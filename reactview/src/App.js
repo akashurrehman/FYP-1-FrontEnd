@@ -26,7 +26,7 @@ function App() {
           
 
           {/* UserPanel Routes */}
-          <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
+          <Route exact path='/user/HomeScreen' element={<UserPanelHomeScreen/>}/>
 
 
         </Routes>

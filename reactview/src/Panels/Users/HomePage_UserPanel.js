@@ -5,7 +5,9 @@ import UserPanelHeader from "../../Components_for_All_Panels/UserComponents/User
 const HomeScreen_UserPanel = () => {
     return ( 
         <div>
-        <UserPanelFooter/>
+            <UserPanelHeader/>
+
+            
         </div>
      );
 }
