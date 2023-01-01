@@ -32,8 +32,9 @@ function App() {
   return (
     <div>
       <Router>
-      <Header/>
+      
         <Routes>
+          <Header/>
           <Route exact path="/sparql" element={<Sparql />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
           <Route exact path='/bloodCenter/ProfileSettings' element={<ProfileSettings/>}/>
@@ -41,6 +42,9 @@ function App() {
           <Route exact path='/bloodCenter/userbloodInformation' element={<UserBloodInformation/>}/>
           <Route exact path='/bloodCenter/AppointmentDetails' element={<Appointments/>}/>
           <Route exact path='/bloodCenter/addNewUser' element={<AddNewUser/>}/>
+          <Footer/>
+
+          
           {/* UserPanel Routes */}
           <Route exact path='/user/home' element={<UserPanelHomeScreen/>} />
           <Route exact path='/user/login' element={<UserLogin/>} />
@@ -53,7 +57,7 @@ function App() {
 
           <Route exact path='/user/HomeScreen' element={<UserPanelHomeScreen/>}/>
         </Routes>
-        <Footer/>
+        
       </Router>
     </div>
   );
