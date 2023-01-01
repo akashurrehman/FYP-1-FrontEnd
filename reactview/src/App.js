@@ -16,17 +16,25 @@ import Appointments from './Panels/BloodDonationCentre/Appointments';
 import AddNewUser from './Panels/BloodDonationCentre/AddNewUser';
  
 /* AdminPanel Imports */
-import AdminPanelHomeScreen from './Panels/Admin/screen'
+import AdminPanelHomeScreen from './Panels/Admin/screen';
 /* UserPanel Imports */
 import UserPanelHomeScreen from './Panels/Users/HomePage_UserPanel';
+import UserLogin from './Components_for_All_Panels/UserComponents/auths/UserLogin';
+import UserRegister from './Components_for_All_Panels/UserComponents/auths/UserRegister';
+import UserPostBloodRequest from './Components_for_All_Panels/UserComponents/request_makers/PostBloodRequest';
+import UserRequestMaker from './Components_for_All_Panels/UserComponents/request_makers/RequestMaker';
+import UserMakeBloodDonation from './Components_for_All_Panels/UserComponents/donors/MakeBloodDonation';
+import UserDonor from './Components_for_All_Panels/UserComponents/donors/Donor';
+import UserBloodDonationCentre from './Components_for_All_Panels/UserComponents/blood_donation_centres/BloodDonationCentre';
 
 function App() {
   return (
     <div>
       <AdminPanelHomeScreen/>
       <Router>
-      <Header/>
+      
         <Routes>
+          <Header/>
           <Route exact path="/sparql" element={<Sparql />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
           {/* Admin panel Routes */}
@@ -36,7 +44,7 @@ function App() {
           {/* UserPanel Routes */}
           <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
         </Routes>
-        <Footer/>
+        
       </Router>
     </div>
   );
