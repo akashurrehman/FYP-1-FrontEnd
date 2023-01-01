@@ -10,8 +10,7 @@ import BloodCentreHomeScreen from './Panels/BloodDonationCentre/HomeScreen_Blood
 
 
 /* AdminPanel Imports */
-
-
+import AdminPanelHomeScreen from './Panels/Admin/screen'
 /* UserPanel Imports */
 import UserPanelHomeScreen from './Panels/Users/HomePage_UserPanel';
 
@@ -19,16 +18,17 @@ import UserPanelHomeScreen from './Panels/Users/HomePage_UserPanel';
 function App() {
   return (
     <div>
+      <AdminPanelHomeScreen/>
       <Router>
         <Routes>
           <Route exact path="/sparql" element={<Sparql />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
-          
+          {/* Admin panel Routes */}
+          <Route exact path='/adminpanel/HomeScreen' element={<AdminPanelHomeScreen/>}/>
+    
 
           {/* UserPanel Routes */}
           <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
-
-
         </Routes>
       </Router>
     </div>
