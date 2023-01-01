@@ -14,6 +14,13 @@ import BloodCentreHomeScreen from './Panels/BloodDonationCentre/HomeScreen_Blood
 
 /* UserPanel Imports */
 import UserPanelHomeScreen from './Panels/Users/HomePage_UserPanel';
+import UserLogin from './Components_for_All_Panels/UserComponents/auths/UserLogin';
+import UserRegister from './Components_for_All_Panels/UserComponents/auths/UserRegister';
+import UserPostBloodRequest from './Components_for_All_Panels/UserComponents/request_makers/PostBloodRequest';
+import UserRequestMaker from './Components_for_All_Panels/UserComponents/request_makers/RequestMaker';
+import UserMakeBloodDonation from './Components_for_All_Panels/UserComponents/donors/MakeBloodDonation';
+import UserDonor from './Components_for_All_Panels/UserComponents/donors/Donor';
+import UserBloodDonationCentre from './Components_for_All_Panels/UserComponents/blood_donation_centres/BloodDonationCentre';
 
 
 function App() {
@@ -26,8 +33,14 @@ function App() {
           
 
           {/* UserPanel Routes */}
-          <Route exact path='/user/HomeScreen' element={<UserPanelHomeScreen/>}/>
-
+          <Route exact path='/user/home' element={<UserPanelHomeScreen/>} />
+          <Route exact path='/user/login' element={<UserLogin/>} />
+          <Route exact path='/user/register' element={<UserRegister/>} />
+          <Route exact path='/user/post-blood-request' element={<UserPostBloodRequest/>} />
+          <Route exact path='/user/request-maker' element={<UserRequestMaker/>} />
+          <Route exact path='/user/make-blood-donation' element={<UserMakeBloodDonation/>} />
+          <Route exact path='/user/donor' element={<UserDonor/>} />
+          <Route exact path='/user/blood-donation-centre' element={<UserBloodDonationCentre/>} />
 
         </Routes>
       </Router>
