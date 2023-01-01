@@ -7,8 +7,14 @@ import Sparql from './Services/Api/SparqlQuery/sparql';
 
 /* BloodDonationCenterPanel Imports */
 import BloodCentreHomeScreen from './Panels/BloodDonationCentre/HomeScreen_BloodDonation';
-
-
+import Footer from './Components_for_All_Panels/BloodCentre/Footer';
+import Header from './Components_for_All_Panels/BloodCentre/Header';
+import ProfileSettings from './Panels/BloodDonationCentre/ProfileSettings';
+import BloodStock from './Panels/BloodDonationCentre/BloodStock'
+import UserBloodInformation from './Panels/BloodDonationCentre/BloodInformation'
+import Appointments from './Panels/BloodDonationCentre/Appointments';
+import AddNewUser from './Panels/BloodDonationCentre/AddNewUser';
+ 
 /* AdminPanel Imports */
 
 
@@ -22,16 +28,19 @@ import UserMakeBloodDonation from './Components_for_All_Panels/UserComponents/do
 import UserDonor from './Components_for_All_Panels/UserComponents/donors/Donor';
 import UserBloodDonationCentre from './Components_for_All_Panels/UserComponents/blood_donation_centres/BloodDonationCentre';
 
-
 function App() {
   return (
     <div>
       <Router>
+      <Header/>
         <Routes>
           <Route exact path="/sparql" element={<Sparql />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
-          
-
+          <Route exact path='/bloodCenter/ProfileSettings' element={<ProfileSettings/>}/>
+          <Route exact path='/bloodCenter/BloodStock' element={<BloodStock/>}/>
+          <Route exact path='/bloodCenter/userbloodInformation' element={<UserBloodInformation/>}/>
+          <Route exact path='/bloodCenter/AppointmentDetails' element={<Appointments/>}/>
+          <Route exact path='/bloodCenter/addNewUser' element={<AddNewUser/>}/>
           {/* UserPanel Routes */}
           <Route exact path='/user/home' element={<UserPanelHomeScreen/>} />
           <Route exact path='/user/login' element={<UserLogin/>} />
@@ -42,7 +51,9 @@ function App() {
           <Route exact path='/user/donor' element={<UserDonor/>} />
           <Route exact path='/user/blood-donation-centre' element={<UserBloodDonationCentre/>} />
 
+          <Route exact path='/user/HomeScreen' element={<UserPanelHomeScreen/>}/>
         </Routes>
+        <Footer/>
       </Router>
     </div>
   );
