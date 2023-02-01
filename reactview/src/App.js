@@ -16,28 +16,35 @@ import Appointments from './Panels/BloodDonationCentre/Appointments';
 import AddNewUser from './Panels/BloodDonationCentre/AddNewUser';
  
 /* AdminPanel Imports */
-
-
+import AdminPanelHomeScreen from './Panels/Admin/screen';
 /* UserPanel Imports */
 import UserPanelHomeScreen from './Panels/Users/HomePage_UserPanel';
+import UserLogin from './Components_for_All_Panels/UserComponents/auths/UserLogin';
+import UserRegister from './Components_for_All_Panels/UserComponents/auths/UserRegister';
+import UserPostBloodRequest from './Components_for_All_Panels/UserComponents/request_makers/PostBloodRequest';
+import UserRequestMaker from './Components_for_All_Panels/UserComponents/request_makers/RequestMaker';
+import UserMakeBloodDonation from './Components_for_All_Panels/UserComponents/donors/MakeBloodDonation';
+import UserDonor from './Components_for_All_Panels/UserComponents/donors/Donor';
+import UserBloodDonationCentre from './Components_for_All_Panels/UserComponents/blood_donation_centres/BloodDonationCentre';
 
 function App() {
   return (
     <div>
+      <AdminPanelHomeScreen/>
       <Router>
-      <Header/>
+      
         <Routes>
+          <Header/>
           <Route exact path="/sparql" element={<Sparql />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
-          <Route exact path='/bloodCenter/ProfileSettings' element={<ProfileSettings/>}/>
-          <Route exact path='/bloodCenter/BloodStock' element={<BloodStock/>}/>
-          <Route exact path='/bloodCenter/userbloodInformation' element={<UserBloodInformation/>}/>
-          <Route exact path='/bloodCenter/AppointmentDetails' element={<Appointments/>}/>
-          <Route exact path='/bloodCenter/addNewUser' element={<AddNewUser/>}/>
+          {/* Admin panel Routes */}
+          <Route exact path='/adminpanel/HomeScreen' element={<AdminPanelHomeScreen/>}/>
+    
+
           {/* UserPanel Routes */}
-          <Route exact path='/user/HomeScreen' element={<UserPanelHomeScreen/>}/>
+          <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
         </Routes>
-        <Footer/>
+        
       </Router>
     </div>
   );

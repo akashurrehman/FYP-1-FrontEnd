@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
 
 //User Panel imports
-
+import '../src/Public/user/css/style.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

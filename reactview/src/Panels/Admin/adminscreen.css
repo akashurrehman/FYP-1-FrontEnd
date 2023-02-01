@@ -1,0 +1,203 @@
+/* body{
+  overflow-x: hidden;
+} */
+
+.reflex
+{
+  display: flex;
+}
+.flexes
+{
+  display: flex;
+  margin-top: 30px;
+}
+.marginss{
+  margin-top: 30px;
+}
+.red{
+  color:rgb(200, 5, 5);
+}
+.maincontainer {
+  /* display: flex; */
+  margin-top: 55px;
+  /* background-color: rgb(203, 203, 204); */
+}
+.cup{
+  margin-top: 12px;
+}
+.Appcolor{
+  color: rgb(200, 5, 5);
+}
+.rang{
+  color: rgb(255, 2, 2);
+}
+.bton{
+  float: right;
+}
+.settingss{
+ width: 100%;
+}
+.numinput
+{
+  width:50px;
+}
+
+.numsettingss{
+  width: 50px;
+  margin-right: 20px; 
+  /* background-color: black; */
+ }
+.inputcont{
+  margin-top: 25px;
+}
+.settings{
+  display: flex;
+  margin-top: 25px;
+  /* justify-content: space-around; */
+ 
+   
+ }
+ .centered
+ {
+  margin-left: 10%;
+ }
+
+.turningred {
+  margin-left: 10px;
+}
+.head-text {
+  position: relative;
+}
+.color {
+  color: rgb(200, 5, 5);
+  /* color: rgb(116, 10, 10); */
+}
+h5{
+  color: rgb(200, 5, 5);
+}
+.text-on-image {
+  position: absolute;
+  /* right: 50%; */
+  /* left: 50%; */
+  bottom: 10%;
+}
+.cardimage {
+  width: 270px;
+  height: 150px;
+  border-radius: 8px;
+}
+
+.btn {
+  text-align: left;
+  justify-content: left;
+  /* width: 20px; */
+}
+.carddiv {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-left: 20px;
+  margin-top: 20px;
+  border-left: 2px solid red;
+}
+
+.carddivs {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-left: 80px;
+}
+
+.mail {
+  color: rgb(108, 144, 197);
+}
+
+.donorimg {
+  height: 150px;
+  width: 150px;
+}
+.logoimage {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+.profilebox {
+  /* background-color: rgba(255, 0, 0, 0.932); */
+  height: 300px;
+  text-align: center;
+  justify-content: center;
+}
+
+.sidemenu {
+  /* display: flex; */
+  background-color: rgb(255, 255, 255);
+  /* border: 5px solid red; */
+}
+
+.heading {
+  color: "red";
+  background-color: aqua;
+}
+.container1 {
+  width: 40%;
+  background-color: aqua;
+}
+
+.container2 {
+  width: 60%;
+  background-color: rgb(182, 182, 182);
+}
+
+.menu-list {
+  text-align: left;
+  margin-left: 20px;
+}
+
+/* Progress bar css */
+.str {
+  color: rgb(255, 0, 0);
+  font-weight: 400;
+  /* justify-content: space-between; */
+  /* margin-top: 15px; */
+}
+.hello{
+  background-color: black;
+  width: 100px;
+}
+.cont{
+
+  width: 500px;
+  height : 150px;
+  /* background-color: rgb(255, 251, 0); */
+  text-align: center;
+  justify-content: center;
+  margin-left: 23%;
+  margin-top: 10px;
+
+}
+
+.str2 {
+  color: rgb(255, 0, 0);
+  font-weight: 400;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+}
+.roll {
+  width: 160px;
+  height: 160px;
+}
+.roll2
+{
+  width: 160px;
+  height: 160px;
+}
+.hey{
+  color: blue;
+}
+
+@media screen and (max-width:769px) {
+ 
+}

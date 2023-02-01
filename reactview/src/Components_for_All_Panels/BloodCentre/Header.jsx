@@ -6,9 +6,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Dropdown } from 'react-bootstrap';
 import './style/navbar.css'
 
-const  Header=()=>{
+function Header(props) {
   return (
-    <Navbar style={{backgroundColor:"#782F40",color:"#FFFFFF",paddingLeft:"50px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
+    <Navbar bg="warning" expand="lg" fixed="top" >
       <Container fluid>
         <Navbar.Brand>
         <img
