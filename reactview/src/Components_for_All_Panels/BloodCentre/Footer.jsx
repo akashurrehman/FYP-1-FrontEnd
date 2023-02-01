@@ -1,34 +1,33 @@
-import Nav from 'react-bootstrap/Nav';
-import React from 'react'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import { Container, Row, Col } from 'react-bootstrap';
+import {Navbar} from 'react-bootstrap';
 
-const Footer=()=> {
-  return (
-    <Container fluid className="mt-3">  
-      <Row className="py-2" style={{backgroundColor:"#782F40",color:"#FFFFFF",marginTop:"10%"}}>
-        <Col sm={6} md={3}>
-
-        </Col>
-        <Col sm={3}>
-        <h2>Technical Help</h2>
-            <Nav defaultActiveKey="/home" className="flex-column">
-                <Nav.Link href="/home">Active</Nav.Link>
-                <Nav.Link eventKey="link-1">Link</Nav.Link>
-                <Nav.Link eventKey="link-2">Link</Nav.Link>
-                <Nav.Link eventKey="disabled">
-                    Disabled
-                </Nav.Link>
-            </Nav>
-        </Col>
-        <Col sm={3}  className="mt-5">
-            <Button variant="primary">Get Mobile App</Button>
-        </Col>
-      </Row>
-    </Container>
-  );
+const Footer = () => {
+    return (
+        <footer style={{ backgroundColor: '#f5f5f5', padding: '20px 0',position: 'fixed', marginTop:10,
+        bottom: 0,width:'100%'}}>
+            <Container>
+                <Row>
+                    <Col xs={4}>
+                        <h4>About Us</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Col>
+                    <Col xs={4}>
+                        <h4>Contact Us</h4>
+                        <p>Email: info@example.com</p>
+                        <p>Phone: 555-555-5555</p>
+                    </Col>
+                    <Col xs={4} style={{textAlign: 'right'}}>
+                        <p>Get Mobile Application</p>
+                    </Col>
+                </Row>
+                <Navbar fixed="bottom" bg="light" className="justify-content-center">
+            <Navbar.Text>
+                &copy; Copyright 2021
+            </Navbar.Text>
+        </Navbar>
+            </Container>
+        </footer>
+    );
 }
 
 export default Footer;

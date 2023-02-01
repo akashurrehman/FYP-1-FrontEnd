@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Dropdown } from 'react-bootstrap';
 import './style/navbar.css'
 
 const  Header=()=>{
@@ -13,8 +13,11 @@ const  Header=()=>{
         <Navbar.Brand>
         <img
                 src="/Images/blood-center.jpg"
-                width="30"
-                height="30"
+                style={{
+                  width: '35px',
+                  height: '35px',
+                  borderRadius: '50%'
+              }}
                 alt="Notification-icon"
                 className="d-inline-block align-top mx-2"
               /></Navbar.Brand>
@@ -46,9 +49,11 @@ const  Header=()=>{
               <Nav.Link href="#Home1" style={{color:"#FFFFFF" }}>
               <img
                 src="/Images/bell-notification.jpg"
-                width="30"
-                height="30"
-                borderRadius="50%"
+                style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%'
+              }}
                 alt="user Profile"
                 className="d-inline-block align-top mx-2"
               />
@@ -57,23 +62,26 @@ const  Header=()=>{
          
               <img
                 src="/Images/blood-center.jpg"
-                width="30"
-                height="30"
-                borderRadius="30px"
+                style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: '50%'
+              }}
                 alt="user Profile"
                 className="d-inline-block align-top mx-2"
               />
           <Form className="d-flex">
-            <NavDropdown className="mx-5 dropleft">
-              <NavDropdown.Item href="#action3"  style={{width:'5vw'}} className="pull-left">BloodDonation centre Name here</NavDropdown.Item>
-              <NavDropdown.Item href="#action4"  className="ml-5">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
+          <Dropdown>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+                Dropdown
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu style={{position: 'absolute', left: '-100%'}}>
+                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+        </Dropdown>
           </Form>
         </Navbar.Collapse>
       </Container>
