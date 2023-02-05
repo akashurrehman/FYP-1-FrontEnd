@@ -1,29 +1,23 @@
-import React from "react";
+import React,{useState} from "react";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row'
-import { useNavigate } from 'react-router-dom';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
-import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import { BsStopwatch } from 'react-icons/bs';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { BsExclamationSquare } from 'react-icons/bs';
 import { BsEnvelopeFill } from 'react-icons/bs';
 import { BsGeoAltFill } from 'react-icons/bs';
-
-
-
-
+import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 
 const ProfileSettings=()=> {
   const[data,setData]=React.useState([]);
-  const[phoneNumber,setphoneNumber]=React.useState([]);
-  const[licenseNumber,setLicenseNumber]=React.useState([]);
-  let navigate=useNavigate();
+  const[phoneNumber,setphoneNumber]=useState([]);
+  const[licenseNumber,setLicenseNumber]=useState([]);
 
   React.useEffect(()=>{
     axios.get('http://localhost:3001/bloodcentre/profilesettings').then((response)=>{
@@ -42,6 +36,7 @@ const ProfileSettings=()=> {
 
   return (
     <Container fluid>
+      <Header />
       <Row>
         <Col xs={3}>
             <Sidebar/>        
@@ -53,7 +48,6 @@ const ProfileSettings=()=> {
               <Card.Title >Name of blood Donation Center</Card.Title>
             </Card.Body>
           </Card>
-        <Paper variant="outlined" square />
         <Form className="mt-5">
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
@@ -86,12 +80,12 @@ const ProfileSettings=()=> {
           <Form.Label>Email</Form.Label>
 
           <BsEnvelopeFill size={15} color="red"/>
-          <Form.Control placeholder="Lahore, Punjab, Pakistan" />
+          <Form.Control placeholder="example@gmail.com" />
       </Form.Group>
 
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridCity">
-          <Form.Label>Timings</Form.Label>
+          <Form.Label>Available Timings</Form.Label>
           <BsStopwatch size={15} color="red"/>
             <Form.Select defaultValue="Select Timings...">
             <option>Option-1</option>
@@ -118,15 +112,7 @@ const ProfileSettings=()=> {
           <Form.Check type="checkbox" label="Agree?" />
         </Form.Group>
 
-        <Button as={Col} variant="primary" size="sm" type="submit" onClick={(e)=>{axios.put('',{
-          number:phoneNumber
-          }).then(function(response){
-
-          }).catch(function(err){
-              console.log(err);
-          });
-        }}
-        >
+        <Button as={Col} variant="primary" size="sm" type="submit">
           Submit Information
         </Button>
       </Row>

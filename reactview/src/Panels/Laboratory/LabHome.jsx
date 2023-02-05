@@ -2,14 +2,14 @@ import React from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Header from '../../Components_for_All_Panels/BloodCentre/Header';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import Header from "../../Components_for_All_Panels/BloodCentre/Header";
+import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 
-const HomeScreen_BloodDonation=()=> {
+const LabHome=()=> {
   const mystyle = {
       height: "7%",
       width: "7%",
@@ -24,13 +24,10 @@ const HomeScreen_BloodDonation=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10}} >
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
-              <Card.Title >Blood Donation Website: Dashboard</Card.Title>
-               
-              <Button variant="primary">Customize this Page</Button>
-        
+              <Card.Title >Lab: Dashboard</Card.Title>
             </Card.Body>
           </Card>
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
@@ -53,7 +50,7 @@ const HomeScreen_BloodDonation=()=> {
               <Card.Body>
                 <Card.Title><i className="fa fa-folder" aria-hidden="true"></i>Blood Stock Overview</Card.Title>
                 <p>
-                
+
                 </p>
               </Card.Body>
             </Card>
@@ -62,5 +59,4 @@ const HomeScreen_BloodDonation=()=> {
     </Container>
   );
 }
-
-export default HomeScreen_BloodDonation;
+export default LabHome;

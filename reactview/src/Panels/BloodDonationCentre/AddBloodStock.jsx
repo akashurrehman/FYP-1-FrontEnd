@@ -9,7 +9,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 
-const BloodInformation=()=> {
+const AddBloodStock=()=> {
   return (
     <Container fluid>
       <Header />
@@ -21,7 +21,7 @@ const BloodInformation=()=> {
           <Card style={{marginTop:30,paddingBottom:10}}>
             <Card.Img variant="top" src="/100px180" />
             <Card.Body>
-              <Card.Title>Add Blood Information of User</Card.Title>
+              <Card.Title>Add Blood Information</Card.Title>
               <Button variant="primary">Customize this Page</Button>
             </Card.Body>
           </Card>
@@ -118,4 +118,4 @@ const BloodInformation=()=> {
   );
 }
 
-export default BloodInformation;
+export default AddBloodStock;

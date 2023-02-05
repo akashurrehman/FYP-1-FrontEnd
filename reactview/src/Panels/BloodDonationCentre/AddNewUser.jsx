@@ -7,10 +7,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
+import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 
 const AddNewUser=()=> {
   return (
     <Container fluid>
+      <Header />
       <Row>
         <Col xs={3}>
             <Sidebar/>        

@@ -8,7 +8,8 @@ import Button from 'react-bootstrap/Button';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-
+import Header from "../../Components_for_All_Panels/BloodCentre/Header";
+ 
 const BloodStock=()=> {
   const [show, setShow] = useState(false);
 
@@ -52,6 +53,7 @@ const BloodStock=()=> {
   </>
   return (
     <Container fluid>
+      <Header />
       <Row>
         <Col xs={3}>
             <Sidebar/>        

@@ -11,7 +11,6 @@ import CardImage5 from "../../Public/user/image/CardImage6.jpg";
 import CardImage6 from "../../Public/user/image/CardImage5.jpg";
 import Image1 from "../../Public/user/image/CoverImage21.jpg";
 import Image2 from "../../Public/user/image/Image1.jpg";
-
 import { ArrowUp,ArrowRight,QuestionCircle,HospitalFill,BatteryHalf,PeopleFill,QuestionLg,PostcardFill, DropletFill } from 'react-bootstrap-icons';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -216,8 +215,7 @@ const HomeScreen_UserPanel = () => {
                             </Card>
                         </Col>
                     </Row>
-                </Container>
-                
+                </Container>                
             </div>
 
 

@@ -1,5 +1,4 @@
 import React from "react";
-import "./adminscreen.css";
 import Footer from "../../Components_for_All_Panels/BloodCentre/Footer";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap/dist/js/bootstrap.bundle.min.js"

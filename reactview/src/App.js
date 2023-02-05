@@ -26,25 +26,31 @@ import UserRequestMaker from './Components_for_All_Panels/UserComponents/request
 import UserMakeBloodDonation from './Components_for_All_Panels/UserComponents/donors/MakeBloodDonation';
 import UserDonor from './Components_for_All_Panels/UserComponents/donors/Donor';
 import UserBloodDonationCentre from './Components_for_All_Panels/UserComponents/blood_donation_centres/BloodDonationCentre';
+import AddBloodStock from './Panels/BloodDonationCentre/AddBloodStock';
+import LabHome from './Panels/Laboratory/LabHome';
 
 function App() {
   return (
     <div>
-      <AdminPanelHomeScreen/>
-      <Router>
-      
+      <Router>      
         <Routes>
-          <Header/>
           <Route exact path="/sparql" element={<Sparql />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
+          <Route exact path='/bloodCenter/ProfileSettings' element={<ProfileSettings/>}/>
+          <Route exact path='/bloodCenter/BloodStock' element={<BloodStock/>}/>
+          <Route exact path='/bloodCenter/addbloodStock' element={<AddBloodStock />} />
+          <Route exact path='/bloodCenter/userbloodInformation' element={<UserBloodInformation/>}/>
+          <Route exact path='/bloodCenter/AppointmentDetails' element={<Appointments/>}/>
+          <Route exact path='/bloodCenter/addNewUser' element={<AddNewUser/>}/>
           {/* Admin panel Routes */}
           <Route exact path='/adminpanel/HomeScreen' element={<AdminPanelHomeScreen/>}/>
-    
-
+  
           {/* UserPanel Routes */}
           <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
+
+          {/*Lab Interface Routes */}
+          <Route exact path='/lab/home' element={<LabHome/>}/>
         </Routes>
-        
       </Router>
     </div>
   );

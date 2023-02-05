@@ -8,7 +8,7 @@ import './style/navbar.css'
 
 function Header(props) {
   return (
-    <Navbar bg="warning" expand="lg" fixed="top" >
+    <Navbar style={{backgroundColor:"#782F40",color:"#FFFFFF",paddingLeft:"50px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
       <Container fluid>
         <Navbar.Brand>
         <img
@@ -73,13 +73,13 @@ function Header(props) {
           <Form className="d-flex">
           <Dropdown>
             <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                Dropdown
+                
             </Dropdown.Toggle>
 
-            <Dropdown.Menu style={{position: 'absolute', left: '-100%'}}>
+            <Dropdown.Menu style={{position: 'absolute', left: '-450%'}}>
                 <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Help</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
           </Form>
