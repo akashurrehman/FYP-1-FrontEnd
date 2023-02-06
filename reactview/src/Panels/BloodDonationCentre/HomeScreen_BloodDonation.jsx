@@ -24,13 +24,10 @@ const HomeScreen_BloodDonation=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10}} >
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Blood Donation Website: Dashboard</Card.Title>
-               
-              <Button variant="primary">Customize this Page</Button>
-        
             </Card.Body>
           </Card>
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
@@ -51,7 +48,7 @@ const HomeScreen_BloodDonation=()=> {
           </Card>
             <Card border="info" style={{marginTop:30,paddingBottom:10}}>
               <Card.Body>
-                <Card.Title><i className="fa fa-folder" aria-hidden="true"></i>Blood Stock Overview</Card.Title>
+                <Card.Title><i className="fa fa-folder" aria-hidden="true"></i>Blood Stock Overview/Available Blood Stock</Card.Title>
                 <p>
                 
                 </p>

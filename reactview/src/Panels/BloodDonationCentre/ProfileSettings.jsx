@@ -59,7 +59,6 @@ const ProfileSettings=()=> {
             <Form.Control type="License" placeholder="License Number" value={licenseNumber} disabled={true}/>
           </Form.Group>
         </Row>
-
         <Form.Group className="mb-3" controlId="formGridAddress1">
           <Form.Label>Location/Address</Form.Label>
           <BsGeoAltFill size={15}/>

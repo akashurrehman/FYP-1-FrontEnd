@@ -18,11 +18,10 @@ const AddBloodStock=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
             <Card.Img variant="top" src="/100px180" />
             <Card.Body>
-              <Card.Title>Add Blood Information</Card.Title>
-              <Button variant="primary">Customize this Page</Button>
+              <Card.Title>Add New Blood Information</Card.Title>
             </Card.Body>
           </Card>
         

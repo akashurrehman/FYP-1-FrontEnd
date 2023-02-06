@@ -73,9 +73,7 @@ const HomeScreen_BloodDonation = () => {
 
                 {/* Home button Dashboard */}
 
-
             </div>
-            <Footer />
         </div>
     );
 }
