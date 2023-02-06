@@ -1,7 +1,48 @@
 var express = require('express');
 var router = express.Router();
 const user = require('../../Model/user');
+const Image=require('../../Model/ImageSchema');
+const path=require('path');
+const multer = require("multer");
+const validatePicture=require('../../Middlewares/validatePicture');
 
+
+var maxSize = 2097152;
+
+const Storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      const error =
+        file.mimetype === "image/jpeg" || file.mimetype === "image/png"
+          ? null
+          : new Error("Please, Select file with Jpeg or png format");
+      cb(error, "./public/images");
+      console.log(file.mimetype);
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    console.log(file.originalname)
+    },
+});
+  
+const upload = multer({
+    storage: Storage,
+}).single("image");
+
+router.post("/upload", upload, async (req, res) => {
+    console.log("Upload",upload);
+    const picture = new Image({
+      image: req.file.filename,
+      imagePath: req.file.path,
+    });
+    try {
+      await picture.save();
+      res.send(picture);
+      console.log("Picture saved",picture);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+  
 router.post("/Register",async function(req,res){
     let User= await user.findOne({Email:req.body.Email});
         if(User) 
@@ -25,11 +66,11 @@ router.post("/Login",async function(req,res){
       } catch (error) {
           res.status(404).json("Something went Wrong at server!");
     }
-    var token = jwt.sign({ _id: User._id,Email:User.Email,role:User.role }, "webtokensecret");
     res.send(token);
 });
 router.get("/",async function(req,res){
     var getuser = await user.find();
+    console.log(getuser);
     return res.send(getuser);
 })
 router.delete('/:id', async function(req, res) {
