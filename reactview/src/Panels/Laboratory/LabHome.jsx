@@ -46,14 +46,6 @@ const LabHome=()=> {
               </p>
             </Card.Body>
           </Card>
-            <Card border="info" style={{marginTop:30,paddingBottom:10}}>
-              <Card.Body>
-                <Card.Title><i className="fa fa-folder" aria-hidden="true"></i>Blood Stock Overview</Card.Title>
-                <p>
-
-                </p>
-              </Card.Body>
-            </Card>
         </Col>
       </Row>
     </Container>
