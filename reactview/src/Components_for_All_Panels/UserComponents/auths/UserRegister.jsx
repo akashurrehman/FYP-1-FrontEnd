@@ -5,6 +5,9 @@ import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import background from '../../../Public/user/image/registration.jpg';
 
+
+import '../css/style.css';
+
 import { PersonFill,Envelope,Lock,Google,Facebook,Twitter,Instagram,Calendar2,Globe,Telephone,HouseAdd,PersonAdd,Map,SignIntersection,Clock,PersonWorkspace,Award, PersonCircle, HospitalFill, Calendar2Date, GeoAlt, HouseDoor, Calendar2Event, Geo } from 'react-bootstrap-icons';
 
 const UserRegister = () => {

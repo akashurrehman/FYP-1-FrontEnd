@@ -8,6 +8,7 @@ import logo from '../../../Public/user/image/AppLogo4.png';
 import { Envelope,PersonAdd,House,Geo,Droplet,ArrowRight,GenderAmbiguous,TelephonePlus,CalendarEvent, HouseDoor, GeoAlt } from 'react-bootstrap-icons';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import '../css/style.css';
 
 const MakeBloodDonation = () => {
 

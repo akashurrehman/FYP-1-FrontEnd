@@ -4,6 +4,8 @@ import { Container,Row,Col,ListGroup,Card,Button,Table } from "react-bootstrap";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+import '../css/style.css';
+
 const AvailableDonorsBar = () => {
     return ( <div>
         <div className="d-flex justify-content-center">

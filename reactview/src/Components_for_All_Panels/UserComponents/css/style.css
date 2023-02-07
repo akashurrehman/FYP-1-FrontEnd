@@ -1,0 +1,247 @@
+.Navbar{
+    background-color: rgb(255, 255, 255);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0px 0px 8px 0px rgb(116, 10, 10);
+}
+
+.Appname{
+    color: rgb(214, 79, 79);
+    font-family:"cursive";
+    font-weight: 900;
+}
+
+.Appcolor{
+    color:  rgb(200, 5, 5);
+    padding-right: 8%;
+}
+
+.AppSocialMediaIcon{
+    color:  rgb(160, 15, 15);
+    padding-right: 2%;
+}
+
+
+.LoginContainerRow {
+    margin-top: 10%;
+}
+.LoginContainerCol {
+    padding: 20px;
+    
+}
+
+.RegistrationContainerRow {
+    margin-top: 6.9%;
+}
+.RegistrationContainerCol {
+    padding: 20px;
+}
+
+.UserChangerBoxLogo {
+    margin: 10%;
+}
+
+.UserChangerBox {
+    width: 27%;
+   
+}
+
+.RowMargin {
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    padding-left: 35%;
+}
+
+.PageFooterContainer{
+    background-color: rgb(116, 10, 10);
+    text-align: center;
+    color: bisque;
+    padding-bottom: 3%;
+    padding-top: 8%;
+}
+
+.FooterColor {
+    background-color: rgba(245, 241, 241, 0.445);
+    box-shadow: 0px 0px 6px 0px rgb(214, 79, 79);
+    
+}
+
+
+
+.ColHover:hover{
+    box-shadow: 0px 0px 16px 0px rgb(160, 15, 15);
+    transition-duration: 0.6s;
+}
+
+.IconHover:hover{
+    color:  rgb(146, 17, 17);
+}
+
+
+
+ul > .Menu {
+    display: inline-block
+}
+ul > .Menu ul {
+    visibility: hidden;
+    position: absolute;
+    top: 105%;
+    left: 0;
+    transition: 0.2s 1s;
+    background: rgb(255, 255, 255);
+}
+ul > .Menu:hover ul {
+    visibility: visible;
+    transition-delay: 0s;
+    background: rgb(255, 255, 255);
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+}
+.Menu {
+    width: 200px;
+    background: rgb(255, 255, 255);
+    margin: -1px;
+    position: relative;
+    padding: 10px;
+}
+.Link {
+    display: block;
+    color:rgb(214, 79, 79);
+}
+
+.BorderBottom {
+    border-bottom: "dashed rgb(116, 10, 10)";
+}
+
+
+
+
+
+
+.dropbtn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 0px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #d83838;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgb(160, 15, 15);
+    z-index: 1;
+    margin-top: 30%;
+  }
+  
+  .dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: rgb(119, 12, 12);}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #ffffff;}
+
+
+
+  /* Container holding the image and the text */
+  .Color {
+    background-color: rgba(236, 213, 213, 0.445);
+    box-shadow: 0px 0px 6px 0px rgb(214, 79, 79);
+}
+
+
+
+
+
+.FilterListHoverColor {
+    color: rgb(2, 1, 1);
+    padding-left: 13%;
+    padding-bottom: 3%;
+    background-color: #ffffff;
+    border-bottom: 2px solid rgb(255, 255, 255);
+}
+.FilterListHoverColor:hover {
+    border-bottom: 2px solid rgb(160, 15, 15);
+    border-left: 4px solid rgb(160, 15, 15);
+    color:rgb(160, 15, 15);
+    border-radius: 0px;
+}
+
+
+.AlignCenter {
+    margin-left: 22%;
+}
+
+
+.btn-flat {
+    background-color: #ffffff;
+    color: rgb(160, 15, 15);
+    border: 1px solid rgb(160, 15, 15);
+}
+
+.Button {
+    background-color: #ffffff;
+    color: rgb(160, 15, 15);
+    border: 1px solid rgb(160, 15, 15);
+}
+
+.btn-flat:hover {
+    background-color: rgb(160, 15, 15);
+    color: white;
+}
+
+.btn-flatSolid {
+    background-color: rgb(160, 15, 15);
+    color: white;
+    border: 1px solid rgb(160, 15, 15);
+}
+
+.btn-flatSolid:hover {
+    background-color: #ffffff;
+    color: rgb(160, 15, 15);
+    border: 1px solid rgb(160, 15, 15);
+}
+
+.IconColor {
+    color: rgb(160, 15, 15);
+}
+
+.TextColor {
+    color: rgb(160, 15, 15);
+}
+
+
+.UserCard{
+    border: 1px solid rgb(160, 15, 15);
+}
+.UserCard:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transform: translateY(-5px);
+    transition-duration: 0.45s;
+}
+
+.TextCursive {
+    font-family: cursive;
+    
+}
+
+
+

@@ -8,6 +8,7 @@ import Image1 from "../../../Public/user/image/RequestMaker.jpg";
 import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 import CardImage1 from "../../../Public/user/image/Avatar.JPG";
 
+import '../css/style.css';
 import AvailableDonorsBar from "./AvailableDonorsBar";
 
 

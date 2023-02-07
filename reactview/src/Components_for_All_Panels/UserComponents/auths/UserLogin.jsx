@@ -7,6 +7,9 @@ import image from '../../../Public/user/image/Image1.png';
 import { Envelope,Lock,Google,Facebook,Twitter,Instagram,ArrowRight } from 'react-bootstrap-icons';
 import { CDBFooter, CDBFooterLink, CDBBox, CDBBtn, CDBIcon } from 'cdbreact';
 
+
+import '../css/style.css';
+
 const UserLogin = () => {
     return ( 
     <div>

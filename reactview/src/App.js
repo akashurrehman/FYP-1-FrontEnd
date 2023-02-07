@@ -47,6 +47,13 @@ function App() {
   
           {/* UserPanel Routes */}
           <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
+          <Route exact path='/user/login' element={<UserLogin/>} />
+          <Route exact path='/user/register' element={<UserRegister/>} />
+          <Route exact path='/user/post-blood-request' element={<UserPostBloodRequest/>} />
+          <Route exact path='/user/request-maker' element={<UserRequestMaker/>} />
+          <Route exact path='/user/make-blood-donation' element={<UserMakeBloodDonation/>} />
+          <Route exact path='/user/donor' element={<UserDonor/>} />
+          <Route exact path='/user/blood-donation-centre' element={<UserBloodDonationCentre/>} />
 
           {/*Lab Interface Routes */}
           <Route exact path='/lab/home' element={<LabHome/>}/>
