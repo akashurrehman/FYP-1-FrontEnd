@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col,Button } from "react-bootstrap";
 import { CDBFooter, CDBFooterLink, CDBBox, CDBBtn, CDBIcon } from 'cdbreact';
 import logo from '../../Public/user/image/AppLogo4.png';
-
+import './css/style.css';
 const UserPanelFooter = () => {
     return (
         <CDBFooter className="FooterColor">

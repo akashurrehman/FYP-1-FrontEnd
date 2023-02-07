@@ -3,6 +3,8 @@ import { Container,  Navbar, Nav, Button,NavDropdown } from 'react-bootstrap';
 import { Person,EnvelopePaper } from 'react-bootstrap-icons';
 import logo from '../../Public/user/image/AppLogo4.png';
 
+import './css/style.css';
+
 const UserPanelHeader = () => {
 
 

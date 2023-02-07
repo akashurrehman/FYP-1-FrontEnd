@@ -3,6 +3,7 @@ import { Container,Row,Col,ListGroup,Card,Button,Table } from "react-bootstrap";
 
 import { ArrowUp } from 'react-bootstrap-icons';
 
+import './css/style.css';
 
 const UserPanelBackToTopButton = () => {
 

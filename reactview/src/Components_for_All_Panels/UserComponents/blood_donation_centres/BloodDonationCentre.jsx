@@ -10,6 +10,8 @@ import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill
 import CardImage1 from "../../../Public/user/image/Avatar.JPG";
 
 
+import '../css/style.css';
+
 
 const BloodDonationCentre = () => {
 

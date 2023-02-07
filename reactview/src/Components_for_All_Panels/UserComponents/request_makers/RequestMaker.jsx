@@ -11,6 +11,7 @@ import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 import CardImage1 from "../../../Public/user/image/Avatar.JPG";
 import AvailableRequestMakersBar from "./AvailableRequestMakersBar";
 
+import '../css/style.css';
 
 const RequestMaker = () => {
 

@@ -16,11 +16,29 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import UserPanelBackToTopButton from "../../Components_for_All_Panels/UserComponents/UserPanelBackToTopButton";
 
+import '../../Components_for_All_Panels/UserComponents/css/style.css';
+
 
 
 const HomeScreen_UserPanel = () => {
 
     const value = 0.66;
+
+    
+    const [isHover, setIsHover] = React.useState(true);
+
+    const handleMouseEnter = () => {
+        setIsHover(false);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHover(true);
+    };
+    const ButtonStyle = {
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
+        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        transform: isHover ? '' : 'scale(1.05)',
+    };
 
     React.useEffect(() => {
         // 👇️ scroll to top on page load
@@ -52,7 +70,7 @@ const HomeScreen_UserPanel = () => {
                         <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
                         
                         
-                        <Button variant="flatSolid">Donate <ArrowRight className="" size={22} /></Button>
+                        <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Donate <ArrowRight className="" size={22} /></Button>
                     </div>
             </div>
             

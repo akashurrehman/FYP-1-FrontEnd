@@ -8,6 +8,7 @@ import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+import '../css/style.css';
 const PostBloodRequest = () => {
 
     //Form Validation
