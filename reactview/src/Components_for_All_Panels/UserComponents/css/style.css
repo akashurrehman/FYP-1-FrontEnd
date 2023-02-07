@@ -1,3 +1,4 @@
+/*
 .Navbar{
     background-color: rgb(255, 255, 255);
     padding-top: 10px;
@@ -91,17 +92,20 @@ ul > .Menu ul {
     transition: 0.2s 1s;
     background: rgb(255, 255, 255);
 }
+
 ul > .Menu:hover ul {
     visibility: visible;
     transition-delay: 0s;
     background: rgb(255, 255, 255);
 }
+
 ul {
     list-style: none;
     padding: 0;
     margin: 0;
     background-color: rgb(255, 255, 255);
 }
+*/
 .Menu {
     width: 200px;
     background: rgb(255, 255, 255);
@@ -152,7 +156,7 @@ ul {
     text-decoration: none;
     display: block;
   }
-  
+
   .dropdown-content a:hover {background-color: rgb(119, 12, 12);}
   
   .dropdown:hover .dropdown-content {display: block;}
@@ -162,6 +166,7 @@ ul {
 
 
   /* Container holding the image and the text */
+
   .Color {
     background-color: rgba(236, 213, 213, 0.445);
     box-shadow: 0px 0px 6px 0px rgb(214, 79, 79);
@@ -242,6 +247,4 @@ ul {
     font-family: cursive;
     
 }
-
-
 
