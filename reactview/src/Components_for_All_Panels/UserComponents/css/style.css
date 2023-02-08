@@ -1,3 +1,4 @@
+
 .Navbar{
     background-color: rgb(255, 255, 255);
     padding-top: 10px;
@@ -102,6 +103,7 @@
     margin: 0;
     background-color: rgb(255, 255, 255);
 }
+
 .Menu {
     width: 200px;
     background: rgb(255, 255, 255);
@@ -117,11 +119,6 @@
 .BorderBottom {
     border-bottom: "dashed rgb(116, 10, 10)";
 }
-
-
-
-
-
 
 .dropbtn {
     background-color: #ffffff;
@@ -152,7 +149,7 @@
     text-decoration: none;
     display: block;
   }
-  
+
   .dropdown-content a:hover {background-color: rgb(119, 12, 12);}
   
   .dropdown:hover .dropdown-content {display: block;}
@@ -162,6 +159,7 @@
 
 
   /* Container holding the image and the text */
+
   .Color {
     background-color: rgba(236, 213, 213, 0.445);
     box-shadow: 0px 0px 6px 0px rgb(214, 79, 79);
@@ -242,6 +240,4 @@
     font-family: cursive;
     
 }
-
-
 

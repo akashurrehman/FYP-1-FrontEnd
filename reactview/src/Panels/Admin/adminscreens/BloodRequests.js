@@ -57,7 +57,8 @@ const DonorsTables = () =>{
     setFilteredCountries(result);
   }, [search])
 
-  return (<DataTable title = "Blood Requests" columns={columns} data={filteredcountries}
+  return (
+<DataTable title = "Blood Requests" columns={columns} data={filteredcountries}
   pagination
   fixedHeader
   fixedHeaderScrollHeight='450px'
