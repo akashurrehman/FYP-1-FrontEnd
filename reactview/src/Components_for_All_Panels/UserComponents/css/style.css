@@ -1,4 +1,4 @@
-/*
+
 .Navbar{
     background-color: rgb(255, 255, 255);
     padding-top: 10px;
@@ -79,7 +79,7 @@
     color:  rgb(146, 17, 17);
 }
 
-
+/*
 
 ul > .Menu {
     display: inline-block
@@ -121,11 +121,6 @@ ul {
 .BorderBottom {
     border-bottom: "dashed rgb(116, 10, 10)";
 }
-
-
-
-
-
 
 .dropbtn {
     background-color: #ffffff;
