@@ -38,7 +38,7 @@ const UserPanelHeader = () => {
                 </Nav.Link>
                 
                 <Nav className="me-auto">
-                    <ul>
+                    <ul className="list">
                         <Nav.Link className="Menu" href="/user/home">Blood Analysis
                             <ul>
                                 <Nav.Link className="Link Menu" href="#"><EnvelopePaper className="p-1" size={31} />Post Blood Request</Nav.Link>

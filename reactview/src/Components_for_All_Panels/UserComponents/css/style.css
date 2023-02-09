@@ -79,12 +79,12 @@
     color:  rgb(146, 17, 17);
 }
 
-/*
 
-ul > .Menu {
+
+.list > .Menu {
     display: inline-block
 }
-ul > .Menu ul {
+.list > .Menu ul {
     visibility: hidden;
     position: absolute;
     top: 105%;
@@ -92,20 +92,18 @@ ul > .Menu ul {
     transition: 0.2s 1s;
     background: rgb(255, 255, 255);
 }
-
-ul > .Menu:hover ul {
+.list > .Menu:hover ul {
     visibility: visible;
     transition-delay: 0s;
     background: rgb(255, 255, 255);
 }
-
-ul {
+.list {
     list-style: none;
     padding: 0;
     margin: 0;
     background-color: rgb(255, 255, 255);
 }
-*/
+
 .Menu {
     width: 200px;
     background: rgb(255, 255, 255);
