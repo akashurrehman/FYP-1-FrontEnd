@@ -10,29 +10,32 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 
-const Appointments=()=> {
-/*  
-    const endpoint = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#";
-    const query = `
-    PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>
-      SELECT *
-      WHERE {
-      ?users bd:userEnrollsIn bd:DONOR_Website
-      }    
-    `;
-    const sendQuery = async () => {
-      console.log("Send Query Function Called");
-      try {
-        const response = await axios.post(endpoint, {
-          query: query
-        });
-        const results = response.data;
-        console.log(results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  */
+const Appointments=()=> {  
+  const queryUrl=()=>{  
+  const query = `
+  SELECT  ?user ?name
+  WHERE {
+    ?user bd:userEnrollsIn ?blood_donation_website .
+    ?user bd:hasAdminName ?name
+  }`;
+  var url_to_endpoint="http://localhost:3030/#/dataset/ds/query";
+const encodedQuery = (query);
+const url = `${url_to_endpoint}?query=${encodedQuery}`;
+
+const name=()=> {
+  console.log("url",url);
+}
+axios.get(url)
+  .then(data => {
+    console.log(data)
+    name();
+    // do something with the data
+  })
+  .catch(error => {
+    console.error(error);
+  });
+}
+
     const [image, setImage] = useState(null);
     const [message, setMessage] = useState("");
   
@@ -122,6 +125,9 @@ const columns = [
               <button type="submit">Upload</button>
               {message && <p>{message}</p>}
             </form>
+            <Button variant="primary" onClick={queryUrl}>
+        Send Query to Ontology
+      </Button >
         </CardGroup>
         </Col>
       </Row>
