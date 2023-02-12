@@ -1,5 +1,6 @@
 import React from "react";
 import { Container,Row,Col,ListGroup,Card,Button,Table } from "react-bootstrap";
+import axios from "axios";
 import UserPanelFooter from "../../Components_for_All_Panels/UserComponents/UserPanelFooter";
 import UserPanelHeader from "../../Components_for_All_Panels/UserComponents/UserPanelHeader";
 import CoverImage from "../../Public/user/image/blooddonate.jpg";
@@ -22,6 +23,27 @@ import '../../Components_for_All_Panels/UserComponents/css/style.css';
 
 const HomeScreen_UserPanel = () => {
 
+    const endpoint = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#";
+    const query = `
+    PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>
+      SELECT *
+      WHERE {
+      ?users bd:userEnrollsIn bd:DONOR_Website
+      }    
+    `;
+    const sendQuery = async () => {
+      console.log("Send Query Function Called");
+      try {
+        const response = await axios.post(endpoint, {
+          query: query
+        });
+        const results = response.data;
+        console.log(results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     const value = 0.66;
 
     
@@ -35,9 +57,10 @@ const HomeScreen_UserPanel = () => {
         setIsHover(true);
     };
     const ButtonStyle = {
-        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
-        color: isHover ? 'white' : 'rgb(160, 15, 15)',
-        transform: isHover ? '' : 'scale(1.05)',
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
+        color: isHover ? 'white' : 'white',
+        transform: isHover ? '' : 'scale(1.1)',
+        border: isHover ? '' : '1px solid white',
     };
 
     React.useEffect(() => {
@@ -70,7 +93,7 @@ const HomeScreen_UserPanel = () => {
                         <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
                         
                         
-                        <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Donate <ArrowRight className="" size={22} /></Button>
+                        <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={sendQuery}>Donate <ArrowRight className="" size={22} /></Button>
                     </div>
             </div>
             
