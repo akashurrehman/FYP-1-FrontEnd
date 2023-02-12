@@ -29,8 +29,8 @@ function Header(props) {
             navbarScroll
           >
             <Nav.Link href="#action1" style={{color:"#FFFFFF" }}>Dashboard/Home</Nav.Link>
-            <Nav.Link href="#action2" style={{color:"#FFFFFF" }}>Support</Nav.Link>
-            <Nav.Link href="#action2" style={{color:"#FFFFFF" }}>Policies</Nav.Link>
+            <Nav.Link href="#action2" style={{color:"#FFFFFF" }}>Add Blood Request</Nav.Link>
+            <Nav.Link href="#action2" style={{color:"#FFFFFF" }}>Add User</Nav.Link>
             {/* <NavDropdown title="About Us" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -72,12 +72,12 @@ function Header(props) {
               />
           <Form className="d-flex">
           <Dropdown>
-            <Dropdown.Toggle variant="primary" id="dropdown-basic">
+            <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{}}>
                 
             </Dropdown.Toggle>
 
             <Dropdown.Menu style={{position: 'absolute', left: '-450%'}}>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                <Dropdown.Item href="#/action-1">My Account</Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Help</Dropdown.Item>
                 <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
             </Dropdown.Menu>

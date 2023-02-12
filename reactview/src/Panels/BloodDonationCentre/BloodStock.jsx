@@ -9,6 +9,11 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
+import A_positive from './../../Components_for_All_Panels/BloodCentre/Image/A-positive.jpg';
+import B_positive from './../../Components_for_All_Panels/BloodCentre/Image/B-positive.jpg';
+import AB_positive from './../../Components_for_All_Panels/BloodCentre/Image/Ab-positive.jpg';
+import AB_negative from './../../Components_for_All_Panels/BloodCentre/Image/Ab-negative.jpg';
+
  
 const BloodStock=()=> {
 
@@ -21,30 +26,51 @@ const BloodStock=()=> {
 
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  <>
+  function handleClose() {
+    console.log("Handle Closed clicked");
+
+    return setShow(false);
+  }
+  function handleShow() {
+    console.log("handle show clicked");
+    return setShow(true);
+  }
     return (
+      <>
       <Modal fade={false} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Blood Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
+              <Form.Label>Blood Group:{"A+"}</Form.Label>
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Label>Total blood bottles or quantity in MLiters</Form.Label>
+              <Form.Control
+                placeholder="1 bottle or 100Ml"
+                autoFocus
+                value="1 bottle or 100Ml"
+                onChange={(e)=>console.log(e.target.value)}
+              />
+              <Form.Label>Date on last bottle collected?</Form.Label>
+              <Form.Control
+                placeholder="21 january 2022"
+                autoFocus
+                value="29 jan 2022"
+                onChange={(e)=>console.log(e.target.value)}
+              />
+              <Form.Label>Freeze time</Form.Label>
+              <Form.Control
+                placeholder="10 am"
+                autoFocus
+                value="10 am"
+                onChange={(e)=>console.log(e.target.value)}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -52,14 +78,11 @@ const BloodStock=()=> {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleClose}> 
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
-    );
-  </>
-  return (
     <Container fluid>
       <Header />
       <Row>
@@ -76,9 +99,11 @@ const BloodStock=()=> {
           <CardGroup>
             <Col className="mt-md-5 px-2" xs={12} md={4}>  
                 <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
                     <Card.Body>
-                        <Card.Title>Blood Stock-1</Card.Title>
+                        <Card.Title>Last blood updated on {"time_Changes"}</Card.Title>
                         <Button variant="primary" onClick={handleShow}>Details</Button>
                         <Button variant="danger">Update Details</Button>
                     </Card.Body>
@@ -86,9 +111,11 @@ const BloodStock=()=> {
             </Col>
             <Col className="mt-md-5 px-2" xs={12} md={4}>  
                 <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={B_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
                     <Card.Body>
-                    <Card.Title>Blood Stock-2</Card.Title>
+                    <Card.Title>Last blood changed on time={"date"}</Card.Title>
                     <Button variant="primary">Go to Details-2</Button>
                     <Button variant="danger">Update Details</Button>
                     </Card.Body>
@@ -96,7 +123,47 @@ const BloodStock=()=> {
             </Col>
             <Col className="mt-md-5" xs={12} md={4}>  
                 <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={AB_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
+                <Card.Body>
+                    <Card.Title>Last blood changed on {"date"}</Card.Title>
+                    <Button variant="primary">Go to Details-2</Button>
+                    <Button variant="danger">Update Details</Button>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </CardGroup>
+        <CardGroup>
+            <Col className="mt-md-5 px-2" xs={12} md={4}>  
+                <Card style={{marginTop:30,paddingBottom:10}}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={AB_negative} style={{height:"8rem",width:"10rem"}}/>
+                </div>
+                    <Card.Body>
+                        <Card.Title>Last blodd changed on time={"date"}</Card.Title>
+                        <Button variant="primary" onClick={handleShow}>Details</Button>
+                        <Button variant="danger">Update Details</Button>
+                    </Card.Body>
+                </Card>
+            </Col>
+            <Col className="mt-md-5 px-2" xs={12} md={4}>  
+                <Card style={{marginTop:30,paddingBottom:10}}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
+                    <Card.Body>
+                    <Card.Title>Blood Stock-2</Card.Title>
+                    <Button variant="primary">Go to Details-2</Button>
+                    <Button variant="danger">Update Details</Button>
+                    </Card.Body>
+                </Card>
+            </Col>
+            <Col className="mt-md-5 px-2" xs={12} md={4}>  
+                <Card style={{marginTop:30,paddingBottom:10}}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
                     <Card.Body>
                     <Card.Title>Blood Stock-2</Card.Title>
                     <Button variant="primary">Go to Details-2</Button>
@@ -108,7 +175,9 @@ const BloodStock=()=> {
         <CardGroup>
             <Col className="mt-md-5 px-2" xs={12} md={4}>  
                 <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
                     <Card.Body>
                         <Card.Title>Blood Stock-1</Card.Title>
                         <Button variant="primary" onClick={handleShow}>Details</Button>
@@ -118,7 +187,9 @@ const BloodStock=()=> {
             </Col>
             <Col className="mt-md-5 px-2" xs={12} md={4}>  
                 <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
                     <Card.Body>
                     <Card.Title>Blood Stock-2</Card.Title>
                     <Button variant="primary">Go to Details-2</Button>
@@ -128,39 +199,9 @@ const BloodStock=()=> {
             </Col>
             <Col className="mt-md-5 px-2" xs={12} md={4}>  
                 <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
-                    <Card.Body>
-                    <Card.Title>Blood Stock-2</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </CardGroup>
-        <CardGroup>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
-                    <Card.Body>
-                        <Card.Title>Blood Stock-1</Card.Title>
-                        <Button variant="primary" onClick={handleShow}>Details</Button>
-                        <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
-                    <Card.Body>
-                    <Card.Title>Blood Stock-2</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                    <Card.Img variant="top" src="/100px180" />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
+                </div>
                     <Card.Body>
                     <Card.Title>Blood Stock-2</Card.Title>
                     <Button variant="primary">Go to Details-2</Button>
@@ -172,6 +213,7 @@ const BloodStock=()=> {
         </Col>
       </Row>
     </Container>
+    </>
   );
 }
 export default BloodStock;
