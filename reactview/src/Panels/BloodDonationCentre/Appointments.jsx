@@ -10,22 +10,30 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 
+
 const Appointments=()=> {  
   const queryUrl=()=>{  
+
   const query = `
-  SELECT  ?user ?name
-  WHERE {
-    ?user bd:userEnrollsIn ?blood_donation_website .
-    ?user bd:hasAdminName ?name
-  }`;
-  var url_to_endpoint="http://localhost:3030/#/dataset/ds/query";
+SELECT ?subject ?predicate ?object
+WHERE {
+  ?subject ?predicate ?object
+}
+LIMIT 25
+`;
+var url_to_endpoint="http://localhost:3030/#/dataset/ds/query";
 const encodedQuery = (query);
 const url = `${url_to_endpoint}?query=${encodedQuery}`;
+
+const endpoint = 'http://localhost:3030/#/dataset/ds/query';
 
 const name=()=> {
   console.log("url",url);
 }
-axios.get(url)
+fetch(endpoint, { query })
+  .then((response)=>{
+    console.log(response.data);
+  })
   .then(data => {
     console.log(data)
     name();
