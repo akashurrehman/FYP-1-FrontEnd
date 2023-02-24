@@ -1,3 +1,7 @@
+/**
+ * Chat Commponent 
+ * Further Implementation will perform here
+ */
 import React, { useState } from 'react';
 import { io } from 'socket.io-client';
 
