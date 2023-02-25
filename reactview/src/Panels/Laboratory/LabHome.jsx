@@ -28,6 +28,7 @@ const LabHome=()=> {
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Lab: Dashboard</Card.Title>
+              <Button variant='primary' onClick={(e)=>{e.preventDefault}}>Enter Record</Button>
             </Card.Body>
           </Card>
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>

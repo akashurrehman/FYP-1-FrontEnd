@@ -10,39 +10,40 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 
-
 const Appointments=()=> {  
-  const queryUrl=()=>{  
+  const [queryResult, setQueryResult] = useState(null)
 
-  const query = `
-SELECT ?subject ?predicate ?object
-WHERE {
-  ?subject ?predicate ?object
-}
-LIMIT 25
-`;
-var url_to_endpoint="http://localhost:3030/#/dataset/ds/query";
-const encodedQuery = (query);
-const url = `${url_to_endpoint}?query=${encodedQuery}`;
+  const queryUrl= async()=>{  
 
-const endpoint = 'http://localhost:3030/#/dataset/ds/query';
+    const query = `
+    PREFIX wd: <http://www.wikidata.org/entity/>
+    PREFIX p: <http://www.wikidata.org/prop/>
+    PREFIX ps: <http://www.wikidata.org/prop/statement/>
+    PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+    
+    SELECT ?value WHERE {
+      wd:Q243 p:P2048 ?height.
+    
+      ?height pq:P518 wd:Q24192182;
+        ps:P2048 ?value .
+    }`
 
-const name=()=> {
-  console.log("url",url);
-}
-fetch(endpoint, { query })
-  .then((response)=>{
-    console.log(response.data);
-  })
-  .then(data => {
-    console.log(data)
-    name();
-    // do something with the data
-  })
-  .catch(error => {
-    console.error(error);
-  });
-}
+    const url = 'https://query.wikidata.org/sparql'
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/sparql-query',
+        'Accept': 'application/sparql-results+json'
+      },
+      body: query
+    })
+
+    const data = await response.json()
+
+    setQueryResult(data.results.bindings)
+    console.log("data",data)
+  }
 
     const [image, setImage] = useState(null);
     const [message, setMessage] = useState("");
