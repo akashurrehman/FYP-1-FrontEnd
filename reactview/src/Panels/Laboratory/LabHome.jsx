@@ -35,7 +35,7 @@ const LabHome=()=> {
             <Card.Body>
               <Card.Title><i className="fa fa-flag" aria-hidden="true"></i>Important  Notification</Card.Title>
               <p>
-
+                <Button variant="primary" onClick={(e)=>{e.preventDefault}}>See Applicant Requests</Button>
               </p>
             </Card.Body>
           </Card>
