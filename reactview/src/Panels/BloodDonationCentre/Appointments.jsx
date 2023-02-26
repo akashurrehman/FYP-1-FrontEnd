@@ -13,6 +13,9 @@ import DataTable from 'react-data-table-component';
 const Appointments=()=> {  
   const [queryResult, setQueryResult] = useState(null)
 
+  /**
+   * Method for Sparql Query
+   */
   const queryUrl= async()=>{  
 
     const query = `
