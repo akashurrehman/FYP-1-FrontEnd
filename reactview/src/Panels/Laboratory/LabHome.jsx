@@ -28,14 +28,14 @@ const LabHome=()=> {
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Lab: Dashboard</Card.Title>
-              <Button variant='primary' onClick={(e)=>{e.preventDefault}}>Enter Record</Button>
+              <Button variant='primary' onClick={(e)=>{}}>Enter Record</Button>
             </Card.Body>
           </Card>
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
               <Card.Title><i className="fa fa-flag" aria-hidden="true"></i>Important  Notification</Card.Title>
               <p>
-                <Button variant="primary" onClick={(e)=>{e.preventDefault}}>See Applicant Requests</Button>
+                <Button variant="primary" onClick={(e)=>{}}>See Applicant Requests</Button>
               </p>
             </Card.Body>
           </Card>
