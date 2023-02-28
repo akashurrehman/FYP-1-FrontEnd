@@ -14,6 +14,7 @@
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "cdbreact": "^1.5.3",
+    "fetch-sparql-endpoint": "^3.2.1",
     "install": "^0.13.0",
     "npm": "^9.4.0",
     "rdflib": "^2.2.25",

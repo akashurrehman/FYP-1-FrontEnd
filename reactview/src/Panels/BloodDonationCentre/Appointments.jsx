@@ -9,6 +9,8 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
+import {SparqlEndpointFetcher} from "fetch-sparql-endpoint";
+
 
 const Appointments=()=> {  
   const [queryResult, setQueryResult] = useState(null)
@@ -18,6 +20,20 @@ const Appointments=()=> {
    */
   const queryUrl= async()=>{  
 
+    const myFetcher = new SparqlEndpointFetcher({
+      method: 'POST',                           // A custom HTTP method for issuing (non-update) queries, defaults to POST. Update queries are always issued via POST.
+      additionalUrlParams: new URLSearchParams({'infer': 'true', 'sameAs': 'false'}),  // A set of additional parameters that well be added to fetchAsk, fetchBindings & fetchTriples requests
+      fetch: fetch,                             // A custom fetch-API-supporting function
+      prefixVariableQuestionMark: false,        // If variable names in bindings should be prefixed with '?', defaults to false
+      timeout: 5000                             // Timeout for setting up server connection (Once a connection has been made, and the response is being parsed, the timeout does not apply anymore).
+    });
+    
+    const bindingsStream = await myFetcher.fetchBindings('https://dbpedia.org/sparql', 'SELECT * WHERE { ?s ?p ?o } LIMIT 100');
+    bindingsStream.on('data', (bindings) => console.log("Bindings",bindings));
+    // Will print [ variable('s'), variable('p'), variable('o') ] 
+    bindingsStream.on('variables', (variables) => console.log(variables));
+    
+    /*
     const query = `
     PREFIX wd: <http://www.wikidata.org/entity/>
     PREFIX p: <http://www.wikidata.org/prop/>
@@ -26,7 +42,6 @@ const Appointments=()=> {
     
     SELECT ?value WHERE {
       wd:Q243 p:P2048 ?height.
-    
       ?height pq:P518 wd:Q24192182;
         ps:P2048 ?value .
     }`
@@ -46,6 +61,7 @@ const Appointments=()=> {
 
     setQueryResult(data.results.bindings)
     console.log("data",data)
+    */
   }
 
     const [image, setImage] = useState(null);
