@@ -9,32 +9,60 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
+import {SparqlEndpointFetcher} from "fetch-sparql-endpoint";
+
 
 const Appointments=()=> {  
-  const queryUrl=()=>{  
-  const query = `
-  SELECT  ?user ?name
-  WHERE {
-    ?user bd:userEnrollsIn ?blood_donation_website .
-    ?user bd:hasAdminName ?name
-  }`;
-  var url_to_endpoint="http://localhost:3030/#/dataset/ds/query";
-const encodedQuery = (query);
-const url = `${url_to_endpoint}?query=${encodedQuery}`;
+  const [queryResult, setQueryResult] = useState(null)
 
-const name=()=> {
-  console.log("url",url);
-}
-axios.get(url)
-  .then(data => {
-    console.log(data)
-    name();
-    // do something with the data
-  })
-  .catch(error => {
-    console.error(error);
-  });
-}
+  /**
+   * Method for Sparql Query
+   */
+  const queryUrl= async()=>{  
+
+    const myFetcher = new SparqlEndpointFetcher({
+      method: 'POST',                           // A custom HTTP method for issuing (non-update) queries, defaults to POST. Update queries are always issued via POST.
+      additionalUrlParams: new URLSearchParams({'infer': 'true', 'sameAs': 'false'}),  // A set of additional parameters that well be added to fetchAsk, fetchBindings & fetchTriples requests
+      fetch: fetch,                             // A custom fetch-API-supporting function
+      prefixVariableQuestionMark: false,        // If variable names in bindings should be prefixed with '?', defaults to false
+      timeout: 5000                             // Timeout for setting up server connection (Once a connection has been made, and the response is being parsed, the timeout does not apply anymore).
+    });
+    
+    const bindingsStream = await myFetcher.fetchBindings('https://dbpedia.org/sparql', 'SELECT * WHERE { ?s ?p ?o } LIMIT 100');
+    bindingsStream.on('data', (bindings) => console.log("Bindings",bindings));
+    // Will print [ variable('s'), variable('p'), variable('o') ] 
+    bindingsStream.on('variables', (variables) => console.log(variables));
+    
+    /*
+    const query = `
+    PREFIX wd: <http://www.wikidata.org/entity/>
+    PREFIX p: <http://www.wikidata.org/prop/>
+    PREFIX ps: <http://www.wikidata.org/prop/statement/>
+    PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+    
+    SELECT ?value WHERE {
+      wd:Q243 p:P2048 ?height.
+      ?height pq:P518 wd:Q24192182;
+        ps:P2048 ?value .
+    }`
+
+    const url = 'https://query.wikidata.org/sparql'
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/sparql-query',
+        'Accept': 'application/sparql-results+json'
+      },
+      body: query
+    })
+
+    const data = await response.json()
+
+    setQueryResult(data.results.bindings)
+    console.log("data",data)
+    */
+  }
 
     const [image, setImage] = useState(null);
     const [message, setMessage] = useState("");

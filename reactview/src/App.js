@@ -54,7 +54,7 @@ function App() {
           <Route exact path='/user/make-blood-donation' element={<UserMakeBloodDonation/>} />
           <Route exact path='/user/donor' element={<UserDonor/>} />
           <Route exact path='/user/blood-donation-centre' element={<UserBloodDonationCentre/>} />
-
+          
           {/*Lab Interface Routes */}
           <Route exact path='/lab/home' element={<LabHome/>}/>
         </Routes>
