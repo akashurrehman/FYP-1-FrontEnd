@@ -17,32 +17,84 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import UserPanelBackToTopButton from "../../Components_for_All_Panels/UserComponents/UserPanelBackToTopButton";
 
+// import { sparqlConnect, setQueryURL } from "sparql-connect";
+ 
+
 import '../../Components_for_All_Panels/UserComponents/css/style.css';
 
 
 
 const HomeScreen_UserPanel = () => {
 
-    const endpoint = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#";
-    const query = `
-    PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>
-      SELECT *
-      WHERE {
-      ?users bd:userEnrollsIn bd:DONOR_Website
-      }    
-    `;
-    const sendQuery = async () => {
-      console.log("Send Query Function Called");
-      try {
-        const response = await axios.post(endpoint, {
-          query: query
-        });
-        const results = response.data;
-        console.log(results);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+    // const endpoint = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#";
+    // const query = `
+    // PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>
+    //   SELECT *
+    //   WHERE {
+    //   ?users bd:userEnrollsIn bd:DONOR_Website
+    //   }    
+    // `;
+    // const sendQuery = async () => {
+    //   console.log("Send Query Function Called");
+    //   try {
+    //     const response = await axios.post(endpoint, {
+    //       query: query
+    //     });
+    //     const results = response.data;
+    //     console.log(results);
+    //   } catch (error) {
+    //     console.error(error);
+    //   }
+    // };
+
+
+    const queryUrl=()=>{  
+        const query = `
+        SELECT ?persons ?id ?name ?email
+        WHERE {
+        ?persons rdf:type bd:Person .
+        ?persons bd:hasPersonID ?id .
+        ?persons bd:hasPersonFullName ?name .
+        ?persons bd:hasPersonEmail ?email .
+        }`;
+        var url_to_endpoint="http://localhost:3030/#/dataset/blood/query";
+        const encodedQuery = (query);
+        const url = `${url_to_endpoint}?query=${encodedQuery}`;
+      
+        const name=()=> {
+            console.log("url",url);
+        }
+        axios
+            .get(url)
+            .then((response) => {
+                console.log(response);
+                
+                // do something with the data
+            })
+            .catch(error => {
+                console.error(error);
+            }
+        );
+    }
+
+    // const url = setQueryURL('http://localhost:3030/#/dataset/blood/query');
+ 
+    // //Write a query that returns some resources with the additional field `label`
+    // const query = `
+    // SELECT ?persons ?id ?name ?email
+    //     WHERE {
+    //     ?persons rdf:type bd:Person .
+    //     ?persons bd:hasPersonID ?id .
+    //     ?persons bd:hasPersonFullName ?name .
+    //     ?persons bd:hasPersonEmail ?email .
+    //     }
+    // `;
+    // //Create a connector to populate the component with the results
+    // const queryUrl = () => {
+    //     const connector = sparqlConnect(query);
+    //     console.log(connector);
+    // };
+    
 
     const value = 0.66;
 
@@ -93,7 +145,7 @@ const HomeScreen_UserPanel = () => {
                         <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
                         
                         
-                        <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={sendQuery}>Donate <ArrowRight className="" size={22} /></Button>
+                        <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={queryUrl}>Donate <ArrowRight className="" size={22} /></Button>
                     </div>
             </div>
             
