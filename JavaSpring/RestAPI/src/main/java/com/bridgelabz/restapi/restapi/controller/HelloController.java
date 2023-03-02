@@ -1,7 +1,25 @@
 package com.bridgelabz.restapi.restapi.controller;
 
+import java.io.*;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.bridgelabz.restapi.restapi.entity.Person;
-import org.springframework.web.bind.annotation.*;
+
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.ModelFactory;
 
 @RestController
 public class HelloController {
@@ -12,9 +30,10 @@ public class HelloController {
     }
 
     @GetMapping("/api/bloodCenter")
-    public String center(){
+    public String center() {
         return "Blood Donation Center";
     }
+
     @GetMapping("/copy")
     public String copy() {
         return "Hello from Copy";
@@ -27,8 +46,8 @@ public class HelloController {
 
     // get request mapping with query parameter
     @GetMapping("/helloParam")
-    public String hello(@RequestParam String name) {
-        return "Hello " + name + " from Bridgelabz";
+    public void sparqlMethodString() {
+        SparqlTest();
     }
 
     // get request mapping with path variable
@@ -47,5 +66,39 @@ public class HelloController {
     @PutMapping("/hello/put/{firstName}")
     public String sayHelloWithPut(@RequestParam String lastName, @PathVariable String firstName) {
         return "Hello " + firstName + " " + lastName + " from Bridgelabz";
+    }
+
+    static void SparqlTest() {
+
+        // create a file object for the RDF file
+        File file = new File("data/blood.rdf");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            // handle the exception
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // create a SPARQL query
+        String queryString = "SELECT * WHERE { ?s ?p ?o }";
+        Query query = QueryFactory.create(queryString);
+
+        // execute the query and print the results
+        try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
+            ResultSet results = qe.execSelect();
+            ResultSetFormatter.out(System.out, results, query);
+        }
     }
 }
