@@ -1,0 +1,1178 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#"
+     xml:base="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system"
+     xmlns:User="http://www.metaphacts.com/resource/user/"
+     xmlns:fibo-sec-sec-cls="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesClassification/"
+     xmlns:fibo-be-le-cb="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/CorporateBodies/"
+     xmlns:party="https://schema.chubb.com/parties-20220801/"
+     xmlns:fibo-loan-typ-stu="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/StudentLoans/"
+     xmlns:fibo-der-cr-mod="https://spec.edmcouncil.org/fibo/ontology/DER/CreditDerivatives/MetadataDERCreditDerivatives/"
+     xmlns:fibo-sec-dbt-mod="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/MetadataSECDebt/"
+     xmlns:fibo-be-corp-corp="https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/Corporations/"
+     xmlns:fibo-loan-tem-sta="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansStatus/"
+     xmlns:fibo-der-rtd-irswp="https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IRSwaps/"
+     xmlns:fibo-ind-all="https://spec.edmcouncil.org/fibo/ontology/IND/AllIND/"
+     xmlns:fibo-bp-iss-prc="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceProcess/"
+     xmlns:Platform="http://www.metaphacts.com/ontologies/platform#"
+     xmlns:fibo-fnd-utl-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/MetadataFNDUtilities/"
+     xmlns:patterns="http://www.co-ode.org/patterns#"
+     xmlns:fibo-der-com-mod="https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/MetadataDERCommoditiesDerivatives/"
+     xmlns:fibo-loan-typ-com="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CommercialLoans/"
+     xmlns:fibo-sec-dbt-ab-abs="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSecurities/"
+     xmlns:fibo-fnd-plc-loc="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Locations/"
+     xmlns:fibo-sec-dbt-ab-cbo="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CBOs/"
+     xmlns:fibo-loan-tem-mod="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/MetadataLOANLoansTemporal/"
+     xmlns:ssn-system="http://www.w3.org/ns/ssn/systems/"
+     xmlns:fibo-fbc-fct-rga="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegulatoryAgencies/"
+     xmlns:fibo-loan-typ-per="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/PersonalLoans/"
+     xmlns:km4c="http://www.disit.org/km4city/"
+     xmlns:fibo-sec-dbt-ex="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/ExerciseConventions/"
+     xmlns:go="http://purl.obolibrary.org/obo/go#"
+     xmlns:fibo-ind-mkt-mod="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/MetadataINDMarketIndices/"
+     xmlns:fibo-fnd-arr-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/MetadataFNDArrangements/"
+     xmlns:fibo-ind-fx-mod="https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/MetadataINDForeignExchange/"
+     xmlns:fibo-loan-mod="https://spec.edmcouncil.org/fibo/ontology/LOAN/MetadataLOAN/"
+     xmlns:gr_data="http://genomic-resources.eu/resource/"
+     xmlns:fibo-der-rat-mod="https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/MetadataDERRateDerivatives/"
+     xmlns:untitled-ontology-22="http://www.semanticweb.org/umarcomputers/ontologies/2022/4/untitled-ontology-2#2/3"
+     xmlns:snomed="http://snomed.info/id/"
+     xmlns:ex="http://example.org/"
+     xmlns:fibo-der-com-sw="https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySwaps/"
+     xmlns:fibo-der-com-sp="https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditySpots/"
+     xmlns:fibo-bp-iss-doc="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/IssuanceDocuments/"
+     xmlns:fibo-der-drc-pn="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ParticipationNotes/"
+     xmlns:fibo-fbc-fct-cajrga="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/CARegulatoryAgencies/"
+     xmlns:fibo-fnd-agrx-mod="https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/MetadataFNDAgreementsExt/"
+     xmlns:fibo-be-le-lei="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LEIEntities/"
+     xmlns:base="http://www.semanticweb.org/lg/ontologies/2023/0/untitled-ontology-8#"
+     xmlns:ggg="http://www.semanticweb.org/admin/ontologies/2022/4/MKTaxonomy/"
+     xmlns:fibo-md-temx-crs="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityCreditStatuses/"
+     xmlns:fibo-loan-ln-hmda="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanHMDA/"
+     xmlns:efo="http://www.ebi.ac.uk/efo/"
+     xmlns:ucum="https://biomedit.ch/rdf/sphn-resource/ucum/"
+     xmlns:dba="https://w3id.org/dba/ontology/"
+     xmlns:fibo-fnd-oac-own="https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Ownership/"
+     xmlns:fibo-loan-typ-cr="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/CreditProducts/"
+     xmlns:fibo-fnd-plc-vrt="https://spec.edmcouncil.org/fibo/ontology/FND/Places/VirtualPlaces/"
+     xmlns:fibo-fnd-pas-mod="https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/MetadataFNDProductsAndServices/"
+     xmlns:fibo-cae-mod="https://spec.edmcouncil.org/fibo/ontology/CAE/MetadataCAE/"
+     xmlns:fibo-fnd-org-fm="https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/FormalOrganizations/"
+     xmlns:fibo-loan-typ-cl="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/ConstructionLoans/"
+     xmlns:lcc-cr="https://www.omg.org/spec/LCC/Countries/CountryRepresentation/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:fibo-fnd-arr-rep="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Reporting/"
+     xmlns:fibo-md-mod="https://spec.edmcouncil.org/fibo/ontology/MD/MetadataMD/"
+     xmlns:fibo-fnd-pty-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/MetadataFNDParties/"
+     xmlns:fibo-fbc-fct-ireg="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/InternationalRegistriesAndAuthorities/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:fibo-fbceuna-all="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC-EuropeAndNorthAmerica/"
+     xmlns:fibo-fnd-org-org="https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/Organizations/"
+     xmlns:fibo-fnd-txn-sup="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SupplyTransactions/"
+     xmlns:fibo-be-oac-opty="https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/OwnershipParties/"
+     xmlns:fibo-bp-iss-ambs="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/AgencyMBSIssuance/"
+     xmlns:fibo-be-oac-cpty="https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/ControlParties/"
+     xmlns:cl="http://purl.obolibrary.org/obo/cl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:fibo-md-temx-mod="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/MetadataMDTemporalCore/"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+     xmlns:cd="http://www.recshop.fake/cd#"
+     xmlns:emmo="http://emmo.info/emmo#"
+     xmlns:adeel-cv-ontology="http://users.jyu.fi/~matahivv/cv-ontology.owl#"
+     xmlns:fibo-fnd-oac-mod="https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/MetadataFNDOwnershipAndControl/"
+     xmlns:Repository="http://www.metaphacts.com/ontologies/repository#"
+     xmlns:fibo-loan-tem-app="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanApplicationsTemporal/"
+     xmlns:hsapdv="http://purl.obolibrary.org/obo/hsapdv#"
+     xmlns:fibo-der-drc-raw="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/RightsAndWarrants/"
+     xmlns:fibo-be-ge-caj="https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/CAGovernmentEntitiesAndJurisdictions/"
+     xmlns:fibo-be-fct-fct="https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/FunctionalEntities/"
+     xmlns:fibo-fnd-acc-4217="https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/ISO4217-CurrencyCodes/"
+     xmlns:fibo-fnd-agrx-ele="https://spec.edmcouncil.org/fibo/ontology/FND/AgreementsExt/ContractElements/"
+     xmlns:ubprop="http://purl.obolibrary.org/obo/ubprop#"
+     xmlns:fibo-fbc-dae-crt="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditRatings/"
+     xmlns:bspo="http://purl.obolibrary.org/obo/bspo#"
+     xmlns:fibo-be-all="https://spec.edmcouncil.org/fibo/ontology/BE/AllBE/"
+     xmlns:fibo-fnd-plc-uspsai="https://spec.edmcouncil.org/fibo/ontology/FND/Places/NorthAmerica/USPostalServiceAddressesIndividuals/"
+     xmlns:fibo-fbc-dae-crf="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditFacilities/"
+     xmlns:fibo-fbc-dae-cre="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/CreditEvents/"
+     xmlns:fibo-fbc-fct-eufseind="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/EuropeanEntities/EuropeanFinancialServicesEntitiesIndividuals/"
+     xmlns:fibo-fnd-gao-gl="https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Goals/"
+     xmlns:fibo-der-rat-indo="https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/OTCIndexOptions/"
+     xmlns:fibo-fnd-pas-psch="https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/PaymentsAndSchedules/"
+     xmlns:fibo-bena-all="https://spec.edmcouncil.org/fibo/ontology/BE/AllBE-NorthAmerica/"
+     xmlns:fibo-sec-sec-sch="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/ParametricSchedules/"
+     xmlns:fibo-fnd-oac-ctl="https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/Control/"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:fibo-sec-dbt-ab-cdo="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CDOs/"
+     xmlns:fibo-der-ass-bo="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondOptions/"
+     xmlns:oboRel="http://www.obofoundry.org/ro/ro.owl#"
+     xmlns:ephedra="http://www.metaphacts.com/ontologies/platform/ephedra#"
+     xmlns:fibo-ind-ei-ei="https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicators/"
+     xmlns:fibo-loan-loan-loan="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoanBasicTerms/"
+     xmlns:fibo-loan-ln-mod="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/MetadataLOANLoanContracts/"
+     xmlns:fibo-fbc-dae-mod="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/MetadataFBCDebtAndEquities/"
+     xmlns:fibo-der-der-rsw="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ReturnSwaps/"
+     xmlns:fibo-sec-sec-id="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIdentification/"
+     xmlns:fibo-der-der-spn="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaptions/"
+     xmlns:fibo-fnd-arr-cls="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/ClassificationSchemes/"
+     xmlns:fibo-fnd-txn-ecr="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/EconomicResources/"
+     xmlns:Party_Chairman="http://www.semanticweb.org/umarcomputers/ontologies/2022/4/untitled-ontology-2#Party_Chairman/"
+     xmlns:fibo-fbc-fct-bc="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCenters/"
+     xmlns:fibo-md-derx-mod="https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/MetadataMDDerivativesTemporal/"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:fibo-der-rtd-rtd="https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/RateDerivatives/"
+     xmlns:fibo-bp-prc-mod="https://spec.edmcouncil.org/fibo/ontology/BP/Process/MetadataBPProcess/"
+     xmlns:fibo-sec-sec-bsk="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Baskets/"
+     xmlns:fibo-be-oac-mod="https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/MetadataBEOwnershipAndControl/"
+     xmlns:ctl="http://example.com/ontologies/control#"
+     xmlns:fibo-der-der-opt="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Options/"
+     xmlns:fibo-md-derx-eto="https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/ETOptionsTemporal/"
+     xmlns:fibo-fnd-acc-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/MetadataFNDAccounting/"
+     xmlns:fibo-fnd-rel-rel="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/Relations/"
+     xmlns:fibo-sec-eq-eqind="https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquitiesExampleIndividuals/"
+     xmlns:fibo-ind-ind-mod="https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/MetadataINDIndicators/"
+     xmlns:webprotege="http://webprotege.stanford.edu/"
+     xmlns:fibo-md-civx-fun="https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/FundsTemporal/"
+     xmlns:fibo-be-le-lp="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/LegalPersons/"
+     xmlns:fibo-sec-sec-ast="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecurityAssets/"
+     xmlns:fibo-sec-mod="https://spec.edmcouncil.org/fibo/ontology/SEC/MetadataSEC/"
+     xmlns:fibo-sec-dbt-ab-mod="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MetadataSECDebtAssetBackedSecurities/"
+     xmlns:fibo-be-oac-exec="https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/Executives/"
+     xmlns:fibo-fnd-law-lcap="https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCapacity/"
+     xmlns:fibo-ind-ei-caei="https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/CAEconomicIndicators/"
+     xmlns:fibo-bp-iss-dbti="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/DebtIssuance/"
+     xmlns:fibo-der-rtd-isw="https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/InflationSwaps/"
+     xmlns:fibo-fnd-arr-doc="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Documents/"
+     xmlns:untitled-ontology-2="http://www.semanticweb.org/umarcomputers/ontologies/2022/4/untitled-ontology-2#"
+     xmlns:untitled-ontology-5="http://www.semanticweb.org/kudli/ontologies/2023/0/untitled-ontology-5#"
+     xmlns:fibo-fnd-arr-id="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/IdentifiersAndIndices/"
+     xmlns:fibo-der-etd-std="https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/DerivativesStandardizedTerms/"
+     xmlns:fibo-fnd-plc-adr="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Addresses/"
+     xmlns:mv="http://schema.mobivoc.org/"
+     xmlns:fibo-fbc-fct-bci="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessCentersIndividuals/"
+     xmlns:fibo-der-cr-cds="https://spec.edmcouncil.org/fibo/ontology/DER/CreditDerivatives/CreditDefaultSwaps/"
+     xmlns:fibo-fnd-arr-com="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Communications/"
+     xmlns:subsets="http://purl.obolibrary.org/obo/ro/subsets#"
+     xmlns:fibo-loan-tem-ph="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoanPhases/"
+     xmlns:ncbitaxon="http://purl.obolibrary.org/obo/ncbitaxon#"
+     xmlns:obo2="http://www.geneontology.org/formats/oboInOwl#http://purl.obolibrary.org/obo/"
+     xmlns:obo1="http://purl.obolibrary.org/obo/"
+     xmlns:fibo-bp-prc-fcp="https://spec.edmcouncil.org/fibo/ontology/BP/Process/FinancialContextAndProcess/"
+     xmlns:fibo-ind-fx-fx="https://spec.edmcouncil.org/fibo/ontology/IND/ForeignExchange/ForeignExchange/"
+     xmlns:fibo-fbc-mod="https://spec.edmcouncil.org/fibo/ontology/FBC/MetadataFBC/"
+     xmlns:fibo-bena-ex="https://spec.edmcouncil.org/fibo/ontology/BE/AllBE-NorthAmericanExamples/"
+     xmlns:fibo-der-drc-cfd="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/ContractsForDifference/"
+     xmlns:fibo-der-etd-fut="https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/Futures/"
+     xmlns:fibo-fnd-arr-lif="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Lifecycles/"
+     xmlns:fibo-fbc-pas-fpas="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/FinancialProductsAndServices/"
+     xmlns:fibo-fbc-fct-usmkt="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USMarketsAndExchangesIndividuals/"
+     xmlns:fibo-ind-mkt-eqind="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/EquityIndexExampleIndividuals/"
+     xmlns:fibo-fnd-gao-obj="https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/Objectives/"
+     xmlns:fibo-sec-dbt-dbti="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/DebtInstruments/"
+     xmlns:fibo-der-ass-eqs="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquitySwaps/"
+     xmlns:j.1="http://ontologydesignpatterns.org/cp/owl/semiotics.owl#"
+     xmlns:fibo-sec-all="https://spec.edmcouncil.org/fibo/ontology/SEC/AllSEC/"
+     xmlns:j.0="http://www.ontologydesignpatterns.org/ont/boxer/boxing.owl#"
+     xmlns:j.3="http://dbpedia.org/resource/"
+     xmlns:j.2="http://www.ontologydesignpatterns.org/ont/fred/domain.owl#"
+     xmlns:fibo-fbcna-all="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC-NorthAmerica/"
+     xmlns:j.8="http://www.ontologydesignpatterns.org/ont/boxer/boxer.owl#"
+     xmlns:lcc-lr="https://www.omg.org/spec/LCC/Languages/LanguageRepresentation/"
+     xmlns:j.9="http://www.ontologydesignpatterns.org/ont/vn/abox/role/"
+     xmlns:fibo-fbc-fct-mkti="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/MarketsIndividuals/"
+     xmlns:j.4="http://www.ontologydesignpatterns.org/ont/fred/pos.owl#"
+     xmlns:j.5="http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#"
+     xmlns:j.6="http://www.ontologydesignpatterns.org/ont/fred/quantifiers.owl#"
+     xmlns:j.7="http://www.essepuntato.it/2008/12/earmark#"
+     xmlns:fibo-der-ass-bas="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetBaskets/"
+     xmlns:fibo-der-com-com="https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/Commodities/"
+     xmlns:fibo-md-dbtx-aly="https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtAnalytics/"
+     xmlns:hp="http://purl.obolibrary.org/obo/hp#"
+     xmlns:fibo-der-com-fwd="https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityForwards/"
+     xmlns:fibo-fnd-plc-fac="https://spec.edmcouncil.org/fibo/ontology/FND/Places/Facilities/"
+     xmlns:caloha-reqs-vetted="http://purl.obolibrary.org/obo/caloha-reqs-vetted#"
+     xmlns:dcterms="http://purl.org/dc/terms/"
+     xmlns:fibo-der-com-opt="https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommodityOptions/"
+     xmlns:fibo-sec-sec-pls="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/Pools/"
+     xmlns:pato="http://purl.obolibrary.org/obo/pato#"
+     xmlns:Help="http://help.metaphacts.com/resource/"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:fibo-sec-dbt-ab-lpn="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/LoanParticipationNotes/"
+     xmlns:rsctx="http://softeng.polito.it/rsctx/"
+     xmlns:fibo-sec-dbt-ab-cmo="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CMOs/"
+     xmlns:fibo-fnd-dt-oc="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/Occurrences/"
+     xmlns:ie="http://www.ieontology.org/"
+     xmlns:fibo-be-plc-mod="https://spec.edmcouncil.org/fibo/ontology/BE/PrivateLimitedCompanies/MetadataBEPrivateLimitedCompanies/"
+     xmlns:fibo-der-ass-eqf="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityForwards/"
+     xmlns:fibo-der-ass-eqo="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/EquityOptions/"
+     xmlns:fibo-bp-iss-mod="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MetadataBPSecuritiesIssuance/"
+     xmlns:fibo-der-etd-mod="https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/MetadataDERExchangeTradedDerivatives/"
+     xmlns:fibo-fnd-pty-pty="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Parties/"
+     xmlns:fibo-der-der-fwd="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Forwards/"
+     xmlns:resource="https://biomedit.ch/rdf/sphn-resource/"
+     xmlns:fibo-fbc-fi-mod="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/MetadataFBCFinancialInstruments/"
+     xmlns:fibo-der-etd-eto="https://spec.edmcouncil.org/fibo/ontology/DER/ExchangeTradedDerivatives/ExchangeTradedOptions/"
+     xmlns:fibo-sec-dbt-ab-clo="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/CLOs/"
+     xmlns:terms2="http://www.geneontology.org/formats/oboInOwl#http://purl.org/dc/terms/"
+     xmlns:fibo-indrr-all="https://spec.edmcouncil.org/fibo/ontology/IND/AllIND-ReferenceRates/"
+     xmlns:oboInOwl="http://www.geneontology.org/formats/oboInOwl#"
+     xmlns:fibo-fbc-fct-eurga="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/EuropeanEntities/EURegulatoryAgencies/"
+     xmlns:chebi3="http://purl.obolibrary.org/obo/chebi#2"
+     xmlns:chebi4="http://purl.obolibrary.org/obo/chebi#3"
+     xmlns:fibo-sec-dbt-ab-spv="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/AssetBackedSPVs/"
+     xmlns:fibo-fnd-dt-fd="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/FinancialDates/"
+     xmlns:chebi6="http://purl.obolibrary.org/obo/chebi#1"
+     xmlns:xi="http://www.w3.org/2001/XInclude"
+     xmlns:chebi1="http://purl.obolibrary.org/obo/chebi#"
+     xmlns:fibo-loan-tem-ev="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansEvents/"
+     xmlns:fibo-fnd-mod="https://spec.edmcouncil.org/fibo/ontology/FND/MetadataFND/"
+     xmlns:schema="http://schema.org/"
+     xmlns:sphn-loinc="https://biomedit.ch/rdf/sphn-resource/loinc/"
+     xmlns:fibo-sec-eq-eq="https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/EquityInstruments/"
+     xmlns:dpa="http://ontologie.politie.nl/def/dpm-autorisation#"
+     xmlns:fibo-der-fx-ctr="https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxContracts/"
+     xmlns:fibo-fbc-fct-breg="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/BusinessRegistries/"
+     xmlns:chebi="http://purl.obolibrary.org/obo/chebi/"
+     xmlns:fibo-fnd-dt-mod="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/MetadataFNDDatesAndTimes/"
+     xmlns:fibo-bp-mod="https://spec.edmcouncil.org/fibo/ontology/BP/MetadataBP/"
+     xmlns:fibo-md-dbtx-py="https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/DebtPricingYields/"
+     xmlns:fibo-fbc-dae-gty="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Guaranty/"
+     xmlns:fibo-der-rat-iro="https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/IROptions/"
+     xmlns:dpm="http://ontologie.politie.nl/def/dpm-core#"
+     xmlns:fibo-be-ptr-ptr="https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/Partnerships/"
+     xmlns:fibo-fnd-arr-asmt="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Assessments/"
+     xmlns:dpt="http://ontologie.politie.nl/def/dpm-template#"
+     xmlns:fibo-sec-dbt-ab-pbs="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/PoolBackedSecurities/"
+     xmlns:fibo-sec-eq-dr="https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/DepositaryReceipts/"
+     xmlns:fibo-fbc-fct-eufse="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/EuropeanEntities/EUFinancialServicesEntities/"
+     xmlns:fibo-fnd-txn-mod="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MetadataFNDTransactionsExt/"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:fibo-loan-ln-ln="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanContracts/LoanCore/"
+     xmlns:fibo-be-ge-mod="https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/MetadataBEGovernmentEntities/"
+     xmlns:fibo-derri-all="https://spec.edmcouncil.org/fibo/ontology/DER/AllDER-ReferenceIndividuals/"
+     xmlns:fibo-der-rat-fra="https://spec.edmcouncil.org/fibo/ontology/DER/RateDerivatives/ForwardRateAgreements/"
+     xmlns:events="http://schema.chubb.com/events/"
+     xmlns:fibo-be-corp-mod="https://spec.edmcouncil.org/fibo/ontology/BE/Corporations/MetadataBECorporations/"
+     xmlns:fibo-be-plc-plc="https://spec.edmcouncil.org/fibo/ontology/BE/PrivateLimitedCompanies/PrivateLimitedCompanies/"
+     xmlns:fibo-fnd-txn-mkt="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/MarketTransactions/"
+     xmlns:fibo-be-le-usee="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/NorthAmericanEntities/USExampleEntities/"
+     xmlns:vs="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+     xmlns:fibo-loan-loan-mod="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/MetadataLOANLoans/"
+     xmlns:fibo-secex-all="https://spec.edmcouncil.org/fibo/ontology/SEC/AllSEC-ExampleIndividuals/"
+     xmlns:fibo-be-ge-euj="https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/EUGovernmentEntitiesAndJurisdictions/"
+     xmlns:fibo-loan-all="https://spec.edmcouncil.org/fibo/ontology/LOAN/AllLOAN/"
+     xmlns:fibo-fnd-arr-rt="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Ratings/"
+     xmlns:fibo-bp-iss-muni="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MuniIssuance/"
+     xmlns:gr_ont="http://genomic-resources.eu/ontology/"
+     xmlns:fibo-ind-ir-mdp="https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/MarketDataProviders/"
+     xmlns:fibo-ind-ir-cm="https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/CommonInterestRates/"
+     xmlns:fibo-bp-iss-mbs="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/MBSIssuance/"
+     xmlns:fibo-fnd-utl-av="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/AnnotationVocabulary/"
+     xmlns:fibo-fnd-utl-alx="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Analytics/"
+     xmlns:fibo-cae-ce-mod="https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/MetadataCAECorporateEvents/"
+     xmlns:fibo-ind-ei-usei="https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/NorthAmericanIndicators/USEconomicIndicators/"
+     xmlns:sosa="http://www.w3.org/ns/sosa/"
+     xmlns:admin="http://webns.net/mvcb/"
+     xmlns:fibo-civ-fnd-civ="https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/CIV/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:ub="http://swat.cse.lehigh.edu/onto/univ-bench.owl##"
+     xmlns:fibo-sec-sec-mod="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/MetadataSECSecurities/"
+     xmlns:fibo-sec-sec-rst="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesRestrictions/"
+     xmlns:annotations="http://emmo.info/emmo/top/annotations#"
+     xmlns:fibo-be-ge-usj="https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/NorthAmericanJurisdiction/USGovernmentEntitiesAndJurisdictions/"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:fibo-be-le-mod="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/MetadataBELegalEntities/"
+     xmlns:fibo-fbc-pas-caa="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/ClientsAndAccounts/"
+     xmlns:fibo-fnd-plc-uspsa="https://spec.edmcouncil.org/fibo/ontology/FND/Places/NorthAmerica/USPostalServiceAddresses/"
+     xmlns:ts="http://www.yso.fi/onto/tervesuomi-schema/"
+     xmlns:fibo-ind-ei-mod="https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/MetadataINDEconomicIndicators/"
+     xmlns:ssn="http://www.w3.org/ns/ssn/"
+     xmlns:fibo-ind-mkt-bas="https://spec.edmcouncil.org/fibo/ontology/IND/MarketIndices/BasketIndices/"
+     xmlns:fibo-ind-mod="https://spec.edmcouncil.org/fibo/ontology/IND/MetadataIND/"
+     xmlns:fibo-fnd-agr-ctr="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Contracts/"
+     xmlns:fibo-der-ass-mod="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/MetadataDERAssetDerivatives/"
+     xmlns:fibo-der-drc-swp="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Swaps/"
+     xmlns:fibo-fbc-fi-fi="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/FinancialInstruments/"
+     xmlns:fibo-be-mod="https://spec.edmcouncil.org/fibo/ontology/BE/MetadataBE/"
+     xmlns:fibo-fnd-aap-ppl="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/People/"
+     xmlns:sw="http://www.kunsan.ac.kr/sw/"
+     xmlns:sp="http://spinrdf.org/sp#"
+     xmlns:fibo-der-fx-fwd="https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxForwards/"
+     xmlns:fibo-be-fct-mod="https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/MetadataBEFunctionalEntities/"
+     xmlns:fibo-beeuna-all="https://spec.edmcouncil.org/fibo/ontology/BE/AllBE-EuropeAndNorthAmerica/"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:se="http://www.semanticweb.org/umarcomputers/ontologies/2022/4/untitled-ontology-2"
+     xmlns:sh="http://www.w3.org/ns/shacl#"
+     xmlns:fibo-der-drc-mod="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/MetadataDERDerivativesContracts/"
+     xmlns:fibo-fbc-fct-usind="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USExampleIndividuals/"
+     xmlns:fibo-fnd-rel-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Relations/MetadataFNDRelations/"
+     xmlns:rr="http://www.w3.org/ns/r2rml#"
+     xmlns:fibo-loan-tem-cl="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/ConstructionLoansTemporal/"
+     xmlns:fibo-indna-all="https://spec.edmcouncil.org/fibo/ontology/IND/AllIND-NorthAmerica/"
+     xmlns:fibo-fbc-dae-dbt="https://spec.edmcouncil.org/fibo/ontology/FBC/DebtAndEquities/Debt/"
+     xmlns:cap="http://example.com/ontologies/capability#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:fibo-fnd-oac-oac="https://spec.edmcouncil.org/fibo/ontology/FND/OwnershipAndControl/OwnershipAndControl/"
+     xmlns:fibo-der-com-ctr="https://spec.edmcouncil.org/fibo/ontology/DER/CommoditiesDerivatives/CommoditiesContracts/"
+     xmlns:fibo-loan-typ-sec="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/SecuredLoans/"
+     xmlns:fibo-sec-sec-iss="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIssuance/"
+     xmlns:fibo-sec-eq-mod="https://spec.edmcouncil.org/fibo/ontology/SEC/Equities/MetadataSECEquities/"
+     xmlns:top="https://w3id.org/italia/env/onto/top/"
+     xmlns:fibo-fnd-pas-pas="https://spec.edmcouncil.org/fibo/ontology/FND/ProductsAndServices/ProductsAndServices/"
+     xmlns:fibo-sec-sec-idind="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesIdentificationIndividuals/"
+     xmlns:fibo-sec-sec-lst="https://spec.edmcouncil.org/fibo/ontology/SEC/Securities/SecuritiesListings/"
+     xmlns:fibo-fnd-law-jur="https://spec.edmcouncil.org/fibo/ontology/FND/Law/Jurisdiction/"
+     xmlns:fibo-fnd-arr-arr="https://spec.edmcouncil.org/fibo/ontology/FND/Arrangements/Arrangements/"
+     xmlns:fibo-fnd-agr-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/MetadataFNDAgreements/"
+     xmlns:ns2="http://www.semanticweb.org/ing/ontologies/2022/11/recommenderSerie#"
+     xmlns:fibo-fnd-txn-qr="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/QuantifiedResources/"
+     xmlns:fibo-fnd-txn-sec="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/SecuritiesTransactions/"
+     xmlns:ns1="file:///C:/Users/rashmi.nayak.n/KnowledgeGraph/Final_Integration/#"
+     xmlns:fibo-fbc-fct-usjrga="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USRegulatoryAgencies/"
+     xmlns:fibo-der-der-cof="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/OptionContractsOnFutures/"
+     xmlns:fibo-loan-loan-reg="https://spec.edmcouncil.org/fibo/ontology/LOAN/Loans/LoansRegulatory/"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:qudt-unit-1-1="http://qudt.org/1.1/vocab/unit#"
+     xmlns:core="http://purl.obolibrary.org/obo/uberon/core#"
+     xmlns:claim="https://schema.chubb.com/claims-20220801/"
+     xmlns:pr="http://purl.obolibrary.org/obo/pr#"
+     xmlns:fibo-sec-dbt-tstd="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/TradedShortTermDebt/"
+     xmlns:Service="http://www.metaphacts.com/ontologies/platform/service/"
+     xmlns:cito="http://purl.org/spar/cito/"
+     xmlns:fibo-der-fx-sw="https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSwaps/"
+     xmlns:fibo-fbceu-all="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC-Europe/"
+     xmlns:mondo="http://purl.obolibrary.org/obo/mondo#"
+     xmlns:lookup="http://www.metaphacts.com/ontologies/platform/repository/lookup#"
+     xmlns:fibo-fnd-law-cor="https://spec.edmcouncil.org/fibo/ontology/FND/Law/LegalCore/"
+     xmlns:fibo-fbc-fct-ra="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/RegistrationAuthorities/"
+     xmlns:fibo-fbc-fct-usfse="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntities/"
+     xmlns:pext="http://www.ontotext.com/proton/protonext.html#"
+     xmlns:fibo-bp-iss-pmbs="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/PrivateLabelMBSIssuance/"
+     xmlns:fibo-sec-dbt-ab-syn="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/SyntheticCDOs/"
+     xmlns:dbpedia-owl="http://dbpedia.org/ontology/"
+     xmlns:fibo-fnd-agr-agr="https://spec.edmcouncil.org/fibo/ontology/FND/Agreements/Agreements/"
+     xmlns:JBOntology="http://www.movies.org/ontologies/JBOntology#"
+     xmlns:fibo-fbc-fi-ip="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/InstrumentPricing/"
+     xmlns:fibo-fbc-fct-fse="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/FinancialServicesEntities/"
+     xmlns:electrochemistry="https://big-map.github.io/BattINFO/ontology/electrochemistry#"
+     xmlns:fibo-fbc-pas-mod="https://spec.edmcouncil.org/fibo/ontology/FBC/ProductsAndServices/MetadataFBCProductsAndServices/"
+     xmlns:fibo-fbc-fct-usfsind="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/USFinancialServicesEntitiesIndividuals/"
+     xmlns:fibo-ind-ir-ir="https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/InterestRates/"
+     xmlns:fibo-fnd-txn-rea="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REATransactions/"
+     xmlns:fibo-der-fx-mod="https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/MetadataDERFxDerivatives/"
+     xmlns:fibo-fbcnaex-all="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC-NorthAmericanExamples/"
+     xmlns:fibo-md-civx-mod="https://spec.edmcouncil.org/fibo/ontology/MD/CIVTemporal/MetadataMDCIVTemporal/"
+     xmlns:sphn="https://biomedit.ch/rdf/sphn-ontology/sphn#"
+     xmlns:Assets="http://www.metaphacts.com/resource/assets/"
+     xmlns:fibo-fnd-qt-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/MetadataFNDQuantities/"
+     xmlns:ukm="http://www.maranatha.edu/resources/ontologies/2023/0/ukm#"
+     xmlns:org="http://www.w3.org/ns/org#"
+     xmlns:fibo-der-mod="https://spec.edmcouncil.org/fibo/ontology/DER/MetadataDER/"
+     xmlns:fibo-fnd-txn-ev="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionEvents/"
+     xmlns:fibo-loan-typ-gen="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/GeneralLoans/"
+     xmlns:fibo-be-sps-sps="https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/SoleProprietorships/"
+     xmlns:fibo-be-tr-tr="https://spec.edmcouncil.org/fibo/ontology/BE/Trusts/Trusts/"
+     xmlns:fibo-fnd-all="https://spec.edmcouncil.org/fibo/ontology/FND/AllFND/"
+     xmlns:fibo-be-ge-ge="https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/GovernmentEntities/"
+     xmlns:fibo-der-ass-brs="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/BondReturnSwaps/"
+     xmlns:fibo-fnd-txn-cle="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/REAClaimsEvents/"
+     xmlns:prov="http://www.w3.org/ns/prov#"
+     xmlns:fibo-fbc-fct-mod="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/MetadataFBCFunctionalEntities/"
+     xmlns:fibo-fnd-qt-qtu="https://spec.edmcouncil.org/fibo/ontology/FND/Quantities/QuantitiesAndUnits/"
+     xmlns:fibo-beexin-all="https://spec.edmcouncil.org/fibo/ontology/BE/AllBE-ExampleIndividuals/"
+     xmlns:fibo-der-all="https://spec.edmcouncil.org/fibo/ontology/DER/AllDER/"
+     xmlns:fibo-loan-typ-mtg="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MortgageLoans/"
+     xmlns:juso="http://rdfs.co/juso/kr/"
+     xmlns:fibo-fnd-aap-mod="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/MetadataFNDAgentsAndPeople/"
+     xmlns:fibo-ind-ind-ind="https://spec.edmcouncil.org/fibo/ontology/IND/Indicators/Indicators/"
+     xmlns:fibo-fnd-txn-txnx="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionsExtended/"
+     xmlns:ontologyofspatialobject="http://www.semanticweb.org/mpuebla/ontologies/2015/8/OntologyOfSpatialObject#"
+     xmlns:fibo-be-ge-ukj="https://spec.edmcouncil.org/fibo/ontology/BE/GovernmentEntities/EuropeanJurisdiction/UKGovernmentEntitiesAndJurisdictions/"
+     xmlns:fibo-fnd-acc-aeq="https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/AccountingEquity/"
+     xmlns:nmo="http://nomisma.org/ontology#"
+     xmlns:fibo-civ-fnd-mod="https://spec.edmcouncil.org/fibo/ontology/CIV/Funds/MetadataCIVFunds/"
+     xmlns:fibo-fnd-org-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Organizations/MetadataFNDOrganizations/"
+     xmlns:fibo-der-fx-sp="https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxSpots/"
+     xmlns:doap="http://usefulinc.com/ns/doap#"
+     xmlns:fibo-fnd-dt-bd="https://spec.edmcouncil.org/fibo/ontology/FND/DatesAndTimes/BusinessDates/"
+     xmlns:fibo-be-sps-mod="https://spec.edmcouncil.org/fibo/ontology/BE/SoleProprietorships/MetadataBESoleProprietorships/"
+     xmlns:fibo-fnd-pty-rl="https://spec.edmcouncil.org/fibo/ontology/FND/Parties/Roles/"
+     xmlns:fibo-fbcexind-all="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC-ExampleIndividuals/"
+     xmlns:Admin="http://www.metaphacts.com/resource/admin/"
+     xmlns:fibo-sec-dbt-ab-mbs="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/AssetBackedSecurities/MortgageBackedSecurities/"
+     xmlns:fibo-fndna-all="https://spec.edmcouncil.org/fibo/ontology/FND/AllFND-NorthAmerica/"
+     xmlns:fibo-md-dbtx-mod="https://spec.edmcouncil.org/fibo/ontology/MD/DebtTemporal/MetadataMDDebtTemporal/"
+     xmlns:fibo-fbc-fct-cafse="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/NorthAmericanEntities/CAFinancialServicesEntities/"
+     xmlns:fibo-loan-typ-prod="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/LoanProducts/"
+     xmlns:fibo-civ-mod="https://spec.edmcouncil.org/fibo/ontology/CIV/MetadataCIV/"
+     xmlns:fibo-fnd-law-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Law/MetadataFNDLaw/"
+     xmlns:fibo-der-der-sp="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/Spots/"
+     xmlns:fibo-fnd-utl-val="https://spec.edmcouncil.org/fibo/ontology/FND/Utilities/Values/"
+     xmlns:fibo-be-tr-mod="https://spec.edmcouncil.org/fibo/ontology/BE/Trusts/MetadataBETrusts/"
+     xmlns:fibo-der-drc-ma="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesMasterAgreements/"
+     xmlns:fibo-md-temx-trs="https://spec.edmcouncil.org/fibo/ontology/MD/TemporalCore/SecurityTradingStatuses/"
+     xmlns:fibo-ind-ir-mod="https://spec.edmcouncil.org/fibo/ontology/IND/InterestRates/MetadataINDInterestRates/"
+     xmlns:fibo-der-drc-swpind="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/SwapsIndividuals/"
+     xmlns:policy="https://schema.chubb.com/policies-20220801/"
+     xmlns:fibo-sec-dbt-bnd="https://spec.edmcouncil.org/fibo/ontology/SEC/Debt/Bonds/"
+     xmlns:fibo-fnd-txn-acc="https://spec.edmcouncil.org/fibo/ontology/FND/TransactionsExt/TransactionAccounting/"
+     xmlns:fibo-fnd-aap-agt="https://spec.edmcouncil.org/fibo/ontology/FND/AgentsAndPeople/Agents/"
+     xmlns:fibo-be-ptr-mod="https://spec.edmcouncil.org/fibo/ontology/BE/Partnerships/MetadataBEPartnerships/"
+     xmlns:fibo-fnd-gao-mod="https://spec.edmcouncil.org/fibo/ontology/FND/GoalsAndObjectives/MetadataFNDGoalsAndObjectives/"
+     xmlns:fibo-be-fct-pub="https://spec.edmcouncil.org/fibo/ontology/BE/FunctionalEntities/Publishers/"
+     xmlns:fibo-der-drc-bsc="https://spec.edmcouncil.org/fibo/ontology/DER/DerivativesContracts/DerivativesBasics/"
+     xmlns:fibo-cae-ce-cae="https://spec.edmcouncil.org/fibo/ontology/CAE/CorporateEvents/CorporateActionsEvents/"
+     xmlns:fibo-be-oac-cctl="https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/CorporateControl/"
+     xmlns:fibo-loan-tem-tem="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoansTemporal/LoansTemporal/"
+     xmlns:fibo-der-fx-opt="https://spec.edmcouncil.org/fibo/ontology/DER/FxDerivatives/FxOptions/"
+     xmlns:fibo-ind-ei-pub="https://spec.edmcouncil.org/fibo/ontology/IND/EconomicIndicators/EconomicIndicatorPublishers/"
+     xmlns:fibo-fnd-plc-mod="https://spec.edmcouncil.org/fibo/ontology/FND/Places/MetadataFNDPlaces/"
+     xmlns:fibo-secri-all="https://spec.edmcouncil.org/fibo/ontology/SEC/AllSEC-ReferenceIndividuals/"
+     xmlns:fibo-beeu-all="https://spec.edmcouncil.org/fibo/ontology/BE/AllBE-Europe/"
+     xmlns:fibo-loan-typ-uns="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/UnsecuredLoans/"
+     xmlns:fibo-der-ass-ass="https://spec.edmcouncil.org/fibo/ontology/DER/AssetDerivatives/AssetDerivatives/"
+     xmlns:fibo-fbc-fi-stl="https://spec.edmcouncil.org/fibo/ontology/FBC/FinancialInstruments/Settlement/"
+     xmlns:fibo-bp-iss-ipo="https://spec.edmcouncil.org/fibo/ontology/BP/SecuritiesIssuance/EquitiesIPOIssuance/"
+     xmlns:fibo-be-oac-cown="https://spec.edmcouncil.org/fibo/ontology/BE/OwnershipAndControl/CorporateOwnership/"
+     xmlns:fibo-fbc-all="https://spec.edmcouncil.org/fibo/ontology/FBC/AllFBC/"
+     xmlns:fibo-fnd-acc-cur="https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/"
+     xmlns:fibo-be-le-fbo="https://spec.edmcouncil.org/fibo/ontology/BE/LegalEntities/FormalBusinessOrganizations/"
+     xmlns:cl3="http://purl.obolibrary.org/obo/cl#1"
+     xmlns:qudt-1-1="http://qudt.org/1.1/schema/qudt#"
+     xmlns:fibo-loan-typ-mod="https://spec.edmcouncil.org/fibo/ontology/LOAN/LoanTypes/MetadataLOANLoanTypes/"
+     xmlns:fibo-md-der-fut="https://spec.edmcouncil.org/fibo/ontology/MD/DerivativesTemporal/FuturesTemporal/"
+     xmlns:cl1="http://purl.obolibrary.org/obo/cl#3"
+     xmlns:cl2="http://purl.obolibrary.org/obo/cl#2"
+     xmlns:fibo-fbc-fct-mkt="https://spec.edmcouncil.org/fibo/ontology/FBC/FunctionalEntities/Markets/">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system">
+        <rdfs:comment xml:lang="en">This is an ontology about Blood Donation System</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasUser -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasUser">
+        <rdfs:comment xml:lang="en">Blood Donation Website (System) has different types of users like admin, blood donation center and person (donor,request maker)</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+        <owl:inverseOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userEnrollsIn"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userDonates -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userDonates">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="en">User donates Blood (A+, B+, AB+, O+)</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userEnrollsIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userEnrollsIn">
+        <rdfs:comment xml:lang="en">User enrolls in blood donation website (System)</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userGives -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userGives">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Users gives feedback about website/or any other thing</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Feedback"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userLoggedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userLoggedIn">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Users who logged in to the Blood Donation Website (System)</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userViews -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#userViews">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AsymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#InverseFunctionalProperty"/>
+        <rdfs:comment xml:lang="en">User views (checks list of) different Blood donation centers for making appointment.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hadFeedback -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hadFeedback">
+        <rdfs:comment xml:lang="en">this property belongs to feedback like good feedback and bad feedback</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasAdminEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasAdminEmail">
+        <rdfs:comment xml:lang="en">Indicates Admin has Email for login</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasAdminID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasAdminID">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates admin has unique userID for login</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasAdminName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasAdminName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Admin has full name</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasBloodGroup">
+        <rdfs:comment xml:lang="en">Indicates Blood has Blood Group</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterAddress">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has Location/Address</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterCategory -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterCategory">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has category (Government,Private)</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterCity">
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has City</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterContactNO -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterContactNO">
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has Contact Number</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterEmail">
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has Email Address</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterID">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has unique ID</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterLicenseNO -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterLicenseNO">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has licence number</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has proper name</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterTiming -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasCenterTiming">
+        <rdfs:comment xml:lang="en">Indicates Blood Donation Center has timings</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorAge -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorAge">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Donor has age</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorBloodGroup">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Donor has Blood Group</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorBloodPressure -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorBloodPressure">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Donor has some Average Blood Pressure for blood donation</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorDisease -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorDisease">
+        <rdfs:comment xml:lang="en">Donor has some disease for blood donation</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorGender">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Donor has gender</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorHemoglobinLevel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorHemoglobinLevel">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Donor has some Hemoglobin Level value for blood donation</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorSmookingStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorSmookingStatus">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Donor has some smooking status for blood donation</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorWeight -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasDonorWeight">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Donor has some weight for blood donation</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasFeedbackDetails -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasFeedbackDetails">
+        <rdfs:comment xml:lang="en">Person gives Feedback about the blood donation website</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasLabel -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasLabel">
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonAddress">
+        <rdfs:comment xml:lang="en">Indicates Person has Address</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonBloodGroup">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Person has Blood Group</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonCity">
+        <rdfs:comment xml:lang="en">Indicates Person has City</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonContactNO -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonContactNO">
+        <rdfs:comment xml:lang="en">Indicates Person has Contact No</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonDOB -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonDOB">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Person has Date of Birth</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonEmail">
+        <rdfs:comment xml:lang="en">Indiactes Person has Email</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonFullName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonFullName">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Person has Full Name</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonGender">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Person has Gender</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#hasPersonID">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Indicates Person has Unique ID</rdfs:comment>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Admin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Admin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+        <rdfs:comment xml:lang="en">This is admin class, it belongs to user and it is subclass of user class</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:comment xml:lang="en">This is the Blood class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:comment xml:lang="en">This is the Blood Donation class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+        <rdfs:comment xml:lang="en">This is blood donation center class, it belongs to user and it is subclass of user class</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website">
+        <rdfs:comment xml:lang="en">This is the main class of our Blood Donation Management System</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Request -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Request">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:comment xml:lang="en">This is the Blood Request class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Request_Maker"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:comment xml:lang="en">This is donor class, it belongs to user and it is subclass of person class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Feedback -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Feedback">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:comment xml:lang="en">This is the Feedback class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User"/>
+        <rdfs:comment xml:lang="en">This is person class, it belongs to user and it is subclass of user class. It includes donors and request makers.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Request_Maker -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Request_Maker">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdfs:comment xml:lang="en">This is request maker class, it belongs to user and it is subclass of person class.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#User">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <rdfs:comment xml:lang="en">This is the User class that indicates all users.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#AB_Pos_Blood -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#AB_Pos_Blood">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood"/>
+        <hasBloodGroup rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AB Positive Blood Group</hasBloodGroup>
+        <rdfs:comment xml:lang="en">It iis a type of blood group</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#A_Pos_Blood -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#A_Pos_Blood">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood"/>
+        <hasBloodGroup rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A Positive Blood Group</hasBloodGroup>
+        <rdfs:comment xml:lang="en">It is a type of blood group</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#B_Pos_Blood -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#B_Pos_Blood">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood"/>
+        <hasBloodGroup rdf:datatype="http://www.w3.org/2001/XMLSchema#string">B Postive Blood Group</hasBloodGroup>
+        <rdfs:comment xml:lang="en">It is a type of blood group</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Bad_Feedback -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Bad_Feedback">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Feedback"/>
+        <hadFeedback rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Bad Feedback</hadFeedback>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Website"/>
+        <hasLabel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">User *Registered In* Blood Donation Website</hasLabel>
+        <rdfs:comment xml:lang="en">This is our website (System) name.</rdfs:comment>
+        <hasUser rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_A001"/>
+        <hasUser rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_C001"/>
+        <hasUser rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P001"/>
+        <hasUser rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P002"/>
+        <hasUser rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P003"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Good_Feedback -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Good_Feedback">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Feedback"/>
+        <hadFeedback rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Good Feedback</hadFeedback>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_A001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_A001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Admin"/>
+        <hasAdminID rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A001</hasAdminID>
+        <hasAdminName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Muhammad Azhar</hasAdminName>
+        <hasAdminEmail rdf:datatype="http://www.w3.org/2001/XMLSchema#string">azhar@gmail.com</hasAdminEmail>
+        <rdfs:comment xml:lang="en">AZHAR is registered as a ADMIN</rdfs:comment>
+        <userLoggedIn rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website"/>
+        <userEnrollsIn rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_C001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_C001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Blood_Donation_Center"/>
+        <hasCenterContactNO rdf:datatype="http://www.w3.org/2001/XMLSchema#string">+92 042 1234561</hasCenterContactNO>
+        <hasCenterTiming rdf:datatype="http://www.w3.org/2001/XMLSchema#string">09AM-06PM</hasCenterTiming>
+        <hasCenterID rdf:datatype="http://www.w3.org/2001/XMLSchema#string">C001</hasCenterID>
+        <hasCenterAddress rdf:datatype="http://www.w3.org/2001/XMLSchema#string">H01 A-Block Awan Twon, Lahore</hasCenterAddress>
+        <hasCenterLicenseNO rdf:datatype="http://www.w3.org/2001/XMLSchema#string">LLL1234567891</hasCenterLicenseNO>
+        <hasCenterCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lahore</hasCenterCity>
+        <hasCenterCategory rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Private</hasCenterCategory>
+        <hasCenterName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Sundas Foundation</hasCenterName>
+        <hasCenterEmail rdf:datatype="http://www.w3.org/2001/XMLSchema#string">sundas_foundation@gmail.com</hasCenterEmail>
+        <rdfs:comment xml:lang="en">SUNDAS FOUNDATION is registered as a BLOOD DONATION CENTER</rdfs:comment>
+        <userEnrollsIn rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Request_Maker"/>
+        <hasPersonContactNO rdf:datatype="http://www.w3.org/2001/XMLSchema#string">+92 333 1234561</hasPersonContactNO>
+        <hasPersonDOB rdf:datatype="http://www.w3.org/2001/XMLSchema#string">01-01-2000</hasPersonDOB>
+        <hasPersonBloodGroup rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A+</hasPersonBloodGroup>
+        <hasPersonAddress rdf:datatype="http://www.w3.org/2001/XMLSchema#string">House 01 H-Block Sabazazar, Lahore</hasPersonAddress>
+        <hasPersonCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lahore</hasPersonCity>
+        <hasPersonGender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Male</hasPersonGender>
+        <hasPersonFullName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Muhammad Ali</hasPersonFullName>
+        <hasPersonID rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P001</hasPersonID>
+        <hasFeedbackDetails rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This website helped me for smooth blood donation process and it works nicely</hasFeedbackDetails>
+        <hasPersonEmail rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ali@gmail.com</hasPersonEmail>
+        <rdfs:comment xml:lang="en">ALI is registered as a PERSON (DONOR , REQUEST MAKER)
+ALI is currently logged in to the system
+ALI views Blood Donation Center
+ALI donates Blood of group A+</rdfs:comment>
+        <userDonates rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#A_Pos_Blood"/>
+        <userLoggedIn rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website"/>
+        <userEnrollsIn rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website"/>
+        <userGives rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Good_Feedback"/>
+        <userViews rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_C001"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P002 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P002">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Request_Maker"/>
+        <hasPersonContactNO rdf:datatype="http://www.w3.org/2001/XMLSchema#string">+92 333 1234562</hasPersonContactNO>
+        <hasPersonDOB rdf:datatype="http://www.w3.org/2001/XMLSchema#string">02-01-2000</hasPersonDOB>
+        <hasPersonBloodGroup rdf:datatype="http://www.w3.org/2001/XMLSchema#string">B+</hasPersonBloodGroup>
+        <hasPersonCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lahore</hasPersonCity>
+        <hasPersonGender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Male</hasPersonGender>
+        <hasPersonFullName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Muhammad Ahmad</hasPersonFullName>
+        <hasPersonID rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P002</hasPersonID>
+        <hasPersonEmail rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ahmad@gmail.com</hasPersonEmail>
+        <rdfs:comment xml:lang="en">AHMAD is registered as a PERSON (DONOR , REQUEST MAKER)</rdfs:comment>
+        <userDonates rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#B_Pos_Blood"/>
+        <userEnrollsIn rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P003 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#ID_P003">
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Donor"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Person"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#Request_Maker"/>
+        <hasPersonContactNO rdf:datatype="http://www.w3.org/2001/XMLSchema#string">+92 333 1234563</hasPersonContactNO>
+        <hasPersonDOB rdf:datatype="http://www.w3.org/2001/XMLSchema#string">03-01-2000</hasPersonDOB>
+        <hasPersonBloodGroup rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AB+</hasPersonBloodGroup>
+        <hasPersonFullName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Fatima Sabir</hasPersonFullName>
+        <hasPersonGender rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Female</hasPersonGender>
+        <hasPersonAddress rdf:datatype="http://www.w3.org/2001/XMLSchema#string">House 03 H-Block Sabazazar, Lahore</hasPersonAddress>
+        <hasPersonCity rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Lahore</hasPersonCity>
+        <hasPersonID rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P003</hasPersonID>
+        <hasPersonEmail rdf:datatype="http://www.w3.org/2001/XMLSchema#string">fatima@gmail.com</hasPersonEmail>
+        <rdfs:comment xml:lang="en">FATIMA is registered as a PERSON (DONOR , REQUEST MAKER)</rdfs:comment>
+        <userEnrollsIn rdf:resource="http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#DONOR_Website"/>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.5-SNAPSHOT) http://owlapi.sourceforge.net -->
