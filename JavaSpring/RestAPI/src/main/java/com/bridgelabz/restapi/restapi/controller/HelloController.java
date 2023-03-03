@@ -68,6 +68,7 @@ public class HelloController {
         return "Hello " + firstName + " " + lastName + " from Bridgelabz";
     }
 
+    // Pull Request for Insert Query
     static void SparqlTest() {
 
         // create a file object for the RDF file
@@ -80,7 +81,7 @@ public class HelloController {
             in = new FileInputStream(file);
             model.read(in, null);
         } catch (IOException e) {
-            // handle the exception
+            System.out.println("No file Found!");
         } finally {
             if (in != null) {
                 try {
