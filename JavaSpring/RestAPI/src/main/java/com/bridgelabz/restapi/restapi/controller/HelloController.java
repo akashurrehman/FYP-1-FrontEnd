@@ -72,7 +72,7 @@ public class HelloController {
     static void SparqlTest() {
 
         // create a file object for the RDF file
-        File file = new File("data/blood.rdf");
+        File file = new File("D:/Final Year Project/FYP FrontEnd 2/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/Blood.xml");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -93,7 +93,13 @@ public class HelloController {
         }
 
         // create a SPARQL query
-        String queryString = "SELECT * WHERE { ?s ?p ?o }";
+        String queryString = 
+        "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" + 
+        "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
+        "SELECT * WHERE { " + 
+        "?users bd:userEnrollsIn bd:DONOR_Website " +
+        "}" ;
+
         Query query = QueryFactory.create(queryString);
 
         // execute the query and print the results
