@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bridgelabz.restapi.restapi.entity.Person;
 
-import org.apache.jena.query.Dataset;
-import org.apache.jena.query.DatasetFactory;
-import org.apache.jena.update.UpdateProcessor;
+//import org.apache.jena.query.Dataset;
+//import org.apache.jena.query.DatasetFactory;
+//import org.apache.jena.update.UpdateProcessor;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -25,35 +25,15 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.update.UpdateExecutionFactory;
-import org.apache.jena.update.UpdateFactory;
-import org.apache.jena.update.UpdateRequest;
-import org.json.JSONArray;
+//import org.apache.jena.update.UpdateExecutionFactory;
+//import org.apache.jena.update.UpdateFactory;
+//import org.apache.jena.update.UpdateRequest;
+//import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 @RestController
-public class HelloController {
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello from Bridgelabz";
-    }
-
-    @GetMapping("/api/bloodCenter")
-    public String center() {
-        return "Blood Donation Center";
-    }
-
-    @GetMapping("/copy")
-    public String copy() {
-        return "Hello from Copy";
-    }
-
-    @GetMapping("/api/blood")
-    public String blood() {
-        return "Blood Group: A+";
-    }
+public class User {
 
     // get request mapping with query parameter
     @GetMapping("/helloParam")
