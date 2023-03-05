@@ -66,7 +66,7 @@ public class User {
         return "Hello " + firstName + " " + lastName + " from Bridgelabz";
     }
 
-    // Pull Request for Insert Query
+    // Method for Read Query
     static String SparqlTest() {
 
         // create a file object for the RDF file
@@ -111,6 +111,7 @@ public class User {
                 "?persons bd:hasPersonID ?id ." +
                 "?persons bd:hasPersonFullName ?name ." +
                 "?persons bd:hasPersonEmail ?email ." +
+                /* FILTER(?id = "${enteredId}") */
                 "}";
 
         Query query = QueryFactory.create(queryString);
@@ -122,6 +123,7 @@ public class User {
             ResultSetFormatter.outputAsJSON(outputStream, results);
             String jsonResult = outputStream.toString();
             return jsonResult;
+            //Returns the results in json format
         }
     }
 }
