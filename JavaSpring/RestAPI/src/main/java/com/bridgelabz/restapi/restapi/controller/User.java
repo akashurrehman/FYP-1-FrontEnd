@@ -17,6 +17,8 @@ import com.bridgelabz.restapi.restapi.entity.Person;
 //import org.apache.jena.query.Dataset;
 //import org.apache.jena.query.DatasetFactory;
 //import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.*;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -25,6 +27,7 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.update.UpdateAction;
 //import org.apache.jena.update.UpdateExecutionFactory;
 //import org.apache.jena.update.UpdateFactory;
 //import org.apache.jena.update.UpdateRequest;
@@ -46,6 +49,12 @@ public class User {
         String result = SparqlTest();
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/api/insert")
+    public void Insert() {
+        // InsertSparql();
+        // Insert using UpdateAction
     }
 
     // get request mapping with path variable
@@ -123,7 +132,7 @@ public class User {
             ResultSetFormatter.outputAsJSON(outputStream, results);
             String jsonResult = outputStream.toString();
             return jsonResult;
-            //Returns the results in json format
+            // Returns the results in json format
         }
     }
 }
