@@ -101,15 +101,15 @@ public class User {
             }
         }
 
-        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"+
-        "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>"+
-        
-        "SELECT ?centers ?id ?name ?email WHERE {"+
-          "?centers rdf:type bd:Blood_Donation_Center ." +
-          "?centers bd:hasCenterID ?id ."+
-          "?centers bd:hasCenterName ?name ."+
-          "?centers bd:hasCenterEmail ?email ."+
-        "}";
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
+
+                "SELECT ?centers ?id ?name ?email WHERE {" +
+                "?centers rdf:type bd:Blood_Donation_Center ." +
+                "?centers bd:hasCenterID ?id ." +
+                "?centers bd:hasCenterName ?name ." +
+                "?centers bd:hasCenterEmail ?email ." +
+                "}";
         /*
          * String queryString =
          * "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>"
@@ -156,7 +156,7 @@ public class User {
                 }
             }
         }
-
+        // Query to insert donation centres data
         String updateString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
 
