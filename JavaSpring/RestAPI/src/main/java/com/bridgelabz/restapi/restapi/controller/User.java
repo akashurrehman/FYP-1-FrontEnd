@@ -4,6 +4,7 @@ import java.io.*;
 import org.springframework.http.HttpHeaders;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,151 @@ import org.springframework.http.MediaType;
 
 @RestController
 public class User {
+
+    /*
+     * Route to Get Data of all Registered Users
+     */
+
+    @GetMapping("/api/users/registration")
+    public String users() {
+        return "All Registered Users";
+    }
+
+    /*
+     * Route to Get Data of Single User by passing ID
+     * ID is passed in the URL
+     * Through ID we can find the User Information
+     */
+    @GetMapping("/api/users/registration/{id}")
+    public String user(@PathVariable String id) {
+        return "User: " + id;
+    }
+
+    /*
+     * Route to Register the Users
+     * Users have to enter information such as Email, Username and password
+     */
+    @PostMapping("/api/users/registration")
+    public String register(@RequestBody String user) {
+        return "User: " + user;
+    }
+
+    /*
+     * Edit the User Information by passing ID
+     * 
+     * @param id
+     * User can edit the information such as Email, Username and password
+     */
+    @PutMapping("/api/users/edit/{id}")
+    public String editUser(@RequestBody String user, @PathVariable String id) {
+        return "User: " + id;
+    }
+    /*
+     * Delete the User Information by passing ID
+     * Delete all the information of the user
+     */
+
+    @DeleteMapping("/api/users/delete/{id}")
+    public String deleteUser(@PathVariable String id) {
+        return "User: " + id;
+    }
+
+    /*
+     * Donate Blood
+     * Add the information of the Donor in the Database
+     */
+    @PostMapping("/api/users/donate")
+    public String donate(@RequestBody String user) {
+        return "User: " + user;
+    }
+
+    /*
+     * Edit the Donor Information who want to donate blood by passing ID
+     * Pass Information such as Blood Group, Age
+     */
+    @PutMapping("/api/users/donate/{id}")
+    public String editDonate(@RequestBody String user, @PathVariable String id) {
+        return "User: " + id;
+    }
+
+    /*
+     * Delete the Information of Donors who want to donate blood by passing ID
+     */
+    @DeleteMapping("/api/users/donate/{id}")
+    public String deleteDonate(@PathVariable String id) {
+        return "User: " + id;
+    }
+
+    /*
+     * Get the Information of all the Donors
+     * Get the Information of all the Donors who want to donate blood
+     */
+    @GetMapping("/api/users/donate")
+    public String donate() {
+        return "All Donors";
+    }
+
+    /*
+     * GET the Information of the Donors by passing ID
+     * 
+     * @param id
+     */
+    @GetMapping("/api/users/donate/{id}")
+    public String GetdonatebyID(@PathVariable String id) {
+        return "Donor: " + id;
+    }
+
+    /*
+     * Appointment Details of Users such as Center, Timing
+     * Add the Appointment Details of Users in the Database
+     */
+    @PostMapping("/api/users/appointment")
+    public String appointment(@RequestBody String user) {
+        return "User: " + user;
+    }
+    /*
+     * Edit the Appointment Details of Users by passing ID
+     * Edit information such as center, or timing
+     */
+
+    @PutMapping("/api/users/appointment/{id}")
+    public String editAppointment(@RequestBody String user, @PathVariable String id) {
+        return "User: " + id;
+    }
+
+    /*
+     * Delete the Appointment Details of Users by passing ID
+     */
+    @DeleteMapping("/api/users/appointment/{id}")
+    public String deleteAppointment(@PathVariable String id) {
+        return "User: " + id;
+    }
+    /*
+     * GET the Appointment Details of Users by passing ID
+     * Appointment details such as center, or timing
+     */
+
+    @GetMapping("/api/users/appointment")
+    public String appointment() {
+        return "All Appointments";
+    }
+    /*
+     * GET the Appointment Details of Users by passing ID
+     * Appointment details such as center, or timing
+     */
+
+    @GetMapping("/api/users/appointment/{id}")
+    public String GetappointmentbyID(@PathVariable String id) {
+        return "Appointment: " + id;
+    }
+
+    /*
+     * View Blood Requests entered by Users
+     */
+    @GetMapping("/api/users/bloodrequest")
+    public String bloodrequest() {
+        return "All Blood Requests";
+    }
 
     // get request mapping with query parameter
     @GetMapping("/helloParam")

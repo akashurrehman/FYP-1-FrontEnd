@@ -25,7 +25,7 @@ public class BloodCenter {
     }
 
     /* Route to add New Blood Donation Center */
-    @PostMapping("/api/bloodCenter/RegisteredCenters/")
+    @PostMapping("/api/bloodCenter/RegisteredCenters")
     public String centerPost(@RequestBody String center) {
         return "Blood Donation Center: " + center;
     }
