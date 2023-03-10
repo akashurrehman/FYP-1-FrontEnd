@@ -40,6 +40,27 @@ import org.springframework.http.MediaType;
 public class User {
 
     /*
+     * Class Managed by Akash
+     * 
+     * @author Akash
+     * Date: 2023-03-10
+     * 
+     */
+
+    /*
+     * Check the Validity of the User by passing their CBC Report details
+     * Save the CBC Report details to the database of the Users by their ID
+     * Send this details to be processed by ML Algortihm
+     */
+    @PostMapping("/api/users/checkValidity")
+    public String checkValidity(@RequestBody String user) {
+        return "User: " + user;
+    }
+    /*
+     * Check the Validity of the User by passing their CBC Report details
+     */
+
+    /*
      * Route to Get Data of all Registered Users
      */
 
