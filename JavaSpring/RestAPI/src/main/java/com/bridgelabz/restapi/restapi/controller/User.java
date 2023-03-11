@@ -208,12 +208,21 @@ public class User {
     // get request mapping with query parameter
     @GetMapping("/helloParam")
     public ResponseEntity<String> sparqlMethodString() {
-        System.out.print(SparqlTest());
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
+
+                "SELECT ?centers ?id ?name ?email WHERE {" +
+                "?centers rdf:type bd:Blood_Donation_Center ." +
+                "?centers bd:hasCenterID ?id ." +
+                "?centers bd:hasCenterName ?name ." +
+                "?centers bd:hasCenterEmail ?email ." +
+                "}";
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String result = SparqlTest();
+        String result = ReadSparqlMethod(queryString);
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
@@ -242,8 +251,13 @@ public class User {
         return "Hello " + firstName + " " + lastName + " from Bridgelabz";
     }
 
-    // Method for Read Query
-    static String SparqlTest() {
+    /*
+     * Single Method for Read data using SPARQL Query
+     * Query will passed as a parameter
+     * Return the result in JSON format
+     * Read data for all the routes
+     */
+    static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
         File file = new File(
@@ -267,25 +281,6 @@ public class User {
                 }
             }
         }
-
-        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
-
-                "SELECT ?centers ?id ?name ?email WHERE {" +
-                "?centers rdf:type bd:Blood_Donation_Center ." +
-                "?centers bd:hasCenterID ?id ." +
-                "?centers bd:hasCenterName ?name ." +
-                "?centers bd:hasCenterEmail ?email ." +
-                "}";
-        /*
-         * String queryString =
-         * "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>"
-         * +
-         * "SELECT ?person ?bloodType WHERE {" +
-         * "?person bd:userName 'John Doe' ." +
-         * "?person bd:userBloodType ?bloodType ." +
-         * "}";
-         */
         Query query = QueryFactory.create(queryString);
 
         // execute the query and print the results
