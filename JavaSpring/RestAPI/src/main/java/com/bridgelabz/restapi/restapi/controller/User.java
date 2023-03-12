@@ -65,18 +65,59 @@ public class User {
      */
 
     @GetMapping("/api/users/registration")
-    public String users() {
-        return "All Registered Users";
+    public ResponseEntity<String> Allusers() {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?persons rdf:type bd:Person ." +
+                "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasPersonEmail ?Email ." +
+                "?persons bd:hasPersonContactNo ?ContactNo ." +
+                "?persons bd:hasPersonAddress ?Address ." +
+                "?persons bd:hasPersonBloodGroup ?BloodGroup ." +
+                "?persons bd:hasPersonDateOfBirth ?DOB ." +
+                "?persons bd:hasPersonGender ?Gender ." +
+                "?persons bd:hasPersonCity ?City ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
-     * Route to Get Data of Single User by passing ID
+     * Route to Get Data of Single User by passing Email
      * ID is passed in the URL
      * Through ID we can find the User Information
      */
-    @GetMapping("/api/users/registration/{id}")
-    public String user(@PathVariable String id) {
-        return "User: " + id;
+    @GetMapping("/api/users/registration/{email}")
+    public ResponseEntity<String> Singleuser(@PathVariable String email) {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?persons rdf:type bd:Person ." +
+                "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasPersonEmail ?Email ." +
+                "?persons bd:hasPersonContactNo ?ContactNo ." +
+                "?persons bd:hasPersonAddress ?Address ." +
+                "?persons bd:hasPersonBloodGroup ?BloodGroup ." +
+                "?persons bd:hasPersonDateOfBirth ?DOB ." +
+                "?persons bd:hasPersonGender ?Gender ." +
+                "?persons bd:hasPersonCity ?City ." +
+                "filter(?Email = " + email + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -139,18 +180,63 @@ public class User {
      * Get the Information of all the Donors who want to donate blood
      */
     @GetMapping("/api/users/donate")
-    public String donate() {
-        return "All Donors";
+    public ResponseEntity<String> Alldonations() {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?donations rdf:type bd:Blood_Donation ." +
+                "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorEmail ?Email ." +
+                "?donations bd:hasDonorGender ?Gender ." +
+                "?donations bd:hasDonorLocation ?Location ." +
+                "?donations bd:hasDonorMessage ?Message ." +
+                "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
+                "?donations bd:hasDonorContactNo ?Contact ." +
+                "?donations bd:hasDonorCity ?City ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
-     * GET the Information of the Donors by passing ID
+     * GET the Information of the Donors by passing Email
      * 
      * @param id
      */
-    @GetMapping("/api/users/donate/{id}")
-    public String GetdonatebyID(@PathVariable String id) {
-        return "Donor: " + id;
+    @GetMapping("/api/users/donate/{Email}")
+    public ResponseEntity<String> GetdonatebyEmail(@PathVariable String Email) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?donations rdf:type bd:Blood_Donation ." +
+                "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorEmail ?Email ." +
+                "?donations bd:hasDonorGender ?Gender ." +
+                "?donations bd:hasDonorLocation ?Location ." +
+                "?donations bd:hasDonorMessage ?Message ." +
+                "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
+                "?donations bd:hasDonorContactNo ?Contact ." +
+                "?donations bd:hasDonorCity ?City ." +
+                "filter(?Email = " + Email + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -201,23 +287,24 @@ public class User {
      * View Blood Requests entered by Users
      */
     @GetMapping("/api/users/bloodrequest")
-    public String bloodrequest() {
-        return "All Blood Requests";
-    }
-
-    // get request mapping with query parameter
-    @GetMapping("/helloParam")
-    public ResponseEntity<String> sparqlMethodString() {
+    public ResponseEntity<String> Allbloodrequest() {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
-                "SELECT ?centers ?id ?name ?email WHERE {" +
-                "?centers rdf:type bd:Blood_Donation_Center ." +
-                "?centers bd:hasCenterID ?id ." +
-                "?centers bd:hasCenterName ?name ." +
-                "?centers bd:hasCenterEmail ?email ." +
+                "SELECT * WHERE {" +
+                "?requests rdf:type bd:Blood_Request ." +
+                "?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerEmail ?Email ." +
+                "?requests bd:hasRequestMakerGender ?Gender ." +
+                "?requests bd:hasRequestMakerLocation ?Location ." +
+                "?requests bd:hasRequestMakerMessage ?Message ." +
+                "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+                "?requests bd:hasRequestMakerContactNo ?Contact ." +
+                "?requests bd:hasRequestMakerCity ?City ." +
+                "?requests bd:hasRequestMakerHospital ?Hospital ." +
                 "}";
+
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -227,28 +314,45 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
+    /*
+     * View Blood Requests entered by users by passing Email
+     */
+    @GetMapping("/api/users/bloodrequest/{Email}")
+    public ResponseEntity<String> GetbloodrequestbyEmail(@PathVariable String Email) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?requests rdf:type bd:Blood_Request ." +
+                "?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerEmail ?Email ." +
+                "?requests bd:hasRequestMakerGender ?Gender ." +
+                "?requests bd:hasRequestMakerLocation ?Location ." +
+                "?requests bd:hasRequestMakerMessage ?Message ." +
+                "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+                "?requests bd:hasRequestMakerContactNo ?Contact ." +
+                "?requests bd:hasRequestMakerCity ?City ." +
+                "?requests bd:hasRequestMakerHospital ?Hospital ." +
+                "filter(?Email = " + Email + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    /*
+     * Test Method to check Insert Query
+     */
     @GetMapping("/api/insert")
     public void Insert() {
         InsertSparql();
         // Insert using UpdateAction
-    }
-
-    // get request mapping with path variable
-    @GetMapping("/hello/{name}")
-    public String sayHello(@PathVariable String name) {
-        return "Hello " + name + " from Bridgelabz";
-    }
-
-    // get request mapping with request body
-    @PostMapping("/hello/post")
-    public String getFirstLastName(@RequestBody Person person) {
-        return "Hello " + person.getFirstName() + " " + person.getLastName() + " from Bridgelabz";
-    }
-
-    // put request mapping with path variable and query parameter
-    @PutMapping("/hello/put/{firstName}")
-    public String sayHelloWithPut(@RequestParam String lastName, @PathVariable String firstName) {
-        return "Hello " + firstName + " " + lastName + " from Bridgelabz";
     }
 
     /*
@@ -261,7 +365,7 @@ public class User {
 
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/Blood.xml");
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         //
         // create a model from the RDF file
@@ -300,7 +404,6 @@ public class User {
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/Blood.xml");
 
-        //
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;

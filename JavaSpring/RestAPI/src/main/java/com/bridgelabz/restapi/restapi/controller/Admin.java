@@ -1,5 +1,6 @@
 package com.bridgelabz.restapi.restapi.controller;
 
+import java.io.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +8,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+//import org.apache.jena.query.Dataset;
+//import org.apache.jena.query.DatasetFactory;
+import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.query.QueryExecutionFactory;
+import org.apache.jena.query.QueryFactory;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.query.ResultSetFormatter;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.update.UpdateAction;
+import org.apache.jena.update.UpdateExecutionFactory;
+import org.apache.jena.update.UpdateFactory;
+import org.springframework.http.HttpHeaders;
+
+import org.apache.jena.update.UpdateRequest;
+//import org.json.JSONArray;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 public class Admin {
@@ -72,17 +97,55 @@ public class Admin {
     /*
      * Delete the Financial Donation Record By their ID
      */
-    @DeleteMapping("/api/admin/deleteFinancialDonation/{id}")
-    public String deleteFinancialDonation(@PathVariable int id) {
-        return "FinancialDonation" + id;
+    @DeleteMapping("/api/admin/deleteFinancialDonation/{Name}")
+    public ResponseEntity<String> deleteFinancialDonation(@PathVariable String Name) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?financial_donations rdf:type bd:Financial_Donation ." +
+                "?financial_donations bd:hasFinancialDonorName ?Name ." +
+                "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
+                "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
+                "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
+                "?financial_donations bd:hasFinancialDonorMessage ?Message ." +
+                "filter(?Title = " + Name + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
      * Get the Financial Donations in the Database
      */
     @GetMapping("/api/admin/getFinancialDonation")
-    public String getFinancialDonation() {
-        return "FinancialDonation";
+    public ResponseEntity<String> getFinancialDonation() {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?financial_donations rdf:type bd:Financial_Donation ." +
+                "?financial_donations bd:hasFinancialDonorName ?Name ." +
+                "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
+                "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
+                "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
+                "?financial_donations bd:hasFinancialDonorMessage ?Message ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -122,16 +185,50 @@ public class Admin {
      * Get the Job posts
      */
     @GetMapping("/api/admin/getJobPost")
-    public String getJobPost() {
-        return "JobPost";
+    public ResponseEntity<String> getJobPost() {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?jobs rdf:type bd:Job_Post ." +
+                "?jobs bd:hasJobPostTitle ?Title ." +
+                "?jobs bd:hasJobPostDetails ?Details ." +
+                "?jobs bd:hasJobPostPostingDate ?Date " +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
      * Get the Job posts by ID
      */
-    @GetMapping("/api/admin/getJobPost/{id}")
-    public String getJobPostById(@PathVariable String id) {
-        return "JobPost" + id;
+    @GetMapping("/api/admin/getJobPost/{title}")
+    public ResponseEntity<String> getJobPostById(@PathVariable String title) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?jobs rdf:type bd:Job_Post ." +
+                "?jobs bd:hasJobPostTitle ?Title ." +
+                "?jobs bd:hasJobPostDetails ?Details ." +
+                "?jobs bd:hasJobPostPostingDate ?Date " +
+                "filter(?Title = " + title + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -163,16 +260,46 @@ public class Admin {
      * Get the Frequently Asked Questions
      */
     @GetMapping("/api/admin/getFAQ")
-    public String getFAQ() {
-        return "FAQ";
+    public ResponseEntity<String> getFAQ() {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?faqs rdf:type bd:Frequently_Asked_Question ." +
+                "?faqs bd:hasFAQTitle ?Title ." +
+                "?faqs bd:hasFAQDetails ?Details ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
      * Get the Frequently Asked Questions by ID
      */
-    @GetMapping("/api/admin/getFAQ/{id}")
-    public String getFAQById(@PathVariable String id) {
-        return "FAQ" + id;
+    @GetMapping("/api/admin/getFAQ/{title}")
+    public ResponseEntity<String> getFAQById(@PathVariable String title) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?faqs rdf:type bd:Frequently_Asked_Question ." +
+                "?faqs bd:hasFAQTitle ?Title ." +
+                "?faqs bd:hasFAQDetails ?Details ." +
+                "filter(?Title = " + title + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -245,16 +372,51 @@ public class Admin {
      * Get the Compaigns in the Database
      */
     @GetMapping("/api/admin/getCompaigns")
-    public String getCompaigns() {
-        return "Compaigns";
+    public ResponseEntity<String> getCompaigns() {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?campaigns rdf:type bd:Campaign ." +
+                "?campaigns bd:hasCampaignTitle ?Title ." +
+                "?campaigns bd:hasCampaignDetails ?Details ." +
+                "?campaigns bd:hasCampaignsPostDate ?Date ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
      * Get the Compaign by ID
      */
-    @GetMapping("/api/admin/getCompaigns/{id}")
-    public String getCompaignsById(@PathVariable String id) {
-        return "Compaigns" + id;
+    @GetMapping("/api/admin/getCompaigns/{title}")
+    public ResponseEntity<String> getCompaignsById(@PathVariable String title) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?campaigns rdf:type bd:Campaign ." +
+                "?campaigns bd:hasCampaignTitle ?Title ." +
+                "?campaigns bd:hasCampaignDetails ?Details ." +
+                "?campaigns bd:hasCampaignsPostDate ?Date ." +
+                "filter(?Email = " + title + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -286,16 +448,52 @@ public class Admin {
      * Get the News in the Database
      */
     @GetMapping("/api/admin/getNews")
-    public String getNews() {
-        return "News";
+    public ResponseEntity<String> getNews() {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?news rdf:type bd:News ." +
+                "?news bd:hasNewsTitle ?Title ." +
+                "?news bd:hasNewsDetails ?Details ." +
+                "?news bd:hasNewsPostDate ?Date" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+
     }
 
     /*
      * Get the News by ID
      */
-    @GetMapping("/api/admin/getNews/{id}")
-    public String getNewsById(@PathVariable String id) {
-        return "News";
+    @GetMapping("/api/admin/getNews/{title}")
+    public ResponseEntity<String> getNewsById(@PathVariable String title) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?news rdf:type bd:News ." +
+                "?news bd:hasNewsTitle ?Title ." +
+                "?news bd:hasNewsDetails ?Details ." +
+                "?news bd:hasNewsPostDate ?Date" +
+                "filter(?Title = " + title + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -320,5 +518,94 @@ public class Admin {
     @DeleteMapping("/api/admin/deleteEvents/{id}")
     public String deleteEvents(@PathVariable String id) {
         return "Events";
+    }
+
+    /*
+     * Get the Events in the Database
+     */
+    @GetMapping("/api/admin/getEvents")
+    public ResponseEntity<String> getEvents() {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?events rdf:type bd:Events ." +
+                "?events bd:hasEventsTitle ?Title ." +
+                "?events bd:hasEventsDetails ?Details ." +
+                "?events bd:hasEventsPostDate ?Date" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+
+    }
+
+    /*
+     * Get the Events by ID
+     */
+    @GetMapping("/api/admin/getEvents/{title}")
+    public ResponseEntity<String> getEventsById(@PathVariable String title) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?events rdf:type bd:Events ." +
+                "?events bd:hasEventsTitle ?Title ." +
+                "?events bd:hasEventsDetails ?Details ." +
+                "?events bd:hasEventsPostDate ?Date" +
+                "filter(?Title = " + title + ")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    static String ReadSparqlMethod(String queryString) {
+
+        // create a file object for the RDF file
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        //
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+        Query query = QueryFactory.create(queryString);
+
+        // execute the query and print the results
+        try (QueryExecution qe = QueryExecutionFactory.create(query, model)) {
+            ResultSet results = qe.execSelect();
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            ResultSetFormatter.outputAsJSON(outputStream, results);
+            String jsonResult = outputStream.toString();
+            return jsonResult;
+            // Returns the results in json format
+        }
     }
 }
