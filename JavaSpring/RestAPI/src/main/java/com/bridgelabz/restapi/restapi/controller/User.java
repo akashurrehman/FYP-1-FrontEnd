@@ -18,6 +18,7 @@ import com.bridgelabz.restapi.restapi.entity.Person;
 //import org.apache.jena.query.Dataset;
 //import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.update.UpdateProcessor;
+import org.apache.http.HttpException;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.query.Query;
@@ -32,6 +33,8 @@ import org.apache.jena.update.UpdateAction;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateRequest;
+import org.json.JSONArray;
+import org.json.JSONObject;
 //import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -108,7 +111,7 @@ public class User {
                 "?persons bd:hasPersonDateOfBirth ?DOB ." +
                 "?persons bd:hasPersonGender ?Gender ." +
                 "?persons bd:hasPersonCity ?City ." +
-                "filter(?Email = " + email + ")" +
+                "filter(?Email = \"" + email + "\")" +
                 "}";
 
         // set the response headers
@@ -227,7 +230,7 @@ public class User {
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
-                "filter(?Email = " + Email + ")" +
+                "filter(?Email = \"" + Email + "\")" +
                 "}";
 
         // set the response headers
@@ -334,14 +337,23 @@ public class User {
                 "?requests bd:hasRequestMakerContactNo ?Contact ." +
                 "?requests bd:hasRequestMakerCity ?City ." +
                 "?requests bd:hasRequestMakerHospital ?Hospital ." +
-                "filter(?Email = " + Email + ")" +
+                "filter(?Email = \"" + Email + "\")" +
                 "}";
 
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
         String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Email not found: " + Email + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
@@ -398,11 +410,13 @@ public class User {
         }
     }
 
+    /**
+     * 
+     */
     static void InsertSparql() {
-
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/Blood.xml");
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -421,20 +435,6 @@ public class User {
                 }
             }
         }
-        // Query to insert donation centres data
-        String updateString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
 
-                "INSERT DATA{" +
-                "bd:Center1 rdf:type bd:Blood_Donation_Center ." +
-                "bd:Center1 bd:hasCenterID '123' ." +
-                "bd:Center1 bd:hasCenterName 'Shukat Khanam' ." +
-                "bd:Center1 bd:hasCenterEmail 'shoukat@example.com' ." +
-                "}";
-
-        UpdateRequest updateRequest = UpdateFactory.create(updateString);
-        Dataset dataset = DatasetFactory.create(model);
-        UpdateProcessor updateProcessor = UpdateExecutionFactory.create(updateRequest, dataset);
-        updateProcessor.execute();
     }
 }

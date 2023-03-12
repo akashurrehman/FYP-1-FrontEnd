@@ -86,7 +86,7 @@ public class BloodCenter {
                 "?centres bd:hasCentreLicenseNo ?License ." +
                 "?centres bd:hasCentreCity ?City ." +
                 "?centres bd:hasCentreOpeningDays ?Opening_Days ." +
-                "filter(?License = " + License + ")" +
+                "filter(?License = \"" + License + "\")" +
                 "}";
 
         // set the response headers
@@ -164,7 +164,7 @@ public class BloodCenter {
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
                 "?donations bd:hasDonorDate ?Date ." +
-                "filter(?Email = " + Email + ")" +
+                "filter(?Email = \"" + Email + "\")" +
                 "}";
 
         // set the response headers
@@ -245,7 +245,7 @@ public class BloodCenter {
                 "?stocks bd:hasBloodStockBloodGroup ?Blood_Group ." +
                 "?stocks bd:hasBloodStockNoOfBags ?No_Of_Bags ." +
                 "?stocks bd:hasBloodStockAddedDate ?Gender ." +
-                "filter(?Blood_Group = " + Blood_Group + ")" +
+                "filter(?Blood_Group = \"" + Blood_Group + "\")" +
                 "}";
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
@@ -365,7 +365,7 @@ public class BloodCenter {
                 "?requests bd:hasRequestMakerContactNo ?Contact ." +
                 "?requests bd:hasRequestMakerCity ?City ." +
                 "?requests bd:hasRequestMakerHospital ?Hospital ." +
-                "filter(?Email = " + Email + ")" +
+                "filter(?Email = \"" + Email + "\")" +
                 "}";
 
         // set the response headers

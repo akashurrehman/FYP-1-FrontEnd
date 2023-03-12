@@ -98,28 +98,8 @@ public class Admin {
      * Delete the Financial Donation Record By their ID
      */
     @DeleteMapping("/api/admin/deleteFinancialDonation/{Name}")
-    public ResponseEntity<String> deleteFinancialDonation(@PathVariable String Name) {
-
-        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
-
-                "SELECT * WHERE {" +
-                "?financial_donations rdf:type bd:Financial_Donation ." +
-                "?financial_donations bd:hasFinancialDonorName ?Name ." +
-                "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
-                "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
-                "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
-                "?financial_donations bd:hasFinancialDonorMessage ?Message ." +
-                "filter(?Title = " + Name + ")" +
-                "}";
-
-        // set the response headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        String result = ReadSparqlMethod(queryString);
-        // create the response object with the JSON result and headers
-        return new ResponseEntity<String>(result, HttpStatus.OK);
+    public String deleteFinancialDonation(@PathVariable String Name) {
+        return "FinancialDonation" + Name;
     }
 
     /*
@@ -151,9 +131,29 @@ public class Admin {
     /*
      * Get the Financial Donations in the Database by ID
      */
-    @GetMapping("/api/admin/getFinancialDonation/{id}")
-    public String getFinancialDonationById(@PathVariable String id) {
-        return "FinancialDonation" + id;
+    @GetMapping("/api/admin/getFinancialDonation/{Name}")
+    public ResponseEntity<String> getFinancialDonationByName(@PathVariable String Name) {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?financial_donations rdf:type bd:Financial_Donation ." +
+                "?financial_donations bd:hasFinancialDonorName ?Name ." +
+                "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
+                "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
+                "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
+                "?financial_donations bd:hasFinancialDonorMessage ?Message ." +
+                "filter(?Name = \"" + Name + "\")" +
+
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -219,7 +219,7 @@ public class Admin {
                 "?jobs bd:hasJobPostTitle ?Title ." +
                 "?jobs bd:hasJobPostDetails ?Details ." +
                 "?jobs bd:hasJobPostPostingDate ?Date " +
-                "filter(?Title = " + title + ")" +
+                "filter(?Title = \"" + title + "\")" +
                 "}";
 
         // set the response headers
@@ -407,7 +407,7 @@ public class Admin {
                 "?campaigns bd:hasCampaignTitle ?Title ." +
                 "?campaigns bd:hasCampaignDetails ?Details ." +
                 "?campaigns bd:hasCampaignsPostDate ?Date ." +
-                "filter(?Email = " + title + ")" +
+                "filter(?Title = \"" + title + "\")" +
                 "}";
 
         // set the response headers
@@ -471,7 +471,7 @@ public class Admin {
     }
 
     /*
-     * Get the News by ID
+     * Get the News by title
      */
     @GetMapping("/api/admin/getNews/{title}")
     public ResponseEntity<String> getNewsById(@PathVariable String title) {
@@ -484,7 +484,7 @@ public class Admin {
                 "?news bd:hasNewsTitle ?Title ." +
                 "?news bd:hasNewsDetails ?Details ." +
                 "?news bd:hasNewsPostDate ?Date" +
-                "filter(?Title = " + title + ")" +
+                "filter(?Title = \"" + title + "\")" +
                 "}";
 
         // set the response headers
@@ -547,7 +547,7 @@ public class Admin {
     }
 
     /*
-     * Get the Events by ID
+     * Get the Events by title
      */
     @GetMapping("/api/admin/getEvents/{title}")
     public ResponseEntity<String> getEventsById(@PathVariable String title) {
@@ -560,7 +560,7 @@ public class Admin {
                 "?events bd:hasEventsTitle ?Title ." +
                 "?events bd:hasEventsDetails ?Details ." +
                 "?events bd:hasEventsPostDate ?Date" +
-                "filter(?Title = " + title + ")" +
+                "filter(?Title = \"" + title + "\")" +
                 "}";
 
         // set the response headers
