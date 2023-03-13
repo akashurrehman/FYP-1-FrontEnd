@@ -18,7 +18,6 @@ import com.bridgelabz.restapi.restapi.entity.Person;
 //import org.apache.jena.query.Dataset;
 //import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.update.UpdateProcessor;
-import org.apache.http.HttpException;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.query.Query;
@@ -435,6 +434,20 @@ public class User {
                 }
             }
         }
+        // Query to insert donation centres data
+        String updateString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
 
+                "INSERT DATA{" +
+                "bd:Center1 rdf:type bd:Blood_Donation_Center ." +
+                "bd:Center1 bd:hasCenterID '123' ." +
+                "bd:Center1 bd:hasCenterName 'Shukat Khanam' ." +
+                "bd:Center1 bd:hasCenterEmail 'shoukat@example.com' ." +
+                "}";
+
+        UpdateRequest updateRequest = UpdateFactory.create(updateString);
+        Dataset dataset = DatasetFactory.create(model);
+        UpdateProcessor updateProcessor = UpdateExecutionFactory.create(updateRequest, dataset);
+        updateProcessor.execute();
     }
 }
