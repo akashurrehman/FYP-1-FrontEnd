@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -13,7 +13,7 @@ import A_positive from './../../Components_for_All_Panels/BloodCentre/Image/A-po
 import B_positive from './../../Components_for_All_Panels/BloodCentre/Image/B-positive.jpg';
 import AB_positive from './../../Components_for_All_Panels/BloodCentre/Image/Ab-positive.jpg';
 import AB_negative from './../../Components_for_All_Panels/BloodCentre/Image/Ab-negative.jpg';
-
+import axios from 'axios';
  
 const BloodStock=()=> {
 
@@ -23,6 +23,28 @@ const BloodStock=()=> {
     borderRadius: "50px",
     display: "inline-block",
 };
+const [bloodStocks, setBloodStocks] = useState([]);
+
+useEffect(() => {
+  axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails')
+    .then((response) => {
+      const data = JSON.parse(response);
+      const stocks = data.results.bindings.map((stock) => {
+        return {
+          Blood_Group: stock.Blood_Group.value,
+          No_Of_Bags: stock.No_Of_Bags.value,
+          Gender: stock.Gender.value
+        };
+      });
+      console.log(stocks); 
+      setBloodStocks(stocks);
+      console.log("Blood stock details are:",stocks); 
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}, []);
+
 
   const [show, setShow] = useState(false);
 
@@ -153,7 +175,7 @@ const BloodStock=()=> {
                     <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
                 </div>
                     <Card.Body>
-                    <Card.Title>Blood Stock-2</Card.Title>
+                    <Card.Title>Blood Group</Card.Title>
                     <Button variant="primary">Go to Details-2</Button>
                     <Button variant="danger">Update Details</Button>
                     </Card.Body>
