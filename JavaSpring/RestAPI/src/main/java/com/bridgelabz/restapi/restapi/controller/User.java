@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 //import org.apache.jena.query.Dataset;
 //import org.apache.jena.query.DatasetFactory;
 import org.apache.jena.update.UpdateProcessor;
+import org.apache.jena.ontology.*;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.query.Query;
@@ -30,6 +31,7 @@ import org.apache.jena.update.UpdateAction;
 import org.apache.jena.update.UpdateExecutionFactory;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateRequest;
+import org.apache.jena.vocabulary.XSD;
 import org.json.JSONArray;
 import org.json.JSONObject;
 //import org.json.JSONArray;
@@ -402,7 +404,7 @@ public class User {
 
     @GetMapping("/api/Readtest")
     public void TestRead() {
-        String ontologyURI = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system";
+        String ontologyURI = "http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system";
         String ontologyFile = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
         Model model = ModelFactory.createDefaultModel();
         model.read(ontologyFile);
@@ -410,11 +412,11 @@ public class User {
         // Create the SPARQL SELECT query
 
         String sparqlSelect = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                "PREFIX ex: <" + ontologyURI + "#>\n" +
+                "PREFIX bd: <" + ontologyURI + "#>\n" +
                 "SELECT ?person ?name\n" +
                 "WHERE {\n" +
-                "  ?person rdf:type ex:Person ;\n" +
-                "          ex:name ?name .\n" +
+                "  ?person rdf:type bd:Person ;\n" +
+                "          bd:name ?name .\n" +
                 "}";
 
         // Execute the SPARQL SELECT query and print the results
@@ -422,11 +424,11 @@ public class User {
         try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
             ResultSet results = qexec.execSelect();
             System.out.print("Results of Read Query: ");
-            System.out.print(results);
             while (results.hasNext()) {
                 QuerySolution soln = results.nextSolution();
+                System.out.print(soln);
                 RDFNode person = soln.get("person");
-                RDFNode name = soln.get("name");
+                RDFNode name = soln.get("hasName");
                 System.out.println(person + " has name " + name);
             }
         }
@@ -436,7 +438,7 @@ public class User {
      * Test Method to check Insert Query
      */
     @GetMapping("/api/insert")
-    public void Insert() {
+    public void Insert() throws IOException {
         InsertSparql();
         // Insert using UpdateAction
     }
@@ -485,9 +487,10 @@ public class User {
     }
 
     /**
+     * @throws IOException
      * 
      */
-    static void InsertSparql() {
+    static void InsertSparql() throws IOException {
         // create a file object for the RDF file
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
@@ -529,26 +532,39 @@ public class User {
          * UpdateProcessor updateProcessor =
          * UpdateExecutionFactory.create(updateRequest, dataset);
          * updateProcessor.execute();
+         * 
          */
-
         // Create the SPARQL INSERT query
-        String ontologyURI = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system";
-        String sparql = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                "PREFIX ex: <" + ontologyURI + "#>\n" +
-                "INSERT DATA\n" +
-                "{\n" +
-                "  ex:JohnSmith rdf:type ex:Person ;\n" +
-                "               ex:name \"John Smith\" .\n" +
+        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
+
+                "INSERT DATA {" +
+                // Define the classes and their properties
+                "bd:Person rdf:type rdfs:Class ." +
+                "bd:hasName rdf:type rdf:Property ;" +
+                "rdfs:domain bd:Person ;" +
+                "rdfs:range xsd:string ." +
+
+                // Define the individuals and their properties
+                "bd:AbuHurariah rdf:type bd:Person ;" +
+                "bd:hasName \"Abu  Hurairah\"^^xsd:string ." +
+                "bd:AkashUrRehman rdf:type bd:Person ;" +
+                "bd:hasName \"Akash Ur Rehman\"^^xsd:string ." +
                 "}";
 
         // Create the update execution object and execute the query
-        UpdateAction.parseExecute(sparql, model);
+        UpdateAction.parseExecute(query, model);
 
         // Print the updated model
         System.out.println("Updated model:");
-        model.write(System.out, "TURTLE");
 
-        // Close the model when finished
-        model.close();
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
+
     }
 }
