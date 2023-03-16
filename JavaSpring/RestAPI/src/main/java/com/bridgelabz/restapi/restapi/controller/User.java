@@ -400,6 +400,38 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/api/Readtest")
+    public void TestRead() {
+        String ontologyURI = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system";
+        String ontologyFile = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+        Model model = ModelFactory.createDefaultModel();
+        model.read(ontologyFile);
+
+        // Create the SPARQL SELECT query
+
+        String sparqlSelect = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX ex: <" + ontologyURI + "#>\n" +
+                "SELECT ?person ?name\n" +
+                "WHERE {\n" +
+                "  ?person rdf:type ex:Person ;\n" +
+                "          ex:name ?name .\n" +
+                "}";
+
+        // Execute the SPARQL SELECT query and print the results
+        Query query = QueryFactory.create(sparqlSelect);
+        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
+            ResultSet results = qexec.execSelect();
+            System.out.print("Results of Read Query: ");
+            System.out.print(results);
+            while (results.hasNext()) {
+                QuerySolution soln = results.nextSolution();
+                RDFNode person = soln.get("person");
+                RDFNode name = soln.get("name");
+                System.out.println(person + " has name " + name);
+            }
+        }
+    }
+
     /*
      * Test Method to check Insert Query
      */
@@ -478,19 +510,45 @@ public class User {
             }
         }
         // Query to insert donation centres data
-        String updateString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>" +
+        /*
+         * String updateString =
+         * "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+         * "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>"
+         * +
+         * 
+         * "INSERT DATA{" +
+         * "bd:Center1 rdf:type bd:Blood_Donation_Center ." +
+         * "bd:Center1 bd:hasCenterID '123' ." +
+         * "bd:Center1 bd:hasCenterName 'Shukat Khanam' ." +
+         * "bd:Center1 bd:hasCenterEmail 'shoukat@example.com' ." +
+         * "}";
+         * 
+         * 
+         * UpdateRequest updateRequest = UpdateFactory.create(updateString);
+         * Dataset dataset = DatasetFactory.create(model);
+         * UpdateProcessor updateProcessor =
+         * UpdateExecutionFactory.create(updateRequest, dataset);
+         * updateProcessor.execute();
+         */
 
-                "INSERT DATA{" +
-                "bd:Center1 rdf:type bd:Blood_Donation_Center ." +
-                "bd:Center1 bd:hasCenterID '123' ." +
-                "bd:Center1 bd:hasCenterName 'Shukat Khanam' ." +
-                "bd:Center1 bd:hasCenterEmail 'shoukat@example.com' ." +
+        // Create the SPARQL INSERT query
+        String ontologyURI = "http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system";
+        String sparql = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX ex: <" + ontologyURI + "#>\n" +
+                "INSERT DATA\n" +
+                "{\n" +
+                "  ex:JohnSmith rdf:type ex:Person ;\n" +
+                "               ex:name \"John Smith\" .\n" +
                 "}";
 
-        UpdateRequest updateRequest = UpdateFactory.create(updateString);
-        Dataset dataset = DatasetFactory.create(model);
-        UpdateProcessor updateProcessor = UpdateExecutionFactory.create(updateRequest, dataset);
-        updateProcessor.execute();
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(sparql, model);
+
+        // Print the updated model
+        System.out.println("Updated model:");
+        model.write(System.out, "TURTLE");
+
+        // Close the model when finished
+        model.close();
     }
 }
