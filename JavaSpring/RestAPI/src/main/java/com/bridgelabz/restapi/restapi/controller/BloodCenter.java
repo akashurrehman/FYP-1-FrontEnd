@@ -314,8 +314,10 @@ public class BloodCenter {
 
     /*
      * Add Blood Stock Details of blood Donation Centres
+     * 
      * Information Includes Last daate preserved and quantity
-     */
+     *Insert Query will write here
+     * /
     @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails")
     public String AddbloodStockDetails(@RequestBody String bloodStockDetails) {
         return "Blood Stock Details: " + bloodStockDetails;
