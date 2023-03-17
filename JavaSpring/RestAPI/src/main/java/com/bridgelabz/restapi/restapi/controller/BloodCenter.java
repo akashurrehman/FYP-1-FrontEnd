@@ -9,11 +9,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import org.apache.jena.update.UpdateProcessor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -313,14 +320,40 @@ public class BloodCenter {
     }
 
     /*
-     * Add Blood Stock Details of blood Donation Centres
-     * 
-     * Information Includes Last daate preserved and quantity
-     *Insert Query will write here
-     * /
-    @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails")
-    public String AddbloodStockDetails(@RequestBody String bloodStockDetails) {
-        return "Blood Stock Details: " + bloodStockDetails;
+     * Add the blood stock details here
+     * Send insert Sparql Query
+     */
+    @GetMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
+    public String AddbloodStockDetails() throws IOException {
+        // Gson gson = new Gson();
+        // JsonElement jsonElement = gson.fromJson(request.body(), JsonElement.class);
+        // JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+        // Extract the values from the JSON object
+        // String bloodGroup = jsonObject.get("bloodGroup").getAsString();
+        // int noOfBags = jsonObject.get("noOfBags").getAsInt();
+        // String addedDate = jsonObject.get("addedDate").getAsString();
+
+        // Create the SPARQL INSERT query string with the extracted values
+        String bloodGroup = "AB+";
+        int noOfBags = 10;
+        String addedDate = "25 March, 2023";
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        "  bd:exampleBloodStock rdf:type bd:Blood_Stock ;\n" +
+                        "                       bd:hasBloodStockBloodGroup \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasBloodStockNoOfBags %d ;\n" +
+                        "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:dateTime .\n" +
+                        "}",
+                bloodGroup, noOfBags, addedDate);
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -488,5 +521,64 @@ public class BloodCenter {
             return jsonResult;
             // Returns the results in json format
         }
+    }
+
+    static void InsertSparql(String query) throws IOException {
+        // create a file object for the RDF file
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+        // Query to insert donation centres data
+        /*
+         * String updateString =
+         * "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+         * "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>"
+         * +
+         * 
+         * "INSERT DATA{" +
+         * "bd:Center1 rdf:type bd:Blood_Donation_Center ." +
+         * "bd:Center1 bd:hasCenterID '123' ." +
+         * "bd:Center1 bd:hasCenterName 'Shukat Khanam' ." +
+         * "bd:Center1 bd:hasCenterEmail 'shoukat@example.com' ." +
+         * "}";
+         * 
+         * 
+         * UpdateRequest updateRequest = UpdateFactory.create(updateString);
+         * Dataset dataset = DatasetFactory.create(model);
+         * UpdateProcessor updateProcessor =
+         * UpdateExecutionFactory.create(updateRequest, dataset);
+         * updateProcessor.execute();
+         * 
+         */
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(query, model);
+
+        // Print the updated model
+        System.out.println("Updated model:");
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
+
     }
 }

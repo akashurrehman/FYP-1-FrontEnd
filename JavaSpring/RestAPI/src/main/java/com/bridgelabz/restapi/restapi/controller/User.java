@@ -439,7 +439,26 @@ public class User {
      */
     @GetMapping("/api/insert")
     public void Insert() throws IOException {
-        InsertSparql();
+        // Create the SPARQL INSERT query
+        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
+
+                "INSERT DATA {" +
+                // Define the classes and their properties
+                "bd:Person rdf:type rdfs:Class ." +
+                "bd:hasName rdf:type rdf:Property ;" +
+                "rdfs:domain bd:Person ;" +
+                "rdfs:range xsd:string ." +
+
+                // Define the individuals and their properties
+                "bd:AbuHurariah rdf:type bd:Person ;" +
+                "bd:hasName \"Abu  Hurairah\"^^xsd:string ." +
+                "bd:AkashUrRehman rdf:type bd:Person ;" +
+                "bd:hasName \"Akash Ur Rehman\"^^xsd:string ." +
+                "}";
+        InsertSparql(query);
         // Insert using UpdateAction
     }
 
@@ -487,10 +506,11 @@ public class User {
     }
 
     /**
+     * @param query
      * @throws IOException
      * 
      */
-    static void InsertSparql() throws IOException {
+    static void InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
@@ -534,25 +554,6 @@ public class User {
          * updateProcessor.execute();
          * 
          */
-        // Create the SPARQL INSERT query
-        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
-                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
-
-                "INSERT DATA {" +
-                // Define the classes and their properties
-                "bd:Person rdf:type rdfs:Class ." +
-                "bd:hasName rdf:type rdf:Property ;" +
-                "rdfs:domain bd:Person ;" +
-                "rdfs:range xsd:string ." +
-
-                // Define the individuals and their properties
-                "bd:AbuHurariah rdf:type bd:Person ;" +
-                "bd:hasName \"Abu  Hurairah\"^^xsd:string ." +
-                "bd:AkashUrRehman rdf:type bd:Person ;" +
-                "bd:hasName \"Akash Ur Rehman\"^^xsd:string ." +
-                "}";
 
         // Create the update execution object and execute the query
         UpdateAction.parseExecute(query, model);
