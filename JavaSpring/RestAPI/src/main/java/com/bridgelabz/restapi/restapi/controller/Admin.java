@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//import org.apache.jena.query.Dataset;
-//import org.apache.jena.query.DatasetFactory;
-import org.apache.jena.update.UpdateProcessor;
-import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.*;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -23,17 +18,13 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
-import org.apache.jena.update.UpdateExecutionFactory;
-import org.apache.jena.update.UpdateFactory;
-import org.springframework.http.HttpHeaders;
-
-import org.apache.jena.update.UpdateRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 //import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 
 @RestController
 public class Admin {
@@ -43,8 +34,29 @@ public class Admin {
      * Add the Sponsor to the Database
      */
     @PostMapping("/api/admin/addSponsor")
-    public String addSponsor(@RequestBody String Sponsor) {
-        return "Sponsor" + Sponsor;
+    public String AddSponsorDetails() throws IOException {
+
+        String name = "";
+        String message = "";
+
+        String individualId = "bd:Sponsor_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Sponsor ;\n" +
+                        "                       bd:hasSponsorMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasSponsorID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasSponsorName \"%s\"^^xsd:string ;\n" +
+                        "}",
+                message, individualId, name);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -67,8 +79,34 @@ public class Admin {
      * Get the Sponsor in the Database
      */
     @GetMapping("/api/admin/getSponsor")
-    public String getSponsor() {
-        return "Sponsor";
+    public ResponseEntity<String> getSponsor() {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?sponsors rdf:type bd:Sponsor ." +
+                "?sponsors bd:hasSponsorID ?ID ." +
+                "?sponsors bd:hasSponsorName ?Name ." +
+                "?sponsors bd:hasSponsorMessage ?Message ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check that Result is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"No Data Found!\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     /*
@@ -84,8 +122,33 @@ public class Admin {
      * Add the Financial Donation record
      */
     @PostMapping("/api/admin/addFinancialDonation")
-    public String addFinancialDonation(@RequestBody String FinancialDonation) {
-        return "FinancialDonation";
+    public String AddFinancialDonorDetails() throws IOException {
+
+        String contactNo = "";
+        String message = "";
+        String name = "";
+        String donationDate = "";
+
+        String individualId = "bd:Financial_Donor_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Financial_Donation ;\n" +
+                        "                       bd:hasFinancialDonorContactNo \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasFinancialDonorMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasFinancialDonorName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasFinancialDonationID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasFinancialDonorDonationDate \"%s\"^^xsd:string ;\n" +
+                        "}",
+                contactNo, message, name, individualId, donationDate);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -181,8 +244,31 @@ public class Admin {
      * Add the New Job posts
      */
     @PostMapping("/api/admin/addJobPost")
-    public String addJobPost(@RequestBody String JobPost) {
-        return "JobPost";
+    public String AddJobPostDetails() throws IOException {
+
+        String postingDate = "";
+        String title = "";
+        String details = "";
+
+        String individualId = "bd:Job_Post_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Job_Post ;\n" +
+                        "                       bd:hasJobPostID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasJobPostDetails \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasJobPostTitle \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasJobPostPostingDate \"%s\"^^xsd:string ;\n" +
+                        "}",
+                individualId, details, title, postingDate);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -274,8 +360,29 @@ public class Admin {
      * Add the New Frequently Asked Questions
      */
     @PostMapping("/api/admin/addFAQ")
-    public String addFAQ(@RequestBody String FAQ) {
-        return "FAQ";
+    public String AddFrequentlyAskedQuestionDetails() throws IOException {
+
+        String title = "";
+        String details = "";
+
+        String individualId = "bd:FAQ_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Frequently_Asked_Question ;\n" +
+                        "                       bd:hasFAQTitle \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasFAQDetails \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasFAQID \"%s\"^^xsd:string ;\n" +
+                        "}",
+                title, details, individualId);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -404,8 +511,31 @@ public class Admin {
      * Add the New Compaign to the Database
      */
     @PostMapping("/api/admin/addCompaigns")
-    public String addCompaigns(@RequestBody String Compaigns) {
-        return "Compaigns";
+    public String AddCampaignDetails() throws IOException {
+
+        String title = "";
+        String details = "";
+        String postDate = "";
+
+        String individualId = "bd:Campaign_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Campaign ;\n" +
+                        "                       bd:hasCampaignTitle \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasCampaignDetails \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasCampaignID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasCampaignPostDate \"%s\"^^xsd:string ;\n" +
+                        "}",
+                title, details, individualId, postDate);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -498,8 +628,31 @@ public class Admin {
      */
 
     @PostMapping("/api/admin/addNews")
-    public String addNews(@RequestBody String News) {
-        return "News";
+    public String AddNewsDetails() throws IOException {
+
+        String postDate = "";
+        String title = "";
+        String details = "";
+
+        String individualId = "bd:News_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:News ;\n" +
+                        "                       bd:hasNewsPostDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNewsTitle \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNewsDetails \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNewsID \"%s\"^^xsd:string ;\n" +
+                        "}",
+                postDate, title, details, individualId);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -592,8 +745,33 @@ public class Admin {
      * Add the Events in the Database
      */
     @PostMapping("/api/admin/addEvents")
-    public String addEvents(@RequestBody String Events) {
-        return "Events" + Events;
+    public String AddEventDetails() throws IOException {
+
+        String name = "";
+        String location = "";
+        String message = "";
+        String dateTime = "";
+
+        String individualId = "bd:Event_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Event ;\n" +
+                        "                       bd:hasEventName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasEventID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasEventLocation \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasEventMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasEventDateTime \"%s\"^^xsd:dateTime ;\n" +
+                        "}",
+                name, individualId, location, message, dateTime);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -680,6 +858,43 @@ public class Admin {
         }
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    static void InsertSparql(String query) throws IOException {
+        // create a file object for the RDF file
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(query, model);
+
+        // Print the updated model
+        System.out.println("Updated model:");
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
+
     }
 
     static String ReadSparqlMethod(String queryString) {

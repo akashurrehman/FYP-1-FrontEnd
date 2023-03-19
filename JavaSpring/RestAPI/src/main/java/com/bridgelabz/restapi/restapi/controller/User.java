@@ -10,13 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-//import org.apache.jena.query.Dataset;
-//import org.apache.jena.query.DatasetFactory;
-import org.apache.jena.update.UpdateProcessor;
-import org.apache.jena.ontology.*;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.query.Query;
@@ -28,10 +22,6 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
-import org.apache.jena.update.UpdateExecutionFactory;
-import org.apache.jena.update.UpdateFactory;
-import org.apache.jena.update.UpdateRequest;
-import org.apache.jena.vocabulary.XSD;
 import org.json.JSONArray;
 import org.json.JSONObject;
 //import org.json.JSONArray;
@@ -144,9 +134,42 @@ public class User {
      * Route to Register the Users
      * Users have to enter information such as Email, Username and password
      */
-    @PostMapping("/api/users/registration")
-    public String register(@RequestBody String user) {
-        return "User: " + user;
+    @PostMapping("/api/user/registration/add")
+    public String AddPersonDetails() throws IOException {
+
+        String fullName = "";
+        String city = "";
+        String bloodGroup = "";
+        String address = "";
+        String contactNo = "";
+        String email = "";
+        String gender = "";
+        String dob = "";
+
+        String individualId = "bd:Person_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Person ;\n" +
+                        "                       bd:hasPersonFullName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonCity \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonBloodGroup \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonAddress \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonContactNo \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonEmail \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonGender \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonDateOfBirth \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPersonID \"%s\"^^xsd:string ;\n" +
+                        "}",
+                fullName, city, bloodGroup, address, contactNo, email, gender, dob, individualId);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -319,6 +342,50 @@ public class User {
     @GetMapping("/api/users/appointment/{id}")
     public String GetappointmentbyID(@PathVariable String id) {
         return "Appointment: " + id;
+    }
+
+    /*
+     * Add Blood Request
+     * Can by add by Users or centers
+     */
+    @PostMapping("/api/user/bloodRequest/BloodRequestDetails/add")
+    public String AddBloodRequestDetails() throws IOException {
+
+        String email = "";
+        String hospital = "";
+        String city = "";
+        String bloodGroup = "";
+        String contactNo = "";
+        String message = "";
+        String name = "";
+        String gender = "";
+        String location = "";
+
+        String individualId = "bd:Request_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        individualId + " rdf:type bd:Blood_Request ;\n" +
+                        "                       bd:hasRequestMakerEmail \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerHospital \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerCity \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerBloodGroup \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerContactNo \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerGender \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRequestMakerLocation \"%s\"^^xsd:string ;\n" +
+                        "}",
+                email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location);
+
+        // Call the InsertSparql function with the query
+        InsertSparql(query);
+
+        // Return a success message
+        return "Insert Sparql QUery runs successfully";
     }
 
     /*
@@ -532,29 +599,6 @@ public class User {
                 }
             }
         }
-        // Query to insert donation centres data
-        /*
-         * String updateString =
-         * "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-         * "PREFIX bd: <http://www.semanticweb.org/samsung/ontologies/2022/10/blood-donation-system#>"
-         * +
-         * 
-         * "INSERT DATA{" +
-         * "bd:Center1 rdf:type bd:Blood_Donation_Center ." +
-         * "bd:Center1 bd:hasCenterID '123' ." +
-         * "bd:Center1 bd:hasCenterName 'Shukat Khanam' ." +
-         * "bd:Center1 bd:hasCenterEmail 'shoukat@example.com' ." +
-         * "}";
-         * 
-         * 
-         * UpdateRequest updateRequest = UpdateFactory.create(updateString);
-         * Dataset dataset = DatasetFactory.create(model);
-         * UpdateProcessor updateProcessor =
-         * UpdateExecutionFactory.create(updateRequest, dataset);
-         * updateProcessor.execute();
-         * 
-         */
-
         // Create the update execution object and execute the query
         UpdateAction.parseExecute(query, model);
 
