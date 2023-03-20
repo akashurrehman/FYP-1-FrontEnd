@@ -151,11 +151,11 @@ public class lab {
     @PostMapping("/api/lab/registered/add")
     public String AddLabDetails() throws IOException {
 
-        String name = "";
-        String city = "";
-        String address = "";
-        String contactNo = "";
-        String email = "";
+        String name = "Kinza Lab";
+        String city = "Lahore";
+        String address = "Gulberg, Main Road, Lahore";
+        String contactNo = "+9245625896";
+        String email = "kinza@email.com";
 
         String individualId = "bd:Lab_" + System.currentTimeMillis();
         String query = String.format(

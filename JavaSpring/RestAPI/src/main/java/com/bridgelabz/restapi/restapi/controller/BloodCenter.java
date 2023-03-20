@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,15 +116,15 @@ public class BloodCenter {
     @PostMapping("/api/bloodCenter/CenterRegistration/add")
     public String AddCentreDetails() throws IOException {
 
-        String name = "";
-        String city = "";
-        String location = "";
-        String licenseNo = "";
-        String contactNo = "";
-        String email = "";
-        String openingDays = "";
-        String timings = "";
-        String category = "";
+        String name = "Al Qabeer Foundation";
+        String city = "Lahore";
+        String location = "Near Main Market, Lahore";
+        String licenseNo = "ALQabeer-1234";
+        String contactNo = "+923487456987";
+        String email = "alqabeer@email.com";
+        String openingDays = "Monday to Friday";
+        String timings = "9am-6pm";
+        String category = "Private";
 
         String individualId = "bd:Centre_" + System.currentTimeMillis();
         String query = String.format(
@@ -172,14 +171,14 @@ public class BloodCenter {
     @PostMapping("/api/user/bloodDonation/BloodDonationDetails/addUserInfo")
     public String AddBloodDonationDetails() throws IOException {
 
-        String name = "";
-        String gender = "";
-        String city = "";
-        String location = "";
-        String contactNo = "";
-        String bloodGroup = "";
-        String email = "";
-        String message = "";
+        String name = "Mabuhurairah";
+        String gender = "Male";
+        String city = "Lahore";
+        String location = "Near SabzaZar";
+        String contactNo = "+923456852023";
+        String bloodGroup = "B-";
+        String email = "hurairah761@email.com";
+        String message = "Donate the blood for the Needy Person";
 
         String individualId = "bd:Donation_" + System.currentTimeMillis();
         String query = String.format(
@@ -432,15 +431,15 @@ public class BloodCenter {
     @PostMapping("/api/bloodCenter/RegisteredCenters/makeRequest")
     public String AddBloodRequestDetails() throws IOException {
 
-        String email = "";
-        String hospital = "";
-        String city = "";
-        String bloodGroup = "";
-        String contactNo = "";
-        String message = "";
-        String name = "";
-        String gender = "";
-        String location = "";
+        String email = "Ahmed@email.com";
+        String hospital = "Shaukat Khanam";
+        String city = "Lahore";
+        String bloodGroup = "O-";
+        String contactNo = "+92342586025";
+        String message = "I need Blood for the Heart Transplant Patient";
+        String name = "Ahmed Ali";
+        String gender = "Male";
+        String location = "Near Main Market, Lahore";
 
         String individualId = "bd:Request_" + System.currentTimeMillis();
         String query = String.format(

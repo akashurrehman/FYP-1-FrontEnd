@@ -36,8 +36,8 @@ public class Admin {
     @PostMapping("/api/admin/addSponsor")
     public String AddSponsorDetails() throws IOException {
 
-        String name = "";
-        String message = "";
+        String name = "Ali Hassan";
+        String message = "Sponser the details of the blood donation system";
 
         String individualId = "bd:Sponsor_" + System.currentTimeMillis();
         String query = String.format(
@@ -124,10 +124,10 @@ public class Admin {
     @PostMapping("/api/admin/addFinancialDonation")
     public String AddFinancialDonorDetails() throws IOException {
 
-        String contactNo = "";
-        String message = "";
-        String name = "";
-        String donationDate = "";
+        String contactNo = "+92345687958";
+        String message = "Donate the Financial Donation ";
+        String name = "Salman Ahmed";
+        String donationDate = "9th April, 2023";
 
         String individualId = "bd:Financial_Donor_" + System.currentTimeMillis();
         String query = String.format(
@@ -246,9 +246,9 @@ public class Admin {
     @PostMapping("/api/admin/addJobPost")
     public String AddJobPostDetails() throws IOException {
 
-        String postingDate = "";
-        String title = "";
-        String details = "";
+        String postingDate = "10 April, 2023";
+        String title = "System Maintenance";
+        String details = "Required the expert for the System maintance";
 
         String individualId = "bd:Job_Post_" + System.currentTimeMillis();
         String query = String.format(
@@ -362,8 +362,8 @@ public class Admin {
     @PostMapping("/api/admin/addFAQ")
     public String AddFrequentlyAskedQuestionDetails() throws IOException {
 
-        String title = "";
-        String details = "";
+        String title = "How to donate blood?";
+        String details = "Here is the details about the blood donation";
 
         String individualId = "bd:FAQ_" + System.currentTimeMillis();
         String query = String.format(
@@ -469,6 +469,7 @@ public class Admin {
      * Manage the ENQUIRY in the Database
      * Add The Enquiry to the Database
      */
+
     @PostMapping("/api/admin/addEnquiry")
     public String addEnquiry(@RequestBody String Enquiry) {
         return "Enquiry";
@@ -513,9 +514,9 @@ public class Admin {
     @PostMapping("/api/admin/addCompaigns")
     public String AddCampaignDetails() throws IOException {
 
-        String title = "";
-        String details = "";
-        String postDate = "";
+        String title = "Campaign Title";
+        String details = "Details about the Compaigns";
+        String postDate = "9th April, 2023";
 
         String individualId = "bd:Campaign_" + System.currentTimeMillis();
         String query = String.format(
@@ -630,9 +631,9 @@ public class Admin {
     @PostMapping("/api/admin/addNews")
     public String AddNewsDetails() throws IOException {
 
-        String postDate = "";
-        String title = "";
-        String details = "";
+        String postDate = "10th April, 2023";
+        String title = "News Title";
+        String details = "News Details";
 
         String individualId = "bd:News_" + System.currentTimeMillis();
         String query = String.format(
@@ -747,10 +748,10 @@ public class Admin {
     @PostMapping("/api/admin/addEvents")
     public String AddEventDetails() throws IOException {
 
-        String name = "";
-        String location = "";
-        String message = "";
-        String dateTime = "";
+        String name = "Event Name";
+        String location = "Main Street, Karachi";
+        String message = "Event about Blood dONATION";
+        String dateTime = "9th Feb, 2023";
 
         String individualId = "bd:Event_" + System.currentTimeMillis();
         String query = String.format(

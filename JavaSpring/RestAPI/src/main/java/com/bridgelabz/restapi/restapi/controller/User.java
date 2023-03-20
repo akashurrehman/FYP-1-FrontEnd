@@ -137,14 +137,14 @@ public class User {
     @PostMapping("/api/user/registration/add")
     public String AddPersonDetails() throws IOException {
 
-        String fullName = "";
-        String city = "";
-        String bloodGroup = "";
-        String address = "";
-        String contactNo = "";
-        String email = "";
-        String gender = "";
-        String dob = "";
+        String fullName = "Muhammad Hassan";
+        String city = "Gujranwala";
+        String bloodGroup = "AB-";
+        String address = "Main Road, House No-1";
+        String contactNo = "+92348526958";
+        String email = "hassan@email.com";
+        String gender = "Male";
+        String dob = "9 FEB,2001";
 
         String individualId = "bd:Person_" + System.currentTimeMillis();
         String query = String.format(
@@ -302,6 +302,7 @@ public class User {
 
     /*
      * Appointment Details of Users such as Center, Timing
+     * Missing Sparql Query
      * Add the Appointment Details of Users in the Database
      */
     @PostMapping("/api/users/appointment")
@@ -351,15 +352,15 @@ public class User {
     @PostMapping("/api/user/bloodRequest/BloodRequestDetails/add")
     public String AddBloodRequestDetails() throws IOException {
 
-        String email = "";
-        String hospital = "";
-        String city = "";
-        String bloodGroup = "";
-        String contactNo = "";
-        String message = "";
-        String name = "";
-        String gender = "";
-        String location = "";
+        String email = "Ahmed@email.com";
+        String hospital = "Shaukat Khanam";
+        String city = "Lahore";
+        String bloodGroup = "O-";
+        String contactNo = "+92342586025";
+        String message = "I need Blood for the Heart Transplant Patient";
+        String name = "Ahmed Ali";
+        String gender = "Male";
+        String location = "Near Main Market, Lahore";
 
         String individualId = "bd:Request_" + System.currentTimeMillis();
         String query = String.format(
@@ -503,31 +504,33 @@ public class User {
 
     /*
      * Test Method to check Insert Query
+     * 
+     * @GetMapping("/api/insert")
+     * public void Insert() throws IOException {
+     * // Create the SPARQL INSERT query
+     * String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+     * "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
+     * "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>"
+     * +
+     * "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
+     * 
+     * "INSERT DATA {" +
+     * // Define the classes and their properties
+     * "bd:Person rdf:type rdfs:Class ." +
+     * "bd:hasName rdf:type rdf:Property ;" +
+     * "rdfs:domain bd:Person ;" +
+     * "rdfs:range xsd:string ." +
+     * 
+     * // Define the individuals and their properties
+     * "bd:AbuHurariah rdf:type bd:Person ;" +
+     * "bd:hasName \"Abu  Hurairah\"^^xsd:string ." +
+     * "bd:AkashUrRehman rdf:type bd:Person ;" +
+     * "bd:hasName \"Akash Ur Rehman\"^^xsd:string ." +
+     * "}";
+     * InsertSparql(query);
+     * // Insert using UpdateAction
+     * }
      */
-    @GetMapping("/api/insert")
-    public void Insert() throws IOException {
-        // Create the SPARQL INSERT query
-        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-                "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
-                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
-
-                "INSERT DATA {" +
-                // Define the classes and their properties
-                "bd:Person rdf:type rdfs:Class ." +
-                "bd:hasName rdf:type rdf:Property ;" +
-                "rdfs:domain bd:Person ;" +
-                "rdfs:range xsd:string ." +
-
-                // Define the individuals and their properties
-                "bd:AbuHurariah rdf:type bd:Person ;" +
-                "bd:hasName \"Abu  Hurairah\"^^xsd:string ." +
-                "bd:AkashUrRehman rdf:type bd:Person ;" +
-                "bd:hasName \"Akash Ur Rehman\"^^xsd:string ." +
-                "}";
-        InsertSparql(query);
-        // Insert using UpdateAction
-    }
 
     /*
      * Single Method for Read data using SPARQL Query
