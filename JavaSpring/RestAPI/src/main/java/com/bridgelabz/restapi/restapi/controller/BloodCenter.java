@@ -483,6 +483,9 @@ public class BloodCenter {
      */
     @DeleteMapping("/api/bloodCenter/RegisteredCenters/deleteRequest/{id}")
     public String deleteRequest(@PathVariable String id) {
+
+        String query = "Insert Delete Query here";
+        DeleteSparql(query);
         return "Request: " + id;
     }
 
@@ -642,6 +645,10 @@ public class BloodCenter {
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         model.write(out, "RDF/XML-ABBREV");
         out.close();
+
+    }
+
+    static void DeleteSparql(String query) {
 
     }
 }

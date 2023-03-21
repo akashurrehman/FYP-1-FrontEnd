@@ -934,4 +934,8 @@ public class Admin {
             // Returns the results in json format
         }
     }
+
+    static void DeleteSparql(String query) {
+
+    }
 }

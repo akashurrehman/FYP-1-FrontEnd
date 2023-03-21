@@ -251,4 +251,8 @@ public class lab {
             // Returns the results in json format
         }
     }
+
+    static void DeleteSparql(String query) {
+
+    }
 }

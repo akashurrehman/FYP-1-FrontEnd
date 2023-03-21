@@ -615,4 +615,8 @@ public class User {
         out.close();
 
     }
+
+    static void DeleteSparql(String query) {
+
+    }
 }
