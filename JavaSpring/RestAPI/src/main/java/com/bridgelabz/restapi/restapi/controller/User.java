@@ -619,4 +619,8 @@ public class User {
     static void DeleteSparql(String query) {
 
     }
+
+    static void UpdateSparql(String query) {
+
+    }
 }

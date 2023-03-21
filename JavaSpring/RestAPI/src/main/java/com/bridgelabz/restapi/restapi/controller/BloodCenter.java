@@ -651,4 +651,8 @@ public class BloodCenter {
     static void DeleteSparql(String query) {
 
     }
+
+    static void UpdateSparql(String query) {
+
+    }
 }

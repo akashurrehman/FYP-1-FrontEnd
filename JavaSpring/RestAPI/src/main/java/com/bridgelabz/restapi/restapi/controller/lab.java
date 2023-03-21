@@ -255,4 +255,8 @@ public class lab {
     static void DeleteSparql(String query) {
 
     }
+
+    static void updateSparql(String query) {
+
+    }
 }

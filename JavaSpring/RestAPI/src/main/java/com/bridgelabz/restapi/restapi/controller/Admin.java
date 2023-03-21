@@ -938,4 +938,8 @@ public class Admin {
     static void DeleteSparql(String query) {
 
     }
+
+    static void UpdateSparql(String query) {
+
+    }
 }
