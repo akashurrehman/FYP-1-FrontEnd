@@ -648,10 +648,12 @@ public class BloodCenter {
 
     }
 
+    /* Method for the Funtionality of Deleting data on the basis of query */
     static void DeleteSparql(String query) {
 
     }
 
+    /* Method for Funtionality of Updating Data using sparql query */
     static void UpdateSparql(String query) {
 
     }

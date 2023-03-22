@@ -22,6 +22,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 //import org.json.JSONArray;
@@ -322,9 +324,9 @@ public class User {
     /*
      * Delete the Appointment Details of Users by passing ID
      */
-    @DeleteMapping("/api/users/appointment/{id}")
-    public String deleteAppointment(@PathVariable String id) {
-        return "User: " + id;
+    @DeleteMapping("/api/users/appointment/delete")
+    public String deleteAppointment() {
+        return "User: Deleted";
     }
     /*
      * GET the Appointment Details of Users by passing ID
@@ -363,6 +365,7 @@ public class User {
         String location = "Near Main Market, Lahore";
 
         String individualId = "bd:Request_" + System.currentTimeMillis();
+        System.out.print(individualId);
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
@@ -387,6 +390,12 @@ public class User {
 
         // Return a success message
         return "Insert Sparql QUery runs successfully";
+    }
+
+    @GetMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{email}")
+    public String DeleteBloodRequest(@PathVariable String email) throws IOException {
+        DeleteSparql(email);
+        return "Blood Request Deleted" + email;
     }
 
     /*
@@ -470,74 +479,6 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-    @GetMapping("/api/Readtest")
-    public void TestRead() {
-        String ontologyURI = "http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system";
-        String ontologyFile = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
-        Model model = ModelFactory.createDefaultModel();
-        model.read(ontologyFile);
-
-        // Create the SPARQL SELECT query
-
-        String sparqlSelect = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                "PREFIX bd: <" + ontologyURI + "#>\n" +
-                "SELECT ?person ?name\n" +
-                "WHERE {\n" +
-                "  ?person rdf:type bd:Person ;\n" +
-                "          bd:name ?name .\n" +
-                "}";
-
-        // Execute the SPARQL SELECT query and print the results
-        Query query = QueryFactory.create(sparqlSelect);
-        try (QueryExecution qexec = QueryExecutionFactory.create(query, model)) {
-            ResultSet results = qexec.execSelect();
-            System.out.print("Results of Read Query: ");
-            while (results.hasNext()) {
-                QuerySolution soln = results.nextSolution();
-                System.out.print(soln);
-                RDFNode person = soln.get("person");
-                RDFNode name = soln.get("hasName");
-                System.out.println(person + " has name " + name);
-            }
-        }
-    }
-
-    /*
-     * Test Method to check Insert Query
-     * 
-     * @GetMapping("/api/insert")
-     * public void Insert() throws IOException {
-     * // Create the SPARQL INSERT query
-     * String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-     * "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>" +
-     * "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>"
-     * +
-     * "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
-     * 
-     * "INSERT DATA {" +
-     * // Define the classes and their properties
-     * "bd:Person rdf:type rdfs:Class ." +
-     * "bd:hasName rdf:type rdf:Property ;" +
-     * "rdfs:domain bd:Person ;" +
-     * "rdfs:range xsd:string ." +
-     * 
-     * // Define the individuals and their properties
-     * "bd:AbuHurariah rdf:type bd:Person ;" +
-     * "bd:hasName \"Abu  Hurairah\"^^xsd:string ." +
-     * "bd:AkashUrRehman rdf:type bd:Person ;" +
-     * "bd:hasName \"Akash Ur Rehman\"^^xsd:string ." +
-     * "}";
-     * InsertSparql(query);
-     * // Insert using UpdateAction
-     * }
-     */
-
-    /*
-     * Single Method for Read data using SPARQL Query
-     * Query will passed as a parameter
-     * Return the result in JSON format
-     * Read data for all the routes
-     */
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
@@ -616,10 +557,60 @@ public class User {
 
     }
 
-    static void DeleteSparql(String query) {
+    /* Method for the Funtionality of Deleting data on the basis of query */
+    static void DeleteSparql(String email) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Build the SPARQL DELETE query string
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Request ;\n" +
+                "              bd:hasRequestMakerEmail ?email ;\n" +
+                "              bd:hasRequestMakerHospital ?hospital ;\n" +
+                "              bd:hasRequestMakerCity ?city ;\n" +
+                "              bd:hasRequestMakerBloodGroup ?bloodGroup ;\n" +
+                "              bd:hasRequestMakerContactNo ?contactNo ;\n" +
+                "              bd:hasRequestMakerMessage ?message ;\n" +
+                "              bd:hasRequestMakerName ?name ;\n" +
+                "              bd:hasRequestMakerID ?individualId ;\n" +
+                "              bd:hasRequestMakerGender ?gender ;\n" +
+                "              bd:hasRequestMakerLocation ?location .\n" +
+                "  FILTER(?email = \"" + email + "\").\n" +
+
+                "}";
+        // Create a UpdateRequest object
+        UpdateRequest updateRequest = UpdateFactory.create(queryString);
+
+        // Create a QueryExecution object and execute the query on the model
+        UpdateAction.execute(updateRequest, model);
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
     }
 
+    /* Method for Funtionality of Updating Data using sparql query */
     static void UpdateSparql(String query) {
 
     }
