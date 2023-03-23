@@ -354,14 +354,14 @@ public class User {
     @PostMapping("/api/user/bloodRequest/BloodRequestDetails/add")
     public String AddBloodRequestDetails() throws IOException {
 
-        String email = "Ahmed@email.com";
+        String email = "Sana@email.com";
         String hospital = "Shaukat Khanam";
         String city = "Lahore";
-        String bloodGroup = "O-";
+        String bloodGroup = "AB-";
         String contactNo = "+92342586025";
-        String message = "I need Blood for the Heart Transplant Patient";
-        String name = "Ahmed Ali";
-        String gender = "Male";
+        String message = "Donate Blood";
+        String name = "Sana Rizwan";
+        String gender = "FeMale";
         String location = "Near Main Market, Lahore";
 
         String individualId = "bd:Request_" + System.currentTimeMillis();
@@ -585,19 +585,18 @@ public class User {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                 "DELETE WHERE {\n" +
                 "  ?individual rdf:type bd:Blood_Request ;\n" +
-                "              bd:hasRequestMakerEmail ?email ;\n" +
-                "              bd:hasRequestMakerHospital ?hospital ;\n" +
-                "              bd:hasRequestMakerCity ?city ;\n" +
-                "              bd:hasRequestMakerBloodGroup ?bloodGroup ;\n" +
-                "              bd:hasRequestMakerContactNo ?contactNo ;\n" +
-                "              bd:hasRequestMakerMessage ?message ;\n" +
-                "              bd:hasRequestMakerName ?name ;\n" +
-                "              bd:hasRequestMakerID ?individualId ;\n" +
-                "              bd:hasRequestMakerGender ?gender ;\n" +
-                "              bd:hasRequestMakerLocation ?location .\n" +
-                "  FILTER(?email = \"" + email + "\").\n" +
-
+                "                            bd:hasRequestMakerEmail \"" + email + "\" ;" +
                 "}";
+        // " bd:hasRequestMakerHospital ?hospital ;\n" +
+        // " bd:hasRequestMakerCity ?city ;\n" +
+        // " bd:hasRequestMakerBloodGroup ?bloodGroup ;\n" +
+        // " bd:hasRequestMakerContactNo ?contactNo ;\n" +
+        // " bd:hasRequestMakerMessage ?message ;\n" +
+        // " bd:hasRequestMakerName ?name ;\n" +
+        // " bd:hasRequestMakerID ?individualId ;\n" +
+        // " bd:hasRequestMakerGender ?gender ;\n" +
+        // " bd:hasRequestMakerLocation ?location .\n" +
+
         // Create a UpdateRequest object
         UpdateRequest updateRequest = UpdateFactory.create(queryString);
 
