@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -116,17 +119,30 @@ public class BloodCenter {
 
     /* Route to add New Blood Donation Center */
     @PostMapping("/api/bloodCenter/CenterRegistration/add")
-    public String AddCentreDetails() throws IOException {
+    public String AddCentreDetails(@BodyRequest String BloodCenterRegistration) throws IOException {
+        /*
+         * String name = "Al Qabeer Foundation";
+         * String city = "Lahore";
+         * String location = "Near Main Market, Lahore";
+         * String licenseNo = "ALQabeer-1234";
+         * String contactNo = "+923487456987";
+         * String email = "alqabeer@email.com";
+         * String openingDays = "Monday to Friday";
+         * String timings = "9am-6pm";
+         * String category = "Private";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(BloodCenterRegistration);
 
-        String name = "Al Qabeer Foundation";
-        String city = "Lahore";
-        String location = "Near Main Market, Lahore";
-        String licenseNo = "ALQabeer-1234";
-        String contactNo = "+923487456987";
-        String email = "alqabeer@email.com";
-        String openingDays = "Monday to Friday";
-        String timings = "9am-6pm";
-        String category = "Private";
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String licenseNo = jsonNode.has("licenseNo") ? jsonNode.get("licenseNo").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String openingDays = jsonNode.has("openingDays") ? jsonNode.get("openingDays").asText() : null;
+        String timings = jsonNode.has("timings") ? jsonNode.get("timings").asText() : null;
+        String category = jsonNode.has("category") ? jsonNode.get("category").asText() : null;
 
         String individualId = "bd:Centre_" + System.currentTimeMillis();
         String query = String.format(
@@ -192,16 +208,28 @@ public class BloodCenter {
      * Information Includes blood details and user details
      */
     @PostMapping("/api/user/bloodDonation/BloodDonationDetails/addUserInfo")
-    public String AddBloodDonationDetails() throws IOException {
+    public String AddBloodDonationDetails(@RequestBody String UserInfo) throws IOException {
+        /*
+         * String name = "Mabuhurairah";
+         * String gender = "Male";
+         * String city = "Lahore";
+         * String location = "Near SabzaZar";
+         * String contactNo = "+923456852023";
+         * String bloodGroup = "B-";
+         * String email = "hurairah761@email.com";
+         * String message = "Donate the blood for the Needy Person";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(UserInfo);
 
-        String name = "Mabuhurairah";
-        String gender = "Male";
-        String city = "Lahore";
-        String location = "Near SabzaZar";
-        String contactNo = "+923456852023";
-        String bloodGroup = "B-";
-        String email = "hurairah761@email.com";
-        String message = "Donate the blood for the Needy Person";
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
 
         String individualId = "bd:Donation_" + System.currentTimeMillis();
         String query = String.format(
@@ -414,11 +442,19 @@ public class BloodCenter {
      * Send insert Sparql Query
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
-    public String AddBloodStockDetails() throws IOException {
+    public String AddBloodStockDetails(@BodyRequest String BloodDetails) throws IOException {
+        /*
+         * String bloodGroup = "AB+";
+         * String addedDate = "9TH FEB, 2023";
+         * String noOfBags = "5";
+         */
 
-        String bloodGroup = "AB+";
-        String addedDate = "9TH FEB, 2023";
-        String noOfBags = "5";
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(BloodDetails);
+
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String addedDate = jsonNode.has("addedDate") ? jsonNode.get("addedDate").asText() : null;
+        String noOfBags = jsonNode.has("noOfBags") ? jsonNode.get("noOfBags").asText() : null;
 
         String individualId = "bd:Blood_Stock_" + System.currentTimeMillis();
         String query = String.format(
@@ -476,17 +512,30 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/makeRequest")
-    public String AddBloodRequestDetails() throws IOException {
+    public String AddBloodRequestDetails(@BodyRequest String RequestInfo) throws IOException {
+        /*
+         * String email = "Ahmed@email.com";
+         * String hospital = "Shaukat Khanam";
+         * String city = "Lahore";
+         * String bloodGroup = "O-";
+         * String contactNo = "+92342586025";
+         * String message = "I need Blood for the Heart Transplant Patient";
+         * String name = "Ahmed Ali";
+         * String gender = "Male";
+         * String location = "Near Main Market, Lahore";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(RequestInfo);
 
-        String email = "Ahmed@email.com";
-        String hospital = "Shaukat Khanam";
-        String city = "Lahore";
-        String bloodGroup = "O-";
-        String contactNo = "+92342586025";
-        String message = "I need Blood for the Heart Transplant Patient";
-        String name = "Ahmed Ali";
-        String gender = "Male";
-        String location = "Near Main Market, Lahore";
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String hospital = jsonNode.has("hospital") ? jsonNode.get("hospital").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
 
         String individualId = "bd:Request_" + System.currentTimeMillis();
         String query = String.format(

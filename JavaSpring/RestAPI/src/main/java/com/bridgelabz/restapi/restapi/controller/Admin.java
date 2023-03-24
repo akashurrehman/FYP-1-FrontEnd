@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -36,10 +39,16 @@ public class Admin {
      * Add the Sponsor to the Database
      */
     @PostMapping("/api/admin/addSponsor")
-    public String AddSponsorDetails() throws IOException {
+    public String AddSponsorDetails(@RequestBody String Sponser) throws IOException {
+        /*
+         * String name = "Ali Hassan";
+         * String message = "Sponser the details of the blood donation system";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Sponser);
 
-        String name = "Ali Hassan";
-        String message = "Sponser the details of the blood donation system";
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
 
         String individualId = "bd:Sponsor_" + System.currentTimeMillis();
         String query = String.format(
@@ -136,12 +145,20 @@ public class Admin {
      * Add the Financial Donation record
      */
     @PostMapping("/api/admin/addFinancialDonation")
-    public String AddFinancialDonorDetails() throws IOException {
+    public String AddFinancialDonorDetails(@BodyRequest String FinancialDonation) throws IOException {
+        /*
+         * String contactNo = "+92345687958";
+         * String message = "Donate the Financial Donation ";
+         * String name = "Salman Ahmed";
+         * String donationDate = "9th April, 2023";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FinancialDonation);
 
-        String contactNo = "+92345687958";
-        String message = "Donate the Financial Donation ";
-        String name = "Salman Ahmed";
-        String donationDate = "9th April, 2023";
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
 
         String individualId = "bd:Financial_Donor_" + System.currentTimeMillis();
         String query = String.format(
@@ -270,11 +287,19 @@ public class Admin {
      * Add the New Job posts
      */
     @PostMapping("/api/admin/addJobPost")
-    public String AddJobPostDetails() throws IOException {
+    public String AddJobPostDetails(@BodyRequest String JobPostDetails) throws IOException {
 
-        String postingDate = "10 April, 2023";
-        String title = "System Maintenance";
-        String details = "Required the expert for the System maintance";
+        /*
+         * String postingDate = "10 April, 2023";
+         * String title = "System Maintenance";
+         * String details = "Required the expert for the System maintance";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(JobPostDetails);
+
+        String postingDate = jsonNode.has("postingDate") ? jsonNode.get("postingDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
         String individualId = "bd:Job_Post_" + System.currentTimeMillis();
         String query = String.format(
@@ -398,10 +423,16 @@ public class Admin {
      * Add the New Frequently Asked Questions
      */
     @PostMapping("/api/admin/addFAQ")
-    public String AddFrequentlyAskedQuestionDetails() throws IOException {
+    public String AddFrequentlyAskedQuestionDetails(@BodyRequest String FAQSDetails) throws IOException {
+        /*
+         * String title = "How to donate blood?";
+         * String details = "Here is the details about the blood donation";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FAQSDetails);
 
-        String title = "How to donate blood?";
-        String details = "Here is the details about the blood donation";
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
         String individualId = "bd:FAQ_" + System.currentTimeMillis();
         String query = String.format(
@@ -562,11 +593,18 @@ public class Admin {
      * Add the New Compaign to the Database
      */
     @PostMapping("/api/admin/addCompaigns")
-    public String AddCampaignDetails() throws IOException {
+    public String AddCampaignDetails(@BodyRequest String Compaign) throws IOException {
+        /*
+         * String title = "Campaign Title";
+         * String details = "Details about the Compaigns";
+         * String postDate = "9th April, 2023";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Compaign);
 
-        String title = "Campaign Title";
-        String details = "Details about the Compaigns";
-        String postDate = "9th April, 2023";
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
 
         String individualId = "bd:Campaign_" + System.currentTimeMillis();
         String query = String.format(
@@ -691,11 +729,18 @@ public class Admin {
      */
 
     @PostMapping("/api/admin/addNews")
-    public String AddNewsDetails() throws IOException {
+    public String AddNewsDetails(@BodyRequest String News) throws IOException {
+        /*
+         * String postDate = "10th April, 2023";
+         * String title = "News Title";
+         * String details = "News Details";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(News);
 
-        String postDate = "10th April, 2023";
-        String title = "News Title";
-        String details = "News Details";
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
         String individualId = "bd:News_" + System.currentTimeMillis();
         String query = String.format(
@@ -820,12 +865,20 @@ public class Admin {
      * Add the Events in the Database
      */
     @PostMapping("/api/admin/addEvents")
-    public String AddEventDetails() throws IOException {
+    public String AddEventDetails(@BodyRequest String Event) throws IOException {
+        /*
+         * String name = "Event Name";
+         * String location = "Main Street, Karachi";
+         * String message = "Event about Blood dONATION";
+         * String dateTime = "9th Feb, 2023";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Event);
 
-        String name = "Event Name";
-        String location = "Main Street, Karachi";
-        String message = "Event about Blood dONATION";
-        String dateTime = "9th Feb, 2023";
+        String name = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
 
         String individualId = "bd:Event_" + System.currentTimeMillis();
         String query = String.format(

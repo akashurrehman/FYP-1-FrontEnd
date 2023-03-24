@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -136,13 +139,23 @@ public class lab {
      * New Lab Added
      */
     @PostMapping("/api/lab/registered/add")
-    public String AddLabDetails() throws IOException {
+    public String AddLabDetails(@BodyRequest String LabData) throws IOException {
+        /*
+         * String name = "Kinza Lab";
+         * String city = "Lahore";
+         * String address = "Gulberg, Main Road, Lahore";
+         * String contactNo = "+9245625896";
+         * String email = "kinza@email.com";
+         */
 
-        String name = "Kinza Lab";
-        String city = "Lahore";
-        String address = "Gulberg, Main Road, Lahore";
-        String contactNo = "+9245625896";
-        String email = "kinza@email.com";
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(LabData);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
 
         String individualId = "bd:Lab_" + System.currentTimeMillis();
         String query = String.format(
