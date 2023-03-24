@@ -56,6 +56,7 @@ public class lab {
 
     /*
      * Edit the Report in the Database
+     * Passing the new data in the body of the Request
      */
     @PutMapping("/api/lab/editReport/{id}")
     public String editReport(@RequestBody String Report, @PathVariable int id) {
@@ -92,22 +93,6 @@ public class lab {
     @GetMapping("/api/lab/getReport/{name}")
     public String getReportByName(@PathVariable String name) {
         return "Report" + name;
-    }
-
-    /*
-     * Get the Report in the Database by Date
-     */
-    @GetMapping("/api/lab/getReport/{date}")
-    public String getReportByDate(@PathVariable String date) {
-        return "Report" + date;
-    }
-
-    /*
-     * Get the Report in the Database by Time
-     */
-    @GetMapping("/api/lab/getReport/{time}")
-    public String getReportByTime(@PathVariable String time) {
-        return "Report" + time;
     }
 
     /*
@@ -180,6 +165,15 @@ public class lab {
 
         // Return a success message
         return "Insert Sparql QUery runs successfully";
+    }
+
+    /*
+     * Route to edit the registered labs details
+     * Passing the new data in the body of the request
+     */
+    @PutMapping("/api/lab/RegisteredLabs/edit/{id}")
+    public String EditRegisteredLabs(@PathVariable String id) {
+        return "Edit Registered Labs" + id;
     }
 
     @DeleteMapping("/api/lab/RegisteredLabs/delete/{id}")
@@ -307,7 +301,39 @@ public class lab {
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String query) {
+    static void UpdateSparql(String queryString) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(queryString, model);
+
+        // Print the updated model
+        System.out.printf("Updated model:", model);
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
 
     }
 }

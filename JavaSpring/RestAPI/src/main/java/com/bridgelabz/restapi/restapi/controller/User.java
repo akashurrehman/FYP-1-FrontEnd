@@ -416,7 +416,60 @@ public class User {
         return "Insert Sparql QUery runs successfully";
     }
 
-    @GetMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{id}")
+    /*
+     * Method to update Blood Request
+     * Email is passed as the first parameter
+     */
+    @PutMapping("/api/user/bloodRequest/BloodRequestDetails/update/{Email}")
+    public String UpdateBloodRequestDetails(@PathVariable String Email) throws IOException {
+        String name = "Huraih";
+        String email = "hurairahmail@example.com";
+        String gender = "Male";
+        String location = "SabzaZar Town";
+        String message = "He needs blood urgently due to his severe condition";
+        String bloodGroup = "0-";
+        String contact = "+924856253820";
+        String city = "Lahore";
+        String hospital = "Doctors Hospital";
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerEmail ?Email ." +
+                "?requests bd:hasRequestMakerGender ?Gender ." +
+                "?requests bd:hasRequestMakerLocation ?Location ." +
+                "?requests bd:hasRequestMakerMessage ?Message ." +
+                "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+                "?requests bd:hasRequestMakerContactNo ?Contact ." +
+                "?requests bd:hasRequestMakerCity ?City ." +
+                "?requests bd:hasRequestMakerHospital ?Hospital } " +
+                "INSERT { ?requests bd:hasRequestMakerName \"" + name + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerEmail \"" + email + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerGender \"" + gender + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerLocation \"" + location + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerMessage \"" + message + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerContactNo \"" + contact + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerCity \"" + city + "\"^^xsd:string ." +
+                " ?requests bd:hasRequestMakerHospital \"" + hospital + "\"^^xsd:string } " +
+                "WHERE { ?requests rdf:type bd:Blood_Request ." +
+                "?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerEmail ?Email ." +
+                "?requests bd:hasRequestMakerGender ?Gender ." +
+                "?requests bd:hasRequestMakerLocation ?Location ." +
+                "?requests bd:hasRequestMakerMessage ?Message ." +
+                "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+                "?requests bd:hasRequestMakerContactNo ?Contact ." +
+                "?requests bd:hasRequestMakerCity ?City ." +
+                "?requests bd:hasRequestMakerHospital ?Hospital ." +
+                "filter(?Email = \"" + Email + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Blood Request runs successfuly" + Email;
+    }
+
+    @DeleteMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{id}")
     public String DeleteBloodRequestDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
@@ -578,6 +631,7 @@ public class User {
                 }
             }
         }
+
         // Create the update execution object and execute the query
         UpdateAction.parseExecute(query, model);
 
@@ -628,7 +682,39 @@ public class User {
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String query) {
+    static void UpdateSparql(String queryString) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(queryString, model);
+
+        // Print the updated model
+        System.out.printf("Updated model:", model);
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
 
     }
 }

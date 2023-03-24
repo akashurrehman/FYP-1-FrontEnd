@@ -854,7 +854,7 @@ public class Admin {
      */
     @PutMapping("/api/admin/editEvents/{id}")
     public String editEvents(@PathVariable String id) {
-        return "Events";
+        return "Events" + id;
     }
 
     /*
@@ -1057,7 +1057,39 @@ public class Admin {
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String query) {
+    static void UpdateSparql(String queryString) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(queryString, model);
+
+        // Print the updated model
+        System.out.printf("Updated model:", model);
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
 
     }
 }

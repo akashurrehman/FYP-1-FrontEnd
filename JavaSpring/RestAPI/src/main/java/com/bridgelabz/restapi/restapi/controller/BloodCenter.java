@@ -161,7 +161,7 @@ public class BloodCenter {
      * Through ID we can find the Blood Donation Center
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/{id}")
-    public String centerPut(@RequestBody String center, @PathVariable String id) {
+    public String EditRegistedCenter(@RequestBody String center, @PathVariable String id) {
         return "Blood Donation Center: " + id;
     }
 
@@ -254,9 +254,9 @@ public class BloodCenter {
      * Edit User Information who donate blood
      * Information Includes blood details and user details
      */
-    @PutMapping("/api/bloodCenter/RegisteredCenters/editUserInfo/{id}")
-    public String editUserInfo(@RequestBody String userInfo, @PathVariable String id) {
-        return "User Information: " + userInfo + " ID: " + id;
+    @PutMapping("/api/bloodCenter/RegisteredCenters/editDonorInformations/{id}")
+    public String editUserInfo(@RequestBody String DonorInfo, @PathVariable String id) {
+        return "User Information: " + DonorInfo + " ID: " + id;
     }
 
     /*
@@ -264,8 +264,8 @@ public class BloodCenter {
      * By specific id
      * Information Includes blood details and user details
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/getUserInfo/{Email}")
-    public ResponseEntity<String> getUserInfo(@PathVariable String Email) {
+    @GetMapping("/api/bloodCenter/RegisteredCenters/getDonorInfo/{Email}")
+    public ResponseEntity<String> getDonorInfo(@PathVariable String Email) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -306,7 +306,7 @@ public class BloodCenter {
      * Get User Information who donate blood
      * Information Includes blood details and user details
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/getUserInfo")
+    @GetMapping("/api/bloodCenter/RegisteredCenters/getDonorInfo")
     public ResponseEntity<String> getUserInfo() {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
@@ -740,7 +740,39 @@ public class BloodCenter {
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String query) {
+    static void UpdateSparql(String queryString) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(queryString, model);
+
+        // Print the updated model
+        System.out.printf("Updated model:", model);
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
 
     }
 }
