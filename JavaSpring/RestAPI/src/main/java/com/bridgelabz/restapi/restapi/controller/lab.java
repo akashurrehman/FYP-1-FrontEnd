@@ -38,16 +38,14 @@ import org.springframework.http.HttpHeaders;
 
 @RestController
 public class lab {
-    // This lab class will returns the report record of the user if their report
-    // available in the database
-    // If the report is not available then it will return the message that the
-    // report is not available
-    // This class will also add the report of the user in the database
-    // This class will also delete the report of the user in the database
-    // This class will also update the report of the user in the database
-    // This class will also get the report of the user in the database
-    // This class will also get the report of the user in the database by ID
-    // This class will also get the report of the user in the database by Name
+
+    /*
+     * Managed by Akash Ur Rehman
+     * Last Updated on 24/03/2020 11:00 PM
+     * All Routes are added for FRs
+     * No Hard Coded Data
+     * Pass Data in Json format for POST AND PUT Requests
+     */
 
     /*
      * Add the New report in the Database
@@ -194,14 +192,14 @@ public class lab {
          * String email = "kinza@email.com";
          */
 
-         ObjectMapper objectMapper = new ObjectMapper();
-         JsonNode jsonNode = objectMapper.readTree(LabData);
- 
-         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
-         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
-         String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
-         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
-         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(LabData);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
 
         return "Edit Lab Data" + LabData;
     }

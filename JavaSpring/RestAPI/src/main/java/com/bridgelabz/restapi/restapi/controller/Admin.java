@@ -37,6 +37,14 @@ import org.springframework.http.HttpHeaders;
 public class Admin {
 
     /*
+     * Managed by Akash Ur Rehman
+     * Last Updated on 24/03/2020 11:00 PM
+     * All Routes are added for FRs
+     * No Hard Coded Data
+     * Pass Data in Json format for POST AND PUT Requests
+     */
+
+    /*
      * Manage the Sponsors in the Database
      * Add the Sponsor to the Database
      */

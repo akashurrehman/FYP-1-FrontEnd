@@ -42,6 +42,14 @@ import org.springframework.http.HttpHeaders;
 
 public class BloodCenter {
 
+    /*
+     * Managed by Akash Ur Rehman
+     * Last Updated on 24/03/2020 11:00 PM
+     * All Routes are added for FRs
+     * No Hard Coded Data
+     * Pass Data in Json format for POST AND PUT Requests
+     */
+
     /* Route to Get Data of all blood Donation Centers */
     @GetMapping("/api/bloodCenter/RegisteredCenters")
     public ResponseEntity<String> Allcenters() {

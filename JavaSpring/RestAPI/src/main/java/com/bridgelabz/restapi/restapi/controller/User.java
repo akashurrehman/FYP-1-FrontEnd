@@ -38,11 +38,11 @@ import org.springframework.http.MediaType;
 public class User {
 
     /*
-     * Class Managed by Akash
-     * 
-     * @author Akash
-     * Date: 2023-03-10
-     * 
+     * Managed by Akash Ur Rehman
+     * Last Updated on 24/03/2020 11:00 PM
+     * All Routes are added for FRs
+     * No Hard Coded Data
+     * Pass Data in Json format for POST AND PUT Requests
      */
 
     /*
