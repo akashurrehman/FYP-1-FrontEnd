@@ -25,6 +25,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -163,6 +165,27 @@ public class BloodCenter {
         return "Blood Donation Center: " + id;
     }
 
+    /*
+     * Route to Delete Center Information
+     * ID is passed
+     */
+    @DeleteMapping("/api/bloodCenter/RegisteredCenters/delete/{id}")
+    public String DeleteCentreDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Donation_Centre ;\n" +
+                "                            bd:hasCentreID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
+    }
+
     /**
      * Add User Information who donate blood
      * FR-14
@@ -210,9 +233,21 @@ public class BloodCenter {
      * Delete User Information who donate blood
      * Information Includes blood details and user details
      */
-    @DeleteMapping("/api/bloodCenter/RegisteredCenters/deleteUserInfo")
-    public String deleteUserInfo(@RequestBody String userInfo) {
-        return "User Information: " + userInfo;
+    @DeleteMapping("/api/bloodCenter/RegisteredCenters/deleteUserInfo/{id}")
+    public String DeleteBloodDonationDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Donation ;\n" +
+                "                            bd:hasDonorID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -378,12 +413,12 @@ public class BloodCenter {
      * Add the blood stock details here
      * Send insert Sparql Query
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
+    @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
     public String AddBloodStockDetails() throws IOException {
 
-        String bloodGroup = "";
-        String addedDate = "";
-        String noOfBags = "";
+        String bloodGroup = "AB+";
+        String addedDate = "9TH FEB, 2023";
+        String noOfBags = "5";
 
         String individualId = "bd:Blood_Stock_" + System.currentTimeMillis();
         String query = String.format(
@@ -420,8 +455,20 @@ public class BloodCenter {
      * Information Includes Last daate preserved and quantity
      */
     @DeleteMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{id}")
-    public String DeletebloodStockDetails(@PathVariable String id) {
-        return "Blood Stock Details: " + id;
+    public String DeleteBloodStockDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Stock ;\n" +
+                "                            bd:hasBloodStockID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -482,11 +529,20 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @DeleteMapping("/api/bloodCenter/RegisteredCenters/deleteRequest/{id}")
-    public String deleteRequest(@PathVariable String id) {
+    public String DeleteBloodRequestDetails(@PathVariable String id) throws IOException {
 
-        String query = "Insert Delete Query here";
-        DeleteSparql(query);
-        return "Request: " + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Request ;\n" +
+                "                            bd:hasRequestMakerID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -649,8 +705,38 @@ public class BloodCenter {
     }
 
     /* Method for the Funtionality of Deleting data on the basis of query */
-    static void DeleteSparql(String query) {
+    static void DeleteSparql(String query) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create a UpdateRequest object
+        UpdateRequest updateRequest = UpdateFactory.create(query);
+
+        // Create a QueryExecution object and execute the query on the model
+        UpdateAction.execute(updateRequest, model);
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
     }
 
     /* Method for Funtionality of Updating Data using sparql query */

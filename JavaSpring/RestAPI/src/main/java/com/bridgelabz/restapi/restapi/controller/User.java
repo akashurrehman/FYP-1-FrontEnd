@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.apache.jena.query.*;
-import org.apache.jena.rdf.model.*;
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -190,8 +188,21 @@ public class User {
      */
 
     @DeleteMapping("/api/users/delete/{id}")
-    public String deleteUser(@PathVariable String id) {
-        return "User: " + id;
+
+    public String DeletePersonDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Person ;\n" +
+                "                            bd:hasPersonID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -215,9 +226,22 @@ public class User {
     /*
      * Delete the Information of Donors who want to donate blood by passing ID
      */
-    @DeleteMapping("/api/users/donate/{id}")
-    public String deleteDonate(@PathVariable String id) {
-        return "User: " + id;
+
+    @DeleteMapping("/api/user/deleteBloodDonation/bloodDonationDetails/delete/{id}")
+    public String DeleteBloodDonationDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Donation ;\n" +
+                "                            bd:hasDonorID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -392,10 +416,21 @@ public class User {
         return "Insert Sparql QUery runs successfully";
     }
 
-    @GetMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{email}")
-    public String DeleteBloodRequest(@PathVariable String email) throws IOException {
-        DeleteSparql(email);
-        return "Blood Request Deleted" + email;
+    @GetMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{id}")
+    public String DeleteBloodRequestDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Request ;\n" +
+                "                            bd:hasRequestMakerID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -558,7 +593,7 @@ public class User {
     }
 
     /* Method for the Funtionality of Deleting data on the basis of query */
-    static void DeleteSparql(String email) throws IOException {
+    static void DeleteSparql(String query) throws IOException {
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
@@ -580,25 +615,8 @@ public class User {
             }
         }
 
-        // Build the SPARQL DELETE query string
-        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
-                "DELETE WHERE {\n" +
-                "  ?individual rdf:type bd:Blood_Request ;\n" +
-                "                            bd:hasRequestMakerEmail \"" + email + "\" ;" +
-                "}";
-        // " bd:hasRequestMakerHospital ?hospital ;\n" +
-        // " bd:hasRequestMakerCity ?city ;\n" +
-        // " bd:hasRequestMakerBloodGroup ?bloodGroup ;\n" +
-        // " bd:hasRequestMakerContactNo ?contactNo ;\n" +
-        // " bd:hasRequestMakerMessage ?message ;\n" +
-        // " bd:hasRequestMakerName ?name ;\n" +
-        // " bd:hasRequestMakerID ?individualId ;\n" +
-        // " bd:hasRequestMakerGender ?gender ;\n" +
-        // " bd:hasRequestMakerLocation ?location .\n" +
-
         // Create a UpdateRequest object
-        UpdateRequest updateRequest = UpdateFactory.create(queryString);
+        UpdateRequest updateRequest = UpdateFactory.create(query);
 
         // Create a QueryExecution object and execute the query on the model
         UpdateAction.execute(updateRequest, model);

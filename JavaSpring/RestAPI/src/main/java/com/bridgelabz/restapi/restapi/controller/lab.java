@@ -16,6 +16,8 @@ import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -180,6 +182,23 @@ public class lab {
         return "Insert Sparql QUery runs successfully";
     }
 
+    @DeleteMapping("/api/lab/RegisteredLabs/delete/{id}")
+    public String DeleteLabDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Lab ;\n" +
+                "                            bd:hasLabID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
+    }
+
     static void InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
@@ -253,8 +272,38 @@ public class lab {
     }
 
     /* Method for the Funtionality of Deleting data on the basis of query */
-    static void DeleteSparql(String query) {
+    static void DeleteSparql(String query) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create a UpdateRequest object
+        UpdateRequest updateRequest = UpdateFactory.create(query);
+
+        // Create a QueryExecution object and execute the query on the model
+        UpdateAction.execute(updateRequest, model);
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
