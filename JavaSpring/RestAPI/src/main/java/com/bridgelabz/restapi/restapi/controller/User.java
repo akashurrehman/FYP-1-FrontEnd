@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -187,8 +189,20 @@ public class User {
      * User can edit the information such as Email, Username and password
      */
     @PutMapping("/api/users/edit/{id}")
-    public String editUser(@RequestBody String user, @PathVariable String id) {
-        return "User: " + id;
+    public String editUser(@RequestBody String User, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(User);
+
+        String fullName = jsonNode.has("fullName") ? jsonNode.get("fullName").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String dob = jsonNode.has("dob") ? jsonNode.get("dob").asText() : null;
+        return "Edit Sparql QUery runs successfully" + User;
     }
     /*
      * Delete the User Information by passing ID

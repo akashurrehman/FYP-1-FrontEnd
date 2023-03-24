@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -74,7 +76,15 @@ public class Admin {
      * Edit the Sponsor in the Database
      */
     @PutMapping("/api/admin/editSponsor/{id}")
-    public String editSponsor(@RequestBody String Sponsor, @PathVariable int id) {
+    public String editSponsor(@RequestBody String Sponsor, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Sponsor);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+
         return "Sponsor" + id;
     }
 
@@ -186,7 +196,16 @@ public class Admin {
      * Edit the Financial Donation Record By their ID
      */
     @PutMapping("/api/admin/editFinancialDonation/{id}")
-    public String editFinancialDonation(@RequestBody String FinancialDonation, @PathVariable int id) {
+    public String editFinancialDonation(@RequestBody String FinancialDonation, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FinancialDonation);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
+
         return "FinancialDonation" + id;
     }
 
@@ -326,7 +345,16 @@ public class Admin {
      * Edit the Job posts
      */
     @PutMapping("/api/admin/editJobPost/{id}")
-    public String editJobPost(@RequestBody String JobPost, @PathVariable int id) {
+    public String editJobPost(@RequestBody String JobPost, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(JobPost);
+
+        String postingDate = jsonNode.has("postingDate") ? jsonNode.get("postingDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+
         return "JobPost" + id;
     }
 
@@ -458,7 +486,14 @@ public class Admin {
      * Edit the Frequently Asked Questions by their ID
      */
     @PutMapping("/api/admin/editFAQ/{id}")
-    public String editFAQ(@RequestBody String FAQ, @PathVariable int id) {
+    public String editFAQ(@RequestBody String FAQ, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FAQ);
+
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+
         return "FAQ" + id;
     }
 
@@ -631,7 +666,15 @@ public class Admin {
      * Edit the Compaign in the Database
      */
     @PutMapping("/api/admin/editCompaigns/{id}")
-    public String editCompaigns(@RequestBody String Compaigns, @PathVariable int id) {
+    public String editCompaigns(@RequestBody String Compaigns, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Compaigns);
+
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
         return "Compaigns" + id;
     }
 
@@ -767,7 +810,16 @@ public class Admin {
      * Edit the News in the Database
      */
     @PutMapping("/api/admin/editNews/{id}")
-    public String editNews(@RequestBody String News, @PathVariable int id) {
+    public String editNews(@RequestBody String News, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(News);
+
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+
         return "News" + id;
     }
 
@@ -906,7 +958,15 @@ public class Admin {
      * Edit the Events in the Database
      */
     @PutMapping("/api/admin/editEvents/{id}")
-    public String editEvents(@PathVariable String id) {
+    public String editEvents(@PathVariable String id, @RequestBody String Event) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Event);
+
+        String name = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
+
         return "Events" + id;
     }
 

@@ -185,8 +185,25 @@ public class lab {
      * Passing the new data in the body of the request
      */
     @PutMapping("/api/lab/RegisteredLabs/edit/{id}")
-    public String EditRegisteredLabs(@PathVariable String id) {
-        return "Edit Registered Labs" + id;
+    public String EditRegisteredLabs(@PathVariable String id, @RequestBody String LabData) throws IOException {
+        /*
+         * String name = "Kinza Lab";
+         * String city = "Lahore";
+         * String address = "Gulberg, Main Road, Lahore";
+         * String contactNo = "+9245625896";
+         * String email = "kinza@email.com";
+         */
+
+         ObjectMapper objectMapper = new ObjectMapper();
+         JsonNode jsonNode = objectMapper.readTree(LabData);
+ 
+         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+         String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
+         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+
+        return "Edit Lab Data" + LabData;
     }
 
     @DeleteMapping("/api/lab/RegisteredLabs/delete/{id}")

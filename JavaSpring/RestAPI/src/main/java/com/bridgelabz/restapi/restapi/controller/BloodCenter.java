@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -177,8 +179,22 @@ public class BloodCenter {
      * Through ID we can find the Blood Donation Center
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/{id}")
-    public String EditRegistedCenter(@RequestBody String center, @PathVariable String id) {
-        return "Blood Donation Center: " + id;
+    public String EditRegistedCenter(@RequestBody String center, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(center);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String licenseNo = jsonNode.has("licenseNo") ? jsonNode.get("licenseNo").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String openingDays = jsonNode.has("openingDays") ? jsonNode.get("openingDays").asText() : null;
+        String timings = jsonNode.has("timings") ? jsonNode.get("timings").asText() : null;
+        String category = jsonNode.has("category") ? jsonNode.get("category").asText() : null;
+
+        return "Blood Donation Center: " + center;
     }
 
     /*
@@ -283,7 +299,20 @@ public class BloodCenter {
      * Information Includes blood details and user details
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/editDonorInformations/{id}")
-    public String editUserInfo(@RequestBody String DonorInfo, @PathVariable String id) {
+    public String editUserInfo(@RequestBody String DonorInfo, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(DonorInfo);
+
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+
         return "User Information: " + DonorInfo + " ID: " + id;
     }
 
@@ -482,7 +511,15 @@ public class BloodCenter {
      * Information Includes Last daate preserved and quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{id}")
-    public String EditbloodStockDetails(@RequestBody String bloodStockDetails, @PathVariable String id) {
+    public String EditbloodStockDetails(@RequestBody String bloodStockDetails, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(bloodStockDetails);
+
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String addedDate = jsonNode.has("addedDate") ? jsonNode.get("addedDate").asText() : null;
+        String noOfBags = jsonNode.has("noOfBags") ? jsonNode.get("noOfBags").asText() : null;
+
         return "Blood Stock Details: " + bloodStockDetails + " ID: " + id;
     }
 
@@ -569,7 +606,22 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/editRequest/{id}")
-    public String editRequest(@RequestBody String request, @PathVariable String id) {
+    public String editRequest(@RequestBody String request, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(request);
+
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String hospital = jsonNode.has("hospital") ? jsonNode.get("hospital").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+
         return "Request: " + request + " ID: " + id;
     }
 
