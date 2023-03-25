@@ -39,9 +39,10 @@ public class User {
 
     /*
      * Managed by Akash Ur Rehman
-     * Last Updated on 24/03/2020 11:00 PM
+     * Last Updated on 25/03/2020 11:00 PM
      * All Routes are added for FRs
      * No Hard Coded Data
+     * All the functionality perform on the basis of ID
      * Pass Data in Json format for POST AND PUT Requests
      */
 
