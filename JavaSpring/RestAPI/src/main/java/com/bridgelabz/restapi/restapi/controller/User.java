@@ -401,18 +401,8 @@ public class User {
      * Can by add by Users or centers
      */
     @PostMapping("/api/user/bloodRequest/BloodRequestDetails/add")
-    public String AddBloodRequestDetails(@BodyRequest String bloodRequest) throws IOException {
-        /*
-         * String email = "Sana@email.com";
-         * String hospital = "Shaukat Khanam";
-         * String city = "Lahore";
-         * String bloodGroup = "AB-";
-         * String contactNo = "+92342586025";
-         * String message = "Donate Blood";
-         * String name = "Sana Rizwan";
-         * String gender = "FeMale";
-         * String location = "Near Main Market, Lahore";
-         */
+    public String AddBloodRequestDetails(@RequestBody String bloodRequest) throws IOException {
+        
         System.out.print(bloodRequest);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -428,14 +418,14 @@ public class User {
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
         String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
 
-        String individualId = "bd:Request_" + System.currentTimeMillis();
+        String individualId = "Request_" + System.currentTimeMillis();
         System.out.print(individualId);
         String query = String.format(
-                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
-                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Blood_Request ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Blood_Request ;\n" +
                         "                       bd:hasRequestMakerEmail \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasRequestMakerHospital \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasRequestMakerCity \"%s\"^^xsd:string ;\n" +
@@ -448,7 +438,7 @@ public class User {
                         "                       bd:hasRequestMakerLocation \"%s\"^^xsd:string ;\n" +
                         "}",
                 email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location);
-
+        
         // Call the InsertSparql function with the query
         InsertSparql(query);
 
@@ -460,20 +450,10 @@ public class User {
      * Method to update Blood Request
      * Email is passed as the first parameter
      */
-    @PutMapping("/api/user/bloodRequest/BloodRequestDetails/update/{Email}")
-    public String UpdateBloodRequestDetails(@PathVariable String Email, @BodyRequest String bloodRequest)
+    @PutMapping("/api/user/bloodRequest/BloodRequestDetails/update/{ID}")
+    public String UpdateBloodRequestDetails(@PathVariable String ID, @RequestBody String bloodRequest)
             throws IOException {
-        /*
-         * String name = "Huraih";
-         * String email = "hurairahmail@example.com";
-         * String gender = "Male";
-         * String location = "SabzaZar Town";
-         * String message = "He needs blood urgently due to his severe condition";
-         * String bloodGroup = "0-";
-         * String contact = "+924856253820";
-         * String city = "Lahore";
-         * String hospital = "Doctors Hospital";
-         */
+        
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(bloodRequest);
 
@@ -491,6 +471,7 @@ public class User {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerID ?Id ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
                 "?requests bd:hasRequestMakerLocation ?Location ." +
@@ -510,6 +491,7 @@ public class User {
                 " ?requests bd:hasRequestMakerHospital \"" + hospital + "\"^^xsd:string } " +
                 "WHERE { ?requests rdf:type bd:Blood_Request ." +
                 "?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerID ?ID ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
                 "?requests bd:hasRequestMakerLocation ?Location ." +
@@ -518,10 +500,10 @@ public class User {
                 "?requests bd:hasRequestMakerContactNo ?Contact ." +
                 "?requests bd:hasRequestMakerCity ?City ." +
                 "?requests bd:hasRequestMakerHospital ?Hospital ." +
-                "filter(?Email = \"" + Email + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
         UpdateSparql(queryString);
-        return "Update Blood Request runs successfuly" + Email;
+        return "Update Blood Request runs successfuly" + ID;
     }
 
     @DeleteMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{id}")
@@ -552,6 +534,7 @@ public class User {
 
                 "SELECT * WHERE {" +
                 "?requests rdf:type bd:Blood_Request ." +
+                "?requests bd:hasRequestMakerID ?ID ." +
                 "?requests bd:hasRequestMakerName ?Name ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
@@ -584,8 +567,8 @@ public class User {
     /*
      * View Blood Requests entered by users by passing Email
      */
-    @GetMapping("/api/users/bloodrequest/{Email}")
-    public ResponseEntity<String> GetbloodrequestbyEmail(@PathVariable String Email) {
+    @GetMapping("/api/users/bloodrequest/{id}")
+    public ResponseEntity<String> GetbloodrequestbyID(@PathVariable String id) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -593,6 +576,7 @@ public class User {
                 "SELECT * WHERE {" +
                 "?requests rdf:type bd:Blood_Request ." +
                 "?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerID ?ID ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
                 "?requests bd:hasRequestMakerLocation ?Location ." +
@@ -601,7 +585,7 @@ public class User {
                 "?requests bd:hasRequestMakerContactNo ?Contact ." +
                 "?requests bd:hasRequestMakerCity ?City ." +
                 "?requests bd:hasRequestMakerHospital ?Hospital ." +
-                "filter(?Email = \"" + Email + "\")" +
+                "filter(?ID = \"" + id + "\")" +
                 "}";
 
         // set the response headers
@@ -614,7 +598,7 @@ public class User {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Email: " + Email + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
 
@@ -739,7 +723,7 @@ public class User {
     /* Method for Funtionality of Updating Data using sparql query */
     static void UpdateSparql(String queryString) throws IOException {
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -767,7 +751,7 @@ public class User {
 
         // Write the updated model to a file
         FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         model.write(out, "RDF/XML-ABBREV");
         out.close();
 
