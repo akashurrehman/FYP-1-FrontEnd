@@ -14,7 +14,7 @@ import BloodStock from './Panels/BloodDonationCentre/BloodStock'
 import UserBloodInformation from './Panels/BloodDonationCentre/BloodInformation'
 import Appointments from './Panels/BloodDonationCentre/Appointments';
 import AddNewUser from './Panels/BloodDonationCentre/AddNewUser';
- 
+
 /* AdminPanel Imports */
 import AdminPanelHomeScreen from './Panels/Admin/screen';
 /* UserPanel Imports */

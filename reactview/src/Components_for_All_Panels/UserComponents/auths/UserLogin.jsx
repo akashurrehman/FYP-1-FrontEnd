@@ -40,7 +40,7 @@ const UserLogin = () => {
                         <FloatingLabel controlId="floatingPassword" label="Password">
                             <Form.Control type="password" placeholder="Password" required />
                         </FloatingLabel>
-                       
+
                     </InputGroup>
 
                     <Row>

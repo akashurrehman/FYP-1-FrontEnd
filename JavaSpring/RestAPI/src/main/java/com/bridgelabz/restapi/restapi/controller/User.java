@@ -64,6 +64,7 @@ public class User {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "SELECT * WHERE {" +
                 "?persons rdf:type bd:Person ." +
+                "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonFullName ?Name ." +
                 "?persons bd:hasPersonEmail ?Email ." +
                 "?persons bd:hasPersonContactNo ?ContactNo ." +
@@ -155,6 +156,8 @@ public class User {
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
                         individualId + " rdf:type bd:Person ;\n" +
+                        "   rdf:type bd:Donor ;\n" +
+                        "   rdf:type bd:Request_Maker ;\n" +
                         "                       bd:hasPersonFullName \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasPersonCity \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasPersonBloodGroup \"%s\"^^xsd:string ;\n" +
@@ -392,10 +395,10 @@ public class User {
         return "Insert Sparql QUery runs successfully";
     }
 
-    @GetMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{email}")
-    public String DeleteBloodRequest(@PathVariable String email) throws IOException {
+    @GetMapping("/api/user/person/PersonDetails/delete/{email}")
+    public String DeletePerson(@PathVariable String email) throws IOException {
         DeleteSparql(email);
-        return "Blood Request Deleted" + email;
+        return "Person Deleted " + email;
     }
 
     /*
@@ -483,7 +486,7 @@ public class User {
 
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         //
         // create a model from the RDF file
@@ -524,7 +527,7 @@ public class User {
     static void InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -551,7 +554,7 @@ public class User {
 
         // Write the updated model to a file
         FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         model.write(out, "RDF/XML-ABBREV");
         out.close();
 
@@ -560,7 +563,7 @@ public class User {
     /* Method for the Funtionality of Deleting data on the basis of query */
     static void DeleteSparql(String email) throws IOException {
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -584,19 +587,8 @@ public class User {
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                 "DELETE WHERE {\n" +
-                "  ?individual rdf:type bd:Blood_Request ;\n" +
-                "              bd:hasRequestMakerEmail ?email ;\n" +
-                "              bd:hasRequestMakerHospital ?hospital ;\n" +
-                "              bd:hasRequestMakerCity ?city ;\n" +
-                "              bd:hasRequestMakerBloodGroup ?bloodGroup ;\n" +
-                "              bd:hasRequestMakerContactNo ?contactNo ;\n" +
-                "              bd:hasRequestMakerMessage ?message ;\n" +
-                "              bd:hasRequestMakerName ?name ;\n" +
-                "              bd:hasRequestMakerID ?individualId ;\n" +
-                "              bd:hasRequestMakerGender ?gender ;\n" +
-                "              bd:hasRequestMakerLocation ?location .\n" +
-                "  FILTER(?email = \"" + email + "\").\n" +
-
+                "  ?individual rdf:type bd:Person ;\n" +
+                "   bd:hasPersonEmail \"" + email + "\" ;" +
                 "}";
         // Create a UpdateRequest object
         UpdateRequest updateRequest = UpdateFactory.create(queryString);
@@ -605,7 +597,7 @@ public class User {
         UpdateAction.execute(updateRequest, model);
         // Write the updated model to a file
         FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         model.write(out, "RDF/XML-ABBREV");
         out.close();
     }
