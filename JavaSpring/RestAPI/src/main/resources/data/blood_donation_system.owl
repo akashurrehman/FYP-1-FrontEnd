@@ -570,6 +570,18 @@
     <bd:hasSponsorName>Jamal Sons</bd:hasSponsorName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
   </owl:NamedIndividual>
+  <bd:Blood_Request rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1679476648042">
+    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
+    <bd:hasRequestMakerLocation>Near Main Market, Lahore</bd:hasRequestMakerLocation>
+    <bd:hasRequestMakerEmail>Ahmed@email.com</bd:hasRequestMakerEmail>
+    <bd:hasRequestMakerName>Ahmed Ali</bd:hasRequestMakerName>
+    <bd:hasRequestMakerMessage>I need Blood for the Heart Transplant Patient</bd:hasRequestMakerMessage>
+    <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
+    <bd:hasRequestMakerBloodGroup>O-</bd:hasRequestMakerBloodGroup>
+    <bd:hasRequestMakerID>bd:Request_1679476648042</bd:hasRequestMakerID>
+    <bd:hasRequestMakerContactNo>+92342586025</bd:hasRequestMakerContactNo>
+    <bd:hasRequestMakerHospital>Shaukat Khanam</bd:hasRequestMakerHospital>
+  </bd:Blood_Request>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_1">
     <bd:stockManagedBy>
       <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_001">
@@ -619,6 +631,18 @@
     <bd:hasFinancialDonorName>Ahmad</bd:hasFinancialDonorName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
   </owl:NamedIndividual>
+  <bd:Blood_Request rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1679654615602">
+    <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
+    <bd:hasRequestMakerContactNo>+924856253820</bd:hasRequestMakerContactNo>
+    <bd:hasRequestMakerID>bd:Request_1679654615602</bd:hasRequestMakerID>
+    <bd:hasRequestMakerName>Huraih</bd:hasRequestMakerName>
+    <bd:hasRequestMakerEmail>hurairahmail@example.com</bd:hasRequestMakerEmail>
+    <bd:hasRequestMakerMessage>He needs blood urgently due to his severe condition</bd:hasRequestMakerMessage>
+    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
+    <bd:hasRequestMakerHospital>Doctors Hospital</bd:hasRequestMakerHospital>
+    <bd:hasRequestMakerLocation>SabzaZar Town</bd:hasRequestMakerLocation>
+    <bd:hasRequestMakerBloodGroup>0-</bd:hasRequestMakerBloodGroup>
+  </bd:Blood_Request>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_001">
     <bd:userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
     <bd:hasLabAddress>Thokar Niyaz Baig, Lahore</bd:hasLabAddress>
@@ -677,6 +701,18 @@
     <bd:hasRequestMakerName>Ali</bd:hasRequestMakerName>
     <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
     <bd:hasRequestMakerHospital>Jinnah Hospital</bd:hasRequestMakerHospital>
+  <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1679662363212">
+    <bd:hasPersonDateOfBirth>1980-01-01</bd:hasPersonDateOfBirth>
+    <bd:hasPersonAddress>123 Main St</bd:hasPersonAddress>
+    <bd:hasPersonGender>Male</bd:hasPersonGender>
+    <bd:hasPersonBloodGroup>O+</bd:hasPersonBloodGroup>
+    <bd:hasPersonEmail>johndoe@example.com</bd:hasPersonEmail>
+    <bd:hasPersonCity>New York</bd:hasPersonCity>
+    <bd:hasPersonFullName>John Doe</bd:hasPersonFullName>
+    <bd:hasPersonID>bd:Person_1679662363212</bd:hasPersonID>
+    <bd:hasPersonContactNo>+1 (123) 456-7890</bd:hasPersonContactNo>
+  </bd:Person>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1">
     <bd:bloodRequestMakeby>
       <bd:Donor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_002">
         <bd:hasPersonEmail>raza@email.com</bd:hasPersonEmail>
@@ -708,6 +744,18 @@
     <bd:hasPersonDateOfBirth>9 FEB,2001</bd:hasPersonDateOfBirth>
     <bd:hasPersonGender>Male</bd:hasPersonGender>
   </bd:Person>
+  </owl:NamedIndividual>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1679535586519">
+    <bd:hasRequestMakerBloodGroup>O-</bd:hasRequestMakerBloodGroup>
+    <bd:hasRequestMakerContactNo>+92342586025</bd:hasRequestMakerContactNo>
+    <bd:hasRequestMakerID>bd:Request_1679535586519</bd:hasRequestMakerID>
+    <bd:hasRequestMakerMessage>I need Blood for the Heart Transplant Patient</bd:hasRequestMakerMessage>
+    <bd:hasRequestMakerHospital>Shaukat Khanam</bd:hasRequestMakerHospital>
+    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
+    <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
+    <bd:hasRequestMakerLocation>Near Main Market, Lahore</bd:hasRequestMakerLocation>
+    <bd:hasRequestMakerName>Ahmed Ali</bd:hasRequestMakerName>
+  </rdf:Description>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1">
     <bd:campaignManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <bd:hasCampaignDetails>Give food, cloths and money or what ever you have for the injured people of TURKEY who suffered from earth quake.</bd:hasCampaignDetails>

@@ -16,6 +16,8 @@ import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -33,16 +38,14 @@ import org.springframework.http.HttpHeaders;
 
 @RestController
 public class lab {
-    // This lab class will returns the report record of the user if their report
-    // available in the database
-    // If the report is not available then it will return the message that the
-    // report is not available
-    // This class will also add the report of the user in the database
-    // This class will also delete the report of the user in the database
-    // This class will also update the report of the user in the database
-    // This class will also get the report of the user in the database
-    // This class will also get the report of the user in the database by ID
-    // This class will also get the report of the user in the database by Name
+
+    /*
+     * Managed by Akash Ur Rehman
+     * Last Updated on 24/03/2020 11:00 PM
+     * All Routes are added for FRs
+     * No Hard Coded Data
+     * Pass Data in Json format for POST AND PUT Requests
+     */
 
     /*
      * Add the New report in the Database
@@ -54,6 +57,7 @@ public class lab {
 
     /*
      * Edit the Report in the Database
+     * Passing the new data in the body of the Request
      */
     @PutMapping("/api/lab/editReport/{id}")
     public String editReport(@RequestBody String Report, @PathVariable int id) {
@@ -90,22 +94,6 @@ public class lab {
     @GetMapping("/api/lab/getReport/{name}")
     public String getReportByName(@PathVariable String name) {
         return "Report" + name;
-    }
-
-    /*
-     * Get the Report in the Database by Date
-     */
-    @GetMapping("/api/lab/getReport/{date}")
-    public String getReportByDate(@PathVariable String date) {
-        return "Report" + date;
-    }
-
-    /*
-     * Get the Report in the Database by Time
-     */
-    @GetMapping("/api/lab/getReport/{time}")
-    public String getReportByTime(@PathVariable String time) {
-        return "Report" + time;
     }
 
     /*
@@ -149,13 +137,23 @@ public class lab {
      * New Lab Added
      */
     @PostMapping("/api/lab/registered/add")
-    public String AddLabDetails() throws IOException {
+    public String AddLabDetails(@BodyRequest String LabData) throws IOException {
+        /*
+         * String name = "Kinza Lab";
+         * String city = "Lahore";
+         * String address = "Gulberg, Main Road, Lahore";
+         * String contactNo = "+9245625896";
+         * String email = "kinza@email.com";
+         */
 
-        String name = "Kinza Lab";
-        String city = "Lahore";
-        String address = "Gulberg, Main Road, Lahore";
-        String contactNo = "+9245625896";
-        String email = "kinza@email.com";
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(LabData);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
 
         String individualId = "bd:Lab_" + System.currentTimeMillis();
         String query = String.format(
@@ -178,6 +176,49 @@ public class lab {
 
         // Return a success message
         return "Insert Sparql QUery runs successfully";
+    }
+
+    /*
+     * Route to edit the registered labs details
+     * Passing the new data in the body of the request
+     */
+    @PutMapping("/api/lab/RegisteredLabs/edit/{id}")
+    public String EditRegisteredLabs(@PathVariable String id, @RequestBody String LabData) throws IOException {
+        /*
+         * String name = "Kinza Lab";
+         * String city = "Lahore";
+         * String address = "Gulberg, Main Road, Lahore";
+         * String contactNo = "+9245625896";
+         * String email = "kinza@email.com";
+         */
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(LabData);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+
+        return "Edit Lab Data" + LabData;
+    }
+
+    @DeleteMapping("/api/lab/RegisteredLabs/delete/{id}")
+    public String DeleteLabDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Lab ;\n" +
+                "                            bd:hasLabID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     static void InsertSparql(String query) throws IOException {
@@ -253,12 +294,74 @@ public class lab {
     }
 
     /* Method for the Funtionality of Deleting data on the basis of query */
-    static void DeleteSparql(String query) {
+    static void DeleteSparql(String query) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create a UpdateRequest object
+        UpdateRequest updateRequest = UpdateFactory.create(query);
+
+        // Create a QueryExecution object and execute the query on the model
+        UpdateAction.execute(updateRequest, model);
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String query) {
+    static void UpdateSparql(String queryString) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(queryString, model);
+
+        // Print the updated model
+        System.out.printf("Updated model:", model);
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
 
     }
 }

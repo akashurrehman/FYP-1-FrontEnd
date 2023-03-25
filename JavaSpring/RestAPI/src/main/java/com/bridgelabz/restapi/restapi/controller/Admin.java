@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -18,6 +23,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 //import org.json.JSONArray;
@@ -30,14 +37,28 @@ import org.springframework.http.HttpHeaders;
 public class Admin {
 
     /*
+     * Managed by Akash Ur Rehman
+     * Last Updated on 24/03/2020 11:00 PM
+     * All Routes are added for FRs
+     * No Hard Coded Data
+     * Pass Data in Json format for POST AND PUT Requests
+     */
+
+    /*
      * Manage the Sponsors in the Database
      * Add the Sponsor to the Database
      */
     @PostMapping("/api/admin/addSponsor")
-    public String AddSponsorDetails() throws IOException {
+    public String AddSponsorDetails(@RequestBody String Sponser) throws IOException {
+        /*
+         * String name = "Ali Hassan";
+         * String message = "Sponser the details of the blood donation system";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Sponser);
 
-        String name = "Ali Hassan";
-        String message = "Sponser the details of the blood donation system";
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
 
         String individualId = "bd:Sponsor_" + System.currentTimeMillis();
         String query = String.format(
@@ -63,7 +84,15 @@ public class Admin {
      * Edit the Sponsor in the Database
      */
     @PutMapping("/api/admin/editSponsor/{id}")
-    public String editSponsor(@RequestBody String Sponsor, @PathVariable int id) {
+    public String editSponsor(@RequestBody String Sponsor, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Sponsor);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+
         return "Sponsor" + id;
     }
 
@@ -71,8 +100,20 @@ public class Admin {
      * Delete the Sponsor in the Database
      */
     @DeleteMapping("/api/admin/deleteSponsor/{id}")
-    public String deleteSponsor(@PathVariable int id) {
-        return "Sponsor" + id;
+    public String DeleteSponsorDetails(String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Sponsor ;\n" +
+                "                            bd:hasSponsorID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -122,12 +163,20 @@ public class Admin {
      * Add the Financial Donation record
      */
     @PostMapping("/api/admin/addFinancialDonation")
-    public String AddFinancialDonorDetails() throws IOException {
+    public String AddFinancialDonorDetails(@BodyRequest String FinancialDonation) throws IOException {
+        /*
+         * String contactNo = "+92345687958";
+         * String message = "Donate the Financial Donation ";
+         * String name = "Salman Ahmed";
+         * String donationDate = "9th April, 2023";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FinancialDonation);
 
-        String contactNo = "+92345687958";
-        String message = "Donate the Financial Donation ";
-        String name = "Salman Ahmed";
-        String donationDate = "9th April, 2023";
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
 
         String individualId = "bd:Financial_Donor_" + System.currentTimeMillis();
         String query = String.format(
@@ -155,16 +204,37 @@ public class Admin {
      * Edit the Financial Donation Record By their ID
      */
     @PutMapping("/api/admin/editFinancialDonation/{id}")
-    public String editFinancialDonation(@RequestBody String FinancialDonation, @PathVariable int id) {
+    public String editFinancialDonation(@RequestBody String FinancialDonation, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FinancialDonation);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
+
         return "FinancialDonation" + id;
     }
 
     /*
      * Delete the Financial Donation Record By their ID
      */
-    @DeleteMapping("/api/admin/deleteFinancialDonation/{Name}")
-    public String deleteFinancialDonation(@PathVariable String Name) {
-        return "FinancialDonation" + Name;
+    @DeleteMapping("/api/admin/deleteFinancialDonation/financialDonationDetails/delete/{id}")
+    public String DeleteFinancialDonationDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Financial_Donation ;\n" +
+                "                            bd:hasFinancialDonationID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -244,11 +314,19 @@ public class Admin {
      * Add the New Job posts
      */
     @PostMapping("/api/admin/addJobPost")
-    public String AddJobPostDetails() throws IOException {
+    public String AddJobPostDetails(@BodyRequest String JobPostDetails) throws IOException {
 
-        String postingDate = "10 April, 2023";
-        String title = "System Maintenance";
-        String details = "Required the expert for the System maintance";
+        /*
+         * String postingDate = "10 April, 2023";
+         * String title = "System Maintenance";
+         * String details = "Required the expert for the System maintance";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(JobPostDetails);
+
+        String postingDate = jsonNode.has("postingDate") ? jsonNode.get("postingDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
         String individualId = "bd:Job_Post_" + System.currentTimeMillis();
         String query = String.format(
@@ -275,7 +353,16 @@ public class Admin {
      * Edit the Job posts
      */
     @PutMapping("/api/admin/editJobPost/{id}")
-    public String editJobPost(@RequestBody String JobPost, @PathVariable int id) {
+    public String editJobPost(@RequestBody String JobPost, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(JobPost);
+
+        String postingDate = jsonNode.has("postingDate") ? jsonNode.get("postingDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+
         return "JobPost" + id;
     }
 
@@ -283,8 +370,20 @@ public class Admin {
      * Delete the Job posts
      */
     @DeleteMapping("/api/admin/deleteJobPost/{id}")
-    public String deleteJobPost(@PathVariable int id) {
-        return "JobPost" + id;
+    public String DeleteJobPostDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Job_Post ;\n" +
+                "                            bd:hasJobPostID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -360,10 +459,16 @@ public class Admin {
      * Add the New Frequently Asked Questions
      */
     @PostMapping("/api/admin/addFAQ")
-    public String AddFrequentlyAskedQuestionDetails() throws IOException {
+    public String AddFrequentlyAskedQuestionDetails(@BodyRequest String FAQSDetails) throws IOException {
+        /*
+         * String title = "How to donate blood?";
+         * String details = "Here is the details about the blood donation";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FAQSDetails);
 
-        String title = "How to donate blood?";
-        String details = "Here is the details about the blood donation";
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
         String individualId = "bd:FAQ_" + System.currentTimeMillis();
         String query = String.format(
@@ -389,7 +494,14 @@ public class Admin {
      * Edit the Frequently Asked Questions by their ID
      */
     @PutMapping("/api/admin/editFAQ/{id}")
-    public String editFAQ(@RequestBody String FAQ, @PathVariable int id) {
+    public String editFAQ(@RequestBody String FAQ, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(FAQ);
+
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+
         return "FAQ" + id;
     }
 
@@ -397,8 +509,20 @@ public class Admin {
      * Delete the Frequently Asked Questions by their ID
      */
     @DeleteMapping("/api/admin/deleteFAQ/{id}")
-    public String deleteFAQ(@PathVariable int id) {
-        return "FAQ" + id;
+    public String DeleteFAQDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Frequently_Asked_Question ;\n" +
+                "                            bd:hasFAQID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -512,11 +636,18 @@ public class Admin {
      * Add the New Compaign to the Database
      */
     @PostMapping("/api/admin/addCompaigns")
-    public String AddCampaignDetails() throws IOException {
+    public String AddCampaignDetails(@BodyRequest String Compaign) throws IOException {
+        /*
+         * String title = "Campaign Title";
+         * String details = "Details about the Compaigns";
+         * String postDate = "9th April, 2023";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Compaign);
 
-        String title = "Campaign Title";
-        String details = "Details about the Compaigns";
-        String postDate = "9th April, 2023";
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
 
         String individualId = "bd:Campaign_" + System.currentTimeMillis();
         String query = String.format(
@@ -543,7 +674,15 @@ public class Admin {
      * Edit the Compaign in the Database
      */
     @PutMapping("/api/admin/editCompaigns/{id}")
-    public String editCompaigns(@RequestBody String Compaigns, @PathVariable int id) {
+    public String editCompaigns(@RequestBody String Compaigns, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Compaigns);
+
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
         return "Compaigns" + id;
     }
 
@@ -551,8 +690,20 @@ public class Admin {
      * Delete the Compaign by ID
      */
     @DeleteMapping("/api/admin/deleteCompaigns/{id}")
-    public String deleteCompaigns(@PathVariable int id) {
-        return "Compaigns" + id;
+    public String DeleteCampaignDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Campaign ;\n" +
+                "                            bd:hasCampaignID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -629,11 +780,18 @@ public class Admin {
      */
 
     @PostMapping("/api/admin/addNews")
-    public String AddNewsDetails() throws IOException {
+    public String AddNewsDetails(@BodyRequest String News) throws IOException {
+        /*
+         * String postDate = "10th April, 2023";
+         * String title = "News Title";
+         * String details = "News Details";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(News);
 
-        String postDate = "10th April, 2023";
-        String title = "News Title";
-        String details = "News Details";
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
         String individualId = "bd:News_" + System.currentTimeMillis();
         String query = String.format(
@@ -660,7 +818,16 @@ public class Admin {
      * Edit the News in the Database
      */
     @PutMapping("/api/admin/editNews/{id}")
-    public String editNews(@RequestBody String News, @PathVariable int id) {
+    public String editNews(@RequestBody String News, @PathVariable int id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(News);
+
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+
         return "News" + id;
     }
 
@@ -668,8 +835,20 @@ public class Admin {
      * Delete the News in the Database
      */
     @DeleteMapping("/api/admin/deleteNews/{id}")
-    public String deleteNews(@PathVariable int id) {
-        return "News" + id;
+    public String DeleteNewsDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:News ;\n" +
+                "                            bd:hasNewsID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -746,12 +925,20 @@ public class Admin {
      * Add the Events in the Database
      */
     @PostMapping("/api/admin/addEvents")
-    public String AddEventDetails() throws IOException {
+    public String AddEventDetails(@BodyRequest String Event) throws IOException {
+        /*
+         * String name = "Event Name";
+         * String location = "Main Street, Karachi";
+         * String message = "Event about Blood dONATION";
+         * String dateTime = "9th Feb, 2023";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Event);
 
-        String name = "Event Name";
-        String location = "Main Street, Karachi";
-        String message = "Event about Blood dONATION";
-        String dateTime = "9th Feb, 2023";
+        String name = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
 
         String individualId = "bd:Event_" + System.currentTimeMillis();
         String query = String.format(
@@ -779,16 +966,36 @@ public class Admin {
      * Edit the Events in the Database
      */
     @PutMapping("/api/admin/editEvents/{id}")
-    public String editEvents(@PathVariable String id) {
-        return "Events";
+    public String editEvents(@PathVariable String id, @RequestBody String Event) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Event);
+
+        String name = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
+
+        return "Events" + id;
     }
 
     /*
      * Delete the Events in the Database
      */
     @DeleteMapping("/api/admin/deleteEvents/{id}")
-    public String deleteEvents(@PathVariable String id) {
-        return "Events";
+    public String DeleteEventDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Event ;\n" +
+                "                            bd:hasEventID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -936,12 +1143,74 @@ public class Admin {
     }
 
     /* Method for the Funtionality of Deleting data on the basis of query */
-    static void DeleteSparql(String query) {
+    static void DeleteSparql(String query) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create a UpdateRequest object
+        UpdateRequest updateRequest = UpdateFactory.create(query);
+
+        // Create a QueryExecution object and execute the query on the model
+        UpdateAction.execute(updateRequest, model);
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String query) {
+    static void UpdateSparql(String queryString) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(queryString, model);
+
+        // Print the updated model
+        System.out.printf("Updated model:", model);
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
 
     }
 }

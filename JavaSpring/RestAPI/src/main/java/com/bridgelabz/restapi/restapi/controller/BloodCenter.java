@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +30,8 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.update.UpdateAction;
+import org.apache.jena.update.UpdateFactory;
+import org.apache.jena.update.UpdateRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -34,6 +41,14 @@ import org.springframework.http.HttpHeaders;
 @RestController
 
 public class BloodCenter {
+
+    /*
+     * Managed by Akash Ur Rehman
+     * Last Updated on 24/03/2020 11:00 PM
+     * All Routes are added for FRs
+     * No Hard Coded Data
+     * Pass Data in Json format for POST AND PUT Requests
+     */
 
     /* Route to Get Data of all blood Donation Centers */
     @GetMapping("/api/bloodCenter/RegisteredCenters")
@@ -114,17 +129,30 @@ public class BloodCenter {
 
     /* Route to add New Blood Donation Center */
     @PostMapping("/api/bloodCenter/CenterRegistration/add")
-    public String AddCentreDetails() throws IOException {
+    public String AddCentreDetails(@BodyRequest String BloodCenterRegistration) throws IOException {
+        /*
+         * String name = "Al Qabeer Foundation";
+         * String city = "Lahore";
+         * String location = "Near Main Market, Lahore";
+         * String licenseNo = "ALQabeer-1234";
+         * String contactNo = "+923487456987";
+         * String email = "alqabeer@email.com";
+         * String openingDays = "Monday to Friday";
+         * String timings = "9am-6pm";
+         * String category = "Private";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(BloodCenterRegistration);
 
-        String name = "Al Qabeer Foundation";
-        String city = "Lahore";
-        String location = "Near Main Market, Lahore";
-        String licenseNo = "ALQabeer-1234";
-        String contactNo = "+923487456987";
-        String email = "alqabeer@email.com";
-        String openingDays = "Monday to Friday";
-        String timings = "9am-6pm";
-        String category = "Private";
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String licenseNo = jsonNode.has("licenseNo") ? jsonNode.get("licenseNo").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String openingDays = jsonNode.has("openingDays") ? jsonNode.get("openingDays").asText() : null;
+        String timings = jsonNode.has("timings") ? jsonNode.get("timings").asText() : null;
+        String category = jsonNode.has("category") ? jsonNode.get("category").asText() : null;
 
         String individualId = "bd:Centre_" + System.currentTimeMillis();
         String query = String.format(
@@ -159,8 +187,43 @@ public class BloodCenter {
      * Through ID we can find the Blood Donation Center
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/{id}")
-    public String centerPut(@RequestBody String center, @PathVariable String id) {
-        return "Blood Donation Center: " + id;
+    public String EditRegistedCenter(@RequestBody String center, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(center);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String licenseNo = jsonNode.has("licenseNo") ? jsonNode.get("licenseNo").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String openingDays = jsonNode.has("openingDays") ? jsonNode.get("openingDays").asText() : null;
+        String timings = jsonNode.has("timings") ? jsonNode.get("timings").asText() : null;
+        String category = jsonNode.has("category") ? jsonNode.get("category").asText() : null;
+
+        return "Blood Donation Center: " + center;
+    }
+
+    /*
+     * Route to Delete Center Information
+     * ID is passed
+     */
+    @DeleteMapping("/api/bloodCenter/RegisteredCenters/delete/{id}")
+    public String DeleteCentreDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Donation_Centre ;\n" +
+                "                            bd:hasCentreID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /**
@@ -169,16 +232,28 @@ public class BloodCenter {
      * Information Includes blood details and user details
      */
     @PostMapping("/api/user/bloodDonation/BloodDonationDetails/addUserInfo")
-    public String AddBloodDonationDetails() throws IOException {
+    public String AddBloodDonationDetails(@RequestBody String UserInfo) throws IOException {
+        /*
+         * String name = "Mabuhurairah";
+         * String gender = "Male";
+         * String city = "Lahore";
+         * String location = "Near SabzaZar";
+         * String contactNo = "+923456852023";
+         * String bloodGroup = "B-";
+         * String email = "hurairah761@email.com";
+         * String message = "Donate the blood for the Needy Person";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(UserInfo);
 
-        String name = "Mabuhurairah";
-        String gender = "Male";
-        String city = "Lahore";
-        String location = "Near SabzaZar";
-        String contactNo = "+923456852023";
-        String bloodGroup = "B-";
-        String email = "hurairah761@email.com";
-        String message = "Donate the blood for the Needy Person";
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
 
         String individualId = "bd:Donation_" + System.currentTimeMillis();
         String query = String.format(
@@ -210,18 +285,43 @@ public class BloodCenter {
      * Delete User Information who donate blood
      * Information Includes blood details and user details
      */
-    @DeleteMapping("/api/bloodCenter/RegisteredCenters/deleteUserInfo")
-    public String deleteUserInfo(@RequestBody String userInfo) {
-        return "User Information: " + userInfo;
+    @DeleteMapping("/api/bloodCenter/RegisteredCenters/deleteUserInfo/{id}")
+    public String DeleteBloodDonationDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Donation ;\n" +
+                "                            bd:hasDonorID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
      * Edit User Information who donate blood
      * Information Includes blood details and user details
      */
-    @PutMapping("/api/bloodCenter/RegisteredCenters/editUserInfo/{id}")
-    public String editUserInfo(@RequestBody String userInfo, @PathVariable String id) {
-        return "User Information: " + userInfo + " ID: " + id;
+    @PutMapping("/api/bloodCenter/RegisteredCenters/editDonorInformations/{id}")
+    public String editUserInfo(@RequestBody String DonorInfo, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(DonorInfo);
+
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+
+        return "User Information: " + DonorInfo + " ID: " + id;
     }
 
     /*
@@ -229,8 +329,8 @@ public class BloodCenter {
      * By specific id
      * Information Includes blood details and user details
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/getUserInfo/{Email}")
-    public ResponseEntity<String> getUserInfo(@PathVariable String Email) {
+    @GetMapping("/api/bloodCenter/RegisteredCenters/getDonorInfo/{Email}")
+    public ResponseEntity<String> getDonorInfo(@PathVariable String Email) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -271,7 +371,7 @@ public class BloodCenter {
      * Get User Information who donate blood
      * Information Includes blood details and user details
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/getUserInfo")
+    @GetMapping("/api/bloodCenter/RegisteredCenters/getDonorInfo")
     public ResponseEntity<String> getUserInfo() {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
@@ -378,12 +478,20 @@ public class BloodCenter {
      * Add the blood stock details here
      * Send insert Sparql Query
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
-    public String AddBloodStockDetails() throws IOException {
+    @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
+    public String AddBloodStockDetails(@BodyRequest String BloodDetails) throws IOException {
+        /*
+         * String bloodGroup = "AB+";
+         * String addedDate = "9TH FEB, 2023";
+         * String noOfBags = "5";
+         */
 
-        String bloodGroup = "";
-        String addedDate = "";
-        String noOfBags = "";
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(BloodDetails);
+
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String addedDate = jsonNode.has("addedDate") ? jsonNode.get("addedDate").asText() : null;
+        String noOfBags = jsonNode.has("noOfBags") ? jsonNode.get("noOfBags").asText() : null;
 
         String individualId = "bd:Blood_Stock_" + System.currentTimeMillis();
         String query = String.format(
@@ -411,7 +519,15 @@ public class BloodCenter {
      * Information Includes Last daate preserved and quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{id}")
-    public String EditbloodStockDetails(@RequestBody String bloodStockDetails, @PathVariable String id) {
+    public String EditbloodStockDetails(@RequestBody String bloodStockDetails, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(bloodStockDetails);
+
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String addedDate = jsonNode.has("addedDate") ? jsonNode.get("addedDate").asText() : null;
+        String noOfBags = jsonNode.has("noOfBags") ? jsonNode.get("noOfBags").asText() : null;
+
         return "Blood Stock Details: " + bloodStockDetails + " ID: " + id;
     }
 
@@ -420,8 +536,20 @@ public class BloodCenter {
      * Information Includes Last daate preserved and quantity
      */
     @DeleteMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{id}")
-    public String DeletebloodStockDetails(@PathVariable String id) {
-        return "Blood Stock Details: " + id;
+    public String DeleteBloodStockDetails(@PathVariable String id) throws IOException {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Stock ;\n" +
+                "                            bd:hasBloodStockID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -429,17 +557,30 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/makeRequest")
-    public String AddBloodRequestDetails() throws IOException {
+    public String AddBloodRequestDetails(@BodyRequest String RequestInfo) throws IOException {
+        /*
+         * String email = "Ahmed@email.com";
+         * String hospital = "Shaukat Khanam";
+         * String city = "Lahore";
+         * String bloodGroup = "O-";
+         * String contactNo = "+92342586025";
+         * String message = "I need Blood for the Heart Transplant Patient";
+         * String name = "Ahmed Ali";
+         * String gender = "Male";
+         * String location = "Near Main Market, Lahore";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(RequestInfo);
 
-        String email = "Ahmed@email.com";
-        String hospital = "Shaukat Khanam";
-        String city = "Lahore";
-        String bloodGroup = "O-";
-        String contactNo = "+92342586025";
-        String message = "I need Blood for the Heart Transplant Patient";
-        String name = "Ahmed Ali";
-        String gender = "Male";
-        String location = "Near Main Market, Lahore";
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String hospital = jsonNode.has("hospital") ? jsonNode.get("hospital").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
 
         String individualId = "bd:Request_" + System.currentTimeMillis();
         String query = String.format(
@@ -473,7 +614,22 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/editRequest/{id}")
-    public String editRequest(@RequestBody String request, @PathVariable String id) {
+    public String editRequest(@RequestBody String request, @PathVariable String id)
+            throws JsonMappingException, JsonProcessingException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(request);
+
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String hospital = jsonNode.has("hospital") ? jsonNode.get("hospital").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+
         return "Request: " + request + " ID: " + id;
     }
 
@@ -482,11 +638,20 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @DeleteMapping("/api/bloodCenter/RegisteredCenters/deleteRequest/{id}")
-    public String deleteRequest(@PathVariable String id) {
+    public String DeleteBloodRequestDetails(@PathVariable String id) throws IOException {
 
-        String query = "Insert Delete Query here";
-        DeleteSparql(query);
-        return "Request: " + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                "DELETE WHERE {\n" +
+                "  ?individual rdf:type bd:Blood_Request ;\n" +
+                "                            bd:hasRequestMakerID \"" + id + "\" ;" +
+                "}";
+
+        // Call the InsertSparql function with the query
+        DeleteSparql(queryString);
+
+        // Return a success message
+        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -649,12 +814,74 @@ public class BloodCenter {
     }
 
     /* Method for the Funtionality of Deleting data on the basis of query */
-    static void DeleteSparql(String query) {
+    static void DeleteSparql(String query) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create a UpdateRequest object
+        UpdateRequest updateRequest = UpdateFactory.create(query);
+
+        // Create a QueryExecution object and execute the query on the model
+        UpdateAction.execute(updateRequest, model);
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String query) {
+    static void UpdateSparql(String queryString) throws IOException {
+        File file = new File(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+
+        // create a model from the RDF file
+        Model model = ModelFactory.createDefaultModel();
+        InputStream in = null;
+        try {
+            in = new FileInputStream(file);
+            model.read(in, null);
+        } catch (IOException e) {
+            System.out.println("No file Found!");
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // handle the exception
+                }
+            }
+        }
+
+        // Create the update execution object and execute the query
+        UpdateAction.parseExecute(queryString, model);
+
+        // Print the updated model
+        System.out.printf("Updated model:", model);
+
+        // Write the updated model to a file
+        FileOutputStream out = new FileOutputStream(
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        model.write(out, "RDF/XML-ABBREV");
+        out.close();
 
     }
 }
