@@ -241,18 +241,64 @@ public class User {
     }
 
     /*
-     * Edit the Donor Information who want to donate blood by passing ID
-     * Pass Information such as Blood Group, Age
+     * Method to update Blood Donation
+     * ID is passed as the first parameter
      */
-    @PutMapping("/api/users/donate/{id}")
-    public String editDonate(@RequestBody String user, @PathVariable String id) {
-        return "User: " + id;
+    @PutMapping("/api/user/bloodDonation/BloodDonationDetails/update/{ID}")
+    public String UpdateBloodDonationDetails(@PathVariable String ID, @RequestBody String bloodDonation)
+            throws IOException {
+        
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(bloodDonation);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorCity ?City ." +
+                "?donations bd:hasDonorGender ?Gender ." +
+                "?donations bd:hasDonorLocation ?Location ." +
+                "?donations bd:hasDonorContactNo ?ContactNo ." +
+                "?donations bd:hasDonorBloodGroup ?BloodGroup ." +
+                "?donations bd:hasDonorEmail ?Email ." +
+                "?donations bd:hasDonorMessage ?Message ." +
+                "INSERT { ?donations bd:hasDonorName \"" + name + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorEmail \"" + email + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorGender \"" + gender + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorLocation \"" + location + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorMessage \"" + message + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorContactNo \"" + contactNo + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorCity \"" + city + "\"^^xsd:string ." +
+                "WHERE { ?donations rdf:type bd:Blood_Donation ." +
+                "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorID ?ID ." +
+                "?donations bd:hasDonorEmail ?Email ." +
+                "?donations bd:hasDonorGender ?Gender ." +
+                "?donations bd:hasDonorLocation ?Location ." +
+                "?donations bd:hasDonorMessage ?Message ." +
+                "?donations bd:hasDonorBloodGroup ?BloodGroup ." +
+                "?donations bd:hasDonorContactNo ?Contact ." +
+                "?donations bd:hasDonorCity ?City ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Blood Donation runs successfully " + ID;
     }
+
 
     /*
      * Delete the Information of Donors who want to donate blood by passing ID
      */
-
     @DeleteMapping("/api/user/deleteBloodDonation/bloodDonationDetails/delete/{id}")
     public String DeleteBloodDonationDetails(@PathVariable String id) throws IOException {
 
@@ -283,6 +329,7 @@ public class User {
                 "SELECT * WHERE {" +
                 "?donations rdf:type bd:Blood_Donation ." +
                 "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorID ?ID ." +
                 "?donations bd:hasDonorEmail ?Email ." +
                 "?donations bd:hasDonorGender ?Gender ." +
                 "?donations bd:hasDonorLocation ?Location ." +
@@ -311,12 +358,10 @@ public class User {
     }
 
     /*
-     * GET the Information of the Donors by passing Email
-     * 
-     * @param id
+    * GET the Information of the Donors by passing ID
      */
-    @GetMapping("/api/users/donate/{Email}")
-    public ResponseEntity<String> GetdonatebyEmail(@PathVariable String Email) {
+    @GetMapping("/api/users/donate/{ID}")
+    public ResponseEntity<String> GetdonatebyID(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -324,6 +369,7 @@ public class User {
                 "SELECT * WHERE {" +
                 "?donations rdf:type bd:Blood_Donation ." +
                 "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorID ?ID ." +
                 "?donations bd:hasDonorEmail ?Email ." +
                 "?donations bd:hasDonorGender ?Gender ." +
                 "?donations bd:hasDonorLocation ?Location ." +
@@ -331,7 +377,7 @@ public class User {
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
-                "filter(?Email = \"" + Email + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -345,57 +391,14 @@ public class User {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Email: " + Email + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-    /*
-     * Appointment Details of Users such as Center, Timing
-     * Missing Sparql Query
-     * Add the Appointment Details of Users in the Database
-     */
-    @PostMapping("/api/users/appointment")
-    public String appointment(@RequestBody String user) {
-        return "User: " + user;
-    }
-    /*
-     * Edit the Appointment Details of Users by passing ID
-     * Edit information such as center, or timing
-     */
 
-    @PutMapping("/api/users/appointment/{id}")
-    public String editAppointment(@RequestBody String user, @PathVariable String id) {
-        return "User: " + id;
-    }
-
-    /*
-     * Delete the Appointment Details of Users by passing ID
-     */
-    @DeleteMapping("/api/users/appointment/delete")
-    public String deleteAppointment() {
-        return "User: Deleted";
-    }
-    /*
-     * GET the Appointment Details of Users by passing ID
-     * Appointment details such as center, or timing
-     */
-
-    @GetMapping("/api/users/appointment")
-    public String appointment() {
-        return "All Appointments";
-    }
-    /*
-     * GET the Appointment Details of Users by passing ID
-     * Appointment details such as center, or timing
-     */
-
-    @GetMapping("/api/users/appointment/{id}")
-    public String GetappointmentbyID(@PathVariable String id) {
-        return "Appointment: " + id;
-    }
 
     /*
      * Add Blood Request
@@ -506,6 +509,9 @@ public class User {
         return "Update Blood Request runs successfuly" + ID;
     }
 
+    /*
+     * Delete Blood Requests entered by Users
+     */
     @DeleteMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{id}")
     public String DeleteBloodRequestDetails(@PathVariable String id) throws IOException {
 
@@ -565,7 +571,7 @@ public class User {
     }
 
     /*
-     * View Blood Requests entered by users by passing Email
+     * View Blood Requests entered by users by passing ID
      */
     @GetMapping("/api/users/bloodrequest/{id}")
     public ResponseEntity<String> GetbloodrequestbyID(@PathVariable String id) {
@@ -606,6 +612,58 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
+
+
+    /*
+     * Appointment Details of Users such as Center, Timing
+     * Missing Sparql Query
+     * Add the Appointment Details of Users in the Database
+     */
+    @PostMapping("/api/users/appointment")
+    public String appointment(@RequestBody String user) {
+        return "User: " + user;
+    }
+    /*
+     * Edit the Appointment Details of Users by passing ID
+     * Edit information such as center, or timing
+     */
+
+    @PutMapping("/api/users/appointment/{id}")
+    public String editAppointment(@RequestBody String user, @PathVariable String id) {
+        return "User: " + id;
+    }
+
+    /*
+     * Delete the Appointment Details of Users by passing ID
+     */
+    @DeleteMapping("/api/users/appointment/delete")
+    public String deleteAppointment() {
+        return "User: Deleted";
+    }
+    /*
+     * GET the Appointment Details of Users by passing ID
+     * Appointment details such as center, or timing
+     */
+
+    @GetMapping("/api/users/appointment")
+    public String appointment() {
+        return "All Appointments";
+    }
+    /*
+     * GET the Appointment Details of Users by passing ID
+     * Appointment details such as center, or timing
+     */
+
+    @GetMapping("/api/users/appointment/{id}")
+    public String GetappointmentbyID(@PathVariable String id) {
+        return "Appointment: " + id;
+    }
+
+
+
+    /* 
+        Method for the Functionality of Read data on the basis of query 
+    */
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
@@ -643,11 +701,11 @@ public class User {
         }
     }
 
-    /**
-     * @param query
-     * @throws IOException
-     * 
-     */
+
+
+    /* 
+        Method for the Functionality of Inserting data on the basis of query 
+    */
     static void InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
@@ -685,7 +743,11 @@ public class User {
 
     }
 
-    /* Method for the Funtionality of Deleting data on the basis of query */
+
+
+    /* 
+        Method for the Functionality of Deleting data on the basis of query 
+    */
     static void DeleteSparql(String query) throws IOException {
         File file = new File(
                 "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
@@ -720,7 +782,11 @@ public class User {
         out.close();
     }
 
-    /* Method for Funtionality of Updating Data using sparql query */
+
+
+    /* 
+        Method for Functionality of Updating Data using SPARQL query 
+    */
     static void UpdateSparql(String queryString) throws IOException {
         File file = new File(
                 "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
