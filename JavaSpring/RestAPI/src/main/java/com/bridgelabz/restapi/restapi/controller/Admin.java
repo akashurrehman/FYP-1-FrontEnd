@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -83,17 +81,36 @@ public class Admin {
     /*
      * Edit the Sponsor in the Database
      */
-    @PutMapping("/api/admin/editSponsor/{id}")
-    public String editSponsor(@RequestBody String Sponsor, @PathVariable int id)
-            throws JsonMappingException, JsonProcessingException {
+
+    /*
+     * Method to update Sponsor
+     * ID is passed as the first parameter
+     */
+    @PutMapping("/api/admin/sponsor/SponsorDetails/update/{ID}")
+    public String UpdateSponsorDetails(@PathVariable String ID, @RequestBody String sponsor)
+            throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(Sponsor);
+        JsonNode jsonNode = objectMapper.readTree(sponsor);
 
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
 
-        return "Sponsor" + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?sponsor bd:hasSponsorName ?Name ." +
+                "?sponsor bd:hasSponsorMessage ?Message ." +
+                "INSERT { ?sponsor bd:hasSponsorName \"" + name + "\"^^xsd:string ." +
+                " ?sponsor bd:hasSponsorMessage \"" + message + "\"^^xsd:string ." +
+                "WHERE { ?sponsor rdf:type bd:Sponsor ." +
+                "?sponsor bd:hasSponsorMessage ?Message ." +
+                "?sponsor bd:hasSponsorName ?Name ." +
+                "?sponsor bd:hasSponsorID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Sponsor runs successfully " + ID;
     }
 
     /*
@@ -203,18 +220,47 @@ public class Admin {
     /*
      * Edit the Financial Donation Record By their ID
      */
-    @PutMapping("/api/admin/editFinancialDonation/{id}")
-    public String editFinancialDonation(@RequestBody String FinancialDonation, @PathVariable int id)
-            throws JsonMappingException, JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(FinancialDonation);
+    /*
+     * Method to update Financial Donation
+     * ID is passed as the first parameter
+     */
+    @PutMapping("/api/admin/financialDonation/financialDonationDetails/update/{ID}")
+    public String UpdateFinancialDonationDetails(@PathVariable String ID, @RequestBody String financialDonation)
+            throws IOException {
 
-        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
-        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(financialDonation);
+
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String donationAmount = jsonNode.has("donationAmount") ? jsonNode.get("donationAmount").asText() : null;
         String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
 
-        return "FinancialDonation" + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?financialDonor bd:hasFinancialDonorContactNo ?ContactNo ." +
+                "?financialDonor bd:hasFinancialDonorMessage ?Message ." +
+                "?financialDonor bd:hasFinancialDonorName ?Name ." +
+                "?financialDonor bd:hasFinancialDonorDonationAmount ?DonationAmount ." +
+                "?financialDonor bd:hasFinancialDonorDonationDate ?DonationDate ." +
+                "INSERT { ?financialDonor bd:hasFinancialDonorContactNo \"" + contactNo + "\"^^xsd:string ." +
+                " ?financialDonor bd:hasFinancialDonorMessage \"" + message + "\"^^xsd:string ." +
+                " ?financialDonor bd:hasFinancialDonorName \"" + name + "\"^^xsd:string ." +
+                " ?financialDonor bd:hasFinancialDonorDonationAmount \"" + donationAmount + "\"^^xsd:string ." +
+                " ?financialDonor bd:hasFinancialDonorDonationDate \"" + donationDate + "\"^^xsd:string ." +
+                "WHERE { ?financialDonor rdf:type bd:Financial_Donation ." +
+                "?financialDonor bd:hasFinancialDonorContactNo ?ContactNo ." +
+                "?financialDonor bd:hasFinancialDonorDonationAmount ?DonationAmount ." +
+                "?financialDonor bd:hasFinancialDonorMessage ?Message ." +
+                "?financialDonor bd:hasFinancialDonorName ?Name ." +
+                "?financialDonor bd:hasFinancialDonorDonationDate ?DonationDate ." +
+                "?financialDonor bd:hasFinancialDonationID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Financial Donation runs successfully " + ID;
     }
 
     /*
@@ -352,18 +398,39 @@ public class Admin {
     /*
      * Edit the Job posts
      */
-    @PutMapping("/api/admin/editJobPost/{id}")
-    public String editJobPost(@RequestBody String JobPost, @PathVariable int id)
-            throws JsonMappingException, JsonProcessingException {
+    /*
+     * Method to update Job Post
+     * ID is passed as the first parameter
+     */
+    @PutMapping("/api/admin/jobPost/JobPostDetails/update/{ID}")
+    public String UpdateJobPostDetails(@PathVariable String ID, @RequestBody String jobPost)
+            throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(JobPost);
+        JsonNode jsonNode = objectMapper.readTree(jobPost);
 
-        String postingDate = jsonNode.has("postingDate") ? jsonNode.get("postingDate").asText() : null;
-        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+        String postingDate = jsonNode.has("postingDate") ? jsonNode.get("postingDate").asText() : null;
 
-        return "JobPost" + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?jobpost bd:hasJobPostTitle ?Title ." +
+                "?jobpost bd:hasJobPostDetails ?Details ." +
+                "?jobpost bd:hasJobPostPostingDate ?PostingDate ." +
+                "INSERT { ?jobpost bd:hasJobPostTitle \"" + title + "\"^^xsd:string ." +
+                " ?jobpost bd:hasJobPostDetails \"" + details + "\"^^xsd:string ." +
+                " ?jobpost bd:hasJobPostPostingDate \"" + postingDate + "\"^^xsd:string ." +
+                "WHERE { ?jobpost rdf:type bd:Job_Post ." +
+                "?jobpost bd:hasJobPostDetails ?Details ." +
+                "?jobpost bd:hasJobPostTitle ?Title ." +
+                "?jobpost bd:hasJobPostPostingDate ?PostingDate ." +
+                "?jobpost bd:hasJobPostID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Job Post runs successfully " + ID;
     }
 
     /*
@@ -493,16 +560,31 @@ public class Admin {
     /*
      * Edit the Frequently Asked Questions by their ID
      */
-    @PutMapping("/api/admin/editFAQ/{id}")
-    public String editFAQ(@RequestBody String FAQ, @PathVariable int id)
-            throws JsonMappingException, JsonProcessingException {
+    @PutMapping("/api/admin/faq/FAQDetails/update/{ID}")
+    public String UpdateFrequentlyAskedQuestionDetails(@PathVariable String ID, @RequestBody String faq)
+            throws IOException {
+
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(FAQ);
+        JsonNode jsonNode = objectMapper.readTree(faq);
 
         String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
-        return "FAQ" + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?faq bd:hasFAQTitle ?Title ." +
+                "?faq bd:hasFAQDetails ?Details ." +
+                "INSERT { ?faq bd:hasFAQTitle \"" + title + "\"^^xsd:string ." +
+                " ?faq bd:hasFAQDetails \"" + details + "\"^^xsd:string ." +
+                "WHERE { ?faq rdf:type bd:Frequently_Asked_Question ." +
+                "?faq bd:hasFAQDetails ?Details ." +
+                "?faq bd:hasFAQTitle ?Title ." +
+                "?faq bd:hasFAQID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Frequently_Asked_Question runs successfully " + ID;
     }
 
     /*
@@ -673,17 +755,39 @@ public class Admin {
     /*
      * Edit the Compaign in the Database
      */
-    @PutMapping("/api/admin/editCompaigns/{id}")
-    public String editCompaigns(@RequestBody String Compaigns, @PathVariable int id)
-            throws JsonMappingException, JsonProcessingException {
+    /*
+     * Method to update Campaign
+     * ID is passed as the first parameter
+     */
+    @PutMapping("/api/admin/campaign/CampaignDetails/update/{ID}")
+    public String UpdateCampaignDetails(@PathVariable String ID, @RequestBody String campaign)
+            throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(Compaigns);
+        JsonNode jsonNode = objectMapper.readTree(campaign);
 
-        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
-        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
         String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
-        return "Compaigns" + id;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?campaign bd:hasCampaignsPostDate ?PostDate ." +
+                "?campaign bd:hasCampaignDetails ?Details ." +
+                "?campaign bd:hasCampaignTitle ?Title ." +
+                "INSERT { ?campaign bd:hasCampaignsPostDate \"" + postDate + "\"^^xsd:string ." +
+                " ?campaign bd:hasCampaignDetails \"" + details + "\"^^xsd:string ." +
+                " ?campaign bd:hasCampaignTitle \"" + title + "\"^^xsd:string ." +
+                "WHERE { ?campaign rdf:type bd:Campaign ." +
+                "?campaign bd:hasCampaignsPostDate ?PostDate ." +
+                "?campaign bd:hasCampaignDetails ?Details ." +
+                "?campaign bd:hasCampaignTitle ?Title ." +
+                "?campaign bd:hasCampaignID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Campaign runs successfully " + ID;
     }
 
     /*
@@ -815,20 +919,38 @@ public class Admin {
     }
 
     /*
-     * Edit the News in the Database
+     * Method to update News
+     * ID is passed as the first parameter
      */
-    @PutMapping("/api/admin/editNews/{id}")
-    public String editNews(@RequestBody String News, @PathVariable int id)
-            throws JsonMappingException, JsonProcessingException {
+    @PutMapping("/api/admin/news/NewsDetails/update/{ID}")
+    public String UpdateNewsDetails(@PathVariable String ID, @RequestBody String news)
+            throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(News);
+        JsonNode jsonNode = objectMapper.readTree(news);
 
         String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
-        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
 
-        return "News" + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?news bd:hasNewsPostDate ?PostDate ." +
+                "?news bd:hasNewsDetails ?Details ." +
+                "?news bd:hasNewsTitle ?Title ." +
+                "INSERT { ?news bd:hasNewsPostDate \"" + postDate + "\"^^xsd:string ." +
+                " ?news bd:hasNewsDetails \"" + details + "\"^^xsd:string ." +
+                " ?news bd:hasNewsTitle \"" + title + "\"^^xsd:string ." +
+                "WHERE { ?news rdf:type bd:News ." +
+                "?news bd:hasNewsPostDate ?PostDate ." +
+                "?news bd:hasNewsDetails ?Details ." +
+                "?news bd:hasNewsTitle ?Title ." +
+                "?news bd:hasNewsID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update News runs successfully " + ID;
     }
 
     /*
@@ -922,6 +1044,41 @@ public class Admin {
     }
 
     /*
+     * Method to update Advertisement
+     * ID is passed as the first parameter
+     */
+    @PutMapping("/api/admin/advertisement/AdvertisementDetails/update/{ID}")
+    public String UpdateAdvertisementDetails(@PathVariable String ID, @RequestBody String advertisement)
+            throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(advertisement);
+
+        String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
+        String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
+        String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?advertisement bd:hasAdvertisementPostDate ?PostDate ." +
+                "?advertisement bd:hasAdvertisementDetails ?Details ." +
+                "?advertisement bd:hasAdvertisementTitle ?Title ." +
+                "INSERT { ?advertisement bd:hasAdvertisementPostDate \"" + postDate + "\"^^xsd:string ." +
+                " ?advertisement bd:hasAdvertisementDetails \"" + details + "\"^^xsd:string ." +
+                " ?advertisement bd:hasAdvertisementTitle \"" + title + "\"^^xsd:string ." +
+                "WHERE { ?advertisement rdf:type bd:Advertisement ." +
+                "?advertisement bd:hasAdvertisementPostDate ?PostDate ." +
+                "?advertisement bd:hasAdvertisementDetails ?Details ." +
+                "?advertisement bd:hasAdvertisementTitle ?Title ." +
+                "?advertisement bd:hasAdvertisementID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Advertisement runs successfully " + ID;
+    }
+
+    /*
      * Add the Events in the Database
      */
     @PostMapping("/api/admin/addEvents")
@@ -965,17 +1122,39 @@ public class Admin {
     /*
      * Edit the Events in the Database
      */
-    @PutMapping("/api/admin/editEvents/{id}")
-    public String editEvents(@PathVariable String id, @RequestBody String Event) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(Event);
+    @PutMapping("/api/admin/event/eventDetails/update/{ID}")
+    public String UpdateEventDetails(@PathVariable String ID, @RequestBody String event)
+            throws IOException {
 
-        String name = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(event);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
         String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
 
-        return "Events" + id;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?event bd:hasEventName ?Name ." +
+                "?event bd:hasEventLocation ?Location ." +
+                "?event bd:hasEventMessage ?Message ." +
+                "?event bd:hasEventDateTime ?DateTime ." +
+                "INSERT { ?event bd:hasEventName \"" + name + "\"^^xsd:string ." +
+                " ?event bd:hasEventLocation \"" + location + "\"^^xsd:string ." +
+                " ?event bd:hasEventMessage \"" + message + "\"^^xsd:string ." +
+                " ?event bd:hasEventDateTime \"" + dateTime + "\"^^xsd:dateTime ." +
+                "WHERE { ?event rdf:type bd:Event ." +
+                "?event bd:hasEventName ?Name ." +
+                "?event bd:hasEventDateTime ?DateTime ." +
+                "?event bd:hasEventLocation ?Location ." +
+                "?event bd:hasEventMessage ?Message ." +
+                "?event bd:hasEventID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Event runs successfully " + ID;
     }
 
     /*

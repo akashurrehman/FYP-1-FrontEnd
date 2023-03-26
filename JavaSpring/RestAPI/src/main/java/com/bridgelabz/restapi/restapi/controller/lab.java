@@ -182,8 +182,8 @@ public class lab {
      * Route to edit the registered labs details
      * Passing the new data in the body of the request
      */
-    @PutMapping("/api/lab/RegisteredLabs/edit/{id}")
-    public String EditRegisteredLabs(@PathVariable String id, @RequestBody String LabData) throws IOException {
+    @PutMapping("/api/lab/RegisteredLabs/edit/{ID}")
+    public String EditRegisteredLabs(@PathVariable String ID, @RequestBody String LabData) throws IOException {
         /*
          * String name = "Kinza Lab";
          * String city = "Lahore";
@@ -200,6 +200,29 @@ public class lab {
         String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?lab bd:hasLabContactNo ?ContactNo ." +
+                "?lab bd:hasLabCity ?City ." +
+                "?lab bd:hasLabEmail ?Email ." +
+                "?lab bd:hasLabName ?Name ." +
+                "?lab bd:hasLabAddress ?Address ." +
+                "INSERT { ?lab bd:hasLabContactNo \"" + contactNo + "\"^^xsd:string ." +
+                " ?lab bd:hasLabCity \"" + city + "\"^^xsd:string ." +
+                " ?lab bd:hasLabEmail \"" + email + "\"^^xsd:string ." +
+                " ?lab bd:hasLabName \"" + name + "\"^^xsd:string ." +
+                " ?lab bd:hasLabAddress \"" + address + "\"^^xsd:string ." +
+                "WHERE { ?lab rdf:type bd:Lab ." +
+                "?lab bd:hasLabContactNo ?ContactNo ." +
+                "?lab bd:hasLabName ?Name ." +
+                "?lab bd:hasLabCity ?City ." +
+                "?lab bd:hasLabEmail ?Email ." +
+                "?lab bd:hasLabAddress ?Address ." +
+                "?lab bd:hasLabID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
 
         return "Edit Lab Data" + LabData;
     }

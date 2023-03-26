@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -192,9 +190,9 @@ public class User {
      * @param id
      * User can edit the information such as Email, Username and password
      */
-    @PutMapping("/api/users/edit/{id}")
-    public String editUser(@RequestBody String User, @PathVariable String id)
-            throws JsonMappingException, JsonProcessingException {
+    @PutMapping("/api/users/edit/{ID}")
+    public String editUser(@RequestBody String User, @PathVariable String ID)
+            throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(User);
 
@@ -206,6 +204,38 @@ public class User {
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
         String dob = jsonNode.has("dob") ? jsonNode.get("dob").asText() : null;
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?person bd:hasPersonCity ?City ." +
+                "?person bd:hasPersonContactNo ?ContactNo ." +
+                "?person bd:hasPersonAddress ?Address ." +
+                "?person bd:hasPersonFullName ?FullName ." +
+                "?person bd:hasPersonGender ?Gender ." +
+                "?person bd:hasPersonEmail ?Email ." +
+                "?person bd:hasPersonDateOfBirth ?DateOfBirth ." +
+                "?person bd:hasPersonBloodGroup ?BloodGroup ." +
+                "INSERT { ?person bd:hasPersonCity \"" + city + "\"^^xsd:string ." +
+                " ?person bd:hasPersonContactNo \"" + contactNo + "\"^^xsd:string ." +
+                " ?person bd:hasPersonFullName \"" + fullName + "\"^^xsd:string ." +
+                " ?person bd:hasPersonGender \"" + gender + "\"^^xsd:string ." +
+                " ?person bd:hasPersonEmail \"" + email + "\"^^xsd:string ." +
+                " ?person bd:hasPersonDateOfBirth \"" + dob + "\"^^xsd:string ." +
+                " ?person bd:hasPersonBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
+                " ?person bd:hasPersonAddress \"" + address + "\"^^xsd:string ." +
+                "WHERE { ?person rdf:type bd:Person ." +
+                "?person bd:hasPersonCity ?City ." +
+                "?person bd:hasPersonContactNo ?ContactNo ." +
+                "?person bd:hasPersonFullName ?FullName ." +
+                "?person bd:hasPersonGender ?Gender ." +
+                "?person bd:hasPersonEmail ?Email ." +
+                "?person bd:hasPersonDateOfBirth ?DateOfBirth ." +
+                "?person bd:hasPersonBloodGroup ?BloodGroup ." +
+                "?person bd:hasPersonAddress ?Address ." +
+                "?person bd:hasPersonID ?ID ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
         return "Edit Sparql QUery runs successfully" + User;
     }
     /*
@@ -244,9 +274,55 @@ public class User {
      * Edit the Donor Information who want to donate blood by passing ID
      * Pass Information such as Blood Group, Age
      */
-    @PutMapping("/api/users/donate/{id}")
-    public String editDonate(@RequestBody String user, @PathVariable String id) {
-        return "User: " + id;
+    @PutMapping("/api/user/bloodDonors/Donors/update/{ID}")
+    public String UpdateDonorInformation(@PathVariable String ID, @RequestBody String bloodDonation)
+            throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(bloodDonation);
+
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorCity ?City ." +
+                "?donations bd:hasDonorGender ?Gender ." +
+                "?donations bd:hasDonorLocation ?Location ." +
+                "?donations bd:hasDonorContactNo ?ContactNo ." +
+                "?donations bd:hasDonorBloodGroup ?BloodGroup ." +
+                "?donations bd:hasDonorEmail ?Email ." +
+                "?donations bd:hasDonorMessage ?Message ." +
+                "INSERT { ?donations bd:hasDonorName \"" + name + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorEmail \"" + email + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorGender \"" + gender + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorLocation \"" + location + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorMessage \"" + message + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorContactNo \"" + contactNo + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorCity \"" + city + "\"^^xsd:string ." +
+                "WHERE { ?donations rdf:type bd:Blood_Donation ." +
+                "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorID ?ID ." +
+                "?donations bd:hasDonorEmail ?Email ." +
+                "?donations bd:hasDonorGender ?Gender ." +
+                "?donations bd:hasDonorLocation ?Location ." +
+                "?donations bd:hasDonorMessage ?Message ." +
+                "?donations bd:hasDonorBloodGroup ?BloodGroup ." +
+                "?donations bd:hasDonorContactNo ?Contact ." +
+                "?donations bd:hasDonorCity ?City ." +
+                "filter(?ID = \"" + ID + "\")" +
+                "}";
+        UpdateSparql(queryString);
+        return "Update Blood Donation runs successfully " + ID;
     }
 
     /*
@@ -403,7 +479,7 @@ public class User {
      */
     @PostMapping("/api/user/bloodRequest/BloodRequestDetails/add")
     public String AddBloodRequestDetails(@RequestBody String bloodRequest) throws IOException {
-        
+
         System.out.print(bloodRequest);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -422,9 +498,9 @@ public class User {
         String individualId = "Request_" + System.currentTimeMillis();
         System.out.print(individualId);
         String query = String.format(
-            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
-            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
                         "bd:" + individualId + " rdf:type bd:Blood_Request ;\n" +
                         "                       bd:hasRequestMakerEmail \"%s\"^^xsd:string ;\n" +
@@ -439,7 +515,7 @@ public class User {
                         "                       bd:hasRequestMakerLocation \"%s\"^^xsd:string ;\n" +
                         "}",
                 email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location);
-        
+
         // Call the InsertSparql function with the query
         InsertSparql(query);
 
@@ -454,7 +530,7 @@ public class User {
     @PutMapping("/api/user/bloodRequest/BloodRequestDetails/update/{ID}")
     public String UpdateBloodRequestDetails(@PathVariable String ID, @RequestBody String bloodRequest)
             throws IOException {
-        
+
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(bloodRequest);
 
@@ -467,17 +543,15 @@ public class User {
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
         String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
-
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?requests bd:hasRequestMakerName ?Name ." +
-                "?requests bd:hasRequestMakerID ?Id ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
                 "?requests bd:hasRequestMakerLocation ?Location ." +
                 "?requests bd:hasRequestMakerMessage ?Message ." +
-                "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+                "?requests bd:hasRequestMakerBloodGroup ?BloodGroup ." +
                 "?requests bd:hasRequestMakerContactNo ?Contact ." +
                 "?requests bd:hasRequestMakerCity ?City ." +
                 "?requests bd:hasRequestMakerHospital ?Hospital } " +
@@ -497,7 +571,7 @@ public class User {
                 "?requests bd:hasRequestMakerGender ?Gender ." +
                 "?requests bd:hasRequestMakerLocation ?Location ." +
                 "?requests bd:hasRequestMakerMessage ?Message ." +
-                "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+                "?requests bd:hasRequestMakerBloodGroup ?BloodGroup ." +
                 "?requests bd:hasRequestMakerContactNo ?Contact ." +
                 "?requests bd:hasRequestMakerCity ?City ." +
                 "?requests bd:hasRequestMakerHospital ?Hospital ." +
