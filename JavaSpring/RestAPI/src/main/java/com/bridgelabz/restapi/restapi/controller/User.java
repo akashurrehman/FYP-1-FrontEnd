@@ -471,7 +471,6 @@ public class User {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?requests bd:hasRequestMakerName ?Name ." +
-                "?requests bd:hasRequestMakerID ?Id ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
                 "?requests bd:hasRequestMakerLocation ?Location ." +
