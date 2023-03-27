@@ -243,7 +243,7 @@ public class User {
     /*
      * Method to update Blood Donation
      * ID is passed as the first parameter
-     */
+    */
     @PutMapping("/api/user/bloodDonation/BloodDonationDetails/update/{ID}")
     public String UpdateBloodDonationDetails(@PathVariable String ID, @RequestBody String bloodDonation)
             throws IOException {
