@@ -58,13 +58,13 @@ public class Admin {
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
 
-        String individualId = "bd:Sponsor_" + System.currentTimeMillis();
+        String individualId = "Sponsor_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Sponsor ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Sponsor ;\n" +
                         "                       bd:hasSponsorMessage \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasSponsorID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasSponsorName \"%s\"^^xsd:string ;\n" +
@@ -195,13 +195,13 @@ public class Admin {
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
 
-        String individualId = "bd:Financial_Donor_" + System.currentTimeMillis();
+        String individualId = "Financial_Donor_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Financial_Donation ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Financial_Donation ;\n" +
                         "                       bd:hasFinancialDonorContactNo \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFinancialDonorMessage \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFinancialDonorName \"%s\"^^xsd:string ;\n" +
@@ -293,6 +293,7 @@ public class Admin {
 
                 "SELECT * WHERE {" +
                 "?financial_donations rdf:type bd:Financial_Donation ." +
+                "?financial_donations bd:hasFinancialDonationID ?ID ." +
                 "?financial_donations bd:hasFinancialDonorName ?Name ." +
                 "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
                 "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
@@ -321,19 +322,20 @@ public class Admin {
     /*
      * Get the Financial Donations in the Database by ID
      */
-    @GetMapping("/api/admin/getFinancialDonation/{Name}")
-    public ResponseEntity<String> getFinancialDonationByName(@PathVariable String Name) {
+    @GetMapping("/api/admin/getFinancialDonation/{ID}")
+    public ResponseEntity<String> getFinancialDonationByName(@PathVariable String ID) {
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
                 "?financial_donations rdf:type bd:Financial_Donation ." +
+                "?financial_donations bd:hasFinancialDonationID ?ID ." +
                 "?financial_donations bd:hasFinancialDonorName ?Name ." +
                 "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
                 "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
                 "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
                 "?financial_donations bd:hasFinancialDonorMessage ?Message ." +
-                "filter(?Name = \"" + Name + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
 
                 "}";
 
@@ -348,7 +350,7 @@ public class Admin {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Name: " + Name + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -374,13 +376,13 @@ public class Admin {
         String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
-        String individualId = "bd:Job_Post_" + System.currentTimeMillis();
+        String individualId = "Job_Post_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Job_Post ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Job_Post ;\n" +
                         "                       bd:hasJobPostID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasJobPostDetails \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasJobPostTitle \"%s\"^^xsd:string ;\n" +
@@ -463,6 +465,7 @@ public class Admin {
 
                 "SELECT * WHERE {" +
                 "?jobs rdf:type bd:Job_Post ." +
+                "?jobs bd:hasJobPostID ?ID ." +
                 "?jobs bd:hasJobPostTitle ?Title ." +
                 "?jobs bd:hasJobPostDetails ?Details ." +
                 "?jobs bd:hasJobPostPostingDate ?Date " +
@@ -489,8 +492,8 @@ public class Admin {
     /*
      * Get the Job posts by ID
      */
-    @GetMapping("/api/admin/getJobPost/{title}")
-    public ResponseEntity<String> getJobPostById(@PathVariable String title) {
+    @GetMapping("/api/admin/getJobPost/{ID}")
+    public ResponseEntity<String> getJobPostById(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -498,9 +501,10 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?jobs rdf:type bd:Job_Post ." +
                 "?jobs bd:hasJobPostTitle ?Title ." +
+                "?jobs bd:hasJobPostID ?ID ." +
                 "?jobs bd:hasJobPostDetails ?Details ." +
                 "?jobs bd:hasJobPostPostingDate ?Date " +
-                "filter(?Title = \"" + title + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -514,7 +518,7 @@ public class Admin {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using title: " + title + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -537,13 +541,13 @@ public class Admin {
         String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
-        String individualId = "bd:FAQ_" + System.currentTimeMillis();
+        String individualId = "FAQ_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Frequently_Asked_Question ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Frequently_Asked_Question ;\n" +
                         "                       bd:hasFAQTitle \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFAQDetails \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFAQID \"%s\"^^xsd:string ;\n" +
@@ -616,6 +620,7 @@ public class Admin {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "SELECT * WHERE {" +
                 "?faqs rdf:type bd:Frequently_Asked_Question ." +
+                "?faqs bd:hasFAQID ?ID ." +
                 "?faqs bd:hasFAQTitle ?Title ." +
                 "?faqs bd:hasFAQDetails ?Details ." +
                 "}";
@@ -641,16 +646,17 @@ public class Admin {
     /*
      * Get the Frequently Asked Questions by ID
      */
-    @GetMapping("/api/admin/getFAQ/{title}")
-    public ResponseEntity<String> getFAQById(@PathVariable String title) {
+    @GetMapping("/api/admin/getFAQ/{ID}")
+    public ResponseEntity<String> getFAQById(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "SELECT * WHERE {" +
                 "?faqs rdf:type bd:Frequently_Asked_Question ." +
+                "?faqs bd:hasFAQID ?ID ." +
                 "?faqs bd:hasFAQTitle ?Title ." +
                 "?faqs bd:hasFAQDetails ?Details ." +
-                "filter(?Title = " + title + ")" +
+                "filter(?ID = " + ID + ")" +
                 "}";
 
         // set the response headers
@@ -664,7 +670,7 @@ public class Admin {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using title: " + title + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -731,13 +737,13 @@ public class Admin {
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
         String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
 
-        String individualId = "bd:Campaign_" + System.currentTimeMillis();
+        String individualId = "Campaign_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Campaign ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Campaign ;\n" +
                         "                       bd:hasCampaignTitle \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCampaignDetails \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCampaignID \"%s\"^^xsd:string ;\n" +
@@ -821,6 +827,7 @@ public class Admin {
 
                 "SELECT * WHERE {" +
                 "?campaigns rdf:type bd:Campaign ." +
+                "?campaigns bd:hasCampaignID ?ID ." +
                 "?campaigns bd:hasCampaignTitle ?Title ." +
                 "?campaigns bd:hasCampaignDetails ?Details ." +
                 "?campaigns bd:hasCampaignsPostDate ?Date ." +
@@ -847,18 +854,19 @@ public class Admin {
     /*
      * Get the Compaign by ID
      */
-    @GetMapping("/api/admin/getCompaigns/{title}")
-    public ResponseEntity<String> getCompaignsById(@PathVariable String title) {
+    @GetMapping("/api/admin/getCompaigns/{ID}")
+    public ResponseEntity<String> getCompaignsById(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
                 "?campaigns rdf:type bd:Campaign ." +
+                "?campaigns bd:hasCampaignID ?ID ." +
                 "?campaigns bd:hasCampaignTitle ?Title ." +
                 "?campaigns bd:hasCampaignDetails ?Details ." +
                 "?campaigns bd:hasCampaignsPostDate ?Date ." +
-                "filter(?Title = \"" + title + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -867,12 +875,12 @@ public class Admin {
 
         String result = ReadSparqlMethod(queryString);
 
-        // Check if title is found
+        // Check if ID is found
         JSONObject jsonObj = new JSONObject(result);
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Title: " + title + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -897,13 +905,13 @@ public class Admin {
         String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
-        String individualId = "bd:News_" + System.currentTimeMillis();
+        String individualId = "News_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:News ;\n" +
+                        "bd:" + individualId + " rdf:type bd:News ;\n" +
                         "                       bd:hasNewsPostDate \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasNewsTitle \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasNewsDetails \"%s\"^^xsd:string ;\n" +
@@ -984,6 +992,7 @@ public class Admin {
 
                 "SELECT * WHERE {" +
                 "?news rdf:type bd:News ." +
+                "?news bd:hasNewsID ?ID ." +
                 "?news bd:hasNewsTitle ?Title ." +
                 "?news bd:hasNewsDetails ?Details ." +
                 "?news bd:hasNewsPostDate ?Date" +
@@ -1009,20 +1018,21 @@ public class Admin {
     }
 
     /*
-     * Get the News by title
+     * Get the News by ID
      */
-    @GetMapping("/api/admin/getNews/{title}")
-    public ResponseEntity<String> getNewsById(@PathVariable String title) {
+    @GetMapping("/api/admin/getNews/{ID}")
+    public ResponseEntity<String> getNewsById(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
                 "?news rdf:type bd:News ." +
+                "?news bd:hasNewsID ?ID ." +
                 "?news bd:hasNewsTitle ?Title ." +
                 "?news bd:hasNewsDetails ?Details ." +
                 "?news bd:hasNewsPostDate ?Date" +
-                "filter(?Title = \"" + title + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -1031,12 +1041,12 @@ public class Admin {
 
         String result = ReadSparqlMethod(queryString);
 
-        // Check if title is found
+        // Check if ID is found
         JSONObject jsonObj = new JSONObject(result);
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using title: " + title + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -1097,13 +1107,13 @@ public class Admin {
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
         String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
 
-        String individualId = "bd:Event_" + System.currentTimeMillis();
+        String individualId = "Event_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Event ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Event ;\n" +
                         "                       bd:hasEventName \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasEventID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasEventLocation \"%s\"^^xsd:string ;\n" +
@@ -1188,9 +1198,10 @@ public class Admin {
 
                 "SELECT * WHERE {" +
                 "?events rdf:type bd:Events ." +
-                "?events bd:hasEventsTitle ?Title ." +
-                "?events bd:hasEventsDetails ?Details ." +
-                "?events bd:hasEventsPostDate ?Date" +
+                "?events bd:hasEventID ?ID ." +
+                "?events bd:hasEventTitle ?Title ." +
+                "?events bd:hasEventDetails ?Details ." +
+                "?events bd:hasEventPostDate ?Date" +
                 "}";
 
         // set the response headers
@@ -1215,18 +1226,19 @@ public class Admin {
     /*
      * Get the Events by title
      */
-    @GetMapping("/api/admin/getEvents/{title}")
-    public ResponseEntity<String> getEventsById(@PathVariable String title) {
+    @GetMapping("/api/admin/getEvents/{ID}")
+    public ResponseEntity<String> getEventsById(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
                 "?events rdf:type bd:Events ." +
-                "?events bd:hasEventsTitle ?Title ." +
-                "?events bd:hasEventsDetails ?Details ." +
-                "?events bd:hasEventsPostDate ?Date" +
-                "filter(?Title = \"" + title + "\")" +
+                "?events bd:hasEventTitle ?Title ." +
+                "?events bd:hasEventID ?ID ." +
+                "?events bd:hasEventDetails ?Details ." +
+                "?events bd:hasEventPostDate ?Date" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -1240,7 +1252,7 @@ public class Admin {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Title: " + title + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers

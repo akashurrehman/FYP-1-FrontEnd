@@ -155,13 +155,13 @@ public class lab {
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
 
-        String individualId = "bd:Lab_" + System.currentTimeMillis();
+        String individualId = "Lab_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Lab ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Lab ;\n" +
                         "                       bd:hasLabName \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasLabCity \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasLabAddress \"%s\"^^xsd:string ;\n" +

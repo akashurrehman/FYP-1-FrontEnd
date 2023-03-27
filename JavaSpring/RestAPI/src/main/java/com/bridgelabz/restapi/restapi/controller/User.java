@@ -101,13 +101,14 @@ public class User {
      * ID is passed in the URL
      * Through ID we can find the User Information
      */
-    @GetMapping("/api/users/registration/{email}")
-    public ResponseEntity<String> Singleuser(@PathVariable String email) {
+    @GetMapping("/api/users/registration/{ID}")
+    public ResponseEntity<String> Singleuser(@PathVariable String ID) {
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "SELECT * WHERE {" +
                 "?persons rdf:type bd:Person ." +
                 "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
                 "?persons bd:hasPersonContactNo ?ContactNo ." +
                 "?persons bd:hasPersonAddress ?Address ." +
@@ -115,7 +116,7 @@ public class User {
                 "?persons bd:hasPersonDateOfBirth ?DOB ." +
                 "?persons bd:hasPersonGender ?Gender ." +
                 "?persons bd:hasPersonCity ?City ." +
-                "filter(?Email = \"" + email + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -124,12 +125,12 @@ public class User {
 
         String result = ReadSparqlMethod(queryString);
 
-        // Check if Email is found
+        // Check if ID is found
         JSONObject jsonObj = new JSONObject(result);
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Email: " + email + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -156,13 +157,13 @@ public class User {
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
         String dob = jsonNode.has("dob") ? jsonNode.get("dob").asText() : null;
 
-        String individualId = "bd:Person_" + System.currentTimeMillis();
+        String individualId = "Person_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Person ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Person ;\n" +
                         "   rdf:type bd:Donor ;\n" +
                         "   rdf:type bd:Request_Maker ;\n" +
                         "                       bd:hasPersonFullName \"%s\"^^xsd:string ;\n" +

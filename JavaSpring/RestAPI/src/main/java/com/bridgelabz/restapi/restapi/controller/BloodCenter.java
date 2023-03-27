@@ -59,6 +59,7 @@ public class BloodCenter {
                 "SELECT * WHERE {" +
                 "?centres rdf:type bd:Blood_Donation_Centre ." +
                 "?centres bd:hasCentreName ?Name ." +
+                "?centres bd:hasCentreID ?ID ." +
                 "?centres bd:hasCentreEmail ?Email ." +
                 "?centres bd:hasCentreContactNo ?ContactNo ." +
                 "?centres bd:hasCentreLocation ?Location ." +
@@ -88,8 +89,8 @@ public class BloodCenter {
     }
 
     /* Route to Get Data of Single blood Donation Center by passing License */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/{License}")
-    public ResponseEntity<String> Singlecenter(@PathVariable String License) {
+    @GetMapping("/api/bloodCenter/RegisteredCenters/{ID}")
+    public ResponseEntity<String> Singlecenter(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -97,6 +98,7 @@ public class BloodCenter {
                 "SELECT * WHERE {" +
                 "?centres rdf:type bd:Blood_Donation_Centre ." +
                 "?centres bd:hasCentreName ?Name ." +
+                "?centres bd:hasCentreID ?ID ." +
                 "?centres bd:hasCentreEmail ?Email ." +
                 "?centres bd:hasCentreContactNo ?ContactNo ." +
                 "?centres bd:hasCentreLocation ?Location ." +
@@ -105,7 +107,7 @@ public class BloodCenter {
                 "?centres bd:hasCentreLicenseNo ?License ." +
                 "?centres bd:hasCentreCity ?City ." +
                 "?centres bd:hasCentreOpeningDays ?Opening_Days ." +
-                "filter(?License = \"" + License + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -119,7 +121,7 @@ public class BloodCenter {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using License: " + License + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -153,13 +155,13 @@ public class BloodCenter {
         String timings = jsonNode.has("timings") ? jsonNode.get("timings").asText() : null;
         String category = jsonNode.has("category") ? jsonNode.get("category").asText() : null;
 
-        String individualId = "bd:Centre_" + System.currentTimeMillis();
+        String individualId = "Centre_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Blood_Donation_Centre ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Blood_Donation_Centre ;\n" +
                         "                       bd:hasCentreCategory \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCentreOpeningDays \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCentreEmail \"%s\"^^xsd:string ;\n" +
@@ -290,13 +292,13 @@ public class BloodCenter {
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
 
-        String individualId = "bd:Donation_" + System.currentTimeMillis();
+        String individualId = "Donation_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Blood_Donation ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Blood_Donation ;\n" +
                         "                       bd:hasDonorName \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorCity \"%s\"^^xsd:string ;\n" +
@@ -396,8 +398,8 @@ public class BloodCenter {
      * By specific id
      * Information Includes blood details and user details
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/getDonorInfo/{Email}")
-    public ResponseEntity<String> getDonorInfo(@PathVariable String Email) {
+    @GetMapping("/api/bloodCenter/RegisteredCenters/getDonorInfo/{ID}")
+    public ResponseEntity<String> getDonorInfo(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -405,6 +407,7 @@ public class BloodCenter {
                 "SELECT * WHERE {" +
                 "?donations rdf:type bd:Blood_Donation ." +
                 "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorID ?ID ." +
                 "?donations bd:hasDonorEmail ?Email ." +
                 "?donations bd:hasDonorGender ?Gender ." +
                 "?donations bd:hasDonorLocation ?Location ." +
@@ -413,7 +416,7 @@ public class BloodCenter {
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
                 "?donations bd:hasDonorDate ?Date ." +
-                "filter(?Email = \"" + Email + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -422,12 +425,12 @@ public class BloodCenter {
 
         String result = ReadSparqlMethod(queryString);
 
-        // Check if Email is found
+        // Check if ID is found
         JSONObject jsonObj = new JSONObject(result);
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Email: " + Email + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
@@ -447,6 +450,7 @@ public class BloodCenter {
                 "SELECT * WHERE {" +
                 "?donations rdf:type bd:Blood_Donation ." +
                 "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorID ?ID ." +
                 "?donations bd:hasDonorEmail ?Email ." +
                 "?donations bd:hasDonorGender ?Gender ." +
                 "?donations bd:hasDonorLocation ?Location ." +
@@ -484,6 +488,7 @@ public class BloodCenter {
 
                 "SELECT * WHERE {" +
                 "?stocks rdf:type bd:Blood_Stock ." +
+                "?stocks bd:hasBloodStockID ?ID ." +
                 "?stocks bd:hasBloodStockBloodGroup ?Blood_Group ." +
                 "?stocks bd:hasBloodStockNoOfBags ?No_Of_Bags ." +
                 "?stocks bd:hasBloodStockAddedDate ?Gender ." +
@@ -518,6 +523,7 @@ public class BloodCenter {
                 "SELECT * WHERE {" +
                 "?stocks rdf:type bd:Blood_Stock ." +
                 "?stocks bd:hasBloodStockBloodGroup ?Blood_Group ." +
+                "?stocks bd:hasBloodStockID ?ID ." +
                 "?stocks bd:hasBloodStockNoOfBags ?No_Of_Bags ." +
                 "?stocks bd:hasBloodStockAddedDate ?Gender ." +
                 "filter(?Blood_Group = \"" + Blood_Group + "\")" +
@@ -560,13 +566,13 @@ public class BloodCenter {
         String addedDate = jsonNode.has("addedDate") ? jsonNode.get("addedDate").asText() : null;
         String noOfBags = jsonNode.has("noOfBags") ? jsonNode.get("noOfBags").asText() : null;
 
-        String individualId = "bd:Blood_Stock_" + System.currentTimeMillis();
+        String individualId = "Blood_Stock_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Blood_Stock ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Blood_Stock ;\n" +
                         "                       bd:hasBloodStockID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasBloodStockBloodGroup \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:string ;\n" +
@@ -665,13 +671,13 @@ public class BloodCenter {
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
         String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
 
-        String individualId = "bd:Request_" + System.currentTimeMillis();
+        String individualId = "Request_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Blood_Request ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Blood_Request ;\n" +
                         "                       bd:hasRequestMakerEmail \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasRequestMakerHospital \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasRequestMakerCity \"%s\"^^xsd:string ;\n" +
@@ -783,6 +789,7 @@ public class BloodCenter {
 
                 "SELECT * WHERE {" +
                 "?requests rdf:type bd:Blood_Request ." +
+                "?requests bd:hasRequestMakerID ?ID ." +
                 "?requests bd:hasRequestMakerName ?Name ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
@@ -818,14 +825,15 @@ public class BloodCenter {
      * @param requestID
      * 
      */
-    @GetMapping("/api/bloodCenter/RegisteredCenters/getRequest/{Email}")
-    public ResponseEntity<String> getRequest(@PathVariable String Email) {
+    @GetMapping("/api/bloodCenter/RegisteredCenters/getRequest/{ID}")
+    public ResponseEntity<String> getRequest(@PathVariable String ID) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
                 "?requests rdf:type bd:Blood_Request ." +
+                "?requests bd:hasRequestMakerID ?ID ." +
                 "?requests bd:hasRequestMakerName ?Name ." +
                 "?requests bd:hasRequestMakerEmail ?Email ." +
                 "?requests bd:hasRequestMakerGender ?Gender ." +
@@ -835,7 +843,7 @@ public class BloodCenter {
                 "?requests bd:hasRequestMakerContactNo ?Contact ." +
                 "?requests bd:hasRequestMakerCity ?City ." +
                 "?requests bd:hasRequestMakerHospital ?Hospital ." +
-                "filter(?Email = \"" + Email + "\")" +
+                "filter(?ID = \"" + ID + "\")" +
                 "}";
 
         // set the response headers
@@ -849,7 +857,7 @@ public class BloodCenter {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Email: " + Email + "\"}";
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + ID + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers
