@@ -1197,11 +1197,12 @@ public class Admin {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
-                "?events rdf:type bd:Events ." +
+                "?events rdf:type bd:Event ." +
                 "?events bd:hasEventID ?ID ." +
-                "?events bd:hasEventTitle ?Title ." +
-                "?events bd:hasEventDetails ?Details ." +
-                "?events bd:hasEventPostDate ?Date" +
+                "?events bd:hasEventName ?Name ." +
+                "?events bd:hasEventLocation ?Location ." +
+                "?events bd:hasEventMessage ?Message ." +
+                "?events bd:hasEventDateTime ?DateTime" +
                 "}";
 
         // set the response headers
@@ -1233,11 +1234,12 @@ public class Admin {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
-                "?events rdf:type bd:Events ." +
-                "?events bd:hasEventTitle ?Title ." +
+                "?events rdf:type bd:Event ." +
                 "?events bd:hasEventID ?ID ." +
-                "?events bd:hasEventDetails ?Details ." +
-                "?events bd:hasEventPostDate ?Date" +
+                "?events bd:hasEventName ?Name ." +
+                "?events bd:hasEventDateTime ?DateTime ." +
+                "?events bd:hasEventMessage ?Message ." +
+                "?events bd:hasEventLocation ?Location ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
 
@@ -1262,7 +1264,7 @@ public class Admin {
     static void InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1290,7 +1292,7 @@ public class Admin {
 
         // Write the updated model to a file
         FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         model.write(out, "RDF/XML-ABBREV");
         out.close();
 
@@ -1300,7 +1302,7 @@ public class Admin {
 
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         //
         // create a model from the RDF file
@@ -1336,7 +1338,7 @@ public class Admin {
     /* Method for the Funtionality of Deleting data on the basis of query */
     static void DeleteSparql(String query) throws IOException {
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1363,7 +1365,7 @@ public class Admin {
         UpdateAction.execute(updateRequest, model);
         // Write the updated model to a file
         FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         model.write(out, "RDF/XML-ABBREV");
         out.close();
     }
@@ -1371,7 +1373,7 @@ public class Admin {
     /* Method for Funtionality of Updating Data using sparql query */
     static void UpdateSparql(String queryString) throws IOException {
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1399,7 +1401,7 @@ public class Admin {
 
         // Write the updated model to a file
         FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         model.write(out, "RDF/XML-ABBREV");
         out.close();
 
