@@ -23,27 +23,8 @@ const BloodStock=()=> {
     borderRadius: "50px",
     display: "inline-block",
 };
-const [bloodStocks, setBloodStocks] = useState([]);
+//const [bloodStocks, setBloodStocks] = useState([]);
 
-useEffect(() => {
-  axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails')
-    .then((response) => {
-      const data = JSON.parse(response);
-      const stocks = data.results.bindings.map((stock) => {
-        return {
-          Blood_Group: stock.Blood_Group.value,
-          No_Of_Bags: stock.No_Of_Bags.value,
-          Gender: stock.Gender.value
-        };
-      });
-      console.log(stocks); 
-      setBloodStocks(stocks);
-      console.log("Blood stock details are:",stocks); 
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}, []);
 
 
   const [show, setShow] = useState(false);
@@ -232,6 +213,9 @@ useEffect(() => {
                 </Card>
             </Col>
         </CardGroup>
+        <>
+        
+        </>
         </Col>
       </Row>
     </Container>
