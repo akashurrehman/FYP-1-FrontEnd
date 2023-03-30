@@ -231,7 +231,7 @@ public class lab {
     }
 
     @DeleteMapping("/api/lab/RegisteredLabs/delete/{id}")
-    public String DeleteLabDetails(@PathVariable String id) throws IOException {
+    public ResponseEntity<String> DeleteLabDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
@@ -239,12 +239,12 @@ public class lab {
                 "  ?individual rdf:type bd:Lab ;\n" +
                 "                            bd:hasLabID \"" + id + "\" ;" +
                 "}";
-
-        // Call the InsertSparql function with the query
-        DeleteSparql(queryString);
-
-        // Return a success message
-        return "Delete Sparql QUery runs successfully";
+        boolean success = DeleteSparql(queryString);
+        if (success) {
+            return ResponseEntity.ok("Deletion successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deletion failed");
+        }
     }
 
     static boolean InsertSparql(String query) throws IOException {

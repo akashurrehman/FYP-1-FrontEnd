@@ -250,7 +250,7 @@ public class User {
 
     @DeleteMapping("/api/users/delete/{id}")
 
-    public String DeletePersonDetails(@PathVariable String id) throws IOException {
+    public ResponseEntity<String> DeletePersonDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
@@ -258,12 +258,13 @@ public class User {
                 "  ?individual rdf:type bd:Person ;\n" +
                 "                            bd:hasPersonID \"" + id + "\" ;" +
                 "}";
+        boolean success = DeleteSparql(queryString);
+        if (success) {
+            return ResponseEntity.ok("Deletion successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deletion failed");
+        }
 
-        // Call the Delete function with the query
-        DeleteSparql(queryString);
-
-        // Return a success message
-        return "Delete Sparql QUery runs successfully";
     }
 
     /*
@@ -334,7 +335,7 @@ public class User {
      * Delete the Information of Donors who want to donate blood by passing ID
      */
     @DeleteMapping("/api/user/deleteBloodDonation/bloodDonationDetails/delete/{id}")
-    public String DeleteBloodDonationDetails(@PathVariable String id) throws IOException {
+    public ResponseEntity<String> DeleteBloodDonationDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
@@ -342,12 +343,12 @@ public class User {
                 "  ?individual rdf:type bd:Blood_Donation ;\n" +
                 "                            bd:hasDonorID \"" + id + "\" ;" +
                 "}";
-
-        // Call the InsertSparql function with the query
-        DeleteSparql(queryString);
-
-        // Return a success message
-        return "Delete Sparql QUery runs successfully";
+        boolean success = DeleteSparql(queryString);
+        if (success) {
+            return ResponseEntity.ok("Deletion successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deletion failed");
+        }
     }
 
     /*
@@ -547,7 +548,7 @@ public class User {
      * Delete Blood Requests entered by Users
      */
     @DeleteMapping("/api/user/bloodRequest/BloodRequestDetails/delete/{id}")
-    public String DeleteBloodRequestDetails(@PathVariable String id) throws IOException {
+    public ResponseEntity<String> DeleteBloodRequestDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
@@ -555,12 +556,12 @@ public class User {
                 "  ?individual rdf:type bd:Blood_Request ;\n" +
                 "                            bd:hasRequestMakerID \"" + id + "\" ;" +
                 "}";
-
-        // Call the InsertSparql function with the query
-        DeleteSparql(queryString);
-
-        // Return a success message
-        return "Delete Sparql QUery runs successfully";
+        boolean success = DeleteSparql(queryString);
+        if (success) {
+            return ResponseEntity.ok("Deletion successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Deletion failed");
+        }
     }
 
     /*
