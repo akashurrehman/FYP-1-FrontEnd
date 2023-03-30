@@ -142,7 +142,7 @@ public class User {
      * Users have to enter information such as Email, Username and password
      */
     @PostMapping("/api/user/registration/add")
-    public String AddPersonDetails(@RequestBody String User) throws IOException {
+    public ResponseEntity<String> AddPersonDetails(@RequestBody String User) throws IOException {
         System.out.print(User);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -179,10 +179,14 @@ public class User {
                 fullName, city, bloodGroup, address, contactNo, email, gender, dob, individualId);
 
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -255,7 +259,7 @@ public class User {
                 "                            bd:hasPersonID \"" + id + "\" ;" +
                 "}";
 
-        // Call the InsertSparql function with the query
+        // Call the Delete function with the query
         DeleteSparql(queryString);
 
         // Return a success message
@@ -433,7 +437,7 @@ public class User {
      * Can by add by Users or centers
      */
     @PostMapping("/api/user/bloodRequest/BloodRequestDetails/add")
-    public String AddBloodRequestDetails(@RequestBody String bloodRequest) throws IOException {
+    public ResponseEntity<String> AddBloodRequestDetails(@RequestBody String bloodRequest) throws IOException {
 
         System.out.print(bloodRequest);
 
@@ -470,12 +474,15 @@ public class User {
                         "                       bd:hasRequestMakerLocation \"%s\"^^xsd:string ;\n" +
                         "}",
                 email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location);
-
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -727,7 +734,7 @@ public class User {
     /*
      * Method for the Functionality of Inserting data on the basis of query
      */
-    static void InsertSparql(String query) throws IOException {
+    static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
@@ -749,27 +756,32 @@ public class User {
                 }
             }
         }
+        try {
+            // Create the update execution object and execute the query
+            UpdateAction.parseExecute(query, model);
 
-        // Create the update execution object and execute the query
-        UpdateAction.parseExecute(query, model);
+            // Print the updated model
+            System.out.println("Updated model:");
 
-        // Print the updated model
-        System.out.println("Updated model:");
+            // Write the updated model to a file
+            FileOutputStream out = new FileOutputStream(
+                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            model.write(out, "RDF/XML-ABBREV");
+            out.close();
 
-        // Write the updated model to a file
-        FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-        model.write(out, "RDF/XML-ABBREV");
-        out.close();
-
+            return true; // data insertion successful
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // data insertion unsuccessful
+        }
     }
 
     /*
      * Method for the Functionality of Deleting data on the basis of query
      */
-    static void DeleteSparql(String query) throws IOException {
+    static boolean DeleteSparql(String query) throws IOException {
         File file = new File(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -789,22 +801,29 @@ public class User {
             }
         }
 
-        // Create a UpdateRequest object
-        UpdateRequest updateRequest = UpdateFactory.create(query);
+        try {
+            // Create a UpdateRequest object
+            UpdateRequest updateRequest = UpdateFactory.create(query);
 
-        // Create a QueryExecution object and execute the query on the model
-        UpdateAction.execute(updateRequest, model);
-        // Write the updated model to a file
-        FileOutputStream out = new FileOutputStream(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-        model.write(out, "RDF/XML-ABBREV");
-        out.close();
+            // Create a QueryExecution object and execute the query on the model
+            UpdateAction.execute(updateRequest, model);
+            // Write the updated model to a file
+            FileOutputStream out = new FileOutputStream(
+                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            model.write(out, "RDF/XML-ABBREV");
+            out.close();
+            return true; // data insertion successful
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // data insertion unsuccessful
+        }
     }
 
     /*
      * Method for Functionality of Updating Data using SPARQL query
      */
-    static void UpdateSparql(String queryString) throws IOException {
+    static boolean UpdateSparql(String queryString) throws IOException {
         File file = new File(
                 "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
@@ -825,18 +844,21 @@ public class User {
                 }
             }
         }
+        try {
+            // Create the update execution object and execute the query
+            UpdateAction.parseExecute(queryString, model);
 
-        // Create the update execution object and execute the query
-        UpdateAction.parseExecute(queryString, model);
+            // Write the updated model to a file
+            FileOutputStream out = new FileOutputStream(
+                    "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            model.write(out, "RDF/XML-ABBREV");
+            out.close();
+            return true; // data insertion successful
 
-        // Print the updated model
-        System.out.printf("Updated model:", model);
-
-        // Write the updated model to a file
-        FileOutputStream out = new FileOutputStream(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-        model.write(out, "RDF/XML-ABBREV");
-        out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false; // data insertion unsuccessful
+        }
 
     }
 }

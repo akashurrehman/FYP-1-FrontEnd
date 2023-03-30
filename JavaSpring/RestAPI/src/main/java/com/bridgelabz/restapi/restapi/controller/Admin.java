@@ -47,7 +47,7 @@ public class Admin {
      * Add the Sponsor to the Database
      */
     @PostMapping("/api/admin/addSponsor")
-    public String AddSponsorDetails(@RequestBody String Sponser) throws IOException {
+    public ResponseEntity<String> AddSponsorDetails(@RequestBody String Sponser) throws IOException {
         /*
          * String name = "Ali Hassan";
          * String message = "Sponser the details of the blood donation system";
@@ -70,12 +70,15 @@ public class Admin {
                         "                       bd:hasSponsorName \"%s\"^^xsd:string ;\n" +
                         "}",
                 message, individualId, name);
-
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -182,7 +185,7 @@ public class Admin {
      * Add the Financial Donation record
      */
     @PostMapping("/api/admin/addFinancialDonation")
-    public String AddFinancialDonorDetails(@BodyRequest String FinancialDonation) throws IOException {
+    public ResponseEntity<String> AddFinancialDonorDetails(@BodyRequest String FinancialDonation) throws IOException {
         /*
          * String contactNo = "+92345687958";
          * String message = "Donate the Financial Donation ";
@@ -211,12 +214,15 @@ public class Admin {
                         "                       bd:hasFinancialDonorDonationDate \"%s\"^^xsd:string ;\n" +
                         "}",
                 contactNo, message, name, individualId, donationDate);
-
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -362,7 +368,7 @@ public class Admin {
      * Add the New Job posts
      */
     @PostMapping("/api/admin/addJobPost")
-    public String AddJobPostDetails(@BodyRequest String JobPostDetails) throws IOException {
+    public ResponseEntity<String> AddJobPostDetails(@BodyRequest String JobPostDetails) throws IOException {
 
         /*
          * String postingDate = "10 April, 2023";
@@ -389,12 +395,15 @@ public class Admin {
                         "                       bd:hasJobPostPostingDate \"%s\"^^xsd:string ;\n" +
                         "}",
                 individualId, details, title, postingDate);
-
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -528,7 +537,8 @@ public class Admin {
      * Add the New Frequently Asked Questions
      */
     @PostMapping("/api/admin/addFAQ")
-    public String AddFrequentlyAskedQuestionDetails(@BodyRequest String FAQSDetails) throws IOException {
+    public ResponseEntity<String> AddFrequentlyAskedQuestionDetails(@BodyRequest String FAQSDetails)
+            throws IOException {
         /*
          * String title = "How to donate blood?";
          * String details = "Here is the details about the blood donation";
@@ -551,12 +561,15 @@ public class Admin {
                         "                       bd:hasFAQID \"%s\"^^xsd:string ;\n" +
                         "}",
                 title, details, individualId);
-
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -720,7 +733,7 @@ public class Admin {
      * Add the New Compaign to the Database
      */
     @PostMapping("/api/admin/addCompaigns")
-    public String AddCampaignDetails(@BodyRequest String Compaign) throws IOException {
+    public ResponseEntity<String> AddCampaignDetails(@BodyRequest String Compaign) throws IOException {
         /*
          * String title = "Campaign Title";
          * String details = "Details about the Compaigns";
@@ -746,12 +759,15 @@ public class Admin {
                         "                       bd:hasCampaignPostDate \"%s\"^^xsd:string ;\n" +
                         "}",
                 title, details, individualId, postDate);
-
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -886,7 +902,7 @@ public class Admin {
      */
 
     @PostMapping("/api/admin/addNews")
-    public String AddNewsDetails(@BodyRequest String News) throws IOException {
+    public ResponseEntity<String> AddNewsDetails(@BodyRequest String News) throws IOException {
         /*
          * String postDate = "10th April, 2023";
          * String title = "News Title";
@@ -912,12 +928,15 @@ public class Admin {
                         "                       bd:hasNewsID \"%s\"^^xsd:string ;\n" +
                         "}",
                 postDate, title, details, individualId);
-
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -1084,7 +1103,7 @@ public class Admin {
      * Add the Events in the Database
      */
     @PostMapping("/api/admin/addEvents")
-    public String AddEventDetails(@BodyRequest String Event) throws IOException {
+    public ResponseEntity<String> AddEventDetails(@BodyRequest String Event) throws IOException {
         /*
          * String name = "Event Name";
          * String location = "Main Street, Karachi";
@@ -1115,10 +1134,14 @@ public class Admin {
                 name, individualId, location, message, dateTime);
 
         // Call the InsertSparql function with the query
-        InsertSparql(query);
+        boolean isInserted = InsertSparql(query);
 
-        // Return a success message
-        return "Insert Sparql QUery runs successfully";
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -1249,7 +1272,7 @@ public class Admin {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-    static void InsertSparql(String query) throws IOException {
+    static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
@@ -1271,18 +1294,24 @@ public class Admin {
                 }
             }
         }
+        try {
 
-        // Create the update execution object and execute the query
-        UpdateAction.parseExecute(query, model);
+            // Create the update execution object and execute the query
+            UpdateAction.parseExecute(query, model);
 
-        // Print the updated model
-        System.out.println("Updated model:");
+            // Print the updated model
+            System.out.println("Updated model:");
 
-        // Write the updated model to a file
-        FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-        model.write(out, "RDF/XML-ABBREV");
-        out.close();
+            // Write the updated model to a file
+            FileOutputStream out = new FileOutputStream(
+                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            model.write(out, "RDF/XML-ABBREV");
+            out.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in Inserting Data!");
+            return false;
+        }
 
     }
 
@@ -1324,7 +1353,7 @@ public class Admin {
     }
 
     /* Method for the Funtionality of Deleting data on the basis of query */
-    static void DeleteSparql(String query) throws IOException {
+    static boolean DeleteSparql(String query) throws IOException {
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
@@ -1346,20 +1375,26 @@ public class Admin {
             }
         }
 
-        // Create a UpdateRequest object
-        UpdateRequest updateRequest = UpdateFactory.create(query);
+        try {
+            // Create a UpdateRequest object
+            UpdateRequest updateRequest = UpdateFactory.create(query);
 
-        // Create a QueryExecution object and execute the query on the model
-        UpdateAction.execute(updateRequest, model);
-        // Write the updated model to a file
-        FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-        model.write(out, "RDF/XML-ABBREV");
-        out.close();
+            // Create a QueryExecution object and execute the query on the model
+            UpdateAction.execute(updateRequest, model);
+            // Write the updated model to a file
+            FileOutputStream out = new FileOutputStream(
+                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            model.write(out, "RDF/XML-ABBREV");
+            out.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in Deleting Data!");
+            return false;
+        }
     }
 
     /* Method for Funtionality of Updating Data using sparql query */
-    static void UpdateSparql(String queryString) throws IOException {
+    static boolean UpdateSparql(String queryString) throws IOException {
         File file = new File(
                 "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
@@ -1381,17 +1416,22 @@ public class Admin {
             }
         }
 
-        // Create the update execution object and execute the query
-        UpdateAction.parseExecute(queryString, model);
+        try {
+            // Create the update execution object and execute the query
+            UpdateAction.parseExecute(queryString, model);
 
-        // Print the updated model
-        System.out.printf("Updated model:", model);
+            // Print the updated model
+            System.out.printf("Updated model:", model);
 
-        // Write the updated model to a file
-        FileOutputStream out = new FileOutputStream(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-        model.write(out, "RDF/XML-ABBREV");
-        out.close();
-
+            // Write the updated model to a file
+            FileOutputStream out = new FileOutputStream(
+                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            model.write(out, "RDF/XML-ABBREV");
+            out.close();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error in Updating");
+            return false;
+        }
     }
 }
