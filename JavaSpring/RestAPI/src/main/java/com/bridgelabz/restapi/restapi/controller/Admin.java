@@ -90,7 +90,7 @@ public class Admin {
      * ID is passed as the first parameter
      */
     @PutMapping("/api/admin/sponsor/SponsorDetails/update/{ID}")
-    public String UpdateSponsorDetails(@PathVariable String ID, @RequestBody String sponsor)
+    public ResponseEntity<String> UpdateSponsorDetails(@PathVariable String ID, @RequestBody String sponsor)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -112,8 +112,14 @@ public class Admin {
                 "?sponsor bd:hasSponsorID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update Sponsor runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -233,7 +239,8 @@ public class Admin {
      * ID is passed as the first parameter
      */
     @PutMapping("/api/admin/financialDonation/financialDonationDetails/update/{ID}")
-    public String UpdateFinancialDonationDetails(@PathVariable String ID, @RequestBody String financialDonation)
+    public ResponseEntity<String> UpdateFinancialDonationDetails(@PathVariable String ID,
+            @RequestBody String financialDonation)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -267,8 +274,14 @@ public class Admin {
                 "?financialDonor bd:hasFinancialDonationID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update Financial Donation runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -414,7 +427,7 @@ public class Admin {
      * ID is passed as the first parameter
      */
     @PutMapping("/api/admin/jobPost/JobPostDetails/update/{ID}")
-    public String UpdateJobPostDetails(@PathVariable String ID, @RequestBody String jobPost)
+    public ResponseEntity<String> UpdateJobPostDetails(@PathVariable String ID, @RequestBody String jobPost)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -440,8 +453,14 @@ public class Admin {
                 "?jobpost bd:hasJobPostID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update Job Post runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -576,7 +595,7 @@ public class Admin {
      * Edit the Frequently Asked Questions by their ID
      */
     @PutMapping("/api/admin/faq/FAQDetails/update/{ID}")
-    public String UpdateFrequentlyAskedQuestionDetails(@PathVariable String ID, @RequestBody String faq)
+    public ResponseEntity<String> UpdateFrequentlyAskedQuestionDetails(@PathVariable String ID, @RequestBody String faq)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -598,8 +617,14 @@ public class Admin {
                 "?faq bd:hasFAQID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update Frequently_Asked_Question runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -778,7 +803,7 @@ public class Admin {
      * ID is passed as the first parameter
      */
     @PutMapping("/api/admin/campaign/CampaignDetails/update/{ID}")
-    public String UpdateCampaignDetails(@PathVariable String ID, @RequestBody String campaign)
+    public ResponseEntity<String> UpdateCampaignDetails(@PathVariable String ID, @RequestBody String campaign)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -804,8 +829,14 @@ public class Admin {
                 "?campaign bd:hasCampaignID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update Campaign runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -944,7 +975,7 @@ public class Admin {
      * ID is passed as the first parameter
      */
     @PutMapping("/api/admin/news/NewsDetails/update/{ID}")
-    public String UpdateNewsDetails(@PathVariable String ID, @RequestBody String news)
+    public ResponseEntity<String> UpdateNewsDetails(@PathVariable String ID, @RequestBody String news)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -970,8 +1001,14 @@ public class Admin {
                 "?news bd:hasNewsID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update News runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -1069,7 +1106,7 @@ public class Admin {
      * ID is passed as the first parameter
      */
     @PutMapping("/api/admin/advertisement/AdvertisementDetails/update/{ID}")
-    public String UpdateAdvertisementDetails(@PathVariable String ID, @RequestBody String advertisement)
+    public ResponseEntity<String> UpdateAdvertisementDetails(@PathVariable String ID, @RequestBody String advertisement)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -1095,8 +1132,14 @@ public class Admin {
                 "?advertisement bd:hasAdvertisementID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update Advertisement runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -1148,7 +1191,7 @@ public class Admin {
      * Edit the Events in the Database
      */
     @PutMapping("/api/admin/event/eventDetails/update/{ID}")
-    public String UpdateEventDetails(@PathVariable String ID, @RequestBody String event)
+    public ResponseEntity<String> UpdateEventDetails(@PathVariable String ID, @RequestBody String event)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -1178,8 +1221,14 @@ public class Admin {
                 "?event bd:hasEventID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Update Event runs successfully " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*

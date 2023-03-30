@@ -186,7 +186,8 @@ public class lab {
      * Passing the new data in the body of the request
      */
     @PutMapping("/api/lab/RegisteredLabs/edit/{ID}")
-    public String EditRegisteredLabs(@PathVariable String ID, @RequestBody String LabData) throws IOException {
+    public ResponseEntity<String> EditRegisteredLabs(@PathVariable String ID, @RequestBody String LabData)
+            throws IOException {
         /*
          * String name = "Kinza Lab";
          * String city = "Lahore";
@@ -225,9 +226,14 @@ public class lab {
                 "?lab bd:hasLabID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
+        boolean isInserted = UpdateSparql(queryString);
 
-        return "Edit Lab Data" + LabData;
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     @DeleteMapping("/api/lab/RegisteredLabs/delete/{id}")

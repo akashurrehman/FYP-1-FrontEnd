@@ -191,7 +191,7 @@ public class BloodCenter {
      * Through ID we can find the Blood Donation Center
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/{ID}")
-    public String EditRegistedCenter(@RequestBody String center, @PathVariable String ID)
+    public ResponseEntity<String> EditRegistedCenter(@RequestBody String center, @PathVariable String ID)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(center);
@@ -240,9 +240,14 @@ public class BloodCenter {
                 "?centre bd:hasCentreID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
+        boolean isInserted = UpdateSparql(queryString);
 
-        return "Blood Donation Center: " + center;
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -350,7 +355,7 @@ public class BloodCenter {
      * Information Includes blood details and user details
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/editDonorInformations/{ID}")
-    public String editUserInfo(@RequestBody String DonorInfo, @PathVariable String ID)
+    public ResponseEntity<String> editUserInfo(@RequestBody String DonorInfo, @PathVariable String ID)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(DonorInfo);
@@ -395,8 +400,14 @@ public class BloodCenter {
                 "?donations bd:hasDonorCity ?City ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "User Information: " + DonorInfo + " ID: " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -601,7 +612,7 @@ public class BloodCenter {
      * Information Includes Last daate preserved and quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{ID}")
-    public String EditbloodStockDetails(@RequestBody String bloodStockDetails, @PathVariable String ID)
+    public ResponseEntity<String> EditbloodStockDetails(@RequestBody String bloodStockDetails, @PathVariable String ID)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(bloodStockDetails);
@@ -625,8 +636,14 @@ public class BloodCenter {
                 "?stock bd:hasBloodStockID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Blood Stock Details: " + bloodStockDetails + " ID: " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
@@ -715,7 +732,7 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/editRequest/{ID}")
-    public String editRequest(@RequestBody String request, @PathVariable String ID)
+    public ResponseEntity<String> editRequest(@RequestBody String request, @PathVariable String ID)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -764,8 +781,14 @@ public class BloodCenter {
                 "?requests bd:hasRequestMakerHospital ?Hospital ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
-        UpdateSparql(queryString);
-        return "Request: " + request + " ID: " + ID;
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*
