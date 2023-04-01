@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 
 /* SparQL Query Imports */
-import Sparql from './Services/Api/SparqlQuery/sparql';
+//import Sparql from './Services/Api/SparqlQuery/sparql';
 
 
 /* BloodDonationCenterPanel Imports */
@@ -28,13 +28,14 @@ import UserDonor from './Components_for_All_Panels/UserComponents/donors/Donor';
 import UserBloodDonationCentre from './Components_for_All_Panels/UserComponents/blood_donation_centres/BloodDonationCentre';
 import AddBloodStock from './Panels/BloodDonationCentre/AddBloodStock';
 import LabHome from './Panels/Laboratory/LabHome';
+import Login from './Temp-Files/Login';
 
 function App() {
   return (
     <div>
       <Router>      
         <Routes>
-          <Route exact path="/sparql" element={<Sparql />} />
+          <Route exact path="/Login" element={<Login />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
           <Route exact path='/bloodCenter/ProfileSettings' element={<ProfileSettings/>}/>
           <Route exact path='/bloodCenter/BloodStock' element={<BloodStock/>}/>
