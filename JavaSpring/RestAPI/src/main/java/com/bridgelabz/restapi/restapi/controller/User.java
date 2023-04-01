@@ -70,6 +70,7 @@ public class User {
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonFullName ?Name ." +
                 "?persons bd:hasPersonEmail ?Email ." +
+                "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonContactNo ?ContactNo ." +
                 "?persons bd:hasPersonAddress ?Address ." +
                 "?persons bd:hasPersonBloodGroup ?BloodGroup ." +
@@ -149,6 +150,8 @@ public class User {
         JsonNode jsonNode = objectMapper.readTree(User);
 
         String fullName = jsonNode.has("fullName") ? jsonNode.get("fullName").asText() : null;
+        String userName = jsonNode.has("userName") ? jsonNode.get("userName").asText() : null;
+        String password = jsonNode.has("password") ? jsonNode.get("password").asText() : null;
         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
         String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
         String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
@@ -156,9 +159,45 @@ public class User {
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
         String dob = jsonNode.has("dob") ? jsonNode.get("dob").asText() : null;
+        String role = "USER";
 
         String individualId = "Person_" + System.currentTimeMillis();
-        String query = String.format(
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "{ " +
+                "?persons rdf:type bd:Person ." +
+                "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasUserName ?UserName ." +
+                "?persons bd:hasPersonID ?ID ." +
+                "?persons bd:hasPersonEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?persons rdf:type bd:Person ." +
+                "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasUserName ?UserName ." +
+                "?persons bd:hasPersonID ?ID ." +
+                "?persons bd:hasPersonEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if UserName is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+
+        if (bindingsArr.isEmpty()) {
+            String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
@@ -167,6 +206,9 @@ public class User {
                         "   rdf:type bd:Donor ;\n" +
                         "   rdf:type bd:Request_Maker ;\n" +
                         "                       bd:hasPersonFullName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasPersonCity \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasPersonBloodGroup \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasPersonAddress \"%s\"^^xsd:string ;\n" +
@@ -176,17 +218,22 @@ public class User {
                         "                       bd:hasPersonDateOfBirth \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasPersonID \"%s\"^^xsd:string ;\n" +
                         "}",
-                fullName, city, bloodGroup, address, contactNo, email, gender, dob, individualId);
+                fullName, userName, password, role, city, bloodGroup, address, contactNo, email, gender, dob, individualId);
 
-        // Call the InsertSparql function with the query
-        boolean isInserted = InsertSparql(query);
+            // Call the InsertSparql function with the query
+            boolean isInserted = InsertSparql(query);
 
-        if (isInserted) {
-            String successMessage = "{\"success\": \"Data inserted successfully\"}";
-            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+            if (isInserted) {
+                String successMessage = "{\"success\": \"Data inserted successfully\"}";
+                return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+            }
         }
+        else{
+            String errorMessage = "{\"error\": \"User with this username and email already exit: " + userName + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }        
     }
 
     /*
@@ -756,7 +803,7 @@ public class User {
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -784,7 +831,7 @@ public class User {
 
             // Write the updated model to a file
             FileOutputStream out = new FileOutputStream(
-                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                    "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
             model.write(out, "RDF/XML-ABBREV");
             out.close();
 
