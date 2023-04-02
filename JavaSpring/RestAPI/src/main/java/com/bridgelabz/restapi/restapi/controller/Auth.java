@@ -45,7 +45,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -59,17 +58,16 @@ import org.springframework.http.MediaType;
 
 @RestController
 public class Auth {
-    
+
     String secret = "mySecretKey";
     Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    
+
     Date now = new Date();
     Date expiration = new Date(now.getTime() + 86400000); // 1 day in milliseconds
 
-
     @PostMapping("/login")
     public ResponseEntity<String> Login(@RequestBody String Login) throws IOException {
-        
+
         System.out.print(Login);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -77,7 +75,7 @@ public class Auth {
 
         String username = jsonNode.has("username") ? jsonNode.get("username").asText() : null;
         String password = jsonNode.has("password") ? jsonNode.get("password").asText() : null;
-        
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "SELECT * WHERE {" +
@@ -109,7 +107,6 @@ public class Auth {
                 "}" +
                 "}";
 
-
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -127,7 +124,7 @@ public class Auth {
         }
 
         if (!bindingsArr.isEmpty()) {
-            
+
             String p = bindingsArr.getJSONObject(0).get("Password").toString();
             String r = bindingsArr.getJSONObject(0).get("Role").toString();
             String id = bindingsArr.getJSONObject(0).get("ID").toString();
@@ -140,7 +137,7 @@ public class Auth {
                 JSONObject jsonObject1 = new JSONObject(json1);
                 JSONObject jsonObject2 = new JSONObject(json2);
                 JSONObject jsonObject3 = new JSONObject(json3);
-                
+
                 String password_value = jsonObject1.getString("value");
                 String role_value = jsonObject2.getString("value");
                 String id_value = jsonObject3.getString("value");
@@ -149,30 +146,28 @@ public class Auth {
                 System.out.println(password_value);
                 System.out.println(id_value);
 
-                if(password_value.equals(password)){
+                if (password_value.equals(password)) {
 
                     // Build the JWT token using the Key object
                     String token = Jwts.builder()
-                    .setSubject(role_value)
-                    .claim("role", role_value)
-                    .claim("id", id_value)
-                    .setExpiration(expiration)
-                    .signWith(key)
-                    .compact();
-                        
+                            .setSubject(role_value)
+                            .claim("role", role_value)
+                            .claim("id", id_value)
+                            .setExpiration(expiration)
+                            .signWith(key)
+                            .compact();
 
-                //return ResponseEntity.ok(token);
+                    // return ResponseEntity.ok(token);
                     return ResponseEntity.ok()
-                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-                    .build();
-                    
+                            .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                            .build();
+
                 }
 
-                else{
+                else {
                     String errorMessage = "{\"error\": \"Wrong Password!\"}";
                     return new ResponseEntity<String>(errorMessage, headers, HttpStatus.UNAUTHORIZED);
                 }
-
 
             } catch (JSONException e) {
                 // Handle the exception if the JSON is invalid or cannot be parsed
@@ -181,13 +176,8 @@ public class Auth {
 
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
-        
+
     }
-
-
-    
-
-
 
     /*
      * Method for the Functionality of Read data on the basis of query
@@ -196,9 +186,8 @@ public class Auth {
 
         // create a file object for the RDF file
         File file = new File(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
-        //
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;
@@ -230,4 +219,3 @@ public class Auth {
     }
 
 }
-
