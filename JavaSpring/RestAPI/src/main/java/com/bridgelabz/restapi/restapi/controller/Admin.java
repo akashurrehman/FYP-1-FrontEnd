@@ -191,7 +191,7 @@ public class Admin {
      * Add the Financial Donation record
      */
     @PostMapping("/api/admin/addFinancialDonation")
-    public ResponseEntity<String> AddFinancialDonorDetails(@BodyRequest String FinancialDonation) throws IOException {
+    public ResponseEntity<String> AddFinancialDonorDetails(@RequestBody String FinancialDonation) throws IOException {
         /*
          * String contactNo = "+92345687958";
          * String message = "Donate the Financial Donation ";
@@ -381,7 +381,7 @@ public class Admin {
      * Add the New Job posts
      */
     @PostMapping("/api/admin/addJobPost")
-    public ResponseEntity<String> AddJobPostDetails(@BodyRequest String JobPostDetails) throws IOException {
+    public ResponseEntity<String> AddJobPostDetails(@RequestBody String JobPostDetails) throws IOException {
 
         /*
          * String postingDate = "10 April, 2023";
@@ -556,7 +556,7 @@ public class Admin {
      * Add the New Frequently Asked Questions
      */
     @PostMapping("/api/admin/addFAQ")
-    public ResponseEntity<String> AddFrequentlyAskedQuestionDetails(@BodyRequest String FAQSDetails)
+    public ResponseEntity<String> AddFrequentlyAskedQuestionDetails(@RequestBody String FAQSDetails)
             throws IOException {
         /*
          * String title = "How to donate blood?";
@@ -758,7 +758,7 @@ public class Admin {
      * Add the New Compaign to the Database
      */
     @PostMapping("/api/admin/addCompaigns")
-    public ResponseEntity<String> AddCampaignDetails(@BodyRequest String Compaign) throws IOException {
+    public ResponseEntity<String> AddCampaignDetails(@RequestBody String Compaign) throws IOException {
         /*
          * String title = "Campaign Title";
          * String details = "Details about the Compaigns";
@@ -933,7 +933,7 @@ public class Admin {
      */
 
     @PostMapping("/api/admin/addNews")
-    public ResponseEntity<String> AddNewsDetails(@BodyRequest String News) throws IOException {
+    public ResponseEntity<String> AddNewsDetails(@RequestBody String News) throws IOException {
         /*
          * String postDate = "10th April, 2023";
          * String title = "News Title";
@@ -1146,7 +1146,7 @@ public class Admin {
      * Add the Events in the Database
      */
     @PostMapping("/api/admin/addEvents")
-    public ResponseEntity<String> AddEventDetails(@BodyRequest String Event) throws IOException {
+    public ResponseEntity<String> AddEventDetails(@RequestBody String Event) throws IOException {
         /*
          * String name = "Event Name";
          * String location = "Main Street, Karachi";
@@ -1324,7 +1324,7 @@ public class Admin {
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1353,7 +1353,7 @@ public class Admin {
 
             // Write the updated model to a file
             FileOutputStream out = new FileOutputStream(
-                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                    "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true;
@@ -1368,7 +1368,7 @@ public class Admin {
 
         // create a file object for the RDF file
         File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         //
         // create a model from the RDF file
