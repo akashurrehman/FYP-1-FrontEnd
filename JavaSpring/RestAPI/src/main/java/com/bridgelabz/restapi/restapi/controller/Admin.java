@@ -58,13 +58,13 @@ public class Admin {
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
 
-        String individualId = "bd:Sponsor_" + System.currentTimeMillis();
+        String individualId = "Sponsor_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Sponsor ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Sponsor ;\n" +
                         "                       bd:hasSponsorMessage \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasSponsorID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasSponsorName \"%s\"^^xsd:string ;\n" +
@@ -212,7 +212,7 @@ public class Admin {
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Financial_Donation ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Financial_Donation ;\n" +
                         "                       bd:hasFinancialDonorContactNo \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFinancialDonorMessage \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFinancialDonorName \"%s\"^^xsd:string ;\n" +
@@ -395,13 +395,13 @@ public class Admin {
         String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
-        String individualId = "bd:Job_Post_" + System.currentTimeMillis();
+        String individualId = "Job_Post_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Job_Post ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Job_Post ;\n" +
                         "                       bd:hasJobPostID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasJobPostDetails \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasJobPostTitle \"%s\"^^xsd:string ;\n" +
@@ -568,13 +568,13 @@ public class Admin {
         String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
-        String individualId = "bd:FAQ_" + System.currentTimeMillis();
+        String individualId = "FAQ_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Frequently_Asked_Question ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Frequently_Asked_Question ;\n" +
                         "                       bd:hasFAQTitle \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFAQDetails \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFAQID \"%s\"^^xsd:string ;\n" +
@@ -771,13 +771,13 @@ public class Admin {
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
         String postDate = jsonNode.has("postDate") ? jsonNode.get("postDate").asText() : null;
 
-        String individualId = "bd:Campaign_" + System.currentTimeMillis();
+        String individualId = "Campaign_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Campaign ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Campaign ;\n" +
                         "                       bd:hasCampaignTitle \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCampaignDetails \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCampaignID \"%s\"^^xsd:string ;\n" +
@@ -946,13 +946,13 @@ public class Admin {
         String title = jsonNode.has("title") ? jsonNode.get("title").asText() : null;
         String details = jsonNode.has("details") ? jsonNode.get("details").asText() : null;
 
-        String individualId = "bd:News_" + System.currentTimeMillis();
+        String individualId = "News_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:News ;\n" +
+                        "bd:" + individualId + " rdf:type bd:News ;\n" +
                         "                       bd:hasNewsPostDate \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasNewsTitle \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasNewsDetails \"%s\"^^xsd:string ;\n" +
@@ -1161,13 +1161,13 @@ public class Admin {
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
         String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
 
-        String individualId = "bd:Event_" + System.currentTimeMillis();
+        String individualId = "Event_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
-                        individualId + " rdf:type bd:Event ;\n" +
+                        "bd:" + individualId + " rdf:type bd:Event ;\n" +
                         "                       bd:hasEventName \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasEventID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasEventLocation \"%s\"^^xsd:string ;\n" +
