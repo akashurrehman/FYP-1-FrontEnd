@@ -315,6 +315,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?financial_donations rdf:type bd:Financial_Donation ." +
                 "?financial_donations bd:hasFinancialDonorName ?Name ." +
+                "?financial_donations bd:hasFinancialDonationID ?ID ." +
                 "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
                 "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
                 "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
@@ -350,6 +351,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?financial_donations rdf:type bd:Financial_Donation ." +
                 "?financial_donations bd:hasFinancialDonorName ?Name ." +
+                "?financial_donations bd:hasFinancialDonationID ?ID ." +
                 "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
                 "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
                 "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
@@ -494,6 +496,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?jobs rdf:type bd:Job_Post ." +
                 "?jobs bd:hasJobPostTitle ?Title ." +
+                "?jobs bd:hasJobPostID ?ID ." +
                 "?jobs bd:hasJobPostDetails ?Details ." +
                 "?jobs bd:hasJobPostPostingDate ?Date " +
                 "}";
@@ -528,6 +531,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?jobs rdf:type bd:Job_Post ." +
                 "?jobs bd:hasJobPostTitle ?Title ." +
+                "?jobs bd:hasJobPostID ?ID ." +
                 "?jobs bd:hasJobPostDetails ?Details ." +
                 "?jobs bd:hasJobPostPostingDate ?Date " +
                 "filter(?Title = \"" + title + "\")" +
@@ -657,6 +661,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?faqs rdf:type bd:Frequently_Asked_Question ." +
                 "?faqs bd:hasFAQTitle ?Title ." +
+                "?faqs bd:hasFAQID ?ID ." +
                 "?faqs bd:hasFAQDetails ?Details ." +
                 "}";
 
@@ -689,6 +694,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?faqs rdf:type bd:Frequently_Asked_Question ." +
                 "?faqs bd:hasFAQTitle ?Title ." +
+                "?faqs bd:hasFAQID ?ID ." +
                 "?faqs bd:hasFAQDetails ?Details ." +
                 "filter(?Title = " + title + ")" +
                 "}";
@@ -871,6 +877,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?campaigns rdf:type bd:Campaign ." +
                 "?campaigns bd:hasCampaignTitle ?Title ." +
+                "?campaigns bd:hasCampaignID ?ID ." +
                 "?campaigns bd:hasCampaignDetails ?Details ." +
                 "?campaigns bd:hasCampaignsPostDate ?Date ." +
                 "}";
@@ -905,6 +912,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?campaigns rdf:type bd:Campaign ." +
                 "?campaigns bd:hasCampaignTitle ?Title ." +
+                "?campaigns bd:hasCampaignID ?ID ." +
                 "?campaigns bd:hasCampaignDetails ?Details ." +
                 "?campaigns bd:hasCampaignsPostDate ?Date ." +
                 "filter(?Title = \"" + title + "\")" +
@@ -1043,6 +1051,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?news rdf:type bd:News ." +
                 "?news bd:hasNewsTitle ?Title ." +
+                "?news bd:hasNewsID ?ID ." +
                 "?news bd:hasNewsDetails ?Details ." +
                 "?news bd:hasNewsPostDate ?Date" +
                 "}";
@@ -1078,6 +1087,7 @@ public class Admin {
                 "SELECT * WHERE {" +
                 "?news rdf:type bd:News ." +
                 "?news bd:hasNewsTitle ?Title ." +
+                "?news bd:hasNewsID ?ID ." +
                 "?news bd:hasNewsDetails ?Details ." +
                 "?news bd:hasNewsPostDate ?Date" +
                 "filter(?Title = \"" + title + "\")" +
@@ -1261,10 +1271,11 @@ public class Admin {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
-                "?events rdf:type bd:Events ." +
-                "?events bd:hasEventsTitle ?Title ." +
-                "?events bd:hasEventsDetails ?Details ." +
-                "?events bd:hasEventsPostDate ?Date" +
+                "?events rdf:type bd:Event ." +
+                "?events bd:hasEventTitle ?Title ." +
+                "?events bd:hasEventID ?ID ." +
+                "?events bd:hasEventDetails ?Details ." +
+                "?events bd:hasEventPostDate ?Date" +
                 "}";
 
         // set the response headers
@@ -1296,10 +1307,11 @@ public class Admin {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
                 "SELECT * WHERE {" +
-                "?events rdf:type bd:Events ." +
-                "?events bd:hasEventsTitle ?Title ." +
-                "?events bd:hasEventsDetails ?Details ." +
-                "?events bd:hasEventsPostDate ?Date" +
+                "?events rdf:type bd:Event ." +
+                "?events bd:hasEventTitle ?Title ." +
+                "?events bd:hasEventID ?ID ." +
+                "?events bd:hasEventDetails ?Details ." +
+                "?events bd:hasEventPostDate ?Date" +
                 "filter(?Title = \"" + title + "\")" +
                 "}";
 
