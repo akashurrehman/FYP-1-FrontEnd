@@ -787,7 +787,7 @@ public class Admin {
                         "                       bd:hasCampaignTitle \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCampaignDetails \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasCampaignID \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCampaignPostDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasCampaignsPostDate \"%s\"^^xsd:string ;\n" +
                         "}",
                 title, details, individualId, postDate);
         // Call the InsertSparql function with the query

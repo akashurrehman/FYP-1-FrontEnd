@@ -168,7 +168,6 @@ public class User {
                 "SELECT * WHERE {" +
                 "{ " +
                 "?persons rdf:type bd:Person ." +
-                "?persons bd:hasPersonFullName ?Name ." +
                 "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
@@ -177,7 +176,6 @@ public class User {
                 "UNION" +
                 "{ " +
                 "?persons rdf:type bd:Person ." +
-                "?persons bd:hasPersonFullName ?Name ." +
                 "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
