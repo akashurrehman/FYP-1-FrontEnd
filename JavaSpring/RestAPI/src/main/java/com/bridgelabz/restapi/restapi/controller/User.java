@@ -113,6 +113,7 @@ public class User {
                 "SELECT * WHERE {" +
                 "?persons rdf:type bd:Person ." +
                 "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
                 "?persons bd:hasPersonContactNo ?ContactNo ." +
@@ -183,6 +184,38 @@ public class User {
                 "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?centres rdf:type bd:Blood_Donation_Centre ." +
+                "?centres bd:hasUserName ?UserName ." +
+                "?centres bd:hasCentreID ?ID ." +
+                "?centres bd:hasCentreEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?centres rdf:type bd:Blood_Donation_Centre ." +
+                "?centres bd:hasUserName ?UserName ." +
+                "?centres bd:hasCentreID ?ID ." +
+                "?centres bd:hasCentreEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?admins rdf:type bd:Admin ." +
+                "?admins bd:hasUserName ?UserName ." +
+                "?admins bd:hasAdminID ?ID ." +
+                "?admins bd:hasAdminEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?admins rdf:type bd:Admin ." +
+                "?admins bd:hasUserName ?UserName ." +
+                "?admins bd:hasAdminID ?ID ." +
+                "?admins bd:hasAdminEmail ?Email ." +
                 "filter(?Email = \"" + email + "\")" +
                 "}" +
                 "}";
