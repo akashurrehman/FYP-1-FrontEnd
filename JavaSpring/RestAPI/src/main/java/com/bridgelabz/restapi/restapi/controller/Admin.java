@@ -205,6 +205,7 @@ public class Admin {
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
+        String donationAmount = jsonNode.has("donationAmount") ? jsonNode.get("donationAmount").asText() : null;
 
         String individualId = "bd:Financial_Donor_" + System.currentTimeMillis();
         String query = String.format(
@@ -218,8 +219,9 @@ public class Admin {
                         "                       bd:hasFinancialDonorName \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFinancialDonationID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasFinancialDonorDonationDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasFinancialDonorDonationAmount \"%s\"^^xsd:string ;\n" +
                         "}",
-                contactNo, message, name, individualId, donationDate);
+                contactNo, message, name, individualId, donationDate, donationAmount);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 

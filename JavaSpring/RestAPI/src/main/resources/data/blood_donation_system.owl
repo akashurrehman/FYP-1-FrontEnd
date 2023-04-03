@@ -757,12 +757,14 @@
     <bd:hasEventName>Make Donation</bd:hasEventName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
   </owl:NamedIndividual>
-  <bd:Campaign rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1680453762238">
-    <bd:hasCampaignsPostDate>March 02,2022</bd:hasCampaignsPostDate>
-    <bd:hasCampaignID>Campaign_1680453762238</bd:hasCampaignID>
-    <bd:hasCampaignDetails>Donate Blood</bd:hasCampaignDetails>
-    <bd:hasCampaignTitle>Alert</bd:hasCampaignTitle>
-  </bd:Campaign>
+  <bd:Financial_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#bd:Financial_Donor_1680520975924">
+    <bd:hasFinancialDonorDonationAmount>600 PKR</bd:hasFinancialDonorDonationAmount>
+    <bd:hasFinancialDonorDonationDate>March 03,2000</bd:hasFinancialDonorDonationDate>
+    <bd:hasFinancialDonationID>bd:Financial_Donor_1680520975924</bd:hasFinancialDonationID>
+    <bd:hasFinancialDonorName>Heavy Driver</bd:hasFinancialDonorName>
+    <bd:hasFinancialDonorMessage>Donate the Financial Donation </bd:hasFinancialDonorMessage>
+    <bd:hasFinancialDonorContactNo>+92345687958</bd:hasFinancialDonorContactNo>
+  </bd:Financial_Donation>
   <bd:Request_Maker rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_003">
     <bd:hasPersonFullName>Salman</bd:hasPersonFullName>
     <bd:hasPersonBloodGroup>AB+</bd:hasPersonBloodGroup>
@@ -781,6 +783,12 @@
     <bd:hasPersonEmail>salman@email.com</bd:hasPersonEmail>
     <bd:hasPersonCity>Lahore</bd:hasPersonCity>
   </bd:Request_Maker>
+  <bd:Job_Post rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post_1680520315346">
+    <bd:hasJobPostID>Job_Post_1680520315346</bd:hasJobPostID>
+    <bd:hasJobPostDetails>Required the expert for the System maintance</bd:hasJobPostDetails>
+    <bd:hasJobPostTitle>System Maintenance</bd:hasJobPostTitle>
+    <bd:hasJobPostPostingDate>March 02,2022</bd:hasJobPostPostingDate>
+  </bd:Job_Post>
   <bd:Blood_Request rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1">
     <bd:hasRequestMakerEmail>ali@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
@@ -814,12 +822,6 @@
       </bd:Donor>
     </bd:bloodRequestMakeby>
   </bd:Blood_Request>
-  <bd:Campaign rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1680453522746">
-    <bd:hasCampaignTitle>Alert</bd:hasCampaignTitle>
-    <bd:hasCampaignDetails>Donate Blood</bd:hasCampaignDetails>
-    <bd:hasCampaignID>Campaign_1680453522746</bd:hasCampaignID>
-    <bd:hasCampaignPostDate>March 02,2022</bd:hasCampaignPostDate>
-  </bd:Campaign>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1">
     <bd:campaignManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <bd:hasCampaignDetails>Give food, cloths and money or what ever you have for the injured people of TURKEY who suffered from earth quake.</bd:hasCampaignDetails>
