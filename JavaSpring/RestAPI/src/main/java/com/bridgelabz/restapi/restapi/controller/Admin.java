@@ -34,6 +34,9 @@ import org.springframework.http.HttpHeaders;
 @RestController
 public class Admin {
 
+    //Path for Ontology file
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+
     /*
      * Managed by Akash Ur Rehman
      * Last Updated on 24/03/2020 11:00 PM
@@ -207,7 +210,7 @@ public class Admin {
         String donationDate = jsonNode.has("donationDate") ? jsonNode.get("donationDate").asText() : null;
         String donationAmount = jsonNode.has("donationAmount") ? jsonNode.get("donationAmount").asText() : null;
 
-        String individualId = "bd:Financial_Donor_" + System.currentTimeMillis();
+        String individualId = "Financial_Donor_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
@@ -1337,8 +1340,7 @@ public class Admin {
 
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
-        File file = new File(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1366,8 +1368,7 @@ public class Admin {
             System.out.println("Updated model:");
 
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(
-                    "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true;
@@ -1381,8 +1382,7 @@ public class Admin {
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
-        File file = new File(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
 
         //
         // create a model from the RDF file
@@ -1417,8 +1417,7 @@ public class Admin {
 
     /* Method for the Funtionality of Deleting data on the basis of query */
     static boolean DeleteSparql(String query) throws IOException {
-        File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1445,8 +1444,7 @@ public class Admin {
             // Create a QueryExecution object and execute the query on the model
             UpdateAction.execute(updateRequest, model);
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(
-                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true;
@@ -1458,8 +1456,7 @@ public class Admin {
 
     /* Method for Funtionality of Updating Data using sparql query */
     static boolean UpdateSparql(String queryString) throws IOException {
-        File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1487,8 +1484,7 @@ public class Admin {
             System.out.printf("Updated model:", model);
 
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(
-                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true;

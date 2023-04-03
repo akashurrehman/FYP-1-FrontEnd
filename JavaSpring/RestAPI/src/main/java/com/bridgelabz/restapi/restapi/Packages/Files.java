@@ -2,6 +2,7 @@ package com.bridgelabz.restapi.restapi.Packages;
 
 public class Files {
     /*
+    * Use this code for the Mapping of the ontology to the dataset
      * # Step 1: Prepare the ontology
      * # Load the ontology file using a library such as owlready2
      * from owlready2 import *
@@ -84,4 +85,5 @@ public class Files {
      * app.run(debug=True)
      * 
      */
+    
 }
