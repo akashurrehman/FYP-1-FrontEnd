@@ -35,10 +35,10 @@ import org.springframework.http.HttpHeaders;
 public class Admin {
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
-     * Managed by Akash Ur Rehman
+     * Managed by Akash Ur Rehman and Muhammad Abu hurairah
      * Last Updated on 24/03/2020 11:00 PM
      * All Routes are added for FRs
      * No Hard Coded Data
@@ -129,7 +129,7 @@ public class Admin {
      * Delete the Sponsor in the Database
      */
     @DeleteMapping("/api/admin/deleteSponsor/{id}")
-    public ResponseEntity<String> DeleteSponsorDetails(String id) throws IOException {
+    public ResponseEntity<String> DeleteSponsorDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
