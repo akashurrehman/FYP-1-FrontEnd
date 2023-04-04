@@ -43,6 +43,10 @@ public class User {
      * Pass Data in Json format for POST AND PUT Requests
      */
 
+    //Path for Ontology file
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+
+
     /*
      * Check the Validity of the User by passing their CBC Report details
      * Save the CBC Report details to the database of the Users by their ID
@@ -108,6 +112,7 @@ public class User {
                 "SELECT * WHERE {" +
                 "?persons rdf:type bd:Person ." +
                 "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
                 "?persons bd:hasPersonContactNo ?ContactNo ." +
@@ -178,6 +183,38 @@ public class User {
                 "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?centres rdf:type bd:Blood_Donation_Centre ." +
+                "?centres bd:hasUserName ?UserName ." +
+                "?centres bd:hasCentreID ?ID ." +
+                "?centres bd:hasCentreEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?centres rdf:type bd:Blood_Donation_Centre ." +
+                "?centres bd:hasUserName ?UserName ." +
+                "?centres bd:hasCentreID ?ID ." +
+                "?centres bd:hasCentreEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?admins rdf:type bd:Admin ." +
+                "?admins bd:hasUserName ?UserName ." +
+                "?admins bd:hasAdminID ?ID ." +
+                "?admins bd:hasAdminEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?admins rdf:type bd:Admin ." +
+                "?admins bd:hasUserName ?UserName ." +
+                "?admins bd:hasAdminID ?ID ." +
+                "?admins bd:hasAdminEmail ?Email ." +
                 "filter(?Email = \"" + email + "\")" +
                 "}" +
                 "}";
@@ -761,9 +798,7 @@ public class User {
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
-        File file = new File(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
         //
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -800,8 +835,7 @@ public class User {
      */
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
-        File file = new File(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -828,8 +862,7 @@ public class User {
             System.out.println("Updated model:");
 
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(
-                    "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
             model.write(out, "RDF/XML-ABBREV");
             out.close();
 
@@ -844,9 +877,7 @@ public class User {
      * Method for the Functionality of Deleting data on the basis of query
      */
     static boolean DeleteSparql(String query) throws IOException {
-        File file = new File(
-                "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;
@@ -872,8 +903,7 @@ public class User {
             // Create a QueryExecution object and execute the query on the model
             UpdateAction.execute(updateRequest, model);
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(
-                    "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true; // data insertion successful
@@ -888,9 +918,7 @@ public class User {
      * Method for Functionality of Updating Data using SPARQL query
      */
     static boolean UpdateSparql(String queryString) throws IOException {
-        File file = new File(
-                "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
-
+        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;
@@ -913,8 +941,7 @@ public class User {
             UpdateAction.parseExecute(queryString, model);
 
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(
-                    "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
+            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true; // data insertion successful
