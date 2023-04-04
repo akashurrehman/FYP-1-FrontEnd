@@ -75,7 +75,6 @@ public class User {
                 "SELECT * WHERE {" +
                 "?persons rdf:type bd:Person ." +
                 "?persons bd:hasPersonID ?ID ." +
-                "?persons bd:hasPassword ?Password ." +
                 "?persons bd:hasPersonFullName ?Name ." +
                 "?persons bd:hasPersonEmail ?Email ." +
                 "?persons bd:hasUserName ?UserName ." +
@@ -172,6 +171,7 @@ public class User {
 
         String individualId = "Person_" + System.currentTimeMillis();
 
+        //Create new object of type BCyptPasswordEncoder Class for password encryption
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(password);
 
@@ -382,10 +382,59 @@ public class User {
      * Donate Blood
      * Add the information of the Donor in the Database
      */
-    @PostMapping("/api/users/donate")
-    public String donate(@RequestBody String user) {
-        return "User: " + user;
+    @PostMapping("/api/users/donate/addDonorInfo")
+    public ResponseEntity<String> AddBloodDonationDetails(@RequestBody String UserInfo) throws IOException {
+        /*
+         * String name = "Mabuhurairah";
+         * String gender = "Male";
+         * String city = "Lahore";
+         * String location = "Near SabzaZar";
+         * String contactNo = "+923456852023";
+         * String bloodGroup = "B-";
+         * String email = "hurairah761@email.com";
+         * String message = "Donate the blood for the Needy Person";
+         */
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(UserInfo);
+
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+
+        String individualId = "Donation_" + System.currentTimeMillis();
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        "bd:" + individualId + " rdf:type bd:Blood_Donation ;\n" +
+                        "                       bd:hasDonorName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorCity \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorGender \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorLocation \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorContactNo \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorBloodGroup \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorEmail \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorMessage \"%s\"^^xsd:string ;\n" +
+                        "}",
+                name, individualId, city, gender, location, contactNo, bloodGroup, email, message);
+        // Call the InsertSparql function with the query
+        boolean isInserted = InsertSparql(query);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
+
 
     /*
      * Method to update Blood Donation

@@ -36,6 +36,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpHeaders;
 
+//import for password encryption
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @RestController
 public class lab {
 
@@ -113,6 +116,7 @@ public class lab {
                 "?labs rdf:type bd:Lab ." +
                 "?labs bd:hasLabID ?ID ." +
                 "?labs bd:hasLabName ?Name ." +
+                "?labs bd:hasUserName ?UserName ." +
                 "?labs bd:hasLabEmail ?Email ." +
                 "?labs bd:hasLabContactNo ?ContactNo ." +
                 "?labs bd:hasLabAddress ?Address ." +
@@ -141,7 +145,7 @@ public class lab {
      * New Lab Added
      */
     @PostMapping("/api/lab/registered/add")
-    public ResponseEntity<String> AddLabDetails(@BodyRequest String LabData) throws IOException {
+    public ResponseEntity<String> AddLabDetails(@RequestBody String LabData) throws IOException {
         /*
          * String name = "Kinza Lab";
          * String city = "Lahore";
@@ -153,36 +157,134 @@ public class lab {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(LabData);
 
+        String userName = jsonNode.has("userName") ? jsonNode.get("userName").asText() : null;
+        String password = jsonNode.has("password") ? jsonNode.get("password").asText() : null;
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
         String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String role= "LAB";
 
         String individualId = "Lab_" + System.currentTimeMillis();
-        String query = String.format(
+
+        //Create new object of type BCyptPasswordEncoder Class for password encryption
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(password);
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "{ " +
+                "?persons rdf:type bd:Person ." +
+                "?persons bd:hasUserName ?UserName ." +
+                "?persons bd:hasPersonID ?ID ." +
+                "?persons bd:hasPersonEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?persons rdf:type bd:Person ." +
+                "?persons bd:hasUserName ?UserName ." +
+                "?persons bd:hasPersonID ?ID ." +
+                "?persons bd:hasPersonEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?centres rdf:type bd:Blood_Donation_Centre ." +
+                "?centres bd:hasUserName ?UserName ." +
+                "?centres bd:hasCentreID ?ID ." +
+                "?centres bd:hasCentreEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?centres rdf:type bd:Blood_Donation_Centre ." +
+                "?centres bd:hasUserName ?UserName ." +
+                "?centres bd:hasCentreID ?ID ." +
+                "?centres bd:hasCentreEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?admins rdf:type bd:Admin ." +
+                "?admins bd:hasUserName ?UserName ." +
+                "?admins bd:hasAdminID ?ID ." +
+                "?admins bd:hasAdminEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?admins rdf:type bd:Admin ." +
+                "?admins bd:hasUserName ?UserName ." +
+                "?admins bd:hasAdminID ?ID ." +
+                "?admins bd:hasAdminEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?labs rdf:type bd:Lab ." +
+                "?labs bd:hasUserName ?UserName ." +
+                "?labs bd:hasLabID ?ID ." +
+                "?labs bd:hasLabEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?labs rdf:type bd:Lab ." +
+                "?labs bd:hasUserName ?UserName ." +
+                "?labs bd:hasLabID ?ID ." +
+                "?labs bd:hasLabEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if UserName is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+
+        if (bindingsArr.isEmpty()) {
+            String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                         "INSERT DATA {\n" +
                         "bd:" + individualId + " rdf:type bd:Lab ;\n" +
                         "                       bd:hasLabName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasLabCity \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasLabAddress \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasLabContactNo \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasLabEmail \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasLabID \"%s\"^^xsd:string ;\n" +
                         "}",
-                name, city, address, contactNo, email, individualId);
-        // Call the InsertSparql function with the query
-        boolean isInserted = InsertSparql(query);
+                name, userName, encodedPassword, role, city, address, contactNo, email, individualId);
+        
+            // Call the InsertSparql function with the query
+            boolean isInserted = InsertSparql(query);
 
-        if (isInserted) {
-            String successMessage = "{\"success\": \"Data inserted successfully\"}";
-            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+            if (isInserted) {
+                String successMessage = "{\"success\": \"Data inserted successfully\"}";
+                return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+            }
         }
+        else{
+            String errorMessage = "{\"error\": \"User with this username and email already exit: " + userName + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+
     }
 
     /*
