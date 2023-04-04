@@ -48,6 +48,8 @@ import org.json.JSONException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+//import for password encryption
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /*
  * Author: 
  * 
@@ -109,6 +111,15 @@ public class Auth {
                 "?centre bd:hasRole ?Role ." +
                 "filter(?UserName = \"" + username + "\")" +
                 "}" +
+                "UNION" +
+                "{ " +
+                "?lab rdf:type bd:Lab ." +
+                "?lab bd:hasLabID ?ID ." +
+                "?lab bd:hasUserName ?UserName ." +
+                "?lab bd:hasPassword ?Password ." +
+                "?lab bd:hasRole ?Role ." +
+                "filter(?UserName = \"" + username + "\")" +
+                "}" +
                 "}";
 
         // set the response headers
@@ -123,6 +134,9 @@ public class Auth {
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
 
         if (bindingsArr.isEmpty()) {
+            //Check if password not match value
+            System.out.println("User not found");
+
             String errorMessage = "{\"error\": \"User not found, Please registered yourself!\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
@@ -146,11 +160,15 @@ public class Auth {
                 String role_value = jsonObject2.getString("value");
                 String id_value = jsonObject3.getString("value");
 
-                System.out.println(role_value);
-                System.out.println(password_value);
-                System.out.println(id_value);
+                // System.out.println(role_value);
+                // System.out.println(password_value);
+                // System.out.println(id_value);
 
-                if (password_value.equals(password)) {
+                //For password decryption and check user login password with database password
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                boolean isMatch = encoder.matches(password, password_value);
+
+                if (isMatch) {
 
                     // Build the JWT token using the Key object
                     String token = Jwts.builder()
@@ -161,6 +179,9 @@ public class Auth {
                             .signWith(key)
                             .compact();
 
+                    //Check token value
+                    System.out.println("Token: " + token);
+
                     // return ResponseEntity.ok(token);
                     return ResponseEntity.ok()
                             .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
@@ -169,6 +190,9 @@ public class Auth {
                 }
 
                 else {
+                    //Check if password not match value
+                    System.out.println("Wrong Password entered by User");
+
                     String errorMessage = "{\"error\": \"Wrong Password!\"}";
                     return new ResponseEntity<String>(errorMessage, headers, HttpStatus.UNAUTHORIZED);
                 }

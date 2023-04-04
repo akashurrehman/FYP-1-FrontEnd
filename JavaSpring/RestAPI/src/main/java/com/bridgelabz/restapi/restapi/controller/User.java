@@ -32,6 +32,9 @@ import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+//import for password encryption
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @RestController
 public class User {
 
@@ -72,6 +75,7 @@ public class User {
                 "SELECT * WHERE {" +
                 "?persons rdf:type bd:Person ." +
                 "?persons bd:hasPersonID ?ID ." +
+                "?persons bd:hasPassword ?Password ." +
                 "?persons bd:hasPersonFullName ?Name ." +
                 "?persons bd:hasPersonEmail ?Email ." +
                 "?persons bd:hasUserName ?UserName ." +
@@ -168,6 +172,9 @@ public class User {
 
         String individualId = "Person_" + System.currentTimeMillis();
 
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(password);
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "SELECT * WHERE {" +
@@ -218,6 +225,22 @@ public class User {
                 "?admins bd:hasAdminEmail ?Email ." +
                 "filter(?Email = \"" + email + "\")" +
                 "}" +
+                "UNION" +
+                "{ " +
+                "?labs rdf:type bd:Lab ." +
+                "?labs bd:hasUserName ?UserName ." +
+                "?labs bd:hasLabID ?ID ." +
+                "?labs bd:hasLabEmail ?Email ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}" +
+                "UNION" +
+                "{ " +
+                "?labs rdf:type bd:Lab ." +
+                "?labs bd:hasUserName ?UserName ." +
+                "?labs bd:hasLabID ?ID ." +
+                "?labs bd:hasLabEmail ?Email ." +
+                "filter(?Email = \"" + email + "\")" +
+                "}" +
                 "}";
 
         // set the response headers
@@ -253,7 +276,7 @@ public class User {
                         "                       bd:hasPersonDateOfBirth \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasPersonID \"%s\"^^xsd:string ;\n" +
                         "}",
-                fullName, userName, password, role, city, bloodGroup, address, contactNo, email, gender, dob, individualId);
+                fullName, userName, encodedPassword, role, city, bloodGroup, address, contactNo, email, gender, dob, individualId);
 
             // Call the InsertSparql function with the query
             boolean isInserted = InsertSparql(query);
