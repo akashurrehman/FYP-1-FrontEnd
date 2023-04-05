@@ -454,8 +454,8 @@ public class Admin {
                 " ?jobpost bd:hasJobPostDetails \"" + details + "\"^^xsd:string ." +
                 " ?jobpost bd:hasJobPostPostingDate \"" + postingDate + "\"^^xsd:string ." +
                 "WHERE { ?jobpost rdf:type bd:Job_Post ." +
-                "?jobpost bd:hasJobPostDetails ?Details ." +
                 "?jobpost bd:hasJobPostTitle ?Title ." +
+                "?jobpost bd:hasJobPostDetails ?Details ." +
                 "?jobpost bd:hasJobPostPostingDate ?PostingDate ." +
                 "?jobpost bd:hasJobPostID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +

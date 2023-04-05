@@ -297,7 +297,7 @@ public class BloodCenter {
      * Through ID we can find the Blood Donation Center
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/{ID}")
-    public ResponseEntity<String> EditRegistedCenter(@RequestBody String center, @PathVariable String ID)
+    public ResponseEntity<String> EditRegistedCenter(@PathVariable String ID, @RequestBody String center)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(center);
@@ -331,8 +331,8 @@ public class BloodCenter {
                 " ?centre bd:hasCentreTimings \"" + timings + "\"^^xsd:string ." +
                 " ?centre bd:hasCentreContactNo \"" + contactNo + "\"^^xsd:string ." +
                 " ?centre bd:hasCentreEmail \"" + email + "\"^^xsd:string ." +
-                " ?centre bd:hasCentreCategory \"" + category + "\"^^xsd:string ." +
                 " ?centre bd:hasCentreOpeningDays \"" + openingDays + "\"^^xsd:string ." +
+                " ?centre bd:hasCentreCategory \"" + category + "\"^^xsd:string ." +
                 "WHERE { ?centre rdf:type bd:Blood_Donation_Centre ." +
                 "?centre bd:hasCentreLocation ?Location ." +
                 "?centre bd:hasCentreName ?Name ." +
@@ -341,8 +341,8 @@ public class BloodCenter {
                 "?centre bd:hasCentreTimings ?Timings ." +
                 "?centre bd:hasCentreContactNo ?ContactNo ." +
                 "?centre bd:hasCentreEmail ?Email ." +
-                "?centre bd:hasCentreCategory ?Category ." +
                 "?centre bd:hasCentreOpeningDays ?OpeningDays ." +
+                "?centre bd:hasCentreCategory ?Category ." +
                 "?centre bd:hasCentreID ?ID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
@@ -461,7 +461,7 @@ public class BloodCenter {
      * Information Includes blood details and user details
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/editDonorInformations/{ID}")
-    public ResponseEntity<String> editUserInfo(@RequestBody String DonorInfo, @PathVariable String ID)
+    public ResponseEntity<String> editUserInfo(@PathVariable String ID, @RequestBody String DonorInfo)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(DonorInfo);
@@ -675,7 +675,7 @@ public class BloodCenter {
      * Send insert Sparql Query
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
-    public ResponseEntity<String> AddBloodStockDetails(@BodyRequest String BloodDetails) throws IOException {
+    public ResponseEntity<String> AddBloodStockDetails(@RequestBody String BloodDetails) throws IOException {
         /*
          * String bloodGroup = "AB+";
          * String addedDate = "9TH FEB, 2023";
@@ -718,7 +718,7 @@ public class BloodCenter {
      * Information Includes Last daate preserved and quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{ID}")
-    public ResponseEntity<String> EditbloodStockDetails(@RequestBody String bloodStockDetails, @PathVariable String ID)
+    public ResponseEntity<String> EditbloodStockDetails(@PathVariable String ID, @RequestBody String bloodStockDetails)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(bloodStockDetails);
@@ -778,7 +778,7 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/makeRequest")
-    public ResponseEntity<String> AddBloodRequestDetails(@BodyRequest String RequestInfo) throws IOException {
+    public ResponseEntity<String> AddBloodRequestDetails(@RequestBody String RequestInfo) throws IOException {
         /*
          * String email = "Ahmed@email.com";
          * String hospital = "Shaukat Khanam";
@@ -838,7 +838,7 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PutMapping("/api/bloodCenter/RegisteredCenters/editRequest/{ID}")
-    public ResponseEntity<String> editRequest(@RequestBody String request, @PathVariable String ID)
+    public ResponseEntity<String> editRequest(@PathVariable String ID, @RequestBody String request)
             throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();

@@ -804,18 +804,23 @@
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
     <bd:hasPersonCity>Lahore</bd:hasPersonCity>
   </bd:Request_Maker>
+  <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_1680641623877">
+    <bd:hasBloodStockID>Blood_Stock_1680641623877</bd:hasBloodStockID>
+    <bd:hasBloodStockBloodGroup>0-</bd:hasBloodStockBloodGroup>
+    <bd:hasBloodStockAddedDate>6th Aug,2022</bd:hasBloodStockAddedDate>
+    <bd:hasBloodStockNoOfBags>8</bd:hasBloodStockNoOfBags>
+  </bd:Blood_Stock>
   <bd:Blood_Request rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1">
-    <bd:hasRequestMakerEmail>ali@email.com</bd:hasRequestMakerEmail>
-    <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
-    <bd:hasRequestMakerContactNo>+92 333 1234561</bd:hasRequestMakerContactNo>
+    <bd:hasRequestMakerEmail>Testing12</bd:hasRequestMakerEmail>
+    <bd:hasRequestMakerLocation>public</bd:hasRequestMakerLocation>
+    <bd:hasRequestMakerContactNo>testing</bd:hasRequestMakerContactNo>
+    <bd:hasRequestMakerGender>8am-8pm</bd:hasRequestMakerGender>
+    <bd:hasRequestMakerMessage>testing@email</bd:hasRequestMakerMessage>
     <bd:hasRequestMakerID>RM001</bd:hasRequestMakerID>
-    <bd:hasRequestMakerBloodGroup>A+</bd:hasRequestMakerBloodGroup>
-    <bd:hasRequestMakerMessage>I need A positive blood group urgently for thelicimia pateient.</bd:hasRequestMakerMessage>
-    <bd:hasRequestMakerLocation>Canal Road, Lahore</bd:hasRequestMakerLocation>
+    <bd:hasRequestMakerName>Mon-Tues</bd:hasRequestMakerName>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-    <bd:hasRequestMakerName>Ali</bd:hasRequestMakerName>
-    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
-    <bd:hasRequestMakerHospital>Jinnah Hospital</bd:hasRequestMakerHospital>
+    <bd:hasRequestMakerBloodGroup>testing</bd:hasRequestMakerBloodGroup>
+    <bd:hasRequestMakerHospital>Karachi</bd:hasRequestMakerHospital>
     <bd:bloodRequestMakeby>
       <bd:Donor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_002">
         <bd:hasPersonEmail>raza@email.com</bd:hasPersonEmail>
@@ -836,6 +841,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
       </bd:Donor>
     </bd:bloodRequestMakeby>
+    <bd:hasRequestMakerCity>North Area</bd:hasRequestMakerCity>
   </bd:Blood_Request>
   <bd:Campaign rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1">
     <bd:hasCampaignsPostDate>Jan 02,2000</bd:hasCampaignsPostDate>
