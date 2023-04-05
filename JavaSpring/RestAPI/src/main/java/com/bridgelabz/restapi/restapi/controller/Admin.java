@@ -38,11 +38,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RestController
 public class Admin {
 
-    //Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    // Path for Ontology file
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
-     * Managed by Akash Ur Rehman
+     * Managed by Akash Ur Rehman and Muhammad Abu hurairah
      * Last Updated on 24/03/2020 11:00 PM
      * All Routes are added for FRs
      * No Hard Coded Data

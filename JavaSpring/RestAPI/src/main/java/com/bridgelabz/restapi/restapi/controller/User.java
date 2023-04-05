@@ -28,7 +28,6 @@ import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
-//import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -47,9 +46,8 @@ public class User {
      * Pass Data in Json format for POST AND PUT Requests
      */
 
-    //Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
-
+    // Path for Ontology file
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Check the Validity of the User by passing their CBC Report details
@@ -171,7 +169,7 @@ public class User {
 
         String individualId = "Person_" + System.currentTimeMillis();
 
-        //Create new object of type BCyptPasswordEncoder Class for password encryption
+        // Create new object of type BCyptPasswordEncoder Class for password encryption
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(password);
 
@@ -256,27 +254,28 @@ public class User {
 
         if (bindingsArr.isEmpty()) {
             String query = String.format(
-                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
-                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
-                        "INSERT DATA {\n" +
-                        "bd:" + individualId + " rdf:type bd:Person ;\n" +
-                        "   rdf:type bd:Donor ;\n" +
-                        "   rdf:type bd:Request_Maker ;\n" +
-                        "                       bd:hasPersonFullName \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonCity \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonBloodGroup \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonAddress \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonContactNo \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonEmail \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonGender \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonDateOfBirth \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPersonID \"%s\"^^xsd:string ;\n" +
-                        "}",
-                fullName, userName, encodedPassword, role, city, bloodGroup, address, contactNo, email, gender, dob, individualId);
+                    "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                            "INSERT DATA {\n" +
+                            "bd:" + individualId + " rdf:type bd:Person ;\n" +
+                            "   rdf:type bd:Donor ;\n" +
+                            "   rdf:type bd:Request_Maker ;\n" +
+                            "                       bd:hasPersonFullName \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonCity \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonBloodGroup \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonAddress \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonContactNo \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonEmail \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonGender \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonDateOfBirth \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPersonID \"%s\"^^xsd:string ;\n" +
+                            "}",
+                    fullName, userName, encodedPassword, role, city, bloodGroup, address, contactNo, email, gender, dob,
+                    individualId);
 
             // Call the InsertSparql function with the query
             boolean isInserted = InsertSparql(query);
@@ -285,13 +284,13 @@ public class User {
                 String successMessage = "{\"success\": \"Data inserted successfully\"}";
                 return new ResponseEntity<String>(successMessage, HttpStatus.OK);
             } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error occurred while inserting data");
             }
-        }
-        else{
+        } else {
             String errorMessage = "{\"error\": \"User with this username and email already exit: " + userName + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
-        }        
+        }
     }
 
     /*
@@ -434,7 +433,6 @@ public class User {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
         }
     }
-
 
     /*
      * Method to update Blood Donation

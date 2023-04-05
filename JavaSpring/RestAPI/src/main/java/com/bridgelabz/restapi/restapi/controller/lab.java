@@ -50,9 +50,8 @@ public class lab {
      * Pass Data in Json format for POST AND PUT Requests
      */
 
-    //Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
-
+    // Path for Ontology file
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Add the New report in the Database
@@ -164,11 +163,11 @@ public class lab {
         String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
-        String role= "LAB";
+        String role = "LAB";
 
         String individualId = "Lab_" + System.currentTimeMillis();
 
-        //Create new object of type BCyptPasswordEncoder Class for password encryption
+        // Create new object of type BCyptPasswordEncoder Class for password encryption
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(password);
 
@@ -253,23 +252,23 @@ public class lab {
 
         if (bindingsArr.isEmpty()) {
             String query = String.format(
-                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
-                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
-                        "INSERT DATA {\n" +
-                        "bd:" + individualId + " rdf:type bd:Lab ;\n" +
-                        "                       bd:hasLabName \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasLabCity \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasLabAddress \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasLabContactNo \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasLabEmail \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasLabID \"%s\"^^xsd:string ;\n" +
-                        "}",
-                name, userName, encodedPassword, role, city, address, contactNo, email, individualId);
-        
+                    "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                            "INSERT DATA {\n" +
+                            "bd:" + individualId + " rdf:type bd:Lab ;\n" +
+                            "                       bd:hasLabName \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasLabCity \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasLabAddress \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasLabContactNo \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasLabEmail \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasLabID \"%s\"^^xsd:string ;\n" +
+                            "}",
+                    name, userName, encodedPassword, role, city, address, contactNo, email, individualId);
+
             // Call the InsertSparql function with the query
             boolean isInserted = InsertSparql(query);
 
@@ -277,10 +276,10 @@ public class lab {
                 String successMessage = "{\"success\": \"Data inserted successfully\"}";
                 return new ResponseEntity<String>(successMessage, HttpStatus.OK);
             } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error occurred while inserting data");
             }
-        }
-        else{
+        } else {
             String errorMessage = "{\"error\": \"User with this username and email already exit: " + userName + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }

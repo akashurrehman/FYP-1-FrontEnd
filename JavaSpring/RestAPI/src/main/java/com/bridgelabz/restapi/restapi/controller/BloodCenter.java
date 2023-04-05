@@ -38,23 +38,22 @@ import org.springframework.http.HttpHeaders;
 
 //import for password encryption
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @RestController
 
 public class BloodCenter {
 
-
     /*
-     * Managed by Akash Ur Rehman
-     * Last Updated on 24/03/2020 11:00 PM
+     * Managed by Akash Ur Rehman and Muhammad Abu hurairah
+     * Last Updated on 4/03/2020 11:00 PM
      * All Routes are added for FRs
      * No Hard Coded Data
      * All the Functionality perform on the basis of ID
      * Pass Data in Json format for POST AND PUT Requests
      */
 
-    //Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
-
+    // Path for Ontology file
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /* Route to Get Data of all blood Donation Centers */
     @GetMapping("/api/bloodCenter/RegisteredCenters")
@@ -168,7 +167,7 @@ public class BloodCenter {
 
         String individualId = "Centre_" + System.currentTimeMillis();
 
-        //Create new object of type BCyptPasswordEncoder Class for password encryption
+        // Create new object of type BCyptPasswordEncoder Class for password encryption
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(password);
 
@@ -253,27 +252,28 @@ public class BloodCenter {
 
         if (bindingsArr.isEmpty()) {
             String query = String.format(
-                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
-                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
-                        "INSERT DATA {\n" +
-                        "bd:" + individualId + " rdf:type bd:Blood_Donation_Centre ;\n" +
-                        "                       bd:hasCentreCategory \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreOpeningDays \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreEmail \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreContactNo \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreID \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreTimings \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreLicenseNo \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreCity \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreName \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasCentreLocation \"%s\"^^xsd:string ;\n" +
-                        "}",
-                category, userName, encodedPassword, role, openingDays, email, contactNo, individualId, timings, licenseNo, city, name, location);
-        
+                    "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                            "INSERT DATA {\n" +
+                            "bd:" + individualId + " rdf:type bd:Blood_Donation_Centre ;\n" +
+                            "                       bd:hasCentreCategory \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasUserName \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasPassword \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasRole \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreOpeningDays \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreEmail \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreContactNo \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreID \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreTimings \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreLicenseNo \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreCity \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreName \"%s\"^^xsd:string ;\n" +
+                            "                       bd:hasCentreLocation \"%s\"^^xsd:string ;\n" +
+                            "}",
+                    category, userName, encodedPassword, role, openingDays, email, contactNo, individualId, timings,
+                    licenseNo, city, name, location);
+
             // Call the InsertSparql function with the query
             boolean isInserted = InsertSparql(query);
 
@@ -281,14 +281,14 @@ public class BloodCenter {
                 String successMessage = "{\"success\": \"Data inserted successfully\"}";
                 return new ResponseEntity<String>(successMessage, HttpStatus.OK);
             } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error occurred while inserting data");
             }
-        }
-        else{
+        } else {
             String errorMessage = "{\"error\": \"User with this username and email already exit: " + userName + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
-        
+
     }
 
     /*
