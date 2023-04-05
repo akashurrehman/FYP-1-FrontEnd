@@ -324,7 +324,7 @@ public class User {
                 "?person bd:hasPersonGender ?Gender ." +
                 "?person bd:hasPersonEmail ?Email ." +
                 "?person bd:hasPersonDateOfBirth ?DateOfBirth ." +
-                "?person bd:hasPersonBloodGroup ?BloodGroup ." +
+                "?person bd:hasPersonBloodGroup ?BloodGroup }" +
                 "INSERT { ?person bd:hasPersonCity \"" + city + "\"^^xsd:string ." +
                 " ?person bd:hasPersonContactNo \"" + contactNo + "\"^^xsd:string ." +
                 " ?person bd:hasPersonFullName \"" + fullName + "\"^^xsd:string ." +
@@ -332,7 +332,7 @@ public class User {
                 " ?person bd:hasPersonEmail \"" + email + "\"^^xsd:string ." +
                 " ?person bd:hasPersonDateOfBirth \"" + dob + "\"^^xsd:string ." +
                 " ?person bd:hasPersonBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
-                " ?person bd:hasPersonAddress \"" + address + "\"^^xsd:string ." +
+                " ?person bd:hasPersonAddress \"" + address + "\"^^xsd:string } " +
                 "WHERE { ?person rdf:type bd:Person ." +
                 "?person bd:hasPersonCity ?City ." +
                 "?person bd:hasPersonContactNo ?ContactNo ." +
@@ -466,7 +466,7 @@ public class User {
                 "?donations bd:hasDonorContactNo ?ContactNo ." +
                 "?donations bd:hasDonorBloodGroup ?BloodGroup ." +
                 "?donations bd:hasDonorEmail ?Email ." +
-                "?donations bd:hasDonorMessage ?Message ." +
+                "?donations bd:hasDonorMessage ?Message }" +
                 "INSERT { ?donations bd:hasDonorName \"" + name + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorEmail \"" + email + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorGender \"" + gender + "\"^^xsd:string ." +
@@ -474,7 +474,7 @@ public class User {
                 " ?donations bd:hasDonorMessage \"" + message + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorContactNo \"" + contactNo + "\"^^xsd:string ." +
-                " ?donations bd:hasDonorCity \"" + city + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorCity \"" + city + "\"^^xsd:string } " +
                 "WHERE { ?donations rdf:type bd:Blood_Donation ." +
                 "?donations bd:hasDonorName ?Name ." +
                 "?donations bd:hasDonorID ?ID ." +

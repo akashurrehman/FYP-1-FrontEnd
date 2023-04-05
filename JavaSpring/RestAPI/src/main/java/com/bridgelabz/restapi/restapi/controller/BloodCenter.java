@@ -323,7 +323,7 @@ public class BloodCenter {
                 "?centre bd:hasCentreContactNo ?ContactNo ." +
                 "?centre bd:hasCentreEmail ?Email ." +
                 "?centre bd:hasCentreOpeningDays ?OpeningDays ." +
-                "?centre bd:hasCentreCategory ?Category ." +
+                "?centre bd:hasCentreCategory ?Category } " +
                 "INSERT { ?centre bd:hasCentreLocation \"" + location + "\"^^xsd:string ." +
                 " ?centre bd:hasCentreName \"" + name + "\"^^xsd:string ." +
                 " ?centre bd:hasCentreLicenseNo \"" + licenseNo + "\"^^xsd:string ." +
@@ -332,7 +332,7 @@ public class BloodCenter {
                 " ?centre bd:hasCentreContactNo \"" + contactNo + "\"^^xsd:string ." +
                 " ?centre bd:hasCentreEmail \"" + email + "\"^^xsd:string ." +
                 " ?centre bd:hasCentreCategory \"" + category + "\"^^xsd:string ." +
-                " ?centre bd:hasCentreOpeningDays \"" + openingDays + "\"^^xsd:string ." +
+                " ?centre bd:hasCentreOpeningDays \"" + openingDays + "\"^^xsd:string } " +
                 "WHERE { ?centre rdf:type bd:Blood_Donation_Centre ." +
                 "?centre bd:hasCentreLocation ?Location ." +
                 "?centre bd:hasCentreName ?Name ." +
@@ -485,7 +485,7 @@ public class BloodCenter {
                 "?donations bd:hasDonorContactNo ?ContactNo ." +
                 "?donations bd:hasDonorBloodGroup ?BloodGroup ." +
                 "?donations bd:hasDonorEmail ?Email ." +
-                "?donations bd:hasDonorMessage ?Message ." +
+                "?donations bd:hasDonorMessage ?Message } " +
                 "INSERT { ?donations bd:hasDonorName \"" + name + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorEmail \"" + email + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorGender \"" + gender + "\"^^xsd:string ." +
@@ -493,7 +493,7 @@ public class BloodCenter {
                 " ?donations bd:hasDonorMessage \"" + message + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
                 " ?donations bd:hasDonorContactNo \"" + contactNo + "\"^^xsd:string ." +
-                " ?donations bd:hasDonorCity \"" + city + "\"^^xsd:string ." +
+                " ?donations bd:hasDonorCity \"" + city + "\"^^xsd:string } " +
                 "WHERE { ?donations rdf:type bd:Blood_Donation ." +
                 "?donations bd:hasDonorName ?Name ." +
                 "?donations bd:hasDonorID ?ID ." +
@@ -731,10 +731,10 @@ public class BloodCenter {
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?stock bd:hasBloodStockBloodGroup ?BloodGroup ." +
                 "?stock bd:hasBloodStockAddedDate ?AddedDate ." +
-                "?stock bd:hasBloodStockNoOfBags ?NoOfBags ." +
+                "?stock bd:hasBloodStockNoOfBags ?NoOfBags } " +
                 "INSERT { ?stock bd:hasBloodStockBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
                 " ?stock bd:hasBloodStockAddedDate \"" + addedDate + "\"^^xsd:dateTime ." +
-                " ?stock bd:hasBloodStockNoOfBags \"" + noOfBags + "\"^^xsd:string ." +
+                " ?stock bd:hasBloodStockNoOfBags \"" + noOfBags + "\"^^xsd:string } " +
                 "WHERE { ?stock rdf:type bd:Blood_Stock ." +
                 "?stock bd:hasBloodStockBloodGroup ?BloodGroup ." +
                 "?stock bd:hasBloodStockAddedDate ?AddedDate ." +

@@ -71,7 +71,7 @@ public class Auth {
     Date now = new Date();
     Date expiration = new Date(now.getTime() + 86400000); // 1 day in milliseconds
 
-    @PostMapping("/login")
+    @PostMapping("/user/auth/login")
     public ResponseEntity<String> Login(@RequestBody String Login) throws IOException {
 
         System.out.print(Login);

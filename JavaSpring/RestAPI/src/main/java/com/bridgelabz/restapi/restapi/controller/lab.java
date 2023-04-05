@@ -317,12 +317,12 @@ public class lab {
                 "?lab bd:hasLabCity ?City ." +
                 "?lab bd:hasLabEmail ?Email ." +
                 "?lab bd:hasLabName ?Name ." +
-                "?lab bd:hasLabAddress ?Address ." +
+                "?lab bd:hasLabAddress ?Address } " +
                 "INSERT { ?lab bd:hasLabContactNo \"" + contactNo + "\"^^xsd:string ." +
                 " ?lab bd:hasLabCity \"" + city + "\"^^xsd:string ." +
                 " ?lab bd:hasLabEmail \"" + email + "\"^^xsd:string ." +
                 " ?lab bd:hasLabName \"" + name + "\"^^xsd:string ." +
-                " ?lab bd:hasLabAddress \"" + address + "\"^^xsd:string ." +
+                " ?lab bd:hasLabAddress \"" + address + "\"^^xsd:string } " +
                 "WHERE { ?lab rdf:type bd:Lab ." +
                 "?lab bd:hasLabContactNo ?ContactNo ." +
                 "?lab bd:hasLabName ?Name ." +
