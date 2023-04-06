@@ -1,24 +1,20 @@
 package com.bridgelabz.restapi.restapi.controller;
 
 import org.springframework.http.ResponseEntity;
-
 import java.io.*;
-
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+// import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
-
+// import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
-
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.apache.jena.query.Query;
 import org.apache.jena.query.QueryExecution;
 import org.apache.jena.query.QueryExecutionFactory;
@@ -34,16 +30,24 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
+import javax.servlet.http.HttpServletRequest;
+// import javax.servlet.http.HttpServletResponse;
+import java.util.HashSet;
+import java.util.Set;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.SignatureException;
+import io.jsonwebtoken.Claims;
 //import for password encryption
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-/*
- * Author: 
+
+/* 
+ * *****بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ*****
+ *
+ * Author:  
  * 
- * Authentication Function for our blood donation website
+ * Create JWT token for "Authentication Functionality" for our blood donation website
  * Full Stack Developer implementation
  * 
 */
@@ -55,12 +59,19 @@ public class Auth {
     public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
 
-    String secret = "mySecretKey";
-    Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    // String secret = "mySecretKey";
+    // Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    private final String secretKey = "secret-key-for-jwt-token-encryption-mySecretKey";
+    private final Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
+
+    public static String ROLE = "USER";
 
     Date now = new Date();
     Date expiration = new Date(now.getTime() + 86400000); // 1 day in milliseconds
 
+    /*
+     * Make login authentication request
+    */
     @PostMapping("/user/auth/login")
     public ResponseEntity<String> Login(@RequestBody String Login) throws IOException {
 
@@ -159,7 +170,7 @@ public class Auth {
                 boolean isMatch = encoder.matches(password, password_value);
 
                 if (isMatch) {
-
+                    ROLE = role_value;
                     // Build the JWT token using the Key object
                     String token = Jwts.builder()
                             .setSubject(role_value)
@@ -171,6 +182,7 @@ public class Auth {
 
                     //Check token value
                     System.out.println("Token: " + token);
+                    System.out.println("Key: " + key);
 
                     // return ResponseEntity.ok(token);
                     return ResponseEntity.ok()
@@ -197,6 +209,25 @@ public class Auth {
 
     }
 
+
+    /*
+     * Make logout request
+    */
+    @GetMapping("/user/logout")
+    public ResponseEntity<String> Logout(HttpServletRequest request) {
+
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            // create new token with expired expiration time
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "");
+        return new ResponseEntity<>("Logout successful", headers, HttpStatus.OK);
+    }
+
+
+    
     /*
      * Method for the Functionality of Read data on the basis of query
      */

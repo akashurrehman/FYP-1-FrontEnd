@@ -296,7 +296,7 @@ public class BloodCenter {
      * ID is passed in the URL
      * Through ID we can find the Blood Donation Center
      */
-    @PutMapping("/api/bloodCenter/RegisteredCenters/{ID}")
+    @PutMapping("/api/bloodCenter/RegisteredCenters/update/{ID}")
     public ResponseEntity<String> EditRegistedCenter(@RequestBody String center, @PathVariable String ID)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -756,7 +756,7 @@ public class BloodCenter {
      * Delete Blood Stock Details of blood Donation Centres by passing id
      * Information Includes Last daate preserved and quantity
      */
-    @DeleteMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{id}")
+    @DeleteMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/delete/{id}")
     public ResponseEntity<String> DeleteBloodStockDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
@@ -778,7 +778,7 @@ public class BloodCenter {
      * Include the Information such as Address, Required Blood Group, Quantity
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/makeRequest")
-    public ResponseEntity<String> AddBloodRequestDetails(@BodyRequest String RequestInfo) throws IOException {
+    public ResponseEntity<String> AddBloodRequestDetails(@RequestBody String RequestInfo) throws IOException {
         /*
          * String email = "Ahmed@email.com";
          * String hospital = "Shaukat Khanam";

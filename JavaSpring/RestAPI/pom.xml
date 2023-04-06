@@ -64,6 +64,7 @@
             <version>2.15.0-rc1</version>
         </dependency>
 
+        <!-- Dependencies for authentication -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -81,28 +82,28 @@
             <version>0.11.2</version>
             <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>5.5.0</version>
         </dependency>
         
+        <!-- Dependencies for authorization -->
         <dependency>
-  <groupId>org.springframework.security</groupId>
-  <artifactId>spring-security-config</artifactId>
-  <version>5.6.0</version>
-</dependency>
-<dependency>
-  <groupId>org.springframework.security</groupId>
-  <artifactId>spring-security-web</artifactId>
-  <version>5.6.0</version>
-</dependency>
-<dependency>
-  <groupId>org.springframework.security</groupId>
-  <artifactId>spring-security-core</artifactId>
-  <version>5.6.0</version>
-</dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>5.6.0</version>
+        </dependency>
             
 
 
