@@ -698,7 +698,7 @@ public class BloodCenter {
                         "bd:" + individualId + " rdf:type bd:Blood_Stock ;\n" +
                         "                       bd:hasBloodStockID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasBloodStockBloodGroup \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:dateTime ;\n" +
                         "                       bd:hasBloodStockNoOfBags \"%s\"^^xsd:string ;\n" +
                         "}",
                 individualId, bloodGroup, addedDate, noOfBags);
@@ -726,6 +726,7 @@ public class BloodCenter {
         String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
         String addedDate = jsonNode.has("addedDate") ? jsonNode.get("addedDate").asText() : null;
         String noOfBags = jsonNode.has("noOfBags") ? jsonNode.get("noOfBags").asText() : null;
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +

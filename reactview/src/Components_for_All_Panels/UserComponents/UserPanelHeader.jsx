@@ -1,19 +1,34 @@
 import React from "react";
-import { Container,  Navbar, Nav, Button,NavDropdown } from 'react-bootstrap';
-import { Person,EnvelopePaper } from 'react-bootstrap-icons';
+import { Container,  Navbar, Nav, Button,NavDropdown,Row,Col } from 'react-bootstrap';
+import { Person,EnvelopePaper,ArrowRight,PersonBadge } from 'react-bootstrap-icons';
 import logo from '../../Public/user/image/AppLogo4.png';
 
 import './css/style.css';
 
 const UserPanelHeader = () => {
 
+    const [isHover, setIsHover] = React.useState(true);
 
+    const handleMouseEnter = () => {
+        setIsHover(false);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHover(true);
+    };
+    const ButtonStyle = {
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
+        color: isHover ? 'white' : 'white',
+        transform: isHover ? 'scale(0.85)' : 'scale(0.9)',
+        border: isHover ? '' : '1px solid white',
+        transitionDuration: isHover ? '' : '0.45s',
+    };
 
     return ( <div>
         <Navbar collapseOnSelect expand="lg" bg="" variant="light" className='Navbar' fixed="top">
-            <div className="d-flex" style={{paddingLeft:'4%'}}>
-            <img src={logo} alt="logo" width="3.5%" height="50rem" />
-            <Navbar.Brand href="/user/home"><h2 className="TextColor d-flex"><div style={{fontFamily:'cursive',color:'rgb(150, 60, 60)'}}>life</div>Blood</h2></Navbar.Brand>
+            <div className="d-flex" style={{paddingLeft:'2%'}}>
+            <img src={logo} alt="logo" width="3.1%" height="43rem" />
+            <Navbar.Brand href="/user/home"><h3 className="TextColor d-flex"><div style={{fontFamily:'cursive',color:'rgb(150, 60, 60)'}}>life</div>Blood</h3></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
@@ -26,7 +41,7 @@ const UserPanelHeader = () => {
 
                 <Nav.Link className="" href="/user/blood-donation-centre">Donor Centres</Nav.Link>
                 
-                <Nav.Link className="" href="/user/request-maker">
+                {/* <Nav.Link className="" href="/user/request-maker">
                     <div class="dropdown">
                         <button class="dropbtn">Book Appointment</button>
                         <div class="dropdown-content">
@@ -35,19 +50,28 @@ const UserPanelHeader = () => {
                             <a href="#">Link 3</a>
                         </div>
                     </div>
-                </Nav.Link>
+                </Nav.Link> */}
                 
                 <Nav className="me-auto">
                     <ul className="list">
                         <Nav.Link className="Menu" href="/user/home">Blood Analysis
-                            <ul>
-                                <Nav.Link className="Link Menu" href="#"><EnvelopePaper className="p-1" size={31} />Post Blood Request</Nav.Link>
-                                <Nav.Link className="Link Menu" href="#">View Blood Request</Nav.Link>
-                                <Nav.Link className="Link Menu" href="#"></Nav.Link>
-                            </ul>
+                                <ul className="hello">
+                                    <Row>
+                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                    </Row>
+                                </ul>
+                            
                         </Nav.Link>
                     </ul>
-                    
                 </Nav>
 
                 </Nav>
@@ -60,10 +84,7 @@ const UserPanelHeader = () => {
                     <Nav.Link href="/user/contact-us">About us</Nav.Link>
                 </Nav>
                 <Nav>
-                    <Button variant="flat" href="/user/login">
-                        <Person className="" size={25} />
-                        Login
-                    </Button>  
+                <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >Login <ArrowRight className="" size={17} /></Button>  
                 </Nav>
                 
                 </div>
