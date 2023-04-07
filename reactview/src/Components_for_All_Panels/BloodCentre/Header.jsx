@@ -8,7 +8,7 @@ import './style/navbar.css'
 
 function Header(props) {
   return (
-    <Navbar style={{backgroundColor:"#153250",color:"#FFFFFF",paddingLeft:"50px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
+    <Navbar style={{backgroundColor:"#153250",color:"#FFFFFF",paddingLeft:"60px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
       <Container fluid>
         <Navbar.Brand>
         <img

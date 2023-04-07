@@ -663,7 +663,7 @@ public class BloodCenter {
         JSONObject resultsObj = jsonObj.getJSONObject("results");
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
-            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using provided Blood Group: " + Blood_Group
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using provided Blood Group: " + BloodGroup
                     + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
