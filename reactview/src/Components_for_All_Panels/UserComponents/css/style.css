@@ -1,9 +1,9 @@
 
 .Navbar{
     background-color: rgb(255, 255, 255);
-    padding-top: 10px;
-    padding-bottom: 10px;
-    box-shadow: 0px 0px 8px 0px rgb(116, 10, 10);
+    padding-top: 6.5px;
+    padding-bottom: 1px;
+    box-shadow: 0px 0px 2px 0px rgb(116, 10, 10);
 }
 
 .Appname{
@@ -82,38 +82,50 @@
 
 
 .list > .Menu {
-    display: inline-block
+    display: inline-block;
+    
 }
 .list > .Menu ul {
     visibility: hidden;
     position: absolute;
-    top: 105%;
-    left: 0;
+    top: 113%;
+    right: 0;
     transition: 0.2s 1s;
     background: rgb(255, 255, 255);
+    
 }
 .list > .Menu:hover ul {
     visibility: visible;
     transition-delay: 0s;
     background: rgb(255, 255, 255);
+    
 }
 .list {
     list-style: none;
     padding: 0;
     margin: 0;
     background-color: rgb(255, 255, 255);
+    
+    
 }
-
+.hello {
+    /* border: 1px solid #e93333; */
+    box-shadow: 0px 0px 2px 0px rgb(160, 15, 15);
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+    width: 400px;
+}
 .Menu {
     width: 200px;
     background: rgb(255, 255, 255);
     margin: -1px;
     position: relative;
     padding: 10px;
+    
 }
 .Link {
     display: block;
-    color:rgb(214, 79, 79);
+    color:rgba(68, 67, 67, 0.87);
+    margin-left: -12%;
 }
 
 .BorderBottom {

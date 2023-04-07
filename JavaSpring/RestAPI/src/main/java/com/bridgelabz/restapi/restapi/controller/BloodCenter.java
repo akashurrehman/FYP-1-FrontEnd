@@ -296,8 +296,8 @@ public class BloodCenter {
      * ID is passed in the URL
      * Through ID we can find the Blood Donation Center
      */
-    @PutMapping("/api/bloodCenter/RegisteredCenters/{ID}")
-    public ResponseEntity<String> EditRegistedCenter(@PathVariable String ID, @RequestBody String center)
+    @PutMapping("/api/bloodCenter/RegisteredCenters/update/{ID}")
+    public ResponseEntity<String> EditRegistedCenter(@RequestBody String center, @PathVariable String ID)
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(center);
@@ -639,7 +639,7 @@ public class BloodCenter {
      * Information Includes Last daate preserved and quantity
      */
     @GetMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{BloodGroup}")
-    public ResponseEntity<String> GetbloodStockDetailsbyID(@PathVariable String Blood_Group) {
+    public ResponseEntity<String> GetbloodStockDetailsbyID(@PathVariable String BloodGroup) {
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
@@ -649,7 +649,7 @@ public class BloodCenter {
                 "?stocks bd:hasBloodStockID ?ID ." +
                 "?stocks bd:hasBloodStockNoOfBags ?No_Of_Bags ." +
                 "?stocks bd:hasBloodStockAddedDate ?Gender ." +
-                "filter(?Blood_Group = \"" + Blood_Group + "\")" +
+                "filter(?Blood_Group = \"" + BloodGroup + "\")" +
                 "}";
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
@@ -698,7 +698,7 @@ public class BloodCenter {
                         "bd:" + individualId + " rdf:type bd:Blood_Stock ;\n" +
                         "                       bd:hasBloodStockID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasBloodStockBloodGroup \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:dateTime ;\n" +
                         "                       bd:hasBloodStockNoOfBags \"%s\"^^xsd:string ;\n" +
                         "}",
                 individualId, bloodGroup, addedDate, noOfBags);
@@ -726,6 +726,7 @@ public class BloodCenter {
         String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
         String addedDate = jsonNode.has("addedDate") ? jsonNode.get("addedDate").asText() : null;
         String noOfBags = jsonNode.has("noOfBags") ? jsonNode.get("noOfBags").asText() : null;
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
@@ -756,7 +757,7 @@ public class BloodCenter {
      * Delete Blood Stock Details of blood Donation Centres by passing id
      * Information Includes Last daate preserved and quantity
      */
-    @DeleteMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{id}")
+    @DeleteMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/delete/{id}")
     public ResponseEntity<String> DeleteBloodStockDetails(@PathVariable String id) throws IOException {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +

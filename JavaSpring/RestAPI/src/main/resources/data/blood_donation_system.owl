@@ -679,18 +679,18 @@
     <bd:hasDonorCity>Lahore</bd:hasDonorCity>
   </bd:Blood_Donation>
   <bd:Sponsor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor_1">
+    <bd:hasSponsorName>Jamal Sons</bd:hasSponsorName>
     <bd:hasSponsorMessage>This website make sure that blood is available for pateient in any situation.</bd:hasSponsorMessage>
-    <bd:hasSponsorName>Jamal Brothers</bd:hasSponsorName>
     <bd:hasSponsorID>S001</bd:hasSponsorID>
     <bd:sponsorManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Sponsor>
   <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_1">
-    <bd:hasBloodStockNoOfBags>1</bd:hasBloodStockNoOfBags>
-    <bd:hasBloodStockID>BS001</bd:hasBloodStockID>
-    <bd:hasBloodStockBloodGroup>O-</bd:hasBloodStockBloodGroup>
+    <bd:hasBloodStockNoOfBags>2</bd:hasBloodStockNoOfBags>
     <bd:hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
+    >2000-01-02T00:00:05</bd:hasBloodStockAddedDate>
+    <bd:hasBloodStockBloodGroup>O+</bd:hasBloodStockBloodGroup>
+    <bd:hasBloodStockID>BS001</bd:hasBloodStockID>
     <bd:stockManagedBy>
       <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_001">
         <bd:hasCentreContactNo>+92 042 1234567</bd:hasCentreContactNo>
@@ -766,9 +766,9 @@
     <bd:hasRole>USER</bd:hasRole>
     <bd:hasPassword>345678912user</bd:hasPassword>
     <bd:hasPersonContactNo>+92 333 1234563</bd:hasPersonContactNo>
-    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasPersonGender>Male</bd:hasPersonGender>
     <bd:hasPersonAddress>H03 A-Block DHA, Lahore</bd:hasPersonAddress>
+    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasUserName>salman123</bd:hasUserName>
     <bd:userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
     <bd:hasPersonDateOfBirth>January 03,2001</bd:hasPersonDateOfBirth>

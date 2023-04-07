@@ -182,7 +182,7 @@ const BloodDonationCentre = () => {
                                         
                                         <Row style={{backgroundColor:'#f9f2f1',width:'100%',marginLeft:'0%'}}>
                                             <Card.Text>
-                                                <p style={{paddingTop:'1%'}}><strong>Open: </strong>Monday to Friday</p> 
+                                                <p style={{paddingTop:'1%'}}><strong>Opening Days: </strong>Monday to Friday</p> 
                                             </Card.Text>
                                         </Row>
     
