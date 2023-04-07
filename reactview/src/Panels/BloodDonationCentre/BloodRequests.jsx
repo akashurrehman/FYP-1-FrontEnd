@@ -9,9 +9,25 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
-import './Styling/print.css';
-const Appointments=()=> {  
+
+const BloodRequests=()=> {  
+    const [selectedRowIds, setSelectedRowIds] = useState({});
+
   const [data, setData] = useState([]);
+
+        const handleApprove = (id) => {
+            axios
+                .post(`http://localhost:8081/api/users/bloodrequest/approve/${id}`)
+                .then((response) => console.log(response.data))
+                .catch((error) => console.log(error));
+        };
+        const handleReject = (id) => {
+            axios
+                .post(`http://localhost:8081/api/users/bloodrequest/reject/${id}`)
+                .then((response) => console.log(response.data))
+                .catch((error) => console.log(error));
+        };
+
   useEffect(() => {
     // fetch data from the backend
     fetch('http://localhost:8081/api/users/bloodrequest')
@@ -38,56 +54,20 @@ const Appointments=()=> {
   }, []);
 
   const handlePrint = () => {
-    let printContent = '<h1>All Booked Appointment</h1><table>';
+    let printContent = '<h1>All Blood Requests</h1><table>';
     printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
     data.forEach((row) => {
       printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
     });
     printContent += '</table>';
-  // Add the watermark image
-  printContent += '<div class="watermark"><img src="/../../Components_for_All_Panels/BloodCentre/Image/A-positive.jpg" /></div>';
-
-      // Use CSS to style the background image
-  const style = `
-  <style>
-    table {
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    .watermark {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.3;
-    }
-    .watermark img {
-      display: block;
-      margin: 0 auto;
-      max-width: 50%;
-      max-height: 50%;
-    }
-  
-  </style>
-`;
-  
     // Create a new window with the printable HTML and print it
     const printWindow = window.open('', '_blank');
-
-    printWindow.document.write(style + printContent);
+    printWindow.document.write(printContent);
     printWindow.document.close();
     printWindow.print();
   };
+  
+   
 const mystyle = {
   height: "7%",
   width: "7%",
@@ -132,11 +112,13 @@ const columns = [
   {
     name: 'Action',
     cell: (row) => (
-      <Button variant="primary" style={{ borderRadius: 0, height:"50%", widht:"100%" }} onClick={() => alert('Download Receipt Option selected!')}>Download Receipt</Button>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Button variant="primary" style={{ borderRadius: 0,height:"30px", width:"100%", marginRight:"5px" }} onClick={handleApprove}>Remove</Button>
+        <Button variant="success" style={{ borderRadius: 0,height:"30px",  width:"100%" }} onClick={handleReject}>Update</Button>
+      </div>
     )
-  }
+  }  
 ];
-
   return (
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
@@ -148,19 +130,18 @@ const columns = [
         <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
-              <Card.Title >Booked Appointments</Card.Title>
+              <Card.Title >All Blood Requests</Card.Title>
             </Card.Body>
         </Card>
-        <DataTable title = "All Appointment" columns={columns} data={data}
+        <DataTable title = "All Blood Requests" columns={columns} data={data}
           pagination
           fixedHeader
-          fixedHeaderScrollHeight='450px'
+          fixedHeaderScrollHeight='500px'
           selectableRows
           selectableRowsHighlight
           highlightOnHover
-          
           actions ={
-            <button className='btn btn-info' onClick={handlePrint}> Download</button>
+            <button className='btn btn-info' onClick={handlePrint}> Download All blood Requests</button>
           }
           subHeader
         />
@@ -170,4 +151,4 @@ const columns = [
   );
 }
 
-export default Appointments;
+export default BloodRequests;

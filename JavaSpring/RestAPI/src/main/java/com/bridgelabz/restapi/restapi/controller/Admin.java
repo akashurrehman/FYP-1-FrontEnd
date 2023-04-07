@@ -1,6 +1,9 @@
 package com.bridgelabz.restapi.restapi.controller;
 
 import java.io.*;
+import org.springframework.http.HttpHeaders;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,17 +31,18 @@ import org.json.JSONObject;
 //import org.json.JSONArray;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpHeaders;
+
+//import for password encryption
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @RestController
 public class Admin {
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
-     * Managed by Akash Ur Rehman and Muhammad Abu hurairah
+     * Managed by Akash Ur Rehman
      * Last Updated on 24/03/2020 11:00 PM
      * All Routes are added for FRs
      * No Hard Coded Data
@@ -105,16 +109,17 @@ public class Admin {
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
-                "DELETE {?sponsor bd:hasSponsorName ?Name ." +
-                "?sponsor bd:hasSponsorMessage ?Message ." +
-                "INSERT { ?sponsor bd:hasSponsorName \"" + name + "\"^^xsd:string ." +
-                " ?sponsor bd:hasSponsorMessage \"" + message + "\"^^xsd:string ." +
-                "WHERE { ?sponsor rdf:type bd:Sponsor ." +
-                "?sponsor bd:hasSponsorMessage ?Message ." +
-                "?sponsor bd:hasSponsorName ?Name ." +
-                "?sponsor bd:hasSponsorID ?ID ." +
+                "DELETE {?sponsors bd:hasSponsorName ?Name ." +
+                "?sponsors bd:hasSponsorMessage ?Message }" +
+                "INSERT { ?sponsors bd:hasSponsorName \"" + name + "\"^^xsd:string ." +
+                " ?sponsors bd:hasSponsorMessage \"" + message + "\"^^xsd:string } " +
+                "WHERE { ?sponsors rdf:type bd:Sponsor ." +
+                "?sponsors bd:hasSponsorName ?Name ." +
+                "?sponsors bd:hasSponsorID ?ID ." +
+                "?sponsors bd:hasSponsorMessage ?Message ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
+
         boolean isInserted = UpdateSparql(queryString);
 
         if (isInserted) {
@@ -264,12 +269,12 @@ public class Admin {
                 "?financialDonor bd:hasFinancialDonorMessage ?Message ." +
                 "?financialDonor bd:hasFinancialDonorName ?Name ." +
                 "?financialDonor bd:hasFinancialDonorDonationAmount ?DonationAmount ." +
-                "?financialDonor bd:hasFinancialDonorDonationDate ?DonationDate ." +
+                "?financialDonor bd:hasFinancialDonorDonationDate ?DonationDate }" +
                 "INSERT { ?financialDonor bd:hasFinancialDonorContactNo \"" + contactNo + "\"^^xsd:string ." +
                 " ?financialDonor bd:hasFinancialDonorMessage \"" + message + "\"^^xsd:string ." +
                 " ?financialDonor bd:hasFinancialDonorName \"" + name + "\"^^xsd:string ." +
                 " ?financialDonor bd:hasFinancialDonorDonationAmount \"" + donationAmount + "\"^^xsd:string ." +
-                " ?financialDonor bd:hasFinancialDonorDonationDate \"" + donationDate + "\"^^xsd:string ." +
+                " ?financialDonor bd:hasFinancialDonorDonationDate \"" + donationDate + "\"^^xsd:string } " +
                 "WHERE { ?financialDonor rdf:type bd:Financial_Donation ." +
                 "?financialDonor bd:hasFinancialDonorContactNo ?ContactNo ." +
                 "?financialDonor bd:hasFinancialDonorDonationAmount ?DonationAmount ." +
@@ -449,10 +454,10 @@ public class Admin {
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?jobpost bd:hasJobPostTitle ?Title ." +
                 "?jobpost bd:hasJobPostDetails ?Details ." +
-                "?jobpost bd:hasJobPostPostingDate ?PostingDate ." +
+                "?jobpost bd:hasJobPostPostingDate ?PostingDate }" +
                 "INSERT { ?jobpost bd:hasJobPostTitle \"" + title + "\"^^xsd:string ." +
                 " ?jobpost bd:hasJobPostDetails \"" + details + "\"^^xsd:string ." +
-                " ?jobpost bd:hasJobPostPostingDate \"" + postingDate + "\"^^xsd:string ." +
+                " ?jobpost bd:hasJobPostPostingDate \"" + postingDate + "\"^^xsd:string } " +
                 "WHERE { ?jobpost rdf:type bd:Job_Post ." +
                 "?jobpost bd:hasJobPostTitle ?Title ." +
                 "?jobpost bd:hasJobPostDetails ?Details ." +
@@ -617,9 +622,9 @@ public class Admin {
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?faq bd:hasFAQTitle ?Title ." +
-                "?faq bd:hasFAQDetails ?Details ." +
+                "?faq bd:hasFAQDetails ?Details }" +
                 "INSERT { ?faq bd:hasFAQTitle \"" + title + "\"^^xsd:string ." +
-                " ?faq bd:hasFAQDetails \"" + details + "\"^^xsd:string ." +
+                " ?faq bd:hasFAQDetails \"" + details + "\"^^xsd:string } " +
                 "WHERE { ?faq rdf:type bd:Frequently_Asked_Question ." +
                 "?faq bd:hasFAQDetails ?Details ." +
                 "?faq bd:hasFAQTitle ?Title ." +
@@ -829,10 +834,10 @@ public class Admin {
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?campaign bd:hasCampaignsPostDate ?PostDate ." +
                 "?campaign bd:hasCampaignDetails ?Details ." +
-                "?campaign bd:hasCampaignTitle ?Title ." +
+                "?campaign bd:hasCampaignTitle ?Title }" +
                 "INSERT { ?campaign bd:hasCampaignsPostDate \"" + postDate + "\"^^xsd:string ." +
                 " ?campaign bd:hasCampaignDetails \"" + details + "\"^^xsd:string ." +
-                " ?campaign bd:hasCampaignTitle \"" + title + "\"^^xsd:string ." +
+                " ?campaign bd:hasCampaignTitle \"" + title + "\"^^xsd:string } " +
                 "WHERE { ?campaign rdf:type bd:Campaign ." +
                 "?campaign bd:hasCampaignsPostDate ?PostDate ." +
                 "?campaign bd:hasCampaignDetails ?Details ." +
@@ -1003,10 +1008,10 @@ public class Admin {
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?news bd:hasNewsPostDate ?PostDate ." +
                 "?news bd:hasNewsDetails ?Details ." +
-                "?news bd:hasNewsTitle ?Title ." +
+                "?news bd:hasNewsTitle ?Title }" +
                 "INSERT { ?news bd:hasNewsPostDate \"" + postDate + "\"^^xsd:string ." +
                 " ?news bd:hasNewsDetails \"" + details + "\"^^xsd:string ." +
-                " ?news bd:hasNewsTitle \"" + title + "\"^^xsd:string ." +
+                " ?news bd:hasNewsTitle \"" + title + "\"^^xsd:string } " +
                 "WHERE { ?news rdf:type bd:News ." +
                 "?news bd:hasNewsPostDate ?PostDate ." +
                 "?news bd:hasNewsDetails ?Details ." +
@@ -1136,10 +1141,10 @@ public class Admin {
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                 "DELETE {?advertisement bd:hasAdvertisementPostDate ?PostDate ." +
                 "?advertisement bd:hasAdvertisementDetails ?Details ." +
-                "?advertisement bd:hasAdvertisementTitle ?Title ." +
+                "?advertisement bd:hasAdvertisementTitle ?Title }" +
                 "INSERT { ?advertisement bd:hasAdvertisementPostDate \"" + postDate + "\"^^xsd:string ." +
                 " ?advertisement bd:hasAdvertisementDetails \"" + details + "\"^^xsd:string ." +
-                " ?advertisement bd:hasAdvertisementTitle \"" + title + "\"^^xsd:string ." +
+                " ?advertisement bd:hasAdvertisementTitle \"" + title + "\"^^xsd:string } " +
                 "WHERE { ?advertisement rdf:type bd:Advertisement ." +
                 "?advertisement bd:hasAdvertisementPostDate ?PostDate ." +
                 "?advertisement bd:hasAdvertisementDetails ?Details ." +
@@ -1223,11 +1228,11 @@ public class Admin {
                 "DELETE {?event bd:hasEventName ?Name ." +
                 "?event bd:hasEventLocation ?Location ." +
                 "?event bd:hasEventMessage ?Message ." +
-                "?event bd:hasEventDateTime ?DateTime ." +
+                "?event bd:hasEventDateTime ?DateTime }" +
                 "INSERT { ?event bd:hasEventName \"" + name + "\"^^xsd:string ." +
                 " ?event bd:hasEventLocation \"" + location + "\"^^xsd:string ." +
                 " ?event bd:hasEventMessage \"" + message + "\"^^xsd:string ." +
-                " ?event bd:hasEventDateTime \"" + dateTime + "\"^^xsd:dateTime ." +
+                " ?event bd:hasEventDateTime \"" + dateTime + "\"^^xsd:dateTime } " +
                 "WHERE { ?event rdf:type bd:Event ." +
                 "?event bd:hasEventName ?Name ." +
                 "?event bd:hasEventDateTime ?DateTime ." +
@@ -1454,10 +1459,11 @@ public class Admin {
         }
     }
 
-    /* Method for Funtionality of Updating Data using sparql query */
+    /*
+     * Method for Functionality of Updating Data using SPARQL query
+     */
     static boolean UpdateSparql(String queryString) throws IOException {
         File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
-
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;
@@ -1475,22 +1481,20 @@ public class Admin {
                 }
             }
         }
-
         try {
             // Create the update execution object and execute the query
             UpdateAction.parseExecute(queryString, model);
-
-            // Print the updated model
-            System.out.printf("Updated model:", model);
 
             // Write the updated model to a file
             FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
             model.write(out, "RDF/XML-ABBREV");
             out.close();
-            return true;
+            return true; // data insertion successful
+
         } catch (Exception e) {
-            System.out.println("Error in Updating");
-            return false;
+            e.printStackTrace();
+            return false; // data insertion unsuccessful
         }
+
     }
 }

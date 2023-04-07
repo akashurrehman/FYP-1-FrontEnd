@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -8,10 +8,52 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
+import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
+
 
 const BloodInformation=()=> {
+    const [donorData, setDonorData] = useState({
+      name:"",
+      gender: "",
+      city:"",
+      location: "",
+      contactNo: "",
+      bloodGroup: "",
+      email: "",
+      message:"",
+    });
+
+    const [showModal, setShowModal] = useState(false);
+
+    
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setDonorData((prevUserData) => ({ ...prevUserData, [name]: value }));
+    };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      setShowModal(true);
+    };
+    
+  const handleConfirm = () => {
+    axios
+    .post(`http://localhost:8081/api/user/bloodDonation/BloodDonationDetails/addUserInfo`, donorData)
+    .then((response) => {
+      console.log(response.data);
+      })
+    .catch((error) => {
+      console.error(error);
+    });
+  setShowModal(false);
+  }
+
+  const handleCancel = () => {
+    setShowModal(false);
+  }
   return (
-    <Container fluid>
+    <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
         <Col xs={3}>
@@ -21,8 +63,15 @@ const BloodInformation=()=> {
           <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
             <Card.Img variant="top" src="/100px180" />
             <Card.Body>
-              <Card.Title>Add Blood Information of User</Card.Title>
+              <Card.Title>Add Blood Information of User who donate blood</Card.Title>
             </Card.Body>
+          </Card>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
+            <Card.Body>
+              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>In this Page, you can add the details of the user who donate blood on you center!</Card.Title>
+              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>This donor information can be used for future transfutions!</Card.Title>
+            </Card.Body>
+
           </Card>
         
       <Form className="mt-3">
@@ -33,16 +82,7 @@ const BloodInformation=()=> {
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-user"></i></InputGroup.Text>
-            <Form.Control id="inlineFormInputGroup" placeholder="Donor Name" />
-          </InputGroup>
-        </Col>
-        <Col xs="12"  sm="4">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Phone
-          </Form.Label>
-          <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
-            <Form.Control id="inlineFormInputGroup" placeholder="+923459215623" />
+            <Form.Control id="inlineFormInputGroup" placeholder="Donor Name" name="name" onChange={handleChange}/>
           </InputGroup>
         </Col>
         <Col xs="12"  sm="4">
@@ -51,7 +91,16 @@ const BloodInformation=()=> {
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
-            <Form.Control id="inlineFormInputGroup" placeholder="Email" />
+            <Form.Control id="inlineFormInputGroup" placeholder="example@email.com" name="email" onChange={handleChange}/>
+          </InputGroup>
+        </Col>
+        <Col xs="12"  sm="4">
+          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
+            Contact No
+          </Form.Label>
+          <InputGroup className="mb-2">
+            <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
+            <Form.Control id="inlineFormInputGroup" placeholder="+92 348484848" name="contactNo" onChange={handleChange}/>
           </InputGroup>
         </Col>
       </Row>
@@ -59,23 +108,20 @@ const BloodInformation=()=> {
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
-              <Form.Control placeholder="Donor's Address" />
+              <Form.Control placeholder="Donor's City" name="city" onChange={handleChange}/>
           </InputGroup>
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
-              <Form.Label visuallyHidden>Blood Type</Form.Label>
-                <Form.Select defaultValue="Choose blood Type">
-                  <option>AB+</option>
-                  <option>AB-</option>
-                </Form.Select>
+              <Form.Label visuallyHidden>Enter Location</Form.Label>
+              <Form.Control placeholder="Location" name="location" onChange={handleChange}/>
           </InputGroup>
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
-              <Form.Control placeholder="Donor's Age" />
+              <Form.Control placeholder="Donor's Blood Group" name="bloodGroup" onChange={handleChange} />
           </InputGroup>
         </Col>
       </Row>
@@ -83,36 +129,49 @@ const BloodInformation=()=> {
         <Col>
         <InputGroup className="mb-2">
           <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
-            <Form.Label visuallyHidden>Blood Donation Center</Form.Label>
-              <Form.Select defaultValue="Choose blood Type">
-                  <option>Center-1</option>
-                  <option>Center-2</option>
-              </Form.Select>
-        </InputGroup>
+            <Form.Label visuallyHidden>Donor's Gender </Form.Label>
+              <Form.Control placeholder="Donor's gender" name="gender" onChange={handleChange}/>
+          </InputGroup>
         </Col>
         <Col>
-          <Form.Label visuallyHidden>last  Donation</Form.Label>
-          <Form.Select placeholder="Choose last Donation  time">
-            <option>1 Month</option>
-            <option>2 Months</option>
-          </Form.Select>
+        <InputGroup className="mb-2">
+          <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+          <Form.Label visuallyHidden>Any message to other user?</Form.Label>
+            <Form.Control placeholder="Type your message here...." name="message" onChange={handleChange}/>
+        </InputGroup>
         </Col>
       </Row>
       <Row className="mt-3">
         <Col xs="12" sm={6}>
           <Form.Group className="mb-3" id="formGridCheckbox">
-            <Form.Check type="checkbox" label="According to your provided information of Donor is correct" />
+            <Form.Check type="checkbox" label="According to your provided information of Donor is correct. Any wrong information can lead to disconnect from using website" />
           </Form.Group>
-        </Col>
-        <Col xs="12" sm={6} className="align-items-center">
-          <Button variant="primary" type="submit" className="w-25">
-            Submit
-          </Button>
         </Col>
       </Row>
     </Form>
+    <Col xs="12" sm={6} className="align-items-center">
+          <Button variant="primary" type="submit" className="w-50" onClick={handleSubmit}>
+            Submit Donor's Information
+          </Button>
+        </Col>
     </Col>
       </Row>
+      <Modal show={showModal} onHide={handleCancel}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Submission</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to submit the Donors Information?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancel}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={handleConfirm}>
+            Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }

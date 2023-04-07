@@ -1,0 +1,16 @@
+@media print {
+    h1 {
+      color: blue;
+      font-size: 24px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    td, th {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+  }
+  

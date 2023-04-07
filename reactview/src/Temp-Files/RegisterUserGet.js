@@ -227,3 +227,41 @@ function User({ match }) {
 }
 
 export default User;
+
+// Functionality For uploading image to server build in Nodejs
+/*
+
+    const [image, setImage] = useState(null);
+    const [message, setMessage] = useState("");
+const handleChange = (event) => {
+  setImage(event.target.files[0]);
+};
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+
+  const formData = new FormData();
+  formData.append("image", image);
+
+  axios
+    .post("http://localhost:3003/users/upload", formData)
+    .then((res) => {
+      console.log(res.data)
+      setMessage(res.data.message);
+    })
+    .catch((error) => {
+      setMessage(error.message);
+    });
+};
+*/
+
+//For uploading image to server build in Nodejs
+/*
+<CardGroup>
+<form onSubmit={handleSubmit}>
+  <input type="file" accept="image/*"  onChange={handleChange} />
+  <button type="submit">Upload</button>
+  {message && <p>{message}</p>}
+</form>
+</CardGroup>
+*/

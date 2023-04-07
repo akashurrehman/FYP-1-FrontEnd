@@ -13,8 +13,8 @@ import A_positive from './../../Components_for_All_Panels/BloodCentre/Image/A-po
 import B_positive from './../../Components_for_All_Panels/BloodCentre/Image/B-positive.jpg';
 import AB_positive from './../../Components_for_All_Panels/BloodCentre/Image/Ab-positive.jpg';
 import AB_negative from './../../Components_for_All_Panels/BloodCentre/Image/Ab-negative.jpg';
-import axios from 'axios';
- 
+import axios from 'axios'; 
+
 const BloodStock=()=> {
 
   const mystyle = {
@@ -23,21 +23,92 @@ const BloodStock=()=> {
     borderRadius: "50px",
     display: "inline-block",
 };
-//const [bloodStocks, setBloodStocks] = useState([]);
 
 
 
   const [show, setShow] = useState(false);
 
+  const [blood, setbloodData] = useState([]);
+
+  
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails');
+        const { results } = response.data;
+        if (results && results.bindings && results.bindings.length > 0) {
+          const centerData = results.bindings.map((binding) => ({
+            ID: binding.ID.value,
+            bloodGroup: binding.Blood_Group.value,
+            noOfBags: binding.No_Of_Bags.value,
+            addedDate: binding.Gender.value,
+          }));
+          setbloodData(centerData);
+          console.log("Data",centerData);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
+  
+  
+const handleInputChange = (event) => {
+  const { name, value } = event.target;
+  setSingleData((prevCenterData) => ({ ...prevCenterData, [name]: value }));
+};
+
   function handleClose() {
     console.log("Handle Closed clicked");
-
     return setShow(false);
   }
-  function handleShow() {
-    console.log("handle show clicked");
+
+  const [bloodData, setSingleData] = useState(
+    {
+      ID: "",
+      bloodGroup: "",
+      noOfBags: "",
+      addedDate: "",
+    }
+  );
+  const handleShow = (id) => {
+    console.log("Handle Show clicked");
+    console.log("ID",id)
+    axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${id}`).then((response)=>{
+      const { results } = response.data;
+      if (results && results.bindings && results.bindings.length > 0) {
+        const centerData = results.bindings[0];
+        setSingleData({
+          ID: centerData.ID.value,
+          bloodGroup: centerData.Blood_Group.value,
+          noOfBags: centerData.No_Of_Bags.value,
+          addedDate: centerData.Gender.value
+        });
+        console.log("Data",centerData);
+      }});
     return setShow(true);
-  }
+  };
+  
+  
+
+  const handleSaveChanges = () => {
+    console.log("Handle Save Changes clicked");
+    console.log("ID",bloodData.ID);
+    axios
+      .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${bloodData.ID}`, bloodData)
+      .then((response) => {
+        console.log("Response Data",response.data);
+        console.log("Data updated successfully!");
+        handleClose();
+      })
+      .catch((error) => {
+        console.log("Error updating data: ", error);
+      });
+  };
+
+
     return (
       <>
       <Modal fade={false} show={show} onHide={handleClose}>
@@ -47,7 +118,7 @@ const BloodStock=()=> {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Blood Group:{"A+"}</Form.Label>
+            <Form.Label>Blood Group: {bloodData.bloodGroup}</Form.Label>
             </Form.Group>
             <Form.Group
               className="mb-3"
@@ -57,22 +128,17 @@ const BloodStock=()=> {
               <Form.Control
                 placeholder="1 bottle or 100Ml"
                 autoFocus
-                value="1 bottle or 100Ml"
-                onChange={(e)=>console.log(e.target.value)}
-              />
-              <Form.Label>Date on last bottle collected?</Form.Label>
-              <Form.Control
-                placeholder="21 january 2022"
-                autoFocus
-                value="29 jan 2022"
-                onChange={(e)=>console.log(e.target.value)}
-              />
+                name="noOfBags"
+                value={bloodData.noOfBags}
+                onChange={handleInputChange}
+                />
               <Form.Label>Freeze time</Form.Label>
               <Form.Control
                 placeholder="10 am"
                 autoFocus
-                value="10 am"
-                onChange={(e)=>console.log(e.target.value)}
+                name="addedDate"
+                value={bloodData.addedDate}
+                onChange={handleInputChange}
               />
             </Form.Group>
           </Form>
@@ -81,141 +147,44 @@ const BloodStock=()=> {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}> 
+          <Button variant="primary" onClick={handleSaveChanges}> 
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
-    <Container fluid>
+    <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
         <Col xs={3}>
-            <Sidebar/>        
+          <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
         <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
-            <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
+          <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Available Blood Stock</Card.Title>
             </Card.Body>
           </Card>
+          <>
           <CardGroup>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                        <Card.Title>Last blood updated on {"time_Changes"}</Card.Title>
-                        <Button variant="primary" onClick={handleShow}>Details</Button>
-                        <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={B_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                    <Card.Title>Last blood changed on time={"date"}</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={AB_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
+          {blood.map((card) => (
+            <Col key={card.ID} md={4}>
+              <Card style={{ width: "18rem" }}>
+                <Card.Img variant="top" src={card.bloodGroup === 'A+' ? A_positive : card.bloodGroup === 'B+' ? B_positive : card.bloodGroup === 'AB+' ? AB_positive : AB_negative} />
                 <Card.Body>
-                    <Card.Title>Last blood changed on {"date"}</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
+                  <Card.Title>{card.bloodGroup}</Card.Title>
+                  <Card.Text>No of bags available: {card.noOfBags}</Card.Text>
+                  <Card.Text>Freeze time: {card.addedDate}</Card.Text>
+                  <Button variant="primary" onClick={() => handleShow(card.bloodGroup)}>
+                    Update Stock
+                  </Button>
+                </Card.Body>
+              </Card>
             </Col>
+          ))}
         </CardGroup>
-        <CardGroup>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={AB_negative} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                        <Card.Title>Last blodd changed on time={"date"}</Card.Title>
-                        <Button variant="primary" onClick={handleShow}>Details</Button>
-                        <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                    <Card.Title>Blood Group</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                    <Card.Title>Blood Stock-2</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </CardGroup>
-        <CardGroup>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                        <Card.Title>Blood Stock-1</Card.Title>
-                        <Button variant="primary" onClick={handleShow}>Details</Button>
-                        <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                    <Card.Title>Blood Stock-2</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-            <Col className="mt-md-5 px-2" xs={12} md={4}>  
-                <Card style={{marginTop:30,paddingBottom:10}}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Card.Img variant="top" src={A_positive} style={{height:"8rem",width:"10rem"}}/>
-                </div>
-                    <Card.Body>
-                    <Card.Title>Blood Stock-2</Card.Title>
-                    <Button variant="primary">Go to Details-2</Button>
-                    <Button variant="danger">Update Details</Button>
-                    </Card.Body>
-                </Card>
-            </Col>
-        </CardGroup>
-        <>
-        
-        </>
+          </>
+
         </Col>
       </Row>
     </Container>

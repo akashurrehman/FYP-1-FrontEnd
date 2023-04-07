@@ -51,7 +51,7 @@ public class lab {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Add the New report in the Database
@@ -316,12 +316,12 @@ public class lab {
                 "?lab bd:hasLabCity ?City ." +
                 "?lab bd:hasLabEmail ?Email ." +
                 "?lab bd:hasLabName ?Name ." +
-                "?lab bd:hasLabAddress ?Address ." +
+                "?lab bd:hasLabAddress ?Address } " +
                 "INSERT { ?lab bd:hasLabContactNo \"" + contactNo + "\"^^xsd:string ." +
                 " ?lab bd:hasLabCity \"" + city + "\"^^xsd:string ." +
                 " ?lab bd:hasLabEmail \"" + email + "\"^^xsd:string ." +
                 " ?lab bd:hasLabName \"" + name + "\"^^xsd:string ." +
-                " ?lab bd:hasLabAddress \"" + address + "\"^^xsd:string ." +
+                " ?lab bd:hasLabAddress \"" + address + "\"^^xsd:string } " +
                 "WHERE { ?lab rdf:type bd:Lab ." +
                 "?lab bd:hasLabContactNo ?ContactNo ." +
                 "?lab bd:hasLabName ?Name ." +

@@ -8,7 +8,7 @@ import './style/navbar.css'
 
 function Header(props) {
   return (
-    <Navbar style={{backgroundColor:"#782F40",color:"#FFFFFF",paddingLeft:"50px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
+    <Navbar style={{backgroundColor:"#153250",color:"#FFFFFF",paddingLeft:"50px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
       <Container fluid>
         <Navbar.Brand>
         <img
@@ -28,9 +28,9 @@ function Header(props) {
             style={{ maxHeight: '100px',color:"#FFFFFF" }}
             navbarScroll
           >
-            <Nav.Link href="#action1" style={{color:"#FFFFFF" }}>Dashboard/Home</Nav.Link>
-            <Nav.Link href="#action2" style={{color:"#FFFFFF" }}>Add Blood Request</Nav.Link>
-            <Nav.Link href="#action2" style={{color:"#FFFFFF" }}>Add User</Nav.Link>
+            <Nav.Link href="/bloodCenter/HomeScreen" style={{color:"#FFFFFF" }}>Dashboard/Home</Nav.Link>
+            <Nav.Link href="/bloodCenter/addbloodRequest" style={{color:"#FFFFFF" }}>Add Blood Request</Nav.Link>
+            <Nav.Link href="/bloodCenter/addNewUser" style={{color:"#FFFFFF" }}>Add New User</Nav.Link>
             {/* <NavDropdown title="About Us" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -42,7 +42,7 @@ function Header(props) {
               </NavDropdown.Item>
             </NavDropdown> */}
             <Nav.Link href="#" style={{color:"#FFFFFF" }}>
-              Link
+              Other Options
             </Nav.Link>
           </Nav>
             <Nav>
@@ -72,7 +72,7 @@ function Header(props) {
               />
           <Form className="d-flex">
           <Dropdown>
-            <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{}}>
+            <Dropdown.Toggle variant="primary" id="dropdown-basic" style={{ backgroundColor: "white", color: "red",height:"auto",width:"auto"}} caret>
                 
             </Dropdown.Toggle>
 

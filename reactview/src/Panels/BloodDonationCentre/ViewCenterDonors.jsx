@@ -10,7 +10,8 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 import './Styling/print.css';
-const Appointments=()=> {  
+
+const ViewCenterDonors=()=> {  
   const [data, setData] = useState([]);
   useEffect(() => {
     // fetch data from the backend
@@ -148,10 +149,11 @@ const columns = [
         <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
-              <Card.Title >Booked Appointments</Card.Title>
+              <Card.Title >All Donors till Now</Card.Title>
+              <Card.Title >Contains the information of all the donors who donate at your blood donation center!</Card.Title>
             </Card.Body>
         </Card>
-        <DataTable title = "All Appointment" columns={columns} data={data}
+        <DataTable title = "All donors" columns={columns} data={data}
           pagination
           fixedHeader
           fixedHeaderScrollHeight='450px'
@@ -170,4 +172,4 @@ const columns = [
   );
 }
 
-export default Appointments;
+export default ViewCenterDonors;
