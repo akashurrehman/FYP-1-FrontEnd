@@ -11,6 +11,8 @@ import CardImage1 from "../../../Public/user/image/Avatar.JPG";
 
 
 import '../css/style.css';
+import centreService from "../../../Services/Api/User/BloodDonationCentreService";
+import SingleBloodDonationCentre from "./SingleBloodDonationCentre";
 
 
 const BloodDonationCentre = () => {
@@ -23,9 +25,21 @@ const BloodDonationCentre = () => {
     const [filterDistance,setFilterDistance] = React.useState("Any Distance");
     const distanceArray = ['Within 1km','Within 5km','Within 10km','Within 15km'];
     
-    const numberArray = ['1','2','3'];
 
-    
+    const [centres, setCentres] = React.useState([]);
+
+    const getData = () => {
+        centreService
+          .getCentres()
+          .then((data) => {
+            setCentres(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    };
+    React.useEffect(getData, []);
+    console.log(centres.results);
 
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -149,54 +163,15 @@ const BloodDonationCentre = () => {
         </div>
 
         <div style={{}}>
-            <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'7%'}}>
-                <Row className=''>
-                    <div className=''>
-                        {numberArray.map(()=>(
-                            <Col sm={4}>
-                            <Row className="" style={{marginBottom:"10%"}}>
-                                <Col sm={12}>
-                                    <Card className="UserCard" border="secondary" style={{ width: '70rem' }}>
-                                        <Row>
-                                            <Col sm={5} style={{marginLeft: '1%',paddingTop: '2%',textAlign:'left'}}>
-                                                <Card.Title>
-                                                    <h5 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>Sundas Foundation Blood Donation Centre</h5>
-                                                </Card.Title>
-                                                <Card.Text>
-                                                    <p style={{marginTop:'0%'}}>IKEA, 397 Adelaide Airport SA 5950</p> 
-                                                </Card.Text>
-                                            </Col>
-                                            <Col sm={3} className='d-flex' style={{paddingTop:'3%'}}>
-                                                <GeoAltFill className="TextColor" size={25} /><p style={{paddingLeft:'2%'}}>2.3 km away</p>
-                                            </Col>
-                                            <Col sm={2} className='d-flex' style={{paddingTop:'3%'}}>
-                                                <TelephoneOutboundFill className="TextColor" size={22} />
-                                                <p style={{paddingLeft:'6%'}}>042 1234567</p>
-
-                                                
-                                            </Col>
-                                            <Col sm={1} className='d-flex' style={{paddingTop:'3%'}}>
-                                            <Nav.Link className='TextColor' style={{paddingLeft:'160%'}}><ChevronRight className="" size={18} /></Nav.Link>
-                                            </Col>
-                                        </Row>
-                                        
-                                        <Row style={{backgroundColor:'#f9f2f1',width:'100%',marginLeft:'0%'}}>
-                                            <Card.Text>
-                                                <p style={{paddingTop:'1%'}}><strong>Opening Days: </strong>Monday to Friday</p> 
-                                            </Card.Text>
-                                        </Row>
-    
-                                    </Card>
-                                </Col>
-                                <Col sm={4}></Col>
-                                <Col sm={4}></Col>
-                            </Row>
-                        </Col>
-                        ),)}
-                    </div>
-                    
-                </Row>
-            </Container>
+            {centres.length === 0 ? (
+                <p>There are no Centres</p>
+            ) : (
+                <div>
+                    {centres.results.bindings.map((centre, index) => (
+                        <SingleBloodDonationCentre key={index} centre={centre} />
+                    ))}
+                </div>
+            )}
         </div>
 
         
