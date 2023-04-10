@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddBloodRequest=()=> {
   const [bloodRequests, setBloodRequests] = useState({
@@ -42,9 +44,11 @@ const AddBloodRequest=()=> {
     .post(`http://localhost:8081/api/bloodCenter/RegisteredCenters/makeRequest`, bloodRequests)
     .then((response) => {
       console.log(response.data);
+      toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
       })
     .catch((error) => {
       console.error(error);
+      toast.error(error.response.data,{position:toast.POSITION.TOP_RIGHT});
     });
     setShowModal(false);
   }
@@ -65,7 +69,7 @@ const AddBloodRequest=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}}>
             <Card.Img variant="top" src="/100px180" />
             <Card.Body>
               <Card.Title>Add New Blood Request</Card.Title>
@@ -163,7 +167,7 @@ const AddBloodRequest=()=> {
     </Form>
       <Row className="mb-3">
           <Col>
-              <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} onClick={handleSubmit}>Post Blood Request</Button>
+              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Post Blood Request</Button>
           </Col>
       </Row>
       
@@ -176,7 +180,7 @@ const AddBloodRequest=()=> {
                   }>You can view all the blood requests here!</Card.Title>
                 </Card.Body>
                 <Card.Footer>
-                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center"}} className="w-25" onClick={handleAllRequests}>View All blood Requests </Button>
+                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} className="w-25" onClick={handleAllRequests}>View All blood Requests </Button>
                 </Card.Footer>
               </Card>
             </Col>
@@ -192,10 +196,10 @@ const AddBloodRequest=()=> {
           Are you sure you want to submit the new blood request?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancel}>
+          <Button variant="secondary" onClick={handleCancel} style={{backgroundColor: "#153250"}}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleConfirm}>
+          <Button variant="primary" onClick={handleConfirm} style={{backgroundColor: "#153250"}}>
             Submit
           </Button>
         </Modal.Footer>

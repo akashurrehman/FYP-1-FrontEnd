@@ -30,10 +30,14 @@ import LabHome from './Panels/Laboratory/LabHome';
 import Login from './Temp-Files/Login';
 import ViewCenterDonors from './Panels/BloodDonationCentre/ViewCenterDonors';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <div>
-      <Router>      
+      <Router>
+      <ToastContainer />      
         <Routes>
           <Route exact path="/Login" element={<Login />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>
