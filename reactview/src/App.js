@@ -32,10 +32,14 @@ import ViewCenterDonors from './Panels/BloodDonationCentre/ViewCenterDonors';
 import MakeBloodDonation from './Components_for_All_Panels/UserComponents/donors/MakeBloodDonation';
 import MakeBloodRequest from './Components_for_All_Panels/UserComponents/request_makers/MakeBloodRequest';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   return (
     <div>
-      <Router>      
+      <Router>
+      <ToastContainer />      
         <Routes>
           <Route exact path="/Login" element={<Login />} />
           <Route exact path='/bloodCenter/HomeScreen' element={<BloodCentreHomeScreen/>}/>

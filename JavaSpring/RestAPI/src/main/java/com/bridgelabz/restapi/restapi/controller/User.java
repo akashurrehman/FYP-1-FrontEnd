@@ -50,19 +50,6 @@ public class User {
     public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
-     * Check the Validity of the User by passing their CBC Report details
-     * Save the CBC Report details to the database of the Users by their ID
-     * Send this details to be processed by ML Algortihm
-     */
-    @PostMapping("/api/users/checkValidity")
-    public String checkValidity(@RequestBody String user) {
-        return "User: " + user;
-    }
-    /*
-     * Check the Validity of the User by passing their CBC Report details
-     */
-
-    /*
      * Route to Get Data of all Registered Users
      */
 

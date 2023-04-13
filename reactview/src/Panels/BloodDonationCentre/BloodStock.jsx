@@ -14,6 +14,9 @@ import B_positive from './../../Components_for_All_Panels/BloodCentre/Image/B-po
 import AB_positive from './../../Components_for_All_Panels/BloodCentre/Image/Ab-positive.jpg';
 import AB_negative from './../../Components_for_All_Panels/BloodCentre/Image/Ab-negative.jpg';
 import axios from 'axios'; 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const BloodStock=()=> {
 
@@ -100,10 +103,14 @@ const handleInputChange = (event) => {
       .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${bloodData.ID}`, bloodData)
       .then((response) => {
         console.log("Response Data",response.data);
-        console.log("Data updated successfully!");
+        toast.success(response.data,{position:toast.POSITION.TOP_RIGHT});
         handleClose();
+        window.location.reload();
       })
       .catch((error) => {
+        toast.error(error,{
+          position: toast.POSITION.TOP_RIGHT
+      });
         console.log("Error updating data: ", error);
       });
   };
@@ -144,10 +151,10 @@ const handleInputChange = (event) => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleClose} style={{backgroundColor: "#153250"}}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSaveChanges}> 
+          <Button variant="primary" onClick={handleSaveChanges} style={{backgroundColor: "#153250"}}> 
             Save Changes
           </Button>
         </Modal.Footer>
@@ -159,7 +166,7 @@ const handleInputChange = (event) => {
           <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Available Blood Stock</Card.Title>
@@ -169,13 +176,18 @@ const handleInputChange = (event) => {
           <CardGroup>
           {blood.map((card) => (
             <Col key={card.ID} md={4}>
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src={card.bloodGroup === 'A+' ? A_positive : card.bloodGroup === 'B+' ? B_positive : card.bloodGroup === 'AB+' ? AB_positive : AB_negative} />
+              <Card style={{ width: "18rem",marginTop:"10px" }}>
+                <Card.Img variant="top" style={{
+                    width: "50%",
+                    height: "50%",
+                    margin: "0 auto",
+                    display: "block"
+                  }}  src={card.bloodGroup === 'A+' ? A_positive : card.bloodGroup === 'B+' ? B_positive : card.bloodGroup === 'AB+' ? AB_positive : AB_negative} />
                 <Card.Body>
-                  <Card.Title>{card.bloodGroup}</Card.Title>
+                  <Card.Title>Blood Group:{card.bloodGroup}</Card.Title>
                   <Card.Text>No of bags available: {card.noOfBags}</Card.Text>
                   <Card.Text>Freeze time: {card.addedDate}</Card.Text>
-                  <Button variant="primary" onClick={() => handleShow(card.bloodGroup)}>
+                  <Button variant="primary" onClick={() => handleShow(card.bloodGroup)} style={{backgroundColor: "#153250"}}>
                     Update Stock
                   </Button>
                 </Card.Body>

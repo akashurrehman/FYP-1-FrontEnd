@@ -10,6 +10,8 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BloodInformation=()=> {
@@ -42,9 +44,11 @@ const BloodInformation=()=> {
     .post(`http://localhost:8081/api/user/bloodDonation/BloodDonationDetails/addUserInfo`, donorData)
     .then((response) => {
       console.log(response.data);
+      toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
       })
     .catch((error) => {
       console.error(error);
+      toast.error(error.response.data,{position:toast.POSITION.TOP_RIGHT});
     });
   setShowModal(false);
   }
@@ -60,7 +64,7 @@ const BloodInformation=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}}>
             <Card.Img variant="top" src="/100px180" />
             <Card.Body>
               <Card.Title>Add Blood Information of User who donate blood</Card.Title>
@@ -150,7 +154,7 @@ const BloodInformation=()=> {
       </Row>
     </Form>
     <Col xs="12" sm={6} className="align-items-center">
-          <Button variant="primary" type="submit" className="w-50" onClick={handleSubmit}>
+          <Button variant="primary" type="submit" className="w-50" onClick={handleSubmit} style={{backgroundColor: "#153250"}}>
             Submit Donor's Information
           </Button>
         </Col>
@@ -164,10 +168,10 @@ const BloodInformation=()=> {
           Are you sure you want to submit the Donors Information?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancel}>
+          <Button variant="secondary" onClick={handleCancel} style={{backgroundColor: "#153250"}}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleConfirm}>
+          <Button variant="primary" onClick={handleConfirm} style={{backgroundColor: "#153250"}}>
             Submit
           </Button>
         </Modal.Footer>

@@ -146,7 +146,7 @@ const columns = [
             <Sidebar />        
         </Col>
         <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >All Donors till Now</Card.Title>
@@ -162,7 +162,7 @@ const columns = [
           highlightOnHover
           
           actions ={
-            <button className='btn btn-info' onClick={handlePrint}> Download</button>
+            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250"}}> Download</button>
           }
           subHeader
         />

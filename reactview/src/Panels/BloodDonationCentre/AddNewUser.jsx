@@ -10,6 +10,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddNewUser=()=> {
   const [userData, setuserData] = useState({
@@ -43,9 +45,15 @@ const handleConfirm = () => {
   .post(`http://localhost:8081/api/user/registration/add`, userData)
   .then((response) => {
     console.log(response.data);
+    toast.success("User Added Successfully", {
+      position: toast.POSITION.TOP_CENTER,
+    });
     })
   .catch((error) => {
     console.error(error);
+    toast.error(error.response.data, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
   });
 setShowModal(false);
 }
@@ -63,7 +71,7 @@ const handleCancel = () => {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}}>
             <Card.Img variant="top" src="/100px180" />
             <Card.Body>
               <Card.Title>Add New User to the website</Card.Title>
@@ -150,7 +158,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
           <Col xs={12} sm={6}>
-              <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} type="submit" onClick={{handleSubmit}}>Add User</Button>
+              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} type="submit" onClick={{handleSubmit}}>Add User</Button>
           </Col>
       </Row>
         </Col>
@@ -163,10 +171,10 @@ const handleCancel = () => {
           Are you sure you want to submit the form?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancel}>
+          <Button variant="secondary" onClick={handleCancel}style={{backgroundColor: "#153250"}}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleConfirm}>
+          <Button variant="primary" onClick={handleConfirm} style={{backgroundColor: "#153250"}}>
             Submit
           </Button>
         </Modal.Footer>

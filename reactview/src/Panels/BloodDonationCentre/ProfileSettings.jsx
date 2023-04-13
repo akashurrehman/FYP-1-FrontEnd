@@ -14,6 +14,9 @@ import { BsExclamationSquare } from 'react-icons/bs';
 import { BsEnvelopeFill } from 'react-icons/bs';
 import { BsGeoAltFill } from 'react-icons/bs';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ProfileSettings=()=> {
   const [center, setCenterData] = useState({
@@ -69,23 +72,27 @@ const handleDelete = () => {
     .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${CENTER_ID}`)
     .then((response) => {
       console.log(response.data);
+      toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
       // Perform any additional actions after successful delete
     })
     .catch((error) => {
       console.error(error);
+      toast.error(error,{position:toast.POSITION.TOP_CENTER});
     });
 };
 
 
 const handleConfirm = () => {
   axios
-  .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${CENTER_ID}`, center)
+  .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/update/${CENTER_ID}`, center)
   .then((response) => {
     console.log(response.data);
+    toast("Profile Updated Successfully");
   })
   .catch((error) => {
     console.error(error);
-  });
+    toast.error(error,{position:toast.POSITION.TOP_CENTER}
+  )});
 setShowModal(false);
 }
 
@@ -108,13 +115,13 @@ const handleCancel = () => {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-            <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
+            <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
               <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body>
                 <Card.Title >{center.name}</Card.Title>
-                <Card.Text>
-                  <span className="text-danger"style={{justifyContent:"center",textAlign:"center",fontSize:"20px",fontWeight:"bold"}}>Profile Settings Panel</span>
-                </Card.Text>
+                <Card.Title>
+                  <h3 className="text-danger"style={{justifyContent:"center",textAlign:"center"}}>Profile Settings Panel</h3>
+                </Card.Title>
               </Card.Body>
           </Card>
         <div>
@@ -180,7 +187,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
         <Col>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center"}} onClick={handleSubmit}>Update Information</Button>
+            <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
         </Col>
     </Row>
       <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
@@ -206,10 +213,10 @@ const handleCancel = () => {
           Are you sure you want to submit the form?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCancel}>
+          <Button variant="secondary" onClick={handleCancel} style={{backgroundColor: "#153250"}}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={handleConfirm}>
+          <Button variant="primary" onClick={handleConfirm} style={{backgroundColor: "#153250"}}>
             Submit
           </Button>
         </Modal.Footer>

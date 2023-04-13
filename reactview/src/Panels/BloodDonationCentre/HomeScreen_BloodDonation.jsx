@@ -12,6 +12,8 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import { useHistory } from 'react-router-dom';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -46,6 +48,7 @@ const options = {
 
 const HomeScreen_BloodDonation=()=> {
   const ViewAllRequests = () => {
+    toast.success("You are redirected to View All Requests Page", {position: toast.POSITION.TOP_CENTER});
     window.location.href = '/bloodCenter/bloodRequests';
   }
   const RegisterNewUser = ()=> {
@@ -72,11 +75,11 @@ const HomeScreen_BloodDonation=()=> {
       const response2 = await axios.get("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo")
       .then((response) => setDonors(response.data.results.bindings)).catch((error) => console.log(error));
       const response3 = await axios.get("http://localhost:8081/api/admin/getJobPost")
-      .then((response) => setJobPosts(response.data.results.bindings)).catch((error) => console.log(error));
+      .then((response) => setJobPosts(response.data.results.bindings)).catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
       const response4 = await axios.get("http://localhost:8081/api/admin/getNews")
       .then((response) => setNews(response.data.results.bindings)).catch((error) => console.log(error));
       const response5 = await axios.get("http://localhost:8081/api/admin/getFAQ")
-      .then((response) => setFAQ(response.data.results.bindings)).catch((error) => console.log(error));
+      .then((response) => setFAQ(response.data.results.bindings)).catch((error) => toast.error(error));
       const response6 = await axios.get("http://localhost:8081/api/bloodCenter/RegisteredCenters/getAppointmentInfo")
       .then((response) => setAppointment(response.data.results.bindings)).catch((error) => console.log(error));
       const response7 = await axios.get("http://localhost:8081/api/admin/getEvents")
@@ -131,7 +134,7 @@ const HomeScreen_BloodDonation=()=> {
                   <img src="/Images/blood-Center.jpg" alt="Image for display" style={{width: "50%", height: "50%", objectFit: "cover"}}/>
                     <div style={{position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(0,0,0,0.5)", padding: "10px"}}>
                       <Card.Title style={{color: "white"}}>Be a hero in your - It's in your blood</Card.Title>
-                        <Button variant="primary" onClick={RegisterNewUser}>Register New User</Button>
+                        <Button variant="primary" onClick={RegisterNewUser} style={{backgroundColor: "#153250"}}>Register New User</Button>
                     </div>
                 </div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginTop: "10px"}}>
@@ -154,7 +157,7 @@ const HomeScreen_BloodDonation=()=> {
                           </div>                       
                         ))} 
                         </div>
-                        <Button variant="primary" onClick={ViewAllDonors}>View All Donors</Button>
+                        <Button variant="primary" onClick={ViewAllDonors} style={{backgroundColor: "#153250"}}>View All Donors</Button>
                     </Card.Body>
                 </Card>
             </Col>
