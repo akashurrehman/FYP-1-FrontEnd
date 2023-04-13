@@ -4,6 +4,7 @@ class DonorService extends GenericService {
         super();
     }
     getDonors = () => this.get("api/users/donate");
+    addDonor = (data) => this.post("api/users/donate/addDonorInfo",data);
 }
 
 let donorService = new DonorService();

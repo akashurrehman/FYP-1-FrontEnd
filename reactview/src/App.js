@@ -29,6 +29,8 @@ import UserBloodDonationCentre from './Components_for_All_Panels/UserComponents/
 import LabHome from './Panels/Laboratory/LabHome';
 import Login from './Temp-Files/Login';
 import ViewCenterDonors from './Panels/BloodDonationCentre/ViewCenterDonors';
+import MakeBloodDonation from './Components_for_All_Panels/UserComponents/donors/MakeBloodDonation';
+import MakeBloodRequest from './Components_for_All_Panels/UserComponents/request_makers/MakeBloodRequest';
 
 function App() {
   return (
@@ -55,6 +57,7 @@ function App() {
           <Route exact path='/user/login' element={<UserLogin/>} />
           <Route exact path='/user/register' element={<UserRegister/>} />
           <Route exact path='/user/post-blood-request' element={<UserPostBloodRequest/>} />
+          <Route exact path='/user/make-blood-request' element={<MakeBloodRequest/>} />
           <Route exact path='/user/request-maker' element={<UserRequestMaker/>} />
           <Route exact path='/user/make-blood-donation' element={<UserMakeBloodDonation/>} />
           <Route exact path='/user/donor' element={<UserDonor/>} />

@@ -19,7 +19,7 @@ const UserPanelHeader = () => {
     const ButtonStyle = {
         backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
         color: isHover ? 'white' : 'white',
-        transform: isHover ? 'scale(0.85)' : 'scale(0.9)',
+        transform: isHover ? 'scale(0.8)' : 'scale(0.82)',
         border: isHover ? '' : '1px solid white',
         transitionDuration: isHover ? '' : '0.45s',
     };
@@ -27,8 +27,8 @@ const UserPanelHeader = () => {
     return ( <div>
         <Navbar collapseOnSelect expand="lg" bg="" variant="light" className='Navbar' fixed="top">
             <div className="d-flex" style={{paddingLeft:'2%'}}>
-            <img src={logo} alt="logo" width="3.1%" height="43rem" />
-            <Navbar.Brand href="/user/home"><h3 className="TextColor d-flex"><div style={{fontFamily:'cursive',color:'rgb(150, 60, 60)'}}>life</div>Blood</h3></Navbar.Brand>
+            <img src={logo} alt="logo" width="2.7%" height="40rem" />
+            <Navbar.Brand href="/user/home"><h4 className="TextColor d-flex"><div style={{fontFamily:'cursive'}}>Donate</div><div style={{fontFamily:'cursive',color:'rgb(150, 60, 60)',fontSize:'15px'}}> life</div></h4></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
