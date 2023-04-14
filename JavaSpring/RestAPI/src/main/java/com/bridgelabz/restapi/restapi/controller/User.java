@@ -47,7 +47,7 @@ public class User {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Route to Get Data of all Registered Users
@@ -269,6 +269,12 @@ public class User {
 
             if (isInserted) {
                 String successMessage = "{\"success\": \"Data inserted successfully\"}";
+                // Send a push notification to the admin
+                // PushNotificationService pushNotificationService = new
+                // PushNotificationService();
+                // pushNotificationService.sendNotification("New blood request", "A new blood
+                // request has been made.");
+
                 return new ResponseEntity<String>(successMessage, HttpStatus.OK);
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -276,6 +282,11 @@ public class User {
             }
         } else {
             String errorMessage = "{\"error\": \"User with this username and email already exit: " + userName + "\"}";
+
+            // PushNotificationService pushNotificationService = new
+            // PushNotificationService();
+            // pushNotificationService.sendNotification("New blood request", "A new blood
+            // request has been made.");
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
     }
@@ -893,6 +904,7 @@ public class User {
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
+        System.out.println("File Path: " + file);
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();

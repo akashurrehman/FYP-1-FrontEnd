@@ -103,6 +103,45 @@ public class lab {
     }
 
     /*
+     * Get single lab by passing ID
+     */
+    @GetMapping("/api/labs/RegisteredLabs/{id}")
+    public ResponseEntity<String> SingleLab(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?labs rdf:type bd:Lab ." +
+                "?labs bd:hasLabID ?ID ." +
+                "?labs bd:hasLabName ?Name ." +
+                "?labs bd:hasUserName ?UserName ." +
+                "?labs bd:hasLabEmail ?Email ." +
+                "?labs bd:hasLabContactNo ?ContactNo ." +
+                "?labs bd:hasLabAddress ?Address ." +
+                "?labs bd:hasLabCity ?City ." +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Data is Found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"No Data Found!\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    /*
      * Get ALL LABS
      */
     @GetMapping("/api/labs/RegisteredLabs")

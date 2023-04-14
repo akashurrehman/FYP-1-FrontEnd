@@ -34,12 +34,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import javax.servlet.http.HttpServletRequest;
 // import javax.servlet.http.HttpServletResponse;
-import java.util.HashSet;
+/* import java.util.HashSet;
 import java.util.Set;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.SignatureException;
 import io.jsonwebtoken.Claims;
-//import for password encryption
+//import for password encryption */
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /* 
@@ -55,9 +55,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @RestController
 public class Auth {
 
-    //Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
-
+    // Path for Ontology file
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     // String secret = "mySecretKey";
     // Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -71,7 +70,7 @@ public class Auth {
 
     /*
      * Make login authentication request
-    */
+     */
     @PostMapping("/user/auth/login")
     public ResponseEntity<String> Login(@RequestBody String Login) throws IOException {
 
@@ -135,7 +134,7 @@ public class Auth {
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
 
         if (bindingsArr.isEmpty()) {
-            //Check if password not match value
+            // Check if password not match value
             System.out.println("User not found");
 
             String errorMessage = "{\"error\": \"User not found, Please registered yourself!\"}";
@@ -165,7 +164,7 @@ public class Auth {
                 // System.out.println(password_value);
                 // System.out.println(id_value);
 
-                //For password decryption and check user login password with database password
+                // For password decryption and check user login password with database password
                 BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
                 boolean isMatch = encoder.matches(password, password_value);
 
@@ -180,7 +179,7 @@ public class Auth {
                             .signWith(key)
                             .compact();
 
-                    //Check token value
+                    // Check token value
                     System.out.println("Token: " + token);
                     System.out.println("Key: " + key);
 
@@ -192,7 +191,7 @@ public class Auth {
                 }
 
                 else {
-                    //Check if password not match value
+                    // Check if password not match value
                     System.out.println("Wrong Password entered by User");
 
                     String errorMessage = "{\"error\": \"Wrong Password!\"}";
@@ -209,10 +208,9 @@ public class Auth {
 
     }
 
-
     /*
      * Make logout request
-    */
+     */
     @GetMapping("/user/logout")
     public ResponseEntity<String> Logout(HttpServletRequest request) {
 
@@ -226,8 +224,6 @@ public class Auth {
         return new ResponseEntity<>("Logout successful", headers, HttpStatus.OK);
     }
 
-
-    
     /*
      * Method for the Functionality of Read data on the basis of query
      */
