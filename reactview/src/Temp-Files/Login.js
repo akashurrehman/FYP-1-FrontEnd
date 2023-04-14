@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import { useAuth  } from "./../Panels/BloodDonationCentre/Auth/AuthContext";
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { handleLogin } = useAuth();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/login', {
+            const response = await axios.post('http://localhost:8081/user/auth/login', {
             username,
             password
           });
           const token = response.headers.authorization;
             // Store the token in local storage
-
-          localStorage.setItem('token', token);
-          console.log("Before Decode Token:",token);
+            handleLogin(token);
+            console.log("In  Login File:",token);
           // Determine the user's role from the token payload
           const { role } = jwt_decode(token);
           console.log("After Decode Token:",jwt_decode(token))

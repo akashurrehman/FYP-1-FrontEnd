@@ -32,7 +32,8 @@ import ViewCenterDonors from './Panels/BloodDonationCentre/ViewCenterDonors';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import LabProfileSetting from './Panels/Laboratory/LabProfileSetting';
+import ReportRequests from './Panels/Laboratory/ReportRequests';
 function App() {
   return (
     <div>
@@ -49,12 +50,13 @@ function App() {
           <Route exact path='/bloodCenter/addNewUser' element={<AddNewUser/>}/>
           <Route exact path='/bloodCenter/bloodRequests' element={<BloodRequests/>}/>
           <Route exact path='/bloodCenter/ViewAllDonors' element={<ViewCenterDonors/>}/>
-          
+
           
           {/* Admin panel Routes */}
           <Route exact path='/adminpanel/HomeScreen' element={<AdminPanelHomeScreen/>}/>
-  
+
           {/* UserPanel Routes */}
+          
           <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
           <Route exact path='/user/login' element={<UserLogin/>} />
           <Route exact path='/user/register' element={<UserRegister/>} />
@@ -63,9 +65,11 @@ function App() {
           <Route exact path='/user/make-blood-donation' element={<UserMakeBloodDonation/>} />
           <Route exact path='/user/donor' element={<UserDonor/>} />
           <Route exact path='/user/blood-donation-centre' element={<UserBloodDonationCentre/>} />
-          
+
           {/*Lab Interface Routes */}
           <Route exact path='/lab/home' element={<LabHome/>}/>
+          <Route exact path='/lab/profileSettings' element={<LabProfileSetting/>}/>
+          <Route exact path='/lab/ReportRequest' element={<ReportRequests/>}/>
         </Routes>
       </Router>
     </div>

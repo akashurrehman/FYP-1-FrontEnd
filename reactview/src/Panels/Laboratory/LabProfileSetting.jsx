@@ -5,7 +5,6 @@ import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row'
-import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { BsStopwatch } from 'react-icons/bs';
@@ -13,13 +12,12 @@ import { BsFillTelephoneFill } from 'react-icons/bs';
 import { BsExclamationSquare } from 'react-icons/bs';
 import { BsEnvelopeFill } from 'react-icons/bs';
 import { BsGeoAltFill } from 'react-icons/bs';
-import Header from "../../Components_for_All_Panels/BloodCentre/Header";
-import { useAuth  }  from './Auth/AuthContext';
+import Header from "./LabComponents/Header";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import jwt_decode from "jwt-decode";
 
-const ProfileSettings=()=> {
+
+const LabProfileSetting=()=> {
   const [center, setCenterData] = useState({
     name: "",
     city: "",
@@ -33,8 +31,8 @@ const ProfileSettings=()=> {
   });
 
   const [showModal, setShowModal] = useState(false);
-  const {token} = useAuth();
-  const {id} = jwt_decode(token);
+
+
   useEffect(()=>{
     axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/CR001').then((response)=>{
       const { results } = response.data;
@@ -42,19 +40,14 @@ const ProfileSettings=()=> {
         const centerData = results.bindings[0];
         setCenterData({
           name: centerData.Name.value,
-          city: centerData.City.value,
-          contactNo: centerData.ContactNo.value,
+          userName:centerData.Name.value,
           email: centerData.Email.value,
-          licenseNo: centerData.License.value,
-          location: centerData.Location.value,
-          openingDays: centerData.Opening_Days.value,
-          timings: centerData.Timings.value,
-          category: centerData.Category.value,
+          contactNo: centerData.ContactNo.value,
+          address: centerData.Address.value,
         });
 
   }
 });
-console.log("Decoded Data",id)
 },[]);
 
   const handleChange = (event) => {
@@ -110,19 +103,16 @@ const handleCancel = () => {
 };
 
   return (
-    <Container fluid style={{backgroundColor:"#EEEEEE"}}>
+    <Container style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
-        <Col xs={3}>
-            <Sidebar/>        
-        </Col>
-        <Col className="mt-md-5" xs={9}>
+        <Col className="mt-md-5" xs={12}>
             <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
               <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body>
                 <Card.Title >{center.name}</Card.Title>
-                <Card.Title>
-                  <h3 className="text-danger"style={{justifyContent:"center",textAlign:"center"}}>Profile Settings Panel</h3>
+                <Card.Title style={{justifyContent:"center",textAlign:"center"}}>
+                  Profile Settings Panel
                 </Card.Title>
               </Card.Body>
           </Card>
@@ -194,21 +184,18 @@ const handleCancel = () => {
     </Row>
       <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
         <Row>
-          <Col style={{ textAlign: "justifyContent" }}>
-            <h5>Are you sure you want to delete your account?</h5>
-            <h6>Once you delete your account, there is no going back. Please be certain.</h6>
+          <Col style={{ textAlign: "justifyContent"}}>
+            <h5 className="py-2 mx-3">Are you sure you want to delete your account?</h5>
+            <h6 className="py-2 mx-3">Once you delete your account, there is no going back. Please be certain.</h6>
             <Form>
               <Form.Group as={Col} id="formGridCheckbox">
-                <Form.Check type="checkbox" label="Are the provided information is correct according to your center or knowledge?" />
+                <Form.Check type="checkbox" style={{color:"black",borderColor:"red"}} className="py-3" label="Are the provided information is correct according to your center or knowledge?" />
               </Form.Group>
             </Form>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center"}} variant="danger" onClick={handleDelete}>Delete Center</Button>
+            <Button style={{ display: "inline-block", width:"25%",textAlign:"center"}} className="mx-3 my-3" variant="danger" onClick={handleDelete}>Delete Center</Button>
           </Col>
         </Row>
       </Card>
-        <>
-        {token ? <p>You are logged in.{id}</p> : <p>You are not logged in.</p>}
-        </>
     </div>
     <Modal show={showModal} onHide={handleCancel}>
         <Modal.Header closeButton>
@@ -232,4 +219,4 @@ const handleCancel = () => {
   );
 }
 
-export default ProfileSettings;
+export default LabProfileSetting;
