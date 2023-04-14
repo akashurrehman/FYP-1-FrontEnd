@@ -34,6 +34,8 @@ const ProfileSettings=()=> {
 
   const [showModal, setShowModal] = useState(false);
   const {token} = useAuth();
+
+  //This will get the id  from the token if user is login
   const {id} = jwt_decode(token);
   useEffect(()=>{
     axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/CR001').then((response)=>{
