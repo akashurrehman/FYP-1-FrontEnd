@@ -1,141 +1,194 @@
 import React from "react";
-import { Container, Button } from "react-bootstrap";
-import { Form, Row, Col, InputGroup, Nav,Dropdown } from "react-bootstrap";
+import { Container, Button, Image } from "react-bootstrap";
+import { Form, Row, Col, InputGroup, FloatingLabel } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import image from '../../../Public/user/image/CoverImage1.jpg';
-import logo from '../../../Public/user/image/AppLogo4.png';
-import { Envelope,PersonAdd,House,Geo,Droplet,ArrowRight,GenderAmbiguous,TelephonePlus,CalendarEvent, HouseDoor, GeoAlt } from 'react-bootstrap-icons';
+import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, GeoAlt,Telephone } from 'react-bootstrap-icons';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+
+import AccountCircle from '@mui/icons-material/PersonSharp';
+import EmailIcon from '@mui/icons-material/EmailSharp';
+import LocalHospitalIcon from '@mui/icons-material/LocalPharmacySharp';
+import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';
+import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
+import ContactsSharpIcon from '@mui/icons-material/ContactsSharp';
+import LocationCitySharpIcon from '@mui/icons-material/LocationCitySharp';
+import ChatSharpIcon from '@mui/icons-material/ChatSharp';
+import WcSharpIcon from '@mui/icons-material/WcSharp';
+
 import '../css/style.css';
+import donorService from "../../../Services/Api/User/DonorService";
 
 const MakeBloodDonation = () => {
 
+    const [name, setName] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [contactNo, setContactNo] = React.useState("");
+    const [location, setLocation] = React.useState("");
+    const [bloodGroup, setBloodGroup] = React.useState("");
+    const [gender, setGender] = React.useState("");
+    const [city, setCity] = React.useState("");
+    const [message, setMessage] = React.useState("");
+
     //Form Validation
     const [validated, setValidated] = React.useState(false);
-
     const handleSubmit = (event) => {
-      const form = event.currentTarget;
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-  
-      setValidated(true);
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else {
+            storeData();
+        }
+        setValidated(true);
     };
 
+    //Store Data In Database(API)
+    const storeData = () => {
+        console.log("Send API call");
+        donorService
+            .addDonor({ name, message, email, location, contactNo, bloodGroup, gender, city })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.log(err);
+        });
+    };
+
+    const handleChange = (event) => {
+        setBloodGroup(event.target.value);
+    };
+
+    //Button Stylings
+    const [isHover, setIsHover] = React.useState(true);
+    const handleMouseEnter = () => {
+        setIsHover(false);
+    };
+    const handleMouseLeave = () => {
+        setIsHover(true);
+    };
+    const ButtonStyle = {
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
+        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
+        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
+        transitionDuration: isHover ? '' : '0.1s',
+    };
+    
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
 
         <div style={{position: "relative"}}>
-            <div 
-                style={{
-                    backgroundImage:`url(${image})`,backgroundRepeat:'no-repeat',
-                    backgroundSize:'cover',opacity: 0.8,paddingTop:"37%",marginBottom:"2%",backgroundColor: "",
-                }}>
+            <div>
+                <Image src={image} rounded style={{marginLeft: "51.3%",marginTop:'3.9%',height: "40%",opacity:'0.7'}}></Image>
             </div>
 
             <div 
                 style={{position: "absolute",
-                    bottom: "20%",left: "5%",top: "27%",
+                    bottom: "20%",left: "3%",top: "22%",
                     backgroundColor: "white",color: "",
-                    height: "80%",
+                    height: "90%",
                     marginLeft: "20px",textAlign: "center",
                     width:"55%",fontFamily: "Arial",opacity: "0.99"
             }}>
                 <Container>
-                    <Row className='mt-3 mb-5 p-1'>
+                    <Row className='mt-0 mb-5 p-1'>
                         <Col sm={12} className='LoginContainerCol'>
-                            <h3 className="TextColor">Make Blood Donation</h3>
-                            <p className="justify-content mb-3 mt-3">
-                                "Dear Blood Donor!", your information is valuable to us. Please fill all the blanks. "*" Marked fields are mandatory!
+                            <h4 className="TextColor" style={{fontFamily:'cursive'}}>Make Blood Donation</h4>
+                            <p className="justify-content mb-3 mt-3" style={{fontSize:'13px'}}>
+                                "Dear Donor!", your information is valuable to us.
                                 When you fill out this form, the system will create your blood donation. 
-                                With your name and other details; you can view your maked blood donations!
+                                With your name and other details; you can view your posted blood requests!
                             </p>
                             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                 <Row>
-                                    <Col sm={12}>
-                                        <InputGroup className="mb-3" hasValidation>
+                                    <Col sm={6}>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
-                                                <PersonAdd className="IconColor" size={23} />
+                                                <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
                                             <Form.Control
                                                 required
                                                 aria-label="Default"
-                                                aria-describedby="inputGroup-sizing-default" type="name" placeholder="Blood Donor Name*" 
+                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Full Name*" 
+                                                value={name}
+                                                onChange={(e) => {
+                                                    setName(e.target.value);
+                                                }}
                                             />
                                             <Form.Control.Feedback type="invalid">
-                                                Please provide a valid donor name.
+                                                Please provide a valid name.
                                             </Form.Control.Feedback>
                                         </InputGroup>
                                     </Col>
-                                </Row>
-                                <Row>
+                                
                                     <Col sm={6}>
-                                        <InputGroup className="mb-3" hasValidation>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
-                                                <GenderAmbiguous className="IconColor" size={23} />
+                                                <BloodtypeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
-                                            <Form.Select>
-                                            <Form.Control
-                                                required
-                                                aria-label="Default"
-                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Gender*" 
-                                            />
-
-                                            <option>
-                                                Gender*
-                                            </option>
-                                                
+                                            
+                                            <Form.Select required 
+                                                value={bloodGroup} 
+                                                onChange={(e) => setBloodGroup(e.target.value)}
+                                            >
+                                                <option value="">Select Blood Group*</option>
+                                                <option value="A+">A+</option>
+                                                <option value="B+">B+</option>
+                                                <option value="AB+">AB+</option>
+                                                <option value="A-">A-</option>
+                                                <option value="B-">B-</option>
+                                                <option value="AB-">AB-</option>
                                             </Form.Select>
-                                            <Form.Control.Feedback type="invalid">
-                                                Please provide a valid gender.
-                                            </Form.Control.Feedback>
-                                        </InputGroup>
-                                    </Col>
-                                    <Col sm={6}>
-                                        <InputGroup className="mb-3" hasValidation>
-                                            <InputGroup.Text id="inputGroup-sizing-default">
-                                                <Droplet className="IconColor" size={23} />
-                                            </InputGroup.Text>
-                                            <Form.Control
-                                                required
-                                                aria-label="Default" 
-                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Blood Group*" 
-                                            />
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide a valid blood group.
                                             </Form.Control.Feedback>
+                                            
                                         </InputGroup>
                                     </Col>
+                                    
                                 </Row>
                                 <Row>
                                     <Col sm={6}>
-                                        <InputGroup className="mb-3" hasValidation>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
-                                                <CalendarEvent className="IconColor" size={23} />
+                                                <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
-                                            <Form.Control
-                                                required
-                                                aria-label="Default"
-                                                aria-describedby="inputGroup-sizing-default" type="number" placeholder="Age" 
-                                            />
+                                            
+                                            <Form.Select required 
+                                                value={gender} 
+                                                onChange={(e) => setGender(e.target.value)}
+                                            >
+                                                <option value="">Gender*</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                            </Form.Select> 
                                             <Form.Control.Feedback type="invalid">
-                                                Please provide a valid age.
+                                                Please provide a valid gender.
                                             </Form.Control.Feedback>
+                                            
                                         </InputGroup>
                                     </Col>
                                     <Col sm={6}>
-                                        <InputGroup className="mb-3" hasValidation>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
-                                                <GeoAlt className="IconColor" size={23} />
+                                                <LocationCitySharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
-                                            <Form.Control
-                                                required
-                                                aria-label="Default" 
-                                                aria-describedby="inputGroup-sizing-default" type="city" placeholder="City*" 
-                                            />
+                                            <Form.Select required
+                                                value={city} 
+                                                onChange={(e) => setCity(e.target.value)}
+                                            >
+                                                <option value="">Select City*</option>
+                                                <option value="Lahore">Lahore</option>
+                                                <option value="Islamabad">Islamabad</option>
+                                                <option value="Karachi">Karachi</option>
+                                            </Form.Select>
+
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide a valid city.
                                             </Form.Control.Feedback>
@@ -144,14 +197,18 @@ const MakeBloodDonation = () => {
                                 </Row>
                                 <Row>
                                     <Col sm={6}>
-                                        <InputGroup className="mb-3" hasValidation>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
-                                                <Envelope className="IconColor" size={23} />
+                                                <EmailIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
                                             <Form.Control
                                                 required
                                                 aria-label="Default"
                                                 aria-describedby="inputGroup-sizing-default" type="email" placeholder="Email*" 
+                                                value={email}
+                                                onChange={(e) => {
+                                                    setEmail(e.target.value);
+                                                }}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide a valid email address.
@@ -159,14 +216,18 @@ const MakeBloodDonation = () => {
                                         </InputGroup>
                                     </Col>
                                     <Col sm={6}>
-                                        <InputGroup className="mb-3" hasValidation>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
-                                                <TelephonePlus className="IconColor" size={23} />
+                                                <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
                                             <Form.Control
                                                 required
                                                 aria-label="Default"
                                                 aria-describedby="inputGroup-sizing-default" type="number" placeholder="Contact Number*" 
+                                                value={contactNo}
+                                                onChange={(e) => {
+                                                    setContactNo(e.target.value);
+                                                }}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide a valid contact number.
@@ -174,16 +235,21 @@ const MakeBloodDonation = () => {
                                         </InputGroup>
                                     </Col>
                                 </Row>
+                                
                                 <Row>
                                     <Col sm={12}>
-                                        <InputGroup className="mb-3" hasValidation>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
-                                                <HouseDoor className="IconColor" size={23} />
+                                                <LocationOnSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
                                             <Form.Control
                                                 required
                                                 aria-label="Default" 
-                                                aria-describedby="inputGroup-sizing-default" type="address" placeholder="Address*" 
+                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Location*" 
+                                                value={location}
+                                                onChange={(e) => {
+                                                    setLocation(e.target.value);
+                                                }}
                                             />
                                             <Form.Control.Feedback type="invalid">
                                                 Please provide a valid location/address.
@@ -192,58 +258,48 @@ const MakeBloodDonation = () => {
                                     </Col>
                                 </Row>
                                 
+                                <Row>
+                                    <Col sm={12}>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
+                                            <InputGroup.Text id="inputGroup-sizing-default">
+                                                <ChatSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            </InputGroup.Text>
+                                            <Form.Control
+                                                aria-label="Default" as="textarea" rows={2} 
+                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Message" 
+                                                value={message}
+                                                onChange={(e) => {
+                                                    setMessage(e.target.value);
+                                                }}
+                                            />
+                                            <Form.Control.Feedback type="invalid">
+                                                
+                                            </Form.Control.Feedback>
+                                        </InputGroup>
+                                    </Col>
+                                </Row>
                                 <Row className="mt-2" style={{textAlign:'right'}}>
                                     <Col sm={12}>
-                                        <Button className="" variant="flatSolid" type="submit" >
-                                            <b>Make Blood Donation</b> <ArrowRight className="" size={22} />
-                                        </Button>
+                                    <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                                    >Make Donation <ArrowRight className="" size={17} /></Button>
                                     </Col>
-                                    
                                 </Row>
                             </Form>
                         </Col>
                     </Row>
                 </Container>
             </div>
-
+            
         </div>
 
-        <Container style={{ marginBottom:'2%'}}>
-            <div style={{ width: 100, height: 100,marginLeft:'87%'}}>
-                <CircularProgressbar value={58} text={150}
-                    styles={buildStyles({
-                    // Rotation of path and trail, in number of turns (0-1)
-                    // rotation: 0.25,
-                
-                    // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                    // strokeLinecap: 'butt',
-                
-                    // Text size
-                    textSize: '17px',
-                
-                    // How long animation takes to go from one percentage to another, in seconds
-                    // pathTransitionDuration: 0.5,
-                
-                    // Can specify path transition in more detail, or remove it entirely
-                    // pathTransition: 'none',
-                
-                    // Colors
-                    pathColor: 'rgb(160, 15, 15)',
-                    textColor: 'rgb(160, 15, 15)',
-                    trailColor: '#d6d6d6',
-                    backgroundColor: '#3e98c7',
-                    })}
-                />
+        
+            <div style={{textAlign:'right',marginTop:'20%',color:'rgb(160, 15, 15)',marginBottom:'10%'}}>
                 
             </div>
-            <div style={{textAlign:'right',marginTop:'1%',color:'rgb(160, 15, 15)',marginBottom:'10%'}}>
-                <h5 className="TextCursive">Available Blood Donors</h5>
-            </div>
-        </Container>
-
+    
+        
         <UserPanelFooter></UserPanelFooter>
-
-    </div>);
+    </div> );
 }
  
 export default MakeBloodDonation;

@@ -161,18 +161,18 @@ const RequestMaker = () => {
             </div>
         </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div style={{width:'99.1%'}}>
             {requestMakers.length === 0 ? (
                     <p>There are no Centres</p>
                 ) : (
-                    <div>
+                    <Row className="d-flex justify-content-center">
                         {requestMakers.results.bindings.map((requestMaker, index) => (
-                            <div key={index} style={{ width: '33%', padding: '0px' }}>
+                            <Col sm={4} key={index}>
                                 <SingleRequestMaker key={index} requestMaker={requestMaker} />
-                            </div>
+                            </Col>
                             
                         ))}
-                    </div>
+                    </Row>
                 )}
         </div>
 

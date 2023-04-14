@@ -23,11 +23,11 @@ const SingleRequestMaker = (props) => {
     const handleShow = () => setShow(true);
 
     return ( <div>
-        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'7%'}}>
-            <Row className=''>
-                <div className='d-flex'>
-                        <Col sm={4}>
-                        <Row className="" style={{marginBottom:"10%"}}>
+        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'5%'}}>
+            
+                <div className='d-flex' style={{}}>
+                        
+                        <Row className="" style={{marginBottom:"5%"}}>
                             <Col sm={12}>
                                 <Card className="UserCard" border="secondary" style={{ width: '22rem' }}>
                                     <Row>
@@ -47,8 +47,8 @@ const SingleRequestMaker = (props) => {
                                         </Card.Text>
                                         
                                         <Card.Text>
-                                            <p style={{textAlign:'justify',marginTop:'-3%'}}>
-                                                <strong className='TextCursive'>Message: </strong>{requestMaker.Message.value}</p>
+                                            <p style={{textAlign:'justify',marginTop:'-3%',height:'80px'}}>
+                                            <strong className='TextCursive'>Message: </strong>{requestMaker.Message.value}</p>
                                         </Card.Text>
                                         
                                         <Nav.Link className='d-flex justify-content-end TextColor' style={{marginTop:'-3%'}} onClick={handleShow}>View Details <ArrowRight className="m-1" size={18} /></Nav.Link>
@@ -61,13 +61,11 @@ const SingleRequestMaker = (props) => {
                                     </Card.Body>
                                 </Card>
                             </Col>
-                            <Col sm={4}></Col>
-                            <Col sm={4}></Col>
+                            
                         </Row>
-                    </Col>
+                    
                 </div>
                 
-            </Row>
         </Container>
 {/* 
         <div>

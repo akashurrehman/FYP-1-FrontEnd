@@ -20,13 +20,13 @@ const Donor = () => {
 
     const getData = () => {
         donorService
-          .getDonors()
-          .then((data) => {
-            setDonors(data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+            .getDonors()
+            .then((data) => {
+                setDonors(data);
+            })
+            .catch((err) => {
+                console.log(err);
+        });
     };
     React.useEffect(getData, []);
     console.log(donors.results);
@@ -162,15 +162,19 @@ const Donor = () => {
             </div>
         </div>
 
-        <div style={{}}>
+        <div style={{width:'99.1%'}}>
             {donors.length === 0 ? (
                     <p>There are no Centres</p>
                 ) : (
-                    <div>
+                    <Row className="d-flex justify-content-center m-5">
+                
                         {donors.results.bindings.map((donor, index) => (
-                            <SingleDonor key={index} donor={donor} />
+                            <Col sm={4} key={index}>
+                                <SingleDonor key={index} donor={donor} />
+                            </Col>
                         ))}
-                    </div>
+                    
+                    </Row>
                 )}
         </div>
 
