@@ -380,6 +380,8 @@ public class BloodCenter {
     /**
      * Add User Information who donate blood
      * FR-14
+     * Add the blood donation name so filter can apply to find donor who donate at
+     * that blood center
      * Information Includes blood details and user details
      */
     @PostMapping("/api/user/bloodDonation/BloodDonationDetails/addUserInfo")

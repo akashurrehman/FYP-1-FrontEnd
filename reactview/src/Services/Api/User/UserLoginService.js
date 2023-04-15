@@ -35,11 +35,7 @@ class UserLoginService extends GenericService {
         .catch((err) => {
             reject();
             console.log(err);
-            toast.error(err.response.data, {
-                closeOnClick: true,
-                pauseOnHover: true,
-                position: toast.POSITION.BOTTOM_RIGHT,
-            });
+            
         });
     });
     

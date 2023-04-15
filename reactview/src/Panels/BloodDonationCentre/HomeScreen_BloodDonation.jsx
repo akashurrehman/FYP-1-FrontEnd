@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useState,useContext} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,8 +14,8 @@ import { Bar } from 'react-chartjs-2';
 import { useHistory } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import { useAuth  }  from './Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
 
 
 //import Link from 'react-router-dom/Link';
@@ -47,6 +47,11 @@ const options = {
 
 
 const HomeScreen_BloodDonation=()=> {
+  const { token } = useAuth();
+
+  //Get the ID from the token
+  const {ID}= jwt_decode(token);
+
   const ViewAllRequests = () => {
     toast.success("You are redirected to View All Requests Page", {position: toast.POSITION.TOP_CENTER});
     window.location.href = '/bloodCenter/bloodRequests';
@@ -87,6 +92,8 @@ const HomeScreen_BloodDonation=()=> {
 
     };
     fetchData();
+    const tokenn={token}
+    console.log(tokenn);
   }, []);
 
 
@@ -242,7 +249,7 @@ const HomeScreen_BloodDonation=()=> {
                 
                 </p>
               </Card.Body>
-            </Card>
+            </Card>            
         </Col>
       </Row>
     </Container>

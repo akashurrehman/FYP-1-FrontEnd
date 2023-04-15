@@ -104,7 +104,7 @@ const UserPanelHeader = () => {
                 ) : (
                     <>
                         <Nav>
-                            <Nav.Link href="/user/contact-us">My Account</Nav.Link>
+                            <Nav.Link href="/user/my-account">My Account</Nav.Link>
                         </Nav>
                         <Nav>
                             <Button variant="default" style={ButtonStyle2} 

@@ -8,6 +8,8 @@ import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import EmailIcon from '@mui/icons-material/EmailSharp';
@@ -49,25 +51,48 @@ const UserRegistration = (props) => {
             event.stopPropagation();
         }
         else {
-            storeData();
+            submitForm();
         }
         setValidated(true);
     };
 
-    //Store Data In Database(API)
-    const storeData = async (e) => {
-        console.log("Send API call");
+    const submitForm = async (e) => {
         e.preventDefault();
-        userLoginService
-            .register({ fullName, userName, bloodGroup, gender, dob, email, contactNo, city, address, password })
-            .then((data) => {
-                console.log(data);
-                props.history.push("/user/login");
-            })
-            .catch((err) => {
-                console.log(err);
-        });
-    };
+        try {
+            const response = await axios.post('http://localhost:8081/api/user/registration/add', {
+                fullName, userName, bloodGroup, gender, dob, email, contactNo, city, address, password
+            });
+            window.location.href = "/user/login";
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+                toast.error(error.response.data.error, {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    position: toast.POSITION.BOTTOM_RIGHT,});
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
+
+
+    //Store Data In Database(API)
+    // const storeData = async (e) => {
+    //     console.log("Send API call");
+    //     e.preventDefault();
+    //     userLoginService
+    //         .register({ fullName, userName, bloodGroup, gender, dob, email, contactNo, city, address, password })
+    //         .then((data) => {
+    //             console.log(data);
+    //             window.location.href = "/user/login";
+    //         })
+    //         .catch((err) => {
+    //             console.log(err);
+    //     });
+    // };
 
     const handleChange = (event) => {
         setBloodGroup(event.target.value);
@@ -349,7 +374,7 @@ const UserRegistration = (props) => {
                                         </Row>
                                         <Row className="mt-2" style={{textAlign:'right'}}>
                                             <Col sm={12}>
-                                            <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                                            <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={submitForm} 
                                             >Sign Up <ArrowRight className="" size={17} /></Button>
                                             </Col>
                                         </Row>
