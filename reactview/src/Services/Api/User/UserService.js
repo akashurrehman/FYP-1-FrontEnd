@@ -4,6 +4,7 @@ class UserService extends GenericService {
         super();
     }
     getUsers = () => this.get("api/users/registration");
+    addUser = (data) => this.post("api/user/registration/add", data);
 }
 
 let userService = new UserService();

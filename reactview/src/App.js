@@ -34,6 +34,7 @@ import MakeBloodRequest from './Components_for_All_Panels/UserComponents/request
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UserRegistration from './Components_for_All_Panels/UserComponents/auths/UserRegistration';
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function App() {
           {/* UserPanel Routes */}
           <Route exact path='/userpanel/HomeScreen' element={<UserPanelHomeScreen/>}/>
           <Route exact path='/user/login' element={<UserLogin/>} />
+          <Route exact path='/user/registration' element={<UserRegistration/>} />
           <Route exact path='/user/register' element={<UserRegister/>} />
           <Route exact path='/user/post-blood-request' element={<UserPostBloodRequest/>} />
           <Route exact path='/user/make-blood-request' element={<MakeBloodRequest/>} />
