@@ -4,6 +4,7 @@ import { Person,EnvelopePaper,ArrowRight,PersonBadge } from 'react-bootstrap-ico
 import logo from '../../Public/user/image/AppLogo4.png';
 
 import './css/style.css';
+import userLoginService from "../../Services/Api/User/UserLoginService";
 
 const UserPanelHeader = () => {
 
@@ -16,11 +17,18 @@ const UserPanelHeader = () => {
     const handleMouseLeave = () => {
         setIsHover(true);
     };
-    const ButtonStyle = {
+    const ButtonStyle1 = {
         backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
         color: isHover ? 'white' : 'white',
         transform: isHover ? 'scale(0.8)' : 'scale(0.82)',
         border: isHover ? '' : '1px solid white',
+        transitionDuration: isHover ? '' : '0.45s',
+    };
+    const ButtonStyle2 = {
+        backgroundColor: isHover ? 'white' : 'white',
+        color: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
+        transform: isHover ? 'scale(0.8)' : 'scale(0.82)',
+        border: isHover ? '1px solid rgb(160, 15, 15)' : '1px solid rgb(160, 15, 15)',
         transitionDuration: isHover ? '' : '0.45s',
     };
 
@@ -80,12 +88,35 @@ const UserPanelHeader = () => {
                 <Nav>
                     <Nav.Link href="/user/contact-us">Help</Nav.Link>
                 </Nav>
-                <Nav>
-                    <Nav.Link href="/user/contact-us">About us</Nav.Link>
-                </Nav>
-                <Nav>
-                <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >Login <ArrowRight className="" size={17} /></Button>  
-                </Nav>
+                
+                
+                {!userLoginService.isLoggedIn() ? (
+                    <>
+                        <Nav>
+                            <Nav.Link href="/user/contact-us">Contact Us</Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <Button variant="default" style={ButtonStyle1} 
+                            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                            href='/user/login' >Login <ArrowRight className="" size={17} /></Button>  
+                        </Nav>
+                    </>
+                ) : (
+                    <>
+                        <Nav>
+                            <Nav.Link href="/user/my-account">My Account</Nav.Link>
+                        </Nav>
+                        <Nav>
+                            <Button variant="default" style={ButtonStyle2} 
+                            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                            onClick={(e) => {
+                                userLoginService.logout();
+                                window.location.reload();
+                            }}>Logout <ArrowRight className="" size={17} /></Button>  
+                        </Nav>
+                    </>
+                )}
+                
                 
                 </div>
             </Navbar.Collapse>

@@ -737,6 +737,25 @@
     <bd:financialdonationManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Financial_Donation>
+<<<<<<< HEAD
+=======
+  <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1681554645611">
+    <bd:hasPersonID>Person_1681554645611</bd:hasPersonID>
+    <bd:hasPersonGender>Male</bd:hasPersonGender>
+    <bd:hasPersonBloodGroup>AB-</bd:hasPersonBloodGroup>
+    <bd:hasUserName>hurairah111</bd:hasUserName>
+    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
+    <bd:hasPassword>$2a$10$TraLzOJTCLhl3Z6l.NtNVe7LzAocJWkh6h02j.ZQtJMI6wCdBKH12</bd:hasPassword>
+    <bd:hasPersonCity>Lahore</bd:hasPersonCity>
+    <bd:hasPersonContactNo>12345678789</bd:hasPersonContactNo>
+    <bd:hasRole>USER</bd:hasRole>
+    <bd:hasPersonAddress>Qazi Town, Multan Road, Lahore</bd:hasPersonAddress>
+    <bd:hasPersonFullName>Muhammad Abu hurairah</bd:hasPersonFullName>
+    <bd:hasPersonEmail>abuhurairah@email.com</bd:hasPersonEmail>
+    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
+    <bd:hasPersonDateOfBirth>2000-12-23</bd:hasPersonDateOfBirth>
+  </bd:Person>
+>>>>>>> c4a03c9861ddaae1113d1d72938185ede9fee789
   <bd:Lab rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_001">
     <bd:hasRole>LAB</bd:hasRole>
     <bd:hasLabAddress>Thokar Niyaz Baig, Near Main Road Lahore</bd:hasLabAddress>
