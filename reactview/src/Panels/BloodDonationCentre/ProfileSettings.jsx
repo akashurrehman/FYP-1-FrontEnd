@@ -34,6 +34,10 @@ const ProfileSettings=()=> {
 
   const [showModal, setShowModal] = useState(false);
   const {token} = useAuth();
+  if(!token){
+    window.location.href = "/Login";
+  }
+
 
   //This will get the id  from the token if user is login
   const {id} = jwt_decode(token);

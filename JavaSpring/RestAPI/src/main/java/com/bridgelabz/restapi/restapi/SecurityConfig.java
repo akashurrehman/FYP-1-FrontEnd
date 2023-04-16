@@ -237,7 +237,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/lab/getReport/{name}").permitAll()
 
                 .antMatchers("/api/labs/RegisteredLabs").permitAll()
-                .antMatchers("/api/labs/RegisteredLabs/{id}").hasRole("LAB")
+                .antMatchers("/api/labs/RegisteredLabs/{id}").permitAll()
                 .antMatchers("/api/lab/registered/add").permitAll()
                 .antMatchers("/api/lab/RegisteredLabs/edit/{ID}").permitAll()
                 .antMatchers("/api/lab/RegisteredLabs/delete/{id}").permitAll()

@@ -3,12 +3,11 @@ import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
-import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
+import Header from "./LabComponents/Header";
 
 const ReportRequests=()=> {  
     const [selectedRowIds, setSelectedRowIds] = useState({});
@@ -124,13 +123,13 @@ const columns = [
       <Header />
       <Row>
         <Col className="mt-md-5" xs={12}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#85586F",color:"white"}} >
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >All Report Requests</Card.Title>
             </Card.Body>
         </Card>
-        <DataTable title = "All Blood Requests" columns={columns} data={data}
+        <DataTable title = "All Reports Requests" columns={columns} data={data}
           pagination
           fixedHeader
           fixedHeaderScrollHeight='500px'
