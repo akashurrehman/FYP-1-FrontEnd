@@ -11,7 +11,8 @@ import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 
 const BloodRequests=()=> {  
-    const [selectedRowIds, setSelectedRowIds] = useState({});
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedData, setSelectedData] = useState([]);
 
   const [data, setData] = useState([]);
 
@@ -27,6 +28,10 @@ const BloodRequests=()=> {
                 .then((response) => console.log(response.data))
                 .catch((error) => console.log(error));
         };
+        const handleChange = (state) => {
+          // Get the selected rows from the state
+        };
+        
 
   useEffect(() => {
     // fetch data from the backend
@@ -51,14 +56,27 @@ const BloodRequests=()=> {
         setData(rows);
       })
       .catch((error) => console.log(error));
-  }, []);
+      console.log("selectedRows after updating state", selectedRows);
+      
+  }, [selectedRows]);
 
   const handlePrint = () => {
+    //Console  results
+    console.log(selectedRows);
+    console.log("Button Clicked Print");
     let printContent = '<h1>All Blood Requests</h1><table>';
     printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
-    data.forEach((row) => {
-      printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
-    });
+      // Check if any rows are selected
+    if (selectedRows.length > 0) {
+      selectedRows.forEach((row) => {
+        printContent += `<tr><td>${row.ID?.value}</td><td>${row.Name?.value}</td><td>${row.Email?.value}</td><td>${row.Gender?.value}</td><td>${row.Location?.value}</td><td>${row.Message?.value}</td><td>${row.Blood_Group?.value}</td><td>${row.Contact?.value}</td><td>${row.City?.value}</td><td>${row.Hospital?.value}</td></tr>`;
+      });
+    } else {
+      data.forEach((row) => {
+        printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
+      });
+    }
+
     printContent += '</table>';
     // Create a new window with the printable HTML and print it
     const printWindow = window.open('', '_blank');
@@ -133,19 +151,30 @@ const columns = [
               <Card.Title >All Blood Requests</Card.Title>
             </Card.Body>
         </Card>
-        <DataTable title = "All Blood Requests" columns={columns} data={data}
+        <DataTable 
+          title="All Blood Requests"
+          columns={columns}
+          data={data}
           pagination
           fixedHeader
           fixedHeaderScrollHeight='500px'
           selectableRows
+          subHeader
+          onSelectedRowsChange={handleChange}
           selectableRowsHighlight
           highlightOnHover
-          actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"white"}}> Download All blood Requests</button>
-          }
-          subHeader
         />
         </Col>
+        <div>
+              <button
+                className='btn btn-info'
+                onClick={handlePrint}
+                style={{backgroundColor: "#153250", color:"white"}}
+                disabled={selectedRows.length === 0} // disable the button if no rows are selected
+              >
+                Download Selected Blood Requests
+              </button>
+            </div>
       </Row>
     </Container>
   );
