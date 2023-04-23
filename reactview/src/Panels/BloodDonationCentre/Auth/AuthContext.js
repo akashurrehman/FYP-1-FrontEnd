@@ -2,6 +2,7 @@ import React, { createContext,useContext, useState } from "react";
 
 export const AuthContext = createContext();
 
+// For the authorization of the blood center routes
 export const AuthProvider = ({children}) => {
     const [token, setToken] = useState(localStorage.getItem('token'));
   
