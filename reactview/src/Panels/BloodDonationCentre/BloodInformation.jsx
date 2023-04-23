@@ -31,7 +31,43 @@ const BloodInformation=()=> {
     
     const handleChange = (event) => {
       const { name, value } = event.target;
-      setDonorData((prevUserData) => ({ ...prevUserData, [name]: value }));
+      
+      let newDonorData = { ...donorData, [name]: value };
+      // For the contact Number validation
+      if (name === "contactNo") {
+        const phoneNumberRegex = /^\+92\s\d{3}\s\d{7}$/; // regex for the required format
+        if (!phoneNumberRegex.test(value)) {
+          newDonorData = { ...donorData, [name]: value, contactNoError: "Please enter a valid phone number" };
+        } else {
+          newDonorData = { ...donorData, [name]: value, contactNoError: null };
+        }
+      }
+      // For the email validation
+      if (name === "email") {
+        const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/; // regex for the required format
+        if (!emailRegex.test(value)) {
+          newDonorData = { ...donorData, [name]: value, emailError: "Please enter a valid email" };
+        } else {
+          newDonorData = { ...donorData, [name]: value, emailError: null };
+        }
+      }
+      //For location
+      if (name === "location" || name === "city") {
+        if (!isNaN(value)) {
+          newDonorData = { ...donorData, [name]: value, locationError: "Please enter a valid location" };
+        } else {
+          newDonorData = { ...donorData, [name]: value, locationError: null };
+        }
+      }
+      //For hospital
+      if (name === "hospital") {
+        if (!isNaN(value)) {
+          newDonorData = { ...donorData, [name]: value, hospitalError: "Please enter a valid hospital" };
+        } else {
+          newDonorData = { ...donorData, [name]: value, hospitalError: null };
+        }
+      }
+      setDonorData(newDonorData);
     };
 
     const handleSubmit = (event) => {
@@ -97,6 +133,9 @@ const BloodInformation=()=> {
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" placeholder="example@email.com" name="email" onChange={handleChange}/>
           </InputGroup>
+          {donorData.emailError && (
+            <p style={{ color: 'red' }}>{donorData.emailError}</p>
+          )}
         </Col>
         <Col xs="12"  sm="4">
           <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
@@ -106,6 +145,9 @@ const BloodInformation=()=> {
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" placeholder="+92 348484848" name="contactNo" onChange={handleChange}/>
           </InputGroup>
+          {donorData.contactNoError && (
+            <p style={{ color: 'red' }}>{donorData.contactNoError}</p>
+          )}
         </Col>
       </Row>
       <Row>
@@ -114,6 +156,9 @@ const BloodInformation=()=> {
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Control placeholder="Donor's City" name="city" onChange={handleChange}/>
           </InputGroup>
+        {donorData.locationError && (
+          <p style={{ color: 'red' }}>{donorData.locationError}</p>
+        )}
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
@@ -121,6 +166,9 @@ const BloodInformation=()=> {
               <Form.Label visuallyHidden>Enter Location</Form.Label>
               <Form.Control placeholder="Location" name="location" onChange={handleChange}/>
           </InputGroup>
+          {donorData.locationError && (
+            <p style={{ color: 'red' }}>{donorData.locationError}</p>
+          )}
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">

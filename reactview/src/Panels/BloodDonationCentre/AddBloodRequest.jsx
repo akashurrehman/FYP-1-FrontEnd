@@ -29,7 +29,43 @@ const AddBloodRequest=()=> {
   const [showModal, setShowModal] = useState(false);
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setBloodRequests((prevUserData) => ({ ...prevUserData, [name]: value }));
+
+    let newRequestData = { ...bloodRequests, [name]: value };
+    // For the contact Number validation
+    if (name === "contactNo") {
+      const phoneNumberRegex = /^\+92\s\d{3}\s\d{7}$/; // regex for the required format
+      if (!phoneNumberRegex.test(value)) {
+        newRequestData = { ...bloodRequests, [name]: value, contactNoError: "Please enter a valid phone number" };
+      } else {
+        newRequestData = { ...bloodRequests, [name]: value, contactNoError: null };
+      }
+    }
+    // For the email validation
+    if (name === "email") {
+      const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/; // regex for the required format
+      if (!emailRegex.test(value)) {
+        newRequestData = { ...bloodRequests, [name]: value, emailError: "Please enter a valid email" };
+      } else {
+        newRequestData = { ...bloodRequests, [name]: value, emailError: null };
+      }
+    }
+    //For location
+    if (name === "location" || name === "city") {
+      if (!isNaN(value)) {
+        newRequestData = { ...bloodRequests, [name]: value, locationError: "Please enter a valid location" };
+      } else {
+        newRequestData = { ...bloodRequests, [name]: value, locationError: null };
+      }
+    }
+    //For hospital
+    if (name === "hospital") {
+      if (!isNaN(value)) {
+        newRequestData = { ...bloodRequests, [name]: value, hospitalError: "Please enter a valid hospital" };
+      } else {
+        newRequestData = { ...bloodRequests, [name]: value, hospitalError: null };
+      }
+    }
+    setBloodRequests(newRequestData);
   };
 
   const handleSubmit = (event) => {
@@ -102,6 +138,9 @@ const AddBloodRequest=()=> {
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" name="contactNo" placeholder="+923459215623" onChange={handleChange}/>
           </InputGroup>
+          {bloodRequests.contactNoError && (
+            <p style={{ color: 'red' }}>{bloodRequests.contactNoError}</p>
+          )}
         </Col>
         <Col xs="12"  sm="4">
           <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
@@ -110,7 +149,11 @@ const AddBloodRequest=()=> {
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" name="email" placeholder="Email" onChange={handleChange}/>
+            
           </InputGroup>
+          {bloodRequests.emailError && (
+              <p style={{ color: 'red' }}>{bloodRequests.emailError}</p>
+            )}
         </Col>
       </Row>
       <Row>
@@ -119,6 +162,9 @@ const AddBloodRequest=()=> {
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Control placeholder="Donor's Address" name="location" onChange={handleChange}/>
           </InputGroup>
+          {bloodRequests.locationError && (
+                <p style={{ color: 'red' }}>{bloodRequests.locationError}</p>
+          )}
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
@@ -141,13 +187,19 @@ const AddBloodRequest=()=> {
             <Form.Label visuallyHidden>Blood Donation Center</Form.Label>
               <Form.Control placeholder="Blood Donation Center or Hospital" name="hospital" onChange={handleChange}/>
         </InputGroup>
+            {bloodRequests.hospitalError && (
+                <p style={{ color: 'red' }}>{bloodRequests.hospitalError}</p>
+              )}
         </Col>
         <Col>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Label visuallyHidden>City</Form.Label>
-              <Form.Control placeholder="City" name="city" onChange={handleChange}/>
+              <Form.Control placeholder="City" name="city" onChange={handleChange} required/>
           </InputGroup>
+          {bloodRequests.locationError && (
+            <p style={{ color: 'red' }}>{bloodRequests.locationError}</p>
+          )}
         </Col>
         <Col>
           <InputGroup className="mb-2">

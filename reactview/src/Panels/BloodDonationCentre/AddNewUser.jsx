@@ -32,7 +32,44 @@ const AddNewUser=()=> {
   
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setuserData((prevUserData) => ({ ...prevUserData, [name]: value }));
+    
+    let newUserData = { ...userData, [name]: value };
+    // For the contact Number validation
+    if (name === "contactNo") {
+      const phoneNumberRegex = /^\+92\s\d{3}\s\d{7}$/; // regex for the required format
+      if (!phoneNumberRegex.test(value)) {
+        newUserData = { ...userData, [name]: value, contactNoError: "Please enter a valid phone number" };
+      } else {
+        newUserData = { ...userData, [name]: value, contactNoError: null };
+      }
+    }
+    // For the email validation
+    if (name === "email") {
+      const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/; // regex for the required format
+      if (!emailRegex.test(value)) {
+        newUserData = { ...userData, [name]: value, emailError: "Please enter a valid email" };
+      } else {
+        newUserData = { ...userData, [name]: value, emailError: null };
+      }
+    }
+    //For location
+    if (name === "location" || name === "city") {
+      if (!isNaN(value)) {
+        newUserData = { ...userData, [name]: value, locationError: "Please enter a valid location" };
+      } else {
+        newUserData = { ...userData, [name]: value, locationError: null };
+      }
+    }
+    //For hospital
+    if (name === "hospital") {
+      if (!isNaN(value)) {
+        newUserData = { ...userData, [name]: value, hospitalError: "Please enter a valid hospital" };
+      } else {
+        newUserData = { ...userData, [name]: value, hospitalError: null };
+      }
+    }
+    setuserData(newUserData);
+
   };
 
   const handleSubmit = (event) => {
@@ -104,6 +141,8 @@ const handleCancel = () => {
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
               <Form.Control name="email"placeholder="Email" onChange={handleChange}/>
           </InputGroup>
+          {userData.emailError && <p style={{ color: "red" }}>{userData.emailError}</p>}
+
         </Col>
       </Row>
       <Row className="mt-1">
@@ -112,6 +151,7 @@ const handleCancel = () => {
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Control name="city" placeholder="City" onChange={handleChange}/>
           </InputGroup>
+          {userData.locationError && <p style={{ color: "red" }}>{userData.locationError}</p>}
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
@@ -119,6 +159,7 @@ const handleCancel = () => {
               <Form.Label visuallyHidden>Location</Form.Label>
                 <Form.Control name="address" defaultValue="Location" onChange={handleChange}/>
           </InputGroup>
+          {userData.locationError && <p style={{ color: "red" }}>{userData.locationError}</p>}
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
@@ -133,6 +174,7 @@ const handleCancel = () => {
             <InputGroup.Text><i  class="fa fa-phone"></i></InputGroup.Text>
               <Form.Control name="contactNo" placeholder="+92-59552658" onChange={handleChange}/>
           </InputGroup>
+          {userData.contactNoError && <p style={{ color: "red" }}>{userData.contactNoError}</p>}
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
