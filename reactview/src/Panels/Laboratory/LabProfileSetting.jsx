@@ -48,7 +48,39 @@ const LabProfileSetting=()=> {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setCenterData((prevCenterData) => ({ ...prevCenterData, [name]: value }));
+    let newCenterData = { ...center, [name]: value };
+    // For the contact Number validation
+    if (name === "contactNo") {
+      const phoneNumberRegex = /^\+92\s\d{3}\s\d{7}$/; // regex for the required format
+      if (!phoneNumberRegex.test(value)) {
+        newCenterData = { ...center, [name]: value, contactNoError: "Please enter a valid phone number" };
+      } else {
+        newCenterData = { ...center, [name]: value, contactNoError: null };
+      }
+    }
+    // For email valigation
+    if (name === "email") {
+      const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/; // regex for the required format
+
+      console.log(emailRegex.test("example@mail.com")); // true
+      console.log(emailRegex.test("example@mail.")); // false
+
+      if (!emailRegex.test(value)) {
+        newCenterData = { ...center, [name]: value, emailError: "Please enter a valid email address" };
+      } else {
+        newCenterData = { ...center, [name]: value, emailError: null };
+      }
+    }
+
+    // For location
+    if (name === "location" || name === "city") {
+      if (!isNaN(value)) {
+        newCenterData = { ...center, [name]: value, locationError: "Please enter alphabets only " };
+      } else {
+        newCenterData = { ...center, [name]: value, locationError: null };
+      }
+    }
+    setCenterData(newCenterData);
   };
 
 const handleSubmit = (event) => {
@@ -119,23 +151,26 @@ const handleCancel = () => {
             <Form.Label>City</Form.Label>
             <Form.Control name="city" placeholder="Lahore" value={center.city} onChange={handleChange}/>
           </Form.Group>
+          {center.locationError && <p style={{ color: "red" }}>{center.locationError}</p> }
           <Form.Group className="mb-3" controlId="formGridAddress1">
             <Form.Label>Location/Address</Form.Label>
             <BsGeoAltFill size={15}/>
             <Form.Control name="address" placeholder="Main Ferozpur Road" value={center.address} onChange={handleChange}/>
           </Form.Group>
-      <Form.Group className="mb-3" controlId="contact1">
+          {center.locationError && <p style={{ color: "red" }}>{center.locationError}</p> }
+        <Form.Group className="mb-3" controlId="contact1">
           <Form.Label>Contact Number</Form.Label>
           <BsFillTelephoneFill size={15} color="red"/>
           <Form.Control placeholder="+9234946123" value={center.contactNo} name="contactNo" onChange={handleChange}/>
         </Form.Group>
-
+        {center.contactNoError && <p style={{ color: "red" }}>{center.contactNoError}</p> }
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
 
           <BsEnvelopeFill size={15} color="red"/>
           <Form.Control name="email" placeholder="example@gmail.com" value={center.email} onChange={handleChange}/>
       </Form.Group>
+      {center.emailError && <p style={{ color: "red" }}>{center.emailError}</p> }
       <Row className="mb-3">
         <Form.Group as={Col} id="formGridCheckbox">
           <Form.Check type="checkbox" label="Are the provided information is correct according to your center or knowledge?" />
