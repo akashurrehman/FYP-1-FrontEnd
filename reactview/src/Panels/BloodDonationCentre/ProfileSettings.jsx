@@ -33,8 +33,14 @@ const ProfileSettings=()=> {
   });
 
   const [showModal, setShowModal] = useState(false);
-  const {token} = useAuth();
-  const {id} = jwt_decode(token);
+  // const {token} = useAuth();
+  // if(!token){
+  //   window.location.href = "/Login";
+  // }
+
+
+  //This will get the id  from the token if user is login
+  // const {id} = jwt_decode(token);
   useEffect(()=>{
     axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/CR001').then((response)=>{
       const { results } = response.data;
@@ -54,17 +60,118 @@ const ProfileSettings=()=> {
 
   }
 });
-console.log("Decoded Data",id)
 },[]);
+const validateForm = () => {
+  let isValid = true;
+  const errors = {};
+
+  if (!center.name) {
+    isValid = false;
+    errors.nameError = "Please enter a name";
+  }
+
+  if (!center.city) {
+    isValid = false;
+    errors.cityError = "Please enter a city";
+  }
+
+  if (!center.location) {
+    isValid = false;
+    errors.locationError = "Please enter a location";
+  }
+
+  if (!center.contactNo) {
+    isValid = false;
+    errors.contactNoError = "Please enter a contact number";
+  }
+
+  if (!center.email) {
+    isValid = false;
+    errors.emailError = "Please enter an email";
+  }
+
+  if (!center.licenseNo) {
+    isValid = false;
+    errors.licenseNoError = "Please enter a license number";
+  }
+
+  if (!center.openingDays) {
+    isValid = false;
+    errors.openingDaysError = "Please enter opening days";
+  }
+
+  if (!center.timings) {
+    isValid = false;
+    errors.timingsError = "Please enter timings";
+  }
+
+  if (!center.category) {
+    isValid = false;
+    errors.categoryError = "Please enter a category";
+  }
+
+  if (!isValid) {
+    setCenterData({ ...center, ...errors });
+  }
+
+  return isValid;
+};
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setCenterData((prevCenterData) => ({ ...prevCenterData, [name]: value }));
+    let newCenterData = { ...center, [name]: value };
+    // For the contact Number validation
+    if (name === "contactNo") {
+      const phoneNumberRegex = /^\+92\s\d{3}\s\d{7}$/; // regex for the required format
+      if (!phoneNumberRegex.test(value)) {
+        newCenterData = { ...center, [name]: value, contactNoError: "Please enter a valid phone number" };
+      } else {
+        newCenterData = { ...center, [name]: value, contactNoError: null };
+      }
+    }
+    // For email valigation
+    if (name === "email") {
+      const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/; // regex for the required format
+
+      console.log(emailRegex.test("example@mail.com")); // true
+      console.log(emailRegex.test("example@mail.")); // false
+
+      if (!emailRegex.test(value)) {
+        newCenterData = { ...center, [name]: value, emailError: "Please enter a valid email address" };
+      } else {
+        newCenterData = { ...center, [name]: value, emailError: null };
+      }
+    }
+
+    // For category
+    if (name === "category") {
+      const categoryRegex = /^(private|public)$/i; // regex for allowed values
+      if (!categoryRegex.test(value)) {
+        newCenterData = { ...center, [name]: value, categoryError: "Please enter 'private' or 'public'" };
+      } else {
+        newCenterData = { ...center, [name]: value, categoryError: null };
+      }
+    }
+
+    // For location
+    if (name === "location" || name === "city") {
+      if (!isNaN(value)) {
+        newCenterData = { ...center, [name]: value, locationError: "Please enter alphabets only " };
+      } else {
+        newCenterData = { ...center, [name]: value, locationError: null };
+      }
+    }
+  
+    
+    setCenterData(newCenterData);  
   };
 
 const handleSubmit = (event) => {
   event.preventDefault();
+  const isValid = validateForm();
+  if (isValid) {
   setShowModal(true);
+  }
 };
 
 const CENTER_ID = 'CR001';
@@ -142,43 +249,57 @@ const handleCancel = () => {
           <Form.Label>Location/Address</Form.Label>
           <BsGeoAltFill size={15}/>
           <Form.Control name="location" placeholder="Main Ferozpur Road" value={center.location} onChange={handleChange}/>
+          {center.locationError && (
+            <p style={{ color: 'red' }}>{center.locationError}</p>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formGridAddress2">
           <Form.Label>City</Form.Label>
           <Form.Control name="city" placeholder="Lahore, Punjab, Pakistan" value={center.city} onChange={handleChange}/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="contact1">
+          {center.locationError && (
+            <p style={{ color: 'red' }}>{center.locationError}</p>
+          )}
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="contact1">
           <Form.Label>Contact Number</Form.Label>
           <BsFillTelephoneFill size={15} color="red"/>
-          <Form.Control placeholder="+9234946123" value={center.contactNo} onChange={handleChange}/>
+          <Form.Control placeholder="+9234946123" name="contactNo" value={center.contactNo} onChange={handleChange}/>
+          {center.contactNoError && (
+            <p style={{ color: 'red' }}>{center.contactNoError}</p>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-
           <BsEnvelopeFill size={15} color="red"/>
           <Form.Control name="email" placeholder="example@gmail.com" value={center.email} onChange={handleChange}/>
+          {center.emailError && (
+            <p style={{ color: 'red' }}>{center.emailError}</p>
+          )}
       </Form.Group>
 
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>Available Timings</Form.Label>
           <BsStopwatch size={15} color="red"/>
-          <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange}/>
+          <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/>
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
   
           <Form.Label>Opening Days</Form.Label>
           <BsStopwatch size={15} color="red"/>
-          <Form.Control placeholder="Category" name="openingDays" value={center.openingDays} onChange={handleChange}/>
-        </Form.Group>
+          <Form.Control placeholder="Category" name="openingDays" value={center.openingDays} onChange={handleChange} required/>
+          </Form.Group>
 
         <Form.Group as={Col} controlId="formGridZip">
           <Form.Label>Category</Form.Label>
           <BsExclamationSquare size={15} color="red"/>
           <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
+          {center.categoryError && (
+            <p style={{ color: 'red' }}>{center.categoryError}</p>
+          )}
         </Form.Group>
       </Row>
       <Row className="mb-3">
@@ -206,9 +327,9 @@ const handleCancel = () => {
           </Col>
         </Row>
       </Card>
-        <>
+        {/* <>
         {token ? <p>You are logged in.{id}</p> : <p>You are not logged in.</p>}
-        </>
+        </> */}
     </div>
     <Modal show={showModal} onHide={handleCancel}>
         <Modal.Header closeButton>

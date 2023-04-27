@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function Header(props) {
   return (
-    <Navbar style={{backgroundColor:"#153250",color:"#FFFFFF",paddingLeft:"60px"}} expand="lg" fixed="top" textColor="#FFFFFF">
+    <Navbar style={{backgroundColor:"#3A4F7A",color:"#FFFFFF"}} expand="lg" fixed="top" textColor="#FFFFFF">
       <Container>
         <Navbar.Brand>
         <img
@@ -16,10 +16,10 @@ function Header(props) {
                   borderRadius: '50%'
               }}
                 alt="Notification-icon"
-                className="d-inline-block align-top mx-2"
+                className="d-inline-block align-top mx-lg-1"
               /></Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll" style={{color:"#FFFFFF"}}>
+        <Navbar.Toggle  />
+        <Navbar.Collapse style={{color:"#FFFFFF"}}>
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: '100px',color:"#FFFFFF" }}

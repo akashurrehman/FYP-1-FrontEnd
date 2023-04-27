@@ -9,6 +9,7 @@ class PackageService extends GenericService {
     getEvents = () => this.get("api/admin/getEvents");
     getFinancialDonations = () => this.get("api/admin/getFinancialDonation");
     getJobPosts = () => this.get("api/admin/getJobPost");
+    getSingleJobPost = (id) => this.get("api/admin/getJobPostByID/" + id);
     getNews = () => this.get("api/admin/getNews");
     getSponsors = () => this.get("api/admin/getSponsor");
 }

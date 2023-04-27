@@ -301,5 +301,5 @@ const MakeBloodDonation = () => {
         <UserPanelFooter></UserPanelFooter>
     </div> );
 }
- 
+
 export default MakeBloodDonation;

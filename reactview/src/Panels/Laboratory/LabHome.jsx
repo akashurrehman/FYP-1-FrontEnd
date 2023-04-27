@@ -10,8 +10,8 @@ import Header from "./LabComponents/Header";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
-import jwt_decode from 'jwt-decode';
+// import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
+// import jwt_decode from 'jwt-decode';
 
 const LabHome=()=> {
   const [jobPosts, setJobPosts] = useState([]);
@@ -22,15 +22,13 @@ const LabHome=()=> {
 
 
   //Get the token from the AuthContext
-  const {token} = useAuth();
-  const {id} = jwt_decode(token);
+  //const {token} = useAuth();
+  const id = "L001"
 
   useEffect(() => {
     const fetchData = async () => {
-      const response1 = await axios.get("http://localhost:8081/api/labs/RegisteredLabs")
+      const response1 = await axios.get(`http://localhost:8081/api/labs/RegisteredLabs/${id}`)
       .then((response) => setLab(response.data.results.bindings)).catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
-      const response2 = await axios.get(`http://localhost:8081/api/labs/RegisteredLabs/${id}`)
-      .then((response) => console.log(response.data)).catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
       const response3 = await axios.get("http://localhost:8081/api/admin/getJobPost")
       .then((response) => setJobPosts(response.data.results.bindings)).catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
       const response4 = await axios.get("http://localhost:8081/api/admin/getNews")
@@ -42,7 +40,6 @@ const LabHome=()=> {
 
     };
     fetchData();
-    console.log("ID: "+id)
   }, []);
   const mystyle = {
       height: "7%",
@@ -51,17 +48,45 @@ const LabHome=()=> {
       display: "inline-block",
     };
   return (
-    <Container >
+  <div style={{backgroundColor:"#F3E8FF"}}>
+    <Container>
       <Header />
-      <Row>
-        <Col className="mt-md-5" xs={12}>
+      <Row className="mt-md-3">
+        <Col className="mt-sm-5" xs={12}>
           <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
-              <Card.Title>{"Lab Name"}</Card.Title>
+              <Card.Title>{lab.Name?.value}</Card.Title>
               <Card.Title >Dashboard</Card.Title>
             </Card.Body>
           </Card>
+        </Col>
+        
+        <Col xs={6}>
+          <Card border="primary" style={{marginTop:30,paddingBottom:10}}>
+            <Card.Body>
+              <Card.Title><i className="fa fa-user" aria-hidden="true"></i>Total Verfied Reports</Card.Title>
+              <Card.Text>
+                <p><b>Name:</b>{lab.Name?.value}</p>
+                <p><b>Address:</b>{lab.Address?.value}</p>
+              </Card.Text>
+              <Button variant="primary">Edit</Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={6}>
+          <Card border="primary" style={{marginTop:30,paddingBottom:10}}>
+            <Card.Body>
+              <Card.Title><i className="fa fa-user" aria-hidden="true"></i>Total Pending reports</Card.Title>
+              <Card.Text>
+                <p><b>Name:</b>{lab.Name?.value}</p>
+                <p><b>Address:</b>{lab.Address?.value}</p>
+              </Card.Text>
+              <Button variant="primary">Edit</Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={12}>  
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
               <Card.Title><i className="fa fa-flag" aria-hidden="true"></i>Important  Notification</Card.Title>
@@ -113,6 +138,7 @@ const LabHome=()=> {
         </Col>
       </Row>
     </Container>
+  </div>
   );
 }
 export default LabHome;

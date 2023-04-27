@@ -39,6 +39,12 @@ import UserRegistration from './Components_for_All_Panels/UserComponents/auths/U
 import LabProfileSetting from './Panels/Laboratory/LabProfileSetting';
 import ReportRequests from './Panels/Laboratory/ReportRequests';
 import MyAccount from './Components_for_All_Panels/UserComponents/profile/MyAccount';
+import BloodAnalysis from './Components_for_All_Panels/UserComponents/BloodAnalysis';
+import JobPost from './Components_for_All_Panels/UserComponents/packages/job_posts/JobPost';
+import JobPostDetails from './Components_for_All_Panels/UserComponents/packages/job_posts/JobPostDetails';
+
+
+
 function App() {
   return (
     <div>
@@ -73,6 +79,11 @@ function App() {
           <Route exact path='/user/donor' element={<UserDonor/>} />
           <Route exact path='/user/my-account' element={<MyAccount/>} />
           <Route exact path='/user/blood-donation-centre' element={<UserBloodDonationCentre/>} />
+          <Route exact path='/user/blood-analysis' element={<BloodAnalysis/>} />
+          <Route exact path='/user/job-post' element={<JobPost/>} />
+          
+          <Route exact path='/user/job-post-details/:id' element={<JobPostDetails/>} />
+          
 
           {/*Lab Interface Routes */}
           <Route exact path='/lab/home' element={<LabHome/>}/>

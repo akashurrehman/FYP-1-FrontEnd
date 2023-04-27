@@ -237,7 +237,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/lab/getReport/{name}").permitAll()
 
                 .antMatchers("/api/labs/RegisteredLabs").permitAll()
-                .antMatchers("/api/labs/RegisteredLabs/{id}").hasRole("LAB")
+                .antMatchers("/api/labs/RegisteredLabs/{id}").permitAll()
                 .antMatchers("/api/lab/registered/add").permitAll()
                 .antMatchers("/api/lab/RegisteredLabs/edit/{ID}").permitAll()
                 .antMatchers("/api/lab/RegisteredLabs/delete/{id}").permitAll()
@@ -257,6 +257,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/admin/getJobPost").permitAll()
                 .antMatchers("/api/admin/getJobPost/{title}").permitAll()
+                .antMatchers("/api/admin/getJobPostByID/{id}").permitAll()
                 .antMatchers("/api/admin/addJobPost").permitAll()
                 .antMatchers("/api/admin/jobPost/JobPostDetails/update/{ID}").permitAll()
                 .antMatchers("/api/admin/deleteJobPost/{id}").permitAll()

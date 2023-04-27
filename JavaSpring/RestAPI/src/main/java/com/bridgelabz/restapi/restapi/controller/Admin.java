@@ -39,7 +39,7 @@ import org.springframework.http.MediaType;
 public class Admin {
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Managed by Akash Ur Rehman
@@ -533,7 +533,7 @@ public class Admin {
      * Get the Job posts by ID
      */
     @GetMapping("/api/admin/getJobPost/{title}")
-    public ResponseEntity<String> getJobPostById(@PathVariable String title) {
+    public ResponseEntity<String> getJobPostByTitle(@PathVariable String title) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -564,6 +564,43 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+    /*
+     * Get the Job posts by ID
+     */
+    @GetMapping("/api/admin/getJobPostByID/{id}")
+    public ResponseEntity<String> getJobPostById(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?jobs rdf:type bd:Job_Post ." +
+                "?jobs bd:hasJobPostTitle ?Title ." +
+                "?jobs bd:hasJobPostID ?ID ." +
+                "?jobs bd:hasJobPostDetails ?Details ." +
+                "?jobs bd:hasJobPostPostingDate ?Date " +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
 
     /*
      * Manage frequently asked Questions
