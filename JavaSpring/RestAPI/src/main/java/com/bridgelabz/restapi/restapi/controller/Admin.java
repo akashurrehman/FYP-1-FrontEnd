@@ -1319,10 +1319,11 @@ public class Admin {
 
                 "SELECT * WHERE {" +
                 "?events rdf:type bd:Event ." +
-                "?events bd:hasEventTitle ?Title ." +
+                "?events bd:hasEventName ?Name ." +
                 "?events bd:hasEventID ?ID ." +
-                "?events bd:hasEventDetails ?Details ." +
-                "?events bd:hasEventPostDate ?Date" +
+                "?events bd:hasEventLocation ?Location ." +
+                "?events bd:hasEventDateTime ?Date ." +
+                "?events bd:hasEventMessage ?Message" +
                 "}";
 
         // set the response headers
@@ -1355,11 +1356,12 @@ public class Admin {
 
                 "SELECT * WHERE {" +
                 "?events rdf:type bd:Event ." +
-                "?events bd:hasEventTitle ?Title ." +
+                "?events bd:hasEventName ?Name ." +
                 "?events bd:hasEventID ?ID ." +
-                "?events bd:hasEventDetails ?Details ." +
-                "?events bd:hasEventPostDate ?Date" +
-                "filter(?Title = \"" + title + "\")" +
+                "?events bd:hasEventLocation ?Location ." +
+                "?events bd:hasEventDateTime ?Date ." +
+                "?events bd:hasEventMessage ?Message" +
+                "filter(?Name = \"" + title + "\")" +
                 "}";
 
         // set the response headers
