@@ -145,6 +145,7 @@ const handleInputChange = (event) => {
                 autoFocus
                 name="addedDate"
                 value={new Date().toLocaleString()}
+                onChange={handleInputChange}
               />
             </Form.Group>
           </Form>
