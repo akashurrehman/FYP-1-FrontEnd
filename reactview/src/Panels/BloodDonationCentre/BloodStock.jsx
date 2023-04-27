@@ -144,8 +144,7 @@ const handleInputChange = (event) => {
                 placeholder="10 am"
                 autoFocus
                 name="addedDate"
-                value={bloodData.addedDate}
-                onChange={handleInputChange}
+                value={new Date().toLocaleString()}
               />
             </Form.Group>
           </Form>
