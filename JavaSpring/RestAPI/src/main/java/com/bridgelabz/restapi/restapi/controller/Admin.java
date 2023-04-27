@@ -1176,7 +1176,7 @@ public class Admin {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(Event);
 
-        String name = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
         String dateTime = jsonNode.has("dateTime") ? jsonNode.get("dateTime").asText() : null;
