@@ -737,22 +737,6 @@
     <bd:financialdonationManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Financial_Donation>
-  <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1681554645611">
-    <bd:hasPersonID>Person_1681554645611</bd:hasPersonID>
-    <bd:hasPersonGender>Male</bd:hasPersonGender>
-    <bd:hasPersonBloodGroup>AB-</bd:hasPersonBloodGroup>
-    <bd:hasUserName>hurairah111</bd:hasUserName>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
-    <bd:hasPassword>$2a$10$TraLzOJTCLhl3Z6l.NtNVe7LzAocJWkh6h02j.ZQtJMI6wCdBKH12</bd:hasPassword>
-    <bd:hasPersonCity>Lahore</bd:hasPersonCity>
-    <bd:hasPersonContactNo>12345678789</bd:hasPersonContactNo>
-    <bd:hasRole>USER</bd:hasRole>
-    <bd:hasPersonAddress>Qazi Town, Multan Road, Lahore</bd:hasPersonAddress>
-    <bd:hasPersonFullName>Muhammad Abu hurairah</bd:hasPersonFullName>
-    <bd:hasPersonEmail>abuhurairah@email.com</bd:hasPersonEmail>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
-    <bd:hasPersonDateOfBirth>2000-12-23</bd:hasPersonDateOfBirth>
-  </bd:Person>
   <bd:Lab rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_001">
     <bd:hasRole>LAB</bd:hasRole>
     <bd:hasLabAddress>Thokar Niyaz Baig, Lahore</bd:hasLabAddress>
@@ -776,6 +760,17 @@
     <bd:eventManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Event>
+  <bd:Blood_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1682414560200">
+    <bd:hasDonorID>Donation_1682414560200</bd:hasDonorID>
+    <bd:hasDonorCity>Lahore</bd:hasDonorCity>
+    <bd:hasDonorEmail>jamshaid@email.com</bd:hasDonorEmail>
+    <bd:hasDonorName>Jamshaid</bd:hasDonorName>
+    <bd:hasDonorContactNo>923331234567</bd:hasDonorContactNo>
+    <bd:hasDonorMessage>Give life blood ........</bd:hasDonorMessage>
+    <bd:hasDonorLocation>LDA Ever New 1, Lahore</bd:hasDonorLocation>
+    <bd:hasDonorGender>Male</bd:hasDonorGender>
+    <bd:hasDonorBloodGroup>B+</bd:hasDonorBloodGroup>
+  </bd:Blood_Donation>
   <bd:Request_Maker rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_003">
     <bd:hasPersonFullName>Salman</bd:hasPersonFullName>
     <bd:hasPersonBloodGroup>AB+</bd:hasPersonBloodGroup>

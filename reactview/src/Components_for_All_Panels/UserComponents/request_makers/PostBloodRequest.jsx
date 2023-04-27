@@ -86,16 +86,16 @@ const PostBloodRequest = () => {
 
         <div style={{position: "relative"}}>
             <div>
-                <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "40%",opacity:'0.7'}}></Image>
+                <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "40%",opacity:'0.75'}}></Image>
             </div>
 
             <div 
                 style={{position: "absolute",
-                    bottom: "20%",left: "3%",top: "22%",
+                    bottom: "20%",left: "3%",top: "25%",
                     backgroundColor: "white",color: "",
                     height: "90%",
                     marginLeft: "20px",textAlign: "center",
-                    width:"55%",fontFamily: "Arial",opacity: "0.99"
+                    width:"55%",fontFamily: "Arial",opacity: "1"
             }}>
                 <Container>
                     <Row className='mt-0 mb-5 p-1'>
