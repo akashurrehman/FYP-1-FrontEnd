@@ -115,7 +115,7 @@ const handleCancel = () => {
             </Card.Body>
           </Card>
 
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}}>
             <Card.Body style={{color:"red",fontSize:"14px",fontWeight:"bold"}}>
               <Card.Title>In this page, you can register new user to the website!</Card.Title>
               <Card.Title>Their login will be created according to provided credentials!</Card.Title>

@@ -163,18 +163,12 @@ const columns = [
           onSelectedRowsChange={handleChange}
           selectableRowsHighlight
           highlightOnHover
+          actions ={
+            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> Download</button>
+          }
         />
         </Col>
-        <div>
-              <button
-                className='btn btn-info'
-                onClick={handlePrint}
-                style={{backgroundColor: "#153250", color:"white"}}
-                disabled={selectedRows.length === 0} // disable the button if no rows are selected
-              >
-                Download Selected Blood Requests
-              </button>
-            </div>
+        
       </Row>
     </Container>
   );

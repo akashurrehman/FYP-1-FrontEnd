@@ -120,16 +120,16 @@ const HomeScreen_BloodDonation=()=> {
                 <Card style={{marginTop:10,paddingBottom:10}}>
                     <Card.Body>
                         <Card.Title>Recent Blood Requests</Card.Title>
-                        <div style={{ height: "25vh", overflow: "scroll" }}>
+                        <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' ,backgroundColor: "#f2f2f2", padding: "10px"}}>
                         {data.map((item) => (
                           <div key={item.requests.value}>
-                            <h2>{item.Blood_Group.value}</h2>
-                            <p>{item.City.value}</p>
+                            <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
+                            <h6><span>Address:</span>{item.City.value}</h6>
                             <hr /> {/* Add a line after each item */}
                           </div>
                         ))} 
                         </div>
-                        <Button variant="primary" onClick={ViewAllRequests} style={{backgroundColor: "#153250"}}><>View all requests</></Button>
+                        <Button variant="primary" onClick={ViewAllRequests} style={{backgroundColor: "#153250",marginTop:"12px"}}><>View all requests</></Button>
                     </Card.Body>
                 </Card>
             </Col>
@@ -162,7 +162,7 @@ const HomeScreen_BloodDonation=()=> {
                           </div>                       
                         ))} 
                         </div>
-                        <Button variant="primary" onClick={ViewAllDonors} style={{backgroundColor: "#153250"}}>View All Donors</Button>
+                        <Button variant="primary" onClick={ViewAllDonors} style={{backgroundColor: "#153250",marginTop:"12px"}}>View All Donors</Button>
                     </Card.Body>
                 </Card>
             </Col>

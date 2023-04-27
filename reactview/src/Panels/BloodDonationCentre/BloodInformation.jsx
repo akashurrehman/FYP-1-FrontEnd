@@ -106,7 +106,7 @@ const BloodInformation=()=> {
               <Card.Title>Add Blood Information of User who donate blood</Card.Title>
             </Card.Body>
           </Card>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}}>
             <Card.Body>
               <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>In this Page, you can add the details of the user who donate blood on you center!</Card.Title>
               <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>This donor information can be used for future transfutions!</Card.Title>
@@ -202,7 +202,7 @@ const BloodInformation=()=> {
       </Row>
     </Form>
     <Col xs="12" sm={6} className="align-items-center">
-          <Button variant="primary" type="submit" className="w-50" onClick={handleSubmit} style={{backgroundColor: "#153250"}}>
+          <Button variant="primary" type="submit" className="w-md-100 mb-5" onClick={handleSubmit} style={{backgroundColor: "#153250"}}>
             Submit Donor's Information
           </Button>
         </Col>
