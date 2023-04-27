@@ -226,13 +226,11 @@ const handleCancel = () => {
         <Col className="mt-md-5" xs={9}>
             <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
               <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
-              <Card.Body>
-                <Card.Title >{center.name}</Card.Title>
-                <Card.Title>
-                  <h3 className="text-danger"style={{justifyContent:"center",textAlign:"center"}}>Profile Settings Panel</h3>
-                </Card.Title>
+              <Card.Body style={{justifyContent:"center",textAlign:"center"}}>
+                <Card.Title>{center.name}</Card.Title>
+                <Card.Title>Profile Settings Panel</Card.Title>
               </Card.Body>
-          </Card>
+            </Card>
         <div>
         <Form className="mt-5">
         <Row className="mb-3">
@@ -313,17 +311,17 @@ const handleCancel = () => {
             <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
         </Col>
     </Row>
-      <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
+    <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
         <Row>
-          <Col style={{ textAlign: "justifyContent" }}>
-            <h5>Are you sure you want to delete your account?</h5>
-            <h6>Once you delete your account, there is no going back. Please be certain.</h6>
+          <Col style={{ textAlign: "justifyContent"}}>
+            <h5 className="py-2 mx-3">Are you sure you want to delete your account?</h5>
+            <h6 className="py-2 mx-3">Once you delete your account, there is no going back. Please be certain.</h6>
             <Form>
               <Form.Group as={Col} id="formGridCheckbox">
-                <Form.Check type="checkbox" label="Are the provided information is correct according to your center or knowledge?" />
+                <Form.Check type="checkbox" style={{color:"black",borderColor:"red"}} className="py-3" label="Are the provided information is correct according to your center or knowledge?" />
               </Form.Group>
             </Form>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center"}} variant="danger" onClick={handleDelete}>Delete Center</Button>
+            <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} className="mx-3 my-3 w-md-100" variant="danger" onClick={handleDelete}>Delete Center</Button>
           </Col>
         </Row>
       </Card>

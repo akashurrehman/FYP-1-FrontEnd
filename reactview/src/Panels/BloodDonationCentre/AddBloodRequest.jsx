@@ -219,7 +219,7 @@ const AddBloodRequest=()=> {
     </Form>
       <Row className="mb-3">
           <Col>
-              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Post Blood Request</Button>
+              <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleSubmit}>Post Blood Request</Button>
           </Col>
       </Row>
       
@@ -232,7 +232,7 @@ const AddBloodRequest=()=> {
                   }>You can view all the blood requests here!</Card.Title>
                 </Card.Body>
                 <Card.Footer>
-                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} className="w-25" onClick={handleAllRequests}>View All blood Requests </Button>
+                  <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleAllRequests}>View All blood Requests </Button>
                 </Card.Footer>
               </Card>
             </Col>
