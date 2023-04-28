@@ -101,7 +101,7 @@ const PostBloodRequest = () => {
                     <Row className='mt-0 mb-5 p-1'>
                         <Col sm={12} className='LoginContainerCol'>
                             <h4 className="TextColor" style={{fontFamily:'cursive'}}>Post Blood Request</h4>
-                            <p className="justify-content mb-3 mt-3" style={{fontSize:'13px'}}>
+                            <p className="justify-content mb-3 mt-3" style={{fontSize:'13.5px',color:'gray'}}>
                                 "Dear Request Maker!", your information is valuable to us.
                                 When you fill out this form, the system will create your blood request. 
                                 With your name and other details; you can view your posted blood requests!

@@ -29,9 +29,9 @@ const SingleJobPost = (props) => {
                                     </Row>
                                     <Card.Body>
                                         <Card.Text>
-                                            <p style={{marginTop:'-6%'}}><strong className='TextCursive'>Title: </strong>{jobpost.Title.value}</p>
-                                            <p style={{marginTop:'-6%'}}><strong className='TextCursive'>Posting Date: </strong>{jobpost.Date.value}</p>
-                                            <p style={{marginTop:'-5%',height:'66px'}}><strong className='TextCursive'>Details: </strong>{jobpost.Details.value}</p>
+                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Title: </strong>{jobpost.Title.value}</p>
+                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Posting Date: </strong>{jobpost.Date.value}</p>
+                                            <p style={{marginTop:'-5.5%',height:'66px'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Details: </strong>{jobpost.Details.value}</p>
                                         </Card.Text>
                                         
                                         <ListGroup className="list-group-flush"style={{marginTop:'-5%'}}>
