@@ -88,7 +88,7 @@
 .list > .Menu ul {
     visibility: hidden;
     position: absolute;
-    top: 113%;
+    top: 107%;
     right: 0;
     transition: 0.2s 1s;
     background: rgb(255, 255, 255);
@@ -98,7 +98,7 @@
     visibility: visible;
     transition-delay: 0s;
     background: rgb(255, 255, 255);
-    
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .list {
     list-style: none;
@@ -189,8 +189,8 @@
     border-bottom: 2px solid rgb(255, 255, 255);
 }
 .FilterListHoverColor:hover {
-    border-bottom: 2px solid rgb(160, 15, 15);
-    border-left: 4px solid rgb(160, 15, 15);
+    
+    border-right: 4px solid rgb(160, 15, 15);
     color:rgb(160, 15, 15);
     border-radius: 0px;
 }

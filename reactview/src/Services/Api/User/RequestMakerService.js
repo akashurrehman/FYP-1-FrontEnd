@@ -5,6 +5,7 @@ class RequestMakerService extends GenericService {
     }
     getRequestMakers = () => this.get("api/users/bloodrequest");
     addRequestMaker = (data) => this.post("api/user/bloodRequest/BloodRequestDetails/add", data);
+    getSingleRequestMaker = (id) => this.get("api/users/bloodrequest/" + id);
 }
 
 let requestMakerService = new RequestMakerService();

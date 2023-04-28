@@ -42,6 +42,23 @@ import MyAccount from './Components_for_All_Panels/UserComponents/profile/MyAcco
 import BloodAnalysis from './Components_for_All_Panels/UserComponents/BloodAnalysis';
 import JobPost from './Components_for_All_Panels/UserComponents/packages/job_posts/JobPost';
 import JobPostDetails from './Components_for_All_Panels/UserComponents/packages/job_posts/JobPostDetails';
+import DonorDetails from './Components_for_All_Panels/UserComponents/donors/DonorDetails';
+
+import RequestMakerDetails from './Components_for_All_Panels/UserComponents/request_makers/RequestMakerDetails';
+import BloodDonationCentreDetails from './Components_for_All_Panels/UserComponents/blood_donation_centres/BloodDonationCentreDetails';
+import Event from './Components_for_All_Panels/UserComponents/packages/events/Event';
+import EventDetails from './Components_for_All_Panels/UserComponents/packages/events/EventDetails';
+import FAQ from './Components_for_All_Panels/UserComponents/packages/faqs/FAQ';
+import FAQDetails from './Components_for_All_Panels/UserComponents/packages/faqs/FAQDetails';
+import FinancialDonation from './Components_for_All_Panels/UserComponents/packages/financial_donations/FinancialDonation';
+import FinancialDonationDetails from './Components_for_All_Panels/UserComponents/packages/financial_donations/FinancialDonationDetails';
+import Sponsor from './Components_for_All_Panels/UserComponents/packages/sponsors/Sponsor';
+import SponsorDetails from './Components_for_All_Panels/UserComponents/packages/sponsors/SponsorDetails';
+
+import NewsDetails from './Components_for_All_Panels/UserComponents/packages/news/NewsDetails';
+import News from './Components_for_All_Panels/UserComponents/packages/news/News';
+import Campaign from './Components_for_All_Panels/UserComponents/packages/campaigns/Campaign';
+import CampaignDetails from './Components_for_All_Panels/UserComponents/packages/campaigns/CampaignDetails';
 
 
 
@@ -80,10 +97,31 @@ function App() {
           <Route exact path='/user/my-account' element={<MyAccount/>} />
           <Route exact path='/user/blood-donation-centre' element={<UserBloodDonationCentre/>} />
           <Route exact path='/user/blood-analysis' element={<BloodAnalysis/>} />
+          
+          <Route exact path='/user/donor-details/:id' element={<DonorDetails/>} />
+          <Route exact path='/user/request-maker-details/:id' element={<RequestMakerDetails/>} />
+          <Route exact path='/user/centre-details/:id' element={<BloodDonationCentreDetails/>} />
+
           <Route exact path='/user/job-post' element={<JobPost/>} />
-          
           <Route exact path='/user/job-post-details/:id' element={<JobPostDetails/>} />
+
+          <Route exact path='/user/event' element={<Event/>} />
+          <Route exact path='/user/event-details/:id' element={<EventDetails/>} />
           
+          <Route exact path='/user/faq' element={<FAQ/>} />
+          <Route exact path='/user/faq-details/:id' element={<FAQDetails/>} />
+
+          <Route exact path='/user/financial-donation' element={<FinancialDonation/>} />
+          <Route exact path='/user/financial-donation-details/:id' element={<FinancialDonationDetails/>} />
+
+          <Route exact path='/user/sponsor' element={<Sponsor/>} />
+          <Route exact path='/user/sponsor-details/:id' element={<SponsorDetails/>} />
+
+          <Route exact path='/user/news' element={<News/>} />
+          <Route exact path='/user/news-details/:id' element={<NewsDetails/>} />
+
+          <Route exact path='/user/campaign' element={<Campaign/>} />
+          <Route exact path='/user/campaign-details/:id' element={<CampaignDetails/>} />
 
           {/*Lab Interface Routes */}
           <Route exact path='/lab/home' element={<LabHome/>}/>

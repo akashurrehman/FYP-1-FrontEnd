@@ -9,6 +9,7 @@ import Image1 from "../../../Public/user/image/CardImage3.jpg";
 import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill } from 'react-bootstrap-icons';
 
 import '../css/style.css';
+import { Link } from "react-router-dom";
 
 const SingleBloodDonationCentre = (props) => {
 
@@ -35,16 +36,19 @@ const SingleBloodDonationCentre = (props) => {
                                                 </Card.Text>
                                             </Col>
                                             <Col sm={3} className='d-flex' style={{paddingTop:'3%'}}>
-                                                <GeoAltFill className="TextColor" size={25} /><p style={{paddingLeft:'2%'}}>2.3 km away</p>
+                                                <GeoAltFill className="TextColor" size={22} /><p style={{paddingLeft:'2%'}}>2.3 km away</p>
                                             </Col>
                                             <Col sm={2} className='d-flex' style={{paddingTop:'3%'}}>
-                                                <TelephoneOutboundFill className="TextColor" size={22} />
+                                                <TelephoneOutboundFill className="TextColor" size={20} />
                                                 <p style={{paddingLeft:'6%'}}>{centre.ContactNo.value}</p>
 
                                                 
                                             </Col>
                                             <Col sm={1} className='d-flex' style={{paddingTop:'3%'}}>
-                                            <Nav.Link className='TextColor' style={{paddingLeft:'160%'}}><ChevronRight className="" size={18} /></Nav.Link>
+                                        
+                                            <Link to={{ pathname: `/user/centre-details/${centre.ID.value}`, state: { centre } }} className='d-flex justify-content-end TextColor' style={{paddingLeft:'160%',marginBottom:'-2%',textDecoration:'none',fontSize:'14px',fontWeight:'600'}}>
+                                            <ChevronRight className="" size={18} />
+                                            </Link>
                                             </Col>
                                         </Row>
                                         

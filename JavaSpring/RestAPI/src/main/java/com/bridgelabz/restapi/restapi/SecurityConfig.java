@@ -251,6 +251,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/admin/getFinancialDonation").permitAll()
                 .antMatchers("/api/admin/getFinancialDonation/{Name}").permitAll()
+                .antMatchers("/api/admin/getFinancialDonationById/{id}").permitAll()
                 .antMatchers("/api/admin/addFinancialDonation").permitAll()
                 .antMatchers("/api/admin/financialDonation/financialDonationDetails/update/{ID}").permitAll()
                 .antMatchers("/api/admin/deleteFinancialDonation/financialDonationDetails/delete/{id}").permitAll()
@@ -264,6 +265,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/admin/getFAQ").permitAll()
                 .antMatchers("/api/admin/getFAQ/{title}").permitAll()
+                .antMatchers("/api/admin/getFAQById/{id}").permitAll()
                 .antMatchers("/api/admin/addFAQ").permitAll()
                 .antMatchers("/api/admin/faq/FAQDetails/update/{ID}").permitAll()
                 .antMatchers("/api/admin/deleteFAQ/{id}").permitAll()
@@ -276,12 +278,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/admin/getCompaigns").permitAll()
                 .antMatchers("/api/admin/getCompaigns/{title}").permitAll()
+                .antMatchers("/api/admin/getCompaignsById/{id}").permitAll()
                 .antMatchers("/api/admin/addCompaigns").permitAll()
                 .antMatchers("/api/admin/campaign/CampaignDetails/update/{ID}").permitAll()
                 .antMatchers("/api/admin/deleteCompaigns/{id}").permitAll()
 
                 .antMatchers("/api/admin/getNews").permitAll()
                 .antMatchers("/api/admin/getNews/{title}").permitAll()
+                .antMatchers("/api/admin/getNewsById/{id}").permitAll()
                 .antMatchers("/api/admin/addNews").permitAll()
                 .antMatchers("/api/admin/news/NewsDetails/update/{ID}").permitAll()
                 .antMatchers("/api/admin/deleteNews/{id}").permitAll()
@@ -294,6 +298,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/api/admin/getEvents").permitAll()
                 .antMatchers("/api/admin/getEvents/{title}").permitAll()
+                .antMatchers("/api/admin/getEventsById/{id}").permitAll()
                 .antMatchers("/api/admin/addEvents").permitAll()
                 .antMatchers("/api/admin/event/eventDetails/update/{ID}").permitAll()
                 .antMatchers("/api/admin/deleteEvents/{id}").permitAll()
