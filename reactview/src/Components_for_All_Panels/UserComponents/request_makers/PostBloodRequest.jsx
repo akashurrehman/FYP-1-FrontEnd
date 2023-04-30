@@ -21,8 +21,16 @@ import WcSharpIcon from '@mui/icons-material/WcSharp';
 
 import '../css/style.css';
 import requestMakerService from "../../../Services/Api/User/RequestMakerService";
+import AvailableRequestMakersBar from "./AvailableRequestMakersBar";
+import jwtDecode from "jwt-decode";
 
 const PostBloodRequest = () => {
+
+    //Get id from token 
+    const token = localStorage.getItem('token');
+    const decodedToken = jwtDecode(token);
+    const id = decodedToken?.id;
+    console.log(id);
 
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -52,9 +60,10 @@ const PostBloodRequest = () => {
     const storeData = () => {
         console.log("Send API call");
         requestMakerService
-            .addRequestMaker({ name, message, email, location, contactNo, hospital, bloodGroup, gender, city })
+            .addRequestMaker({ id,name, message, email, location, contactNo, hospital, bloodGroup, gender, city })
             .then((data) => {
                 console.log(data);
+                window.location.href = "/user/request-maker";
             })
             .catch((err) => {
                 console.log(err);
@@ -313,9 +322,13 @@ const PostBloodRequest = () => {
         </div>
 
         
-            <div style={{textAlign:'right',marginTop:'20%',color:'rgb(160, 15, 15)',marginBottom:'10%'}}>
-                
-            </div>
+        <div style={{marginLeft:'50%',marginTop:'3%'}}>
+            <AvailableRequestMakersBar ></AvailableRequestMakersBar>
+        </div>
+        
+        <div style={{textAlign:'right',marginTop:'5%',color:'rgb(160, 15, 15)',marginBottom:'0%'}}>
+            
+        </div>
     
         
         <UserPanelFooter></UserPanelFooter>

@@ -179,30 +179,6 @@ const RequestMaker = () => {
                 )}
         </div>
 
-        
-        <AvailableRequestMakersBar></AvailableRequestMakersBar>
-
-        <div style={{marginTop:"6%",marginBottom:"10%"}}>
-            <Container>
-                <Row>
-                    <Col sm={7}>
-                        <img src={Image1} width="105%" height="500rem" />
-                    </Col>
-                    
-                    <Col sm={5}>
-                        <div style={{paddingTop:"23%",paddingLeft:"20%",textAlign:"left"}}>
-                            <h5>Thinking about becoming a request maker?</h5>
-                            <h1 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Post Blood Request. Give Life gift.</h1>
-                            <p className="text-left">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
-                            <Button href='/user/post-blood-request' variant="flatSolid">Post Blood Request<ArrowRight className="" size={22} /></Button>
-                        </div>
-                        
-                    </Col>
-                </Row>
-            </Container>
-        </div>
-
-        <UserPanelBackToTopButton></UserPanelBackToTopButton>
 
         <UserPanelFooter></UserPanelFooter>
 

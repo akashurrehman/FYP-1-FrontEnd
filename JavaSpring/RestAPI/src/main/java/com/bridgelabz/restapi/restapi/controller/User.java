@@ -394,6 +394,7 @@ public class User {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(UserInfo);
 
+        String id = jsonNode.has("id") ? jsonNode.get("id").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
         String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
@@ -419,8 +420,9 @@ public class User {
                         "                       bd:hasDonorBloodGroup \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorEmail \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:bloodDonationMakeby bd:%s .\n" +
                         "}",
-                name, individualId, city, gender, location, contactNo, bloodGroup, email, message);
+                name, individualId, city, gender, location, contactNo, bloodGroup, email, message,id);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -596,6 +598,49 @@ public class User {
     }
 
     /*
+     * GET the Information of the Donors by passing ID
+     */
+    @GetMapping("/api/users/donate/byUserID/{id}")
+    public ResponseEntity<String> GetdonatebyUserID(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?donations rdf:type bd:Blood_Donation ." +
+                "?donations bd:bloodDonationMakeby bd:" + id + " ." +
+                "?donations bd:hasDonorName ?Name ." +
+                "?donations bd:hasDonorID ?ID ." +
+                "?donations bd:hasDonorEmail ?Email ." +
+                "?donations bd:hasDonorGender ?Gender ." +
+                "?donations bd:hasDonorLocation ?Location ." +
+                "?donations bd:hasDonorMessage ?Message ." +
+                "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
+                "?donations bd:hasDonorContactNo ?Contact ." +
+                "?donations bd:hasDonorCity ?City ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Email is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
+
+    /*
      * Add Blood Request
      * Can by add by Users or centers
      */
@@ -607,6 +652,7 @@ public class User {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(bloodRequest);
 
+        String id = jsonNode.has("id") ? jsonNode.get("id").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
         String hospital = jsonNode.has("hospital") ? jsonNode.get("hospital").asText() : null;
         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
@@ -635,8 +681,9 @@ public class User {
                         "                       bd:hasRequestMakerID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasRequestMakerGender \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasRequestMakerLocation \"%s\"^^xsd:string ;\n" +
+                        "                       bd:bloodRequestMakeby bd:%s .\n" +
                         "}",
-                email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location);
+                email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location,id);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -814,6 +861,48 @@ public class User {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+    /*
+     * View Blood Requests entered by users by passing ID
+     */
+    @GetMapping("/api/users/bloodrequest/byUserID/{id}")
+    public ResponseEntity<String> GetbloodrequestbyUserID(@PathVariable String id) {
+        
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+        
+            "SELECT * WHERE {" +
+            "?requests rdf:type bd:Blood_Request ." +
+            "?requests bd:bloodRequestMakeby bd:" + id + " ." +
+            "?requests bd:hasRequestMakerID ?ID ." +
+            "?requests bd:hasRequestMakerName ?Name ." +
+            "?requests bd:hasRequestMakerEmail ?Email ." +
+            "?requests bd:hasRequestMakerGender ?Gender ." +
+            "?requests bd:hasRequestMakerLocation ?Location ." +
+            "?requests bd:hasRequestMakerMessage ?Message ." +
+            "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+            "?requests bd:hasRequestMakerContactNo ?Contact ." +
+            "?requests bd:hasRequestMakerCity ?City ." +
+            "?requests bd:hasRequestMakerHospital ?Hospital ." +
+            "}";
+                // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Email is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
 
     /*
      * Appointment Details of Users such as Center, Timing

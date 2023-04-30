@@ -20,8 +20,16 @@ import WcSharpIcon from '@mui/icons-material/WcSharp';
 
 import '../css/style.css';
 import donorService from "../../../Services/Api/User/DonorService";
+import AvailableDonorsBar from "./AvailableDonorsBar";
+import jwtDecode from "jwt-decode";
 
 const MakeBloodDonation = () => {
+
+    //Get id from token 
+    const token = localStorage.getItem('token');
+    const decodedToken = jwtDecode(token);
+    const id = decodedToken?.id;
+    console.log(id);
 
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -50,9 +58,10 @@ const MakeBloodDonation = () => {
     const storeData = () => {
         console.log("Send API call");
         donorService
-            .addDonor({ name, message, email, location, contactNo, bloodGroup, gender, city })
+            .addDonor({ id, name, message, email, location, contactNo, bloodGroup, gender, city })
             .then((data) => {
                 console.log(data);
+                window.location.href = "/user/donor";
             })
             .catch((err) => {
                 console.log(err);
@@ -99,7 +108,7 @@ const MakeBloodDonation = () => {
                     <Row className='mt-0 mb-5 p-1'>
                         <Col sm={12} className='LoginContainerCol'>
                             <h4 className="TextColor" style={{fontFamily:'cursive'}}>Make Blood Donation</h4>
-                            <p className="justify-content mb-3 mt-3" style={{fontSize:'13px'}}>
+                            <p className="justify-content mb-3 mt-3" style={{fontSize:'13.5px',color:'gray'}}>
                                 "Dear Donor!", your information is valuable to us.
                                 When you fill out this form, the system will create your blood donation. 
                                 With your name and other details; you can view your posted blood requests!
@@ -292,10 +301,13 @@ const MakeBloodDonation = () => {
             
         </div>
 
+        <div style={{marginLeft:'50%',marginTop:'3%'}}>
+            <AvailableDonorsBar ></AvailableDonorsBar>
+        </div>
         
-            <div style={{textAlign:'right',marginTop:'20%',color:'rgb(160, 15, 15)',marginBottom:'10%'}}>
-                
-            </div>
+        <div style={{textAlign:'right',marginTop:'5%',color:'rgb(160, 15, 15)',marginBottom:'0%'}}>
+            
+        </div>
     
         
         <UserPanelFooter></UserPanelFooter>

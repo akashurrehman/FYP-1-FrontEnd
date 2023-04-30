@@ -196,12 +196,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/user/deleteBloodDonation/bloodDonationDetails/delete/{id}").permitAll()
                 .antMatchers("/api/users/donate").permitAll()
                 .antMatchers("/api/users/donate/{ID}").permitAll()
+                .antMatchers("/api/users/donate/byUserID/{id}").permitAll()
 
                 .antMatchers("/api/user/bloodRequest/BloodRequestDetails/add").permitAll()
                 .antMatchers("/api/user/bloodRequest/BloodRequestDetails/update/{ID}").permitAll()
                 .antMatchers("/api/user/bloodRequest/BloodRequestDetails/delete/{id}").permitAll()
                 .antMatchers("/api/users/bloodrequest").permitAll()
                 .antMatchers("/api/users/bloodrequest/{id}").permitAll()
+                .antMatchers("/api/users/bloodrequest/byUserID/{id}").permitAll()
 
                 /************ Blood Donation Centre Routes start here *************/
                 .antMatchers("/api/bloodCenter/RegisteredCenters").permitAll()

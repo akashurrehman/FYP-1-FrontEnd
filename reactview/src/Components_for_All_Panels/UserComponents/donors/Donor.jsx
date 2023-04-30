@@ -29,8 +29,9 @@ const Donor = () => {
         });
     };
     React.useEffect(getData, []);
-    console.log(donors.results);
+    console.log(donors?.results?.bindings?.length);
 
+    
 
     //For Filter
     const [filterBlood,setFilterBlood] = React.useState("Blood Group");
@@ -180,34 +181,7 @@ const Donor = () => {
                     </Row>
                 )}
         </div>
-
         
-        
-        <AvailableDonorsBar></AvailableDonorsBar>
-
-        
-        <div style={{marginTop:"6%",marginBottom:"10%"}}>
-            <Container>
-                <Row>
-                    <Col sm={7}>
-                        <img src={Image1} width="100%" height="500rem" />
-                    </Col>
-                    
-                    <Col sm={5}>
-                        <div style={{paddingTop:"23%",paddingLeft:"20%",textAlign:"left"}}>
-                            <h5>Thinking about becoming a blood donor?</h5>
-                            <h1 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Make Blood Donation. Give Life gift.</h1>
-                            <p className="text-left">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
-                            <Button href='/user/post-blood-request' variant="flatSolid">Make Blood Donation<ArrowRight className="" size={22} /></Button>
-                        </div>
-                        
-                    </Col>
-                </Row>
-            </Container>
-        </div>
-
-        <UserPanelBackToTopButton></UserPanelBackToTopButton>
-
         <UserPanelFooter></UserPanelFooter>
 
     </div> );
