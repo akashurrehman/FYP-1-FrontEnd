@@ -81,6 +81,7 @@ const BloodInformation=()=> {
     .then((response) => {
       console.log(response.data);
       toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
+      toast("Donor Information Added Successfully",{position:toast.POSITION.TOP_CENTER});
       })
     .catch((error) => {
       console.error(error);
@@ -93,7 +94,7 @@ const BloodInformation=()=> {
     setShowModal(false);
   }
   return (
-    <Container fluid style={{backgroundColor:"#EEEEEE"}}>
+    <Container fluid style={{backgroundColor:"#EEEEEE",paddingBottom:"3.5rem"}}>
       <Header />
       <Row>
         <Col xs={3}>
@@ -142,7 +143,7 @@ const BloodInformation=()=> {
             Contact No
           </Form.Label>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-phone" aria-hidden="true"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" placeholder="+92 348484848" name="contactNo" onChange={handleChange}/>
           </InputGroup>
           {donorData.contactNoError && (
@@ -153,7 +154,7 @@ const BloodInformation=()=> {
       <Row>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-map-marker" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control placeholder="Donor's City" name="city" onChange={handleChange}/>
           </InputGroup>
         {donorData.locationError && (
@@ -172,7 +173,7 @@ const BloodInformation=()=> {
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-tint" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control placeholder="Donor's Blood Group" name="bloodGroup" onChange={handleChange} />
           </InputGroup>
         </Col>
@@ -180,30 +181,30 @@ const BloodInformation=()=> {
       <Row>
         <Col>
         <InputGroup className="mb-2">
-          <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+          <InputGroup.Text><i class="fa fa-male" aria-hidden="true"></i></InputGroup.Text>
             <Form.Label visuallyHidden>Donor's Gender </Form.Label>
               <Form.Control placeholder="Donor's gender" name="gender" onChange={handleChange}/>
           </InputGroup>
         </Col>
         <Col>
         <InputGroup className="mb-2">
-          <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+          <InputGroup.Text><i class="fa fa-comments" aria-hidden="true"></i></InputGroup.Text>
           <Form.Label visuallyHidden>Any message to other user?</Form.Label>
             <Form.Control placeholder="Type your message here...." name="message" onChange={handleChange}/>
         </InputGroup>
         </Col>
       </Row>
       <Row className="mt-3">
-        <Col xs="12" sm={6}>
+        <Col xs="12" sm={12}>
           <Form.Group className="mb-3" id="formGridCheckbox">
-            <Form.Check type="checkbox" label="According to your provided information of Donor is correct. Any wrong information can lead to disconnect from using website" />
+            <Form.Check type="checkbox" className="w-sm-100 mb-5" label="According to your provided information of Donor is correct. Any wrong information can lead to disconnect from using website" />
           </Form.Group>
         </Col>
       </Row>
     </Form>
     <Col xs="12" sm={6} className="align-items-center">
           <Button variant="primary" type="submit" className="w-md-100 mb-5" onClick={handleSubmit} style={{backgroundColor: "#153250"}}>
-            Submit Donor's Information
+          <i class="fa fa-plus-square" aria-hidden="true"></i> Submit Donor's Information
           </Button>
         </Col>
     </Col>

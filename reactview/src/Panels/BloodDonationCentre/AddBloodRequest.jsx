@@ -81,6 +81,7 @@ const AddBloodRequest=()=> {
     .then((response) => {
       console.log(response.data);
       toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
+      toast("Request for blood Added!",{position:toast.POSITION.TOP_CENTER});
       })
     .catch((error) => {
       console.error(error);
@@ -135,7 +136,7 @@ const AddBloodRequest=()=> {
             Phone
           </Form.Label>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-phone" aria-hidden="true"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" name="contactNo" placeholder="+923459215623" onChange={handleChange}/>
           </InputGroup>
           {bloodRequests.contactNoError && (
@@ -168,14 +169,14 @@ const AddBloodRequest=()=> {
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-tint" aria-hidden="true"></i></InputGroup.Text>
               <Form.Label visuallyHidden>Blood Type</Form.Label>
                 <Form.Control placeholder="Blood Type i.e AB+, O+, AB- etc" name="bloodGroup" onChange={handleChange}/>
           </InputGroup>
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-comments" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control placeholder="Message" name="message" onChange={handleChange}/>
           </InputGroup>
         </Col>
@@ -183,7 +184,7 @@ const AddBloodRequest=()=> {
       <Row>
         <Col>
         <InputGroup className="mb-2">
-          <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+          <InputGroup.Text><i class="fa fa-h-square" aria-hidden="true"></i></InputGroup.Text>
             <Form.Label visuallyHidden>Blood Donation Center</Form.Label>
               <Form.Control placeholder="Blood Donation Center or Hospital" name="hospital" onChange={handleChange}/>
         </InputGroup>
@@ -193,7 +194,7 @@ const AddBloodRequest=()=> {
         </Col>
         <Col>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-map-marker" aria-hidden="true"></i></InputGroup.Text>
               <Form.Label visuallyHidden>City</Form.Label>
               <Form.Control placeholder="City" name="city" onChange={handleChange} required/>
           </InputGroup>
@@ -203,7 +204,7 @@ const AddBloodRequest=()=> {
         </Col>
         <Col>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-male" aria-hidden="true"></i></InputGroup.Text>
               <Form.Label visuallyHidden>Gender</Form.Label>
               <Form.Control placeholder="Gender" name="gender" onChange={handleChange}/>
           </InputGroup>
@@ -219,7 +220,7 @@ const AddBloodRequest=()=> {
     </Form>
       <Row className="mb-3">
           <Col>
-              <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleSubmit}>Post Blood Request</Button>
+              <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleSubmit}><i class="fa fa-plus" aria-hidden="true"></i>Post Blood Request</Button>
           </Col>
       </Row>
       
@@ -229,10 +230,11 @@ const AddBloodRequest=()=> {
                 <Card.Body>
                   <Card.Title style={
                     {color:"red",fontSize:20,fontWeight:"bold",textAlign:"center"}
-                  }>You can view all the blood requests here!</Card.Title>
+                  }>You can view all the blood requests here! <i class="fa fa-hand-o-down" aria-hidden="true"></i>
+                  </Card.Title>
                 </Card.Body>
                 <Card.Footer>
-                  <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleAllRequests}>View All blood Requests </Button>
+                  <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleAllRequests}><i class="fa fa-hand-o-right" aria-hidden="true"></i>View All blood Requests </Button>
                 </Card.Footer>
               </Card>
             </Col>

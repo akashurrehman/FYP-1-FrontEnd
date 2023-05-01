@@ -25,20 +25,20 @@ function Header(props) {
             style={{ maxHeight: '100px',color:"#FFFFFF" }}
             navbarScroll
           >
-            <Nav.Link href="/lab/home" style={{color:"#FFFFFF" }}>Dashboard/Home</Nav.Link>
-            <Nav.Link href="/lab/profileSettings" style={{color:"#FFFFFF" }}>Profile Settings</Nav.Link>
+            <Nav.Link href="/lab/home" style={{color:"#FFFFFF" }}><i class="fa fa-home" aria-hidden="true"></i> Dashboard/Home</Nav.Link>
+            <Nav.Link href="/lab/profileSettings" style={{color:"#FFFFFF" }}> <i class="fa fa-cogs" aria-hidden="true"></i> Profile Settings</Nav.Link>
             <Nav.Link href="/lab/ReportRequest" style={{color:"#FFFFFF" }}>
-                Applicants Report Verify/ Reject
+              <i class="fa fa-check-circle" aria-hidden="true"></i> Applicants Report Verify/ Reject
             </Nav.Link>
           </Nav>
             <Nav>
               <Nav.Link onClick={localStorage.removeItem('token')} style={{color:"#FFFFFF" }}>
-                Logout
+              <i class="fa fa-share" aria-hidden="true"></i> Logout
               </Nav.Link>
             </Nav>
             <Nav>
                 <Nav.Link href="#Help" style={{color:"#FFFFFF" }}>
-                    Help
+                <i class="fa fa-info" aria-hidden="true"></i>  Help
                 </Nav.Link>
             </Nav>
         </Navbar.Collapse>

@@ -131,8 +131,8 @@ const columns = [
     name: 'Action',
     cell: (row) => (
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button variant="primary" style={{ borderRadius: 0,height:"30px", width:"100%", marginRight:"5px" }} onClick={handleApprove}>Remove</Button>
-        <Button variant="success" style={{ borderRadius: 0,height:"30px",  width:"100%" }} onClick={handleReject}>Update</Button>
+        <Button variant="success" style={{ borderRadius: 0,height:"30px", width:"100%", marginRight:"5px" }} onClick={handleApprove}><i class="fa fa-check" aria-hidden="true"></i>Approve</Button>
+        <Button variant="danger" style={{ borderRadius: 0,height:"30px",  width:"100%" }} onClick={handleReject}><i class="fa fa-times" aria-hidden="true"></i>Remove</Button>
       </div>
     )
   }  
@@ -164,7 +164,7 @@ const columns = [
           selectableRowsHighlight
           highlightOnHover
           actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> Download</button>
+            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-download" aria-hidden="true"></i>Download</button>
           }
         />
         </Col>

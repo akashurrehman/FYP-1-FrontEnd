@@ -236,6 +236,7 @@ const handleCancel = () => {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Username</Form.Label>
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
             <Form.Control   name="name"  placeholder="Enter Center Number" value={center.name}  onChange={handleChange}/>
           </Form.Group>
           <Form.Group as={Col} controlId="formGridPassword">
@@ -308,7 +309,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
         <Col>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
+            <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}><i class="fa fa-check-circle" aria-hidden="true"></i>Update Information</Button>
         </Col>
     </Row>
     <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
@@ -321,7 +322,7 @@ const handleCancel = () => {
                 <Form.Check type="checkbox" style={{color:"black",borderColor:"red"}} className="py-3" label="Are the provided information is correct according to your center or knowledge?" />
               </Form.Group>
             </Form>
-            <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} className="mx-3 my-3 w-md-100" variant="danger" onClick={handleDelete}>Delete Center</Button>
+            <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} className="mx-3 my-3 w-md-100" variant="danger" onClick={handleDelete}><i class="fa fa-trash" aria-hidden="true"></i>Delete Center</Button>
           </Col>
         </Row>
       </Card>

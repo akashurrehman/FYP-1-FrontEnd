@@ -129,7 +129,7 @@ const HomeScreen_BloodDonation=()=> {
                           </div>
                         ))} 
                         </div>
-                        <Button variant="primary" onClick={ViewAllRequests} style={{backgroundColor: "#153250",marginTop:"12px"}}><>View all requests</></Button>
+                        <Button variant="primary" onClick={ViewAllRequests} style={{backgroundColor: "#153250",marginTop:"12px"}}><><i class="fa fa-check-circle" aria-hidden="true"></i>View all requests</></Button>
                     </Card.Body>
                 </Card>
             </Col>
@@ -139,7 +139,7 @@ const HomeScreen_BloodDonation=()=> {
                   <img src="/Images/blood-Center.jpg" alt="Image for display" style={{width: "50%", height: "50%", objectFit: "cover"}}/>
                     <div style={{position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(0,0,0,0.5)", padding: "10px"}}>
                       <Card.Title style={{color: "white"}}>Be a hero in your - It's in your blood</Card.Title>
-                        <Button variant="primary" onClick={RegisterNewUser} style={{backgroundColor: "#153250"}}>Register New User</Button>
+                        <Button variant="primary" onClick={RegisterNewUser} style={{backgroundColor: "#153250"}}> <i class="fa fa-plus-square" aria-hidden="true"></i> Register New User</Button>
                     </div>
                 </div>
                 <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginTop: "10px"}}>
@@ -162,7 +162,7 @@ const HomeScreen_BloodDonation=()=> {
                           </div>                       
                         ))} 
                         </div>
-                        <Button variant="primary" onClick={ViewAllDonors} style={{backgroundColor: "#153250",marginTop:"12px"}}>View All Donors</Button>
+                        <Button variant="primary" onClick={ViewAllDonors} style={{backgroundColor: "#153250",marginTop:"12px"}}><i class="fa fa-check-circle" aria-hidden="true"></i>View All Donors</Button>
                     </Card.Body>
                 </Card>
             </Col>
@@ -181,7 +181,7 @@ const HomeScreen_BloodDonation=()=> {
              */ }
                 <Card.Body className="d-flex justify-content-between">
                   <Card.Title>By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
-                    <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}>View All Appointment details!</Button>
+                    <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointment details!</Button>
                 </Card.Body>
                   <p>By handling users through appointments you can gain best experience ever!</p>
             </Card>
@@ -189,7 +189,7 @@ const HomeScreen_BloodDonation=()=> {
         </CardGroup>
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
-              <Card.Title><i className="fa fa-flag" aria-hidden="true"></i>Important  FAQS</Card.Title>
+              <Card.Title><i class="fa fa-question-circle" aria-hidden="true"></i>Important  FAQS</Card.Title>
               {FAQ.map((item) => (
                 <div key={item.ID.value}>
                   <h4>Question:{item.Title.value}</h4>
@@ -205,8 +205,9 @@ const HomeScreen_BloodDonation=()=> {
               <div>
                 {events.map((event) => (
                   <div key={event.ID.value}>
-                    <h4>Event Title:{event.Title.value}</h4>
-                    <p>Event Details:{event.Details.value}</p>
+                    <h4>Event Title:{event.Name.value}</h4>
+                    <p>Event Details:{event.Message.value}</p>
+                    <h5>Location:{event.Location.value}</h5>
                     <h6> Event Date:{event.Date.value}</h6>
                     <hr style={{color:"red",width:"50%",fontSize:"40px",fontWeight:"bold"}}/> {/* Add a line after each item */}
                   </div>
@@ -216,7 +217,7 @@ const HomeScreen_BloodDonation=()=> {
           </Card>
           <Card border="light" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
-              <Card.Title><i className="fa fa-calendar" aria-hidden="true"></i>Job Posts</Card.Title>
+              <Card.Title><i class="fa fa-briefcase" aria-hidden="true"></i>Job Posts</Card.Title>
               {jobPosts.map((jobPost) => (
                 <div key={jobPost.ID.value}>
                   <h4>Job Title:{jobPost.Title.value}</h4>
@@ -229,7 +230,7 @@ const HomeScreen_BloodDonation=()=> {
           </Card>
           <Card border="light" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
-              <Card.Title><i className="fa fa-calendar" aria-hidden="true"></i>Important News </Card.Title>
+              <Card.Title><i class="fa fa-folder" aria-hidden="true"></i>Important News </Card.Title>
               {news.map((jobPost) => (
                 <div key={jobPost.ID.value}>
                   <h4>Job Title:{jobPost.Title.value}</h4>
