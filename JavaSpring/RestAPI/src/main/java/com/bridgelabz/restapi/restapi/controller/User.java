@@ -909,14 +909,72 @@ public class User {
      * Missing Sparql Query
      * Add the Appointment Details of Users in the Database
      */
-    @PostMapping("/api/users/appointment")
-    public String appointment(@RequestBody String user) {
-        return "User: " + user;
+    @PostMapping("/api/user/appointment/AppointmentDetails/add")
+    public ResponseEntity<String> AddAppointmentDetails(@RequestBody String appointment) throws IOException {
+
+        System.out.print(appointment);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(appointment);
+
+        String userID = jsonNode.has("userID") ? jsonNode.get("userID").asText() : null;
+        String centreID = jsonNode.has("centreID") ? jsonNode.get("centreID").asText() : null;
+        String donorName = jsonNode.has("donorName") ? jsonNode.get("donorName").asText() : null;
+        String donorDOB = jsonNode.has("donorDOB") ? jsonNode.get("donorDOB").asText() : null;
+        String donorEmail = jsonNode.has("donorEmail") ? jsonNode.get("donorEmail").asText() : null;
+        String donorContactNo = jsonNode.has("donorContactNo") ? jsonNode.get("donorContactNo").asText() : null;
+        String donorGender = jsonNode.has("donorGender") ? jsonNode.get("donorGender").asText() : null;
+        String donorAddress = jsonNode.has("donorAddress") ? jsonNode.get("donorAddress").asText() : null;
+        String donorCity = jsonNode.has("donorCity") ? jsonNode.get("donorCity").asText() : null;
+        String donorBloodGroup = jsonNode.has("donorBloodGroup") ? jsonNode.get("donorBloodGroup").asText() : null;
+        String centreName = jsonNode.has("centreName") ? jsonNode.get("centreName").asText() : null;
+        String centreTimings = jsonNode.has("centreTimings") ? jsonNode.get("centreTimings").asText() : null;
+        String centreContactNo = jsonNode.has("centreContactNo") ? jsonNode.get("centreContactNo").asText() : null;
+        String centreEmail = jsonNode.has("centreEmail") ? jsonNode.get("centreEmail").asText() : null;
+        String centreLocation = jsonNode.has("centreLocation") ? jsonNode.get("centreLocation").asText() : null;
+
+        String individualId = "Appointment_" + System.currentTimeMillis();
+        System.out.print(individualId);
+
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        "bd:" + individualId + " rdf:type bd:Appointment ;\n" +
+                        "                       bd:hasAppointmentDonorName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentDonorDOB \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentDonorEmail \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentDonorContactNo \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentDonorGender \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentDonorAddress \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentDonorCity \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentDonorBloodGroup \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentCentreName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentCentreTimings \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentCentreContactNo \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentCentreEmail \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentCentreLocation \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:appointmentMadeBy bd:%s ;\n" +
+                        "                       bd:appointmentBookedIn bd:%s ;\n" +
+                        "}",
+                donorName, donorDOB, donorEmail, donorContactNo, donorGender, donorAddress, donorCity, donorBloodGroup, centreName, centreTimings, centreContactNo, centreEmail, centreLocation, individualId, userID, centreID);
+        // Call the InsertSparql function with the query
+        boolean isInserted = InsertSparql(query);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
+
     /*
      * Edit the Appointment Details of Users by passing ID
      * Edit information such as center, or timing
-     */
+    */
 
     @PutMapping("/api/users/appointment/{id}")
     public String editAppointment(@RequestBody String user, @PathVariable String id) {

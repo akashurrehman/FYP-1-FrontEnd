@@ -59,7 +59,7 @@ import NewsDetails from './Components_for_All_Panels/UserComponents/packages/new
 import News from './Components_for_All_Panels/UserComponents/packages/news/News';
 import Campaign from './Components_for_All_Panels/UserComponents/packages/campaigns/Campaign';
 import CampaignDetails from './Components_for_All_Panels/UserComponents/packages/campaigns/CampaignDetails';
-
+import MakeAppointment from './Components_for_All_Panels/UserComponents/appointments/MakeAppointment';
 
 
 function App() {
@@ -100,7 +100,7 @@ function App() {
           
           <Route exact path='/user/donor-details/:id' element={<DonorDetails/>} />
           <Route exact path='/user/request-maker-details/:id' element={<RequestMakerDetails/>} />
-          <Route exact path='/user/centre-details/:id' element={<BloodDonationCentreDetails/>} />
+          <Route exact path='/user/centre-details/:centreID' element={<BloodDonationCentreDetails/>} />
 
           <Route exact path='/user/job-post' element={<JobPost/>} />
           <Route exact path='/user/job-post-details/:id' element={<JobPostDetails/>} />
@@ -122,6 +122,8 @@ function App() {
 
           <Route exact path='/user/campaign' element={<Campaign/>} />
           <Route exact path='/user/campaign-details/:id' element={<CampaignDetails/>} />
+
+          <Route exact path='/user/make-appointment/:centreID' element={<MakeAppointment/>} />
 
           {/*Lab Interface Routes */}
           <Route exact path='/lab/home' element={<LabHome/>}/>
