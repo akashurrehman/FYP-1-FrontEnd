@@ -7,9 +7,9 @@ import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill
 
 import '../../css/style.css';
 
-const SingleJobPost = (props) => {
+const SingleEvent = (props) => {
 
-    const { jobpost, history } = props;
+    const { event, history } = props;
     console.log(props);
 
 
@@ -24,20 +24,20 @@ const SingleJobPost = (props) => {
                                 <Card className="UserCard" border="secondary" style={{ width: '22rem' }}>
                                     <Row>
                                         <Col sm={12} style={{paddingLeft: '7%',paddingTop: '6%',textAlign:'left'}}>
-                                            <Card.Title><h5 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>{jobpost.Title.value}</h5></Card.Title>
+                                            <Card.Title><h5 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>{event?.Name?.value}</h5></Card.Title>
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <Card.Text>
-                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Title: </strong>{jobpost.Title.value}</p>
-                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Posting Date: </strong>{jobpost.Date.value}</p>
-                                            <p style={{marginTop:'-5.5%',height:'66px'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Details: </strong>{jobpost.Details.value}</p>
+                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Event Name: </strong>{event?.Name?.value}</p>
+                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Location: </strong>{event?.Location?.value}</p>
+                                            <p style={{marginTop:'-5.5%',height:'30px'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Date & Time: </strong>{event?.Date?.value}</p>
                                         </Card.Text>
                                         
                                         <ListGroup className="list-group-flush"style={{marginTop:'-5%'}}>
                                             <ListGroup.Item></ListGroup.Item>
                                             <ListGroup.Item>
-                                                <Link to={{ pathname: `/user/job-post-details/${jobpost.ID.value}`, state: { jobpost } }} className='d-flex justify-content-end TextColor' style={{marginBottom:'-5%',textDecoration:'none',fontSize:'14.5px',fontWeight:'600'}}>
+                                                <Link to={{ pathname: `/user/event-details/${event.ID.value}`, state: { event } }} className='d-flex justify-content-end TextColor' style={{marginBottom:'-5%',textDecoration:'none',fontSize:'14.5px',fontWeight:'600'}}>
                                                     View Details <ArrowRight className="m-1" size={16} />
                                                 </Link>
                                             </ListGroup.Item>
@@ -60,4 +60,4 @@ const SingleJobPost = (props) => {
     </div> );
 }
 
-export default SingleJobPost;
+export default SingleEvent;

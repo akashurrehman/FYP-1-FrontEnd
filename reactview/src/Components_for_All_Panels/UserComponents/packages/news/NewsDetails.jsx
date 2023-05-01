@@ -9,16 +9,16 @@ import image from '../../../../Public/user/image/jobpost.png';
 import '../../css/style.css';
 import packageService from "../../../../Services/Api/User/PackageService";
 
-const JobPostDetails = () => {
+const NewsDetails = () => {
 
     const { id } = useParams();
-    const [jobPosts, setJobPosts] = useState();
+    const [news, setNews] = useState();
 
     const getData = () => {
         packageService
-            .getSingleJobPost(id)
+            .getSingleNews(id)
             .then((data) => {
-                setJobPosts(data?.results?.bindings?.[0]);
+                setNews(data?.results?.bindings?.[0]);
             })
             .catch((err) => {
                 console.log(err);
@@ -27,7 +27,7 @@ const JobPostDetails = () => {
 
     
     useEffect(()=> getData, []);
-    console.log(jobPosts?.Title);
+    console.log(news?.Title);
 
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -35,7 +35,7 @@ const JobPostDetails = () => {
             <Container style={{width:'60%'}}>
                 <Row style={{textAlign:'center',marginBottom:'5%'}}>
                     <Col sm={12}>
-                        <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Job Post Details</h2>  
+                        <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>News Details</h2>  
                         <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
                     </Col>
                 </Row>
@@ -43,9 +43,10 @@ const JobPostDetails = () => {
             <Container>
                 <Row style={{marginBottom:'10%'}}>
                     <Col sm={6}>
-                        <h4 style={{fontSize:'20px'}}>Job Title: <spam style={{fontSize:'16px',fontWeight:'400'}}>{jobPosts?.Title?.value}</spam></h4>
-                        <h4 style={{fontSize:'20px'}}>Job Description: <spam style={{fontSize:'16px',fontWeight:'400'}}>{jobPosts?.Details?.value}</spam></h4>
-                        <h4 style={{fontSize:'20px'}}>Posting Date: <spam style={{fontSize:'16px',fontWeight:'400'}}>{jobPosts?.Date?.value}</spam></h4>
+                        <h4 style={{fontSize:'20px'}}>News Title: <spam style={{fontSize:'16px',fontWeight:'400'}}>{news?.Title?.value}</spam></h4>
+                        <h4 style={{fontSize:'20px'}}>Date: <spam style={{fontSize:'16px',fontWeight:'400'}}>{news?.Date?.value}</spam></h4>
+                        <h4 style={{fontSize:'20px'}}>News Details: <spam style={{fontSize:'16px',fontWeight:'400'}}>{news?.Details?.value}</spam></h4>
+                    
                     </Col>
                     <Col sm={6}>
                     <div>
@@ -62,4 +63,4 @@ const JobPostDetails = () => {
     </div> );
 };
 
-export default JobPostDetails;
+export default NewsDetails;

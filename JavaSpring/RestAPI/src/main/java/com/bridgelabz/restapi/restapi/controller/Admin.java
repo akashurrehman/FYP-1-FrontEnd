@@ -186,13 +186,42 @@ public class Admin {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
+    
+    
     /*
      * Get the Sponsors in the Database by ID
      */
     @GetMapping("/api/admin/getSponsor/{id}")
-    public String getSponsorById(@PathVariable String id) {
-        return "Sponsor" + id;
+    public ResponseEntity<String> getSponsorByID(@PathVariable String id) {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?sponsors rdf:type bd:Sponsor ." +
+                "?sponsors bd:hasSponsorID ?ID ." +
+                "?sponsors bd:hasSponsorName ?Name ." +
+                "?sponsors bd:hasSponsorMessage ?Message ." +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
 
     /*
      * Manage the Financial Donation in the Database
@@ -367,7 +396,6 @@ public class Admin {
                 "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
                 "?financial_donations bd:hasFinancialDonorMessage ?Message ." +
                 "filter(?Name = \"" + Name + "\")" +
-
                 "}";
 
         // set the response headers
@@ -387,6 +415,45 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+
+    /*
+     * Get the Financial Donations in the Database by ID
+     */
+    @GetMapping("/api/admin/getFinancialDonationById/{id}")
+    public ResponseEntity<String> getFinancialDonationById(@PathVariable String id) {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?financial_donations rdf:type bd:Financial_Donation ." +
+                "?financial_donations bd:hasFinancialDonorName ?Name ." +
+                "?financial_donations bd:hasFinancialDonationID ?ID ." +
+                "?financial_donations bd:hasFinancialDonorContactNo ?ContactNo ." +
+                "?financial_donations bd:hasFinancialDonorDonationDate ?Date ." +
+                "?financial_donations bd:hasFinancialDonorDonationAmount ?Amount ." +
+                "?financial_donations bd:hasFinancialDonorMessage ?Message ." +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Name: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
 
     /*
      * Manage the job Posts in the Database
@@ -733,7 +800,7 @@ public class Admin {
      * Get the Frequently Asked Questions by ID
      */
     @GetMapping("/api/admin/getFAQ/{title}")
-    public ResponseEntity<String> getFAQById(@PathVariable String title) {
+    public ResponseEntity<String> getFAQByTitle(@PathVariable String title) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -742,7 +809,7 @@ public class Admin {
                 "?faqs bd:hasFAQTitle ?Title ." +
                 "?faqs bd:hasFAQID ?ID ." +
                 "?faqs bd:hasFAQDetails ?Details ." +
-                "filter(?Title = " + title + ")" +
+                "filter(?Title = \"" + title + "\")" +
                 "}";
 
         // set the response headers
@@ -762,6 +829,42 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+
+    /*
+     * Get the Frequently Asked Questions by ID
+     */
+    @GetMapping("/api/admin/getFAQById/{id}")
+    public ResponseEntity<String> getFAQById(@PathVariable String id) {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?faqs rdf:type bd:Frequently_Asked_Question ." +
+                "?faqs bd:hasFAQTitle ?Title ." +
+                "?faqs bd:hasFAQID ?ID ." +
+                "?faqs bd:hasFAQDetails ?Details ." +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
+        
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
 
     /*
      * Manage the ENQUIRY in the Database
@@ -950,7 +1053,7 @@ public class Admin {
      * Get the Compaign by ID
      */
     @GetMapping("/api/admin/getCompaigns/{title}")
-    public ResponseEntity<String> getCompaignsById(@PathVariable String title) {
+    public ResponseEntity<String> getCompaignsByTitle(@PathVariable String title) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -981,6 +1084,44 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+    /*
+     * Get the Compaign by ID
+     */
+    @GetMapping("/api/admin/getCompaignsById/{id}")
+    public ResponseEntity<String> getCompaignsById(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?campaigns rdf:type bd:Campaign ." +
+                "?campaigns bd:hasCampaignTitle ?Title ." +
+                "?campaigns bd:hasCampaignID ?ID ." +
+                "?campaigns bd:hasCampaignDetails ?Details ." +
+                "?campaigns bd:hasCampaignsPostDate ?Date ." +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
 
     /*
      * Add the News in the Database
@@ -1125,7 +1266,7 @@ public class Admin {
      * Get the News by title
      */
     @GetMapping("/api/admin/getNews/{title}")
-    public ResponseEntity<String> getNewsById(@PathVariable String title) {
+    public ResponseEntity<String> getNewsByTitle(@PathVariable String title) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -1156,6 +1297,44 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+    /*
+     * Get the News by title
+     */
+    @GetMapping("/api/admin/getNewsById/{id}")
+    public ResponseEntity<String> getNewsById(@PathVariable String id) {
+        
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+        "SELECT * WHERE {" +
+        "?news rdf:type bd:News ." +
+        "?news bd:hasNewsTitle ?Title ." +
+        "?news bd:hasNewsID ?ID ." +
+        "?news bd:hasNewsDetails ?Details ." +
+        "?news bd:hasNewsPostDate ?Date ." +
+        "filter(?ID = \"" + id + "\")" +
+        "}";
+
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
 
     /*
      * Method to update Advertisement
@@ -1348,7 +1527,7 @@ public class Admin {
      * Get the Events by title
      */
     @GetMapping("/api/admin/getEvents/{title}")
-    public ResponseEntity<String> getEventsById(@PathVariable String title) {
+    public ResponseEntity<String> getEventsByTitle(@PathVariable String title) {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -1359,7 +1538,7 @@ public class Admin {
                 "?events bd:hasEventID ?ID ." +
                 "?events bd:hasEventLocation ?Location ." +
                 "?events bd:hasEventDateTime ?Date ." +
-                "?events bd:hasEventMessage ?Message" +
+                "?events bd:hasEventMessage ?Message ." +
                 "filter(?Name = \"" + title + "\")" +
                 "}";
 
@@ -1375,6 +1554,44 @@ public class Admin {
         JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
         if (bindingsArr.isEmpty()) {
             String errorMessage = "{\"error\": \"Unable to Fetch Data by Using Title: " + title + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
+    /*
+     * Get the Events by title
+     */
+    @GetMapping("/api/admin/getEventsById/{id}")
+    public ResponseEntity<String> getEventsById(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?events rdf:type bd:Event ." +
+                "?events bd:hasEventName ?Name ." +
+                "?events bd:hasEventID ?ID ." +
+                "?events bd:hasEventLocation ?Location ." +
+                "?events bd:hasEventDateTime ?Date ." +
+                "?events bd:hasEventMessage ?Message ." +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if title is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
             return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
         // create the response object with the JSON result and headers

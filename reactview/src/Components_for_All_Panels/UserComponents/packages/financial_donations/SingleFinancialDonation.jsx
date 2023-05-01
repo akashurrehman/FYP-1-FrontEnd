@@ -7,9 +7,9 @@ import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill
 
 import '../../css/style.css';
 
-const SingleJobPost = (props) => {
+const SingleFinancialDonation = (props) => {
 
-    const { jobpost, history } = props;
+    const { financialDonation, history } = props;
     console.log(props);
 
 
@@ -24,20 +24,20 @@ const SingleJobPost = (props) => {
                                 <Card className="UserCard" border="secondary" style={{ width: '22rem' }}>
                                     <Row>
                                         <Col sm={12} style={{paddingLeft: '7%',paddingTop: '6%',textAlign:'left'}}>
-                                            <Card.Title><h5 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>{jobpost.Title.value}</h5></Card.Title>
+                                            <Card.Title><h5 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>{financialDonation?.Amount?.value} Rs</h5></Card.Title>
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <Card.Text>
-                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Title: </strong>{jobpost.Title.value}</p>
-                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Posting Date: </strong>{jobpost.Date.value}</p>
-                                            <p style={{marginTop:'-5.5%',height:'66px'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Details: </strong>{jobpost.Details.value}</p>
+                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donor Name: </strong>{financialDonation?.Name?.value}</p>
+                                            <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Contact No: </strong>{financialDonation?.ContactNo?.value}</p>
+                                            <p style={{marginTop:'-5.5%',height:'30px'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donation Date: </strong>{financialDonation?.Date?.value}</p>
                                         </Card.Text>
                                         
                                         <ListGroup className="list-group-flush"style={{marginTop:'-5%'}}>
                                             <ListGroup.Item></ListGroup.Item>
                                             <ListGroup.Item>
-                                                <Link to={{ pathname: `/user/job-post-details/${jobpost.ID.value}`, state: { jobpost } }} className='d-flex justify-content-end TextColor' style={{marginBottom:'-5%',textDecoration:'none',fontSize:'14.5px',fontWeight:'600'}}>
+                                                <Link to={{ pathname: `/user/financial-donation-details/${financialDonation.ID.value}`, state: { financialDonation } }} className='d-flex justify-content-end TextColor' style={{marginBottom:'-5%',textDecoration:'none',fontSize:'14.5px',fontWeight:'600'}}>
                                                     View Details <ArrowRight className="m-1" size={16} />
                                                 </Link>
                                             </ListGroup.Item>
@@ -60,4 +60,4 @@ const SingleJobPost = (props) => {
     </div> );
 }
 
-export default SingleJobPost;
+export default SingleFinancialDonation;

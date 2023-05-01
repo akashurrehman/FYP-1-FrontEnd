@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Button, Image } from "react-bootstrap";
-import { Form, Row, Col, InputGroup, FloatingLabel } from "react-bootstrap";
+import { Form, Row, Col, InputGroup, FloatingLabel, OverlayTrigger, Popover } from "react-bootstrap";
 import UserPanelHeader from "./UserPanelHeader";
 import UserPanelFooter from "./UserPanelFooter";
 import image from '../../Public/user/image/CoverImage1.jpg';
@@ -8,18 +8,21 @@ import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
-import AccountCircle from '@mui/icons-material/PersonSharp';
-import EmailIcon from '@mui/icons-material/EmailSharp';
-import LocalHospitalIcon from '@mui/icons-material/LocalPharmacySharp';
+
+import EscalatorWarningSharpIcon from '@mui/icons-material/EscalatorWarningSharp';
 import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';
-import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
-import ContactsSharpIcon from '@mui/icons-material/ContactsSharp';
-import LocationCitySharpIcon from '@mui/icons-material/LocationCitySharp';
-import ChatSharpIcon from '@mui/icons-material/ChatSharp';
+import BloodtypeOutlinedIcon from '@mui/icons-material/BloodtypeOutlined';
 import WcSharpIcon from '@mui/icons-material/WcSharp';
+import GrainSharpIcon from '@mui/icons-material/GrainSharp';
+import AnimationSharpIcon from '@mui/icons-material/AnimationSharp';
+import CoronavirusSharpIcon from '@mui/icons-material/CoronavirusSharp';
+import AcUnitSharpIcon from '@mui/icons-material/AcUnitSharp';
+import Diversity2SharpIcon from '@mui/icons-material/Diversity2Sharp';
+import HubSharpIcon from '@mui/icons-material/HubSharp';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import './css/style.css';
-
 
 const BloodAnalysis = () => {
 
@@ -28,7 +31,7 @@ const BloodAnalysis = () => {
     const [wbc, setWBC] = React.useState();
     const [rbc, setRBC] = React.useState();
     const [plt, setPLT] = React.useState();
-    const [hgb, setHGB] = React.useState();
+    const [HGB, setHGB] = React.useState();
     const [diabetes, setDiabetes] = React.useState();
     const [stds, setSTDs] = React.useState();
     const [syphilis, setSyphilis] = React.useState();
@@ -43,16 +46,51 @@ const BloodAnalysis = () => {
             event.stopPropagation();
         }
         else {
-            storeData();
+            submitForm();
         }
         setValidated(true);
     };
 
-    //Store Data In Database(API)
-    const storeData = () => {
-        console.log("Send API call");
+    const submitForm = async (e) => {
+        console.log(age,sex,wbc,rbc,plt,HGB,diabetes,stds,syphilis,aids);
+        e.preventDefault(); 
         
-    };
+        try {
+            const response = await axios.post('http://localhost:5000/predictions', {
+                age, sex, wbc, rbc, plt, HGB, diabetes, stds, syphilis, aids
+            });
+            // window.location.href = "/user/blood-analysis";
+            console.log(response.data.output);
+            if (response.data.output == "Donor is eligible for blood donation") {
+                console.log(response.data.output);
+                toast.success(response.data.output, {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    position: toast.POSITION.BOTTOM_RIGHT,});
+            }
+            else {
+                console.log(response.data.output);
+                toast.error(response.data.output, {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    position: toast.POSITION.BOTTOM_RIGHT,});
+            } 
+        }
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+                toast.error(error.response.data.error, {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    position: toast.POSITION.BOTTOM_RIGHT,});
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
+
+
 
     
 
@@ -92,9 +130,20 @@ const BloodAnalysis = () => {
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <Row>
                                 <Col sm={6}>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="left"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Enter correct value Age. How old are you?
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <EscalatorWarningSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Control
                                             required
@@ -109,9 +158,21 @@ const BloodAnalysis = () => {
                                             Please provide a valid name.
                                         </Form.Control.Feedback>
                                     </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                             
                                 <Col sm={6}>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="right"
+                                        overlay={
+                                        <Popover id="aids-popover" style={{ backgroundColor: 'white', color: 'black',  }}>
+                                            <Popover.Body>
+                                                Select your gender.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
                                             <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -130,13 +191,25 @@ const BloodAnalysis = () => {
                                         </Form.Control.Feedback>
                                             
                                     </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col sm={6}>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="left"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Enter correct value of White Blood Cell Level in body.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <BloodtypeOutlinedIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Control
                                             required
@@ -151,11 +224,23 @@ const BloodAnalysis = () => {
                                             Please provide a valid name.
                                         </Form.Control.Feedback>
                                     </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="right"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Enter correct value of Red Blood Cells Level in body.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <BloodtypeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Control
                                             required
@@ -170,13 +255,26 @@ const BloodAnalysis = () => {
                                             Please provide a valid name.
                                         </Form.Control.Feedback>
                                     </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
+
                             </Row>
                             <Row>
-                            <Col sm={6}>
+                                <Col sm={6}>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="left"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Enter correct value of Platelets Level in body.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <GrainSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Control
                                             required
@@ -191,17 +289,29 @@ const BloodAnalysis = () => {
                                             Please provide a valid name.
                                         </Form.Control.Feedback>
                                     </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="right"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Enter correct value of Hemoglobin Level in body.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <AnimationSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Control
                                             required
                                             aria-label="Default"
                                             aria-describedby="inputGroup-sizing-default" type="number" placeholder="HGB*" 
-                                            value={hgb}
+                                            value={HGB}
                                             onChange={(e) => {
                                                 setHGB(e.target.value);
                                             }}
@@ -210,98 +320,152 @@ const BloodAnalysis = () => {
                                             Please provide a valid name.
                                         </Form.Control.Feedback>
                                     </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                             </Row>
                             
                             <Row>
                                 <Col sm={6}>
-                                    <InputGroup size="sm" className="mb-3" hasValidation>
-                                        <InputGroup.Text id="inputGroup-sizing-default">
-                                            <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                        </InputGroup.Text>
-                                        
-                                        <Form.Select required 
-                                            value={diabetes} 
-                                            onChange={(e) => setDiabetes(e.target.value)}
-                                        >
-                                            <option value="">Diabetes*</option>
-                                            <option value={1}>Yes</option>
-                                            <option value={0}>No</option>
-                                        </Form.Select> 
-                                        <Form.Control.Feedback type="invalid">
-                                            Please provide a valid gender.
-                                        </Form.Control.Feedback>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="left"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Select "Yes" if the person has Diabetes, or "No" if they do not have AIDS.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
+                                            <InputGroup.Text id="inputGroup-sizing-default">
+                                                <CoronavirusSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            </InputGroup.Text>
                                             
-                                    </InputGroup>
+                                            <Form.Select
+                                                required
+                                                value={diabetes}
+                                                onChange={(e) => setDiabetes(e.target.value)}
+                                            >
+                                                <option value="">Diabetes*</option>
+                                                <option value={1}>Yes</option>
+                                                <option value={0}>No</option>
+                                            </Form.Select>
+                                            
+                                            <Form.Control.Feedback type="invalid">
+                                                Please provide a valid gender.
+                                            </Form.Control.Feedback>
+                                        </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
-                                    <InputGroup size="sm" className="mb-3" hasValidation>
-                                        <InputGroup.Text id="inputGroup-sizing-default">
-                                            <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                        </InputGroup.Text>
-                                        
-                                        <Form.Select required 
-                                            value={stds} 
-                                            onChange={(e) => setSTDs(e.target.value)}
-                                        >
-                                            <option value="">STDs*</option>
-                                            <option value={1}>Yes</option>
-                                            <option value={0}>No</option>
-                                        </Form.Select> 
-                                        <Form.Control.Feedback type="invalid">
-                                            Please provide a valid gender.
-                                        </Form.Control.Feedback>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="right"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Select "Yes" if the person has STDs, or "No" if they do not have AIDS.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
+                                            <InputGroup.Text id="inputGroup-sizing-default">
+                                                <AcUnitSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            </InputGroup.Text>
                                             
-                                    </InputGroup>
+                                            <Form.Select
+                                                required
+                                                value={stds}
+                                                onChange={(e) => setSTDs(e.target.value)}
+                                            >
+                                                <option value="">STDs*</option>
+                                                <option value={1}>Yes</option>
+                                                <option value={0}>No</option>
+                                            </Form.Select>
+                                            
+                                            <Form.Control.Feedback type="invalid">
+                                                Please provide a valid gender.
+                                            </Form.Control.Feedback>
+                                        </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                             </Row>
+
                             
                             <Row>
                                 <Col sm={6}>
-                                    <InputGroup size="sm" className="mb-3" hasValidation>
-                                        <InputGroup.Text id="inputGroup-sizing-default">
-                                            <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                        </InputGroup.Text>
-                                        
-                                        <Form.Select required 
-                                            value={syphilis} 
-                                            onChange={(e) => setSyphilis(e.target.value)}
-                                        >
-                                            <option value="">Syphilis*</option>
-                                            <option value={1}>Yes</option>
-                                            <option value={0}>No</option>
-                                        </Form.Select> 
-                                        <Form.Control.Feedback type="invalid">
-                                            Please provide a valid gender.
-                                        </Form.Control.Feedback>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="left"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Select "Yes" if the person has Syphilis, or "No" if they do not have AIDS.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
+                                            <InputGroup.Text id="inputGroup-sizing-default">
+                                                <Diversity2SharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            </InputGroup.Text>
                                             
-                                    </InputGroup>
+                                            <Form.Select
+                                                required
+                                                value={syphilis}
+                                                onChange={(e) => setSyphilis(e.target.value)}
+                                            >
+                                                <option value="">Syphilis*</option>
+                                                <option value={1}>Yes</option>
+                                                <option value={0}>No</option>
+                                            </Form.Select>
+                                            
+                                            <Form.Control.Feedback type="invalid">
+                                                Please provide a valid gender.
+                                            </Form.Control.Feedback>
+                                        </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
-                                    <InputGroup size="sm" className="mb-3" hasValidation>
-                                        <InputGroup.Text id="inputGroup-sizing-default">
-                                            <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                        </InputGroup.Text>
-                                        
-                                        <Form.Select required 
-                                            value={aids} 
-                                            onChange={(e) => setAIDs(e.target.value)}
-                                        >
-                                            <option value="">AIDs*</option>
-                                            <option value={1}>Yes</option>
-                                            <option value={0}>No</option>
-                                        </Form.Select> 
-                                        <Form.Control.Feedback type="invalid">
-                                            Please provide a valid gender.
-                                        </Form.Control.Feedback>
+                                    <OverlayTrigger
+                                        trigger={['hover', 'focus']}
+                                        placement="right"
+                                        overlay={
+                                        <Popover id="aids-popover">
+                                            <Popover.Body>
+                                                Select "Yes" if the person has AIDS, or "No" if they do not have AIDS.
+                                            </Popover.Body>
+                                        </Popover>
+                                        }
+                                    >
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
+                                            <InputGroup.Text id="inputGroup-sizing-default">
+                                                <HubSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            </InputGroup.Text>
                                             
-                                    </InputGroup>
+                                            <Form.Select
+                                                required
+                                                value={aids}
+                                                onChange={(e) => setAIDs(e.target.value)}
+                                            >
+                                                <option value="">AIDS*</option>
+                                                <option value={1}>Yes</option>
+                                                <option value={0}>No</option>
+                                            </Form.Select>
+                                            
+                                            <Form.Control.Feedback type="invalid">
+                                                Please provide a valid gender.
+                                            </Form.Control.Feedback>
+                                        </InputGroup>
+                                    </OverlayTrigger>
                                 </Col>
                             </Row>
 
                             <Row className="mt-2" style={{textAlign:'right'}}>
                                 <Col sm={12}>
-                                <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                                <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={submitForm}
                                 >Check Eligibility <ArrowRight className="" size={17} /></Button>
                                 </Col>
                             </Row>

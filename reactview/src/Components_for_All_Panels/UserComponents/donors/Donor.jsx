@@ -29,8 +29,9 @@ const Donor = () => {
         });
     };
     React.useEffect(getData, []);
-    console.log(donors.results);
+    console.log(donors?.results?.bindings?.length);
 
+    
 
     //For Filter
     const [filterBlood,setFilterBlood] = React.useState("Blood Group");
@@ -43,10 +44,10 @@ const Donor = () => {
     
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
-        <div style={{marginTop:'10%',marginBottom:'4%'}}>
-            <Container className='d-flex justify-content-center'>
+        <div style={{marginTop:'9%',marginBottom:'3%'}}>
+            <Container style={{textAlign:'center',width:'50%'}}>
                 <Row>
-                    <h1 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Find a available donors near you</h1>
+                    <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Find a available donors near you</h2>
                 </Row>
             </Container>
         </div>
@@ -55,14 +56,14 @@ const Donor = () => {
         <div style={{borderRadius:'10% 30% 50% 70%',backgroundColor:'#f9f2f1',marginBottom:'0%'}}>
             <div style={{marginTop:'-1%',marginBottom:'0%',paddingTop:'0%',marginBottom:'0%',position:'absolute',width:'100%'}}>
                 <Container className='d-flex justify-content-center'>
-                    <Row style={{width:'43%'}}>
-                        <InputGroup className="mb-1">
+                    <Row style={{width:'40%'}}>
+                        <InputGroup size="sm" className="mb-1">
                             <Form.Control
                                 placeholder="Search Blood Donations"
                                 aria-label="Search Blood Donations"
                                 aria-describedby="basic-addon2"
                             />
-                            <InputGroup.Text id="basic-addon2"><Search className="m-1 IconColor" size={20} /></InputGroup.Text>
+                            <InputGroup.Text id="basic-addon2"><Search className="m-1 IconColor" size={18} /></InputGroup.Text>
                         </InputGroup>
                     </Row>
                 </Container>
@@ -78,6 +79,7 @@ const Donor = () => {
                             <DropdownButton
                                 id="dropdown-autoclose-false dropdown-menu-align-end"
                                 variant="flat" align="end"
+                                size='sm'
                                 title={filterBlood}
                                 style={{paddingLeft:'5px'}}
                             >
@@ -85,12 +87,12 @@ const Donor = () => {
                                     {bloodArray.map((blood)=>(
                                         
                                         <Nav.Link 
-                                            className='FilterListHoverColor' 
+                                            className='FilterListHoverColor'
                                             eventKey={blood} 
                                             onClick={() => {setFilterBlood(blood)}}
                                         >
                                             <Form.Check 
-                                                type='checkbox'
+                                                type=''
                                                 id='default-check'
                                                 label={`${blood}`}
                                             />
@@ -104,6 +106,7 @@ const Donor = () => {
                             <DropdownButton
                                 id="dropdown-autoclose-false"
                                 variant="flat"
+                                size='sm'
                                 title={filterCity}
                                 style={{paddingLeft:'5px'}}
                             >
@@ -129,6 +132,7 @@ const Donor = () => {
                             <DropdownButton
                                 id="dropdown-autoclose-false"
                                 variant="flat"
+                                size='sm'
                                 title={filterDate}
                                 style={{paddingLeft:'5px'}}
                             >
@@ -152,7 +156,7 @@ const Donor = () => {
                             </DropdownButton>
 
                             <div style={{paddingLeft:'5px'}}>
-                                <Button className='' variant="flat" onClick={()=>{setFilterCity('City',setFilterBlood('Blood Group'),setFilterDate('Request Makers'))}}><Trash className="IcomColor" size={20} /></Button>
+                                <Button size='sm' variant="flat" onClick={()=>{setFilterCity('City',setFilterBlood('Blood Group'),setFilterDate('Request Makers'))}}><Trash className="IcomColor" size={18} /></Button>
                             </div>
                             
                         </p>
@@ -177,34 +181,7 @@ const Donor = () => {
                     </Row>
                 )}
         </div>
-
         
-        
-        <AvailableDonorsBar></AvailableDonorsBar>
-
-        
-        <div style={{marginTop:"6%",marginBottom:"10%"}}>
-            <Container>
-                <Row>
-                    <Col sm={7}>
-                        <img src={Image1} width="100%" height="500rem" />
-                    </Col>
-                    
-                    <Col sm={5}>
-                        <div style={{paddingTop:"23%",paddingLeft:"20%",textAlign:"left"}}>
-                            <h5>Thinking about becoming a blood donor?</h5>
-                            <h1 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Make Blood Donation. Give Life gift.</h1>
-                            <p className="text-left">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
-                            <Button href='/user/post-blood-request' variant="flatSolid">Make Blood Donation<ArrowRight className="" size={22} /></Button>
-                        </div>
-                        
-                    </Col>
-                </Row>
-            </Container>
-        </div>
-
-        <UserPanelBackToTopButton></UserPanelBackToTopButton>
-
         <UserPanelFooter></UserPanelFooter>
 
     </div> );

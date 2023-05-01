@@ -46,7 +46,7 @@ const BloodDonationCentre = () => {
         <div style={{marginTop:'10%',marginBottom:'4%'}}>
             <Container className='d-flex justify-content-center'>
                 <Row>
-                    <h1 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Find a blood donation centre near you</h1>
+                    <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Find a blood donation centre near you</h2>
                 </Row>
             </Container>
         </div>
@@ -55,14 +55,14 @@ const BloodDonationCentre = () => {
         <div style={{borderRadius:'10% 30% 50% 70%',backgroundColor:'#f9f2f1',marginBottom:'0%'}}>
             <div style={{marginTop:'-1%',marginBottom:'0%',paddingTop:'0%',marginBottom:'0%',position:'absolute',width:'100%'}}>
                 <Container className='d-flex justify-content-center'>
-                    <Row style={{width:'43%'}}>
-                        <InputGroup className="mb-1">
+                    <Row style={{width:'40%'}}>
+                        <InputGroup className="mb-1" size='sm'>
                             <Form.Control
                                 placeholder="Search Blood Donations"
                                 aria-label="Search Blood Donations"
                                 aria-describedby="basic-addon2"
                             />
-                            <InputGroup.Text id="basic-addon2"><Search className="m-1 IconColor" size={20} /></InputGroup.Text>
+                            <InputGroup.Text id="basic-addon2"><Search className="m-1 IconColor" size={18} /></InputGroup.Text>
                         </InputGroup>
                     </Row>
                 </Container>
@@ -78,6 +78,7 @@ const BloodDonationCentre = () => {
                             <DropdownButton
                                 id="dropdown-autoclose-false dropdown-menu-align-end"
                                 variant="flat" align="end"
+                                size = 'sm'
                                 title={filterBlood}
                                 style={{paddingLeft:'5px'}}
                             >
@@ -104,6 +105,7 @@ const BloodDonationCentre = () => {
                             <DropdownButton
                                 id="dropdown-autoclose-false"
                                 variant="flat" align="end"
+                                size = 'sm'
                                 title={filterCity}
                                 style={{paddingLeft:'5px'}}
                             >
@@ -129,6 +131,7 @@ const BloodDonationCentre = () => {
                             <DropdownButton
                                 id="dropdown-autoclose-false"
                                 variant="flat" align="end"
+                                size = 'sm'
                                 title={filterDistance}
                                 style={{paddingLeft:'5px'}}
                             >
@@ -152,7 +155,7 @@ const BloodDonationCentre = () => {
                             </DropdownButton>
 
                             <div style={{paddingLeft:'5px'}}>
-                                <Button className='' variant="flat" onClick={()=>{setFilterCity('City',setFilterBlood('Blood Group'),setFilterDistance('Any Distance'))}}><Trash className="IcomColor" size={20} /></Button>
+                                <Button size = 'sm' variant="flat" onClick={()=>{setFilterCity('City',setFilterBlood('Blood Group'),setFilterDistance('Any Distance'))}}><Trash className="IcomColor" size={18} /></Button>
                             </div>
                             
                         </p>

@@ -62,19 +62,23 @@ const UserPanelHeader = () => {
                 
                 <Nav className="me-auto">
                     <ul className="list">
-                        <Nav.Link className="Menu" href="/user/home">Blood Analysis
+                        <Nav.Link className="Menu" href="/user/home">Packages
                                 <ul className="hello">
                                     <Row>
-                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
-                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/campaign">Campaigns</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/news">News</Nav.Link></Col>
                                     </Row>
                                     <Row>
-                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
-                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/sponsor">Sponsors</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/financial-donation">Financial Donors</Nav.Link></Col>
                                     </Row>
                                     <Row>
-                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
-                                        <Col sm={6}><Nav.Link className="Link" href="#"><EnvelopePaper className="p-1" size={26} />Post Blood Request</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/job-post">Job Posts</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/event">Events</Nav.Link></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/advertisement">Advertisements</Nav.Link></Col>
+                                        <Col sm={6}><Nav.Link className="Link" href="/user/faq">Frequently Asked Questions</Nav.Link></Col>
                                     </Row>
                                 </ul>
                             

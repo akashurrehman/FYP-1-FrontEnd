@@ -4,6 +4,7 @@ class BloodDonationCentreService extends GenericService {
         super();
     }
     getCentres = () => this.get("api/bloodCenter/RegisteredCenters");
+    getSingleCentre = (id) => this.get("api/bloodCenter/RegisteredCenters/" + id);
 }
 
 let centreService = new BloodDonationCentreService();

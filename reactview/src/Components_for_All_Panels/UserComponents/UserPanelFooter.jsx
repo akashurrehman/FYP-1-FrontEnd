@@ -3,35 +3,49 @@ import { Row, Col,Button } from "react-bootstrap";
 import { CDBFooter, CDBFooterLink, CDBBox, CDBBtn, CDBIcon } from 'cdbreact';
 import logo from '../../Public/user/image/AppLogo4.png';
 import './css/style.css';
+import { ArrowRight } from "react-bootstrap-icons";
 const UserPanelFooter = () => {
+
+    const [isHover, setIsHover] = React.useState(true);
+
+    const handleMouseEnter = () => {
+        setIsHover(false);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHover(true);
+    };
+    const ButtonStyle1 = {
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
+        color: isHover ? 'white' : 'white',
+        transform: isHover ? 'scale(0.8)' : 'scale(0.82)',
+        border: isHover ? '' : '1px solid white',
+        transitionDuration: isHover ? '' : '0.45s',
+    };
+
     return (
         <CDBFooter className="FooterColor">
         <CDBBox display="flex" flex="column" className="mx-auto py-5" style={{ width: '85%' }}>
             <CDBBox display="flex" justifyContent="between" className="flex-wrap">
             <CDBBox>
-                <a href="/" className="d-flex align-items-center p-0 TextColor">
-                <img alt="logo" src={logo} width="60px" />
-                <span className="h3 font-weight-bold TextColor">DONORS</span>
+                <a href="/userpanel/" className="d-flex align-items-center p-0 TextColor" style={{textDecoration:'none'}}>
+                <img alt="logo" src={logo} width="38px" />
+                <h4 className="TextColor d-flex"><div style={{fontFamily:'cursive'}}>Donate</div><div style={{fontFamily:'cursive',color:'rgb(150, 60, 60)',fontSize:'15px'}}> life</div></h4>
                 </a>
                 <p className="my-3 text-center" style={{ width: '250px' }}>
                 This helps for making blood donation easily.
                 </p>
                 <CDBBox display="flex" className="mt-4">
                 
-                    <Button className="mx-1" variant='flatSolid'><CDBIcon fab icon="facebook-f" /></Button>
-                    <Button className="mx-1" variant='flatSolid'><CDBIcon fab icon="twitter" /></Button>
-                    <Button className="mx-1" variant='flatSolid'><CDBIcon fab icon="instagram" /></Button>
-                    <Button className="mx-1" variant='flatSolid'><CDBIcon fab spin icon="google" /></Button>
-                
-               
+                    
                 </CDBBox>
             </CDBBox>
             
             <CDBBox>
-                <p className="h5 mb-4" style={{ fontWeight: '600' }}>
+                <p className="h6 mb-4" style={{ fontWeight: '600' }}>
                 Blood
                 </p>
-                <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0'}}>
+                <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0',textDecoration:'none'}}>
                 <CDBFooterLink href="/">Blood Donors</CDBFooterLink>
                 <CDBFooterLink href="/">Request Makers</CDBFooterLink>
                 <CDBFooterLink href="/">Make Blood Donation</CDBFooterLink>
@@ -46,7 +60,7 @@ const UserPanelFooter = () => {
                 </CDBBox>
             </CDBBox>
             <CDBBox>
-                <p className="h5 mb-4" style={{ fontWeight: '600' }}>
+                <p className="h6 mb-4" style={{ fontWeight: '600' }}>
                 Features
                 </p>
                 <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
@@ -60,20 +74,9 @@ const UserPanelFooter = () => {
                 <CDBFooterLink href="/">Blog</CDBFooterLink>
                 </CDBBox>
             </CDBBox>
+            
             <CDBBox>
-                <p className="h5 mb-4" style={{ fontWeight: '600' }}>
-                Panels/Interfaces
-                </p>
-                <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
-                <CDBFooterLink href="/">Donor Panel</CDBFooterLink>
-                <CDBFooterLink href="/">Request Maker Panel</CDBFooterLink>
-                <CDBFooterLink href="/">Admin Panel</CDBFooterLink>
-                <CDBFooterLink href="/">Center Panel</CDBFooterLink>
-                <CDBFooterLink href="/">NGO's Panel</CDBFooterLink>
-                </CDBBox>
-            </CDBBox>
-            <CDBBox>
-                <p className="h5 mb-4" style={{ fontWeight: '600' }}>
+                <p className="h6 mb-4" style={{ fontWeight: '600' }}>
                 About Us
                 </p>
                 <CDBBox flex="column" style={{cursor: 'pointer', padding: '0',color:"drak"}}>
@@ -87,12 +90,25 @@ const UserPanelFooter = () => {
                 <CDBFooterLink href="/">About Us</CDBFooterLink>
                 </CDBBox>
             </CDBBox>
+            <CDBBox>
+                <p className="h6 mb-4" style={{ fontWeight: '600' }}>
+                Panels/Interfaces
+                </p>
+                <CDBBox flex="column" style={{ cursor: 'pointer', padding: '0' }}>
+                <CDBFooterLink href="/">User(Donor,Request Maker) Panel</CDBFooterLink>
+                <CDBFooterLink href="/">Admin Panel</CDBFooterLink>
+                <CDBFooterLink href="/">Center Panel</CDBFooterLink>
+                <CDBFooterLink href="/">Lab Panel</CDBFooterLink>
+                </CDBBox>
+            </CDBBox>
             
             </CDBBox>
             
         </CDBBox>
-        <CDBBox display="flex" flex="column" className="mx-auto py-2" style={{ width: '10%' }}>
-            <Button variant="flat">Donate Now</Button>
+        <CDBBox display="flex" flex="column" className="mx-auto py-1" style={{ width: '10.5%' }}>
+            <Button variant="default" style={ButtonStyle1} 
+                onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                href='/user/login' >Donate Now <ArrowRight className="" size={17} /></Button>  
         </CDBBox>
         <CDBBox display="flex" flex="column" className="mx-auto py-1" style={{ width: '45%' }}>
             <p className="text-center mt-1 pl-5">DONORS acknowledges and pays our respect to the past, present and future Traditional Custodians and Elders of this nation
