@@ -160,7 +160,7 @@ const columns = [
           highlightOnHover
           
           actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250", color:"white"}}> Download</button>
+            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250", color:"white"}}> <i class="fa fa-download" aria-hidden="true"></i> Download</button>
           }
           subHeader
         />

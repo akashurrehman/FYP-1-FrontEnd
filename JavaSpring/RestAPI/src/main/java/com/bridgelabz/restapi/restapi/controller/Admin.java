@@ -668,7 +668,6 @@ public class Admin {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     /*
      * Manage frequently asked Questions
      * Add the New Frequently Asked Questions

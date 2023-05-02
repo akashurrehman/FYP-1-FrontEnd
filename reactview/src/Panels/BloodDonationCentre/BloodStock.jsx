@@ -104,6 +104,7 @@ const handleInputChange = (event) => {
       .then((response) => {
         console.log("Response Data",response.data);
         toast.success(response.data,{position:toast.POSITION.TOP_RIGHT});
+        toast("Data added Successfully")
         handleClose();
         window.location.reload();
       })
@@ -144,7 +145,7 @@ const handleInputChange = (event) => {
                 placeholder="10 am"
                 autoFocus
                 name="addedDate"
-                value={new Date().toLocaleString()}
+                value={bloodData.addedDate}
                 onChange={handleInputChange}
               />
             </Form.Group>

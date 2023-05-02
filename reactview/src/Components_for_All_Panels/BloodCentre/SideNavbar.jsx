@@ -26,16 +26,16 @@ const Sidebar = () => {
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/bloodCenter/ProfileSettings" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Profile Setting</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="cog">Profile Setting</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/bloodCenter/addbloodRequest" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Add Blood Request</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="plus-circle">Add Blood Request</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/bloodCenter/BloodStock" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Blood Stock Report</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="book">Blood Stock Report</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/bloodCenter/userbloodInformation" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Add Blood Information</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="info-circle">Add Blood Information</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/bloodCenter/AppointmentDetails" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Appointments</CDBSidebarMenuItem>
@@ -44,10 +44,10 @@ const Sidebar = () => {
             <CDBSidebarMenuItem icon="user-plus">Add New User</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/bloodCenter/bloodRequests" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user-plus">All Blood Requests</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="tint">All Blood Requests</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">Logout</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="sign-in">Logout</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>

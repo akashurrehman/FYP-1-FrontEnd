@@ -110,7 +110,7 @@ const handleConfirm = () => {
   .put(`http://localhost:8081/api/lab/RegisteredLabs/edit/${CENTER_ID}`, center)
   .then((response) => {
     console.log(response.data);
-    toast("Profile Updated Successfully");
+    toast("Profile Updated Successfully",{type:"success", position:toast.POSITION.TOP_RIGHT});
   })
   .catch((error) => {
     console.error(error);

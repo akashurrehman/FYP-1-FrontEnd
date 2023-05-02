@@ -85,6 +85,7 @@ const handleConfirm = () => {
     toast.success("User Added Successfully", {
       position: toast.POSITION.TOP_CENTER,
     });
+    toast("User Added Successfully", {type: "success", position: toast.POSITION.TOP_CENTER})
     })
   .catch((error) => {
     console.error(error);
@@ -125,7 +126,7 @@ const handleCancel = () => {
       <Row className="mt-5">
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-user-ninja"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-user-circle-o" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control  name="fullName" placeholder="Full Name" onChange={handleChange}/>
           </InputGroup>
         </Col>
@@ -163,7 +164,7 @@ const handleCancel = () => {
         </Col>
         <Col xs={12}sm={4}>
           <InputGroup className="mb-2">
-            <InputGroup.Text><i  class="fa fa-angry"></i></InputGroup.Text>
+            <InputGroup.Text><i class="fa fa-calendar" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control name="dob" placeholder="Donor's Age" onChange={handleChange}/>
           </InputGroup>
         </Col>
@@ -200,7 +201,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
           <Col xs={12} sm={6}>
-              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} type="submit" onClick={{handleSubmit}}>Add User</Button>
+              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} type="submit" onClick={{handleSubmit}}><i class="fa fa-plus" aria-hidden="true"></i>Add User</Button>
           </Col>
       </Row>
         </Col>
