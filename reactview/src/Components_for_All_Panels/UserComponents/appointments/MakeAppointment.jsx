@@ -26,8 +26,13 @@ const MakeAppointment = () => {
     const userID = decodedToken?.id;
     // console.log(userID);
 
+    
+    // Retrieve the value from local storage
+    const donorEligible = localStorage.getItem('donorEligible');
+
     const [centre, setCentre] = useState();
     const [user, setUser] = useState();
+    const [eligible, setEligible] = useState("");
 
     const [donorName, setDonorName] = React.useState("");
     const [donorDOB, setDonorDOB] = React.useState("");
@@ -78,7 +83,16 @@ const MakeAppointment = () => {
         });
     };
 
-    useEffect(()=>{getUserData();getCentreData();}, []);
+    const checkEligibility = () => {
+        if(donorEligible == 'Yes'){
+            setEligible('Yes');
+        }
+        else{
+            setEligible('No');
+        }
+    };
+
+    useEffect(()=>{getUserData();getCentreData();checkEligibility();}, []);
     console.log(centre);
     console.log(user);
     // console.log(donorName);
@@ -86,11 +100,20 @@ const MakeAppointment = () => {
     const submitForm = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/api/user/appointment/AppointmentDetails/add', {
-                centreID,userID,donorName,donorDOB,donorEmail,donorContactNo,donorGender,donorAddress,donorCity,donorBloodGroup,centreName,centreEmail,centreLocation,centreTimings,centreContactNo
-            });
-            console.log(response.data);
-            window.location.href = "/user/my-account";
+            if(donorEligible == 'Yes'){
+                const response = await axios.post('http://localhost:8081/api/user/appointment/AppointmentDetails/add', {
+                    centreID,userID,donorName,donorDOB,donorEmail,donorContactNo,donorGender,donorAddress,donorCity,donorBloodGroup,centreName,centreEmail,centreLocation,centreTimings,centreContactNo
+                });
+                console.log(response.data);
+                window.location.href = "/user/my-account";
+            }
+            else{
+                toast.error(<ToastWithButton />, {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    position: toast.POSITION.BOTTOM_RIGHT,});
+            }
+            
         } 
         catch (error) {
             if (error.response) {
@@ -125,6 +148,13 @@ const MakeAppointment = () => {
         transitionDuration: isHover ? '' : '0.1s',
     };
     
+    const ToastWithButton = ({ closeToast }) => (
+        <div>
+            <p>Kindly check your eligibility status for blood donation. </p>
+            <Nav.Link className='TextColor' href='/user/blood-analysis' style={{}}>Blood Analysis</Nav.Link>
+        
+        </div>
+      );
 
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -154,6 +184,8 @@ const MakeAppointment = () => {
                         <h4 style={{fontSize:'18px'}}>Centre Timings: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Timings?.value}</spam></h4>
                         <h4 style={{fontSize:'18px'}}>Centre Contact No: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.ContactNo?.value}</spam></h4>
                         <h4 style={{fontSize:'18px'}}>Centre Location: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Location?.value}</spam></h4>
+                        
+                        <h4 style={{fontSize:'18px'}}>Donor Eligible: <spam style={{fontSize:'16px',fontWeight:'400'}}>{eligible}</spam></h4>
                         <div style={{textAlign:'right',marginTop:'30%'}}>
                         <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={submitForm}
                             >Book Appointment <ArrowRight className="" size={17} /></Button>

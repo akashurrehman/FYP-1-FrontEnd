@@ -62,6 +62,7 @@ const BloodAnalysis = () => {
             // window.location.href = "/user/blood-analysis";
             console.log(response.data.output);
             if (response.data.output == "Donor is eligible for blood donation") {
+                localStorage.setItem('donorEligible', 'Yes');
                 console.log(response.data.output);
                 toast.success(response.data.output, {
                     closeOnClick: true,
@@ -69,6 +70,7 @@ const BloodAnalysis = () => {
                     position: toast.POSITION.BOTTOM_RIGHT,});
             }
             else {
+                localStorage.setItem('donorEligible', '');
                 console.log(response.data.output);
                 toast.error(response.data.output, {
                     closeOnClick: true,
