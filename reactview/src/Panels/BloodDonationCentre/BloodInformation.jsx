@@ -28,6 +28,33 @@ const BloodInformation=()=> {
 
     const [showModal, setShowModal] = useState(false);
 
+    const validateForm = () => {
+      let isValid = true;
+      const errors = {};
+    
+      if (!donorData.name) {
+        isValid = false;
+        errors.nameError = "Please enter a name";
+      }
+      if (!donorData.contactNo) {
+        isValid = false;
+        errors.contactNoError = "Please enter valid contact number";
+      }
+      if (!donorData.email) {
+        isValid = false;
+        errors.emailError = "Please enter valid email address";
+      }
+      if (!donorData.city) {
+        isValid = false;
+        errors.locationError = "Please enter valid city";
+      }    
+      if (!isValid) {
+        setDonorData({ ...donorData, ...errors });
+      }
+    
+      return isValid;
+    };
+    
     
     const handleChange = (event) => {
       const { name, value } = event.target;
@@ -59,12 +86,20 @@ const BloodInformation=()=> {
           newDonorData = { ...donorData, [name]: value, locationError: null };
         }
       }
-      //For hospital
-      if (name === "hospital") {
+      //For gender
+      if (name === "gender") {
         if (!isNaN(value)) {
-          newDonorData = { ...donorData, [name]: value, hospitalError: "Please enter a valid hospital" };
+          newDonorData = { ...donorData, [name]: value, genderError: "Please enter a right gender" };
         } else {
-          newDonorData = { ...donorData, [name]: value, hospitalError: null };
+          newDonorData = { ...donorData, [name]: value, genderError: null };
+        }
+      }
+      //For name
+      if (name === "name") {
+        if (!isNaN(value)) {
+          newDonorData = { ...donorData, [name]: value, nameError: "Please enter a valid name" };
+        } else {
+          newDonorData = { ...donorData, [name]: value, nameError: null };
         }
       }
       setDonorData(newDonorData);
@@ -72,7 +107,10 @@ const BloodInformation=()=> {
 
     const handleSubmit = (event) => {
       event.preventDefault();
+      const isValid = validateForm();
+      if (isValid) {
       setShowModal(true);
+      }
     };
     
   const handleConfirm = () => {
@@ -118,17 +156,20 @@ const BloodInformation=()=> {
       <Form className="mt-3">
       <Row className="align-items-center">
         <Col xs="12" sm="4">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Donor  Name
+          <Form.Label htmlFor="inlineFormInputGroup">
+            Enter Donor  Name
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-user"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" placeholder="Donor Name" name="name" onChange={handleChange}/>
           </InputGroup>
+          {donorData.nameError && (
+            <p style={{ color: 'red' }}>{donorData.nameError}</p>
+          )}
         </Col>
         <Col xs="12"  sm="4">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Email
+          <Form.Label htmlFor="inlineFormInputGroup">
+            Enter Email
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
@@ -139,8 +180,8 @@ const BloodInformation=()=> {
           )}
         </Col>
         <Col xs="12"  sm="4">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Contact No
+          <Form.Label htmlFor="inlineFormInputGroup" >
+            Enter Donor Contact No
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-phone" aria-hidden="true"></i></InputGroup.Text>
@@ -153,6 +194,9 @@ const BloodInformation=()=> {
       </Row>
       <Row>
         <Col xs={12}sm={4}>
+        <Form.Label htmlFor="inlineFormInputGroup" >
+            Enter Donor City
+          </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-map-marker" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control placeholder="Donor's City" name="city" onChange={handleChange}/>
@@ -162,6 +206,9 @@ const BloodInformation=()=> {
         )}
         </Col>
         <Col xs={12}sm={4}>
+        <Form.Label htmlFor="inlineFormInputGroup" >
+          Enter Donor Location
+        </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Label visuallyHidden>Enter Location</Form.Label>
@@ -172,21 +219,30 @@ const BloodInformation=()=> {
           )}
         </Col>
         <Col xs={12}sm={4}>
+        <Form.Label htmlFor="inlineFormInputGroup" >
+          Enter Donor Blood Group
+        </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-tint" aria-hidden="true"></i></InputGroup.Text>
-              <Form.Control placeholder="Donor's Blood Group" name="bloodGroup" onChange={handleChange} />
+              <Form.Control placeholder="AB+, AB-,A+,A-,B,B+,O+,O-" name="bloodGroup" onChange={handleChange} />
           </InputGroup>
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col xs={12} sm={4}>
+        <Form.Label htmlFor="inlineFormInputGroup" >
+          Enter Donor Gender
+        </Form.Label>
         <InputGroup className="mb-2">
           <InputGroup.Text><i class="fa fa-male" aria-hidden="true"></i></InputGroup.Text>
             <Form.Label visuallyHidden>Donor's Gender </Form.Label>
               <Form.Control placeholder="Donor's gender" name="gender" onChange={handleChange}/>
           </InputGroup>
         </Col>
-        <Col>
+        <Col xs={12} sm={4}>
+        <Form.Label htmlFor="inlineFormInputGroup" >
+          Enter Donor Message
+        </Form.Label>
         <InputGroup className="mb-2">
           <InputGroup.Text><i class="fa fa-comments" aria-hidden="true"></i></InputGroup.Text>
           <Form.Label visuallyHidden>Any message to other user?</Form.Label>

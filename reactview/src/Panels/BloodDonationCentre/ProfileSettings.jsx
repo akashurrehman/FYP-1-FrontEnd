@@ -178,7 +178,7 @@ const CENTER_ID = 'CR001';
 
 const handleDelete = () => {
   axios
-    .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${CENTER_ID}`)
+    .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/delete/${CENTER_ID}`)
     .then((response) => {
       console.log(response.data);
       toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
@@ -236,11 +236,12 @@ const handleCancel = () => {
         <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Username</Form.Label>
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+            <i class="fa fa-user-circle" aria-hidden="true"></i>
             <Form.Control   name="name"  placeholder="Enter Center Number" value={center.name}  onChange={handleChange}/>
           </Form.Group>
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>License Number</Form.Label>
+            <i class="fa fa-id-card" aria-hidden="true"></i>
             <Form.Control type="License" placeholder="License Number"  value={center.licenseNo} disabled={true}/>
           </Form.Group>
         </Row>
@@ -255,6 +256,7 @@ const handleCancel = () => {
 
         <Form.Group className="mb-3" controlId="formGridAddress2">
           <Form.Label>City</Form.Label>
+          <i class="fa fa-location-arrow" aria-hidden="true"></i>
           <Form.Control name="city" placeholder="Lahore, Punjab, Pakistan" value={center.city} onChange={handleChange}/>
           {center.locationError && (
             <p style={{ color: 'red' }}>{center.locationError}</p>
@@ -262,7 +264,7 @@ const handleCancel = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="contact1">
           <Form.Label>Contact Number</Form.Label>
-          <BsFillTelephoneFill size={15} color="red"/>
+          <BsFillTelephoneFill size={15} />
           <Form.Control placeholder="+9234946123" name="contactNo" value={center.contactNo} onChange={handleChange}/>
           {center.contactNoError && (
             <p style={{ color: 'red' }}>{center.contactNoError}</p>
@@ -271,7 +273,7 @@ const handleCancel = () => {
 
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-          <BsEnvelopeFill size={15} color="red"/>
+          <BsEnvelopeFill size={15} />
           <Form.Control name="email" placeholder="example@gmail.com" value={center.email} onChange={handleChange}/>
           {center.emailError && (
             <p style={{ color: 'red' }}>{center.emailError}</p>
@@ -281,20 +283,20 @@ const handleCancel = () => {
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formGridCity">
           <Form.Label>Available Timings</Form.Label>
-          <BsStopwatch size={15} color="red"/>
+          <BsStopwatch size={15} />
           <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/>
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGridState">
   
           <Form.Label>Opening Days</Form.Label>
-          <BsStopwatch size={15} color="red"/>
+          <i class="fa fa-sun" aria-hidden="true"></i>
           <Form.Control placeholder="Category" name="openingDays" value={center.openingDays} onChange={handleChange} required/>
           </Form.Group>
 
         <Form.Group as={Col} controlId="formGridZip">
           <Form.Label>Category</Form.Label>
-          <BsExclamationSquare size={15} color="red"/>
+          <i class="fa fa-registered" aria-hidden="true"></i>
           <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
           {center.categoryError && (
             <p style={{ color: 'red' }}>{center.categoryError}</p>

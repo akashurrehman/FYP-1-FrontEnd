@@ -14,6 +14,12 @@ const BloodRequests=()=> {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
 
+  /* For filtering the data with center ID
+
+  */
+  const [filterByCenter, setFilterByCenter] = useState(false);
+  const [centerId, setCenterId] = useState('');
+
   const [data, setData] = useState([]);
 
         const handleApprove = (id) => {
@@ -32,12 +38,30 @@ const BloodRequests=()=> {
           // Get the selected rows from the state
         };
         
+        const handleFilter = () => {
+          //Pass the cnter Name or id here
+          const center = prompt('Enter center ID or name');
+          if (center) {
+            setFilterByCenter(true);
+            setCenterId(center);
+          }
+        };
 
   useEffect(() => {
     // fetch data from the backend
-    fetch('http://localhost:8081/api/users/bloodrequest')
+    let url = 'http://localhost:8081/api/users/bloodrequest';
+    if (filterByCenter) {
+      url += `?centerId=${centerId}`;
+    }
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        // filter the results if filterByCenter is true
+        if (filterByCenter) {
+          data.results.bindings = data.results.bindings.filter(
+            (binding) => binding.CenterID.value === centerId
+          );
+        }
         // map the bindings array to an array of objects
         const rows = data.results.bindings.map((binding) => {
           return {
@@ -58,7 +82,7 @@ const BloodRequests=()=> {
       .catch((error) => console.log(error));
       console.log("selectedRows after updating state", selectedRows);
       
-  }, [selectedRows]);
+  }, [selectedRows, filterByCenter, centerId]);
 
   const handlePrint = () => {
     //Console  results
@@ -164,7 +188,10 @@ const columns = [
           selectableRowsHighlight
           highlightOnHover
           actions ={
+            <>
             <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-download" aria-hidden="true"></i>Download</button>
+            <Button className='btn btn-info' onClick={handleFilter} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-filter" aria-hidden="true"></i>Filter Requests(By You)</Button>
+            </>
           }
         />
         </Col>

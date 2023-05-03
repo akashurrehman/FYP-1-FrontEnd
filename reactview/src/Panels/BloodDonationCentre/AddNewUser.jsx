@@ -29,6 +29,43 @@ const AddNewUser=()=> {
 
   const [showModal, setShowModal] = useState(false);
 
+  const validateForm = () => {
+    let isValid = true;
+    const errors = {};
+  
+    if (!userData.fullName) {
+      isValid = false;
+      errors.nameError = "Please enter a name";
+    }
+    if (!userData.userName) {
+      isValid = false;
+      errors.usernameError = "Please enter user name";
+    }
+    if (!userData.contactNo) {
+      isValid = false;
+      errors.contactNoError = "Please enter valid Phone Number";
+    }
+    
+    if (!userData.email) {
+      isValid = false;
+      errors.emailError = "Please enter valid email address";
+    }
+    
+    if (!userData.city) {
+      isValid = false;
+      errors.locationError = "Please enter valid location name";
+    }
+    
+    if (!userData.gender) {
+      isValid = false;
+      errors.genderError = "Please enter valid gender name";
+    }
+    if (!isValid) {
+      setuserData({ ...userData, ...errors });
+    }
+  
+    return isValid;
+  };
   
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -53,19 +90,36 @@ const AddNewUser=()=> {
       }
     }
     //For location
-    if (name === "location" || name === "city") {
+    if (name === "address" || name === "city") {
       if (!isNaN(value)) {
         newUserData = { ...userData, [name]: value, locationError: "Please enter a valid location" };
       } else {
         newUserData = { ...userData, [name]: value, locationError: null };
       }
     }
-    //For hospital
-    if (name === "hospital") {
+    //For Gender
+    if (name === "gender") {
       if (!isNaN(value)) {
-        newUserData = { ...userData, [name]: value, hospitalError: "Please enter a valid hospital" };
+        newUserData = { ...userData, [name]: value, genderError: "Please enter a valid gender" };
       } else {
-        newUserData = { ...userData, [name]: value, hospitalError: null };
+        newUserData = { ...userData, [name]: value, genderError: null };
+      }
+    }
+    //For FullName
+    if (name === "fullName") {
+      if (!isNaN(value)) {
+        newUserData = { ...userData, [name]: value, nameError: "Please enter a valid Name" };
+      } else {
+        newUserData = { ...userData, [name]: value, nameError: null };
+      }
+    }
+    
+    //For UserName
+    if (name === "userName") {
+      if (!isNaN(value)) {
+        newUserData = { ...userData, [name]: value, usernameError: "Please enter a valid User Name" };
+      } else {
+        newUserData = { ...userData, [name]: value, usernameError: null };
       }
     }
     setuserData(newUserData);
@@ -73,8 +127,12 @@ const AddNewUser=()=> {
   };
 
   const handleSubmit = (event) => {
+    console.log("Button submit event in add User page")
     event.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
     setShowModal(true);
+    }
   };
   
 const handleConfirm = () => {
@@ -124,20 +182,23 @@ const handleCancel = () => {
           </Card>
       <Form>
       <Row className="mt-5">
-        <Col xs={12}sm={4}>
+        <Col xs={12}sm={3}>
+          <Form.Label> Enter full Name of user</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-user-circle-o" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control  name="fullName" placeholder="Full Name" onChange={handleChange}/>
           </InputGroup>
         </Col>
-        <Col xs={12}sm={4}>
+        <Col xs={12}sm={3}>
+        <Form.Label> Enter Username of user</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-user"></i></InputGroup.Text>
               <Form.Label visuallyHidden>UserName</Form.Label>
                 <Form.Control name="userName" placeholder="UserName" onChange={handleChange}/>
           </InputGroup>
         </Col>
-        <Col xs={12}sm={4}>
+        <Col xs={12}sm={3}>
+        <Form.Label> Enter Email of user</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
               <Form.Control name="email"placeholder="Email" onChange={handleChange}/>
@@ -145,9 +206,17 @@ const handleCancel = () => {
           {userData.emailError && <p style={{ color: "red" }}>{userData.emailError}</p>}
 
         </Col>
+        <Col xs={12}sm={3}>
+        <Form.Label> Enter passowrd of user</Form.Label>
+          <InputGroup className="mb-2">
+            <InputGroup.Text><i class="fa fa-unlock-alt" aria-hidden="true"></i></InputGroup.Text>
+              <Form.Control name="password"placeholder="Enter password" onChange={handleChange}/>
+          </InputGroup>
+        </Col>
       </Row>
       <Row className="mt-1">
         <Col xs={12}sm={4}>
+        <Form.Label> Enter city of user</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Control name="city" placeholder="City" onChange={handleChange}/>
@@ -155,6 +224,7 @@ const handleCancel = () => {
           {userData.locationError && <p style={{ color: "red" }}>{userData.locationError}</p>}
         </Col>
         <Col xs={12}sm={4}>
+        <Form.Label> Enter location of user</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Label visuallyHidden>Location</Form.Label>
@@ -163,6 +233,7 @@ const handleCancel = () => {
           {userData.locationError && <p style={{ color: "red" }}>{userData.locationError}</p>}
         </Col>
         <Col xs={12}sm={4}>
+        <Form.Label> Enter Age of user</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-calendar" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control name="dob" placeholder="Donor's Age" onChange={handleChange}/>
@@ -171,6 +242,7 @@ const handleCancel = () => {
       </Row>
       <Row className="mt-1">
         <Col xs={12}sm={4}>
+        <Form.Label>Enter Number(Format-+92 346 2855481)</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-phone"></i></InputGroup.Text>
               <Form.Control name="contactNo" placeholder="+92-59552658" onChange={handleChange}/>
@@ -178,16 +250,17 @@ const handleCancel = () => {
           {userData.contactNoError && <p style={{ color: "red" }}>{userData.contactNoError}</p>}
         </Col>
         <Col xs={12}sm={4}>
+        <Form.Label>Enter Blood Group</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-check-circle"></i></InputGroup.Text>
-              <Form.Label visuallyHidden>Blood Group</Form.Label>
-                <Form.Control name="bloodGroup" placeholder="AB+" onChange={handleChange}/>
+                <Form.Control name="bloodGroup" placeholder="AB-,AB+,O+,O-,A+,A-,B-,B+" onChange={handleChange}/>
           </InputGroup>
         </Col>
         <Col xs={12}sm={4}>
+        <Form.Label> Enter Gender of user</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-genderless"></i></InputGroup.Text>
-              <Form.Control name="gender" placeholder="Gender" onChange={handleChange}/>
+              <Form.Control name="gender" placeholder="Male/Female" onChange={handleChange}/>
           </InputGroup>
         </Col>
       </Row>
@@ -201,7 +274,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
           <Col xs={12} sm={6}>
-              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} type="submit" onClick={{handleSubmit}}><i class="fa fa-plus" aria-hidden="true"></i>Add User</Button>
+              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} type="submit" onClick={handleSubmit}><i class="fa fa-plus" aria-hidden="true"></i>Add User</Button>
           </Col>
       </Row>
         </Col>

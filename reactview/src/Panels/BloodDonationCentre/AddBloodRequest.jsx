@@ -25,7 +25,47 @@ const AddBloodRequest=()=> {
     gender: "",
     location: "",
   });
+  const validateForm = () => {
+    let isValid = true;
+    const errors = {};
+  
+    if (!bloodRequests.name) {
+      isValid = false;
+      errors.nameError = "Please enter a name";
+    }
+    if (!bloodRequests.gender) {
+      isValid = false;
+      errors.genderError = "Please enter a Gender";
+    }
+    if (!bloodRequests.hospital) {
+      isValid = false;
+      errors.hospitalError = "Please enter valid hospital name";
+    }
+    if (!bloodRequests.message) {
+      isValid = false;
+      errors.messageError = "Please enter a valid message";
+    }
+    if (!bloodRequests.email) {
+      isValid = false;
+      errors.emailError = "Please enter valid email address";
+    }
+    if (!bloodRequests.contactNo) {
+      isValid = false;
+      errors.contactNoError = "Please enter valid number";
+    }
+    if (!bloodRequests.city && !bloodRequests.location) {
+      isValid = false;
+      errors.locationError = "Please enter a valid location"; 
+    }
 
+
+    if (!isValid) {
+      setBloodRequests({ ...bloodRequests, ...errors });
+    }
+  
+    return isValid;
+  };
+  
   const [showModal, setShowModal] = useState(false);
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -65,12 +105,36 @@ const AddBloodRequest=()=> {
         newRequestData = { ...bloodRequests, [name]: value, hospitalError: null };
       }
     }
+    if (name === "gender") {
+      if (!isNaN(value)) {
+        newRequestData = { ...bloodRequests, [name]: value, genderError: "Please enter a Correct gender" };
+      } else {
+        newRequestData = { ...bloodRequests, [name]: value, genderError: null };
+      }
+    }
+    if (name === "message") {
+      if (!isNaN(value)) {
+        newRequestData = { ...bloodRequests, [name]: value, messageError: "Please enter a message in right way" };
+      } else {
+        newRequestData = { ...bloodRequests, [name]: value, messageError: null };
+      }
+    }
+    if (name === "name") {
+      if (!isNaN(value)) {
+        newRequestData = { ...bloodRequests, [name]: value, nameError: "Please enter a right name" };
+      } else {
+        newRequestData = { ...bloodRequests, [name]: value, nameError: null };
+      }
+    }
     setBloodRequests(newRequestData);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
     setShowModal(true);
+    }
   };
   
   const handleConfirm = (event) => {
@@ -123,8 +187,8 @@ const AddBloodRequest=()=> {
       <Form className="mt-3">
       <Row className="align-items-center">
         <Col xs="12" sm="4">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Donor  Name
+          <Form.Label htmlFor="inlineFormInputGroup" >
+            Enter Receipter Name
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-user"></i></InputGroup.Text>
@@ -132,8 +196,8 @@ const AddBloodRequest=()=> {
           </InputGroup>
         </Col>
         <Col xs="12"  sm="4">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Phone
+          <Form.Label htmlFor="inlineFormInputGroup">
+            Enter Phone number (+92 346 4511258)
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-phone" aria-hidden="true"></i></InputGroup.Text>
@@ -144,13 +208,12 @@ const AddBloodRequest=()=> {
           )}
         </Col>
         <Col xs="12"  sm="4">
-          <Form.Label htmlFor="inlineFormInputGroup" visuallyHidden>
-            Email
+          <Form.Label htmlFor="inlineFormInputGroup">
+            Enter Email (xyz@email.com)
           </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-envelope"></i></InputGroup.Text>
             <Form.Control id="inlineFormInputGroup" name="email" placeholder="Email" onChange={handleChange}/>
-            
           </InputGroup>
           {bloodRequests.emailError && (
               <p style={{ color: 'red' }}>{bloodRequests.emailError}</p>
@@ -159,6 +222,7 @@ const AddBloodRequest=()=> {
       </Row>
       <Row>
         <Col xs={12}sm={4}>
+        <Form.Label >Enter Location</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i  class="fa fa-location-arrow"></i></InputGroup.Text>
               <Form.Control placeholder="Donor's Address" name="location" onChange={handleChange}/>
@@ -168,13 +232,14 @@ const AddBloodRequest=()=> {
           )}
         </Col>
         <Col xs={12}sm={4}>
+          <Form.Label>Enter blood Type</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-tint" aria-hidden="true"></i></InputGroup.Text>
-              <Form.Label visuallyHidden>Blood Type</Form.Label>
-                <Form.Control placeholder="Blood Type i.e AB+, O+, AB- etc" name="bloodGroup" onChange={handleChange}/>
+                <Form.Control placeholder="AB+, AB-, O+,O - ,A+ , A-,B-,B+" name="bloodGroup" onChange={handleChange}/>
           </InputGroup>
         </Col>
         <Col xs={12}sm={4}>
+        <Form.Label>Enter Any Message/Information</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-comments" aria-hidden="true"></i></InputGroup.Text>
               <Form.Control placeholder="Message" name="message" onChange={handleChange}/>
@@ -182,30 +247,30 @@ const AddBloodRequest=()=> {
         </Col>
       </Row>
       <Row>
-        <Col>
+        <Col xs={12}sm={4}>
+        <Form.Label>Enter Blood Donation Center</Form.Label>
         <InputGroup className="mb-2">
           <InputGroup.Text><i class="fa fa-h-square" aria-hidden="true"></i></InputGroup.Text>
-            <Form.Label visuallyHidden>Blood Donation Center</Form.Label>
-              <Form.Control placeholder="Blood Donation Center or Hospital" name="hospital" onChange={handleChange}/>
+            <Form.Control placeholder="Blood Donation Center or Hospital" name="hospital" onChange={handleChange}/>
         </InputGroup>
             {bloodRequests.hospitalError && (
                 <p style={{ color: 'red' }}>{bloodRequests.hospitalError}</p>
               )}
         </Col>
-        <Col>
+        <Col xs={12}sm={4}>
+        <Form.Label>Enter Donor city</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-map-marker" aria-hidden="true"></i></InputGroup.Text>
-              <Form.Label visuallyHidden>City</Form.Label>
               <Form.Control placeholder="City" name="city" onChange={handleChange} required/>
           </InputGroup>
           {bloodRequests.locationError && (
             <p style={{ color: 'red' }}>{bloodRequests.locationError}</p>
           )}
         </Col>
-        <Col>
+        <Col xs={12}sm={4}>
+        <Form.Label>Gender</Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-male" aria-hidden="true"></i></InputGroup.Text>
-              <Form.Label visuallyHidden>Gender</Form.Label>
               <Form.Control placeholder="Gender" name="gender" onChange={handleChange}/>
           </InputGroup>
         </Col>
@@ -234,9 +299,9 @@ const AddBloodRequest=()=> {
                   </Card.Title>
                 </Card.Body>
                 <Card.Footer>
-                  <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleAllRequests}><i class="fa fa-hand-o-right" aria-hidden="true"></i>View All blood Requests </Button>
+                  <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250",justifyContent:"center",alignItems:"center"}} className="w-md-100" onClick={handleAllRequests}><i class="fa fa-hand-o-right" aria-hidden="true"></i>View All blood Requests </Button>
                 </Card.Footer>
-              </Card>
+              </Card> 
             </Col>
         </Row>
       

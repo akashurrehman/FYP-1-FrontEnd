@@ -28,7 +28,41 @@ const LabProfileSetting=()=> {
 
   const [showModal, setShowModal] = useState(false);
 
-
+  const validateForm = () => {
+    let isValid = true;
+    const errors = {};
+  
+    if (!center.name) {
+      isValid = false;
+      errors.nameError = "Please enter a name";
+    }
+  
+    if (!center.city) {
+      isValid = false;
+      errors.CityError = "Please enter a city";
+    }
+  
+    if (!center.location) {
+      isValid = false;
+      errors.locationError = "Please enter a location";
+    }
+  
+    if (!center.contactNo) {
+      isValid = false;
+      errors.contactNoError = "Please enter a contact number";
+    }
+  
+    if (!center.email) {
+      isValid = false;
+      errors.emailError = "Please enter an email";
+    }
+  
+    if (!isValid) {
+      setCenterData({ ...center, ...errors });
+    }
+  
+    return isValid;
+  };
   useEffect(()=>{
     axios.get('http://localhost:8081/api/labs/RegisteredLabs/L001').then((response)=>{
       const { results } = response.data;
@@ -73,11 +107,19 @@ const LabProfileSetting=()=> {
     }
 
     // For location
-    if (name === "location" || name === "city") {
+    if (name === "location") {
       if (!isNaN(value)) {
-        newCenterData = { ...center, [name]: value, locationError: "Please enter alphabets only " };
+        newCenterData = { ...center, [name]: value, locationError: "Please enter Correct location " };
       } else {
         newCenterData = { ...center, [name]: value, locationError: null };
+      }
+    }
+    // For city
+    if (name === "city") {
+      if (!isNaN(value)) {
+        newCenterData = { ...center, [name]: value, CityError: "Please enter Correct location " };
+      } else {
+        newCenterData = { ...center, [name]: value, CityError: null };
       }
     }
     setCenterData(newCenterData);
@@ -85,7 +127,10 @@ const LabProfileSetting=()=> {
 
 const handleSubmit = (event) => {
   event.preventDefault();
+  const isValid = validateForm();
+  if (isValid) {
   setShowModal(true);
+  }
 };
 
 const CENTER_ID = 'L001';
