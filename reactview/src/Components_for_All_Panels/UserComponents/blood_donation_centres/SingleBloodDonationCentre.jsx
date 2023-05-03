@@ -16,6 +16,23 @@ const SingleBloodDonationCentre = (props) => {
     const { centre, history } = props;
     console.log(props);
 
+    //Button Stylings
+    const [isHover, setIsHover] = React.useState(true);
+    const handleMouseEnter = () => {
+        setIsHover(false);
+    };
+    const handleMouseLeave = () => {
+        setIsHover(true);
+    };
+    const ButtonStyle = {
+        
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
+        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
+        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
+        transitionDuration: isHover ? '' : '0.1s',
+    };
+    
 
     return ( <div>
         <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'7%'}}>
@@ -53,9 +70,19 @@ const SingleBloodDonationCentre = (props) => {
                                         </Row>
                                         
                                         <Row style={{backgroundColor:'#f9f2f1',width:'100%',marginLeft:'0%'}}>
-                                            <Card.Text>
-                                                <p style={{paddingTop:'1%'}}><strong>Opening Days: </strong>{centre.Opening_Days.value}</p> 
-                                            </Card.Text>
+                                            <Col sm={6}>
+                                                <Card.Text>
+                                                    <p style={{paddingTop:'1%'}}><strong>Opening Days: </strong>{centre.Opening_Days.value}</p> 
+                                                </Card.Text>
+                                            </Col>
+                                            <Col sm={6}>
+                                                <Link to={{ pathname: `/user/make-appointment/${centre.ID.value}`, state: { centre } }} className='d-flex justify-content-end TextColor' style={{paddingLeft:'0%',marginTop:'1%',textDecoration:'none',fontSize:'14px',fontWeight:'600'}}>
+                                                <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+                                                    >Book Appointment</Button>
+                                                    
+                                                </Link>
+                                            </Col>
+                                            
                                         </Row>
     
                                     </Card>
