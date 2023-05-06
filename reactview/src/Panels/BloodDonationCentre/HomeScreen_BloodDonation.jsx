@@ -117,10 +117,10 @@ const HomeScreen_BloodDonation=()=> {
           </Card>
           <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={4}>  
-                <Card style={{marginTop:10,paddingBottom:10}}>
+                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title>Recent Blood Requests</Card.Title>
-                        <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' ,backgroundColor: "#f2f2f2", padding: "10px"}}>
+                        <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
                         {data.map((item) => (
                           <div key={item.requests.value}>
                             <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
@@ -150,7 +150,7 @@ const HomeScreen_BloodDonation=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={4}>  
-                <Card style={{marginTop:10,paddingBottom:10}}>
+                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title>Recent Blood Donors</Card.Title>
                         <div style={{ height: "25vh", overflow: "scroll" }}>

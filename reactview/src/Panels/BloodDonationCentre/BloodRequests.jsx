@@ -9,7 +9,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
-
+import {handleRequestsPrint} from "./PrintedFiles/BloodRequestsPrint";
 const BloodRequests=()=> {  
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
@@ -85,28 +85,7 @@ const BloodRequests=()=> {
   }, [selectedRows, filterByCenter, centerId]);
 
   const handlePrint = () => {
-    //Console  results
-    console.log(selectedRows);
-    console.log("Button Clicked Print");
-    let printContent = '<h1>All Blood Requests</h1><table>';
-    printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
-      // Check if any rows are selected
-    if (selectedRows.length > 0) {
-      selectedRows.forEach((row) => {
-        printContent += `<tr><td>${row.ID?.value}</td><td>${row.Name?.value}</td><td>${row.Email?.value}</td><td>${row.Gender?.value}</td><td>${row.Location?.value}</td><td>${row.Message?.value}</td><td>${row.Blood_Group?.value}</td><td>${row.Contact?.value}</td><td>${row.City?.value}</td><td>${row.Hospital?.value}</td></tr>`;
-      });
-    } else {
-      data.forEach((row) => {
-        printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
-      });
-    }
-
-    printContent += '</table>';
-    // Create a new window with the printable HTML and print it
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(printContent);
-    printWindow.document.close();
-    printWindow.print();
+    handleRequestsPrint(data);
   };
   
    
