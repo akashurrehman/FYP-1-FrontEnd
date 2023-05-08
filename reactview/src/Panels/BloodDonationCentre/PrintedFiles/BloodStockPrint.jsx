@@ -1,4 +1,4 @@
-export const handleDonorPrint = (data) => {
+export const handleBloodStockPrint = (blood) => {
     let printContent = '<html><head><style>';
     printContent += 'table { border-collapse: collapse; width: 100%; }';
     printContent += 'th, td { border: 1px solid black; padding: 8px; text-align: left; }';
@@ -12,11 +12,11 @@ export const handleDonorPrint = (data) => {
     printContent += '  #watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.5; font:24px }';
     printContent += '}';
     printContent += '</style></head><body>';
-    printContent += '<div id="header"><h1>All Donors who Donate Blood till Now</h1></div>';
-    printContent += '<div id="content">Here is the list of blood donors who donate the blood at your centers or overall blood donors<table>';
-    printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
-    data.forEach((row) => {
-      printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td></tr>`;
+    printContent += '<div id="header"><h1>Blood Stock Record</h1></div>';
+    printContent += '<div id="content">Here is the details of all the blood record, you can find here till now!<table>';
+    printContent += '<tr><th>ID</th><th>Blood Group</th><th>No of Bags</th><th>Last Item Added Date</th></tr>';
+    blood.forEach((row) => {
+      printContent += `<tr><td>${row.ID}</td><td>${row.bloodGroup}</td><td>${row.noOfBags}</td><td>${row.addedDate}</td></tr>`;
     });
     printContent += '</table></div>';
     printContent += '<div id="footer"><p style="text-align: center; margin-top: 8px;">Footer content will add up here </p></div>';

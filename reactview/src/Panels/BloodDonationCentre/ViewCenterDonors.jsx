@@ -16,7 +16,7 @@ const ViewCenterDonors=()=> {
   const [data, setData] = useState([]);
   useEffect(() => {
     // fetch data from the backend
-    fetch('http://localhost:8081/api/users/bloodrequest')
+    fetch('http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo')
       .then((response) => response.json())
       .then((data) => {
         // map the bindings array to an array of objects
@@ -31,7 +31,6 @@ const ViewCenterDonors=()=> {
             Blood_Group: binding.Blood_Group,
             Contact: binding.Contact,
             City: binding.City,
-            Hospital: binding.Hospital,
           };
         });
         setData(rows);
@@ -79,10 +78,6 @@ const columns = [
   {
     name: 'City',
     selector: 'City.value',
-  },
-  {
-    name: 'Hospital',
-    selector: 'Hospital.value',
   },
   {
     name: 'Action',
