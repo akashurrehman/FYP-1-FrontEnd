@@ -41,6 +41,7 @@ class UserLoginService extends GenericService {
     
     logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("donorEligible");
     }; 
 
     isLoggedIn = () => {

@@ -22,6 +22,7 @@ import '../css/style.css';
 import donorService from "../../../Services/Api/User/DonorService";
 import AvailableDonorsBar from "./AvailableDonorsBar";
 import jwtDecode from "jwt-decode";
+import CongratulationBox from "../CongratulationBox";
 
 const MakeBloodDonation = () => {
 
@@ -50,6 +51,8 @@ const MakeBloodDonation = () => {
         }
         else {
             storeData();
+            event.preventDefault();
+            setShowCongratulationBox(true);
         }
         setValidated(true);
     };
@@ -61,12 +64,14 @@ const MakeBloodDonation = () => {
             .addDonor({ id, name, message, email, location, contactNo, bloodGroup, gender, city })
             .then((data) => {
                 console.log(data);
-                window.location.href = "/user/donor";
+                
             })
             .catch((err) => {
                 console.log(err);
         });
     };
+
+    const [showCongratulationBox, setShowCongratulationBox] = React.useState(false);
 
     const handleChange = (event) => {
         setBloodGroup(event.target.value);
@@ -298,7 +303,21 @@ const MakeBloodDonation = () => {
                     </Row>
                 </Container>
             </div>
-            
+            <div>
+                {showCongratulationBox && (
+                    <CongratulationBox
+                    message="Congratulation! Your blood donation made successfully."
+                    thirdButtonText="My Donations"
+                    secondButtonText="Make Appointment"
+                    firstButtonText="Home Page"
+                    firstButton={() => {window.location.href = "/userpanel/HomeScreen";}}
+                    secondButton={() => {window.location.href = "/user/blood-donation-centre";}}
+                    thirdButton={() => {window.location.href = "/user/my-account";}}
+                    onCancel={()=>{setShowCongratulationBox(false);}}
+                    margin="25%"
+                    />
+                )}
+            </div>
         </div>
 
         <div style={{marginLeft:'50%',marginTop:'3%'}}>

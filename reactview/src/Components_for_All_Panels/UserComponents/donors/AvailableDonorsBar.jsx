@@ -31,7 +31,7 @@ const AvailableDonorsBar = () => {
         <div className="d-flex justify-content-center">
         <div style={{}}>
             <Container>
-                <div style={{border:'2px solid white', backgroundColor:'rgb(160, 15, 15)',width:'130%',borderRadius:'10px'}}>
+                <div style={{borderBottom:'', backgroundColor:'rgb(160, 15, 15)',width:'130%',borderRadius:'10px'}}>
                     <Row>
                         <Col sm={4}>
                         <div style={{marginTop:'20%',textAlign:'center',marginLeft:'25%',marginBottom:'-10%'}}>

@@ -190,6 +190,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/user/registration/add").permitAll()
                 .antMatchers("/api/users/edit/{ID}").permitAll()
                 .antMatchers("/api/users/delete/{id}").permitAll()
+                .antMatchers("/api/users/edit/eligibilityStatus/{ID}").permitAll()
 
                 .antMatchers("/api/users/donate/addDonorInfo").permitAll()
                 .antMatchers("/api/user/bloodDonors/Donors/update/{ID}").permitAll()
@@ -203,9 +204,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/user/bloodRequest/BloodRequestDetails/delete/{id}").permitAll()
                 .antMatchers("/api/users/bloodrequest").permitAll()
                 .antMatchers("/api/users/bloodrequest/{id}").permitAll()
+                .antMatchers("/api/users/accepted/bloodRequests/{id}").permitAll()
                 .antMatchers("/api/users/bloodrequest/byUserID/{id}").permitAll()
+                .antMatchers("/api/users/accept/bloodRequest/{ID}").permitAll()
 
                 .antMatchers("/api/user/appointment/AppointmentDetails/add").permitAll()
+                .antMatchers("/api/users/appointment/byUserID/{id}").permitAll()
+                .antMatchers("/api/users/appointment/byCentreID/{id}").permitAll()
+                .antMatchers("/api/users/appointments/{id}").permitAll()
+                .antMatchers("/api/user/appointment/AppointmentDetails/delete/{id}").permitAll()
+
+
 
                 /************ Blood Donation Centre Routes start here *************/
                 .antMatchers("/api/bloodCenter/RegisteredCenters").permitAll()
