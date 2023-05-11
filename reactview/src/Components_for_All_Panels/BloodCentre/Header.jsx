@@ -68,7 +68,7 @@ function Header(props) {
             </Dropdown.Toggle>
 
             <Dropdown.Menu style={{position: 'absolute', left: '-450%'}}>
-                <Dropdown.Item href="#/action-1">My Account <i class="fa fa-user-md" aria-hidden="true"></i></Dropdown.Item>
+                <Dropdown.Item href="/bloodCenter/MyAccount">My Account <i class="fa fa-user-md" aria-hidden="true"></i></Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Help <i class="fa fa-question-circle" aria-hidden="true"></i></Dropdown.Item>
                 <Dropdown.Item href="#/action-3">Logout <i class="fa fa-share" aria-hidden="true"></i></Dropdown.Item>
             </Dropdown.Menu>
