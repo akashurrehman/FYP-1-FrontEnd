@@ -839,6 +839,12 @@
     <bd:hasEventName>Make Donation</bd:hasEventName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
   </owl:NamedIndividual>
+  <bd:Campaign rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1683385179318">
+    <bd:hasCampaignTitle>Updated Compaign-1</bd:hasCampaignTitle>
+    <bd:hasCampaignDetails>Details for Compaign</bd:hasCampaignDetails>
+    <bd:hasCampaignsPostDate>06 May 2023</bd:hasCampaignsPostDate>
+    <bd:hasCampaignID>Campaign_1683385179318</bd:hasCampaignID>
+  </bd:Campaign>
   <bd:Request_Maker rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_003">
     <bd:hasPersonFullName>Salman</bd:hasPersonFullName>
     <bd:hasPersonBloodGroup>AB+</bd:hasPersonBloodGroup>
@@ -870,8 +876,8 @@
     <bd:hasPersonID>Person_1683027989946</bd:hasPersonID>
     <bd:hasPersonFullName>Muhammad Abu Hurairah</bd:hasPersonFullName>
     <bd:hasRole>USER</bd:hasRole>
-    <bd:hasPersonBloodGroup>AB+</bd:hasPersonBloodGroup>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    <bd:hasPersonBloodGroup>AB+</bd:hasPersonBloodGroup>
     <bd:hasPersonCity>Lahore</bd:hasPersonCity>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
     <bd:hasPersonDateOfBirth>2000-12-23</bd:hasPersonDateOfBirth>

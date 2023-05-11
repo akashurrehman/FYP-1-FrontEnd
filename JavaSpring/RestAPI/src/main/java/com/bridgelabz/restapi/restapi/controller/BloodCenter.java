@@ -1013,7 +1013,6 @@ public class BloodCenter {
         // create a file object for the RDF file
         File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
 
-        //
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;
@@ -1071,7 +1070,7 @@ public class BloodCenter {
             UpdateAction.parseExecute(query, model);
 
             // Print the updated model
-            System.out.println("Updated model:");
+            System.out.println("Updated model");
 
             // Write the updated model to a file
             FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
