@@ -51,7 +51,7 @@ const LabHome=()=> {
   <div style={{backgroundColor:"#F3E8FF"}}>
     <Container>
       <Header />
-      <Row className="mt-md-3">
+      <Row className="mt-sm-5">
         <Col className="mt-sm-5" xs={12}>
           <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center"}} >
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
@@ -61,8 +61,8 @@ const LabHome=()=> {
             </Card.Body>
           </Card>
         </Col>
-        
-        <Col xs={6}>
+
+        <Col xs={12} md={6}>
           <Card border="primary" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
               <Card.Title><i class="fa fa-check-square" aria-hidden="true"></i>Total Verfied Reports</Card.Title>
@@ -74,7 +74,7 @@ const LabHome=()=> {
             </Card.Body>
           </Card>
         </Col>
-        <Col xs={6}>
+        <Col xs={12} md={6}>
           <Card border="primary" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
               <Card.Title><i class="fa fa-bell" aria-hidden="true"></i>Total Pending reports</Card.Title>

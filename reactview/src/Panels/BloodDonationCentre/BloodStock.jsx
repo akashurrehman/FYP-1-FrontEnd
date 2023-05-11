@@ -16,7 +16,7 @@ import AB_negative from './../../Components_for_All_Panels/BloodCentre/Image/Ab-
 import axios from 'axios'; 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import {handleBloodStockPrint} from "./PrintedFiles/BloodStockPrint";
 
 const BloodStock=()=> {
 
@@ -27,13 +27,14 @@ const BloodStock=()=> {
     display: "inline-block",
 };
 
-
-
   const [show, setShow] = useState(false);
 
   const [blood, setbloodData] = useState([]);
 
-  
+  const handleBloodPrint = () => {
+    handleBloodStockPrint(blood);
+    console.log("Handle Print button in Blood Stock!")
+  };
   
   useEffect(() => {
     const fetchData = async () => {
@@ -197,7 +198,7 @@ const handleInputChange = (event) => {
           ))}
         </CardGroup>
           </>
-
+        <Button onClick={handleBloodPrint}>Print Blood stock files</Button>
         </Col>
       </Row>
     </Container>

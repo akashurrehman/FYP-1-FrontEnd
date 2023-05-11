@@ -47,7 +47,7 @@ const Sidebar = () => {
               <CDBSidebarMenuItem icon="tint">All Blood Requests</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="sign-in">Logout</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="share">Logout</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>

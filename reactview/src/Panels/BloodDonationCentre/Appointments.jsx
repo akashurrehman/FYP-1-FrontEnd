@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 import './Styling/print.css';
+import { handleAppointmentPrint } from "./PrintedFiles/AppointmentPrint";
 const Appointments=()=> {  
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -38,55 +39,8 @@ const Appointments=()=> {
   }, []);
 
   const handlePrint = () => {
-    let printContent = '<h1>All Booked Appointment</h1><table>';
-    printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
-    data.forEach((row) => {
-      printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
-    });
-    printContent += '</table>';
-  // Add the watermark image
-  printContent += '<div class="watermark"><img src="/../../Components_for_All_Panels/BloodCentre/Image/A-positive.jpg" /></div>';
-
-      // Use CSS to style the background image
-  const style = `
-  <style>
-    table {
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    .watermark {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.3;
-    }
-    .watermark img {
-      display: block;
-      margin: 0 auto;
-      max-width: 50%;
-      max-height: 50%;
-    }
-  
-  </style>
-`;
-  
-    // Create a new window with the printable HTML and print it
-    const printWindow = window.open('', '_blank');
-
-    printWindow.document.write(style + printContent);
-    printWindow.document.close();
-    printWindow.print();
+    handleAppointmentPrint(data);
+    console.log("Handle Print button in Appointment!")
   };
 const mystyle = {
   height: "7%",

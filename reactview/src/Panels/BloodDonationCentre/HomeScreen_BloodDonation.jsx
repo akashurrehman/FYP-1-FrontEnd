@@ -66,34 +66,48 @@ const HomeScreen_BloodDonation=()=> {
     window.location.href = '/bloodCenter/AppointmentDetails';
   }
 
-  const [data, setData] = useState([]);
-  const [donors,setDonors]=useState([]);
-  const [jobPosts,setJobPosts]=useState([]);
-  const [news,setNews]=useState([]);
-  const [FAQ,setFAQ]=useState([]);
-  const [appointment,setAppointment]=useState([]);
-  const [events,setEvents]=useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response1 = await axios.get("http://localhost:8081/api/users/bloodrequest")
-      .then((response) => setData(response.data.results.bindings)).catch((error) => console.log(error));
-      const response2 = await axios.get("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo")
-      .then((response) => setDonors(response.data.results.bindings)).catch((error) => console.log(error));
-      const response3 = await axios.get("http://localhost:8081/api/admin/getJobPost")
-      .then((response) => setJobPosts(response.data.results.bindings)).catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
-      const response4 = await axios.get("http://localhost:8081/api/admin/getNews")
-      .then((response) => setNews(response.data.results.bindings)).catch((error) => console.log(error));
-      const response5 = await axios.get("http://localhost:8081/api/admin/getFAQ")
-      .then((response) => setFAQ(response.data.results.bindings)).catch((error) => toast.error(error));
-      const response6 = await axios.get("http://localhost:8081/api/bloodCenter/RegisteredCenters/getAppointmentInfo")
-      .then((response) => setAppointment(response.data.results.bindings)).catch((error) => console.log(error));
-      const response7 = await axios.get("http://localhost:8081/api/admin/getEvents")
-      .then((response) => setEvents(response.data.results.bindings)).catch((error) => console.log(error));
+  const fetchData = async (url) => {
+    try {
+      const response = await axios.get(url);
+      return response.data.results.bindings;
+    } catch (error) {
+      console.log(error);
+      return [];
+    }
+  };
+  
+    const [data, setData] = useState([]);
+    const [donors, setDonors] = useState([]);
+    const [jobPosts, setJobPosts] = useState([]);
+    const [news, setNews] = useState([]);
+    const [FAQ, setFAQ] = useState([]);
+    const [appointment, setAppointment] = useState([]);
+    const [events, setEvents] = useState([]);
+  
+    useEffect(() => {
+      const fetchDataForAll = async () => {
+        const [dataRes, donorsRes, jobPostsRes, newsRes, FAQRes, appointmentRes, eventsRes] = await Promise.all([
+          fetchData("http://localhost:8081/api/users/bloodrequest"),
+          fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo"),
+          fetchData("http://localhost:8081/api/admin/getJobPost"),
+          fetchData("http://localhost:8081/api/admin/getNews"),
+          fetchData("http://localhost:8081/api/admin/getFAQ"),
+          fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getAppointmentInfo"),
+          fetchData("http://localhost:8081/api/admin/getEvents"),
+        ]);
+        setData(dataRes);
+        setDonors(donorsRes);
+        setJobPosts(jobPostsRes);
+        setNews(newsRes);
+        setFAQ(FAQRes);
+        setAppointment(appointmentRes);
+        setEvents(eventsRes);
+      };
+      fetchDataForAll();
+    }, []);
+  
 
-    };
-    fetchData();
-  }, []);
-
+  
 
   const mystyle = {
       height: "7%",
@@ -117,10 +131,10 @@ const HomeScreen_BloodDonation=()=> {
           </Card>
           <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={4}>  
-                <Card style={{marginTop:10,paddingBottom:10}}>
+                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title>Recent Blood Requests</Card.Title>
-                        <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' ,backgroundColor: "#f2f2f2", padding: "10px"}}>
+                        <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
                         {data.map((item) => (
                           <div key={item.requests.value}>
                             <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
@@ -150,7 +164,7 @@ const HomeScreen_BloodDonation=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={4}>  
-                <Card style={{marginTop:10,paddingBottom:10}}>
+                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title>Recent Blood Donors</Card.Title>
                         <div style={{ height: "25vh", overflow: "scroll" }}>

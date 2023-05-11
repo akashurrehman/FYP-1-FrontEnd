@@ -5,14 +5,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+//import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
-
+import {handleRequestsPrint} from "./PrintedFiles/BloodRequestsPrint";
 const BloodRequests=()=> {  
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
+
+  /* For filtering the data with center ID
+
+  */
+  const [filterByCenter, setFilterByCenter] = useState(false);
+  const [centerId, setCenterId] = useState('');
 
   const [data, setData] = useState([]);
 
@@ -32,12 +38,30 @@ const BloodRequests=()=> {
           // Get the selected rows from the state
         };
         
+        const handleFilter = () => {
+          //Pass the cnter Name or id here
+          const center = prompt('Enter center ID or name');
+          if (center) {
+            setFilterByCenter(true);
+            setCenterId(center);
+          }
+        };
 
   useEffect(() => {
     // fetch data from the backend
-    fetch('http://localhost:8081/api/users/bloodrequest')
+    let url = 'http://localhost:8081/api/users/bloodrequest';
+    if (filterByCenter) {
+      url += `?centerId=${centerId}`;
+    }
+    fetch(url)
       .then((response) => response.json())
       .then((data) => {
+        // filter the results if filterByCenter is true
+        if (filterByCenter) {
+          data.results.bindings = data.results.bindings.filter(
+            (binding) => binding.CenterID.value === centerId
+          );
+        }
         // map the bindings array to an array of objects
         const rows = data.results.bindings.map((binding) => {
           return {
@@ -58,31 +82,10 @@ const BloodRequests=()=> {
       .catch((error) => console.log(error));
       console.log("selectedRows after updating state", selectedRows);
       
-  }, [selectedRows]);
+  }, [selectedRows, filterByCenter, centerId]);
 
   const handlePrint = () => {
-    //Console  results
-    console.log(selectedRows);
-    console.log("Button Clicked Print");
-    let printContent = '<h1>All Blood Requests</h1><table>';
-    printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
-      // Check if any rows are selected
-    if (selectedRows.length > 0) {
-      selectedRows.forEach((row) => {
-        printContent += `<tr><td>${row.ID?.value}</td><td>${row.Name?.value}</td><td>${row.Email?.value}</td><td>${row.Gender?.value}</td><td>${row.Location?.value}</td><td>${row.Message?.value}</td><td>${row.Blood_Group?.value}</td><td>${row.Contact?.value}</td><td>${row.City?.value}</td><td>${row.Hospital?.value}</td></tr>`;
-      });
-    } else {
-      data.forEach((row) => {
-        printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
-      });
-    }
-
-    printContent += '</table>';
-    // Create a new window with the printable HTML and print it
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(printContent);
-    printWindow.document.close();
-    printWindow.print();
+    handleRequestsPrint(data);
   };
   
    
@@ -164,7 +167,10 @@ const columns = [
           selectableRowsHighlight
           highlightOnHover
           actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-download" aria-hidden="true"></i>Download</button>
+            <>
+            <Button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-download" aria-hidden="true"></i>Download</Button>
+            <Button className='btn btn-info' onClick={handleFilter} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-filter" aria-hidden="true"></i>Filter Requests(By You)</Button>
+            </>
           }
         />
         </Col>

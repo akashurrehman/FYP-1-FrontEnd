@@ -186,8 +186,6 @@ public class Admin {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-    
-    
     /*
      * Get the Sponsors in the Database by ID
      */
@@ -221,7 +219,6 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * Manage the Financial Donation in the Database
@@ -416,7 +413,6 @@ public class Admin {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     /*
      * Get the Financial Donations in the Database by ID
      */
@@ -453,7 +449,6 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * Manage the job Posts in the Database
@@ -830,7 +825,6 @@ public class Admin {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     /*
      * Get the Frequently Asked Questions by ID
      */
@@ -845,7 +839,6 @@ public class Admin {
                 "?faqs bd:hasFAQDetails ?Details ." +
                 "filter(?ID = \"" + id + "\")" +
                 "}";
-        
 
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
@@ -864,7 +857,6 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * Manage the ENQUIRY in the Database
@@ -1121,8 +1113,6 @@ public class Admin {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
-
     /*
      * Add the News in the Database
      */
@@ -1303,19 +1293,18 @@ public class Admin {
      */
     @GetMapping("/api/admin/getNewsById/{id}")
     public ResponseEntity<String> getNewsById(@PathVariable String id) {
-        
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
 
-        "SELECT * WHERE {" +
-        "?news rdf:type bd:News ." +
-        "?news bd:hasNewsTitle ?Title ." +
-        "?news bd:hasNewsID ?ID ." +
-        "?news bd:hasNewsDetails ?Details ." +
-        "?news bd:hasNewsPostDate ?Date ." +
-        "filter(?ID = \"" + id + "\")" +
-        "}";
-
+                "SELECT * WHERE {" +
+                "?news rdf:type bd:News ." +
+                "?news bd:hasNewsTitle ?Title ." +
+                "?news bd:hasNewsID ?ID ." +
+                "?news bd:hasNewsDetails ?Details ." +
+                "?news bd:hasNewsPostDate ?Date ." +
+                "filter(?ID = \"" + id + "\")" +
+                "}";
 
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
@@ -1334,7 +1323,6 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * Method to update Advertisement
@@ -1559,7 +1547,6 @@ public class Admin {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * Get the Events by title
