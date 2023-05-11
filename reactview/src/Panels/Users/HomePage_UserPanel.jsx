@@ -21,6 +21,8 @@ import UserPanelBackToTopButton from "../../Components_for_All_Panels/UserCompon
  
 
 import '../../Components_for_All_Panels/UserComponents/css/style.css';
+import AvailableDonorsBar from "../../Components_for_All_Panels/UserComponents/donors/AvailableDonorsBar";
+import AvailableRequestMakersBar from "../../Components_for_All_Panels/UserComponents/request_makers/AvailableRequestMakersBar";
 
 
 
@@ -111,7 +113,7 @@ const HomeScreen_UserPanel = () => {
     const ButtonStyle = {
         backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
         color: isHover ? 'white' : 'white',
-        transform: isHover ? '' : 'scale(1.1)',
+        transform: isHover ? 'scale(0.9)' : 'scale(0.9)',
         border: isHover ? '' : '1px solid white',
     };
 
@@ -135,17 +137,26 @@ const HomeScreen_UserPanel = () => {
 
                     <div 
                         style={{position: "absolute",
-                            bottom: "20%",left: "22%",
+                            bottom: "20%",left: "10%",
                             backgroundColor: "",color: "white",
                             padding: "30px",
                             marginLeft: "30px",textAlign: "center",
-                            width:"50%",fontFamily: "Arial",opacity: "1.0"
+                            width:"80%",fontFamily: "Arial",opacity: "1.0"
                     }}>
-                        <h5 className='pb-4' style={{}}>DONATE BLOOD, SAVE LIFE!</h5>
-                        <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
+                        <Row>
+                            <Col sm={9}>
+                                <h5 className='pb-4' style={{}}>DONATE BLOOD, SAVE LIFE!</h5>
+                                <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
+                                <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >Donate <ArrowRight className="" size={18} /></Button>
+                            </Col>
+                            <Col sm={3}>
+                                
+                                <Row><AvailableDonorsBar></AvailableDonorsBar></Row>
+                                <Row style={{marginTop:'7%',marginLeft:'-8%'}}><AvailableRequestMakersBar></AvailableRequestMakersBar></Row>
+                                
+                            </Col>
+                        </Row>
                         
-                        
-                        <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={queryUrl}>Donate <ArrowRight className="" size={22} /></Button>
                     </div>
             </div>
             
@@ -190,40 +201,6 @@ const HomeScreen_UserPanel = () => {
             </div>
 
         
-            <div style={{marginTop:'5%',marginBottom:'5%'}}>
-                <Container>
-                <div style={{ width: 100, height: 100,marginLeft:'45%'}}>
-                    <CircularProgressbar value={66} text={111}
-                     styles={buildStyles({
-                        // Rotation of path and trail, in number of turns (0-1)
-                        // rotation: 0.25,
-                    
-                        // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
-                        // strokeLinecap: 'butt',
-                    
-                        // Text size
-                        textSize: '17px',
-                    
-                        // How long animation takes to go from one percentage to another, in seconds
-                        // pathTransitionDuration: 0.5,
-                    
-                        // Can specify path transition in more detail, or remove it entirely
-                        // pathTransition: 'none',
-                    
-                        // Colors
-                        pathColor: 'rgb(160, 15, 15)',
-                        textColor: 'rgb(160, 15, 15)',
-                        trailColor: '#d6d6d6',
-                        backgroundColor: '#3e98c7',
-                      })}
-                    />
-                    
-                </div>
-                <div style={{textAlign:'center',marginTop:'2%',color:'rgb(160, 15, 15)'}}>
-                    <h4>Available Blood Donors</h4>
-                </div>
-                </Container>
-            </div>
                 
             
             <div className="mb-5 pb-5" style={{backgroundColor:'rgba(245, 241, 241, 0.445)',borderRadius:'10px 100px / 120px'}}>
@@ -233,38 +210,38 @@ const HomeScreen_UserPanel = () => {
                     </div>
                     <Row className="" style={{marginBottom:"10%"}}>
                         <Col sm={4}>
-                            <Card className="ColHover" border="danger" style={{ width: '24rem' }}>
-                                <Card.Img variant="top" src={CardImage1} height="275rem"/>
+                            <Card className="ColHover" border="danger" style={{ width: '22rem' }}>
+                                <Card.Img variant="top" src={CardImage1} height="250rem"/>
                                 <Card.Body>
                                     <Card.Title>Can I Donate Blood?</Card.Title>
                                     <Card.Text>
-                                        See if you are eligible to donate blood today, or find answers to frequently asked questions.
+                                        See if you are eligible to donate blood today, or find frequently asked questions.
                                     </Card.Text>
-                                    <Button variant="flat">Check eligibility <ArrowRight className="" size={22} /></Button>
+                                    <Button size='sm' variant="flat">Check eligibility</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
                         <Col sm={4}>
-                            <Card className="ColHover" border="danger" style={{ width: '24rem' }}>
-                                <Card.Img variant="top" src={CardImage2}  height="275rem"/>
+                            <Card className="ColHover" border="danger" style={{ width: '22rem' }}>
+                                <Card.Img variant="top" src={CardImage2}  height="250rem"/>
                                 <Card.Body>
                                     <Card.Title>Making Your Donation?</Card.Title>
                                     <Card.Text>
                                         Discover how you can give blood, plasma or platelets, and book your next donation.
                                     </Card.Text>
-                                    <Button variant="flat">Know how to donate <ArrowRight className="" size={22} /></Button>
+                                    <Button size='sm' variant="flat">Know how to donate</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
                         <Col sm={4}>
-                            <Card  className="ColHover" border="danger" style={{ width: '24rem' }}>
-                                <Card.Img variant="top" src={CardImage3}  height="275rem"/>
+                            <Card  className="ColHover" border="danger" style={{ width: '22rem' }}>
+                                <Card.Img variant="top" src={CardImage3}  height="250rem"/>
                                 <Card.Body>
                                     <Card.Title>Find a Blood Donation Centre?</Card.Title>
                                     <Card.Text>
                                         There are donor centres all across the country. Find one that's closest to you.
                                     </Card.Text>
-                                    <Button variant="flat">Find a Center <ArrowRight className="" size={22} /></Button>
+                                    <Button size='sm' variant="flat">Find a Center</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -272,38 +249,38 @@ const HomeScreen_UserPanel = () => {
                 
                     <Row className="mt-5">
                         <Col sm={4}>
-                            <Card className="ColHover" border="danger" style={{ width: '24rem' }}>
-                                <Card.Img variant="top" src={CardImage4}  height="275rem"/>
+                            <Card className="ColHover" border="danger" style={{ width: '22rem' }}>
+                                <Card.Img variant="top" src={CardImage4}  height="250rem"/>
                                 <Card.Body>
                                     <Card.Title>Find Blood Donors?</Card.Title>
                                     <Card.Text>
                                         There are donor all across the country/city. Find donor one that's closest to you.
                                     </Card.Text>
-                                    <Button variant="flat">Check donors <ArrowRight className="" size={22} /></Button>
+                                    <Button size='sm' variant="flat">Check donors </Button>
                                 </Card.Body>
                             </Card>
                         </Col>
                         <Col sm={4}>
-                            <Card className="ColHover" border="danger" style={{ width: '24rem' }}>
-                                <Card.Img variant="top" src={CardImage5}  height="275rem"/>
+                            <Card className="ColHover" border="danger" style={{ width: '22rem' }}>
+                                <Card.Img variant="top" src={CardImage5}  height="250rem"/>
                                 <Card.Body>
                                     <Card.Title>Post Blood Requests?</Card.Title>
                                     <Card.Text>
-                                        If any one required blood any time they can post blood request of required blood anytime.
+                                        If any one required blood any time they can post blood request of required blood.
                                     </Card.Text>
-                                    <Button variant="flat">Post Blood Request <ArrowRight className="" size={22} /></Button>
+                                    <Button size='sm' variant="flat">Post Blood Request</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
                         <Col sm={4}>
-                            <Card  className="ColHover" border="danger" style={{ width: '24rem' }}>
-                                <Card.Img variant="top" src={CardImage6}  height="275rem"/>
+                            <Card  className="ColHover" border="danger" style={{ width: '22rem' }}>
+                                <Card.Img variant="top" src={CardImage6}  height="250rem"/>
                                 <Card.Body>
                                     <Card.Title>Find a Request Makers?</Card.Title>
                                     <Card.Text>
                                         There are request makers all across the country. Find one that's closest to you.
                                     </Card.Text>
-                                    <Button variant="flat">Find a Request Maker <ArrowRight className="" size={22} /></Button>
+                                    <Button size='sm' variant="flat">Find a Request Maker</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -316,15 +293,15 @@ const HomeScreen_UserPanel = () => {
                 <Container>
                     <Row>
                         <Col sm={8}>
-                            <img src={Image1} width="100%" height="550rem" />
+                            <img src={Image1} width="100%" height="500rem" />
                         </Col>
                         
                         <Col sm={4}>
                             <div style={{paddingTop:"30%",paddingLeft:"20%",textAlign:"left"}}>
                                 <h5>Thinking about becoming a donor?</h5>
-                                <h1 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Join us. Be the Life of a dead person.</h1>
+                                <h3 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Join us. Be the Life of a dead person.</h3>
                                 <p className="text-left">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
-                                <Button variant="flatSolid">Register <ArrowRight className="" size={22} /></Button>
+                                <Button size='sm' variant="flatSolid">Register <ArrowRight className="" size={20} /></Button>
                             </div>
                             
                         </Col>

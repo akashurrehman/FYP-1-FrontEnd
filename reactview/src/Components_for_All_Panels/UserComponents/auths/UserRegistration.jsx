@@ -52,12 +52,14 @@ const UserRegistration = (props) => {
         }
         else {
             submitForm();
+            event.preventDefault();
+            
+            
         }
         setValidated(true);
     };
 
     const submitForm = async (e) => {
-        e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8081/api/user/registration/add', {
                 fullName, userName, bloodGroup, gender, dob, email, contactNo, city, address, password
@@ -374,7 +376,7 @@ const UserRegistration = (props) => {
                                         </Row>
                                         <Row className="mt-2" style={{textAlign:'right'}}>
                                             <Col sm={12}>
-                                            <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={submitForm} 
+                                            <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
                                             >Sign Up <ArrowRight className="" size={17} /></Button>
                                             </Col>
                                         </Row>

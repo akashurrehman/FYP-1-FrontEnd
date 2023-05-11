@@ -12,6 +12,8 @@ import UserPanelHeader from '../UserPanelHeader';
 import MyPersonalDetails from './MyPersonalDetails';
 import MyBloodRequests from './MyBloodRequests';
 import MyBloodDonations from './MyBloodDonations';
+import MyAppointments from './MyAppointments';
+import AcceptedBloodRequests from './AcceptedBloodRequests';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -59,7 +61,7 @@ function TabPanel(props) {
             <UserPanelHeader></UserPanelHeader>
             <div style={{marginTop:'10%', marginLeft:'5%'}}>
                 <Box sx={{ display: 'flex', width: 1000 }}>
-                    <Box sx={{ borderRight: 2, borderColor: 'divider' }}>
+                    <Box sx={{ borderLeft: 0, borderColor: 'divider' }}>
                         <Tabs
                             orientation="vertical" // set the orientation to "vertical"
                             textColor=""
@@ -68,8 +70,10 @@ function TabPanel(props) {
                             onChange={handleChange}
                             variant="fullWidth"
                             aria-label="basic tabs example"
+                            
                             sx={{
                                 width: 200,
+                                position: 'fixed',
                                     "& .Mui-selected": {
                                         color: "#a00f0f",
                                     },
@@ -86,17 +90,34 @@ function TabPanel(props) {
                         <Tab label="My Blood Requests" {...a11yProps(1)} />
                         <Tab label="My Blood Donations" {...a11yProps(2)} />
                         <Tab label="My Appointments" {...a11yProps(3)} />
-                        <Tab label="Log Out" {...a11yProps(4)} />
+                        <Tab label="Accepted Requests" {...a11yProps(4)} />
+                        <Tab label="Log Out" {...a11yProps(5)} />
                         </Tabs>
                     </Box>
                     <TabPanel value={value} index={0}>
-                        <MyPersonalDetails></MyPersonalDetails>
+                        <div style={{marginLeft:'45%',width:'90%'}}>
+                            <MyPersonalDetails></MyPersonalDetails>
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <MyBloodRequests></MyBloodRequests>
+                        <div style={{marginLeft:'25%',width:'80%'}}>
+                            <MyBloodRequests></MyBloodRequests>
+                        </div>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <MyBloodDonations></MyBloodDonations>
+                        <div style={{marginLeft:'25%',width:'80%'}}>
+                            <MyBloodDonations></MyBloodDonations>
+                        </div>
+                    </TabPanel>
+                    <TabPanel value={value} index={3}>
+                        <div style={{marginLeft:'18%',width:'80%'}}>
+                            <MyAppointments></MyAppointments>
+                        </div>
+                    </TabPanel>
+                    <TabPanel value={value} index={4}>
+                        <div style={{marginLeft:'25%',width:'80%'}}>
+                            <AcceptedBloodRequests></AcceptedBloodRequests>
+                        </div>
                     </TabPanel>
                 </Box>
             </div>

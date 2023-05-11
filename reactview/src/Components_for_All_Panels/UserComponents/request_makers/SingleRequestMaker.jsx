@@ -1,24 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Container, Button } from "react-bootstrap";
-import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
-import UserPanelHeader from "../UserPanelHeader";
-import UserPanelFooter from "../UserPanelFooter";
-import UserPanelBackToTopButton from "../UserPanelBackToTopButton";
-import Image1 from "../../../Public/user/image/RequestMaker.jpg";
+import { Row, Col, Card, ListGroup} from "react-bootstrap";
+
 import CardImage1 from "../../../Public/user/image/Avatar.JPG";
-import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill } from 'react-bootstrap-icons';
+import { ArrowRight } from 'react-bootstrap-icons';
 
 import '../css/style.css';
 import { Link } from "react-router-dom";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import userService from "../../../Services/Api/User/UserService";
+import { toast } from "react-toastify";
+import userLoginService from "../../../Services/Api/User/UserLoginService";
 
 
 
 
 const SingleRequestMaker = (props) => {
 
-    const { requestMaker, history } = props;
-    console.log(props);
+    //Get id from token 
+    const token = localStorage.getItem('token');
+    const decodedToken = token ? jwtDecode(token) : null;
+    const id = decodedToken?.id;
+    console.log(id);
+
+    //For updating values in request table
+    const donatedBy = id;
+    const [donorName, setDonorName] = useState();
+    const [personID, setPersonID] = useState();
+
+    const { requestMaker } = props;
+    // console.log(props);
+
+    const getUserData = () => {
+        userService
+            .getSingleUser(donatedBy)
+            .then((data) => {
+                setDonorName(data?.results?.bindings?.[0]?.Name?.value);
+            })
+            .catch((err) => {
+                console.log(err);
+        });
+    };
+
+    const getPersonNameFromRequestMakerTabel = () => {
+        const name = requestMaker.PersonName.value;
+        setPersonID(name.substring(name.lastIndexOf("#") + 1));
+    };
+
+    useEffect(()=>{getUserData();getPersonNameFromRequestMakerTabel();}, []);
 
     const [isHover, setIsHover] = React.useState(true);
 
@@ -37,11 +68,21 @@ const SingleRequestMaker = (props) => {
         transitionDuration: isHover ? '' : '0.45s',
     };
 
-    //For Modal
-    const [show, setShow] = React.useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const updateRequest = async (e) => {
+        try {
+            await axios.put('http://localhost:8081/api/users/accept/bloodRequest/' + requestMaker.ID.value, {
+                donatedBy, donorName
+            });
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
 
     return ( <div>
         <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'5%'}}>
@@ -50,7 +91,7 @@ const SingleRequestMaker = (props) => {
                         
                         <Row className="" style={{marginBottom:"5%"}}>
                             <Col sm={12}>
-                                <Card className="UserCard" border="secondary" style={{ width: '21rem' }}>
+                                <Card className="UserCard" border="secondary" style={{ width: '22rem' }}>
                                     <Row>
                                         <Col sm={8} style={{paddingLeft: '7%',paddingTop: '5%',textAlign:'left'}}>
                                             <Card.Title><h4 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>{requestMaker.Blood_Group.value}</h4></Card.Title>
@@ -79,12 +120,42 @@ const SingleRequestMaker = (props) => {
                                         <ListGroup className="list-group-flush">
                                             <ListGroup.Item></ListGroup.Item>
                                             <ListGroup.Item><div className='d-flex justify-content-center' style={{marginBottom:'-6%'}}>
-                                                <Button variant="default" style={ButtonStyle1} 
-                                                    onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                                    onClick={(e) => {
-                                                        window.location.reload();
-                                                    }}>Donate & Save Life
-                                                </Button>  
+
+                                                {requestMaker.RequestDonatedBy.value !== 'null' ? (
+                                                    <>
+                                                        <p style={{color:'green'}}>Donated By: {requestMaker?.RequestDonorName?.value}</p>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Button variant="default" style={ButtonStyle1} 
+                                                            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                                                            onClick={() => {
+                                                                if(userLoginService.isLoggedIn()){
+                                                                    if(personID !== donatedBy){
+                                                                        updateRequest();
+                                                                        window.location.reload();
+                                                                    }
+                                                                    else{
+                                                                        toast.error("Sorry! You cannot donate to this blood request because its posted by you.", {
+                                                                            closeOnClick: true,
+                                                                            pauseOnHover: true,
+                                                                            position: toast.POSITION.BOTTOM_RIGHT,
+                                                                        });
+                                                                    }
+                                                                }
+                                                                else{
+                                                                    toast.error("Kindly login for making donation.", {
+                                                                        closeOnClick: true,
+                                                                        pauseOnHover: true,
+                                                                        position: toast.POSITION.BOTTOM_RIGHT,
+                                                                    });
+                                                                }
+                                                                
+                                                            }}>Donate & Save Life
+                                                        </Button>
+                                                    </>
+                                                )}
+                                                
                                             </div></ListGroup.Item>
                                         </ListGroup>
 

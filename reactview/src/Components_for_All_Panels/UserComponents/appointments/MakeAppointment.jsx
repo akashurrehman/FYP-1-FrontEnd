@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button,Image } from "react-bootstrap";
-import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
+import { Container, Button,Image, Modal } from "react-bootstrap";
+import { Row, Col, Nav } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import { useParams } from 'react-router-dom';
-import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
-import image from '../../../Public/user/image/jobpost.png';
+import { ArrowRight, House, HouseDoorFill, PrinterFill } from 'react-bootstrap-icons';
+import image from '../../../Public/user/image/makeAppointment.jpg';
 import '../css/style.css';
 
 import centreService from "../../../Services/Api/User/BloodDonationCentreService";
@@ -14,6 +14,7 @@ import jwtDecode from "jwt-decode";
 
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import ConfirmationBox from "../ConfirmationBox";
 
 const MakeAppointment = () => {
 
@@ -26,13 +27,8 @@ const MakeAppointment = () => {
     const userID = decodedToken?.id;
     // console.log(userID);
 
-    
-    // Retrieve the value from local storage
-    const donorEligible = localStorage.getItem('donorEligible');
-
     const [centre, setCentre] = useState();
     const [user, setUser] = useState();
-    const [eligible, setEligible] = useState("");
 
     const [donorName, setDonorName] = React.useState("");
     const [donorDOB, setDonorDOB] = React.useState("");
@@ -83,35 +79,32 @@ const MakeAppointment = () => {
         });
     };
 
-    const checkEligibility = () => {
-        if(donorEligible == 'Yes'){
-            setEligible('Yes');
-        }
-        else{
-            setEligible('No');
-        }
-    };
 
-    useEffect(()=>{getUserData();getCentreData();checkEligibility();}, []);
+
+    useEffect(()=>{getUserData();getCentreData();}, []);
     console.log(centre);
     console.log(user);
     // console.log(donorName);
 
     const submitForm = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
+        // const confirmed = window.confirm('Are you sure you want to delete?');
+        
         try {
-            if(donorEligible == 'Yes'){
+            if(user?.EligibilityStatus?.value == 'Eligible'){
                 const response = await axios.post('http://localhost:8081/api/user/appointment/AppointmentDetails/add', {
                     centreID,userID,donorName,donorDOB,donorEmail,donorContactNo,donorGender,donorAddress,donorCity,donorBloodGroup,centreName,centreEmail,centreLocation,centreTimings,centreContactNo
                 });
                 console.log(response.data);
-                window.location.href = "/user/my-account";
+                handleShow();
             }
             else{
-                toast.error(<ToastWithButton />, {
+                toast.error(<ErrorToastMakeBloodAnalysis />, {
                     closeOnClick: true,
                     pauseOnHover: true,
-                    position: toast.POSITION.BOTTOM_RIGHT,});
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                    className: 'custom-toast',
+                });
             }
             
         } 
@@ -121,12 +114,15 @@ const MakeAppointment = () => {
                 toast.error(error.response.data.error, {
                     closeOnClick: true,
                     pauseOnHover: true,
-                    position: toast.POSITION.BOTTOM_RIGHT,});
+                    position: toast.POSITION.BOTTOM_RIGHT,
+                });
             } 
             else {
                 console.log('An error occurred');
             }
         }
+        
+        
     }
 
 
@@ -148,20 +144,36 @@ const MakeAppointment = () => {
         transitionDuration: isHover ? '' : '0.1s',
     };
     
-    const ToastWithButton = ({ closeToast }) => (
+    const ErrorToastMakeBloodAnalysis = ({ closeToast }) => (
         <div>
-            <p>Kindly check your eligibility status for blood donation. </p>
-            <Nav.Link className='TextColor' href='/user/blood-analysis' style={{}}>Blood Analysis</Nav.Link>
-        
+            <p><strong className='TextColor'>Sorry!</strong> Kindly check your eligibility status for blood donation. </p>
+            <div style={{textAlign:'right'}}>
+                <Nav.Link className='TextColor' href='/user/blood-analysis'>Make blood analysis  <ArrowRight className="" size={16} /></Nav.Link>
+            </div>
         </div>
-      );
+    );
+
+    const [showConfirmationBox, setShowConfirmationBox] = useState(false);
+    const handleDeleteButtonClick = () => {
+        setShowConfirmationBox(true);
+    };
+    const handleCancelConfirmationBox = () => {
+        setShowConfirmationBox(false);
+    };
+
+
+    //For Modal
+    const [show, setShow] = React.useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
         <div style={{marginTop:'9%',marginBottom:'4%'}}>
             <Container>
                 <Row style={{marginBottom:'5%'}}>
-                    <Col sm={12} style={{textAlign:'center',width:'65%'}}>
+                    <Col sm={12} style={{textAlign:'center'}}>
                         <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Make Appointment in "{centre?.Name?.value}"</h2>  
                         <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
                     </Col>
@@ -185,22 +197,72 @@ const MakeAppointment = () => {
                         <h4 style={{fontSize:'18px'}}>Centre Contact No: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.ContactNo?.value}</spam></h4>
                         <h4 style={{fontSize:'18px'}}>Centre Location: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Location?.value}</spam></h4>
                         
-                        <h4 style={{fontSize:'18px'}}>Donor Eligible: <spam style={{fontSize:'16px',fontWeight:'400'}}>{eligible}</spam></h4>
+                        <h4 style={{fontSize:'18px'}}>Donor Eligible: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.EligibilityStatus?.value}</spam></h4>
                         <div style={{textAlign:'right',marginTop:'30%'}}>
-                        <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={submitForm}
-                            >Book Appointment <ArrowRight className="" size={17} /></Button>
+                        <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleDeleteButtonClick}
+                            >Book Appointment <ArrowRight className="" size={18} /></Button>
+                        </div>
+                        <div>
+                            {showConfirmationBox && (
+                                <ConfirmationBox
+                                message="Are you sure you want to book an appointment?"
+                                onConfirm={submitForm}
+                                onCancel={handleCancelConfirmationBox}
+                                />
+                            )}
                         </div>
                     </Col>
                     <Col sm={4}>
                     <div>
-                        <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "40%",opacity:'0.75'}}></Image>
+                        <Image src={image} rounded style={{marginLeft: "20%",marginTop:'3.9%',height: "18rem",opacity:'0.8'}}></Image>
                     </div>
                     </Col>
                 </Row>
                 
             </Container>
         </div>
-        
+
+        <div>
+            <Modal show={show} onHide={handleClose} centered style={{}} >
+                <div style={{border:'1px solid grey',boxShadow: '0px 0px 8px 0px grey'}}>
+                    <Modal.Header closeButton>
+                        <Modal.Title className='TextColor'>Appointment Slip</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body >
+                        <p><strong style={{color:'grey'}}>Donor Name: </strong>{user?.Name?.value}</p>
+                        <p style={{marginTop:'-4%'}}><strong style={{color:'grey'}}>Donor Date of Birth: </strong>{user?.DOB?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Blood Group: </strong>{user?.BloodGroup?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Gender: </strong>{user?.Gender?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Email: </strong>{user?.Email?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Contact No: </strong>{user?.ContactNo?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor City: </strong>{user?.City?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Address: </strong>{user?.Address?.value}</p>
+                        <p style={{marginTop:'-2%'}}><strong style={{color:'grey'}}>Centre Name: </strong>{centre?.Name?.value}</p>
+                        <p style={{marginTop:'-4%'}}><strong style={{color:'grey'}}>Centre Timings: </strong>{centre?.Timings?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Centre Email: </strong>{centre?.Email?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Centre Contact No: </strong>{centre?.ContactNo?.value}</p>
+                        <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Centre Location: </strong>{centre?.Location?.value}</p>
+                    
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <div style={{marginRight:'45%'}}>
+                            <Button size='sm' variant="flat" onClick={()=>{window.location.href = "/userpanel/HomeScreen";}}>
+                                <HouseDoorFill className="" size={20} />
+                            </Button>
+                        </div>
+                        
+                        <Button size='sm' variant="flatSolid" onClick={()=>{window.location.href = "/userpanel/HomeScreen";}}>
+                            <PrinterFill className="" size={20} />
+                        </Button>
+                        <Button size='sm' variant="flatSolid" onClick={()=>{window.location.href = "/user/my-account";}}>
+                            View My Appointments
+                        </Button>
+                    </Modal.Footer>
+                </div>
+            </Modal>
+        </div>
+
         <UserPanelFooter></UserPanelFooter>
 
     </div> );

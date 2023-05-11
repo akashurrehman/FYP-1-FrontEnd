@@ -12,15 +12,9 @@ import 'react-circular-progressbar/dist/styles.css';
 import { toast } from "react-toastify";
 
 import AccountCircle from '@mui/icons-material/PersonSharp';
-import EmailIcon from '@mui/icons-material/EmailSharp';
-import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';
-import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
-import ContactsSharpIcon from '@mui/icons-material/ContactsSharp';
-import LocationCitySharpIcon from '@mui/icons-material/LocationCitySharp';
-import WcSharpIcon from '@mui/icons-material/WcSharp';
-import BadgeSharpIcon from '@mui/icons-material/BadgeSharp';
+
 import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
-import CalendarMonthSharpIcon from '@mui/icons-material/CalendarMonthSharp';
+
 
 import '../css/style.css';
 import requestMakerService from "../../../Services/Api/User/RequestMakerService";
@@ -31,7 +25,7 @@ import { Navigate } from "react-router-dom";
 const UserLogin = (props) => {
 
     const [username, setUserName] = React.useState("");
-    const [bloodGroup, setBloodGroup] = React.useState("");
+
     const [password, setPassword] = React.useState("");
 
     //Form Validation
@@ -43,13 +37,14 @@ const UserLogin = (props) => {
             event.stopPropagation();
         }
         else {
-            
+            submitForm();
+            event.preventDefault();
         }
         setValidated(true);
     };
 
     const submitForm = async (e) => {
-        e.preventDefault();
+    
         try {
             const response = await axios.post('http://localhost:8081/user/auth/login', {
                 username,
@@ -90,9 +85,6 @@ const UserLogin = (props) => {
     //     });
     // };
 
-    const handleChange = (event) => {
-        setBloodGroup(event.target.value);
-    };
 
     //Button Stylings
     const [isHover, setIsHover] = React.useState(true);
@@ -183,7 +175,7 @@ const UserLogin = (props) => {
                                         <Row className="mt-2" style={{textAlign:'right'}}>
                                             <Col sm={12}>
                                             <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} 
-                                            onMouseLeave={handleMouseLeave} onClick={submitForm}
+                                            onMouseLeave={handleMouseLeave}
                                             >Log In <ArrowRight className="" size={17} /></Button>
                                             </Col>
                                         </Row>

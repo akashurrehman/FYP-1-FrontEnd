@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Button, Image } from "react-bootstrap";
 import { Form, Row, Col, InputGroup, FloatingLabel, OverlayTrigger, Popover } from "react-bootstrap";
 import UserPanelHeader from "./UserPanelHeader";
 import UserPanelFooter from "./UserPanelFooter";
-import image from '../../Public/user/image/CoverImage1.jpg';
-import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, GeoAlt,Telephone } from 'react-bootstrap-icons';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import image from '../../Public/user/image/blood-donation-eligibility-quiz-icon.png';
+
 
 
 import EscalatorWarningSharpIcon from '@mui/icons-material/EscalatorWarningSharp';
@@ -23,8 +21,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 import './css/style.css';
+import CongratulationBox from "./CongratulationBox";
+import jwtDecode from "jwt-decode";
 
 const BloodAnalysis = () => {
+
+    //Get id from token 
+    const token = localStorage.getItem('token');
+    const decodedToken = token ? jwtDecode(token) : null;
+    const id = decodedToken?.id;
+    console.log(id);
 
     const [age, setAge] = React.useState();
     const [sex, setSex] = React.useState();
@@ -37,6 +43,8 @@ const BloodAnalysis = () => {
     const [syphilis, setSyphilis] = React.useState();
     const [aids, setAIDs] = React.useState();
 
+    const [eligibilityStatus, setEligibilityStatus] = useState("Eligible");
+
     //Form Validation
     const [validated, setValidated] = React.useState(false);
     const handleSubmit = (event) => {
@@ -47,14 +55,13 @@ const BloodAnalysis = () => {
         }
         else {
             submitForm();
+            event.preventDefault();
         }
         setValidated(true);
     };
 
     const submitForm = async (e) => {
         console.log(age,sex,wbc,rbc,plt,HGB,diabetes,stds,syphilis,aids);
-        e.preventDefault(); 
-        
         try {
             const response = await axios.post('http://localhost:5000/predictions', {
                 age, sex, wbc, rbc, plt, HGB, diabetes, stds, syphilis, aids
@@ -62,15 +69,16 @@ const BloodAnalysis = () => {
             // window.location.href = "/user/blood-analysis";
             console.log(response.data.output);
             if (response.data.output == "Donor is eligible for blood donation") {
-                localStorage.setItem('donorEligible', 'Yes');
-                console.log(response.data.output);
-                toast.success(response.data.output, {
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    position: toast.POSITION.BOTTOM_RIGHT,});
+                // console.log(response.data.output);
+                console.log(eligibilityStatus);
+
+                if(id != null){
+                    updateUserEligibilityStatus();
+                }
+
+                setShowCongratulationBox(true);
             }
             else {
-                localStorage.setItem('donorEligible', '');
                 console.log(response.data.output);
                 toast.error(response.data.output, {
                     closeOnClick: true,
@@ -93,6 +101,21 @@ const BloodAnalysis = () => {
     }
 
 
+    const updateUserEligibilityStatus = async (e) => {
+        try {
+            const response = await axios.put('http://localhost:8081/api/users/edit/eligibilityStatus/' + id, {
+                eligibilityStatus
+            });
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
 
     
 
@@ -105,12 +128,17 @@ const BloodAnalysis = () => {
         setIsHover(true);
     };
     const ButtonStyle = {
-        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
-        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(90, 5, 5)',
+        color: isHover ? 'white' : 'white',
         transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
         border: isHover ? '' : '1px solid rgb(160, 15, 15)',
         transitionDuration: isHover ? '' : '0.1s',
     };
+
+
+    const [showCongratulationBox, setShowCongratulationBox] = useState(false);
+
+    
     
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -125,8 +153,9 @@ const BloodAnalysis = () => {
             <Container>
                 <Row className='mt-0 mb-5 p-1'>
                     <Col sm={12} className='LoginContainerCol'>
+                        <Image src={image} rounded style={{marginBottom: "3%",marginTop:'-5%',height: "7rem",opacity:'1.0'}}></Image>
                         <h4 className="TextColor" style={{fontFamily:'cursive'}}>Check your eligibility</h4>
-                        <p className="justify-content mb-3 mt-3" style={{fontSize:'13px'}}>
+                        <p className="justify-content mb-3 mt-3" style={{fontSize:'13px',color:'grey'}}>
                             "Dear Donor!", Your donation changes lives. But not everyone can donate blood (including plasma), for a few reasons. Check your eligibility to donate today.
                         </p>
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -451,6 +480,12 @@ const BloodAnalysis = () => {
                                                 required
                                                 value={aids}
                                                 onChange={(e) => setAIDs(e.target.value)}
+                                                style={{ 
+                                                    backgroundColor: "#f5f5f5", 
+                                                    color: "#333", 
+                                                    border: "1px solid #ccc", 
+                                                    
+                                                }}
                                             >
                                                 <option value="">AIDS*</option>
                                                 <option value={1}>Yes</option>
@@ -467,17 +502,33 @@ const BloodAnalysis = () => {
 
                             <Row className="mt-2" style={{textAlign:'right'}}>
                                 <Col sm={12}>
-                                <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={submitForm}
-                                >Check Eligibility <ArrowRight className="" size={17} /></Button>
+                                <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
+                                >Check Eligibility</Button>
                                 </Col>
                             </Row>
+
+                            <div>
+                                {showCongratulationBox && (
+                                    <CongratulationBox
+                                    message="Congratulation! You are eligible for making blood donation."
+                                    thirdButtonText="Donate"
+                                    secondButtonText="Make Appointment"
+                                    firstButtonText="Home Page"
+                                    firstButton={() => {window.location.href = "/userpanel/HomeScreen";}}
+                                    secondButton={() => {window.location.href = "/user/blood-donation-centre";}}
+                                    thirdButton={() => {window.location.href = "/user/make-blood-donation";}}
+                                    onCancel={()=>{setShowCongratulationBox(false);}}
+                                    margin="34%"
+                                    />
+                                )}
+                            </div>
                         </Form>
                     </Col>
                 </Row>
             </Container>
         </div>
         
-        <div style={{textAlign:'right',marginTop:'20%',color:'rgb(160, 15, 15)',marginBottom:'50%'}}>
+        <div style={{textAlign:'right',marginTop:'20%',color:'rgb(160, 15, 15)',marginBottom:'10%'}}>
             
         </div>
     

@@ -23,6 +23,7 @@ import '../css/style.css';
 import requestMakerService from "../../../Services/Api/User/RequestMakerService";
 import AvailableRequestMakersBar from "./AvailableRequestMakersBar";
 import jwtDecode from "jwt-decode";
+import CongratulationBox from "../CongratulationBox";
 
 const PostBloodRequest = () => {
 
@@ -52,6 +53,8 @@ const PostBloodRequest = () => {
         }
         else {
             storeData();
+            event.preventDefault();
+            setShowCongratulationBox(true);
         }
         setValidated(true);
     };
@@ -59,16 +62,20 @@ const PostBloodRequest = () => {
     //Store Data In Database(API)
     const storeData = () => {
         console.log("Send API call");
+        
         requestMakerService
             .addRequestMaker({ id,name, message, email, location, contactNo, hospital, bloodGroup, gender, city })
             .then((data) => {
                 console.log(data);
-                window.location.href = "/user/request-maker";
+                
             })
             .catch((err) => {
                 console.log(err);
         });
+        
     };
+
+    const [showCongratulationBox, setShowCongratulationBox] = React.useState(false);
 
     const handleChange = (event) => {
         setBloodGroup(event.target.value);
@@ -318,7 +325,21 @@ const PostBloodRequest = () => {
                     </Row>
                 </Container>
             </div>
-            
+            <div>
+                {showCongratulationBox && (
+                    <CongratulationBox
+                    message="Congratulation! Your blood request posted successfully."
+                    thirdButtonText="View All Requests"
+                    secondButtonText="My Requests"
+                    firstButtonText="Home Page"
+                    firstButton={() => {window.location.href = "/userpanel/HomeScreen";}}
+                    secondButton={() => {window.location.href = "/user/my-account";}}
+                    thirdButton={() => {window.location.href = "/user/request-maker";}}
+                    onCancel={()=>{setShowCongratulationBox(false);}}
+                    margin="29%"
+                    />
+                )}
+            </div>
         </div>
 
         

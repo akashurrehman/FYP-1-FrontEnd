@@ -60,6 +60,7 @@ import News from './Components_for_All_Panels/UserComponents/packages/news/News'
 import Campaign from './Components_for_All_Panels/UserComponents/packages/campaigns/Campaign';
 import CampaignDetails from './Components_for_All_Panels/UserComponents/packages/campaigns/CampaignDetails';
 import MakeAppointment from './Components_for_All_Panels/UserComponents/appointments/MakeAppointment';
+import AppointmentDetails from './Components_for_All_Panels/UserComponents/appointments/AppointmentDetails';
 
 
 function App() {
@@ -124,6 +125,8 @@ function App() {
           <Route exact path='/user/campaign-details/:id' element={<CampaignDetails/>} />
 
           <Route exact path='/user/make-appointment/:centreID' element={<MakeAppointment/>} />
+          <Route exact path='/user/appointment-details/:id' element={<AppointmentDetails/>} />
+
 
           {/*Lab Interface Routes */}
           <Route exact path='/lab/home' element={<LabHome/>}/>

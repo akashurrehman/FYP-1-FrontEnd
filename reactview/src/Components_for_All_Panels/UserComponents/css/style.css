@@ -72,6 +72,7 @@
 
 .ColHover:hover{
     box-shadow: 0px 0px 16px 0px rgb(160, 15, 15);
+    transform: scale(0.9);
     transition-duration: 0.6s;
 }
 
@@ -245,10 +246,12 @@
 .UserCard{
     border: 1px solid rgb(160, 15, 15);
     margin-right: 0%;
+    transform: scale(0.93);
 }
 .UserCard:hover{
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    transform: translateY(-5px);
+    transform: scale(0.96);
+    
     transition-duration: 0.45s;
 }
 
@@ -257,3 +260,68 @@
     
 }
 
+
+.custom-toast {
+    width: 120%; /* Change the width to your desired value */
+    margin-left: -20%;
+    background-color: #f9f2f1;
+}
+
+
+  /* Style the options box */
+  .form-select option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Style the selected option */
+  .form-select option:checked {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .form-select::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 4px);
+    border-top: 6px solid #777;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+
+  /* Hover effect on the dropdown arrow */
+  .form-select:hover::after {
+    border-top-color: #007bff;
+  }
+
+  /* Focus effect on the select box */
+  .form-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25);
+  }
+
+  /* Disabled state of the select box */
+  .form-select:disabled {
+    background-color: #f5f5f5;
+    color: #777;
+    border-color: #ccc;
+  }
+
+  /* Disabled state of the options */
+  .form-select:disabled option {
+    background-color: #f5f5f5;
+    color: #777;
+  }
+
+  /* Hover effect on the options */
+  .form-select option:hover {
+    background-color: #f5f5f5;
+  }

@@ -23,6 +23,9 @@ import WcSharpIcon from '@mui/icons-material/WcSharp';
 import BadgeSharpIcon from '@mui/icons-material/BadgeSharp';
 import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
 import CalendarMonthSharpIcon from '@mui/icons-material/CalendarMonthSharp';
+import { Trash } from 'react-bootstrap-icons';
+import userLoginService from '../../../Services/Api/User/UserLoginService';
+import ConfirmationBox from '../ConfirmationBox';
 
 
 
@@ -135,268 +138,309 @@ export default function MyPersonalDetails() {
             border: isHover ? '' : '1px solid white',
             transitionDuration: isHover ? '' : '0.45s',
         };
-        const ButtonStyle2 = {
-            backgroundColor: isHover ? 'white' : 'white',
-            color: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
-            transform: isHover ? 'scale(0.8)' : 'scale(0.82)',
-            border: isHover ? '1px solid rgb(160, 15, 15)' : '1px solid rgb(160, 15, 15)',
-            transitionDuration: isHover ? '' : '0.45s',
+
+        const [showConfirmationBox, setShowConfirmationBox] = useState(false);
+        const handleCancelConfirmationBox = () => {
+            setShowConfirmationBox(false);
+        };
+
+        const deleteUser = () => {
+            userService
+                .deleteUser(user?.ID?.value)
+                .then((data) => {
+                    console.log(data);
+                    userLoginService.logout();
+                    window.location.href = "/userpanel/HomeScreen";
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         };
         
-  return (
-    <div>
-<div style={{marginLeft:'5%', width:'140%',marginTop:'-15%'}}>
-                            <h3 className='TextColor' style={{fontFamily:'cursive',textAlign:'left'}}>My Account</h3>
-                            <div style={{marginTop:'5%'}}>
-                                <Row>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>Full Name: </strong>{user?.Name?.value}</p>
-                                    </Col>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>Username: </strong>{user?.UserName?.value}</p>
-                                    </Col>
-                                </Row>
-                                <Row style={{marginTop:'-1.5%'}}>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>Blood Group: </strong>{user?.BloodGroup?.value}</p>
-                                    </Col>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>Gender: </strong>{user?.Gender?.value}</p>
-                                    </Col>
-                                </Row>
-                                <Row style={{marginTop:'-1.5%'}}>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>Date Of Birth: </strong>{user?.DOB?.value}</p>
-                                    </Col>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>City: </strong>{user?.City?.value}</p>
-                                    </Col>
-                                </Row>
-                                <Row style={{marginTop:'-1.5%'}}>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>Contact No: </strong>{user?.ContactNo?.value}</p>
-                                    </Col>
-                                    <Col sm={6}>
-                                        <p><strong style={{fontFamily:'cursive'}}>Email: </strong>{user?.Email?.value}</p>
-                                    </Col>
-                                </Row>
-                                <Row style={{marginTop:'-1.5%'}}>
-                                    <Col sm={12}>
-                                    <p><strong style={{fontFamily:'cursive'}}>Location: </strong>{user?.Address?.value}</p>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col sm={12} style={{marginTop:'2%',textAlign:'left',marginLeft:'0%'}}>
-                                        <Button variant="default" style={ButtonStyle1} 
-                                            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                            onClick={(e) => {
-                                                handleShow();
-                                            }}>Update My Account</Button> 
-                                        <Button variant="default" style={ButtonStyle2} 
-                                            onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                            onClick={(e) => {
-                                                window.location.reload();
-                                            }}>Delete My Profile</Button> 
-                                    </Col>
-                                </Row>
-                            </div>
+    return (
+        <div>
+            <div style={{marginLeft:'5%', width:'140%',marginTop:'-12%'}}>
+                <h3>Welcome <spam className='TextColor' style={{fontFamily:'cursive',textAlign:'left',fontSize:'21px'}}>"{user?.Name?.value}"</spam></h3>
+            
+                <div style={{marginTop:'5%'}}>
+                    <Row>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Full Name: </strong>{user?.Name?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Username: </strong>{user?.UserName?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Blood Group: </strong>{user?.BloodGroup?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Gender: </strong>{user?.Gender?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Date Of Birth: </strong>{user?.DOB?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>City: </strong>{user?.City?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Contact No: </strong>{user?.ContactNo?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Email: </strong>{user?.Email?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={12}>
+                            <p><strong style={{fontFamily:''}}>Eligibility Status: </strong>{user?.EligibilityStatus?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={12}>
+                            <p><strong style={{fontFamily:''}}>Location: </strong>{user?.Address?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12} style={{marginTop:'1%',textAlign:'right',marginLeft:'0%'}}>
+                            <Button variant="default" style={ButtonStyle1} 
+                                onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                                onClick={(e) => {
+                                    handleShow();
+                                }}>Update My Account</Button> 
+                            
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'4%', border:'', borderRadius:'7px', backgroundColor:'#f2f0f0'}}>
+                        <div style={{padding:'3%'}}>
+                            <h5 style={{fontSize:'18px'}}>Are you sure you want to delete your account?</h5>
+                            <p style={{fontSize:'14.4px',textStyle:'cursive'}}>Once you delete your account, your personal details should be removed from our system.</p>
+                        
+                            <Form>
+                                <Form.Check type='checkbox' id='checkbox' size='sm'>
+                                    <Form.Check.Input type='checkbox' isValid />
+                                    <Form.Check.Label>{`Are you sure to delete your profile`}</Form.Check.Label>
+                                    <Form.Control.Feedback type="invalid">
+                                    You did it!
+                                    </Form.Control.Feedback>
+                                </Form.Check>
+                            </Form>
+                            <Button variant="flatSolid" size='sm' style={{marginTop:'2%'}} 
+                                onClick={(e) => {
+                                    setShowConfirmationBox(true);
+                                }}>Delete My Profile <Trash className="m-0" size={15} /></Button> 
                         </div>
-
                         <div>
-                            <Modal show={show} onHide={handleClose}>
-                                <div style={{border:'1px solid rgb(160,15,15)',boxShadow: '0px 0px 8px 0px rgb(116, 10, 10)'}}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title className='TextColor'>Personal Details</Modal.Title>
-                                    </Modal.Header>
-                                    <Modal.Body>
-                                    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                                        <Row>
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    <Form.Control
-                                                        required
-                                                        aria-label="Default"
-                                                        aria-describedby="inputGroup-sizing-default" type="text" placeholder="Full Name*" 
-                                                        value={fullName}
-                                                        onChange={(e) => {
-                                                            setFullName(e.target.value);
-                                                        }}
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid name.
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <BloodtypeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    
-                                                    <Form.Select required 
-                                                        value={bloodGroup} 
-                                                        onChange={(e) => setBloodGroup(e.target.value)}
-                                                    >
-                                                        <option value="">Blood Group*</option>
-                                                        <option value="A+">A+</option>
-                                                        <option value="B+">B+</option>
-                                                        <option value="AB+">AB+</option>
-                                                        <option value="A-">A-</option>
-                                                        <option value="B-">B-</option>
-                                                        <option value="AB-">AB-</option>
-                                                    </Form.Select>
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid blood group.
-                                                    </Form.Control.Feedback>
-                                                    
-                                                </InputGroup>
-                                            </Col>
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    
-                                                    <Form.Select required 
-                                                        value={gender} 
-                                                        onChange={(e) => setGender(e.target.value)}
-                                                    >
-                                                        <option value="">Gender*</option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                    </Form.Select> 
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid gender.
-                                                    </Form.Control.Feedback>
-                                                    
-                                                </InputGroup>
-                                            </Col>
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    <Form.Control
-                                                        required
-                                                        aria-label="Default"
-                                                        aria-describedby="inputGroup-sizing-default" type="date" placeholder="Date of Birth*" 
-                                                        value={dob}
-                                                        onChange={(e) => {
-                                                            setDob(e.target.value);
-                                                        }}
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid contact number.
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Col>
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <LocationCitySharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    <Form.Select required
-                                                        value={city} 
-                                                        onChange={(e) => setCity(e.target.value)}
-                                                    >
-                                                        <option value="">Select City*</option>
-                                                        <option value="Lahore">Lahore</option>
-                                                        <option value="Islamabad">Islamabad</option>
-                                                        <option value="Karachi">Karachi</option>
-                                                    </Form.Select>
-
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid city.
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <EmailIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    <Form.Control
-                                                        required
-                                                        aria-label="Default"
-                                                        aria-describedby="inputGroup-sizing-default" type="email" placeholder="Email*" 
-                                                        value={email}
-                                                        onChange={(e) => {
-                                                            setEmail(e.target.value);
-                                                        }}
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid email address.
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Col>
-                                            
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    <Form.Control
-                                                        required
-                                                        aria-label="Default"
-                                                        aria-describedby="inputGroup-sizing-default" type="number" placeholder="Contact Number*" 
-                                                        value={contactNo}
-                                                        onChange={(e) => {
-                                                            setContactNo(e.target.value);
-                                                        }}
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid contact number.
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Col>
-                                        </Row>
-                                        
-                                        <Row>
-                                            
-                                            <Col sm={12}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <LocationOnSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    <Form.Control
-                                                        required
-                                                        aria-label="Default" 
-                                                        aria-describedby="inputGroup-sizing-default" type="text" placeholder="Location*" 
-                                                        value={address}
-                                                        onChange={(e) => {
-                                                            setAddress(e.target.value);
-                                                        }}
-                                                    />
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid location/address.
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Col>
-                                        </Row>
-                                        
-                                    </Form>
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                    <Button size='sm' variant="flat" onClick={handleClose}>
-                                        Close
-                                    </Button>
-                                    <Button size='sm' variant="flatSolid" onClick={submitForm}>
-                                        Update Details
-                                    </Button>
-                                    </Modal.Footer>
-                                </div>
-                            </Modal>
+                            {showConfirmationBox && (
+                                <ConfirmationBox
+                                message="Are you sure you want to delete your account?"
+                                onConfirm={deleteUser}
+                                onCancel={handleCancelConfirmationBox}
+                                />
+                            )}
                         </div>
+                    </Row>
+                </div>
+            </div>
 
+            <div>
+                <Modal show={show} onHide={handleClose}>
+                    <div style={{border:'1px solid rgb(160,15,15)',boxShadow: '0px 0px 8px 0px rgb(116, 10, 10)'}}>
+                        <Modal.Header closeButton>
+                            <Modal.Title className='TextColor'>Personal Details</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                            <Row>
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            required
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default" type="text" placeholder="Full Name*" 
+                                            value={fullName}
+                                            onChange={(e) => {
+                                                setFullName(e.target.value);
+                                            }}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid name.
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <BloodtypeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        
+                                        <Form.Select required 
+                                            value={bloodGroup} 
+                                            onChange={(e) => setBloodGroup(e.target.value)}
+                                        >
+                                            <option value="">Blood Group*</option>
+                                            <option value="A+">A+</option>
+                                            <option value="B+">B+</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB-">AB-</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid blood group.
+                                        </Form.Control.Feedback>
+                                        
+                                    </InputGroup>
+                                </Col>
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        
+                                        <Form.Select required 
+                                            value={gender} 
+                                            onChange={(e) => setGender(e.target.value)}
+                                        >
+                                            <option value="">Gender*</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </Form.Select> 
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid gender.
+                                        </Form.Control.Feedback>
+                                        
+                                    </InputGroup>
+                                </Col>
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            required
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default" type="date" placeholder="Date of Birth*" 
+                                            value={dob}
+                                            onChange={(e) => {
+                                                setDob(e.target.value);
+                                            }}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid contact number.
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Col>
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <LocationCitySharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        <Form.Select required
+                                            value={city} 
+                                            onChange={(e) => setCity(e.target.value)}
+                                        >
+                                            <option value="">Select City*</option>
+                                            <option value="Lahore">Lahore</option>
+                                            <option value="Islamabad">Islamabad</option>
+                                            <option value="Karachi">Karachi</option>
+                                        </Form.Select>
 
-    </div>
-  )
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid city.
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <EmailIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            required
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default" type="email" placeholder="Email*" 
+                                            value={email}
+                                            onChange={(e) => {
+                                                setEmail(e.target.value);
+                                            }}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid email address.
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Col>
+                                
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            required
+                                            aria-label="Default"
+                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Contact Number*" 
+                                            value={contactNo}
+                                            onChange={(e) => {
+                                                setContactNo(e.target.value);
+                                            }}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid contact number.
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                            
+                            <Row>
+                                
+                                <Col sm={12}>
+                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                        <InputGroup.Text id="inputGroup-sizing-default">
+                                            <LocationOnSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                        </InputGroup.Text>
+                                        <Form.Control
+                                            required
+                                            aria-label="Default" 
+                                            aria-describedby="inputGroup-sizing-default" type="text" placeholder="Location*" 
+                                            value={address}
+                                            onChange={(e) => {
+                                                setAddress(e.target.value);
+                                            }}
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Please provide a valid location/address.
+                                        </Form.Control.Feedback>
+                                    </InputGroup>
+                                </Col>
+                            </Row>
+                            
+                        </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                        <Button size='sm' variant="flat" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button size='sm' variant="flatSolid" onClick={submitForm}>
+                            Update Details
+                        </Button>
+                        </Modal.Footer>
+                    </div>
+                </Modal>
+            </div>
+
+        </div>
+    )
 }
