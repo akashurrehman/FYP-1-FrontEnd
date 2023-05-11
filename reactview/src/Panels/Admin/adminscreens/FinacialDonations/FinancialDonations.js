@@ -1,45 +1,35 @@
 import React, { useEffect, useState, useRef } from "react";
-import Cards from "./Cards";
-import CardData from "./CardData";
-import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
-import { CalendarDateFill, Geo, Laptop } from "react-bootstrap-icons";
-import TextField from "@mui/material/TextField";
 import axios from "axios";
-import PopUp from "./PopUps/PopUp";
+import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
+import { TextField } from "@mui/material";
+import { CalendarDateFill, Laptop, PhoneVibrate } from "react-bootstrap-icons";
+import FinancialDonationsPopUp from "../PopUps/FinancialDonationsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-function ncard(val) {
-  return (
-    <Cards
-      imgsrc={val.imgsrcs}
-      title={val.title}
-      date={val.date}
-      location={val.location}
-      details={val.details}
-      id={val.id}
-    />
-  );
-}
-
-export default function Campaign() {
+export default function FinancialDonations() {
   const [users, setUsers] = React.useState([]);
-  const [Title, setTitle] = useState("");
-  const [Date, setDate] = useState("");
-  const [description, setDescription] = useState("");
   const [searchTerm, setSearchTerm] = React.useState("");
+  const [Date, setDate] = useState("");
+  const [Contact, setContact] = useState("");
+  const [Title, setTitle] = useState("");
+  const [Amount, setAmount] = useState("");
+  const [description, setDescription] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api/admin/getCompaigns")
+      .get("http://localhost:8081/api/admin/getFinancialDonation")
       .then((response) => {
         console.log("Response is:", response.data.results.bindings);
         const faqs = response.data.results.bindings.map((faq) => {
           return {
-            title: faq.Title.value,
-            details: faq.Details.value,
+            title: faq.Name.value,
+            contact: faq.ContactNo.value,
+            date: faq.Date.value,
+            amount: faq.Amount.value,
+            message: faq.Message.value,
             id: faq.ID.value,
           };
         });
@@ -52,26 +42,40 @@ export default function Campaign() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:8081/api/admin/deleteCompaigns/${id}`)
+      .delete(
+        `http://localhost:8081/api/admin/deleteFinancialDonation/financialDonationDetails/delete/${id}`
+      )
       .then((response) => {
         console.log(response);
-        alert("Campaign deleted successfully!");
+        alert("Donation Record deleted successfully!");
 
         // Remove the deleted FAQ from the users state
         setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
       })
       .catch((error) => {
         console.error(error);
-        alert("Failed to delete Campaign. Please try again!");
+        alert("Failed to delete Donation Record. Please try again!");
       });
   };
+
+  // const filteredUsers = users.filter((faq) =>
+  //   faq.title.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
 
+  const handleAmountChange = (event) => {
+    setAmount(event.target.value);
+  };
+
   const handleDateChange = (event) => {
     setDate(event.target.value);
+  };
+
+  const handleContactChange = (event) => {
+    setContact(event.target.value);
   };
 
   const handleDescriptionChange = (event) => {
@@ -80,55 +84,70 @@ export default function Campaign() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = { title: Title, postDate: Date, details: description };
+    const data = {
+      name: Title,
+      donationDate: Date,
+      message: description,
+      contactNo: Contact,
+      donationAmount: Amount,
+    };
     console.log("the data I am sending is", data);
     axios
-      .post("http://localhost:8081/api/admin/addCompaigns", data, {
+      .post("http://localhost:8081/api/admin/addFinancialDonation", data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        console.log("My data response in Campaigns is", response);
-        alert("Campaign added successfully!");
+        console.log("My data response in Financial Donation is", response);
+        alert("Donation added successfully!");
 
-        // Create a new campaign object with the same properties as the response data
-        const newUsers = {
+        // Create a new donation object with the same properties as the response data
+        const newDonation = {
           title: Title,
-          postDate: Date,
-          details: description,
+          date: Date,
+          message: description,
+          contact: Contact,
+          amount: Amount,
+          id: response.data.id, // Assuming the server returns the ID of the new donation
         };
 
-        // Update the campaigns state by adding the new campaign to the existing array
-        setUsers((prevCampaigns) => [...prevCampaigns, newUsers]);
+        // Update the donations state by adding the new donation to the existing array
+        setUsers((prevDonations) => [...prevDonations, newDonation]);
 
         setTitle("");
         setDate("");
         setDescription("");
+        setContact("");
+        setAmount("");
       })
       .catch((error) => {
         console.error(error);
-        alert("Failed to add Campaign. Please try again!");
+        alert("Failed to add Donation. Please try again!");
       });
   };
 
-  const filteredUsers = users.filter((faq) =>
-    faq.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleUpdate = (input1Value, input2Value, id) => {
+  const handleUpdate = (
+    input1Value,
+    input2Value,
+    id,
+    dateVal,
+    amountVal,
+    messageVal
+  ) => {
     // Handle the update logic here
-    console.log(`Input 1 value: ${input1Value}`);
-    console.log(`Input 2 value: ${input2Value}`);
-    console.log("test ID value is", id);
-    console.log("Title value", input1Value);
-    console.log("Details value", input2Value);
 
-    const updata = { title: input1Value, details: input2Value };
-    console.log("the data I am updating is", updata);
+    const updata = {
+      title: input1Value,
+      contact: input2Value,
+      date: dateVal,
+      amount: amountVal,
+      message: messageVal,
+    };
+    console.log("the data for financial donation I am updating is", updata);
     axios
       .put(
-        `http://localhost:8081/api/admin/campaign/CampaignDetails/update/${id}`,
+        `http://localhost:8081/api/admin/financialDonation/financialDonationDetails/update/${id}`,
         updata,
         {
           headers: {
@@ -137,13 +156,20 @@ export default function Campaign() {
         }
       )
       .then((response) => {
-        console.log("Campaign updated successfully");
+        console.log("Financial Donation updated successfully");
 
         // Update the state with the new data
         setUsers((prevData) => {
           const updatedData = prevData.map((item) => {
             if (item.id === id) {
-              return { ...item, title: input1Value, details: input2Value };
+              return {
+                ...item,
+                title: input1Value,
+                contact: input2Value,
+                date: dateVal,
+                amount: amountVal,
+                message: messageVal,
+              };
             }
             return item;
           });
@@ -173,7 +199,7 @@ export default function Campaign() {
 
         doc.addImage(imageData, "PNG", 10, 10, 190, 0);
 
-        doc.save("campaigns.pdf");
+        doc.save("FinancialDonations.pdf");
       })
       .catch((error) => {
         buttons.forEach((button) => (button.style.display = "inline-block"));
@@ -184,15 +210,13 @@ export default function Campaign() {
 
   return (
     <div className="turningred">
-      <h1 className="color">Campaigns</h1>
-
       <h3 className="color marginss">
-        <u>Create a New Campaign </u>
+        <u>Add A New Financial Donation</u>
       </h3>
       <div className="container inputcont">
         <div className="row">
           <div className="col">
-            <h5 className="rang">Campaign Title</h5>
+            <h5 className="rang">Donator's Name</h5>
             <InputGroup className="mb-3 input">
               <InputGroup.Text id="basic-addon1">
                 <Laptop className="Appcolor" size={30} />
@@ -208,7 +232,7 @@ export default function Campaign() {
             </InputGroup>
           </div>
           <div className="col settingss">
-            <h5 className="rang">Select Date</h5>
+            <h5 className="rang">Donation Date</h5>
             <InputGroup className="mb-3 input">
               <InputGroup.Text id="basic-addon1">
                 <CalendarDateFill className="Appcolor" size={30} />
@@ -223,8 +247,38 @@ export default function Campaign() {
               </FloatingLabel>
             </InputGroup>
           </div>
+          <div className="col settingss">
+            <h5 className="rang">Contact Number</h5>
+            <InputGroup className="mb-3 input">
+              <InputGroup.Text id="basic-addon1">
+                <PhoneVibrate className="Appcolor" size={30} />
+              </InputGroup.Text>
+              <FloatingLabel controlId="floatingPassword" label="Phone Number*">
+                <Form.Control
+                  type="tel"
+                  placeholder="Contact"
+                  value={Contact}
+                  onChange={handleContactChange}
+                />
+              </FloatingLabel>
+            </InputGroup>
+          </div>
+          <h5 className="rang">Amount Donated</h5>
+          <InputGroup className="mb-3 input">
+            <InputGroup.Text id="basic-addon1">
+              <Laptop className="Appcolor" size={30} />
+            </InputGroup.Text>
+            <FloatingLabel controlId="floatingPassword" label="Amount">
+              <Form.Control
+                type="number"
+                placeholder="Donation Amount"
+                value={Amount}
+                onChange={handleAmountChange}
+              />
+            </FloatingLabel>
+          </InputGroup>
 
-          <h5 className="rang">Description</h5>
+          <h5 className="rang">Kindness Message</h5>
           <TextField
             id="outlined-multiline-static"
             label="Description"
@@ -237,33 +291,51 @@ export default function Campaign() {
         </div>
       </div>
       <div className="generatePDFButton">
-        <button className="btn btn-danger" onClick={handleSubmit}>
+        <button className="btn btn-danger bton" onClick={handleSubmit}>
           Submit Data
         </button>
       </div>
 
       <h3 className="color marginss">
-        <u>Campaigns Currently Live</u>
+        <hu>Financially Contributors List</hu>
       </h3>
-
-      <FloatingLabel controlId="floatingPassword" label="Search By  Title Here">
-        <Form.Control
-          type="City"
-          placeholder="Enter Question Title Here"
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </FloatingLabel>
       <div className="generatePDFButton">
         <button className="btn btn-danger" onClick={generatePDF}>
           Generate PDF
         </button>
       </div>
       <div className="pdf-campaigns-container" ref={pdfContainerRef}>
-        {filteredUsers.map((faq, index) => (
+        {users.map((faq, index) => (
           <div className="headin" key={index}>
-            <h4>Title: {faq.title}</h4>
+            <h4>Name: {faq.title}</h4>
+            <div className="row">
+              <div className="col-lg-6 col-12">
+                {" "}
+                <p>
+                  <strong>Contact No:</strong> {faq.contact}
+                </p>
+              </div>
+              <div className="col-lg-6 col-12">
+                <p>
+                  <strong>Donation Date: </strong>
+                  {faq.date}
+                </p>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-lg-6 col-12">
+                <p>
+                  <strong>Amonut Donated:</strong> {faq.amount}
+                </p>
+              </div>
+              <div className="col-lg-6 col-12">
+                <p>
+                  <strong>Kindness Message:</strong> {faq.message}
+                </p>
+              </div>
+            </div>
+
             <p>
-              Details: {faq.details}
               <button
                 className="btn btn-danger bton"
                 onClick={() => handleDelete(faq.id)}
@@ -277,10 +349,13 @@ export default function Campaign() {
                 Edit
               </button>
               {showPopup && (
-                <PopUp
+                <FinancialDonationsPopUp
                   id={faq.id}
                   title={faq.title}
-                  details={faq.details}
+                  contact={faq.contact}
+                  date={faq.date}
+                  amount={faq.amount}
+                  message={faq.message}
                   onOkClick={handleUpdate}
                 />
               )}
