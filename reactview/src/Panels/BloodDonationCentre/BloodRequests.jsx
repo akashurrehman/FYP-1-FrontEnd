@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
+//import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
@@ -168,7 +168,7 @@ const columns = [
           highlightOnHover
           actions ={
             <>
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-download" aria-hidden="true"></i>Download</button>
+            <Button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-download" aria-hidden="true"></i>Download</Button>
             <Button className='btn btn-info' onClick={handleFilter} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-filter" aria-hidden="true"></i>Filter Requests(By You)</Button>
             </>
           }

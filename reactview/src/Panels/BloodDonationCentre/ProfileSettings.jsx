@@ -234,34 +234,43 @@ const handleCancel = () => {
         <div>
         <Form className="mt-5">
         <Row className="mb-3">
-          <Form.Group as={Col} controlId="formGridEmail">
+        <Col xs="12" sm="6">
+          <Form.Group  controlId="formGridEmail">
             <Form.Label>Username</Form.Label>
             <i class="fa fa-user-circle" aria-hidden="true"></i>
-            <Form.Control   name="name"  placeholder="Enter Center Number" value={center.name}  onChange={handleChange}/>
+            <Form.Control   name="name"  placeholder="Enter Center Number" value={center.name}  disabled={true}/>
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridPassword">
+        </Col>
+        <Col xs="12" sm="6">
+          <Form.Group controlId="formGridPassword">
             <Form.Label>License Number</Form.Label>
             <i class="fa fa-id-card" aria-hidden="true"></i>
             <Form.Control type="License" placeholder="License Number"  value={center.licenseNo} disabled={true}/>
           </Form.Group>
+        </Col>
         </Row>
-        <Form.Group className="mb-3" controlId="formGridAddress1">
-          <Form.Label>Location/Address</Form.Label>
-          <BsGeoAltFill size={15}/>
-          <Form.Control name="location" placeholder="Main Ferozpur Road" value={center.location} onChange={handleChange}/>
-          {center.locationError && (
-            <p style={{ color: 'red' }}>{center.locationError}</p>
-          )}
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formGridAddress2">
-          <Form.Label>City</Form.Label>
-          <i class="fa fa-location-arrow" aria-hidden="true"></i>
-          <Form.Control name="city" placeholder="Lahore, Punjab, Pakistan" value={center.city} onChange={handleChange}/>
-          {center.locationError && (
-            <p style={{ color: 'red' }}>{center.locationError}</p>
-          )}
-        </Form.Group>
+        <Row className="mb-3">
+        <Col xs="12" sm="4">
+          <Form.Group className="mb-3" controlId="formGridAddress1">
+            <Form.Label>Location/Address</Form.Label>
+            <BsGeoAltFill size={15}/>
+              <Form.Control name="location" placeholder="Main Ferozpur Road" value={center.location} onChange={handleChange}/>
+              {center.locationError && (
+                <p style={{ color: 'red' }}>{center.locationError}</p>
+              )}
+          </Form.Group>
+        </Col>
+        <Col xs="12" sm="4">
+          <Form.Group className="mb-3" controlId="formGridAddress2">
+            <Form.Label>City</Form.Label>
+            <i class="fa fa-location-arrow" aria-hidden="true"></i>
+            <Form.Control name="city" placeholder="Lahore, Punjab, Pakistan" value={center.city} onChange={handleChange}/>
+            {center.locationError && (
+              <p style={{ color: 'red' }}>{center.locationError}</p>
+            )}
+          </Form.Group>
+        </Col>
+        <Col xs="12" sm="4">
         <Form.Group className="mb-3" controlId="contact1">
           <Form.Label>Contact Number</Form.Label>
           <BsFillTelephoneFill size={15} />
@@ -270,38 +279,43 @@ const handleCancel = () => {
             <p style={{ color: 'red' }}>{center.contactNoError}</p>
           )}
         </Form.Group>
-
-        <Form.Group className="mb-3" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <BsEnvelopeFill size={15} />
-          <Form.Control name="email" placeholder="example@gmail.com" value={center.email} onChange={handleChange}/>
-          {center.emailError && (
-            <p style={{ color: 'red' }}>{center.emailError}</p>
-          )}
-      </Form.Group>
-
-      <Row className="mb-3">
-        <Form.Group as={Col} controlId="formGridCity">
-          <Form.Label>Available Timings</Form.Label>
-          <BsStopwatch size={15} />
-          <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/>
-        </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridState">
-  
+        </Col>
+        </Row>
+        <Row className="mb-3">
+        <Col xs="12" sm="3">
+          <Form.Group className="mb-3" controlId="email">
+            <Form.Label>Email</Form.Label>
+            <BsEnvelopeFill size={15} />
+            <Form.Control name="email" placeholder="example@gmail.com" value={center.email} onChange={handleChange}/>
+            {center.emailError && (
+              <p style={{ color: 'red' }}>{center.emailError}</p>
+            )}
+          </Form.Group>
+        </Col>
+        <Col xs="12" sm="3">
+          <Form.Group as={Col} controlId="formGridCity">
+            <Form.Label>Available Timings</Form.Label>
+            <BsStopwatch size={15} />
+            <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/>
+          </Form.Group>
+        </Col>
+        <Col xs="12" sm="3">
+        <Form.Group controlId="formGridState">
           <Form.Label>Opening Days</Form.Label>
           <i class="fa fa-sun" aria-hidden="true"></i>
           <Form.Control placeholder="Category" name="openingDays" value={center.openingDays} onChange={handleChange} required/>
-          </Form.Group>
-
-        <Form.Group as={Col} controlId="formGridZip">
-          <Form.Label>Category</Form.Label>
-          <i class="fa fa-registered" aria-hidden="true"></i>
-          <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
-          {center.categoryError && (
-            <p style={{ color: 'red' }}>{center.categoryError}</p>
-          )}
         </Form.Group>
+        </Col>
+        <Col xs="12" sm="3">
+          <Form.Group as={Col} controlId="formGridZip">
+            <Form.Label>Category</Form.Label>
+            <i class="fa fa-registered" aria-hidden="true"></i>
+            <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
+            {center.categoryError && (
+              <p style={{ color: 'red' }}>{center.categoryError}</p>
+            )}
+          </Form.Group>
+        </Col>
       </Row>
       <Row className="mb-3">
         <Form.Group as={Col} id="formGridCheckbox">
@@ -311,7 +325,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
         <Col>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}><i class="fa fa-check-circle" aria-hidden="true"></i>Update Information</Button>
+            <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}><i class="fa fa-check-circle" aria-hidden="true"></i>Update Information</Button>
         </Col>
     </Row>
     <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
