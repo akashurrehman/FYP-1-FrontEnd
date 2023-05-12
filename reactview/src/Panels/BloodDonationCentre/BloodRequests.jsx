@@ -24,7 +24,10 @@ const BloodRequests=()=> {
 
         const handleApprove = (id) => {
             axios
-                .post(`http://localhost:8081/api/users/bloodrequest/approve/${id}`)
+                .put(`http://localhost:8081/api/users/accept/bloodRequest/${id}`,{
+                  "donatedBy":"Center Name display here",
+                  "donorName":"Donor Name display here",
+                })
                 .then((response) => console.log(response.data))
                 .catch((error) => console.log(error));
         };

@@ -50,25 +50,25 @@ const MyAccountCenter=()=> {
   
     const [data, setData] = useState([]);
     const [donors, setDonors] = useState([]);
+    const [requests,setRequests]=useState([]);
     const [appointment, setAppointment] = useState([]);
   
     useEffect(() => {
       const fetchDataForAll = async () => {
-        const [dataRes, donorsRes, appointmentRes] = await Promise.all([
-          fetchData("http://localhost:8081/api/users/bloodrequest"),
+        const [dataRes, donorsRes,requests, appointmentRes] = await Promise.all([
+          fetchData("http://localhost:8081/api/users/bloodrequest/byUserID/Tokenid"),
           fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo"),
-          fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getAppointmentInfo"),
+          fetchData("http://localhost:8081//api/users/accepted/bloodRequests/PassLoginId"),
+          fetchData("http://localhost:8081/api/users/appointment/byCentreID/Centre_001"),
         ]);
         setData(dataRes);
         setDonors(donorsRes);
+        setRequests(requests);
         setAppointment(appointmentRes);
       };
       fetchDataForAll();
     }, []);
   
-
-  
-
   const mystyle = {
       height: "7%",
       width: "7%",
@@ -96,9 +96,38 @@ const MyAccountCenter=()=> {
                         <Card.Title>My Blood Requests</Card.Title>
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
                         {data.map((item) => (
-                          <div key={item.requests.value}>
+                          <div key={item.ID.value}>
+                            <h5><span>Name:</span>{item.Name.value}</h5>
+                            <h5><span>Email:</span>{item.Email.value}</h5>
+                            <h5><span>Gender:</span>{item.Gender.value}</h5>
                             <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
-                            <h6><span>Address:</span>{item.City.value}</h6>
+                            <h5><span>Contact:</span>{item.Contact.value}</h5>
+                            <h6><span>Address:</span>{item.Location.value}</h6>
+                            <hr /> {/* Add a line after each item */}
+                          </div>
+                        ))} 
+                        </div>
+                        <Button variant="primary" onClick={ViewAllRequests} style={{backgroundColor: "#153250",marginTop:"12px"}}><><i class="fa fa-check-circle" aria-hidden="true"></i>View all requests</></Button>
+                    </Card.Body>
+                </Card>
+            </Col>
+        </CardGroup>
+        <CardGroup style={{}}>
+            <Col className="mt-md-5 px-2" md={10}>  
+                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                    <Card.Body>
+                        <Card.Title>All Accepted Requests</Card.Title>
+                        <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
+                        {requests.map((item) => (
+                          <div key={item.ID.value}>
+                            <h5><span>Name:</span>{item.Name.value}</h5>
+                            <h5><span>Email:</span>{item.Email.value}</h5>
+                            <h5><span>Gender:</span>{item.Gender.value}</h5>
+                            <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
+                            <h5><span>Contact:</span>{item.Contact.value}</h5>
+                            <h6><span>City:</span>{item.Location.value}</h6>
+                            <h6><span>Blood Donated By:</span>{item.RequestDonatedBy.value}</h6>
+                            
                             <hr /> {/* Add a line after each item */}
                           </div>
                         ))} 
@@ -128,17 +157,18 @@ const MyAccountCenter=()=> {
             </Col>
             <Col className="mt-md-5 px-2" md={10}>  
             <Card style={{marginTop:10,paddingBottom:10}}>
-              {/*
               <div>
+                <h2 style={{textAlign:"center", alignItems:"center",paddingBottom:"1.5rem"}}> Appointments booked in your Center!</h2>
                 {appointment.map((item) => (
-                  <div key={item.appointments.value}>
-                    <h2>{item.Name.value}</h2>
-                    <p>{item.Email.value}</p>
+                  <div key={item.appointments.value} style={{fontSize:"14px"}}>
+                    <h3>Name:{item.DonorName.value}</h3>
+                    <h3>Email:{item.DonorEmail.value}</h3>
+                    <h3>Timing:{item.Timings.value}</h3>
+                    <h3>Blood Group:{item.BloodGroup.value}</h3>
                     <hr />
                   </div>
                 ))}
                 </div>
-             */ }
                 <Card.Body className="d-flex justify-content-between">
                   <Card.Title>By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
                     <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointment details!</Button>

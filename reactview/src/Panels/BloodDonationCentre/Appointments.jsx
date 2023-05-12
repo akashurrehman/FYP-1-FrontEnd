@@ -15,22 +15,23 @@ const Appointments=()=> {
   const [data, setData] = useState([]);
   useEffect(() => {
     // fetch data from the backend
-    fetch('http://localhost:8081/api/users/bloodrequest')
+    fetch('http://localhost:8081/api/users/appointment/byCentreID/Centre_001')
       .then((response) => response.json())
       .then((data) => {
         // map the bindings array to an array of objects
         const rows = data.results.bindings.map((binding) => {
           return {
             ID: binding.ID,
-            Name: binding.Name,
-            Email: binding.Email,
+            DonorName: binding.DonorName,
+            DOB:binding.DOB,
+            DonorEmail: binding.DonorEmail,
+            DonorContactNo: binding.DonorContactNo,
             Gender: binding.Gender,
-            Location: binding.Location,
-            Message: binding.Message,
-            Blood_Group: binding.Blood_Group,
-            Contact: binding.Contact,
+            Address: binding.Address,
             City: binding.City,
-            Hospital: binding.Hospital,
+            BloodGroup: binding.BloodGroup,
+            Location: binding.Location,
+            Timings: binding.Timings,
           };
         });
         setData(rows);
@@ -57,11 +58,11 @@ const columns = [
   },
   {
     name: 'Name',
-    selector: 'Name.value',
+    selector: 'DonorName.value',
   },
   {
     name: 'Email',
-    selector: 'Email.value',
+    selector: 'DonorEmail.value',
   },
   {
     name: 'Gender',
@@ -69,22 +70,26 @@ const columns = [
   },
   {
     name: 'Blood Group',
-    selector: 'Blood_Group.value',
+    selector: 'BloodGroup.value',
   },
   {
     name: 'Contact',
-    selector: 'Contact.value',
+    selector: 'DonorContactNo.value',
   },
   {
     name: 'City',
     selector: 'City.value',
   },
   {
-    name: 'Hospital',
-    selector: 'Hospital.value',
+    name: 'Address',
+    selector: 'Address.value',
   },
   {
-    name: 'Action',
+    name: 'Timings',
+    selector: 'Timings.value',
+  },
+  {
+    name: 'Appointment Status',
     cell: (row) => (
       <Button variant="primary" style={{ borderRadius: 0, height:"50%", widht:"100%" }} onClick={() => alert('Download Receipt Option selected!')}>Download Receipt</Button>
     )

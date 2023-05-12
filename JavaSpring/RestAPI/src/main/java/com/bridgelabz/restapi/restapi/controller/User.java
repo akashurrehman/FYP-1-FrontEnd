@@ -47,7 +47,7 @@ public class User {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Route to Get Data of all Registered Users
@@ -265,7 +265,8 @@ public class User {
                             "                       bd:hasPersonEligibilityStatus \"%s\"^^xsd:string ;\n" +
                             "                       bd:hasPersonID \"%s\"^^xsd:string ;\n" +
                             "}",
-                    fullName, userName, encodedPassword, role, city, bloodGroup, address, contactNo, email, gender, dob, eligibilityStatus,
+                    fullName, userName, encodedPassword, role, city, bloodGroup, address, contactNo, email, gender, dob,
+                    eligibilityStatus,
                     individualId);
 
             // Call the InsertSparql function with the query
@@ -379,7 +380,6 @@ public class User {
 
     }
 
-
     /*
      * Edit the User Information by passing ID
      * 
@@ -392,8 +392,9 @@ public class User {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(User);
 
-        String eligibilityStatus = jsonNode.has("eligibilityStatus") ? jsonNode.get("eligibilityStatus").asText() : null;
-        
+        String eligibilityStatus = jsonNode.has("eligibilityStatus") ? jsonNode.get("eligibilityStatus").asText()
+                : null;
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
@@ -463,7 +464,7 @@ public class User {
                         "                       bd:hasDonorMessage \"%s\"^^xsd:string ;\n" +
                         "                       bd:bloodDonationMakeby bd:%s .\n" +
                         "}",
-                name, individualId, city, gender, location, contactNo, bloodGroup, email, message,id);
+                name, individualId, city, gender, location, contactNo, bloodGroup, email, message, id);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -679,8 +680,6 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
-
     /*
      * Add Blood Request
      * Can by add by Users or centers
@@ -728,7 +727,8 @@ public class User {
                         "                       bd:hasRequestDonorName \"%s\"^^xsd:string ;\n" +
                         "                       bd:bloodRequestMakeby bd:%s .\n" +
                         "}",
-                email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location, donatedBy, donorName, id);
+                email, hospital, city, bloodGroup, contactNo, message, name, individualId, gender, location, donatedBy,
+                donorName, id);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -913,7 +913,6 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     /*
      * View Blood Requests entered by users by passing ID
      */
@@ -959,34 +958,33 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     /*
      * View Blood Requests entered by users by passing ID
      */
     @GetMapping("/api/users/bloodrequest/byUserID/{id}")
     public ResponseEntity<String> GetbloodrequestbyUserID(@PathVariable String id) {
-        
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
-        
-            "SELECT * WHERE {" +
-            "?requests rdf:type bd:Blood_Request ." +
-            "?requests bd:bloodRequestMakeby bd:" + id + " ." +
-            "?requests bd:hasRequestMakerID ?ID ." +
-            "?requests bd:hasRequestMakerName ?Name ." +
-            "?requests bd:hasRequestMakerEmail ?Email ." +
-            "?requests bd:hasRequestMakerGender ?Gender ." +
-            "?requests bd:hasRequestMakerLocation ?Location ." +
-            "?requests bd:hasRequestMakerMessage ?Message ." +
-            "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
-            "?requests bd:hasRequestMakerContactNo ?Contact ." +
-            "?requests bd:hasRequestMakerCity ?City ." +
-            "?requests bd:hasRequestMakerHospital ?Hospital ." +
-            "?requests bd:hasRequestDonatedBy ?RequestDonatedBy ." +
-            "?requests bd:hasRequestDonorName ?RequestDonorName ." +
-            "?requests bd:bloodRequestMakeby ?PersonName ." +
-            "}";
-                // set the response headers
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?requests rdf:type bd:Blood_Request ." +
+                "?requests bd:bloodRequestMakeby bd:" + id + " ." +
+                "?requests bd:hasRequestMakerID ?ID ." +
+                "?requests bd:hasRequestMakerName ?Name ." +
+                "?requests bd:hasRequestMakerEmail ?Email ." +
+                "?requests bd:hasRequestMakerGender ?Gender ." +
+                "?requests bd:hasRequestMakerLocation ?Location ." +
+                "?requests bd:hasRequestMakerMessage ?Message ." +
+                "?requests bd:hasRequestMakerBloodGroup ?Blood_Group ." +
+                "?requests bd:hasRequestMakerContactNo ?Contact ." +
+                "?requests bd:hasRequestMakerCity ?City ." +
+                "?requests bd:hasRequestMakerHospital ?Hospital ." +
+                "?requests bd:hasRequestDonatedBy ?RequestDonatedBy ." +
+                "?requests bd:hasRequestDonorName ?RequestDonorName ." +
+                "?requests bd:bloodRequestMakeby ?PersonName ." +
+                "}";
+        // set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String result = ReadSparqlMethod(queryString);
@@ -1004,7 +1002,6 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     /*
      * Edit the User Information by passing ID
      * 
@@ -1019,7 +1016,7 @@ public class User {
 
         String donatedBy = jsonNode.has("donatedBy") ? jsonNode.get("donatedBy").asText() : null;
         String donorName = jsonNode.has("donorName") ? jsonNode.get("donorName").asText() : null;
-        
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
@@ -1042,8 +1039,6 @@ public class User {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
         }
     }
-
-
 
     /*
      * Appointment Details of Users such as Center, Timing
@@ -1100,7 +1095,9 @@ public class User {
                         "                       bd:appointmentMadeBy bd:%s ;\n" +
                         "                       bd:appointmentBookedIn bd:%s ;\n" +
                         "}",
-                donorName, donorDOB, donorEmail, donorContactNo, donorGender, donorAddress, donorCity, donorBloodGroup, centreName, centreTimings, centreContactNo, centreEmail, centreLocation, individualId, userID, centreID);
+                donorName, donorDOB, donorEmail, donorContactNo, donorGender, donorAddress, donorCity, donorBloodGroup,
+                centreName, centreTimings, centreContactNo, centreEmail, centreLocation, individualId, userID,
+                centreID);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -1115,7 +1112,7 @@ public class User {
     /*
      * Edit the Appointment Details of Users by passing ID
      * Edit information such as center, or timing
-    */
+     */
 
     @PutMapping("/api/users/appointment/{id}")
     public String editAppointment(@RequestBody String user, @PathVariable String id) {
@@ -1125,7 +1122,7 @@ public class User {
     /*
      * Delete the Appointment Details of Users by passing ID
      */
-    
+
     @DeleteMapping("/api/user/appointment/AppointmentDetails/delete/{id}")
     public ResponseEntity<String> DeleteAppointment(@PathVariable String id) throws IOException {
 
@@ -1154,34 +1151,34 @@ public class User {
     }
 
     /*
-     * GET the Appointment Details of Users by passing  User ID
+     * GET the Appointment Details of Users by passing User ID
      * Appointment details such as center, or timing
      */
     @GetMapping("/api/users/appointment/byUserID/{id}")
     public ResponseEntity<String> GetAppointmentMadeByUser(@PathVariable String id) {
-        
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
-        
-            "SELECT * WHERE {" +
-            "?appointments rdf:type bd:Appointment ." +
-            "?appointments bd:appointmentMadeBy bd:" + id + " ." +
-            "?appointments bd:hasAppointmentID ?ID ." +
-            "?appointments bd:hasAppointmentDonorName ?DonorName ." +
-            "?appointments bd:hasAppointmentDonorDOB ?DOB ." +
-            "?appointments bd:hasAppointmentDonorEmail ?DonorEmail ." +
-            "?appointments bd:hasAppointmentDonorContactNo ?DonorContactNo ." +
-            "?appointments bd:hasAppointmentDonorGender ?Gender ." +
-            "?appointments bd:hasAppointmentDonorAddress ?Address ." +
-            "?appointments bd:hasAppointmentDonorCity ?City ." +
-            "?appointments bd:hasAppointmentDonorBloodGroup ?BloodGroup ." +
-            "?appointments bd:hasAppointmentCentreName ?CentreName ." +
-            "?appointments bd:hasAppointmentCentreTimings ?Timings ." +
-            "?appointments bd:hasAppointmentCentreContactNo ?CentreContactNo ." +
-            "?appointments bd:hasAppointmentCentreEmail ?CentreEmail ." +
-            "?appointments bd:hasAppointmentCentreLocation ?Location ." +
-            "}";
-                // set the response headers
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?appointments rdf:type bd:Appointment ." +
+                "?appointments bd:appointmentMadeBy bd:" + id + " ." +
+                "?appointments bd:hasAppointmentID ?ID ." +
+                "?appointments bd:hasAppointmentDonorName ?DonorName ." +
+                "?appointments bd:hasAppointmentDonorDOB ?DOB ." +
+                "?appointments bd:hasAppointmentDonorEmail ?DonorEmail ." +
+                "?appointments bd:hasAppointmentDonorContactNo ?DonorContactNo ." +
+                "?appointments bd:hasAppointmentDonorGender ?Gender ." +
+                "?appointments bd:hasAppointmentDonorAddress ?Address ." +
+                "?appointments bd:hasAppointmentDonorCity ?City ." +
+                "?appointments bd:hasAppointmentDonorBloodGroup ?BloodGroup ." +
+                "?appointments bd:hasAppointmentCentreName ?CentreName ." +
+                "?appointments bd:hasAppointmentCentreTimings ?Timings ." +
+                "?appointments bd:hasAppointmentCentreContactNo ?CentreContactNo ." +
+                "?appointments bd:hasAppointmentCentreEmail ?CentreEmail ." +
+                "?appointments bd:hasAppointmentCentreLocation ?Location ." +
+                "}";
+        // set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String result = ReadSparqlMethod(queryString);
@@ -1199,36 +1196,35 @@ public class User {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     /*
-     * GET the Appointment Details of Users by passing  User ID
+     * GET the Appointment Details of Users by passing User ID
      * Appointment details such as center, or timing
      */
     @GetMapping("/api/users/appointment/byCentreID/{id}")
     public ResponseEntity<String> GetAppointmentBookedInCentre(@PathVariable String id) {
-        
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
-            "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
-        
-            "SELECT * WHERE {" +
-            "?appointments rdf:type bd:Appointment ." +
-            "?appointments bd:appointmentBookedIn bd:" + id + " ." +
-            "?appointments bd:hasAppointmentID ?ID ." +
-            "?appointments bd:hasAppointmentDonorName ?DonorName ." +
-            "?appointments bd:hasAppointmentDonorDOB ?DOB ." +
-            "?appointments bd:hasAppointmentDonorEmail ?DonorEmail ." +
-            "?appointments bd:hasAppointmentDonorContactNo ?DonorContactNo ." +
-            "?appointments bd:hasAppointmentDonorGender ?Gender ." +
-            "?appointments bd:hasAppointmentDonorAddress ?Address ." +
-            "?appointments bd:hasAppointmentDonorCity ?City ." +
-            "?appointments bd:hasAppointmentDonorBloodGroup ?BloodGroup ." +
-            "?appointments bd:hasAppointmentCentreName ?CentreName ." +
-            "?appointments bd:hasAppointmentCentreTimings ?Timings ." +
-            "?appointments bd:hasAppointmentCentreContactNo ?CentreContactNo ." +
-            "?appointments bd:hasAppointmentCentreEmail ?CentreEmail ." +
-            "?appointments bd:hasAppointmentCentreLocation ?Location ." +
-            "}";
-                // set the response headers
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?appointments rdf:type bd:Appointment ." +
+                "?appointments bd:appointmentBookedIn bd:" + id + " ." +
+                "?appointments bd:hasAppointmentID ?ID ." +
+                "?appointments bd:hasAppointmentDonorName ?DonorName ." +
+                "?appointments bd:hasAppointmentDonorDOB ?DOB ." +
+                "?appointments bd:hasAppointmentDonorEmail ?DonorEmail ." +
+                "?appointments bd:hasAppointmentDonorContactNo ?DonorContactNo ." +
+                "?appointments bd:hasAppointmentDonorGender ?Gender ." +
+                "?appointments bd:hasAppointmentDonorAddress ?Address ." +
+                "?appointments bd:hasAppointmentDonorCity ?City ." +
+                "?appointments bd:hasAppointmentDonorBloodGroup ?BloodGroup ." +
+                "?appointments bd:hasAppointmentCentreName ?CentreName ." +
+                "?appointments bd:hasAppointmentCentreTimings ?Timings ." +
+                "?appointments bd:hasAppointmentCentreContactNo ?CentreContactNo ." +
+                "?appointments bd:hasAppointmentCentreEmail ?CentreEmail ." +
+                "?appointments bd:hasAppointmentCentreLocation ?Location ." +
+                "}";
+        // set the response headers
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         String result = ReadSparqlMethod(queryString);
@@ -1245,7 +1241,6 @@ public class User {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * View Appointments entered by users by passing ID
@@ -1255,7 +1250,7 @@ public class User {
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
-            
+
                 "SELECT * WHERE {" +
                 "?appointments rdf:type bd:Appointment ." +
                 "?appointments bd:hasAppointmentID ?ID ." +
@@ -1292,8 +1287,6 @@ public class User {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
-
 
     /*
      * Method for the Functionality of Read data on the basis of query

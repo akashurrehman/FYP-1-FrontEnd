@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddBloodRequest=()=> {
   const [bloodRequests, setBloodRequests] = useState({
+    id:"Get ID from token",
     email: "",
     hospital:"",
     city:"",
@@ -141,7 +142,7 @@ const AddBloodRequest=()=> {
     event.preventDefault();
 
     axios
-    .post(`http://localhost:8081/api/bloodCenter/RegisteredCenters/makeRequest`, bloodRequests)
+    .post(`http://localhost:8081/api/user/bloodRequest/BloodRequestDetails/add`, bloodRequests)
     .then((response) => {
       console.log(response.data);
       toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
