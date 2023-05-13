@@ -14,6 +14,8 @@ import Appointments from './Panels/BloodDonationCentre/Appointments';
 import AddNewUser from './Panels/BloodDonationCentre/AddNewUser';
 import BloodRequests from './Panels/BloodDonationCentre/BloodRequests';
 import AddBloodRequest from './Panels/BloodDonationCentre/AddBloodRequest';
+import MyAccountCenter from './Panels/BloodDonationCentre/MyAccountCenter';
+import CenterRegistration from './Panels/BloodDonationCentre/CenterRegistration';
 
 /* AdminPanel Imports */
 import AdminPanelHomeScreen from './Panels/Admin/screen';
@@ -79,7 +81,8 @@ function App() {
           <Route exact path='/bloodCenter/addNewUser' element={<AddNewUser/>}/>
           <Route exact path='/bloodCenter/bloodRequests' element={<BloodRequests/>}/>
           <Route exact path='/bloodCenter/ViewAllDonors' element={<ViewCenterDonors/>}/>
-
+          <Route exact path='/bloodCenter/MyAccount' element={<MyAccountCenter/>}/>
+          <Route exact path='/bloodCenter/Registration' element={<CenterRegistration/>}/>
           
           {/* Admin panel Routes */}
           <Route exact path='/adminpanel/HomeScreen' element={<AdminPanelHomeScreen/>}/>

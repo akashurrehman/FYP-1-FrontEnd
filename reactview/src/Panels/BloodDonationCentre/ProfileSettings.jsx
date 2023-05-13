@@ -34,10 +34,12 @@ const ProfileSettings=()=> {
 
   const [showModal, setShowModal] = useState(false);
   // const {token} = useAuth();
-  // if(!token){
-  //   window.location.href = "/Login";
-  // }
-
+    const authCentre=()=>{
+      //if(!token){
+        //   window.location.href = "/Login";
+        // }
+        console.log("authCentre");
+    }
 
   //This will get the id  from the token if user is login
   // const {id} = jwt_decode(token);
@@ -60,6 +62,7 @@ const ProfileSettings=()=> {
 
   }
 });
+authCentre();
 },[]);
 const validateForm = () => {
   let isValid = true;

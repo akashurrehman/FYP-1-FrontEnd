@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const AddBloodRequest=()=> {
   const [bloodRequests, setBloodRequests] = useState({
+    id:"Get ID from token",
     email: "",
     hospital:"",
     city:"",
@@ -25,6 +26,19 @@ const AddBloodRequest=()=> {
     gender: "",
     location: "",
   });
+  // const {token} = useAuth();
+  const authCentre=()=>{
+    //if(!token){
+      //   window.location.href = "/Login";
+      // }
+      console.log("authCentre");
+  }
+
+//This will get the id  from the token if user is login
+// const {id} = jwt_decode(token);
+  useEffect(() => {
+    authCentre();
+  }, []);
   const validateForm = () => {
     let isValid = true;
     const errors = {};
@@ -67,6 +81,7 @@ const AddBloodRequest=()=> {
   };
   
   const [showModal, setShowModal] = useState(false);
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -141,7 +156,7 @@ const AddBloodRequest=()=> {
     event.preventDefault();
 
     axios
-    .post(`http://localhost:8081/api/bloodCenter/RegisteredCenters/makeRequest`, bloodRequests)
+    .post(`http://localhost:8081/api/user/bloodRequest/BloodRequestDetails/add`, bloodRequests)
     .then((response) => {
       console.log(response.data);
       toast.success(response.data,{position:toast.POSITION.TOP_CENTER});

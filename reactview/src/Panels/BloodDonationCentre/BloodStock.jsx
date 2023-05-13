@@ -35,6 +35,16 @@ const BloodStock=()=> {
     handleBloodStockPrint(blood);
     console.log("Handle Print button in Blood Stock!")
   };
+  // const {token} = useAuth();
+  const authCentre=()=>{
+    //if(!token){
+      //   window.location.href = "/Login";
+      // }
+      console.log("authCentre");
+  }
+
+//This will get the id  from the token if user is login
+// const {id} = jwt_decode(token);
   
   useEffect(() => {
     const fetchData = async () => {
@@ -56,6 +66,7 @@ const BloodStock=()=> {
       }
     };
     fetchData();
+    authCentre();
   }, []);
   
   
