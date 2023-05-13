@@ -19,31 +19,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 //import Link from 'react-router-dom/Link';
-const data = {
-  labels: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-'],
-  datasets: [
-    {
-      label: 'Number of Donors',
-      data: [100, 50, 75, 40, 60, 30, 20, 10],
-      backgroundColor: 'rgba(54, 162, 235, 0.2)',
-      borderColor: 'rgba(54, 162, 235, 1)',
-      borderWidth: 1,
-    },
-  ],
-};
-
-
-const options = {
-  scales: {
-    xAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
-};
 
 
 const HomeScreen_BloodDonation=()=> {

@@ -26,7 +26,16 @@ const MyAccountCenter=()=> {
 
   // //Get the ID from the token
   // const {ID}= jwt_decode(token);
+ 
+  const authCentre=()=>{
+    //if(!token){
+      //   window.location.href = "/Login";
+      // }
+      console.log("authCentre");
+  }
 
+//This will get the id  from the token if user is login
+// const {id} = jwt_decode(token);
   const ViewAllRequests = () => {
     toast.success("You are redirected to View All Requests Page", {position: toast.POSITION.TOP_CENTER});
     window.location.href = '/bloodCenter/bloodRequests';
@@ -58,7 +67,7 @@ const MyAccountCenter=()=> {
         const [dataRes, donorsRes,requests, appointmentRes] = await Promise.all([
           fetchData("http://localhost:8081/api/users/bloodrequest/byUserID/Tokenid"),
           fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo"),
-          fetchData("http://localhost:8081//api/users/accepted/bloodRequests/PassLoginId"),
+          fetchData("http://localhost:8081/api/users/accepted/bloodRequests/PassLoginId"),
           fetchData("http://localhost:8081/api/users/appointment/byCentreID/Centre_001"),
         ]);
         setData(dataRes);
@@ -67,6 +76,7 @@ const MyAccountCenter=()=> {
         setAppointment(appointmentRes);
       };
       fetchDataForAll();
+      authCentre();
     }, []);
   
   const mystyle = {

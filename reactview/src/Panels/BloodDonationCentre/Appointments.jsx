@@ -13,6 +13,16 @@ import './Styling/print.css';
 import { handleAppointmentPrint } from "./PrintedFiles/AppointmentPrint";
 const Appointments=()=> {  
   const [data, setData] = useState([]);
+  // const {token} = useAuth();
+  const authCentre=()=>{
+    //if(!token){
+      //   window.location.href = "/Login";
+      // }
+      console.log("authCentre");
+  }
+
+//This will get the id  from the token if user is login
+// const {id} = jwt_decode(token);
   useEffect(() => {
     // fetch data from the backend
     fetch('http://localhost:8081/api/users/appointment/byCentreID/Centre_001')
@@ -37,6 +47,7 @@ const Appointments=()=> {
         setData(rows);
       })
       .catch((error) => console.log(error));
+      authCentre();
   }, []);
 
   const handlePrint = () => {

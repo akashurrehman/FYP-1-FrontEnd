@@ -26,6 +26,19 @@ const AddBloodRequest=()=> {
     gender: "",
     location: "",
   });
+  // const {token} = useAuth();
+  const authCentre=()=>{
+    //if(!token){
+      //   window.location.href = "/Login";
+      // }
+      console.log("authCentre");
+  }
+
+//This will get the id  from the token if user is login
+// const {id} = jwt_decode(token);
+  useEffect(() => {
+    authCentre();
+  }, []);
   const validateForm = () => {
     let isValid = true;
     const errors = {};
@@ -68,6 +81,7 @@ const AddBloodRequest=()=> {
   };
   
   const [showModal, setShowModal] = useState(false);
+  
   const handleChange = (event) => {
     const { name, value } = event.target;
 

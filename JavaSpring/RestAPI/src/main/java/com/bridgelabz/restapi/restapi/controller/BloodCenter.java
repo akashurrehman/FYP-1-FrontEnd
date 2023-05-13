@@ -138,17 +138,7 @@ public class BloodCenter {
     /* Route to add New Blood Donation Center */
     @PostMapping("/api/bloodCenter/CenterRegistration/add")
     public ResponseEntity<String> AddCentreDetails(@RequestBody String BloodCenterRegistration) throws IOException {
-        /*
-         * String name = "Al Qabeer Foundation";
-         * String city = "Lahore";
-         * String location = "Near Main Market, Lahore";
-         * String licenseNo = "ALQabeer-1234";
-         * String contactNo = "+923487456987";
-         * String email = "alqabeer@email.com";
-         * String openingDays = "Monday to Friday";
-         * String timings = "9am-6pm";
-         * String category = "Private";
-         */
+
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(BloodCenterRegistration);
 

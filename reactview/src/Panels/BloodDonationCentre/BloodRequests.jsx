@@ -14,9 +14,17 @@ const BloodRequests=()=> {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
 
-  /* For filtering the data with center ID
+  // const {token} = useAuth();
+  const authCentre=()=>{
+    //if(!token){
+      //   window.location.href = "/Login";
+      // }
+      console.log("authCentre");
+  }
 
-  */
+//This will get the id  from the token if user is login
+// const {id} = jwt_decode(token);
+
   const [filterByCenter, setFilterByCenter] = useState(false);
   const [centerId, setCenterId] = useState('');
 
@@ -84,6 +92,7 @@ const BloodRequests=()=> {
       })
       .catch((error) => console.log(error));
       console.log("selectedRows after updating state", selectedRows);
+      authCentre();
       
   }, [selectedRows, filterByCenter, centerId]);
 
