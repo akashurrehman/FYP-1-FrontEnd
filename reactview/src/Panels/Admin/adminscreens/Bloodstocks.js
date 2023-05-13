@@ -1,121 +1,93 @@
-import React from 'react';
-import 'react-circular-progressbar/dist/styles.css';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import { CircularProgressbar, CircularProgressbarWithChildren, buildStyles } from 'react-circular-progressbar';
-import "../adminscreen.css"
+import React, { useEffect, useRef } from "react";
+import "react-circular-progressbar/dist/styles.css";
+import axios from "axios";
+import "../adminscreen.css";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 export default function Bloodstocks() {
+  const [users, setUsers] = React.useState([]);
+  const pdfContainerRef = useRef(null);
 
-  const percentage = 66;
-  const Aposvalue = 50;
-  const Anegvalue = 30;
-  const Bposvalue = 70;
-  const Bnegvalue = 80;
-  const ABposvalue = 90;
-  const ABnegvalue = 35;
-  const Oposvalue = 95;
-  const Onegvalue = 80;
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails"
+      )
+      .then((response) => {
+        console.log("News Data Response is:", response.data.results.bindings);
+        // console.log("News Data ssssssssssss is:", response.data.results.bindings[0].news);
+        const faqs = response.data.results.bindings.map((faq) => {
+          return {
+            bloodGroup: faq.Blood_Group.value,
+            noOfBags: faq.No_Of_Bags.value,
+            id: faq.ID.value,
+            gender: faq.Gender.value,
+          };
+        });
+        setUsers(faqs);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const campaignsContainer = pdfContainerRef.current;
+
+    const buttons = campaignsContainer.querySelectorAll(".btn");
+    buttons.forEach((button) => (button.style.display = "none"));
+
+    html2canvas(campaignsContainer)
+      .then((canvas) => {
+        buttons.forEach((button) => (button.style.display = "inline-block"));
+
+        const imageData = canvas.toDataURL("image/png");
+
+        doc.addImage(imageData, "PNG", 10, 10, 190, 0);
+
+        doc.save("bloodStock.pdf");
+      })
+      .catch((error) => {
+        buttons.forEach((button) => (button.style.display = "inline-block"));
+
+        console.error("Error generating PDF:", error);
+      });
+  };
 
   return (
     <div className="turningred">
-      <h1 className="color">Blood Stocks</h1>
-      {/* <div className="cup">
-      <div className="scup">
-          
-          <CircularProgressbarWithChildren styles={buildStyles({
-            pathColor: "#rgb(0, 183, 255)",
-            trailColor: "#000"
-          })} value={Aposvalue} className='str' >
-            <img style={{ height: "50%", width: "50%", marginTop: 30 }} src={require('../../../pictures/A+.png')} alt="doge" />
-
-            
-          </CircularProgressbarWithChildren>
-          <h5>{Aposvalue} Left</h5>
+      <div className="pdf-campaigns-container" ref={pdfContainerRef}>
+        <div className="buttonInDonor">
+          <h1 className="color">Blood Stock</h1>
+          <button className="btn btn-danger" onClick={generatePDF}>
+            Generate PDF
+          </button>
         </div>
-        <div className="scup">
-          
-          <CircularProgressbarWithChildren styles={buildStyles({
-            pathColor: "#rgb(0, 183, 255)",
-            trailColor: "#000"
-          })} value={Aposvalue} className='str' >
-            <img style={{ height: "50%", width: "50%", marginTop: 30 }} src={require('../../../pictures/A+.png')} alt="doge" />
-
-            
-          </CircularProgressbarWithChildren>
-          <h5>{Aposvalue} Left</h5>
-        </div>
-        <div className="scup">
-          
-          <CircularProgressbarWithChildren styles={buildStyles({
-            pathColor: "#rgb(0, 183, 255)",
-            trailColor: "#000"
-          })} value={Aposvalue} className='str' >
-            <img style={{ height: "50%", width: "50%", marginTop: 30 }} src={require('../../../pictures/A+.png')} alt="doge" />
-
-            
-          </CircularProgressbarWithChildren>
-          <h5>{Aposvalue} Left</h5>
-        </div>
-       
-        <div className="scup">
-          
-          <CircularProgressbarWithChildren styles={buildStyles({
-            pathColor: "#rgb(0, 183, 255)",
-            trailColor: "#000"
-          })} value={Aposvalue} className='str' >
-            <img style={{ height: "50%", width: "50%", marginTop: 30 }} src={require('../../../pictures/A+.png')} alt="doge" />
-
-            
-          </CircularProgressbarWithChildren>
-          <h5>{Aposvalue} Left</h5>
-        </div>
-        <div className="scup">
-          
-          <CircularProgressbarWithChildren styles={buildStyles({
-            pathColor: "#rgb(0, 183, 255)",
-            trailColor: "#000"
-          })} value={Aposvalue} className='str' >
-            <img style={{ height: "50%", width: "50%", marginTop: 30 }} src={require('../../../pictures/A+.png')} alt="doge" />
-
-            
-          </CircularProgressbarWithChildren>
-          <h5>{Aposvalue} Left</h5>
-        </div>
-       
-
-
-
-
-
-
-
-
-
-
-      </div> */}
-      {/* <div className="progress">
-        <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-      </div> */}
-
-      <div>
-        <h4 className='cup'>A Positive</h4>
-        <ProgressBar animated  striped variant="success" now={Aposvalue} label={`${Aposvalue}`} />
-        <h4 className='cup' >A Negative</h4>
-        <ProgressBar animated striped variant="danger" now={Anegvalue} label={`${Anegvalue}`} />
-        <h4 className='cup' >B Positive</h4>
-        <ProgressBar animated striped variant="success" now={Bposvalue} label={`${Bposvalue}`} />
-        <h4 className='cup' >B Negative</h4>
-        <ProgressBar animated striped variant="danger" now={Bnegvalue} label={`${Bnegvalue}`} />
-        <h4 className='cup' >AB Positive</h4>
-        <ProgressBar animated  className='cup' striped variant="success" now={ABposvalue} label={`${ABposvalue}`} />
-        <h4 className='cup' >AB Negative</h4>
-        <ProgressBar animated striped variant="danger" now={ABnegvalue} label={`${ABnegvalue}`} />
-        <h4 className='cup' >O Positive</h4>
-        <ProgressBar animated striped variant="success" now={Oposvalue} label={`${Oposvalue}`} />
-        <h4 className='cup' >O Negative</h4>
-        <ProgressBar animated striped variant="danger" now={Onegvalue} label={`${Onegvalue}`} />
+        {users.map((faq, index) => (
+          <div className="headin" key={index}>
+            <h4> ID: {faq.id}</h4>
+            <div className="row">
+              <div className="col-lg-4">
+                <p>
+                  <strong>No Of Bags:</strong> {faq.noOfBags}{" "}
+                </p>
+              </div>
+              <div className="col-lg-4">
+                <p>
+                  <strong>Gender:</strong> {faq.gender}{" "}
+                </p>
+              </div>
+              <div className="col-lg-4">
+                <p>
+                  <strong>Blood Group:</strong> {faq.bloodGroup}{" "}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
-
 }

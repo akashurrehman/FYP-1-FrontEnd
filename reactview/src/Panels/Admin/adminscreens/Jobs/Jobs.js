@@ -1,46 +1,32 @@
 import React, { useEffect, useState, useRef } from "react";
-import NewsCardTemplate from "./news/NewsCardTemplate";
-import Newsdata from "./news/Newsdata";
-import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
-import { CalendarDateFill, Filter, Laptop } from "react-bootstrap-icons";
-import TextField from "@mui/material/TextField";
 import axios from "axios";
-import NewsPopUp from "./PopUps/NewsPopUp";
+import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
+import { TextField } from "@mui/material";
+import { CalendarDateFill, Laptop } from "react-bootstrap-icons";
+import JobsPopUp from "../PopUps/JobsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-function ncard(val) {
-  return (
-    <NewsCardTemplate
-      imgsrc={val.imgsrcs}
-      title={val.title}
-      Category={val.Category}
-      Posted_on={val.Posted_on}
-      details={val.details}
-      id={val.id}
-    />
-  );
-}
-
-export default function News() {
+export default function Jobs() {
   const [users, setUsers] = React.useState([]);
-  const [searchTerm, setSearchTerm] = React.useState("");
   const [Title, setTitle] = useState("");
   const [Date, setDate] = useState("");
   const [description, setDescription] = useState("");
+  const [searchTerm, setSearchTerm] = React.useState("");
   const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/api/admin/getNews")
+      .get("http://localhost:8081/api/admin/getJobPost")
       .then((response) => {
-        console.log("News Data Response is:", response.data.results.bindings);
-        // console.log("News Data ssssssssssss is:", response.data.results.bindings[0].news);
+        console.log("Response is:", response.data.results.bindings);
         const faqs = response.data.results.bindings.map((faq) => {
+          console.log("id of my JOB POST IS :", faq.ID.value);
           return {
             title: faq.Title.value,
             details: faq.Details.value,
+            date: faq.Date.value,
             id: faq.ID.value,
           };
         });
@@ -53,17 +39,17 @@ export default function News() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:8081/api/admin/deleteNews/${id}`)
+      .delete(`http://localhost:8081/api/admin/deleteJobPost/${id}`)
       .then((response) => {
         console.log(response);
-        alert("News deleted successfully!");
+        alert("Job post deleted successfully!");
 
         // Remove the deleted FAQ from the users state
         setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
       })
       .catch((error) => {
         console.error(error);
-        alert("Failed to delete News. Please try again!");
+        alert("Failed to delete Job post. Please try again!");
       });
   };
 
@@ -78,31 +64,31 @@ export default function News() {
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
-
+  // This is a handle submit function to submit the data when the user presses the submit button
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = { title: Title, postDate: Date, details: description };
+    const data = { title: Title, postingDate: Date, details: description };
     console.log("the data I am sending is", data);
     axios
-      .post("http://localhost:8081/api/admin/addNews", data, {
+      .post("http://localhost:8081/api/admin/addJobPost", data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        console.log("My data response in news is", response);
-        alert("News added successfully!");
+        console.log("My data response in Jobs is", response);
+        alert("JobPost added successfully!");
 
-        // Create a new news object with the same properties as the response data
-        const newNews = {
+        // Create a new job post object with the same properties as the response data
+        const newJobPost = {
           title: Title,
-          postDate: Date,
+          postingDate: Date,
           details: description,
-          id: response.data.id, // Assuming the API returns the new news item's ID
+          id: response.data.id, // Assuming the API returns the new job post's ID
         };
 
-        // Update the news state by adding the new news item to the existing array
-        setUsers((prevNews) => [...prevNews, newNews]);
+        // Update the jobPosts state by adding the new job post to the existing array
+        setUsers((prevJobPosts) => [...prevJobPosts, newJobPost]);
 
         setTitle("");
         setDate("");
@@ -110,27 +96,22 @@ export default function News() {
       })
       .catch((error) => {
         console.error(error);
-        alert("Failed to add news. Please try again!");
+        alert("Failed to add Job post. Please try again!");
       });
   };
 
-  const filteredUsers = users.filter((faq) =>
-    faq.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleUpdate = (input1Value, input2Value, id) => {
+  const handleUpdate = (input1Value, input2Value, id, dateVal) => {
     // Handle the update logic here
-    console.log(`Input 1 value: ${input1Value}`);
-    console.log(`Input 2 value: ${input2Value}`);
-    console.log("test ID value is", id);
-    console.log("Title value", input1Value);
-    console.log("Details value", input2Value);
 
-    const updata = { title: input1Value, details: input2Value };
-    console.log("the data I am updating is", updata);
+    const updata = {
+      title: input1Value,
+      details: input2Value,
+      date: dateVal,
+    };
+    console.log("the data for financial donation I am updating is", updata);
     axios
       .put(
-        `http://localhost:8081/api/admin/news/NewsDetails/update/${id}`,
+        `http://localhost:8081/api/admin/jobPost/JobPostDetails/update/${id}`,
         updata,
         {
           headers: {
@@ -139,13 +120,18 @@ export default function News() {
         }
       )
       .then((response) => {
-        console.log("Campaign updated successfully");
+        console.log("Financial Donation updated successfully");
 
         // Update the state with the new data
         setUsers((prevData) => {
           const updatedData = prevData.map((item) => {
             if (item.id === id) {
-              return { ...item, title: input1Value, details: input2Value };
+              return {
+                ...item,
+                title: input1Value,
+                details: input2Value,
+                date: dateVal,
+              };
             }
             return item;
           });
@@ -175,7 +161,7 @@ export default function News() {
 
         doc.addImage(imageData, "PNG", 10, 10, 190, 0);
 
-        doc.save("news.pdf");
+        doc.save("Jobs.pdf");
       })
       .catch((error) => {
         buttons.forEach((button) => (button.style.display = "inline-block"));
@@ -186,14 +172,13 @@ export default function News() {
 
   return (
     <div className="turningred">
-      <h1 className="color">News</h1>
       <h3 className="color marginss">
-        <u>Create a new News Feed </u>
+        <u>Create a New Job Post </u>
       </h3>
       <div className="container inputcont">
         <div className="row">
           <div className="col">
-            <h5 className="rang">News Title</h5>
+            <h5 className="rang">Job Title</h5>
             <InputGroup className="mb-3 input">
               <InputGroup.Text id="basic-addon1">
                 <Laptop className="Appcolor" size={30} />
@@ -209,12 +194,12 @@ export default function News() {
             </InputGroup>
           </div>
           <div className="col settingss">
-            <h5 className="rang">Category</h5>
-            <InputGroup className="mb-3">
+            <h5 className="rang">Select Date</h5>
+            <InputGroup className="mb-3 input">
               <InputGroup.Text id="basic-addon1">
                 <CalendarDateFill className="Appcolor" size={30} />
               </InputGroup.Text>
-              <FloatingLabel controlId="floatingPassword" label="Category">
+              <FloatingLabel controlId="floatingPassword" label="Date">
                 <Form.Control
                   type="date"
                   placeholder="mm/dd/yyyy"
@@ -231,43 +216,45 @@ export default function News() {
             label="Description"
             multiline
             rows={4}
+            // defaultValue=""
             value={description}
             onChange={handleDescriptionChange}
-            // defaultValue=""
           />
         </div>
       </div>
       <div className="generatePDFButton">
-        <button className="btn btn-danger bton" onClick={handleSubmit}>
+        <button className="btn btn-danger" onClick={handleSubmit}>
           Submit Data
         </button>
       </div>
-
       <h3 className="color marginss">
-        <u>News Currently Live</u>
+        <u>Already Posted Campaigns</u>
       </h3>
-
-      <FloatingLabel
-        controlId="floatingPassword"
-        label="Search By News Title Here"
-      >
-        <Form.Control
-          type="City"
-          placeholder="Enter Question Title Here"
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </FloatingLabel>
       <div className="generatePDFButton">
         <button className="btn btn-danger" onClick={generatePDF}>
           Generate PDF
         </button>
       </div>
+
       <div className="pdf-campaigns-container" ref={pdfContainerRef}>
-        {filteredUsers.map((faq, index) => (
-          <div className="headin">
-            <h4>Title: {faq.title}</h4>
+        {users.map((faq, index) => (
+          <div className="headin" key={index}>
+            <h4>Job Title: {faq.title}</h4>
+            <div className="row">
+              <div className="col-lg-6 col-12">
+                <p>
+                  <strong>Job Details:</strong> {faq.details}
+                </p>
+              </div>
+              <div className="col-lg-6 col-12">
+                <p>
+                  {" "}
+                  <strong>Posted Date:</strong> {faq.date}
+                </p>
+              </div>
+            </div>
+
             <p>
-              Description: {faq.details}
               <button
                 className="btn btn-danger bton"
                 onClick={() => handleDelete(faq.id)}
@@ -281,10 +268,11 @@ export default function News() {
                 Edit
               </button>
               {showPopup && (
-                <NewsPopUp
+                <JobsPopUp
                   id={faq.id}
                   title={faq.title}
                   details={faq.details}
+                  date={faq.date}
                   onOkClick={handleUpdate}
                 />
               )}
