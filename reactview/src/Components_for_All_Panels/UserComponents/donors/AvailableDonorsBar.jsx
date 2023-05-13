@@ -31,7 +31,7 @@ const AvailableDonorsBar = () => {
         <div className="d-flex justify-content-center">
         <div style={{}}>
             <Container>
-                <div style={{borderBottom:'', backgroundColor:'rgb(160, 15, 15)',width:'130%',borderRadius:'10px'}}>
+                <div className='BarBox' style={{borderBottom:'',width:'130%',borderRadius:'10px'}}>
                     <Row>
                         <Col sm={4}>
                         <div style={{marginTop:'20%',textAlign:'center',marginLeft:'25%',marginBottom:'-10%'}}>
@@ -56,8 +56,8 @@ const AvailableDonorsBar = () => {
                                 // Colors
                                 pathColor: 'white',
                                 textColor: 'white',
-                                trailColor: 'rgb(160, 15, 15)',
-                                backgroundColor: 'rgb(160, 15, 15)',
+                                trailColor: '#D64045',
+                                backgroundColor: '#D64045',
                                 })}
                             />
                             

@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode";
 import GenericService from "./GenericService";
 import { toast } from "react-toastify";
 
@@ -46,6 +47,20 @@ class UserLoginService extends GenericService {
 
     isLoggedIn = () => {
         return localStorage.getItem("token") ? true : false;
+    };
+
+    isLoggedInWithUserRole = () => {
+        //Get id from token 
+        const token = localStorage.getItem('token');
+        const decodedToken = token ? jwtDecode(token) : null;
+        const id = decodedToken?.id;
+        const role = decodedToken?.role;
+        if(id !== null && role === 'USER'){
+            return true;
+        }
+        else{
+            return false;
+        }
     };
 }
 

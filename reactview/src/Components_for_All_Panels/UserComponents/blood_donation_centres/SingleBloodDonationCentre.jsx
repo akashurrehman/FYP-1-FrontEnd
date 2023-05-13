@@ -26,10 +26,10 @@ const SingleBloodDonationCentre = (props) => {
     };
     const ButtonStyle = {
         
-        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
-        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        backgroundColor: isHover ? '#27213C' : '#D64045',
+        color: isHover ? 'white' : 'white',
         transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
-        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
+        border: isHover ? '' : '',
         transitionDuration: isHover ? '' : '0.1s',
     };
     
@@ -46,33 +46,32 @@ const SingleBloodDonationCentre = (props) => {
                                         <Row>
                                             <Col sm={5} style={{marginLeft: '1%',paddingTop: '2%',textAlign:'left'}}>
                                                 <Card.Title>
-                                                    <h5 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>{centre.Name.value}</h5>
+                                                    <h5 className='TextCursive RedColor' style={{}}>{centre.Name.value}</h5>
                                                 </Card.Title>
                                                 <Card.Text>
-                                                    <p style={{marginTop:'0%'}}>{centre.Location.value} ({centre.City.value})</p> 
+                                                    <p className='PurpleColor' style={{marginTop:'0%'}}>{centre.Location.value} ({centre.City.value})</p> 
                                                 </Card.Text>
                                             </Col>
                                             <Col sm={3} className='d-flex' style={{paddingTop:'3%'}}>
-                                                <GeoAltFill className="TextColor" size={22} /><p style={{paddingLeft:'2%'}}>2.3 km away</p>
+                                                <GeoAltFill className="RedColor" size={22} />
+                                                <p className='PurpleColor' style={{paddingLeft:'2%'}}>2.3 km away</p>
                                             </Col>
                                             <Col sm={2} className='d-flex' style={{paddingTop:'3%'}}>
-                                                <TelephoneOutboundFill className="TextColor" size={20} />
-                                                <p style={{paddingLeft:'6%'}}>{centre.ContactNo.value}</p>
-
-                                                
+                                                <TelephoneOutboundFill className="RedColor" size={20} />
+                                                <p className='PurpleColor' style={{paddingLeft:'6%'}}>{centre.ContactNo.value}</p>
                                             </Col>
                                             <Col sm={1} className='d-flex' style={{paddingTop:'3%'}}>
                                         
-                                            <Link to={{ pathname: `/user/centre-details/${centre.ID.value}`, state: { centre } }} className='d-flex justify-content-end TextColor' style={{paddingLeft:'160%',marginBottom:'-2%',textDecoration:'none',fontSize:'14px',fontWeight:'600'}}>
+                                            <Link to={{ pathname: `/user/centre-details/${centre.ID.value}`, state: { centre } }} className='d-flex justify-content-end RedColor' style={{paddingLeft:'160%',marginBottom:'-2%',textDecoration:'none',fontSize:'14px',fontWeight:'600'}}>
                                             <ChevronRight className="" size={18} />
                                             </Link>
                                             </Col>
                                         </Row>
                                         
-                                        <Row style={{backgroundColor:'#f9f2f1',width:'100%',marginLeft:'0%'}}>
+                                        <Row style={{backgroundColor:'#F5F5DC',width:'100%',marginLeft:'0%'}}>
                                             <Col sm={6}>
                                                 <Card.Text>
-                                                    <p style={{paddingTop:'1%'}}><strong>Opening Days: </strong>{centre.Opening_Days.value}</p> 
+                                                    <p className='PurpleColor' style={{paddingTop:'1%'}}><strong>Opening Days: </strong>{centre.Opening_Days.value}</p> 
                                                 </Card.Text>
                                             </Col>
                                             <Col sm={6}>

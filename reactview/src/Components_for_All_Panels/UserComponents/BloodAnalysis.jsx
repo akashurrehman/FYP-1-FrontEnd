@@ -128,10 +128,10 @@ const BloodAnalysis = () => {
         setIsHover(true);
     };
     const ButtonStyle = {
-        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(90, 5, 5)',
+        backgroundColor: isHover ? '#D64045' : '#27213C',
         color: isHover ? 'white' : 'white',
         transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
-        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
+        border: isHover ? '' : '1px solid #27213C',
         transitionDuration: isHover ? '' : '0.1s',
     };
 
@@ -154,7 +154,7 @@ const BloodAnalysis = () => {
                 <Row className='mt-0 mb-5 p-1'>
                     <Col sm={12} className='LoginContainerCol'>
                         <Image src={image} rounded style={{marginBottom: "3%",marginTop:'-5%',height: "7rem",opacity:'1.0'}}></Image>
-                        <h4 className="TextColor" style={{fontFamily:'cursive'}}>Check your eligibility</h4>
+                        <h4 className="RedColor" style={{fontFamily:'cursive'}}>Check your eligibility</h4>
                         <p className="justify-content mb-3 mt-3" style={{fontSize:'13px',color:'grey'}}>
                             "Dear Donor!", Your donation changes lives. But not everyone can donate blood (including plasma), for a few reasons. Check your eligibility to donate today.
                         </p>

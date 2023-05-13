@@ -48,25 +48,25 @@ const SingleAppointment = (props) => {
                                 <Card className="UserCard" border="secondary" style={{ width: '45rem' }}>
                                     <Row>
                                         <Col sm={11} style={{paddingLeft: '3.7%',paddingTop: '2%',textAlign:'left'}}>
-                                            <Card.Title><h4 style={{color:'rgb(116, 10, 10)'}}>{appointment?.CentreName?.value}</h4></Card.Title>
+                                            <Card.Title><h4 className='RedColor'>{appointment?.CentreName?.value}</h4></Card.Title>
                                         </Col>
                                         <Col sm={1} style={{paddingRight: '5%',paddingTop: '2%',textAlign:'right'}}>
-                                            <Nav.Link onClick={()=>{setShowConfirmationBox(true);}}><BsTrash className="TextColor" size={16} /></Nav.Link>
+                                            <Nav.Link onClick={()=>{setShowConfirmationBox(true);}}><BsTrash className="RedColor" size={16} /></Nav.Link>
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <Card.Text>
                                             <Row>
                                                 <Col sm={6}>
-                                                    <p style={{marginTop:'-3%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donor Name: </strong>{appointment?.DonorName?.value}</p>
-                                                    <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Blood Group: </strong>{appointment?.BloodGroup?.value}</p>
-                                                    <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donor Email: </strong>{appointment?.DonorEmail?.value}</p>
-                                                    <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donor City: </strong>{appointment?.City?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-3%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donor Name: </strong>{appointment?.DonorName?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Blood Group: </strong>{appointment?.BloodGroup?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donor Email: </strong>{appointment?.DonorEmail?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Donor City: </strong>{appointment?.City?.value}</p>
                                                 </Col>
                                                 <Col sm={6}>
-                                                    <p style={{marginTop:'-3%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Centre Name: </strong>{appointment?.CentreName?.value}</p>
-                                                    <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Timings: </strong>{appointment?.Timings?.value}</p>
-                                                    <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Location: </strong>{appointment?.Location?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-3%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Centre Name: </strong>{appointment?.CentreName?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Timings: </strong>{appointment?.Timings?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Location: </strong>{appointment?.Location?.value}</p>
                                                 </Col>
                                             </Row>
                                         
@@ -76,7 +76,7 @@ const SingleAppointment = (props) => {
                                             <ListGroup.Item></ListGroup.Item>
                                             <ListGroup.Item>
                                                 <div>
-                                                    <Link to={{ pathname: `/user/appointment-details/${appointment.ID.value}`, state: { appointment } }} className='d-flex justify-content-end TextColor' style={{marginBottom:'-3%',textDecoration:'none',fontSize:'14.5px',fontWeight:'600'}}>
+                                                    <Link to={{ pathname: `/user/appointment-details/${appointment.ID.value}`, state: { appointment } }} className='d-flex justify-content-end RedColor' style={{marginBottom:'-3%',textDecoration:'none',fontSize:'14.5px',fontWeight:'600'}}>
                                                         View details <ArrowRight className="m-1" size={16} />
                                                     </Link>
                                                 </div>
