@@ -8,6 +8,7 @@ import './style/navbar.css'
 import { useAuth } from './../../Panels/BloodDonationCentre/Auth/AuthContext';
 function Header(props) {
   const {handleLogout} = useAuth();
+  
   const handleLogoutClick=()=>{
     handleLogout();
     console.log('In Logout')
