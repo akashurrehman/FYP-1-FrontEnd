@@ -857,9 +857,9 @@
     <bd:hasRole>USER</bd:hasRole>
     <bd:hasPassword>345678912user</bd:hasPassword>
     <bd:hasPersonContactNo>+92 333 1234563</bd:hasPersonContactNo>
-    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasPersonGender>Male</bd:hasPersonGender>
     <bd:hasPersonAddress>H03 A-Block DHA, Lahore</bd:hasPersonAddress>
+    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasUserName>salman123</bd:hasUserName>
     <bd:userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
     <bd:hasPersonDateOfBirth>January 03,2001</bd:hasPersonDateOfBirth>
@@ -867,6 +867,7 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
     <bd:hasPersonEmail>salman@email.com</bd:hasPersonEmail>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    <bd:hasPersonBloodGroup>AB+</bd:hasPersonBloodGroup>
     <bd:hasPersonCity>Lahore</bd:hasPersonCity>
   </bd:Request_Maker>
   <bd:Appointment rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment_001">
@@ -878,8 +879,8 @@
     <bd:hasRequestMakerEmail>ali@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerContactNo>+92 333 1234561</bd:hasRequestMakerContactNo>
-    <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
-    <bd:hasRequestDonatedBy>null</bd:hasRequestDonatedBy>
+    <bd:hasRequestDonatedBy>Person_1683818863966</bd:hasRequestDonatedBy>
+    <bd:hasRequestDonorName>Muhammad Abu Hurairah</bd:hasRequestDonorName>
     <bd:hasRequestMakerID>RM001</bd:hasRequestMakerID>
     <bd:hasRequestMakerBloodGroup>A+</bd:hasRequestMakerBloodGroup>
     <bd:hasRequestMakerMessage>I need A positive blood group urgently for thelicimia pateient.</bd:hasRequestMakerMessage>
@@ -909,23 +910,39 @@
       </bd:Donor>
     </bd:bloodRequestMakeby>
   </bd:Blood_Request>
-  <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684007724216">
-    <bd:hasPersonGender>Male</bd:hasPersonGender>
-    <bd:hasRole>USER</bd:hasRole>
-    <bd:hasPersonContactNo>03001234567</bd:hasPersonContactNo>
-    <bd:hasPassword>$2a$10$N0XN48XwJUnTNN.j.7/tH.RcPaCnrj92n6ETYSkFEY/DRuRhKzhq2</bd:hasPassword>
-    <bd:hasUserName>hurairah111</bd:hasUserName>
-    <bd:hasPersonFullName>Muhammad Abu Hurairah</bd:hasPersonFullName>
-    <bd:hasPersonCity>Lahore</bd:hasPersonCity>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
-    <bd:hasPersonID>Person_1684007724216</bd:hasPersonID>
-    <bd:hasPersonBloodGroup>A+</bd:hasPersonBloodGroup>
-    <bd:hasPersonEmail>abuhurairah@email.com</bd:hasPersonEmail>
-    <bd:hasPersonEligibilityStatus>Not Eligible</bd:hasPersonEligibilityStatus>
-    <bd:hasPersonAddress>Qazi Town, Multan Road, Lahore</bd:hasPersonAddress>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
-    <bd:hasPersonDateOfBirth>2000-12-23</bd:hasPersonDateOfBirth>
-  </bd:Person>
+  <bd:Blood_Request rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1683819004358">
+    <bd:hasRequestMakerHospital>Jinnah Hospital</bd:hasRequestMakerHospital>
+    <bd:hasRequestMakerMessage>I need B- (-ve) blood group urgently in Jinnah Hospital, Lahore.</bd:hasRequestMakerMessage>
+    <bd:hasRequestMakerEmail>jamshaid@email.com</bd:hasRequestMakerEmail>
+    <bd:hasRequestMakerBloodGroup>B-</bd:hasRequestMakerBloodGroup>
+    <bd:hasRequestMakerContactNo>03001234567</bd:hasRequestMakerContactNo>
+    <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
+    <bd:hasRequestMakerLocation>LDA Ever New, 1, Lahore</bd:hasRequestMakerLocation>
+    <bd:bloodRequestMakeby>
+      <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1683818863966">
+        <bd:hasPersonID>Person_1683818863966</bd:hasPersonID>
+        <bd:hasPersonEligibilityStatus>Not Eligible</bd:hasPersonEligibilityStatus>
+        <bd:hasRole>USER</bd:hasRole>
+        <bd:hasPersonDateOfBirth>2000-12-23</bd:hasPersonDateOfBirth>
+        <bd:hasPersonCity>Lahore</bd:hasPersonCity>
+        <bd:hasPersonAddress>Qazi Town, Multan Road, Lahore</bd:hasPersonAddress>
+        <bd:hasPersonBloodGroup>A+</bd:hasPersonBloodGroup>
+        <bd:hasUserName>hurairah111</bd:hasUserName>
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
+        <bd:hasPassword>$2a$10$NCgnpZ6uo7S3u7zJ2Kt67OIBAItpvREeA4uAJniL56NWajz7DQErK</bd:hasPassword>
+        <bd:hasPersonContactNo>03001234567</bd:hasPersonContactNo>
+        <bd:hasPersonFullName>Muhammad Abu Hurairah</bd:hasPersonFullName>
+        <bd:hasPersonGender>Male</bd:hasPersonGender>
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
+        <bd:hasPersonEmail>abuhurairah@email.com</bd:hasPersonEmail>
+      </bd:Person>
+    </bd:bloodRequestMakeby>
+    <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
+    <bd:hasRequestMakerName>Jamshaid</bd:hasRequestMakerName>
+    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
+    <bd:hasRequestDonatedBy>null</bd:hasRequestDonatedBy>
+    <bd:hasRequestMakerID>Request_1683819004358</bd:hasRequestMakerID>
+  </bd:Blood_Request>
   <bd:Campaign rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1">
     <bd:hasCampaignsPostDate>Jan 02,2000</bd:hasCampaignsPostDate>
     <bd:hasCampaignTitle>Donate for TURKEY</bd:hasCampaignTitle>

@@ -14,7 +14,6 @@ import MyBloodRequests from './MyBloodRequests';
 import MyBloodDonations from './MyBloodDonations';
 import MyAppointments from './MyAppointments';
 import AcceptedBloodRequests from './AcceptedBloodRequests';
-import userLoginService from '../../../Services/Api/User/UserLoginService';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -92,34 +91,31 @@ function TabPanel(props) {
                         <Tab label="My Blood Donations" {...a11yProps(2)} />
                         <Tab label="My Appointments" {...a11yProps(3)} />
                         <Tab label="Accepted Requests" {...a11yProps(4)} />
-                        <Tab label="Log Out" {...a11yProps(5)} onClick={(e) => {
-                                userLoginService.logout();
-                                window.location.reload();
-                            }} />
+                        <Tab label="Log Out" {...a11yProps(5)} />
                         </Tabs>
                     </Box>
                     <TabPanel value={value} index={0}>
-                        <div style={{marginLeft:'30%',width:'90%'}}>
+                        <div style={{marginLeft:'45%',width:'90%'}}>
                             <MyPersonalDetails></MyPersonalDetails>
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <div style={{marginLeft:'20%',width:'100%'}}>
+                        <div style={{marginLeft:'25%',width:'80%'}}>
                             <MyBloodRequests></MyBloodRequests>
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <div style={{marginLeft:'20%',width:'100%'}}>
+                        <div style={{marginLeft:'25%',width:'80%'}}>
                             <MyBloodDonations></MyBloodDonations>
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={3}>
-                        <div style={{marginLeft:'20%',width:'100%'}}>
+                        <div style={{marginLeft:'18%',width:'80%'}}>
                             <MyAppointments></MyAppointments>
                         </div>
                     </TabPanel>
                     <TabPanel value={value} index={4}>
-                        <div style={{marginLeft:'20%',width:'100%'}}>
+                        <div style={{marginLeft:'25%',width:'80%'}}>
                             <AcceptedBloodRequests></AcceptedBloodRequests>
                         </div>
                     </TabPanel>

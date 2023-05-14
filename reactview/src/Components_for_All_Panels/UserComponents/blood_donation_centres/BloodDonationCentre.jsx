@@ -46,13 +46,13 @@ const BloodDonationCentre = () => {
         <div style={{marginTop:'10%',marginBottom:'4%'}}>
             <Container className='d-flex justify-content-center'>
                 <Row>
-                    <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Find a blood donation centre near you</h2>
+                    <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Find a blood donation centre near you</h2>
                 </Row>
             </Container>
         </div>
 
 
-        <div style={{borderRadius:'10% 30% 50% 70%',backgroundColor:'#F5F5DC',marginBottom:'0%'}}>
+        <div style={{borderRadius:'10% 30% 50% 70%',backgroundColor:'#f9f2f1',marginBottom:'0%'}}>
             <div style={{marginTop:'-1%',marginBottom:'0%',paddingTop:'0%',marginBottom:'0%',position:'absolute',width:'100%'}}>
                 <Container className='d-flex justify-content-center'>
                     <Row style={{width:'40%'}}>
@@ -62,7 +62,7 @@ const BloodDonationCentre = () => {
                                 aria-label="Search Blood Donations"
                                 aria-describedby="basic-addon2"
                             />
-                            <InputGroup.Text id="basic-addon2"><Search className="m-1 PurpleColor" size={18} /></InputGroup.Text>
+                            <InputGroup.Text id="basic-addon2"><Search className="m-1 IconColor" size={18} /></InputGroup.Text>
                         </InputGroup>
                     </Row>
                 </Container>
@@ -73,7 +73,7 @@ const BloodDonationCentre = () => {
                 <Container className='d-flex justify-content-center'>
                     <Row>
                         <p className='d-flex'>
-                            <div className='TextCursive PurpleColor' style={{margin:'5px',paddingRight:'2px'}}>Filter by:</div>
+                            <div className='TextCursive' style={{margin:'5px',paddingRight:'2px'}}>Filter by:</div>
 
                             <DropdownButton
                                 id="dropdown-autoclose-false dropdown-menu-align-end"
@@ -185,21 +185,23 @@ const BloodDonationCentre = () => {
             <Container>
                 <Row>
                     <Col sm={7}>
-                        <img src={Image1} width="100%" height="450rem" />
+                        <img src={Image1} width="100%" height="500rem" />
                     </Col>
                     
                     <Col sm={5}>
                         <div style={{paddingTop:"23%",paddingLeft:"20%",textAlign:"left"}}>
-                            <h5 className="PurpleColor">Thinking about becoming a blood donor?</h5>
-                            <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Make Blood Donation. Give Life gift.</h3>
+                            <h5>Thinking about becoming a blood donor?</h5>
+                            <h1 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Make Blood Donation. Give Life gift.</h1>
                             <p className="text-left">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
-                            <Button href='/user/make-blood-donation' size='sm' variant="flatSolid">Make Blood Donation<ArrowRight className="" size={20} /></Button>
+                            <Button href='/user/post-blood-request' variant="flatSolid">Make Blood Donation<ArrowRight className="" size={22} /></Button>
                         </div>
                         
                     </Col>
                 </Row>
             </Container>
         </div>
+
+        <UserPanelBackToTopButton></UserPanelBackToTopButton>
 
         <UserPanelFooter></UserPanelFooter>
 
