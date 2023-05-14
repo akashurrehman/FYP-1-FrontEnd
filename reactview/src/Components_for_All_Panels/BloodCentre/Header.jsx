@@ -5,14 +5,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Dropdown } from 'react-bootstrap';
 import './style/navbar.css'
-import { useAuth  }  from './../../Panels/BloodDonationCentre/Auth/AuthContext';
 
 function Header(props) {
-  const {handleLogout} = useAuth();
-  const handleLogoutClick=()=>{
-    handleLogout();
-    console.log('In Logout')
-  }
   return (
     <Navbar style={{backgroundColor:"#153250",color:"#FFFFFF",paddingLeft:"60px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
       <Container fluid>
@@ -76,7 +70,7 @@ function Header(props) {
             <Dropdown.Menu style={{position: 'absolute', left: '-450%'}}>
                 <Dropdown.Item href="/bloodCenter/MyAccount">My Account <i class="fa fa-user-md" aria-hidden="true"></i></Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Help <i class="fa fa-question-circle" aria-hidden="true"></i></Dropdown.Item>
-                <Dropdown.Item onClick={handleLogoutClick}>Logout <i class="fa fa-share" aria-hidden="true"></i></Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Logout <i class="fa fa-share" aria-hidden="true"></i></Dropdown.Item>
             </Dropdown.Menu>
         </Dropdown>
           </Form>

@@ -10,24 +10,20 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 import {handleRequestsPrint} from "./PrintedFiles/BloodRequestsPrint";
-import { useAuth  }  from './Auth/AuthContext';
-import jwt_decode from 'jwt-decode';
-
-
 const BloodRequests=()=> {  
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
 
-  const {token} = useAuth();
+  // const {token} = useAuth();
   const authCentre=()=>{
-    if(!token){
-      window.location.href = "/Login";
-    }
+    //if(!token){
+      //   window.location.href = "/Login";
+      // }
       console.log("authCentre");
   }
 
 //This will get the id  from the token if user is login
-  const {id} = jwt_decode(token);
+// const {id} = jwt_decode(token);
 
   const [filterByCenter, setFilterByCenter] = useState(false);
   const [centerId, setCenterId] = useState('');
@@ -44,10 +40,10 @@ const BloodRequests=()=> {
                 .catch((error) => console.log(error));
         };
         const handleReject = (id) => {
-            // axios
-            //     .post(`http://localhost:8081/api/users/bloodrequest/reject/${id}`)
-            //     .then((response) => console.log(response.data))
-            //     .catch((error) => console.log(error));
+            axios
+                .post(`http://localhost:8081/api/users/bloodrequest/reject/${id}`)
+                .then((response) => console.log(response.data))
+                .catch((error) => console.log(error));
         };
         const handleChange = (state) => {
           // Get the selected rows from the state

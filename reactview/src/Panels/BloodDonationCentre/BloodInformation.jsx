@@ -12,9 +12,6 @@ import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth  }  from './Auth/AuthContext';
-import jwt_decode from 'jwt-decode';
-
 
 
 const BloodInformation=()=> {
@@ -30,16 +27,16 @@ const BloodInformation=()=> {
     });
 
     const [showModal, setShowModal] = useState(false);
-    const {token} = useAuth();
+    // const {token} = useAuth();
     const authCentre=()=>{
-      if(!token){
-        window.location.href = "/Login";
-      }
+      //if(!token){
+        //   window.location.href = "/Login";
+        // }
         console.log("authCentre");
     }
 
   //This will get the id  from the token if user is login
-  const {id} = jwt_decode(token);
+  // const {id} = jwt_decode(token);
     useEffect(() => {
       authCentre();
     }, []);
