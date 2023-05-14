@@ -1,136 +1,80 @@
-import React, { useEffect, useRef } from "react";
-import "react-circular-progressbar/dist/styles.css";
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import "../adminscreen.css";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import DataTable from 'react-data-table-component';
 
-export default function Donors() {
-  const [users, setUsers] = React.useState([]);
-  const pdfContainerRef = useRef(null);
+const DonorsTables = () =>{
+  const [search, setSearch] = useState("");
+  const [countries, setCountries] = useState([]);
+  const [filteredcountries, setFilteredCountries] = useState([]);
+ 
 
-  useEffect(() => {
-    axios
-      .get(
-        "http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo"
+  const getCountries = async () => {
+    try {
+      const response = await axios.get("https://restcountries.com/v2/all");
+      console.log(response);
+      setCountries(response.data);
+      setFilteredCountries(response.data);
+    } catch (error) {
+      console.log(error)
+      console.log("Not Data Found")
+    }
+  };
+
+  const columns = [
+
+    {
+      name: "Country Name",
+      selector: (row) => row.name,
+      sortable: true
+    },
+    {
+      name: "Country Native Name",
+      selector: (row) => row.nativeName
+    },
+    {
+      name: "Country Capital",
+      selector: (row) => row.capital
+    },
+    {
+      name: "Country Flag",
+      selector: (row) => <img width ={50} height={50} src ={row.flag}/>
+    },
+    {
+      name: 'Action',
+      cell: (row) => (
+        <button className='btn btn-primary' onClick={() => alert(row.alpha2Code)}> Edit</button>
       )
-      .then((response) => {
-        console.log("News Data Response is:", response.data.results.bindings);
-        // console.log("News Data ssssssssssss is:", response.data.results.bindings[0].news);
-        const faqs = response.data.results.bindings.map((faq) => {
-          return {
-            name: faq.Name.value,
-            email: faq.Email.value,
-            id: faq.ID.value,
-            gender: faq.Gender.value,
-            location: faq.Location.value,
-            message: faq.Message.value,
-            bloodGroup: faq.Blood_Group.value,
-            contact: faq.Contact.value,
-            city: faq.City.value,
-          };
-        });
-        setUsers(faqs);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    }
+  ];
+  useEffect(()=>{
+    getCountries();
   }, []);
 
-  const generatePDF = () => {
-    const doc = new jsPDF();
-    const campaignsContainer = pdfContainerRef.current;
+  useEffect(()=>{
+    const result = countries.filter(country =>{
+      return country.name.toLowerCase().match(search.toLowerCase());
+    });
+    setFilteredCountries(result);
+  }, [search])
 
-    const buttons = campaignsContainer.querySelectorAll(".btn");
-    buttons.forEach((button) => (button.style.display = "none"));
+  return (<DataTable title = "Donors List" columns={columns} data={filteredcountries}
+  pagination
+  fixedHeader
+  fixedHeaderScrollHeight='450px'
+  selectableRows
+  selectableRowsHighlight
+  highlightOnHover
+  
+  actions ={
+    <button className='btn btn-info'> Download</button>
+  }
+  subHeader
+  subHeaderComponent={
 
-    html2canvas(campaignsContainer)
-      .then((canvas) => {
-        buttons.forEach((button) => (button.style.display = "inline-block"));
+    <input type = "text" placeholder='Search here' className='w-25 form-control'
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}/>
+  }/>);
+};
+export default DonorsTables;
 
-        const imageData = canvas.toDataURL("image/png");
-
-        doc.addImage(imageData, "PNG", 10, 10, 190, 0);
-
-        doc.save("donors.pdf");
-      })
-      .catch((error) => {
-        buttons.forEach((button) => (button.style.display = "inline-block"));
-
-        console.error("Error generating PDF:", error);
-      });
-  };
-  return (
-    <div className="turningred">
-      <div className="pdf-campaigns-container" ref={pdfContainerRef}>
-        <div className="buttonInDonor">
-          <h1 className="color">Donors List</h1>
-          <button className="btn btn-danger" onClick={generatePDF}>
-            Generate PDF
-          </button>
-        </div>
-        {users.map((faq, index) => (
-          <div className="headin" key={index}>
-            <h4> Name: {faq.name}</h4>
-            <div className="row">
-              <div className="col-lg-4 col-12">
-                {" "}
-                <p>
-                  {" "}
-                  <strong>ID:</strong> {faq.id}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  {" "}
-                  <strong>Email: </strong>
-                  {faq.email}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  <strong>Gender: </strong> {faq.gender}{" "}
-                </p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-4 col-12">
-                <p>
-                  {" "}
-                  <strong>Location: </strong>
-                  {faq.location}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  {" "}
-                  <strong>Message:</strong> {faq.message}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  <strong>Blood Group:</strong> {faq.bloodGroup}{" "}
-                </p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-4">
-                {" "}
-                <p>
-                  {" "}
-                  <strong>Contact:</strong> {faq.contact}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4">
-                <p>
-                  {" "}
-                  <strong>City: </strong> {faq.city}{" "}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
