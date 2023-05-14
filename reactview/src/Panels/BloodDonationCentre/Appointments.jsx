@@ -11,21 +11,24 @@ import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 import './Styling/print.css';
 import { handleAppointmentPrint } from "./PrintedFiles/AppointmentPrint";
+import { useAuth } from "./Auth/AuthContext";
+import jwt_decode from 'jwt-decode';
+
 const Appointments=()=> {  
   const [data, setData] = useState([]);
-  // const {token} = useAuth();
+  const {token} = useAuth();
   const authCentre=()=>{
-    //if(!token){
-      //   window.location.href = "/Login";
-      // }
+    if(!token){
+      window.location.href = "/Login";
+    }
       console.log("authCentre");
   }
 
-//This will get the id  from the token if user is login
-// const {id} = jwt_decode(token);
+  //This will get the id  from the token if user is login
+  const {id} = jwt_decode(token);
   useEffect(() => {
     // fetch data from the backend
-    fetch('http://localhost:8081/api/users/appointment/byCentreID/Centre_001')
+    fetch(`http://localhost:8081/api/users/appointment/byCentreID/${id}`)
       .then((response) => response.json())
       .then((data) => {
         // map the bindings array to an array of objects
