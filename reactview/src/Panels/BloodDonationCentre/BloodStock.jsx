@@ -17,6 +17,9 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {handleBloodStockPrint} from "./PrintedFiles/BloodStockPrint";
+import { useAuth  }  from './Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
+
 
 const BloodStock=()=> {
 
@@ -35,16 +38,16 @@ const BloodStock=()=> {
     handleBloodStockPrint(blood);
     console.log("Handle Print button in Blood Stock!")
   };
-  // const {token} = useAuth();
+  const {token} = useAuth();
   const authCentre=()=>{
-    //if(!token){
-      //   window.location.href = "/Login";
-      // }
+    if(!token){
+      window.location.href = "/Login";
+    }
       console.log("authCentre");
   }
 
 //This will get the id  from the token if user is login
-// const {id} = jwt_decode(token);
+  //const {id} = jwt_decode(token);
   
   useEffect(() => {
     const fetchData = async () => {

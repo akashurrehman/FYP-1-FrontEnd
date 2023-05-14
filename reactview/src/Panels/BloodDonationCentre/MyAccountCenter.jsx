@@ -7,35 +7,30 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Header from '../../Components_for_All_Panels/BloodCentre/Header';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
-import { Bar } from 'react-chartjs-2';
-import { useHistory } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useAuth  }  from './Auth/AuthContext';
-// import jwt_decode from 'jwt-decode';
+import { useAuth  }  from './Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
 
 
 //import Link from 'react-router-dom/Link';
 
 
 const MyAccountCenter=()=> {
-  // const { token } = useAuth();
+  const { token } = useAuth();
 
-  // //Get the ID from the token
-  // const {ID}= jwt_decode(token);
+  //Get the ID from the token
+  const {id}= jwt_decode(token);
  
   const authCentre=()=>{
-    //if(!token){
-      //   window.location.href = "/Login";
-      // }
+    if(!token){
+        window.location.href = "/Login";
+      }
       console.log("authCentre");
   }
 
 //This will get the id  from the token if user is login
-// const {id} = jwt_decode(token);
   const ViewAllRequests = () => {
     toast.success("You are redirected to View All Requests Page", {position: toast.POSITION.TOP_CENTER});
     window.location.href = '/bloodCenter/bloodRequests';
@@ -68,7 +63,7 @@ const MyAccountCenter=()=> {
           fetchData("http://localhost:8081/api/users/bloodrequest/byUserID/Tokenid"),
           fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo"),
           fetchData("http://localhost:8081/api/users/accepted/bloodRequests/PassLoginId"),
-          fetchData("http://localhost:8081/api/users/appointment/byCentreID/Centre_001"),
+          fetchData(`http://localhost:8081/api/users/appointment/byCentreID/${id}`),
         ]);
         setData(dataRes);
         setDonors(donorsRes);

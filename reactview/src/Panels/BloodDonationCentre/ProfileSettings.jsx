@@ -33,18 +33,18 @@ const ProfileSettings=()=> {
   });
 
   const [showModal, setShowModal] = useState(false);
-  // const {token} = useAuth();
+  const {token} = useAuth();
     const authCentre=()=>{
-      //if(!token){
-        //   window.location.href = "/Login";
-        // }
+      if(!token){
+          window.location.href = "/Login";
+        }
         console.log("authCentre");
     }
 
   //This will get the id  from the token if user is login
-  // const {id} = jwt_decode(token);
+  const {id} = jwt_decode(token);
   useEffect(()=>{
-    axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/CR001').then((response)=>{
+    axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${id}`).then((response)=>{
       const { results } = response.data;
       if (results && results.bindings && results.bindings.length > 0) {
         const centerData = results.bindings[0];
@@ -177,11 +177,9 @@ const handleSubmit = (event) => {
   }
 };
 
-const CENTER_ID = 'CR001';
-
 const handleDelete = () => {
   axios
-    .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/delete/${CENTER_ID}`)
+    .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/delete/${id}`)
     .then((response) => {
       console.log(response.data);
       toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
@@ -196,7 +194,7 @@ const handleDelete = () => {
 
 const handleConfirm = () => {
   axios
-  .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/update/${CENTER_ID}`, center)
+  .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/update/${id}`, center)
   .then((response) => {
     console.log(response.data);
     toast("Profile Updated Successfully");
