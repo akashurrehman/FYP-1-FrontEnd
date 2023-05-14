@@ -2,88 +2,65 @@
   overflow-x: hidden;
 } */
 
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  background-color: #dc3545;
-}
-.nav-pills .nav-link,
-.nav-pills .show > .nav-link {
-  color: #dc3545;
-  font-weight: 500;
-}
-
-.reflex {
+.reflex
+{
   display: flex;
 }
-.flexes {
+.flexes
+{
   display: flex;
   margin-top: 30px;
 }
-.marginss {
+.marginss{
   margin-top: 30px;
 }
-.red {
-  color: rgb(200, 5, 5);
+.red{
+  color:rgb(200, 5, 5);
 }
 .maincontainer {
   /* display: flex; */
   margin-top: 55px;
   /* background-color: rgb(203, 203, 204); */
 }
-.cup {
+.cup{
   margin-top: 12px;
 }
-.Appcolor {
+.Appcolor{
   color: rgb(200, 5, 5);
 }
-.rang {
+.rang{
   color: rgb(255, 2, 2);
 }
-.bton {
+.bton{
   float: right;
 }
-@media print {
-  .bton {
-    display: none !important;
-  }
+.settingss{
+ width: 100%;
 }
-.generatePDFButton {
-  width: 100%;
-  margin-top: 5px;
-  display: flex;
-  justify-content: flex-end;
-}
-.buttonInDonor {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  height: 40px;
-  margin-bottom: 15px;
-}
-.settingss {
-  width: 100%;
-}
-.numinput {
-  width: 50px;
+.numinput
+{
+  width:50px;
 }
 
-.numsettingss {
+.numsettingss{
   width: 50px;
-  margin-right: 20px;
+  margin-right: 20px; 
   /* background-color: black; */
-}
-.inputcont {
+ }
+.inputcont{
   margin-top: 25px;
 }
-.settings {
+.settings{
   display: flex;
   margin-top: 25px;
   /* justify-content: space-around; */
-}
-.centered {
+ 
+   
+ }
+ .centered
+ {
   margin-left: 10%;
-}
+ }
 
 .turningred {
   margin-left: 10px;
@@ -95,7 +72,7 @@
   color: rgb(200, 5, 5);
   /* color: rgb(116, 10, 10); */
 }
-h5 {
+h5{
   color: rgb(200, 5, 5);
 }
 .text-on-image {
@@ -130,12 +107,6 @@ h5 {
   flex-direction: row;
   margin-top: 20px;
   margin-left: 80px;
-}
-.carddives {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  margin-top: 20px;
 }
 
 .mail {
@@ -190,18 +161,20 @@ h5 {
   /* justify-content: space-between; */
   /* margin-top: 15px; */
 }
-.hello {
+.hello{
   background-color: black;
   width: 100px;
 }
-.cont {
+.cont{
+
   width: 500px;
-  height: 150px;
+  height : 150px;
   /* background-color: rgb(255, 251, 0); */
   text-align: center;
   justify-content: center;
   margin-left: 23%;
   margin-top: 10px;
+
 }
 
 .str2 {
@@ -216,66 +189,15 @@ h5 {
   width: 160px;
   height: 160px;
 }
-.roll2 {
+.roll2
+{
   width: 160px;
   height: 160px;
 }
-.hey {
+.hey{
   color: blue;
 }
 
-@media screen and (max-width: 769px) {
-}
-
-.popup-container {
-  position: fixed;
-  top: 40%;
-  /* left: 50%; */
-  width: 50%;
-  height: 100%;
-}
-
-.popup-overlay {
-  position: absolute;
-  /* top: 0;
-  left: 0; */
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  /* background-color: rgba(0, 0, 0, 0.5); */
-}
-
-.popup {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 2;
-}
-
-.popup input {
-  display: block;
-  margin-bottom: 10px;
-  width: 100%;
-  padding: 6px;
-}
-
-.popup h4 {
-  color: #bb2d3b;
-}
-.popup p {
-  font-weight: bold;
-  margin: 0;
-}
-.popup .buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.popup .buttons button {
-  margin-left: 10px;
+@media screen and (max-width:769px) {
+ 
 }
