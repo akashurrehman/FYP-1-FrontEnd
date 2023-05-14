@@ -47,7 +47,7 @@ public class User {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Route to Get Data of all Registered Users
@@ -640,8 +640,7 @@ public class User {
     }
 
     /*
-     * Get blood donations information 
-     * Made by LogeedIn user by passing userID
+     * GET the Information of the Donors by passing ID
      */
     @GetMapping("/api/users/donate/byUserID/{id}")
     public ResponseEntity<String> GetdonatebyUserID(@PathVariable String id) {
@@ -915,8 +914,7 @@ public class User {
     }
 
     /*
-     * Get accepted blood requests information 
-     * Made by user by passing userID who is loggedIN
+     * View Blood Requests entered by users by passing ID
      */
     @GetMapping("/api/users/accepted/bloodRequests/{id}")
     public ResponseEntity<String> GetAcceptedBloodRequestbyID(@PathVariable String id) {
@@ -961,8 +959,7 @@ public class User {
     }
 
     /*
-     * Get blood requests information 
-     * Made by LogeedIn user by passing userID
+     * View Blood Requests entered by users by passing ID
      */
     @GetMapping("/api/users/bloodrequest/byUserID/{id}")
     public ResponseEntity<String> GetbloodrequestbyUserID(@PathVariable String id) {
@@ -1006,11 +1003,10 @@ public class User {
     }
 
     /*
-     * For accepting request makers blood requests
+     * Edit the User Information by passing ID
      * 
-     * pass blood request id in URL 
-     * Give id value in 'donateBy' parameter who donated to this particular request
-     * Give name value in 'donateName' parameter who donated to this particular request
+     * @param id
+     * User can edit the information only eligibility status
      */
     @PutMapping("/api/users/accept/bloodRequest/{ID}")
     public ResponseEntity<String> acceptBloodRequest(@RequestBody String User, @PathVariable String ID)
@@ -1046,6 +1042,7 @@ public class User {
 
     /*
      * Appointment Details of Users such as Center, Timing
+     * Missing Sparql Query
      * Add the Appointment Details of Users in the Database
      */
     @PostMapping("/api/user/appointment/AppointmentDetails/add")
@@ -1122,10 +1119,10 @@ public class User {
         return "User: " + id;
     }
 
-
     /*
      * Delete the Appointment Details of Users by passing ID
-    */
+     */
+
     @DeleteMapping("/api/user/appointment/AppointmentDetails/delete/{id}")
     public ResponseEntity<String> DeleteAppointment(@PathVariable String id) throws IOException {
 
@@ -1154,8 +1151,7 @@ public class User {
     }
 
     /*
-     * GET the Appointment Details of Users by passing USER ID 
-     * (Get appointments made by particular user)
+     * GET the Appointment Details of Users by passing User ID
      * Appointment details such as center, or timing
      */
     @GetMapping("/api/users/appointment/byUserID/{id}")
@@ -1201,8 +1197,7 @@ public class User {
     }
 
     /*
-     * GET the Appointment Details of Users by passing Center ID 
-     * (Get Booked appointments in particular centre)
+     * GET the Appointment Details of Users by passing User ID
      * Appointment details such as center, or timing
      */
     @GetMapping("/api/users/appointment/byCentreID/{id}")
@@ -1248,9 +1243,8 @@ public class User {
     }
 
     /*
-     * Get particular Appointment details by passing appointment ID
-     * Appointment details such as center, or timing
-    */
+     * View Appointments entered by users by passing ID
+     */
     @GetMapping("/api/users/appointments/{id}")
     public ResponseEntity<String> GetAppointmentsbyID(@PathVariable String id) {
 

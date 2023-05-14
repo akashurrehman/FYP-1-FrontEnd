@@ -866,7 +866,6 @@
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    <bd:hasPersonEmail>salman@email.com</bd:hasPersonEmail>
     <bd:hasPersonCity>Lahore</bd:hasPersonCity>
   </bd:Request_Maker>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment_001">
@@ -878,8 +877,8 @@
     <bd:hasRequestMakerEmail>ali@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerContactNo>+92 333 1234561</bd:hasRequestMakerContactNo>
-    <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
-    <bd:hasRequestDonatedBy>null</bd:hasRequestDonatedBy>
+    <bd:hasRequestDonatedBy>Person_1683818863966</bd:hasRequestDonatedBy>
+    <bd:hasRequestDonorName>Muhammad Abu Hurairah</bd:hasRequestDonorName>
     <bd:hasRequestMakerID>RM001</bd:hasRequestMakerID>
     <bd:hasRequestMakerBloodGroup>A+</bd:hasRequestMakerBloodGroup>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
@@ -909,25 +908,6 @@
       </bd:Donor>
     </bd:bloodRequestMakeby>
   </bd:Blood_Request>
-  <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684007724216">
-    <bd:hasPersonGender>Male</bd:hasPersonGender>
-    <bd:hasRole>USER</bd:hasRole>
-    <bd:hasPersonContactNo>03001234567</bd:hasPersonContactNo>
-    <bd:hasPassword>$2a$10$N0XN48XwJUnTNN.j.7/tH.RcPaCnrj92n6ETYSkFEY/DRuRhKzhq2</bd:hasPassword>
-    <bd:hasUserName>hurairah111</bd:hasUserName>
-    <bd:hasPersonFullName>Muhammad Abu Hurairah</bd:hasPersonFullName>
-    <bd:hasPersonCity>Lahore</bd:hasPersonCity>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
-    <bd:hasPersonID>Person_1684007724216</bd:hasPersonID>
-    <bd:hasPersonBloodGroup>A+</bd:hasPersonBloodGroup>
-    <bd:hasPersonEmail>abuhurairah@email.com</bd:hasPersonEmail>
-    <bd:hasPersonEligibilityStatus>Not Eligible</bd:hasPersonEligibilityStatus>
-    <bd:hasPersonAddress>Qazi Town, Multan Road, Lahore</bd:hasPersonAddress>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
-    <bd:hasPersonDateOfBirth>2000-12-23</bd:hasPersonDateOfBirth>
-  </bd:Person>
-  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1">
-    <bd:hasCampaignTitle>Donate for TURKEY.</bd:hasCampaignTitle>
     <bd:hasCampaignDetails>Give food, cloths and money or what ever you have for the injured people of TURKEY who suffered from earth quake.</bd:hasCampaignDetails>
     <bd:hasCampaignsPostDate>null</bd:hasCampaignsPostDate>
     <bd:hasCampaignID>C001</bd:hasCampaignID>

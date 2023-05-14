@@ -1,21 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { Button,Row,Col,Modal, Form, InputGroup, Image } from 'react-bootstrap';
 
+
+import { Container,  Navbar, Nav, Button,NavDropdown,Row,Col,Modal, Form, InputGroup } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import UserPanelHeader from '../UserPanelHeader';
 import userService from '../../../Services/Api/User/UserService';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import image from '../../../Public/user/image/profile.jpg';
 
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import EmailIcon from '@mui/icons-material/EmailSharp';
 import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';
 import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
-import NearMeSharpIcon from '@mui/icons-material/NearMeSharp'
+import ContactsSharpIcon from '@mui/icons-material/ContactsSharp';
+import LocationCitySharpIcon from '@mui/icons-material/LocationCitySharp';
 import WcSharpIcon from '@mui/icons-material/WcSharp';
+import BadgeSharpIcon from '@mui/icons-material/BadgeSharp';
+import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
 import CalendarMonthSharpIcon from '@mui/icons-material/CalendarMonthSharp';
-import WifiCallingSharpIcon from '@mui/icons-material/WifiCallingSharp';
-import { CheckCircleFill, Trash, XCircleFill } from 'react-bootstrap-icons';
+import { Trash } from 'react-bootstrap-icons';
 import userLoginService from '../../../Services/Api/User/UserLoginService';
 import ConfirmationBox from '../ConfirmationBox';
 
@@ -24,6 +32,7 @@ import ConfirmationBox from '../ConfirmationBox';
 export default function MyPersonalDetails() {
 
     const [fullName, setFullName] = React.useState("");
+        const [userName, setUserName] = React.useState("");
         const [bloodGroup, setBloodGroup] = React.useState("");
         const [gender, setGender] = React.useState("");
         const [dob, setDob] = React.useState("");
@@ -32,7 +41,8 @@ export default function MyPersonalDetails() {
         const [contactNo, setContactNo] = React.useState("");
         const [city, setCity] = React.useState("");
         const [address, setAddress] = React.useState("");
-    
+        const [password, setPassword] = React.useState("");
+
         //Form Validation
     const [validated, setValidated] = React.useState(false);
     const handleSubmit = (event) => {
@@ -50,7 +60,7 @@ export default function MyPersonalDetails() {
     const submitForm = async (e) => {
         e.preventDefault();
         try {
-            await axios.put('http://localhost:8081/api/users/edit/' + id, {
+            const response = await axios.put('http://localhost:8081/api/users/edit/' + id, {
                 fullName, bloodGroup, gender, dob, email, contactNo, city, address
             });
             window.location.href = "/user/my-account";
@@ -73,7 +83,8 @@ export default function MyPersonalDetails() {
 
         //Get User details by ID
         const token = localStorage.getItem('token');
-        const decodedToken = token ? jwtDecode(token) : null;
+        const decodedToken = jwtDecode(token);
+
         const id = decodedToken?.id;
         
         const [user, setUser] = useState();
@@ -97,17 +108,7 @@ export default function MyPersonalDetails() {
             });
         };
 
-        const checkUserIsLogin = () => {
-            const check= userLoginService.isLoggedInWithUserRole();
-            if(check){
-                console.log('User is logged in');
-            }
-            else{
-                window.location.href = "/user/login";
-            }
-        };
-
-        useEffect(()=> {getData();checkUserIsLogin();}, []);
+        useEffect(()=> getData, []);
         
         // console.log(id);
         // console.log(user);
@@ -131,9 +132,9 @@ export default function MyPersonalDetails() {
             setIsHover(true);
         };
         const ButtonStyle1 = {
-            backgroundColor: isHover ? '#27213C' : '#D64045',
+            backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'rgb(160, 15, 15)',
             color: isHover ? 'white' : 'white',
-            transform: isHover ? 'scale(0.8)' : 'scale(0.81)',
+            transform: isHover ? 'scale(0.8)' : 'scale(0.82)',
             border: isHover ? '' : '1px solid white',
             transitionDuration: isHover ? '' : '0.45s',
         };
@@ -158,133 +159,99 @@ export default function MyPersonalDetails() {
         
     return (
         <div>
-            <Row>
-                <Col sm={10}>
-                    <div style={{marginLeft:'5%', width:'140%',marginTop:'-12%'}}>
-                        <Row>
-                            <h3 className='PurpleColor'>Welcome <spam className='RedColor' style={{fontFamily:'cursive',textAlign:'left',fontSize:'21px'}}>"{user?.Name?.value}"  </spam>
-                            { user?.EligibilityStatus?.value === 'Eligible' ? (
-                                <>
-                                    <spam style={{color:'green'}}> <CheckCircleFill className="m-1" size={25} /></spam>
-                                </>
-                            ):(
-                                <>
-                                    <spam style={{color:'red'}}><XCircleFill className="m-1" size={25} /></spam>
-                                </>
-                            )}
-                            </h3>
-                        </Row>
-                    
-                        <div style={{marginTop:'5%'}}>
-                            <Row className='PurpleColor'>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>Full Name: </strong>{user?.Name?.value}</p>
-                                </Col>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>Username: </strong>{user?.UserName?.value}</p>
-                                </Col>
-                            </Row>
-                            <Row className='PurpleColor' style={{marginTop:'-1.5%'}}>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>Blood Group: </strong>{user?.BloodGroup?.value}</p>
-                                </Col>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>Gender: </strong>{user?.Gender?.value}</p>
-                                </Col>
-                            </Row>
-                            <Row className='PurpleColor' style={{marginTop:'-1.5%'}}>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>Date Of Birth: </strong>{user?.DOB?.value}</p>
-                                </Col>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>City: </strong>{user?.City?.value}</p>
-                                </Col>
-                            </Row>
-                            <Row className='PurpleColor' style={{marginTop:'-1.5%'}}>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>Contact No: </strong>{user?.ContactNo?.value}</p>
-                                </Col>
-                                <Col sm={6}>
-                                    <p><strong style={{fontFamily:''}}>Email: </strong>{user?.Email?.value}</p>
-                                </Col>
-                            </Row>
-                            <Row className='PurpleColor' style={{marginTop:'-1.5%'}}>
-                                <Col sm={12}>
-                                    <p><strong style={{fontFamily:''}}>Location: </strong>{user?.Address?.value}</p>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm={12} style={{marginTop:'1%',textAlign:'left',marginLeft:'0%'}}>
-                                    <Button variant="default" style={ButtonStyle1} 
-                                        onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                        onClick={(e) => {
-                                            handleShow();
-                                        }}>Update My Account</Button> 
-                                    
-                                </Col>
-                            </Row>
-                            <Row style={{marginTop:'5%', border:'', borderRadius:'7px', backgroundColor:'#F5F5DC'}}>
-                                <div style={{padding:'2.5%'}}>
-                                    <h5 className='RedColor' style={{fontSize:'18px'}}>Are you sure you want to delete your account?</h5>
-                                    <p className='PurpleColor' style={{fontSize:'14.4px',textStyle:'cursive'}}>Once you delete your account, your personal details should be removed from our system.</p>
-                                
-                                    <Form >
-                                        <Form.Check 
-                                            type='checkbox' 
-                                            id='checkbox' 
-                                            size='sm'
-                                            style={{ color: 'red' }} // Change color of label
-                                        >
-                                            <Form.Check.Input 
-                                                type='checkbox' 
-                                                isValid 
-                                                defaultChecked={true}
-                                                style={{ 
-                                                    backgroundColor: '#27213C', // Change color of checkbox
-                                                    borderColor: '#27213C' // Change color of checkbox border
-                                                }} 
-                                            />
-                                            <Form.Check.Label 
-                                                style={{ color: '#27213C' }} // Change color of label
-                                            >
-                                                {`Are you sure to delete your profile`}
-                                            </Form.Check.Label>
-                                            <Form.Control.Feedback type="invalid">
-                                                You did it!
-                                            </Form.Control.Feedback>
-                                        </Form.Check>
-                                    </Form>
-
-                                    <Button variant="flatSolid" size='sm' style={{marginTop:'2%'}} 
-                                        onClick={(e) => {
-                                            setShowConfirmationBox(true);
-                                        }}>Delete My Profile <Trash className="m-0" size={15} /></Button> 
-                                </div>
-                                <div>
-                                    {showConfirmationBox && (
-                                        <ConfirmationBox
-                                        message="Are you sure you want to delete your account?"
-                                        onConfirm={deleteUser}
-                                        onCancel={handleCancelConfirmationBox}
-                                        />
-                                    )}
-                                </div>
-                            </Row>
-                        </div>
-                    </div>
-                </Col>
-                <Col sm={2}>
-                    <div>
-                        <Image src={image} rounded style={{marginLeft: "170%",marginTop:'0%',height: "12rem",opacity:'0.75'}}></Image>
-                    </div>
-                </Col>
-            </Row>
+            <div style={{marginLeft:'5%', width:'140%',marginTop:'-12%'}}>
+                <h3>Welcome <spam className='TextColor' style={{fontFamily:'cursive',textAlign:'left',fontSize:'21px'}}>"{user?.Name?.value}"</spam></h3>
             
+                <div style={{marginTop:'5%'}}>
+                    <Row>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Full Name: </strong>{user?.Name?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Username: </strong>{user?.UserName?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Blood Group: </strong>{user?.BloodGroup?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Gender: </strong>{user?.Gender?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Date Of Birth: </strong>{user?.DOB?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>City: </strong>{user?.City?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Contact No: </strong>{user?.ContactNo?.value}</p>
+                        </Col>
+                        <Col sm={6}>
+                            <p><strong style={{fontFamily:''}}>Email: </strong>{user?.Email?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={12}>
+                            <p><strong style={{fontFamily:''}}>Eligibility Status: </strong>{user?.EligibilityStatus?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'-1.5%'}}>
+                        <Col sm={12}>
+                            <p><strong style={{fontFamily:''}}>Location: </strong>{user?.Address?.value}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col sm={12} style={{marginTop:'1%',textAlign:'right',marginLeft:'0%'}}>
+                            <Button variant="default" style={ButtonStyle1} 
+                                onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
+                                onClick={(e) => {
+                                    handleShow();
+                                }}>Update My Account</Button> 
+                            
+                        </Col>
+                    </Row>
+                    <Row style={{marginTop:'4%', border:'', borderRadius:'7px', backgroundColor:'#f2f0f0'}}>
+                        <div style={{padding:'3%'}}>
+                            <h5 style={{fontSize:'18px'}}>Are you sure you want to delete your account?</h5>
+                            <p style={{fontSize:'14.4px',textStyle:'cursive'}}>Once you delete your account, your personal details should be removed from our system.</p>
+                        
+                            <Form>
+                                <Form.Check type='checkbox' id='checkbox' size='sm'>
+                                    <Form.Check.Input type='checkbox' isValid />
+                                    <Form.Check.Label>{`Are you sure to delete your profile`}</Form.Check.Label>
+                                    <Form.Control.Feedback type="invalid">
+                                    You did it!
+                                    </Form.Control.Feedback>
+                                </Form.Check>
+                            </Form>
+                            <Button variant="flatSolid" size='sm' style={{marginTop:'2%'}} 
+                                onClick={(e) => {
+                                    setShowConfirmationBox(true);
+                                }}>Delete My Profile <Trash className="m-0" size={15} /></Button> 
+                        </div>
+                        <div>
+                            {showConfirmationBox && (
+                                <ConfirmationBox
+                                message="Are you sure you want to delete your account?"
+                                onConfirm={deleteUser}
+                                onCancel={handleCancelConfirmationBox}
+                                />
+                            )}
+                        </div>
+                    </Row>
+                </div>
+            </div>
+
             <div>
                 <Modal show={show} onHide={handleClose}>
-                    <div style={{border:'1px solid #27213C',boxShadow: '0px 0px 8px 0px #27213C'}}>
+                    <div style={{border:'1px solid rgb(160,15,15)',boxShadow: '0px 0px 8px 0px rgb(116, 10, 10)'}}>
                         <Modal.Header closeButton>
-                            <Modal.Title className='RedColor'>Personal Details</Modal.Title>
+                            <Modal.Title className='TextColor'>Personal Details</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -358,7 +325,7 @@ export default function MyPersonalDetails() {
                                 <Col sm={12}>
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <CalendarMonthSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Control
                                             required
@@ -377,7 +344,7 @@ export default function MyPersonalDetails() {
                                 <Col sm={12}>
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <NearMeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <LocationCitySharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Select required
                                             value={city} 
@@ -419,7 +386,7 @@ export default function MyPersonalDetails() {
                                 <Col sm={12}>
                                     <InputGroup size="sm" className="mb-3" hasValidation>
                                         <InputGroup.Text id="inputGroup-sizing-default">
-                                            <WifiCallingSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                            <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
                                         <Form.Control
                                             required

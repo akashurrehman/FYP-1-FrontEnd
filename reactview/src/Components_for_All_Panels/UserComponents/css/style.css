@@ -63,7 +63,7 @@
 }
 
 .FooterColor {
-    background-color: #F5F5DC;
+    background-color: rgba(223, 222, 222, 0.445);
     box-shadow: 0px 0px 6px 0px rgb(255, 255, 255);
     border-top: 1px solid black;
 }
@@ -90,7 +90,8 @@
     visibility: hidden;
     position: absolute;
     top: 107%;
-    transition: 0.1s;
+    right: 0;
+    transition: 0.2s 1s;
     background: rgb(255, 255, 255);
     
 }
@@ -115,7 +116,7 @@
     width: 400px;
 }
 .Menu {
-    width: 80px;
+    width: 200px;
     background: rgb(255, 255, 255);
     margin: -1px;
     position: relative;
@@ -201,6 +202,34 @@
 }
 
 
+.btn-flat {
+    background-color: #ffffff;
+    color: rgb(160, 15, 15);
+    border: 1px solid rgb(160, 15, 15);
+}
+
+.Button {
+    background-color: #ffffff;
+    color: rgb(160, 15, 15);
+    border: 1px solid rgb(160, 15, 15);
+}
+
+.btn-flat:hover {
+    background-color: rgb(160, 15, 15);
+    color: white;
+}
+
+.btn-flatSolid {
+    background-color: rgb(160, 15, 15);
+    color: white;
+    border: 1px solid rgb(160, 15, 15);
+}
+
+.btn-flatSolid:hover {
+    background-color: #ffffff;
+    color: rgb(160, 15, 15);
+    border: 1px solid rgb(160, 15, 15);
+}
 
 .IconColor {
     color: rgb(160, 15, 15);
@@ -296,77 +325,3 @@
   .form-select option:hover {
     background-color: #f5f5f5;
   }
-
-
-
-
-
-
-
-/* New Styling start from here */
-
-.BrownColor {
-    color: #4E3524;
-}
-.PurpleColor {
-    color: #27213C;
-}
-.RedColor {
-    color: #D64045;
-}
-.WhiteColor {
-    color: #ffffff;
-}
-.GreyColor {
-    color: #635f5f;
-}
-
-
-.btn-flat {
-    background-color: #ffffff;
-    color: #D64045;
-    border: 1px solid #D64045;
-}
-
-.Button {
-    background-color: #ffffff;
-    color: #D64045;
-    border: 1px solid #D64045;
-}
-
-.btn-flat:hover {
-    background-color: #D64045;
-    color: #F5F5DC;
-}
-
-.btn-flatSolid {
-    background-color: #D64045;
-    color: #F5F5DC;
-    border: 1px solid #D64045;
-}
-
-.btn-flatSolid:hover {
-    background-color: #27213C;
-    color: #F5F5DC;
-    border: 1px solid #F5F5DC;
-}
-
-.btn-flat2Solid {
-    background-color: #27213C;
-    color: #F5F5DC;
-    border: 1px solid #27213C;
-}
-
-.btn-flat2Solid:hover {
-    background-color: #D64045;
-    color: #F5F5DC;
-    border: 1px solid #F5F5DC;
-}
-
-
-.BarBox{
-    background-color: #D64045;
-}
-.BarBox:hover{
-    background-color: #27213C;
-}

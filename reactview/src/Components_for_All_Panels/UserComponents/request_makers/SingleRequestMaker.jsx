@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { Row, Col, Card, ListGroup} from "react-bootstrap";
 
-import CardImage1 from "../../../Public/user/image/donor-requestMaker-profile.png";
+import CardImage1 from "../../../Public/user/image/Avatar.JPG";
 import { ArrowRight } from 'react-bootstrap-icons';
 
 import '../css/style.css';
@@ -61,10 +61,10 @@ const SingleRequestMaker = (props) => {
         setIsHover(true);
     };
     const ButtonStyle1 = {
-        backgroundColor: isHover ? '#D64045' : '#27213C',
-        color: isHover ? 'white' : 'white',
+        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
+        color: isHover ? 'white' : 'rgb(160, 15, 15)',
         transform: isHover ? 'scale(0.8)' : 'scale(0.8)',
-        border: isHover ? '' : '1px solid #27213C',
+        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
         transitionDuration: isHover ? '' : '0.45s',
     };
 
@@ -91,35 +91,35 @@ const SingleRequestMaker = (props) => {
                         
                         <Row className="" style={{marginBottom:"5%"}}>
                             <Col sm={12}>
-                                <Card className="UserCard" border="secondary" style={{ width: '22rem',backgroundColor:'' }}>
+                                <Card className="UserCard" border="secondary" style={{ width: '22rem' }}>
                                     <Row>
-                                        <Col sm={8} style={{paddingLeft: '7%',paddingTop: '6%',textAlign:'left'}}>
-                                            <Card.Title><h4 className='TextCursive RedColor'>{requestMaker.Blood_Group.value}</h4></Card.Title>
+                                        <Col sm={8} style={{paddingLeft: '7%',paddingTop: '5%',textAlign:'left'}}>
+                                            <Card.Title><h4 className='TextCursive' style={{color:'rgb(116, 10, 10)'}}>{requestMaker.Blood_Group.value}</h4></Card.Title>
                                         </Col>
                                         <Col className='' sm={3} style={{marginRight:'0%',marginTop: '3%'}}>
-                                            <Card.Img className="" variant="top" src={CardImage1} height="60rem" />
+                                            <Card.Img className="" variant="top" src={CardImage1} width="0%" height="60rem" style={{borderRadius:'40%',border: "solid rgb(116, 10, 10)"}}/>
                                             
                                         </Col>
                                     </Row>
                                     <Card.Body>
                                         <Card.Text>
-                                        <p className='PurpleColor' style={{marginTop:'-7%'}}><strong className='TextCursive' style={{color:'#27213C'}}>Requested by: </strong>{requestMaker.Name.value}</p>
-                                        <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#27213C'}}>Email: </strong>{requestMaker.Email.value}</p>
-                                        <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#27213C'}}>City: </strong>{requestMaker.City.value}</p>
+                                        <p style={{marginTop:'-10%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Requested by: </strong>{requestMaker.Name.value}</p>
+                                        <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Email: </strong>{requestMaker.Email.value}</p>
+                                        <p style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>City: </strong>{requestMaker.City.value}</p>
                                         </Card.Text>
                                         
                                         <Card.Text>
-                                            <p className='PurpleColor' style={{textAlign:'justify',marginTop:'-3%',height:'45px'}}>
-                                            <strong className='TextCursive' style={{color:'#27213C'}}>Message: </strong>{requestMaker.Message.value}</p>
+                                            <p style={{textAlign:'justify',marginTop:'-3%',height:'40px'}}>
+                                            <strong className='TextCursive' style={{color:'#635f5f'}}>Message: </strong>{requestMaker.Message.value}</p>
                                         </Card.Text>
                                         
-                                        <Link to={{ pathname: `/user/request-maker-details/${requestMaker.ID.value}`, state: { requestMaker } }} className='d-flex justify-content-end RedColor' style={{marginBottom:'-2%',textDecoration:'none',fontSize:'14px',fontWeight:'600'}}>
-                                            View details <ArrowRight className="m-1" size={16} />
+                                        <Link to={{ pathname: `/user/request-maker-details/${requestMaker.ID.value}`, state: { requestMaker } }} className='d-flex justify-content-end TextColor' style={{marginBottom:'-2%',textDecoration:'none',fontSize:'14px',fontWeight:'600'}}>
+                                            View Details <ArrowRight className="m-1" size={16} />
                                         </Link>
                                     
                                         <ListGroup className="list-group-flush">
-                                            <ListGroup.Item style={{backgroundColor:''}}></ListGroup.Item>
-                                            <ListGroup.Item style={{backgroundColor:''}}><div className='d-flex justify-content-center' style={{marginBottom:'-6%'}}>
+                                            <ListGroup.Item></ListGroup.Item>
+                                            <ListGroup.Item><div className='d-flex justify-content-center' style={{marginBottom:'-6%'}}>
 
                                                 {requestMaker.RequestDonatedBy.value !== 'null' ? (
                                                     <>
