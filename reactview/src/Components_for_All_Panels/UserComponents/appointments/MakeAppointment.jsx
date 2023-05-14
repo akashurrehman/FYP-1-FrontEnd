@@ -4,7 +4,7 @@ import { Row, Col, Nav } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import { useParams } from 'react-router-dom';
-import { ArrowRight, House, HouseDoorFill, PrinterFill } from 'react-bootstrap-icons';
+import { ArrowRight, CheckCircleFill, House, HouseDoorFill, PrinterFill, XCircleFill } from 'react-bootstrap-icons';
 import image from '../../../Public/user/image/makeAppointment.jpg';
 import '../css/style.css';
 
@@ -137,10 +137,10 @@ const MakeAppointment = () => {
     };
     const ButtonStyle = {
         
-        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
-        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        backgroundColor: isHover ? '#D64045' : '#27213C',
+        color: isHover ? 'white' : 'white',
         transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
-        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
+        border: isHover ? '' : '',
         transitionDuration: isHover ? '' : '0.1s',
     };
     
@@ -148,7 +148,7 @@ const MakeAppointment = () => {
         <div>
             <p><strong className='TextColor'>Sorry!</strong> Kindly check your eligibility status for blood donation. </p>
             <div style={{textAlign:'right'}}>
-                <Nav.Link className='TextColor' href='/user/blood-analysis'>Make blood analysis  <ArrowRight className="" size={16} /></Nav.Link>
+                <Nav.Link className='RedColor' href='/user/blood-analysis'>Make blood analysis  <ArrowRight className="" size={16} /></Nav.Link>
             </div>
         </div>
     );
@@ -174,33 +174,43 @@ const MakeAppointment = () => {
             <Container>
                 <Row style={{marginBottom:'5%'}}>
                     <Col sm={12} style={{textAlign:'center'}}>
-                        <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Make Appointment in "{centre?.Name?.value}"</h2>  
+                        <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Make Appointment in "{centre?.Name?.value}"</h2>  
                         <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
                     </Col>
                 </Row>
                 <Row style={{marginBottom:'10%'}}>
                     <Col sm={4}>
-                        <h4 style={{fontSize:'18px'}}>Donor Name: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Name?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Date Of Birth: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.DOB?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Donor Blood Group: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.BloodGroup?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Donor Gender: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Gender?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Donor Email: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Email?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Donor ContactNo: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.ContactNo?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Donor City: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.City?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Donor Address: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Address?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Donor Name: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Name?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Date Of Birth: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.DOB?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Donor Blood Group: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.BloodGroup?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Donor Gender: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Gender?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Donor Email: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Email?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Donor ContactNo: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.ContactNo?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Donor City: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.City?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Donor Address: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.Address?.value}</spam></h4>
                         
                     </Col>
                     <Col sm={4}>
-                        <h4 style={{fontSize:'18px'}}>Centre Name: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Name?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Centre Email: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Email?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Centre Timings: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Timings?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Centre Contact No: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.ContactNo?.value}</spam></h4>
-                        <h4 style={{fontSize:'18px'}}>Centre Location: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Location?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Centre Name: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Name?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Centre Email: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Email?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Centre Timings: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Timings?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Centre Contact No: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.ContactNo?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px'}}>Centre Location: <spam style={{fontSize:'16px',fontWeight:'400'}}>{centre?.Location?.value}</spam></h4>
                         
-                        <h4 style={{fontSize:'18px'}}>Donor Eligible: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.EligibilityStatus?.value}</spam></h4>
+                        <h4 className='PurpleColor' style={{fontSize:'18px',marginTop:'6%'}}>Eligible For Donation: <spam style={{fontSize:'16px',fontWeight:'400'}}>{user?.EligibilityStatus?.value}</spam>
+                            { user?.EligibilityStatus?.value === 'Eligible' ? (
+                                <>
+                                    <spam style={{color:'green'}}> <CheckCircleFill className="m-1" size={20} /></spam>
+                                </>
+                            ):(
+                                <>
+                                    <spam style={{color:'red'}}><XCircleFill className="m-1" size={20} /></spam>
+                                </>
+                            )}
+                        </h4>
                         <div style={{textAlign:'right',marginTop:'30%'}}>
                         <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleDeleteButtonClick}
-                            >Book Appointment <ArrowRight className="" size={18} /></Button>
+                            >Book Appointment</Button>
                         </div>
                         <div>
                             {showConfirmationBox && (
