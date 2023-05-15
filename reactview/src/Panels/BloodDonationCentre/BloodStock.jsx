@@ -44,6 +44,9 @@ const BloodStock=()=> {
     }
       console.log("authCentre");
   }
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+ 
 
 
   useEffect(() => {

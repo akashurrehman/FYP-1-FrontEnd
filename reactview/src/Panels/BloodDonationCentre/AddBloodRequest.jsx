@@ -18,8 +18,10 @@ import jwt_decode from 'jwt-decode';
 const AddBloodRequest=()=> {
   const { token } = useAuth();
 
-  //Get the ID from the token
-  const {id}= jwt_decode(token);
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const id = decodedToken?.id;
+
 
   const [bloodRequests, setBloodRequests] = useState({
     id:`${id}`,

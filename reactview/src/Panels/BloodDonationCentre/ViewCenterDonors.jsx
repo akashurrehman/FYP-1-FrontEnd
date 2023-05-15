@@ -25,7 +25,8 @@ const ViewCenterDonors=()=> {
   }
 
   //This will get the id  from the token if user is login
-  const {id} = jwt_decode(token);
+  const decodedToken = token ? jwt_decode(token) : null;
+  const id = decodedToken?.id;
 
   useEffect(() => {
     // fetch data from the backend

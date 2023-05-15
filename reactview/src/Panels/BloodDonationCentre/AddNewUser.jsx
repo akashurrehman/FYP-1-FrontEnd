@@ -13,7 +13,7 @@ import Modal from 'react-bootstrap/Modal';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "./Auth/AuthContext";
-
+import jwt_decode from 'jwt-decode';
 const AddNewUser=()=> {
   const [userData, setuserData] = useState({
     fullName: "",
@@ -37,6 +37,10 @@ const AddNewUser=()=> {
     }
       console.log("authCentre");
   }
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const id = decodedToken?.id;
+
   useEffect(() => {
     authCentre();
   }, []);
