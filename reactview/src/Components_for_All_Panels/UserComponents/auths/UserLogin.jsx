@@ -8,15 +8,16 @@ import image from '../../../Public/user/image/Image1.png';
 import { toast } from "react-toastify";
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
-
+import jwt_decode from 'jwt-decode';
 import { Facebook, Instagram, Google, ArrowRight, Twitter } from 'react-bootstrap-icons';
 
 
 import '../css/style.css';
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
 
 
 const UserLogin = (props) => {
-
+    const { handleLogin } = useAuth();
     const [username, setUserName] = React.useState("");
 
     const [password, setPassword] = React.useState("");
@@ -45,9 +46,24 @@ const UserLogin = (props) => {
             });
             const token = response.headers.authorization;
             // Store the token in local storage
-            localStorage.setItem('token', token);
-            console.log("Before Decode Token:",token);
-            window.location.href = "/userpanel/HomeScreen";
+            
+            handleLogin(token);
+            console.log("In  Login File:",token);
+            // Determine the user's role from the token payload
+            const { role } = jwt_decode(token);
+            console.log("After Decode Token:",jwt_decode(token))
+            console.log("Role:",role);
+            // Redirect the user to the appropriate route based on their role
+
+            if(role=='USER') {
+                window.location.href = "/userpanel/HomeScreen";
+            }
+            if(role=='CENTRE') {
+                window.location.href = "/bloodCenter/HomeScreen";
+            }
+            if(role=='ADMIN') {
+                window.location.href = "/adminpanel/HomeScreen";
+            }
         } 
         catch (error) {
             if (error.response) {

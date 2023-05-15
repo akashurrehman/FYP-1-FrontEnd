@@ -35,7 +35,7 @@ const SingleBloodDonationCentre = (props) => {
     
 
     return ( <div>
-        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'7%'}}>
+        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'1%'}}>
                 <Row className=''>
                     <div className=''>
                         

@@ -12,10 +12,17 @@ import DataTable from 'react-data-table-component';
 import {handleRequestsPrint} from "./PrintedFiles/BloodRequestsPrint";
 import { useAuth } from "./Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 const BloodRequests=()=> {  
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
+
+  
+    const [center, setCenterData] = useState({
+      name: "",
+      
+    });
 
   const {token} = useAuth();
   const authCentre=()=>{
@@ -26,25 +33,50 @@ const BloodRequests=()=> {
   }
 
   //This will get the id  from the token if user is login
-  const {id} = jwt_decode(token);
+  const decodedToken = token ? jwtDecode(token) : null;
+  const id = decodedToken?.id;
+  const donatedBy = decodedToken?.id;
+  
+  const getCentreNameById = () => {
+    axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${id}`).then((response)=>{
+      const { results } = response.data;
+      if (results && results.bindings && results.bindings.length > 0) {
+        const centerData = results.bindings[0];
+        setCenterData({
+          name: centerData.Name.value,
+        });
+
+  }
+});
+    
+  }
 
   const [filterByCenter, setFilterByCenter] = useState(false);
   const [centerId, setCenterId] = useState('');
 
   const [data, setData] = useState([]);
 
-        const handleApprove = (id) => {
-            axios
-                .put(`http://localhost:8081/api/users/accept/bloodRequest/${id}`,{
-                  "donatedBy":"Center Name display here",
-                  "donorName":"Donor Name display here",
-                })
-                .then((response) => console.log(response.data))
-                .catch((error) => console.log(error));
+        const handleApprove = () => {
+          console.log(id);
+          console.log(center.name);
+          const donorName = center.name;
+          try {
+            axios.put('http://localhost:8081/api/users/accept/bloodRequest/' + id, {
+                donatedBy, donorName
+            });
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
         };
-        const handleReject = (id) => {
+        const handleReject = () => {
             axios
-                .post(`http://localhost:8081/api/users/bloodrequest/reject/${id}`)
+                .post(`http://localhost:8081/api/users/bloodrequest/reject/`+ id)
                 .then((response) => console.log(response.data))
                 .catch((error) => console.log(error));
         };
@@ -96,7 +128,7 @@ const BloodRequests=()=> {
       .catch((error) => console.log(error));
       console.log("selectedRows after updating state", selectedRows);
       authCentre();
-      
+      getCentreNameById();
   }, [selectedRows, filterByCenter, centerId]);
 
   const handlePrint = () => {

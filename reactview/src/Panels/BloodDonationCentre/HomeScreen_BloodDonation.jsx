@@ -16,21 +16,23 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth  }  from './Auth/AuthContext';
 import jwt_decode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 
 //import Link from 'react-router-dom/Link';
 
 
 const HomeScreen_BloodDonation=()=> {
-  const { token } = useAuth();
-
-  if(!token)
-  {
-    window.location.href = "/Login";
+  const {token} = useAuth();
+  const authCentre=()=>{
+    if(!token){
+      window.location.href = "/Login";
+    }
+      console.log("authCentre");
   }
-  
-  //Get the ID from the token
-  const {ID}= jwt_decode(token);
+
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwtDecode(token) : null;
 
   const ViewAllRequests = () => {
     toast.success("You are redirected to View All Requests Page", {position: toast.POSITION.TOP_CENTER});
@@ -44,12 +46,6 @@ const HomeScreen_BloodDonation=()=> {
   }
   const viewAllAppointments = () => {
     window.location.href = '/bloodCenter/AppointmentDetails';
-  }
-  const authCentre=()=>{
-    if(!token){
-      window.location.href = "/Login";
-    }
-      console.log("authCentre");
   }
   const fetchData = async (url) => {
     try {

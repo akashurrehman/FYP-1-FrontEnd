@@ -16,24 +16,27 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth  }  from './Auth/AuthContext';
 import jwt_decode from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 
 
 //import Link from 'react-router-dom/Link';
 
 
 const MyAccountCenter=()=> {
-  const { token } = useAuth();
-
-  
+  const {token} = useAuth();
+  const decodedToken = token ? jwtDecode(token) : null;
+  const id = decodedToken?.id;
+  const role = decodedToken?.role;
   const authCentre=()=>{
-    if(!token){
+    if(role!='CENTRE'){
+      
       window.location.href = "/Login";
     }
       console.log("authCentre");
   }
 
   //This will get the id  from the token if user is login
-  const {id} = jwt_decode(token);
+  
 
   const ViewAllRequests = () => {
     toast.success("You are redirected to View All Requests Page", {position: toast.POSITION.TOP_CENTER});
