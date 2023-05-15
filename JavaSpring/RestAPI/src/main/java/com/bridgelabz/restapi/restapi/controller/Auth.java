@@ -56,7 +56,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class Auth {
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     // String secret = "mySecretKey";
     // Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);

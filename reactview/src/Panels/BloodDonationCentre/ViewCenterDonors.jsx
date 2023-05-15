@@ -11,19 +11,21 @@ import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 import './Styling/print.css';
 import { handleDonorPrint } from "./PrintedFiles/DonorsPrint";
+import { useAuth } from "./Auth/AuthContext";
+import jwt_decode from 'jwt-decode';
 
 const ViewCenterDonors=()=> {  
   const [data, setData] = useState([]);
-  // const {token} = useAuth();
+  const {token} = useAuth();
   const authCentre=()=>{
-    //if(!token){
-      //   window.location.href = "/Login";
-      // }
+    if(!token){
+      window.location.href = "/Login";
+    }
       console.log("authCentre");
   }
 
-//This will get the id  from the token if user is login
-// const {id} = jwt_decode(token);
+  //This will get the id  from the token if user is login
+  const {id} = jwt_decode(token);
 
   useEffect(() => {
     // fetch data from the backend
@@ -110,8 +112,8 @@ const columns = [
         <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body style={{alignItems:"center",justifyContent:"center",textAlign:"center"}}>
-              <Card.Title >All Donors till Now</Card.Title>
-              <Card.Title >Contains the information of all the donors who donate at your blood donation center!</Card.Title>
+              <Card.Title>All Donors till Now</Card.Title>
+              <Card.Title>Contains the information of all the donors who donate at your blood donation center!</Card.Title>
             </Card.Body>
         </Card>
         <DataTable title = "All donors" columns={columns} data={data}

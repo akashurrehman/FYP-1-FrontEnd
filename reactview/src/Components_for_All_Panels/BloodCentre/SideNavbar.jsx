@@ -8,9 +8,15 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
-import './style/navbar.css'
+import './style/navbar.css';
+import { useAuth } from './../../Panels/BloodDonationCentre/Auth/AuthContext';
 
 const Sidebar = () => {
+  const {handleLogout} = useAuth();
+  const handleLogoutClick=()=>{
+    handleLogout();
+    console.log('In Logout')
+  }
   return (
     <div className="sticky-top position-fixed" style={{ display: 'flex', height: '95vh',marginTop:30,marginLeft:-25}} id="sticky-sidebar">
       <CDBSidebar textColor="#FFFFFF" backgroundColor="#153250"   breakpoint={720} >
@@ -46,7 +52,7 @@ const Sidebar = () => {
             <NavLink exact to="/bloodCenter/bloodRequests" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="tint">All Blood Requests</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/hero404" target="_blank" activeClassName="activeClicked">
+            <NavLink onClick={handleLogoutClick} activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="share">Logout</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
