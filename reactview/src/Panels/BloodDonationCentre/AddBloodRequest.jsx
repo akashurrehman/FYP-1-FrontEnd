@@ -21,7 +21,7 @@ const AddBloodRequest=()=> {
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwt_decode(token) : null;
   const id = decodedToken?.id;
-
+  const role = decodedToken?.role;
 
   const [bloodRequests, setBloodRequests] = useState({
     id:`${id}`,
@@ -37,7 +37,7 @@ const AddBloodRequest=()=> {
   });
   
   const authCentre=()=>{
-    if(!token){
+    if(role!='CENTRE'){
       window.location.href = "/user/login";
     }
       console.log("authCentre");

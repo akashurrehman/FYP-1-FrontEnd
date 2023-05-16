@@ -25,16 +25,19 @@ const BloodRequests=()=> {
     });
 
   const {token} = useAuth();
+  
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwtDecode(token) : null;
+  const id = decodedToken?.id;
+  const role = decodedToken?.role;
+
   const authCentre=()=>{
-    if(!token){
+    if(role!='CENTRE'){
       window.location.href = "/user/login";
     }
       console.log("authCentre");
   }
 
-  //This will get the id  from the token if user is login
-  const decodedToken = token ? jwtDecode(token) : null;
-  const id = decodedToken?.id;
   const donatedBy = decodedToken?.id;
   
   const getCentreNameById = () => {
