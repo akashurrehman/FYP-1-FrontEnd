@@ -122,6 +122,10 @@ const handleSubmit = (event) => {
   }
 };
 
+const handleLogin=(e)=>{
+  e.preventDefault();
+  window.location.href="/user/login";
+}
 
 
 const handleConfirm = () => {
@@ -274,7 +278,7 @@ const handleCancel = () => {
                   <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Register Blood Donation Center</Button>
               </Col>
               <Col xs={6}>
-                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={window.location.href="/Login"}>Already Registered? Go to Login.</Button>
+                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleLogin}>Already Registered? Go to Login.</Button>
               </Col>
           </Row>
         </div>

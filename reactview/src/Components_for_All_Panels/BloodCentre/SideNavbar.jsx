@@ -16,6 +16,7 @@ const Sidebar = () => {
   const handleLogoutClick=()=>{
     handleLogout();
     console.log('In Logout')
+    window.location.href="/user/login";
   }
   return (
     <div className="sticky-top position-fixed" style={{ display: 'flex', height: '95vh',marginTop:30,marginLeft:-25}} id="sticky-sidebar">

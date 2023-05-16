@@ -27,7 +27,7 @@ const BloodRequests=()=> {
   const {token} = useAuth();
   const authCentre=()=>{
     if(!token){
-      window.location.href = "/Login";
+      window.location.href = "/user/login";
     }
       console.log("authCentre");
   }

@@ -30,7 +30,7 @@ const MyAccountCenter=()=> {
   const authCentre=()=>{
     if(role!='CENTRE'){
       
-      window.location.href = "/Login";
+      window.location.href = "/user/login";
     }
       console.log("authCentre");
   }
