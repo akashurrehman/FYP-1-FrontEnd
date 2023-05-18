@@ -16,8 +16,8 @@ import Jobs from "./adminscreens/Jobs/Jobs";
 
 const HomeScreen_BloodDonation = () => {
   return (
-    <div className="container-fluid maincontainer ">
-      <Header />
+    <div className="container-fluid maincontainer mt-0">
+      {/* <Header /> */}
       <div className="row">
         <div className="col-sm-3 sidemenu  p-0 ml-50">
           {/* Profile Image and navigation div */}
@@ -34,8 +34,9 @@ const HomeScreen_BloodDonation = () => {
                 <div className="mt-2">
                   <strong>Salman Ahmed</strong>
                 </div>
-                <div className="mt-2">
-                  <p className="mail">salman.ahmed.org.pk</p>
+                <div className="mt-1">
+                  <p className="text-secondary mb-1">Admin</p>
+                  <p className="fw-bold text-primary">Sign Out</p>
                 </div>
               </div>
               <div>

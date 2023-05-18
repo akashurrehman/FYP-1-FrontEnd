@@ -8,6 +8,8 @@ import axios from "axios";
 import NewsPopUp from "./PopUps/NewsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ncard(val) {
   return (
@@ -30,6 +32,9 @@ export default function News() {
   const [description, setDescription] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
+  const PDFnotify = () => {
+    toast.success("PDF generated successfully");
+  };
 
   useEffect(() => {
     axios
@@ -56,8 +61,8 @@ export default function News() {
       .delete(`http://localhost:8081/api/admin/deleteNews/${id}`)
       .then((response) => {
         console.log(response);
-        alert("News deleted successfully!");
-
+        // alert("News deleted successfully!");
+        toast.success("Record Deleted Successfully");
         // Remove the deleted FAQ from the users state
         setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
       })
@@ -91,7 +96,7 @@ export default function News() {
       })
       .then((response) => {
         console.log("My data response in news is", response);
-        alert("News added successfully!");
+        toast.success("Record Added successfully");
 
         // Create a new news object with the same properties as the response data
         const newNews = {
@@ -182,6 +187,7 @@ export default function News() {
 
         console.error("Error generating PDF:", error);
       });
+    PDFnotify();
   };
 
   return (

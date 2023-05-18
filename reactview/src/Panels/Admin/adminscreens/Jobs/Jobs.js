@@ -6,6 +6,8 @@ import { CalendarDateFill, Laptop } from "react-bootstrap-icons";
 import JobsPopUp from "../PopUps/JobsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Jobs() {
   const [users, setUsers] = React.useState([]);
@@ -15,6 +17,9 @@ export default function Jobs() {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
+  const PDFnotify = () => {
+    toast.success("PDF generated successfully");
+  };
 
   useEffect(() => {
     axios
@@ -42,7 +47,7 @@ export default function Jobs() {
       .delete(`http://localhost:8081/api/admin/deleteJobPost/${id}`)
       .then((response) => {
         console.log(response);
-        alert("Job post deleted successfully!");
+        toast.success("Record Deleted successfully");
 
         // Remove the deleted FAQ from the users state
         setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
@@ -77,7 +82,7 @@ export default function Jobs() {
       })
       .then((response) => {
         console.log("My data response in Jobs is", response);
-        alert("JobPost added successfully!");
+        toast.success("Record Added successfully");
 
         // Create a new job post object with the same properties as the response data
         const newJobPost = {
@@ -120,7 +125,7 @@ export default function Jobs() {
         }
       )
       .then((response) => {
-        console.log("Financial Donation updated successfully");
+        toast.success("Record Updated successfully");
 
         // Update the state with the new data
         setUsers((prevData) => {
@@ -168,6 +173,7 @@ export default function Jobs() {
 
         console.error("Error generating PDF:", error);
       });
+    PDFnotify();
   };
 
   return (

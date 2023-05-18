@@ -4,10 +4,15 @@ import axios from "axios";
 import "../adminscreen.css";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function BloodRequests() {
   const [users, setUsers] = React.useState([]);
   const pdfContainerRef = useRef(null);
+  const PDFnotify = () => {
+    toast.success("PDF generated successfully");
+  };
 
   useEffect(() => {
     axios
@@ -58,6 +63,7 @@ export default function BloodRequests() {
 
         console.error("Error generating PDF:", error);
       });
+    PDFnotify();
   };
 
   return (

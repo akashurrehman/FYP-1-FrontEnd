@@ -56,7 +56,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class Auth {
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     // String secret = "mySecretKey";
     // Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -230,7 +230,7 @@ public class Auth {
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
-        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
+        File file = new File("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
 
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();

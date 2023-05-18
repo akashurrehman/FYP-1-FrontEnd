@@ -8,6 +8,8 @@ import axios from "axios";
 import PopUp from "./PopUps/PopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ncard(val) {
   return (
@@ -30,6 +32,9 @@ export default function Campaign() {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
+  const PDFnotify = () => {
+    toast.success("PDF generated successfully");
+  };
 
   useEffect(() => {
     axios
@@ -55,7 +60,7 @@ export default function Campaign() {
       .delete(`http://localhost:8081/api/admin/deleteCompaigns/${id}`)
       .then((response) => {
         console.log(response);
-        alert("Campaign deleted successfully!");
+        toast.success("Record Deleted successfully");
 
         // Remove the deleted FAQ from the users state
         setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
@@ -90,7 +95,7 @@ export default function Campaign() {
       })
       .then((response) => {
         console.log("My data response in Campaigns is", response);
-        alert("Campaign added successfully!");
+        toast.success("Record Added successfully");
 
         // Create a new campaign object with the same properties as the response data
         const newUsers = {
@@ -137,7 +142,7 @@ export default function Campaign() {
         }
       )
       .then((response) => {
-        console.log("Campaign updated successfully");
+        toast.success("Record Updated successfully");
 
         // Update the state with the new data
         setUsers((prevData) => {
@@ -180,6 +185,7 @@ export default function Campaign() {
 
         console.error("Error generating PDF:", error);
       });
+    PDFnotify();
   };
 
   return (

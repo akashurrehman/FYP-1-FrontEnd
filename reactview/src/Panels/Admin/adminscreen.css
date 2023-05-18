@@ -234,6 +234,13 @@ h5 {
   width: 50%;
   height: 100%;
 }
+.popup-container {
+  position: fixed;
+  top: 20%;
+  /* left: 50%; */
+  width: 50%;
+  height: 100%;
+}
 
 .popup-overlay {
   position: absolute;

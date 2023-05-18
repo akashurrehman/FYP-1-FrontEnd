@@ -47,7 +47,7 @@ public class User {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Route to Get Data of all Registered Users
@@ -1300,7 +1300,7 @@ public class User {
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
-        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
+        File file = new File("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         //
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
@@ -1337,7 +1337,7 @@ public class User {
      */
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
-        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
+        File file = new File("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         System.out.println("File Path: " + file);
 
         // create a model from the RDF file
@@ -1365,7 +1365,7 @@ public class User {
             System.out.println("Updated model:");
 
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
+            FileOutputStream out = new FileOutputStream("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
             model.write(out, "RDF/XML-ABBREV");
             out.close();
 
@@ -1380,7 +1380,7 @@ public class User {
      * Method for the Functionality of Deleting data on the basis of query
      */
     static boolean DeleteSparql(String query) throws IOException {
-        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
+        File file = new File("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;
@@ -1406,7 +1406,7 @@ public class User {
             // Create a QueryExecution object and execute the query on the model
             UpdateAction.execute(updateRequest, model);
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
+            FileOutputStream out = new FileOutputStream("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true; // data insertion successful
@@ -1421,7 +1421,7 @@ public class User {
      * Method for Functionality of Updating Data using SPARQL query
      */
     static boolean UpdateSparql(String queryString) throws IOException {
-        File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
+        File file = new File("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
         // create a model from the RDF file
         Model model = ModelFactory.createDefaultModel();
         InputStream in = null;
@@ -1444,7 +1444,7 @@ public class User {
             UpdateAction.parseExecute(queryString, model);
 
             // Write the updated model to a file
-            FileOutputStream out = new FileOutputStream(ONTOLOGY_FILE_LOCAL_PATH);
+            FileOutputStream out = new FileOutputStream("D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl");
             model.write(out, "RDF/XML-ABBREV");
             out.close();
             return true; // data insertion successful

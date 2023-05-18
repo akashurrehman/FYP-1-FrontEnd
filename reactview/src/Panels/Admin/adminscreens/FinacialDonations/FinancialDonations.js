@@ -6,6 +6,8 @@ import { CalendarDateFill, Laptop, PhoneVibrate } from "react-bootstrap-icons";
 import FinancialDonationsPopUp from "../PopUps/FinancialDonationsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function FinancialDonations() {
   const [users, setUsers] = React.useState([]);
@@ -17,6 +19,9 @@ export default function FinancialDonations() {
   const [description, setDescription] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
+  const PDFnotify = () => {
+    toast.success("PDF generated successfully");
+  };
 
   useEffect(() => {
     axios
@@ -47,7 +52,7 @@ export default function FinancialDonations() {
       )
       .then((response) => {
         console.log(response);
-        alert("Donation Record deleted successfully!");
+        toast.success("Record Deleted successfully");
 
         // Remove the deleted FAQ from the users state
         setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
@@ -100,7 +105,7 @@ export default function FinancialDonations() {
       })
       .then((response) => {
         console.log("My data response in Financial Donation is", response);
-        alert("Donation added successfully!");
+        toast.success("Record Added successfully");
 
         // Create a new donation object with the same properties as the response data
         const newDonation = {
@@ -156,7 +161,7 @@ export default function FinancialDonations() {
         }
       )
       .then((response) => {
-        console.log("Financial Donation updated successfully");
+        toast.success("Record Deleted successfully");
 
         // Update the state with the new data
         setUsers((prevData) => {
@@ -206,6 +211,7 @@ export default function FinancialDonations() {
 
         console.error("Error generating PDF:", error);
       });
+    PDFnotify();
   };
 
   return (
