@@ -17,15 +17,21 @@ import jwt_decode from 'jwt-decode';
 const Appointments=()=> {  
   const [data, setData] = useState([]);
   const {token} = useAuth();
+
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const id = decodedToken?.id;
+  const role = decodedToken?.role;
+
   const authCentre=()=>{
-    if(!token){
-      window.location.href = "/Login";
+    if(role!='CENTRE'){
+      window.location.href = "/user/login";
     }
       console.log("authCentre");
   }
 
-  //This will get the id  from the token if user is login
-  const {id} = jwt_decode(token);
+  
+
   useEffect(() => {
     // fetch data from the backend
     fetch(`http://localhost:8081/api/users/appointment/byCentreID/${id}`)

@@ -29,16 +29,17 @@ const BloodInformation=()=> {
 
     const [showModal, setShowModal] = useState(false);
     const {token} = useAuth();
+     //This will get the id  from the token if user is login
+     const decodedToken = token ? jwt_decode(token) : null;
+     const role = decodedToken?.role;
+
     const authCentre=()=>{
       
-      if(!token){
-        window.location.href = "/Login";
+      if(role!='CENTRE'){
+        window.location.href = "/user/login";
       }
         console.log("authCentre");
     }
-
-    //This will get the id  from the token if user is login
-    const {id} = jwt_decode(token);
     
     useEffect(() => {
       authCentre();

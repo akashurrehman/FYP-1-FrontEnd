@@ -122,6 +122,10 @@ const handleSubmit = (event) => {
   }
 };
 
+const handleLogin=(e)=>{
+  e.preventDefault();
+  window.location.href="/user/login";
+}
 
 
 const handleConfirm = () => {
@@ -270,8 +274,11 @@ const handleCancel = () => {
             </Row>
           </Form>
           <Row className="mb-3">
-              <Col>
-                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
+              <Col xs={6}>
+                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Register Blood Donation Center</Button>
+              </Col>
+              <Col xs={6}>
+                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleLogin}>Already Registered? Go to Login.</Button>
               </Col>
           </Row>
         </div>

@@ -34,15 +34,20 @@ const ProfileSettings=()=> {
 
   const [showModal, setShowModal] = useState(false);
   const {token} = useAuth();
-    const authCentre=()=>{
-      if(!token){
-        window.location.href = "/Login";
+  
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const id = decodedToken?.id;
+  const role= decodedToken?.role;
+
+
+  const authCentre=()=>{
+      if(role!='CENTRE'){
+        window.location.href = "/user/login";
       }
         console.log("authCentre");
-    }
+  }
 
-  //This will get the id  from the token if user is login
-  const {id} = jwt_decode(token);
   useEffect(()=>{
     axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${id}`).then((response)=>{
       const { results } = response.data;

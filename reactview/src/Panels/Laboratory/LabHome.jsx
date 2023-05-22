@@ -10,8 +10,8 @@ import Header from "./LabComponents/Header";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
-// import jwt_decode from 'jwt-decode';
+import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
 
 const LabHome=()=> {
   const [jobPosts, setJobPosts] = useState([]);
@@ -22,8 +22,17 @@ const LabHome=()=> {
 
 
   //Get the token from the AuthContext
-  //const {token} = useAuth();
-  const id = "L001"
+  const {token} = useAuth();
+    const authCentre=()=>{
+      if(!token){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const id = decodedToken?.id;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +49,7 @@ const LabHome=()=> {
 
     };
     fetchData();
+    authCentre();
   }, []);
   const mystyle = {
       height: "7%",

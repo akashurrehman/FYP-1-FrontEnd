@@ -15,9 +15,24 @@ import { BsGeoAltFill } from 'react-icons/bs';
 import Header from "./LabComponents/Header";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
 
 
 const LabProfileSetting=()=> {
+  //Get the token from the AuthContext
+  const {token} = useAuth();
+    const authCentre=()=>{
+      if(!token){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const id = decodedToken?.id;
+
   const [center, setCenterData] = useState({
     name: "",
     email:"",
@@ -64,7 +79,7 @@ const LabProfileSetting=()=> {
     return isValid;
   };
   useEffect(()=>{
-    axios.get('http://localhost:8081/api/labs/RegisteredLabs/L001').then((response)=>{
+    axios.get(`http://localhost:8081/api/labs/RegisteredLabs/${id}`).then((response)=>{
       const { results } = response.data;
       if (results && results.bindings && results.bindings.length > 0) {
         const centerData = results.bindings[0];
@@ -78,6 +93,7 @@ const LabProfileSetting=()=> {
 
   }
 });
+authCentre();
 },[]);
 
   const handleChange = (event) => {

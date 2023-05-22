@@ -12,6 +12,7 @@ function Header(props) {
   const handleLogoutClick=()=>{
     handleLogout();
     console.log('In Logout')
+    window.location.href="/user/login";
   }
   return (
     <Navbar style={{backgroundColor:"#153250",color:"#FFFFFF",paddingLeft:"60px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
