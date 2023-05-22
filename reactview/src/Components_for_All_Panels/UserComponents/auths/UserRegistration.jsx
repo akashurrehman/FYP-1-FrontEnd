@@ -1,12 +1,10 @@
 import React from "react";
 import { Container, Button, Image } from "react-bootstrap";
-import { Form, Row, Col, InputGroup, FloatingLabel } from "react-bootstrap";
+import { Form, Row, Col, InputGroup } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import image from '../../../Public/user/image/Image1.png';
-import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, GeoAlt,Telephone } from 'react-bootstrap-icons';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import { ArrowRight } from 'react-bootstrap-icons';
 
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -20,12 +18,8 @@ import LocationCitySharpIcon from '@mui/icons-material/LocationCitySharp';
 import WcSharpIcon from '@mui/icons-material/WcSharp';
 import BadgeSharpIcon from '@mui/icons-material/BadgeSharp';
 import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
-import CalendarMonthSharpIcon from '@mui/icons-material/CalendarMonthSharp';
 
 import '../css/style.css';
-import requestMakerService from "../../../Services/Api/User/RequestMakerService";
-import userService from "../../../Services/Api/User/UserService";
-import userLoginService from "../../../Services/Api/User/UserLoginService";
 
 const UserRegistration = (props) => {
 
@@ -191,9 +185,11 @@ const UserRegistration = (props) => {
                                                         <option value="">Blood Group*</option>
                                                         <option value="A+">A+</option>
                                                         <option value="B+">B+</option>
+                                                        <option value="O+">O+</option>
                                                         <option value="AB+">AB+</option>
                                                         <option value="A-">A-</option>
                                                         <option value="B-">B-</option>
+                                                        <option value="O-">O-</option>
                                                         <option value="AB-">AB-</option>
                                                     </Form.Select>
                                                     <Form.Control.Feedback type="invalid">

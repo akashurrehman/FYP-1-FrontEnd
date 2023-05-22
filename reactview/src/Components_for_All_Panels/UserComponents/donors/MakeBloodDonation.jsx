@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Button, Image } from "react-bootstrap";
 import { Form, Row, Col, InputGroup, FloatingLabel } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
@@ -23,14 +23,23 @@ import donorService from "../../../Services/Api/User/DonorService";
 import AvailableDonorsBar from "./AvailableDonorsBar";
 import jwtDecode from "jwt-decode";
 import CongratulationBox from "../CongratulationBox";
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
+import userService from "../../../Services/Api/User/UserService";
 
 const MakeBloodDonation = () => {
 
     //Get id from token 
-    const token = localStorage.getItem('token');
-    const decodedToken = jwtDecode(token);
+    const {token} = useAuth();
+    const authCentre=()=>{
+      if(!token){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+    const decodedToken = token ? jwtDecode(token) : null;
     const id = decodedToken?.id;
-    console.log(id);
+
+    useEffect(()=>{authCentre();getData();}, []);
 
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -40,6 +49,23 @@ const MakeBloodDonation = () => {
     const [gender, setGender] = React.useState("");
     const [city, setCity] = React.useState("");
     const [message, setMessage] = React.useState("");
+
+    const getData = () => {
+        userService
+            .getSingleUser(id)
+            .then((data) => {
+                setName(data?.results?.bindings?.[0]?.Name?.value);
+                setBloodGroup(data?.results?.bindings?.[0]?.BloodGroup?.value);
+                setGender(data?.results?.bindings?.[0]?.Gender?.value);
+                setCity(data?.results?.bindings?.[0]?.City?.value);
+                setContactNo(data?.results?.bindings?.[0]?.ContactNo?.value);
+                setEmail(data?.results?.bindings?.[0]?.Email?.value);
+                setLocation(data?.results?.bindings?.[0]?.Address?.value);
+            })
+            .catch((err) => {
+                console.log(err);
+        });
+    };
 
     //Form Validation
     const [validated, setValidated] = React.useState(false);
@@ -72,10 +98,6 @@ const MakeBloodDonation = () => {
     };
 
     const [showCongratulationBox, setShowCongratulationBox] = React.useState(false);
-
-    const handleChange = (event) => {
-        setBloodGroup(event.target.value);
-    };
 
     //Button Stylings
     const [isHover, setIsHover] = React.useState(true);
@@ -153,9 +175,11 @@ const MakeBloodDonation = () => {
                                                 <option value="">Select Blood Group*</option>
                                                 <option value="A+">A+</option>
                                                 <option value="B+">B+</option>
+                                                <option value="O+">O+</option>
                                                 <option value="AB+">AB+</option>
                                                 <option value="A-">A-</option>
                                                 <option value="B-">B-</option>
+                                                <option value="O-">O-</option>
                                                 <option value="AB-">AB-</option>
                                             </Form.Select>
                                             <Form.Control.Feedback type="invalid">

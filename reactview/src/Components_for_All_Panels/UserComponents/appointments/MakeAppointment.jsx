@@ -4,7 +4,7 @@ import { Row, Col, Nav } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import { useParams } from 'react-router-dom';
-import { ArrowRight, CheckCircleFill, House, HouseDoorFill, PrinterFill, XCircleFill } from 'react-bootstrap-icons';
+import { ArrowRight, CheckCircleFill, HouseDoorFill, PrinterFill, XCircleFill } from 'react-bootstrap-icons';
 import image from '../../../Public/user/image/makeAppointment.jpg';
 import '../css/style.css';
 
@@ -15,6 +15,7 @@ import jwtDecode from "jwt-decode";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ConfirmationBox from "../ConfirmationBox";
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
 
 const MakeAppointment = () => {
 
@@ -22,8 +23,16 @@ const MakeAppointment = () => {
     const { centreID } = useParams();
 
     //Get User ID from token
-    const token = localStorage.getItem('token');
-    const decodedToken = jwtDecode(token);
+    const {token} = useAuth();
+    const authCentre=()=>{
+      if(!token){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+  
+    //This will get the id  from the token if user is login
+    const decodedToken = token ? jwtDecode(token) : null;
     const userID = decodedToken?.id;
     // console.log(userID);
 
@@ -81,7 +90,7 @@ const MakeAppointment = () => {
 
 
 
-    useEffect(()=>{getUserData();getCentreData();}, []);
+    useEffect(()=>{authCentre();getUserData();getCentreData();}, []);
     console.log(centre);
     console.log(user);
     // console.log(donorName);
