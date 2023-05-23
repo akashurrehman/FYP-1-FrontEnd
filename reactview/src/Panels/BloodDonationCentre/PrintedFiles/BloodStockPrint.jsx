@@ -8,7 +8,7 @@ export const handleBloodStockPrint = (blood) => {
     printContent += '@media print {';
     printContent += '  #header { position: fixed; top: 0; left: 0; right: 0; height: 80px; background-color: #f5f5f5; border-bottom: 1px solid black; }';
     printContent += '  #footer { position: fixed; bottom: 0; left: 0; right: 0; height: 30px; background-color: #f5f5f5; border-top: 1px solid black; }';
-    printContent += '  #content { margin-top: 80px; margin-bottom: 30px; }';
+    printContent += '  #content { margin-top: 80px; margin-bottom: 50px; }';
     printContent += '  #watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.5; font:24px }';
     printContent += '}';
     printContent += '</style></head><body>';
@@ -19,8 +19,8 @@ export const handleBloodStockPrint = (blood) => {
       printContent += `<tr><td>${row.ID}</td><td>${row.bloodGroup}</td><td>${row.noOfBags}</td><td>${row.addedDate}</td></tr>`;
     });
     printContent += '</table></div>';
-    printContent += '<div id="footer"><p style="text-align: center; margin-top: 8px;">Footer content will add up here </p></div>';
-    printContent += '<div id="watermark">Original</div>';
+    printContent += '<div id="footer"><p style="text-align: center; margin-top: 8px;">This receipt is generate for the record purpose </p></div>';
+    printContent += '<div id="watermark">Original File</div>';
     printContent += '</body></html>';
   
     // Create a new window with the printable HTML and print it
