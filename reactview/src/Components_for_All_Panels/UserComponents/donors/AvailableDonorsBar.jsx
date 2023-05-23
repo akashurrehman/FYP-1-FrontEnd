@@ -1,12 +1,12 @@
 import React from "react";
-import { Container,Row,Col,ListGroup,Card,Button,Table, Nav } from "react-bootstrap";
+import { Container,Row,Col,Nav } from "react-bootstrap";
 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 import '../css/style.css';
 import donorService from "../../../Services/Api/User/DonorService";
-import { ArrowRight, PostcardFill } from "react-bootstrap-icons";
+import {  PostcardFill } from "react-bootstrap-icons";
 
 const AvailableDonorsBar = () => {
 
@@ -36,7 +36,7 @@ const AvailableDonorsBar = () => {
                         <Col sm={4}>
                         <div style={{marginTop:'20%',textAlign:'center',marginLeft:'25%',marginBottom:'-10%'}}>
                             <div style={{ width: 50, height: 50,marginLeft:'0%'}}>
-                            <CircularProgressbar value={donors?.results?.bindings?.length * 70} text={donors?.results?.bindings?.length *20 + "%"}
+                            <CircularProgressbar value={donors?.results?.bindings?.length} text={donors?.results?.bindings?.length + "%"}
                                 styles={buildStyles({
                                 // Rotation of path and trail, in number of turns (0-1)
                                 // rotation: 0.25,

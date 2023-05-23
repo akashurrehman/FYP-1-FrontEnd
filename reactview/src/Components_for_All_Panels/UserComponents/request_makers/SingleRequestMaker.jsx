@@ -49,7 +49,10 @@ const SingleRequestMaker = (props) => {
         setPersonID(name.substring(name.lastIndexOf("#") + 1));
     };
 
-    useEffect(()=>{getUserData();getPersonNameFromRequestMakerTabel();}, []);
+    useEffect(() => {
+        getUserData();
+        getPersonNameFromRequestMakerTabel();
+    }, [getUserData, getPersonNameFromRequestMakerTabel]);
 
     const [isHover, setIsHover] = React.useState(true);
 

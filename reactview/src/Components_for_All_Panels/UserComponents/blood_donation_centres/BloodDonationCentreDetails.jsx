@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Container, Button,Image } from "react-bootstrap";
-import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import { Link, useParams } from 'react-router-dom';
-import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 import image from '../../../Public/user/image/jobpost.png';
 import '../css/style.css';
 

@@ -55,7 +55,7 @@ const UserPanelHeader = () => {
         <Navbar collapseOnSelect expand="lg" bg="" variant="light" className='Navbar' fixed="top">
             <div className="d-flex" style={{paddingLeft:'3%'}}>
             <img src={logo} alt="logo" width="3.6%" height="40rem" />
-            <Navbar.Brand href="/user/home"><h4 className="d-flex"><div style={{fontFamily:'cursive',color:"rgb(160, 15, 15)"}}>Donate</div><div style={{fontFamily:'cursive',color:'#27213C',fontSize:'15px'}}> life</div></h4></Navbar.Brand>
+            <Navbar.Brand href="/userpanel/HomeScreen"><h4 className="d-flex"><div style={{fontFamily:'cursive',color:"rgb(160, 15, 15)"}}>Donate</div><div style={{fontFamily:'cursive',color:'#27213C',fontSize:'15px'}}> life</div></h4></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">
@@ -334,7 +334,7 @@ const UserPanelHeader = () => {
                                         <Col sm={3}>
                                             <div style={{textAlign:'left'}}>
                                                 <Image src={image_faq} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
-                                                <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/financial-donation">FAQ's <ArrowRight className="" size={17} /></Nav.Link>
+                                                <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/faq">FAQ's <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
                                                     We're driven by curiosity to research the journey of blood, milk and beyond. 
                                                 </p>

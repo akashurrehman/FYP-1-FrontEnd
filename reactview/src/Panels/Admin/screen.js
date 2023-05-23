@@ -17,7 +17,7 @@ import Jobs from "./adminscreens/Jobs/Jobs";
 const HomeScreen_BloodDonation = () => {
   return (
     <div className="container-fluid maincontainer ">
-      <Header />
+      
       <div className="row">
         <div className="col-sm-3 sidemenu  p-0 ml-50">
           {/* Profile Image and navigation div */}

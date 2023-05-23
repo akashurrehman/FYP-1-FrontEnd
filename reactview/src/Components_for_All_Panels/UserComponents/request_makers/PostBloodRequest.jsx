@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Button, Image } from "react-bootstrap";
-import { Form, Row, Col, InputGroup, FloatingLabel } from "react-bootstrap";
+import { Form, Row, Col, InputGroup } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import image from '../../../Public/user/image/PostBloodRequest2.jpg';
-import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, GeoAlt,Telephone } from 'react-bootstrap-icons';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import { ArrowRight } from 'react-bootstrap-icons';
+
+
 
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import EmailIcon from '@mui/icons-material/EmailSharp';
@@ -24,14 +23,23 @@ import requestMakerService from "../../../Services/Api/User/RequestMakerService"
 import AvailableRequestMakersBar from "./AvailableRequestMakersBar";
 import jwtDecode from "jwt-decode";
 import CongratulationBox from "../CongratulationBox";
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
 
 const PostBloodRequest = () => {
 
     //Get id from token 
-    const token = localStorage.getItem('token');
-    const decodedToken = jwtDecode(token);
+    //Get User ID from token
+    const {token} = useAuth();
+    const authCentre=()=>{
+      if(!token){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+    const decodedToken = token ? jwtDecode(token) : null;
     const id = decodedToken?.id;
-    console.log(id);
+
+    useEffect(()=>{authCentre();}, []);
 
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -76,10 +84,6 @@ const PostBloodRequest = () => {
     };
 
     const [showCongratulationBox, setShowCongratulationBox] = React.useState(false);
-
-    const handleChange = (event) => {
-        setBloodGroup(event.target.value);
-    };
 
     //Button Stylings
     const [isHover, setIsHover] = React.useState(true);
@@ -241,9 +245,11 @@ const PostBloodRequest = () => {
                                                 <option value="">Select Blood Group*</option>
                                                 <option value="A+">A+</option>
                                                 <option value="B+">B+</option>
+                                                <option value="O+">O+</option>
                                                 <option value="AB+">AB+</option>
                                                 <option value="A-">A-</option>
                                                 <option value="B-">B-</option>
+                                                <option value="O-">O-</option>
                                                 <option value="AB-">AB-</option>
                                             </Form.Select>
                                             <Form.Control.Feedback type="invalid">

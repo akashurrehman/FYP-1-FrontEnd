@@ -46,7 +46,7 @@ export default function MyBloodDonations() {
                     ) : (
                         <Row className="d-flex justify-content-center">
                             {donors.results.bindings.map((donor, index) => (
-                                <Col sm={6} key={index}>
+                                <Col sm={12} key={index}>
                                     <SingleDonor key={index} donor={donor} />
                                 </Col>
                                 
