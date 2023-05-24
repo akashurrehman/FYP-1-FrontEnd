@@ -42,7 +42,21 @@ router.post("/upload", upload, async (req, res) => {
       console.log(err);
     }
   });
+  router.get('/images/:id', async (req, res) => {
+    try {
+      const imageId = req.params.id;
+      const image = await Image.findById(imageId);
+      
+      if (!image) {
+        return res.status(404).send({ error: 'Image not found' });
+      }
   
+      res.send(image);
+    } catch (err) {
+      console.log(err);
+      res.status(500).send({ error: 'Failed to fetch image' });
+    }
+  });  
 router.post("/Register",async function(req,res){
     let User= await user.findOne({Email:req.body.Email});
         if(User) 
