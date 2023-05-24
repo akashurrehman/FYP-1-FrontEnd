@@ -32,7 +32,44 @@ const CenterRegistration=()=> {
   });
 
   const [showModal, setShowModal] = useState(false);
-
+  const [image, setImage] = useState(null);
+  const [message, setMessage] = useState("");
+  const [imageData, setImageData] = useState(null);
+  const imageId="646dd40936040839af204d4e";
+  const url="http://localhost:3003";
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3003/users/images/${imageId}`)
+      .then((response) => {
+        setImageData(response.data);
+        console.log("Response",response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const handleImageChange = (event) => {
+     event.preventDefault();
+    setImage(event.target.files[0]);
+  };
+  
+  const handleImageSubmit = (event) => {
+    event.preventDefault();
+  
+    const formData = new FormData();
+    formData.append("image", image);
+  
+    axios
+      .post("http://localhost:3003/users/upload", formData)
+      .then((res) => {
+        console.log(res.data)
+        setMessage(res.data.message);
+      })
+      .catch((error) => {
+        setMessage(error.message);
+        console.log("error",error)
+      });
+  };
   const validateForm = () => {
     let isValid = true;
     const errors = {};
@@ -282,6 +319,20 @@ const handleCancel = () => {
               </Col>
           </Row>
         </div>
+        <Col>
+            <form onSubmit={handleImageSubmit}>
+              <input type="file" accept="image/*"  onChange={handleImageChange} />
+                <button type="submit">Upload</button>
+                  {message && <p>{message}</p>}
+            </form>
+        </Col>
+        <div>
+      {imageData ? (
+        <img src={`http://localhost:3003/${imageData.imagePath.replace(/\\/g, '/').replace('public/', '')}`} alt="Image" />
+      ) : (
+        <p>Loading image...</p>
+      )}
+    </div>
       <Modal show={showModal} onHide={handleCancel}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Submission</Modal.Title>

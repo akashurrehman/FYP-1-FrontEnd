@@ -14,14 +14,11 @@ const ReportRequests=()=> {
     const [selectedRowIds, setSelectedRowIds] = useState({});
 
   const [data, setData] = useState([]);
+  
   const [approvedData, setApprovedData] = useState([]);
         const handleApprove = (id) => {
           console.log("ID:"+id);
-          
-        //     axios
-        //         .post(`http://localhost:8081/api/users/bloodrequest/approve/${id}`)
-        //         .then((response) => console.log(response.data))
-        //         .catch((error) => console.log(error));
+        
           // Find the approved data from the current data state and remove it
           const approvedItem = data.find((item) => item.ID.value === id);
           setData(data.filter((item) => item.ID.value !== id));
