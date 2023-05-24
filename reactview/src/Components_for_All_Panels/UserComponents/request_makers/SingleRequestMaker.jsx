@@ -25,6 +25,8 @@ const SingleRequestMaker = (props) => {
     const id = decodedToken?.id;
     console.log(id);
 
+    
+
     //For updating values in request table
     const donatedBy = id;
     const [donorName, setDonorName] = useState();
@@ -71,10 +73,33 @@ const SingleRequestMaker = (props) => {
         transitionDuration: isHover ? '' : '0.45s',
     };
 
+    //For making notification process
+    const notificationMadeBy = decodedToken?.id;
+    const userName = decodedToken?.name;
+    const message = "Your blood request accepted by " + userName;
+    const notificationForRequestMaker = personID;
+
     const updateRequest = async (e) => {
         try {
             await axios.put('http://localhost:8081/api/users/accept/bloodRequest/' + requestMaker.ID.value, {
                 donatedBy, donorName
+            });
+            
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
+
+    const makeNotification = async (e) => {
+        try {
+            await axios.post('http://localhost:8081/api/users/addNotification/forRequestMaker', {
+                notificationMadeBy, message, userName, notificationForRequestMaker
             });
         } 
         catch (error) {
@@ -132,11 +157,16 @@ const SingleRequestMaker = (props) => {
                                                     <>
                                                         <Button variant="default" style={ButtonStyle1} 
                                                             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                                            onClick={() => {
+                                                            onClick={async () => {
                                                                 if(userLoginService.isLoggedIn()){
                                                                     if(personID !== donatedBy){
-                                                                        updateRequest();
-                                                                        window.location.reload();
+                                                                        try {
+                                                                            await updateRequest();
+                                                                            await makeNotification();
+                                                                            window.location.reload();
+                                                                        } catch (error) {
+                                                                            console.log('An error occurred during donation handling:', error);
+                                                                        }
                                                                     }
                                                                     else{
                                                                         toast.error("Sorry! You cannot donate to this blood request because its posted by you.", {

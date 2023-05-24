@@ -133,7 +133,7 @@ const HomeScreen_UserPanel = () => {
                 <div 
                     style={{
                         backgroundImage:`url(${CoverImage})`,backgroundRepeat:'no-repeat',
-                        backgroundSize:'cover',opacity: 0.8,paddingTop:"37%",marginBottom:"3%",backgroundColor: "",
+                        backgroundSize:'cover',opacity: 0.85,paddingTop:"37%",marginBottom:"3%",backgroundColor: "",
                     }}>
                 
                 </div>
@@ -169,7 +169,7 @@ const HomeScreen_UserPanel = () => {
                         <Col className="ColHover" sm={2} style={{backgroundColor:'white',borderRadius:'10px',marginRight:'1%'}}>
                             <div style={{padding:'6%'}}>
                                 <Image src={image_blood_analysis} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
-                                <Nav.Link style={{fontSize:'16px',fontWeight:'500',marginLeft:'-2.5%',paddingTop:'8%'}} className="RedColor" href="/user/blood analysis">Take eligibility quiz </Nav.Link>
+                                <Nav.Link style={{fontSize:'16px',fontWeight:'500',marginLeft:'-2.5%',paddingTop:'8%'}} className="RedColor" href="/user/blood-analysis">Take eligibility quiz </Nav.Link>
                                 
                             </div>
                         </Col>
@@ -325,9 +325,9 @@ const HomeScreen_UserPanel = () => {
                         <Col sm={4}>
                             <div style={{paddingTop:"30%",paddingLeft:"20%",textAlign:"left"}}>
                                 <h5 className='PurpleColor'>Thinking about a blood donation?</h5>
-                                <h1 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Join us. Be the Life Donor.</h1>
+                                <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Join us. Be the Life Donor.</h3>
                                 <p className="text-left PurpleColor">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
-                                <Button size='sm' variant="flatSolid">Sign in <ArrowRight className="" size={22} /></Button>
+                                <Button size='sm' variant="flatSolid">Sign in <ArrowRight className="" size={20} /></Button>
                             </div>
                             
                         </Col>

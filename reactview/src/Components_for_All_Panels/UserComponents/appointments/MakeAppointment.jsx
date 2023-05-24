@@ -105,6 +105,7 @@ const MakeAppointment = () => {
                     centreID,userID,donorName,donorDOB,donorEmail,donorContactNo,donorGender,donorAddress,donorCity,donorBloodGroup,centreName,centreEmail,centreLocation,centreTimings,centreContactNo
                 });
                 console.log(response.data);
+                makeNotification();
                 handleShow();
             }
             else{
@@ -133,6 +134,30 @@ const MakeAppointment = () => {
         
         
     }
+
+    
+    //For making notification process
+    const notificationMadeBy = decodedToken?.id;
+    const userName = decodedToken?.name;
+    const message = "Appointment booked by " + userName;
+    const notificationForCentre = centreID;
+
+    const makeNotification = async (e) => {
+        try {
+            await axios.post('http://localhost:8081/api/users/addNotification/forCentre', {
+                notificationMadeBy, message, userName, notificationForCentre
+            });
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
+
 
 
 

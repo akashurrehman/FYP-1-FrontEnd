@@ -5,8 +5,7 @@ import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import image from '../../../Public/user/image/PostBloodRequest2.jpg';
 import { ArrowRight } from 'react-bootstrap-icons';
-
-
+import image_post_blood_request from '../../../Public/user/image/post-blood-request-menu.png';
 
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import EmailIcon from '@mui/icons-material/EmailSharp';
@@ -94,10 +93,10 @@ const PostBloodRequest = () => {
         setIsHover(true);
     };
     const ButtonStyle = {
-        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
-        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        backgroundColor: isHover ? '#27213C' : '#D64045',
+        color: isHover ? 'white' : 'white',
         transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
-        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
+        border: isHover ? '' : '',
         transitionDuration: isHover ? '' : '0.1s',
     };
     
@@ -106,12 +105,12 @@ const PostBloodRequest = () => {
 
         <div style={{position: "relative"}}>
             <div>
-                <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "40%",opacity:'0.75'}}></Image>
+                <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "40%",opacity:'1.0'}}></Image>
             </div>
 
             <div 
                 style={{position: "absolute",
-                    bottom: "20%",left: "3%",top: "25%",
+                    bottom: "20%",left: "3%",top: "30%",
                     backgroundColor: "white",color: "",
                     height: "90%",
                     marginLeft: "20px",textAlign: "center",
@@ -120,7 +119,8 @@ const PostBloodRequest = () => {
                 <Container>
                     <Row className='mt-0 mb-5 p-1'>
                         <Col sm={12} className='LoginContainerCol'>
-                            <h4 className="TextColor" style={{fontFamily:'cursive'}}>Post Blood Request</h4>
+                        <Image src={image_post_blood_request} rounded style={{marginTop: "-8%",marginBottom:'2%',height: "4rem",opacity:'1.0'}}></Image>
+                            <h4 className="RedColor" style={{fontFamily:'cursive'}}>Post Blood Request</h4>
                             <p className="justify-content mb-3 mt-3" style={{fontSize:'13.5px',color:'gray'}}>
                                 "Dear Request Maker!", your information is valuable to us.
                                 When you fill out this form, the system will create your blood request. 
@@ -320,10 +320,10 @@ const PostBloodRequest = () => {
                                         </InputGroup>
                                     </Col>
                                 </Row>
-                                <Row className="mt-2" style={{textAlign:'right'}}>
+                                <Row className="mt-2" style={{textAlign:'left'}}>
                                     <Col sm={12}>
                                     <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                    >Post Request <ArrowRight className="" size={17} /></Button>
+                                    >Post Request</Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -349,7 +349,7 @@ const PostBloodRequest = () => {
         </div>
 
         
-        <div style={{marginLeft:'50%',marginTop:'3%'}}>
+        <div style={{marginLeft:'65%',marginTop:'3%'}}>
             <AvailableRequestMakersBar ></AvailableRequestMakersBar>
         </div>
         
