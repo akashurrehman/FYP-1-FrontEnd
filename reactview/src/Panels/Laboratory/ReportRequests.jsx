@@ -119,7 +119,7 @@ const columns = [
   }  
 ];
   return (
-    <Container style={{backgroundColor:"#EEEEEE"}}>
+    <Container style={{backgroundColor:"#EEEEEE"}} fluid>
       <Header />
       <Row>
         <Col className="mt-md-5" xs={12}>

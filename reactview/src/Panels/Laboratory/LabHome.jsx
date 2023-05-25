@@ -49,7 +49,7 @@ const LabHome=()=> {
 
     };
     fetchData();
-    authCentre();
+    //authCentre();
   }, []);
   const mystyle = {
       height: "7%",
@@ -59,7 +59,7 @@ const LabHome=()=> {
     };
   return (
   <div style={{backgroundColor:"#F3E8FF"}}>
-    <Container>
+    <Container fluid>
       <Header />
       <Row className="mt-sm-5">
         <Col className="mt-sm-5" xs={12}>
@@ -67,7 +67,7 @@ const LabHome=()=> {
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title>{lab.Name?.value}</Card.Title>
-              <Card.Title >Dashboard</Card.Title>
+              <Card.Title >Lab Dashboard</Card.Title>
             </Card.Body>
           </Card>
         </Col>
