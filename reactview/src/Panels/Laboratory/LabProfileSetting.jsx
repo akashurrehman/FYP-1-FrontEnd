@@ -90,10 +90,9 @@ const LabProfileSetting=()=> {
           address: centerData.Address.value,
           city:centerData.City.value
         });
-
   }
 });
-authCentre();
+//authCentre();
 },[]);
 
   const handleChange = (event) => {
@@ -193,7 +192,7 @@ const handleCancel = () => {
 
   return (
   <div  style={{backgroundColor:"#EEEEEE"}}>
-    <Container style={{backgroundColor:"#D5D5D5"}}>
+    <Container style={{backgroundColor:"#D5D5D5"}} fluid className="px-3">
       <Header />
       <Row>
         <Col className="mt-md-5" xs={12}>
@@ -240,7 +239,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
         <Col>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
+            <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
         </Col>
     </Row>
       <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
@@ -253,7 +252,7 @@ const handleCancel = () => {
                 <Form.Check type="checkbox" style={{color:"black",borderColor:"red"}} className="py-3" label="Are the provided information is correct according to your center or knowledge?" />
               </Form.Group>
             </Form>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center"}} className="mx-3 my-3" variant="danger" onClick={handleDelete}>Delete Center</Button>
+            <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} className="mx-3 my-3" variant="danger" onClick={handleDelete}>Delete Center</Button>
           </Col>
         </Row>
       </Card>

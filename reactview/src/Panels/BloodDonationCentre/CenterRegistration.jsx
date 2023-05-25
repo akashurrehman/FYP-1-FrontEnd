@@ -193,15 +193,18 @@ const handleCancel = () => {
 
   return (
   <div  style={{backgroundColor:"#EEEEEE"}}>
-    <Container style={{backgroundColor:"#D5D5D5"}}>
+    <Container style={{backgroundColor:"#D5D5D5"}} fluid>
       <Row>
-        <Col className="mt-md-5" xs={12}>
-            <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#85586F",color:"white"}} >
+        <Col className="mt-md-2" xs={12}>
+            <Card style={{paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
               <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body>
                 <Card.Title style={{justifyContent:"center",textAlign:"center"}}>
                   Blood Donation Center Registration
                 </Card.Title>
+                <Card.Footer style={{justifyContent:"center",textAlign:"center"}}>
+                  Here you can register your blood Donation Centre by providing correct credentials.
+                </Card.Footer>
               </Card.Body>
           </Card>
         <div>
@@ -312,11 +315,16 @@ const handleCancel = () => {
           </Form>
           <Row className="mb-3">
               <Col xs={6}>
-                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Register Blood Donation Center</Button>
+                  <Button style={{ display: "inline-block", width:"75%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Register Blood Donation Center</Button>
               </Col>
+          </Row>
+          <Row className="mb-3">
+            <Card className="mb-5 mt-5 pt-2 pb-2" border="success">
+              <p>If you are already registered then you can login through this button!</p>
               <Col xs={6}>
-                  <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleLogin}>Already Registered? Go to Login.</Button>
+                  <Button style={{ display: "inline-block", width:"75%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleLogin}>Already Registered? Go to Login.</Button>
               </Col>
+            </Card>  
           </Row>
         </div>
         <Col>
