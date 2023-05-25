@@ -1,6 +1,10 @@
-import React from "react";
-import { Navbar, Nav, Button,Row,Col, Image } from 'react-bootstrap';
+import React, { useState } from "react";
+import { Navbar,Nav,Button,Row,Col,Modal,Image } from 'react-bootstrap';
 import { ArrowRight } from 'react-bootstrap-icons';
+import CircleNotificationsSharpIcon from '@mui/icons-material/NotificationsActiveSharp';
+
+import DoneAllSharpIcon from '@mui/icons-material/DoneAllSharp';
+import SettingsSharpIcon from '@mui/icons-material/SettingsSharp';
 import logo from '../../Public/user/image/AppLogo4.png';
 import image_news from '../../Public/user/image/news.png';
 import image_campaign from '../../Public/user/image/campaign.png';
@@ -24,8 +28,33 @@ import image_my_appointment from '../../Public/user/image/my-appointment-menu.pn
 
 import './css/style.css';
 import userLoginService from "../../Services/Api/User/UserLoginService";
+import jwtDecode from "jwt-decode";
+import notificationService from '../../Services/Api/User/NotificationService';
+import SingleNotification from "./notifications/SingleNotification";
+
 
 const UserPanelHeader = () => {
+
+    //Get id from token 
+    const token = localStorage.getItem('token');
+    const decodedToken = token ? jwtDecode(token) : null;
+    const id = decodedToken?.id;
+    console.log(id);
+
+    const [notifications, setNotifications] = React.useState([]);
+
+    const getData = () => {
+        notificationService
+            .getNotificationByRequestMakerID(id)
+            .then((data) => {
+                setNotifications(data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    React.useEffect(getData, []);
+    console.log(notifications.results);
 
     const [isHover, setIsHover] = React.useState(true);
 
@@ -39,22 +68,27 @@ const UserPanelHeader = () => {
     const ButtonStyle1 = {
         backgroundColor: isHover ? '#D64045' : '#27213C',
         color: isHover ? 'white' : 'white',
-        transform: isHover ? 'scale(0.8)' : 'scale(0.80)',
+        transform: isHover ? 'scale(0.76)' : 'scale(0.76)',
         border: isHover ? '' : '1px solid #D64045',
         transitionDuration: isHover ? '' : '0.45s',
     };
     const ButtonStyle2 = {
         backgroundColor: isHover ? 'white' : 'white',
         color: isHover ? '#D64045' : 'rgb(160, 15, 15)',
-        transform: isHover ? 'scale(0.8)' : 'scale(0.80)',
+        transform: isHover ? 'scale(0.76)' : 'scale(0.76)',
         border: isHover ? '1px solid #D64045' : '1px solid rgb(160, 15, 15)',
         transitionDuration: isHover ? '' : '0.45s',
     };
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return ( <div>
         <Navbar collapseOnSelect expand="lg" bg="" variant="light" className='Navbar' fixed="top">
             <div className="d-flex" style={{paddingLeft:'3%'}}>
-            <img src={logo} alt="logo" width="3.6%" height="40rem" />
+            <img src={logo} alt="logo" width="3.2%" height="40rem" />
             <Navbar.Brand href="/userpanel/HomeScreen"><h4 className="d-flex"><div style={{fontFamily:'cursive',color:"rgb(160, 15, 15)"}}>Donate</div><div style={{fontFamily:'cursive',color:'#27213C',fontSize:'15px'}}> life</div></h4></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
@@ -356,7 +390,6 @@ const UserPanelHeader = () => {
                     <Nav.Link href="/user/contact-us">Contact Us</Nav.Link>
                 </Nav>
                 
-                
                 {!userLoginService.isLoggedIn() ? (
                     <>
                         <Nav>
@@ -369,6 +402,52 @@ const UserPanelHeader = () => {
                 ) : (
                     <>
                         <Nav>
+                            <Nav.Link onClick={handleShow}><CircleNotificationsSharpIcon sx={{ color: '#27213C', mr:0 , my: 0 }}/></Nav.Link>
+                            
+                            <div>
+                                <Modal show={show} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                    <Modal.Title>Notifications</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div>
+                                        {notifications.length === 0 ? (
+                                            <></>
+                                            ) : (
+                                                <Row className="d-flex justify-content-center">
+                                                    {notifications.results.bindings.map((notification, index) => (
+                                                        <Col sm={12} key={index}>
+                                                            <SingleNotification key={index} notification={notification} />
+                                                        </Col>
+                                                        
+                                                    ))}
+                                                </Row>
+                                            )}
+                                        </div>
+                                        <div style={{marginTop:'7%'}}>
+                                            <Row>
+                                                <Col sm={1}>
+                                                    <Nav.Link style={{color:'grey'}}><SettingsSharpIcon sx={{ color: '', mr:0 , my: 0, fontSize:'large' }}/></Nav.Link>
+                                                </Col>
+                                                <Col sm={4}>
+                                                    <Nav.Link style={{color:'#1824CB'}}><DoneAllSharpIcon sx={{ color: '', mr:0 , my: 0, fontSize:'large' }}/><spam style={{fontSize:'13px'}}> Mark all as read</spam></Nav.Link>
+                                                </Col>
+                                                <Col sm={7}>
+                                                    <div style={{textAlign:'right'}}>
+                                                        <Button size='sm' variant="flatSolid" onClick={handleClose}>
+                                                            View all notifications
+                                                        </Button>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                            
+                                        </div>
+                                        
+                                    </Modal.Body>
+                                    
+                                </Modal>
+                            </div>
+                            
                             <Button variant="default" style={ButtonStyle2} 
                             onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
                             href="/user/my-account"

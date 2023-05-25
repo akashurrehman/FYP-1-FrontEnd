@@ -4,13 +4,11 @@ import { Form, Row, Col, InputGroup, FloatingLabel } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import image from '../../../Public/user/image/CoverImage1.jpg';
-import { Envelope,PersonAdd, Hospital,Phone,Chat,Droplet,ArrowRight, HouseDoor, GeoAlt,Telephone } from 'react-bootstrap-icons';
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import image_make_blood_donation from '../../../Public/user/image/make-blood-donation-menu.png';
 
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import EmailIcon from '@mui/icons-material/EmailSharp';
-import LocalHospitalIcon from '@mui/icons-material/LocalPharmacySharp';
 import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';
 import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
 import ContactsSharpIcon from '@mui/icons-material/ContactsSharp';
@@ -108,10 +106,10 @@ const MakeBloodDonation = () => {
         setIsHover(true);
     };
     const ButtonStyle = {
-        backgroundColor: isHover ? 'rgb(160, 15, 15)' : 'white',
-        color: isHover ? 'white' : 'rgb(160, 15, 15)',
+        backgroundColor: isHover ? '#27213C' : '#D64045',
+        color: isHover ? 'white' : 'white',
         transform: isHover ? 'scale(0.84)' : 'scale(0.84)',
-        border: isHover ? '' : '1px solid rgb(160, 15, 15)',
+        border: isHover ? '' : '',
         transitionDuration: isHover ? '' : '0.1s',
     };
     
@@ -120,12 +118,12 @@ const MakeBloodDonation = () => {
 
         <div style={{position: "relative"}}>
             <div>
-                <Image src={image} rounded style={{marginLeft: "51.3%",marginTop:'3.9%',height: "40%",opacity:'0.75'}}></Image>
+                <Image src={image} style={{marginLeft: "51.5%",marginTop:'3.9%',height: "40%",opacity:'1'}}></Image>
             </div>
 
             <div 
                 style={{position: "absolute",
-                    bottom: "20%",left: "3%",top: "25%",
+                    bottom: "20%",left: "3%",top: "30%",
                     backgroundColor: "white",color: "",
                     height: "90%",
                     marginLeft: "20px",textAlign: "center",
@@ -134,7 +132,8 @@ const MakeBloodDonation = () => {
                 <Container>
                     <Row className='mt-0 mb-5 p-1'>
                         <Col sm={12} className='LoginContainerCol'>
-                            <h4 className="TextColor" style={{fontFamily:'cursive'}}>Make Blood Donation</h4>
+                        <Image src={image_make_blood_donation} rounded style={{marginTop: "-8%",marginBottom:'2%',height: "4rem",opacity:'1.0'}}></Image>
+                            <h4 className="RedColor" style={{fontFamily:'cursive'}}>Make Blood Donation</h4>
                             <p className="justify-content mb-3 mt-3" style={{fontSize:'13.5px',color:'gray'}}>
                                 "Dear Donor!", your information is valuable to us.
                                 When you fill out this form, the system will create your blood donation. 
@@ -316,10 +315,10 @@ const MakeBloodDonation = () => {
                                         </InputGroup>
                                     </Col>
                                 </Row>
-                                <Row className="mt-2" style={{textAlign:'right'}}>
+                                <Row className="mt-2" style={{textAlign:'left'}}>
                                     <Col sm={12}>
                                     <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                    >Make Donation <ArrowRight className="" size={17} /></Button>
+                                    >Make Donation</Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -344,7 +343,7 @@ const MakeBloodDonation = () => {
             </div>
         </div>
 
-        <div style={{marginLeft:'50%',marginTop:'3%'}}>
+        <div style={{marginLeft:'65%',marginTop:'3%'}}>
             <AvailableDonorsBar ></AvailableDonorsBar>
         </div>
         

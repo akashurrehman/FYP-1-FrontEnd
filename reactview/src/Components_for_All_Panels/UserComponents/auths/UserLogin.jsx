@@ -226,7 +226,7 @@ const UserLogin = (props) => {
                                         </Row>
                                         <Row>
                                             <Col sm={6} style={{textAlign:'left'}}>
-                                                <Nav.Link className='RedColor'>Forgot Your Password</Nav.Link>
+                                                <Nav.Link className='RedColor'>Forgot Your Password ?</Nav.Link>
                                             </Col>
                                             <Col sm={6} style={{textAlign:'right'}}>
                                                 <Nav.Link className='PurpleColor' href='/user/registration'>Register Now <ArrowRight size={18} className="PurpleColor"/></Nav.Link>

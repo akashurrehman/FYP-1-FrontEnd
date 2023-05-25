@@ -23,6 +23,7 @@ import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.query.ResultSetFormatter;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.sparql.function.library.date;
 import org.apache.jena.update.UpdateAction;
 import org.apache.jena.update.UpdateFactory;
 import org.apache.jena.update.UpdateRequest;
@@ -34,6 +35,15 @@ import org.springframework.http.MediaType;
 //import for password encryption
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+//import for date, time, day
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.FormatStyle;
 @RestController
 public class User {
 
@@ -1293,6 +1303,219 @@ public class User {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
+
+
+
+
+
+
+
+    /*
+     * Notification
+     * Add notification details for Request Maker
+    */
+    @PostMapping("/api/users/addNotification/forRequestMaker")
+    public ResponseEntity<String> AddNotificationDetailsForRequestMaker(@RequestBody String Notification) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Notification);
+
+        String notificationMadeBy = jsonNode.has("notificationMadeBy") ? jsonNode.get("notificationMadeBy").asText() : null;
+        String notificationForRequestMaker = jsonNode.has("notificationForRequestMaker") ? jsonNode.get("notificationForRequestMaker").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String userName = jsonNode.has("userName") ? jsonNode.get("userName").asText() : null;
+
+        String individualId = "Notification_" + System.currentTimeMillis();
+
+        //For getting current date.
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatterDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+        String dateString = currentDate.format(formatterDate);
+
+        //For getting current day.
+        DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
+        String dayOfWeekString = currentDayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault());
+
+        //For getting current time.
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatterTime = new DateTimeFormatterBuilder()
+            .appendPattern("hh:mm:ss a")
+            .toFormatter();
+        String timeString = currentTime.format(formatterTime);
+        
+        System.out.println(dateString);
+
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        "bd:" + individualId + " rdf:type bd:Notification ;\n" +
+                        "                       bd:hasNotificationID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationMadeByName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationTime \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationDay \"%s\"^^xsd:string ;\n" +
+                        "                       bd:notificationMadeBy bd:%s ;\n" +
+                        "                       bd:notificationForRequestMaker bd:%s .\n" +
+                        "}",
+                individualId, message, userName, dateString, timeString, dayOfWeekString, notificationMadeBy, notificationForRequestMaker);
+        // Call the InsertSparql function with the query
+        boolean isInserted = InsertSparql(query);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
+    }
+
+
+    /*
+     * Notification
+     * Add notification details for Blood Donation Centre
+    */
+    @PostMapping("/api/users/addNotification/forCentre")
+    public ResponseEntity<String> AddNotificationDetailsForCentre(@RequestBody String Notification) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(Notification);
+
+        String notificationMadeBy = jsonNode.has("notificationMadeBy") ? jsonNode.get("notificationMadeBy").asText() : null;
+        String notificationForCentre = jsonNode.has("notificationForCentre") ? jsonNode.get("notificationForCentre").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String userName = jsonNode.has("userName") ? jsonNode.get("userName").asText() : null;
+
+
+        String individualId = "Notification_" + System.currentTimeMillis();
+
+        //For getting current date.
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter formatterDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
+        String dateString = currentDate.format(formatterDate);
+
+        //For getting current day.
+        DayOfWeek currentDayOfWeek = currentDate.getDayOfWeek();
+        String dayOfWeekString = currentDayOfWeek.getDisplayName(TextStyle.FULL, Locale.getDefault());
+
+        //For getting current time.
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatterTime = new DateTimeFormatterBuilder()
+            .appendPattern("hh:mm:ss a")
+            .toFormatter();
+        String timeString = currentTime.format(formatterTime);
+        
+        System.out.println(dateString);
+
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        "bd:" + individualId + " rdf:type bd:Notification ;\n" +
+                        "                       bd:hasNotificationID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationMadeByName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationTime \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasNotificationDay \"%s\"^^xsd:string ;\n" +
+                        "                       bd:notificationMadeBy bd:%s ;\n" +
+                        "                       bd:notificationForCentre bd:%s .\n" +
+                        "}",
+                individualId, message, userName, dateString, timeString, dayOfWeekString, notificationMadeBy, notificationForCentre);
+        // Call the InsertSparql function with the query
+        boolean isInserted = InsertSparql(query);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
+    }
+
+
+    /*
+     * GET the Notification Details of Request Maker by passing user ID 
+     * Donor details
+     */
+    @GetMapping("/api/users/notification/byRequestMakerID/{id}")
+    public ResponseEntity<String> GetNotificationForRequestMaker(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?notifications rdf:type bd:Notification ." +
+                "?notifications bd:notificationForRequestMaker bd:" + id + " ." +
+                "?notifications bd:hasNotificationID ?ID ." +
+                "?notifications bd:hasNotificationMessage ?Message ." +
+                "?notifications bd:hasNotificationMadeByName ?UserName ." +
+                "?notifications bd:hasNotificationDate ?Date ." +
+                "?notifications bd:hasNotificationDay ?Day ." +
+                "?notifications bd:hasNotificationTime ?Time ." +
+                "?notifications bd:notificationMadeBy ?MadeBy ." +
+                "}";
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Email is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    /*
+     * GET the Notification Details of Request Maker by passing user ID 
+     * Donor details
+     */
+    @GetMapping("/api/users/notification/byCentreID/{id}")
+    public ResponseEntity<String> GetNotificationForCentre(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?notifications rdf:type bd:Notification ." +
+                "?notifications bd:notificationForCentre bd:" + id + " ." +
+                "?notifications bd:hasNotificationID ?ID ." +
+                "?notifications bd:hasNotificationMessage ?Message ." +
+                "?notifications bd:hasNotificationMadeByName ?UserName ." +
+                "?notifications bd:hasNotificationDate ?Date ." +
+                "?notifications bd:hasNotificationDay ?Day ." +
+                "?notifications bd:hasNotificationTime ?Time ." +
+                "?notifications bd:notificationMadeBy ?MadeBy ." +
+                "}";
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Email is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
+
+
 
     /*
      * Method for the Functionality of Read data on the basis of query
