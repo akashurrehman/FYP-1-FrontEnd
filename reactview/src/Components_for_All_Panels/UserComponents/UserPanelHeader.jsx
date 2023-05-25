@@ -89,7 +89,7 @@ const UserPanelHeader = () => {
         <Navbar collapseOnSelect expand="lg" bg="" variant="light" className='Navbar' fixed="top">
             <div className="d-flex" style={{paddingLeft:'3%'}}>
             <img src={logo} alt="logo" width="3.2%" height="40rem" />
-            <Navbar.Brand href="/userpanel/HomeScreen"><h4 className="d-flex"><div style={{fontFamily:'cursive',color:"rgb(160, 15, 15)"}}>Donate</div><div style={{fontFamily:'cursive',color:'#27213C',fontSize:'15px'}}> life</div></h4></Navbar.Brand>
+            <Navbar.Brand href="/userpanel/HomeScreen"><h4 className="d-flex"><div style={{fontFamily:'cursive',color:"#D64045"}}>Donate</div><div style={{fontFamily:'cursive',color:'#27213C',fontSize:'15px'}}> life</div></h4></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="me-auto">

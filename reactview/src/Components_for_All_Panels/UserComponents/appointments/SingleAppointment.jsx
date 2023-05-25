@@ -60,8 +60,8 @@ const SingleAppointment = (props) => {
                                                 </Col>
                                                 <Col sm={6}>
                                                     <p className='PurpleColor' style={{marginTop:'-3%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Centre Name: </strong>{appointment?.CentreName?.value}</p>
-                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Timings: </strong>{appointment?.Timings?.value}</p>
-                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Location: </strong>{appointment?.Location?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Booking Date: </strong>{appointment?.BookingDate?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Booking Time: </strong>{appointment?.BookingTime?.value}</p>
                                                 </Col>
                                             </Row>
                                         
