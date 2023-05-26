@@ -241,7 +241,18 @@ const BloodInformation=()=> {
         </Form.Label>
           <InputGroup className="mb-2">
             <InputGroup.Text><i class="fa fa-tint" aria-hidden="true"></i></InputGroup.Text>
-              <Form.Control placeholder="AB+, AB-,A+,A-,B,B+,O+,O-" name="bloodGroup" onChange={handleChange} />
+              {/* <Form.Control placeholder="AB+, AB-,A+,A-,B,B+,O+,O-" name="bloodGroup" onChange={handleChange} /> */}
+              <Form.Select required name="bloodGroup" onChange={handleChange} >
+                  <option value="">Select Blood Group*</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                </Form.Select>
           </InputGroup>
         </Col>
       </Row>
@@ -253,7 +264,12 @@ const BloodInformation=()=> {
         <InputGroup className="mb-2">
           <InputGroup.Text><i class="fa fa-male" aria-hidden="true"></i></InputGroup.Text>
             <Form.Label visuallyHidden>Donor's Gender </Form.Label>
-              <Form.Control placeholder="Donor's gender" name="gender" onChange={handleChange}/>
+              {/* <Form.Control placeholder="Donor's gender" name="gender" onChange={handleChange}/> */}
+              <Form.Select required name="gender" onChange={handleChange} >
+                  <option value="">Select Gender*</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+              </Form.Select>
           </InputGroup>
         </Col>
         <Col xs={12} sm={4}>

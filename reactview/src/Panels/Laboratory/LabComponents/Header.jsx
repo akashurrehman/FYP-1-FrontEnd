@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 function Header(props) {
   return (
     <Navbar style={{backgroundColor:"#3A4F7A",color:"#FFFFFF"}} expand="lg" fixed="top" textColor="#FFFFFF">
-      <Container>
+      <Container fluid>
         <Navbar.Brand>
         <img
                 src="/Images/blood-center.jpg"

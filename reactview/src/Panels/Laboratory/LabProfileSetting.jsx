@@ -226,7 +226,6 @@ const handleCancel = () => {
         {center.contactNoError && <p style={{ color: "red" }}>{center.contactNoError}</p> }
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-
           <BsEnvelopeFill size={15} color="red"/>
           <Form.Control name="email" placeholder="example@gmail.com" value={center.email} onChange={handleChange}/>
       </Form.Group>
