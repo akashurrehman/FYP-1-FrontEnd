@@ -122,16 +122,18 @@ const UserRegistration = (props) => {
                         <Container>
                             <Row className='mt-0 mb-5 p-1'>
                                 <Col sm={12} className='LoginContainerCol'>
-                                    <h4 className="TextColor" style={{fontFamily:'cursive',textAlign:'center'}}>
-                                        Register as a Donor / Request Maker
-                                    </h4>
+                                    <h3 className="RedColor" style={{fontFamily:'cursive',textAlign:'center',marginBottom:'3%'}}>
+                                        Register as a Donor/Request Maker
+                                    </h3>
+                                    <p className="mt-3" style={{fontSize:'13.5px',color:'gray',textAlign:'center',marginBottom:'8%'}}>
+                                        WELCOME! To our secure online booking process. You can manage all your appointment details in one convenient place.
+                                    </p>
                                     
                                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                         <Row>
-                                            <h6 className="TextColor" style={{fontFamily:'',textAlign:'',marginTop:'2%'}}>
-                                                Personal Information
-                                            </h6>
+                                            
                                             <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Full name <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -152,6 +154,7 @@ const UserRegistration = (props) => {
                                             </Col>
                                         
                                             <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>User name <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <BadgeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -172,7 +175,8 @@ const UserRegistration = (props) => {
                                             </Col>
                                         </Row>
                                         <Row>
-                                            <Col sm={4}>
+                                            <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Blood group <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <BloodtypeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -198,7 +202,8 @@ const UserRegistration = (props) => {
                                                     
                                                 </InputGroup>
                                             </Col>
-                                            <Col sm={4}>
+                                            <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Gender <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -219,7 +224,12 @@ const UserRegistration = (props) => {
                                                     
                                                 </InputGroup>
                                             </Col>
-                                            <Col sm={4}>
+                                            
+                                        </Row>
+
+                                        <Row>
+                                            <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Date of birth <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -238,12 +248,32 @@ const UserRegistration = (props) => {
                                                     </Form.Control.Feedback>
                                                 </InputGroup>
                                             </Col>
-                                        </Row>
-                                        <Row>
-                                            <h6 className="TextColor" style={{fontFamily:'',textAlign:'',marginTop:'1%'}}>
-                                                Contact Information
-                                            </h6>
                                             <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>City <spam className='RedColor'>*</spam></Form.Label>
+                                                <InputGroup size="sm" className="mb-3" hasValidation>
+                                                    <InputGroup.Text id="inputGroup-sizing-default">
+                                                        <LocationCitySharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                                    </InputGroup.Text>
+                                                    <Form.Select required
+                                                        value={city} 
+                                                        onChange={(e) => setCity(e.target.value)}
+                                                    >
+                                                        <option value="">Select City*</option>
+                                                        <option value="Lahore">Lahore</option>
+                                                        <option value="Islamabad">Islamabad</option>
+                                                        <option value="Karachi">Karachi</option>
+                                                    </Form.Select>
+
+                                                    <Form.Control.Feedback type="invalid">
+                                                        Please provide a valid city.
+                                                    </Form.Control.Feedback>
+                                                </InputGroup>
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Email <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <EmailIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -264,6 +294,7 @@ const UserRegistration = (props) => {
                                             </Col>
                                             
                                             <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Contact No <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -283,29 +314,12 @@ const UserRegistration = (props) => {
                                                 </InputGroup>
                                             </Col>
                                         </Row>
-                                        
-                                        <Row>
-                                            <Col sm={4}>
-                                                <InputGroup size="sm" className="mb-3" hasValidation>
-                                                    <InputGroup.Text id="inputGroup-sizing-default">
-                                                        <LocationCitySharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
-                                                    </InputGroup.Text>
-                                                    <Form.Select required
-                                                        value={city} 
-                                                        onChange={(e) => setCity(e.target.value)}
-                                                    >
-                                                        <option value="">Select City*</option>
-                                                        <option value="Lahore">Lahore</option>
-                                                        <option value="Islamabad">Islamabad</option>
-                                                        <option value="Karachi">Karachi</option>
-                                                    </Form.Select>
 
-                                                    <Form.Control.Feedback type="invalid">
-                                                        Please provide a valid city.
-                                                    </Form.Control.Feedback>
-                                                </InputGroup>
-                                            </Col>
-                                            <Col sm={8}>
+                                        
+                                            
+                                        <Row>
+                                            <Col sm={12}>
+                                                <Form.Label className='PurpleColor'>Address <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <LocationOnSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -327,10 +341,8 @@ const UserRegistration = (props) => {
                                         </Row>
                                         
                                         <Row>
-                                            <h6 className="TextColor" style={{fontFamily:'',textAlign:'',marginTop:'1%'}}>
-                                                Password Information
-                                            </h6>
                                             <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Password <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <LockPersonSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -351,6 +363,7 @@ const UserRegistration = (props) => {
                                             </Col>
                                         
                                             <Col sm={6}>
+                                                <Form.Label className='PurpleColor'>Re-enter password <spam className='RedColor'>*</spam></Form.Label>
                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                         <LockPersonSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>

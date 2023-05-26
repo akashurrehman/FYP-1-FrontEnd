@@ -1083,6 +1083,8 @@ public class User {
         String centreContactNo = jsonNode.has("centreContactNo") ? jsonNode.get("centreContactNo").asText() : null;
         String centreEmail = jsonNode.has("centreEmail") ? jsonNode.get("centreEmail").asText() : null;
         String centreLocation = jsonNode.has("centreLocation") ? jsonNode.get("centreLocation").asText() : null;
+        String bookingDate = jsonNode.has("bookingDate") ? jsonNode.get("bookingDate").asText() : null;
+        String bookingTime = jsonNode.has("bookingTime") ? jsonNode.get("bookingTime").asText() : null;
 
         String individualId = "Appointment_" + System.currentTimeMillis();
         System.out.print(individualId);
@@ -1106,12 +1108,14 @@ public class User {
                         "                       bd:hasAppointmentCentreContactNo \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasAppointmentCentreEmail \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasAppointmentCentreLocation \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentBookingDate \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAppointmentBookingTime \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasAppointmentID \"%s\"^^xsd:string ;\n" +
                         "                       bd:appointmentMadeBy bd:%s ;\n" +
                         "                       bd:appointmentBookedIn bd:%s ;\n" +
                         "}",
                 donorName, donorDOB, donorEmail, donorContactNo, donorGender, donorAddress, donorCity, donorBloodGroup,
-                centreName, centreTimings, centreContactNo, centreEmail, centreLocation, individualId, userID,
+                centreName, centreTimings, centreContactNo, centreEmail, centreLocation, bookingDate, bookingTime, individualId, userID,
                 centreID);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
@@ -1192,6 +1196,8 @@ public class User {
                 "?appointments bd:hasAppointmentCentreContactNo ?CentreContactNo ." +
                 "?appointments bd:hasAppointmentCentreEmail ?CentreEmail ." +
                 "?appointments bd:hasAppointmentCentreLocation ?Location ." +
+                "?appointments bd:hasAppointmentBookingDate ?BookingDate ." +
+                "?appointments bd:hasAppointmentBookingTime ?BookingTime ." +
                 "}";
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
@@ -1239,6 +1245,8 @@ public class User {
                 "?appointments bd:hasAppointmentCentreContactNo ?CentreContactNo ." +
                 "?appointments bd:hasAppointmentCentreEmail ?CentreEmail ." +
                 "?appointments bd:hasAppointmentCentreLocation ?Location ." +
+                "?appointments bd:hasAppointmentBookingDate ?BookingDate ." +
+                "?appointments bd:hasAppointmentBookingTime ?BookingTime ." +
                 "}";
         // set the response headers
         HttpHeaders headers = new HttpHeaders();
@@ -1284,6 +1292,8 @@ public class User {
                 "?appointments bd:hasAppointmentCentreContactNo ?CentreContactNo ." +
                 "?appointments bd:hasAppointmentCentreEmail ?CentreEmail ." +
                 "?appointments bd:hasAppointmentCentreLocation ?Location ." +
+                "?appointments bd:hasAppointmentBookingDate ?BookingDate ." +
+                "?appointments bd:hasAppointmentBookingTime ?BookingTime ." +
                 "filter(?ID = \"" + id + "\")" +
                 "}";
 
