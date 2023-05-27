@@ -304,7 +304,16 @@ const handleCancel = () => {
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>Available Timings</Form.Label>
             <BsStopwatch size={15} />
-            <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/>
+            {/* <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/> */}
+            <Form.Select required name="timings" value={center.timings} onChange={handleChange} >
+              <option value="">Select Timing/Shift of Center*</option>
+              <option value="6AM-2PM">6AM-2PM</option>
+              <option value="2PM-11PM">2PM-11PM</option>
+              <option value="11PM-6AM">11PM-6AM</option>
+              <option value="6AM-6PM">6AM-6PM</option>
+              <option value="6PM-6AM">6PM-6AM</option>
+              <option value="12AM-12PM/Full Day/Night">12AM-12PM/Full Day/Night</option>
+            </Form.Select>
           </Form.Group>
         </Col>
         <Col xs="12" sm="3">
@@ -318,10 +327,17 @@ const handleCancel = () => {
           <Form.Group as={Col} controlId="formGridZip">
             <Form.Label>Category</Form.Label>
             <i class="fa fa-registered" aria-hidden="true"></i>
-            <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
+            
+            {/* <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
             {center.categoryError && (
               <p style={{ color: 'red' }}>{center.categoryError}</p>
-            )}
+            )} */}
+            
+            <Form.Select required name="category" value={center.category} onChange={handleChange} >
+              <option value="">Select Category of Center*</option>
+              <option value="Private">Private</option>
+              <option value="Public">Public</option>
+            </Form.Select>
           </Form.Group>
         </Col>
       </Row>

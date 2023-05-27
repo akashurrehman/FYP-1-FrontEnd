@@ -1,4 +1,4 @@
-package com.bridgelabz.restapi.restapi.controller;
+package com.bridgelabz.restapi.restapi.Packages;
 
 public class Paths {
     // Akash's file Path
