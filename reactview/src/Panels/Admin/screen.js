@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Header from "../../Components_for_All_Panels/BloodCentre/Header";
+import { NavLink } from 'react-router-dom';
 import Dashboard from "./adminscreens/Dashboard";
 import FAQs from "./adminscreens/FAQs";
 import Campaign from "./adminscreens/Campaign";
@@ -46,7 +46,7 @@ const HomeScreen_BloodDonation = () => {
                   role="tablist"
                   aria-orientation="vertical"
                 >
-                  <button
+                  <NavLink to="/adminpanel/Dashboard"
                     className="nav-link active menu-list"
                     id="v-pills-home-tab"
                     data-bs-toggle="pill"
@@ -57,8 +57,8 @@ const HomeScreen_BloodDonation = () => {
                     aria-selected="true"
                   >
                     Dashboard
-                  </button>
-                  <button
+                  </NavLink>
+                  <NavLink to="/adminpanel/Donors"
                     className="nav-link menu-list"
                     id="v-pills-profile-tab"
                     data-bs-toggle="pill"
@@ -69,7 +69,7 @@ const HomeScreen_BloodDonation = () => {
                     aria-selected="false"
                   >
                     Donors
-                  </button>
+                  </NavLink>
                   <button
                     className="nav-link menu-list"
                     id="v-pills-stocks-tab"

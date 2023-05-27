@@ -19,6 +19,17 @@ import CenterRegistration from './Panels/BloodDonationCentre/CenterRegistration'
 
 /* AdminPanel Imports */
 import AdminPanelHomeScreen from './Panels/Admin/screen';
+import Jobs from './Panels/Admin/adminscreens/Jobs/Jobs';
+import FAQs from './Panels/Admin/adminscreens/FAQs';
+import FinancialDonations from './Panels/Admin/adminscreens/FinacialDonations/FinancialDonations';
+// import News from './Panels/Admin/adminscreens/News';
+import Sponsors from "./Panels/Admin/adminscreens/Sponsors/Sponsors";
+// import BloodRequests from "./Panels/Admin/adminscreens/BloodRequests";
+import Bloodstocks from './Panels/Admin/adminscreens/Bloodstocks';
+// import Campaign from './Panels/Admin/adminscreens/Campaign';
+import Dashboard from './Panels/Admin/adminscreens/Dashboard';
+import Donors from './Panels/Admin/adminscreens/Donors';
+import Profilesettings from './Panels/Admin/adminscreens/Profilesettings';
 /* UserPanel Imports */
 import UserPanelHomeScreen from './Panels/Users/HomePage_UserPanel';
 import UserLogin from './Components_for_All_Panels/UserComponents/auths/UserLogin';
@@ -86,6 +97,15 @@ function App() {
           
           {/* Admin panel Routes */}
           <Route exact path='/adminpanel/HomeScreen' element={<AdminPanelHomeScreen/>}/>
+          <Route exact path='/adminpanel/Jobs' element={<Jobs/>}/>
+          <Route exact path='/adminpanel/Faqs' element={<FAQs/>}/>
+          <Route exact path='/adminpanel/FinancialDonations' element={<FinancialDonations/>}/>
+          <Route exact path='/adminpanel/Sponsors' element={<Sponsors/>}/>
+          <Route exact path='/adminpanel/Bloodstocks' element={<Bloodstocks/>}/>
+          <Route exact path='/adminpanel/Dashboard' element={<Dashboard/>}/>
+          <Route exact path='/adminpanel/Donors' element={<Donors/>}/>
+          <Route exact path='/adminpanel/Profilesettings' element={<Profilesettings/>}/>
+          {/* <Route exact path='/adminpanel/Campaign' element={<Campaign/>}/> */}
 
           {/* UserPanel Routes */}
           
