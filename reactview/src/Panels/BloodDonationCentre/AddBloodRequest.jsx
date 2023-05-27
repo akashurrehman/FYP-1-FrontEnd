@@ -168,8 +168,7 @@ const AddBloodRequest=()=> {
     .post(`http://localhost:8081/api/user/bloodRequest/BloodRequestDetails/add`, bloodRequests)
     .then((response) => {
       console.log(response.data);
-      toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
-      toast("Request for blood Added!",{position:toast.POSITION.TOP_CENTER});
+      toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
       })
     .catch((error) => {
       console.error(error);

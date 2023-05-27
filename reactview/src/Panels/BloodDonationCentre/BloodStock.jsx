@@ -10,9 +10,15 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import A_positive from './../../Components_for_All_Panels/BloodCentre/Image/A-positive.jpg';
+import A_negative from './../../Components_for_All_Panels/BloodCentre/Image/A-negative.jpg';
 import B_positive from './../../Components_for_All_Panels/BloodCentre/Image/B-positive.jpg';
+import B_negative from './../../Components_for_All_Panels/BloodCentre/Image/B-negative.png';
 import AB_positive from './../../Components_for_All_Panels/BloodCentre/Image/Ab-positive.jpg';
 import AB_negative from './../../Components_for_All_Panels/BloodCentre/Image/Ab-negative.jpg';
+import O_positive from './../../Components_for_All_Panels/BloodCentre/Image/O-positive.jpg';
+import O_negative from './../../Components_for_All_Panels/BloodCentre/Image/O-negative.jpg';
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
+
 import axios from 'axios'; 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,6 +27,7 @@ import { useAuth } from "./Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
 
 const BloodStock=()=> {
+  const [loading, setIsLoading] = useState(true);
 
   const mystyle = {
     height: "7%",
@@ -42,7 +49,7 @@ const BloodStock=()=> {
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwt_decode(token) : null;
   const role = decodedToken?.role;
-
+  const ID= decodedToken?.id;
   const authCentre=()=>{
     if(role!='CENTRE'){
       window.location.href = "/user/login";
@@ -71,6 +78,7 @@ const BloodStock=()=> {
     };
     fetchData();
     authCentre();
+    setIsLoading(false);
   }, []);
   
   
@@ -119,21 +127,22 @@ const handleInputChange = (event) => {
       .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${bloodData.ID}`, bloodData)
       .then((response) => {
         console.log("Response Data",response.data);
-        toast.success(response.data,{position:toast.POSITION.TOP_RIGHT});
-        toast("Data added Successfully")
+        toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
         handleClose();
         window.location.reload();
       })
       .catch((error) => {
-        toast.error(error,{
-          position: toast.POSITION.TOP_RIGHT
-      });
+        toast.error(error,{position: toast.POSITION.TOP_RIGHT});
         console.log("Error updating data: ", error);
       });
   };
 
 
     return (
+    <div>
+      {loading ? (
+    <LoadingSpinner />
+    ) : (
       <>
       <Modal fade={false} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -199,7 +208,7 @@ const handleInputChange = (event) => {
                     height: "50%",
                     margin: "0 auto",
                     display: "block"
-                  }}  src={card.bloodGroup === 'A+' ? A_positive : card.bloodGroup === 'B+' ? B_positive : card.bloodGroup === 'AB+' ? AB_positive : AB_negative} />
+                  }}  src={card.bloodGroup === 'A+' ? A_positive : card.bloodGroup === 'B+' ? B_positive : card.bloodGroup === 'AB+' ? AB_positive : card.bloodGroup ==='A-' ? A_negative : card.bloodGroup === 'B-' ? B_negative : card.bloodGroup ==='A-' ? A_negative : card.bloodGroup === 'AB-' ? AB_negative : card.bloodGroup === 'O+' ? O_positive : O_negative } />
                 <Card.Body>
                   <Card.Title>Blood Group:{card.bloodGroup}</Card.Title>
                   <Card.Text>No of bags available: {card.noOfBags}</Card.Text>
@@ -218,6 +227,8 @@ const handleInputChange = (event) => {
       </Row>
     </Container>
     </>
+    )}
+     </div>
   );
 }
 export default BloodStock;

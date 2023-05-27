@@ -170,7 +170,7 @@ const handleConfirm = () => {
   .post(`http://localhost:8081/api/bloodCenter/CenterRegistration/add`, center)
   .then((response) => {
     console.log(response.data);
-    toast("Profile Created Successfully",{type:"success", position:toast.POSITION.TOP_RIGHT});
+    toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
     window.location.href = "/user/login";
   })
   .catch((error) => {

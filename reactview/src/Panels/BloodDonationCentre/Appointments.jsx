@@ -1,11 +1,9 @@
 import React,{useState,useEffect} from "react";
-import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
@@ -13,8 +11,11 @@ import './Styling/print.css';
 import { handleAppointmentPrint } from "./PrintedFiles/AppointmentPrint";
 import { useAuth } from "./Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
+import {PrinterFill} from 'react-bootstrap-icons'
+import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
-const Appointments=()=> {  
+const Appointments=()=> {
+  const [loading, setIsLoading] = useState(true);  
   const [data, setData] = useState([]);
   const {token} = useAuth();
 
@@ -57,18 +58,19 @@ const Appointments=()=> {
       })
       .catch((error) => console.log(error));
       authCentre();
+      setIsLoading(false);
   }, []);
 
   const handlePrint = () => {
     handleAppointmentPrint(data);
     console.log("Handle Print button in Appointment!")
   };
-const mystyle = {
-  height: "7%",
-  width: "7%",
-  borderRadius: "50px",
-  display: "inline-block",
-};  
+  const mystyle = {
+    height: "7%",
+    width: "7%",
+    borderRadius: "50px",
+    display: "inline-block",
+  };  
 
 const columns = [
   {
@@ -111,12 +113,16 @@ const columns = [
   {
     name: 'Appointment Status',
     cell: (row) => (
-      <Button variant="primary" style={{ borderRadius: 0, height:"50%", widht:"100%" }} onClick={() => alert('Download Receipt Option selected!')}>Download Receipt</Button>
+      <Button variant="primary" style={{ borderRadius: 0, height:"50%", widht:"100%" }} onClick={() => alert('Download Receipt Option selected!')}> IP/CT </Button>
     )
   }
 ];
 
   return (
+  <div>
+   {loading ? (
+    <LoadingSpinner />
+    ) : (
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
@@ -139,13 +145,15 @@ const columns = [
           highlightOnHover
           
           actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250", color:"white"}}> <i class="fa fa-download" aria-hidden="true"></i> Download</button>
+            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250", color:"white"}}> <PrinterFill className="" size={20} /> Download/Print</button>
           }
           subHeader
         />
         </Col>
       </Row>
     </Container>
+    )}
+  </div>
   );
 }
 

@@ -7,22 +7,17 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Header from '../../Components_for_All_Panels/BloodCentre/Header';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios';
-import { Bar } from 'react-chartjs-2';
-import { useHistory } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth  }  from './Auth/AuthContext';
 import jwt_decode from 'jwt-decode';
 import jwtDecode from "jwt-decode";
-
-
-//import Link from 'react-router-dom/Link';
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 
 const MyAccountCenter=()=> {
+  const [Loading, setIsLoading]=useState(true);
   const {token} = useAuth();
   const decodedToken = token ? jwtDecode(token) : null;
   const id = decodedToken?.id;
@@ -35,7 +30,7 @@ const MyAccountCenter=()=> {
       console.log("authCentre");
   }
 
-  //This will get the id  from the token if user is login
+
   
 
   const ViewAllRequests = () => {
@@ -79,7 +74,9 @@ const MyAccountCenter=()=> {
       };
       fetchDataForAll();
       authCentre();
+      setIsLoading(false);
       console.log("Decode Token",jwt_decode(token));
+      
     }, []);
   
   const mystyle = {
@@ -89,6 +86,7 @@ const MyAccountCenter=()=> {
       display: "inline-block",
     };
   return (
+  Loading ? <LoadingSpinner/> :
     <Container fluid style={{backgroundColor:"#E9EAE0"}}>
       <Header />
       <Row>
@@ -103,18 +101,19 @@ const MyAccountCenter=()=> {
             </Card.Body>
           </Card>
           <CardGroup style={{}}>
-            <Col className="mt-md-5 px-2" md={10}>  
+            <Col className="mt-md-5 px-2" md={8}>  
                 <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
-                        <Card.Title>My Blood Requests</Card.Title>
+                        <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Requests</Card.Title>
+                        <hr />
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
                         {data.map((item) => (
                           <div key={item.ID.value}>
-                            <h5><span>Name:</span>{item.Name.value}</h5>
-                            <h5><span>Email:</span>{item.Email.value}</h5>
-                            <h5><span>Gender:</span>{item.Gender.value}</h5>
-                            <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
-                            <h5><span>Contact:</span>{item.Contact.value}</h5>
+                            <h6><span>Name:</span>{item.Name.value}</h6>
+                            <h6><span>Email:</span>{item.Email.value}</h6>
+                            <h6><span>Gender:</span>{item.Gender.value}</h6>
+                            <h6><span>Blood Group:</span>{item.Blood_Group.value}</h6>
+                            <h6><span>Contact:</span>{item.Contact.value}</h6>
                             <h6><span>Address:</span>{item.Location.value}</h6>
                             <hr /> {/* Add a line after each item */}
                           </div>
@@ -126,18 +125,19 @@ const MyAccountCenter=()=> {
             </Col>
         </CardGroup>
         <CardGroup style={{}}>
-            <Col className="mt-md-5 px-2" md={10}>  
+            <Col className="mt-md-5 px-2" md={8}>  
                 <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
-                        <Card.Title>All Accepted Requests</Card.Title>
+                        <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>All Accepted Requests</Card.Title>
+                        <hr />
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
                         {requests.map((item) => (
                           <div key={item.ID.value}>
-                            <h5><span>Name:</span>{item.Name.value}</h5>
-                            <h5><span>Email:</span>{item.Email.value}</h5>
-                            <h5><span>Gender:</span>{item.Gender.value}</h5>
-                            <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
-                            <h5><span>Contact:</span>{item.Contact.value}</h5>
+                            <h6><span>Name:</span>{item.Name.value}</h6>
+                            <h6><span>Email:</span>{item.Email.value}</h6>
+                            <h6><span>Gender:</span>{item.Gender.value}</h6>
+                            <h6><span>Blood Group:</span>{item.Blood_Group.value}</h6>
+                            <h6><span>Contact:</span>{item.Contact.value}</h6>
                             <h6><span>City:</span>{item.Location.value}</h6>
                             <h6><span>Blood Donated By:</span>{item.RequestDonatedBy.value}</h6>
                             
@@ -151,10 +151,11 @@ const MyAccountCenter=()=> {
             </Col>
         </CardGroup>
         <CardGroup style={{}}>
-            <Col className="mt-md-5 px-2" md={10}>  
+            <Col className="mt-md-5 px-2" md={8}>  
                 <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
-                        <Card.Title>My Blood Donors</Card.Title>
+                        <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Donors</Card.Title>
+                        <hr />
                         <div style={{ height: "25vh", overflow: "scroll" }}>
                         {donors.map((donor) => (
                           <div key={donor.donations.value}>
@@ -168,26 +169,27 @@ const MyAccountCenter=()=> {
                     </Card.Body>
                 </Card>
             </Col>
-            <Col className="mt-md-5 px-2" md={10}>  
-            <Card style={{marginTop:10,paddingBottom:10}}>
-              <div>
-                <h2 style={{textAlign:"center", alignItems:"center",paddingBottom:"1.5rem"}}> Appointments booked in your Center!</h2>
-                {appointment.map((item) => (
-                  <div key={item.appointments.value} style={{fontSize:"14px"}}>
-                    <h3>Name:{item.DonorName.value}</h3>
-                    <h3>Email:{item.DonorEmail.value}</h3>
-                    <h3>Timing:{item.Timings.value}</h3>
-                    <h3>Blood Group:{item.BloodGroup.value}</h3>
-                    <hr />
-                  </div>
-                ))}
+            <Col className="mt-md-5 px-2" md={8}>  
+              <Card style={{marginTop:10,paddingBottom:10}}>
+                <div>
+                  <h4 style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}> Appointments booked in your Center!</h4>
+                  <hr />
+                  {appointment.map((item) => (
+                    <div key={item.appointments.value} style={{fontSize:"14px", marginLeft:"16px"}}>
+                      <h6>Name:{item.DonorName.value}</h6>
+                      <h6>Email:{item.DonorEmail.value}</h6>
+                      <h6>Timing:{item.Timings.value}</h6>
+                      <h6>Blood Group:{item.BloodGroup.value}</h6>
+                      <hr />
+                    </div>
+                  ))}
                 </div>
-                <Card.Body className="d-flex justify-content-between">
-                  <Card.Title>By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
-                    <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointment details!</Button>
-                </Card.Body>
-                  <p>By handling users through appointments you can gain best experience ever!</p>
-            </Card>
+                  <Card.Body className="d-flex justify-content-between">
+                    <Card.Title>By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
+                      <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointment details!</Button>
+                  </Card.Body>
+                    <p>By handling users through appointments you can gain best experience ever!</p>
+              </Card>
             </Col>
         </CardGroup>        
         </Col>

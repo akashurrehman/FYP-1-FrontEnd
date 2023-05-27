@@ -7,27 +7,23 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Header from '../../Components_for_All_Panels/BloodCentre/Header';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios';
-import { Bar } from 'react-chartjs-2';
-import { useHistory } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth  }  from './Auth/AuthContext';
-import jwt_decode from 'jwt-decode';
 import jwtDecode from "jwt-decode";
-
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
+import axios from 'axios';
 
 //import Link from 'react-router-dom/Link';
 
 
 const HomeScreen_BloodDonation=()=> {
+  const [isLoading, setIsLoading] = useState(true);
   const {token} = useAuth();
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwtDecode(token) : null;
   const role = decodedToken?.role;
-
+  const id= decodedToken?.id;
   const authCentre=()=>{
     if(role!='CENTRE'){
       window.location.href = "/user/login";
@@ -76,7 +72,7 @@ const HomeScreen_BloodDonation=()=> {
           fetchData("http://localhost:8081/api/admin/getJobPost"),
           fetchData("http://localhost:8081/api/admin/getNews"),
           fetchData("http://localhost:8081/api/admin/getFAQ"),
-          fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getAppointmentInfo"),
+          fetchData(`http://localhost:8081/api/users/appointment/byCentreID/${id}`),
           fetchData("http://localhost:8081/api/admin/getEvents"),
         ]);
         setData(dataRes);
@@ -86,9 +82,11 @@ const HomeScreen_BloodDonation=()=> {
         setFAQ(FAQRes);
         setAppointment(appointmentRes);
         setEvents(eventsRes);
+        setIsLoading(false);
       };
       fetchDataForAll();
       authCentre();
+      toast.info("You have successfully authenticated",{position:toast.POSITION.TOP_CENTER})
     }, []);
   
 
@@ -101,6 +99,10 @@ const HomeScreen_BloodDonation=()=> {
       display: "inline-block",
     };
   return (
+  <div>
+    {isLoading ? (
+        <LoadingSpinner />
+      ) : (
     <Container fluid style={{backgroundColor:"#E9EAE0"}}>
       <Header />
       <Row>
@@ -167,17 +169,18 @@ const HomeScreen_BloodDonation=()=> {
             </Col>
             <Col className="mt-md-5 px-2" md={8}>  
             <Card style={{marginTop:10,paddingBottom:10}}>
-              {/*
               <div>
                 {appointment.map((item) => (
-                  <div key={item.appointments.value}>
-                    <h2>{item.Name.value}</h2>
-                    <p>{item.Email.value}</p>
-                    <hr />
-                  </div>
+                   <div key={item.appointments.value} style={{fontSize:"14px"}}>
+                   <h5>Name:{item.DonorName.value}</h5>
+                   <h5>Email:{item.DonorEmail.value}</h5>
+                   <h5>Timing:{item.Timings.value}</h5>
+                   <h5>Blood Group:{item.BloodGroup.value}</h5>
+                   <hr />
+                 </div>
                 ))}
                 </div>
-             */ }
+
                 <Card.Body className="d-flex justify-content-between">
                   <Card.Title>By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
                     <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointment details!</Button>
@@ -251,6 +254,8 @@ const HomeScreen_BloodDonation=()=> {
         </Col>
       </Row>
     </Container>
+    )}
+  </div>
   );
 }
 

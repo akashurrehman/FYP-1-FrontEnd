@@ -136,7 +136,7 @@ const BloodInformation=()=> {
     .then((response) => {
       console.log(response.data);
       toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
-      toast("Donor Information Added Successfully",{position:toast.POSITION.TOP_CENTER});
+      //toast("Donor Information Added Successfully",{position:toast.POSITION.TOP_CENTER});
       })
     .catch((error) => {
       console.error(error);

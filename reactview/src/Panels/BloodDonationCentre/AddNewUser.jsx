@@ -153,28 +153,23 @@ const AddNewUser=()=> {
     }
   };
   
-const handleConfirm = () => {
-  axios
-  .post(`http://localhost:8081/api/user/registration/add`, userData)
-  .then((response) => {
-    console.log(response.data);
-    toast.success("User Added Successfully", {
-      position: toast.POSITION.TOP_CENTER,
-    });
-    toast("User Added Successfully", {type: "success", position: toast.POSITION.TOP_CENTER})
+  const handleConfirm = () => {
+    axios
+    .post(`http://localhost:8081/api/user/registration/add`, userData)
+    .then((response) => {
+      console.log(response.data);
+      toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
     })
-  .catch((error) => {
-    console.error(error);
-    toast.error(error.response.data, {
-      position: toast.POSITION.TOP_RIGHT,
+    .catch((error) => {
+      console.error(error);
+      toast.error(error.response.data, {position: toast.POSITION.TOP_RIGHT,});
     });
-  });
-setShowModal(false);
-}
-
-const handleCancel = () => {
   setShowModal(false);
-}
+  }
+
+  const handleCancel = () => {
+    setShowModal(false);
+  }
 
 
   return (

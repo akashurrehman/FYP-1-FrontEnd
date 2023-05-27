@@ -11,13 +11,14 @@ import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 import {handleRequestsPrint} from "./PrintedFiles/BloodRequestsPrint";
 import { useAuth } from "./Auth/AuthContext";
-import jwt_decode from 'jwt-decode';
 import jwtDecode from "jwt-decode";
+import {PrinterFill} from 'react-bootstrap-icons'
+import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 const BloodRequests=()=> {  
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
-
+  const [loading, setIsLoading] = useState(true);
   
     const [center, setCenterData] = useState({
       name: "",
@@ -41,6 +42,7 @@ const BloodRequests=()=> {
   const donatedBy = decodedToken?.id;
   
   const getCentreNameById = () => {
+    console.log("In getCentreNameById Method");
     axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${id}`).then((response)=>{
       const { results } = response.data;
       if (results && results.bindings && results.bindings.length > 0) {
@@ -77,24 +79,25 @@ const BloodRequests=()=> {
             }
         }
         };
-        const handleReject = () => {
+        /* const handleReject = () => {
             axios
                 .post(`http://localhost:8081/api/users/bloodrequest/reject/`+ id)
                 .then((response) => console.log(response.data))
-                .catch((error) => console.log(error));
+                .catch((error) => console.log(error)); 
         };
+        */
         const handleChange = (state) => {
           // Get the selected rows from the state
         };
         
-        const handleFilter = () => {
+        /* const handleFilter = () => {
           //Pass the cnter Name or id here
           const center = prompt('Enter center ID or name');
           if (center) {
             setFilterByCenter(true);
             setCenterId(center);
           }
-        };
+        }; */
 
   useEffect(() => {
     // fetch data from the backend
@@ -132,6 +135,7 @@ const BloodRequests=()=> {
       console.log("selectedRows after updating state", selectedRows);
       authCentre();
       getCentreNameById();
+      setIsLoading(false);
   }, [selectedRows, filterByCenter, centerId]);
 
   const handlePrint = () => {
@@ -185,12 +189,15 @@ const columns = [
     cell: (row) => (
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <Button variant="success" style={{ borderRadius: 0,height:"30px", width:"100%", marginRight:"5px" }} onClick={handleApprove}><i class="fa fa-check" aria-hidden="true"></i>Approve</Button>
-        <Button variant="danger" style={{ borderRadius: 0,height:"30px",  width:"100%" }} onClick={handleReject}><i class="fa fa-times" aria-hidden="true"></i>Remove</Button>
       </div>
     )
   }  
 ];
   return (
+  <div>
+   {loading ? (
+    <LoadingSpinner />
+    ) : (
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
@@ -218,8 +225,8 @@ const columns = [
           highlightOnHover
           actions ={
             <>
-            <Button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-download" aria-hidden="true"></i>Download</Button>
-            <Button className='btn btn-info' onClick={handleFilter} style={{backgroundColor: "#153250",color:"#fff"}}> <i class="fa fa-filter" aria-hidden="true"></i>Filter Requests(By You)</Button>
+            <Button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
+            
             </>
           }
         />
@@ -227,7 +234,8 @@ const columns = [
         
       </Row>
     </Container>
-  );
-}
+    )}
+    </div>
+  )};
 
 export default BloodRequests;

@@ -9,12 +9,12 @@ import Button from 'react-bootstrap/Button';
 import DataTable from 'react-data-table-component';
 import Header from "./LabComponents/Header";
 import { handleRequestReportsPrint } from "./LabComponents/PrintedFiles/RequestedReport";
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 const ReportRequests=()=> {  
-    const [selectedRowIds, setSelectedRowIds] = useState({});
-
+  const [selectedRowIds, setSelectedRowIds] = useState({});
+  const [loading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
-  
   const [approvedData, setApprovedData] = useState([]);
         const handleApprove = (id) => {
           console.log("ID:"+id);
@@ -62,6 +62,7 @@ const ReportRequests=()=> {
         setData(rows);
       })
       .catch((error) => console.log(error));
+      setIsLoading(false);
   }, []);
   const handlePrint = () => {
     handleRequestReportsPrint(data);
@@ -119,6 +120,7 @@ const columns = [
   }  
 ];
   return (
+    loading ? <LoadingSpinner/> :
     <Container style={{backgroundColor:"#EEEEEE"}} fluid>
       <Header />
       <Row>
