@@ -65,7 +65,8 @@
 .FooterColor {
     background-color: #F5F5DC;
     box-shadow: 0px 0px 6px 0px rgb(255, 255, 255);
-    border-top: 1px solid black;
+    border-top: 11px solid #D64045;
+    
 }
 
 
@@ -369,4 +370,27 @@
 }
 .BarBox:hover{
     background-color: #27213C;
+}
+
+
+.social-media-buttons {
+    display: flex;
+    /* transform: scale(0.96); */
+}
+
+.social-media-buttons .social-icon {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.social-media-buttons .social-icon:hover {
+    opacity: 0.8;
+}
+
+
+.custom-accordion-header {
+    background-color: red;
+    color: white;
 }

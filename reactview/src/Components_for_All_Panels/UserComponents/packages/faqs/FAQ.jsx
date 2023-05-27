@@ -1,10 +1,8 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
-import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import UserPanelHeader from "../../UserPanelHeader";
 import UserPanelFooter from "../../UserPanelFooter";
-
-import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 
 import '../../css/style.css';
 import SingleFAQ from "./SingleFAQ";
@@ -36,21 +34,21 @@ const FAQ = () => {
         <div style={{marginTop:'9%',marginBottom:'3%'}}>
             <Container style={{textAlign:'center',width:'50%'}}>
                 <Row>
-                    <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Find a frequently asked questions</h2>
+                    <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Find a frequently asked questions</h2>
                     <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
                 </Row>
             </Container>
         </div>
 
 
-        <div style={{width:'99.1%',marginBottom:'13%'}}>
+        <div style={{width:'99.1%',marginBottom:'2%'}}>
             {faqs.length === 0 ? (
                     <p>There are no FAQs</p>
                 ) : (
-                    <Row className="d-flex justify-content-center m-5">
+                    <Row className="d-flex justify-content-center m-1">
                 
                         {faqs?.results?.bindings?.map((faq, index) => (
-                            <Col sm={6} key={index}>
+                            <Col sm={12} key={index}>
                                 <SingleFAQ key={index} faq={faq} />
                             </Col>
                         ))}

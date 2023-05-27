@@ -528,9 +528,7 @@ const BloodAnalysis = () => {
             </Container>
         </div>
         
-        <div style={{textAlign:'right',marginTop:'20%',color:'rgb(160, 15, 15)',marginBottom:'10%'}}>
-            
-        </div>
+        
     
         <UserPanelFooter></UserPanelFooter>
     </div> );

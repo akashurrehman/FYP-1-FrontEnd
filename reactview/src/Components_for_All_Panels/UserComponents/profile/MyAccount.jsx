@@ -14,6 +14,7 @@ import MyBloodDonations from './MyBloodDonations';
 import MyAppointments from './MyAppointments';
 import AcceptedBloodRequests from './AcceptedBloodRequests';
 import userLoginService from '../../../Services/Api/User/UserLoginService';
+import UserPanelFooter from '../UserPanelFooter';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -125,6 +126,10 @@ function TabPanel(props) {
                     </TabPanel>
                 </Box>
             </div>
+            <div style={{marginTop:'8%'}}>
+                
+            </div>
+            <UserPanelFooter></UserPanelFooter>
         </div>
     );
 }

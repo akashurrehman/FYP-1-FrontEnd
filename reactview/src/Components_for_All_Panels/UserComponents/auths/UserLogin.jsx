@@ -9,11 +9,12 @@ import { toast } from "react-toastify";
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
 import jwt_decode from 'jwt-decode';
-import { Facebook, Instagram, Google, ArrowRight, Twitter } from 'react-bootstrap-icons';
+import { ArrowRight } from 'react-bootstrap-icons';
 
 
 import '../css/style.css';
 import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
+import SocialMediaButtons from "../SocialMediaButtons";
 
 
 const UserLogin = (props) => {
@@ -217,12 +218,7 @@ const UserLogin = (props) => {
                                             </Col>
                                         </Row>
                                         <Row style={{marginBottom:'2%',marginTop:'4%'}}>
-                                            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
-                                                <Google size={25} className="RedColor" style={{borderRadius: '50%',margin:'1%'}} />
-                                                <Facebook size={25} className="RedColor" style={{borderRadius: '50%',margin:'1%'}} />
-                                                <Instagram size={25} className="RedColor" style={{borderRadius: '50%',margin:'1%'}} />
-                                                <Twitter size={25} className="RedColor" style={{borderRadius: '50%',margin:'1%'}} />
-                                            </div>
+                                            <SocialMediaButtons></SocialMediaButtons>
                                         </Row>
                                         <Row>
                                             <Col sm={6} style={{textAlign:'left'}}>
@@ -246,16 +242,7 @@ const UserLogin = (props) => {
                 </Col>
             </Row>
             
-
-            
-            
         </div>
-
-        
-            <div style={{textAlign:'',marginTop:'20%',color:'rgb(160, 15, 15)',marginBottom:'10%'}}>
-                
-            </div>
-    
         
         <UserPanelFooter></UserPanelFooter>
     </div> );
