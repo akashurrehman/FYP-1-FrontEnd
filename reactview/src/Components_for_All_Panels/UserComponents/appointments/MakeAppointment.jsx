@@ -31,6 +31,7 @@ import ContactsSharpIcon from '@mui/icons-material/ContactsSharp';
 import WcSharpIcon from '@mui/icons-material/WcSharp';
 import AccessTimeSharpIcon from '@mui/icons-material/AccessTimeSharp';
 import EventAvailableSharpIcon from '@mui/icons-material/EventAvailableSharp';
+import SocialMediaButtons from "../SocialMediaButtons";
 
 const MakeAppointment = () => {
 
@@ -269,24 +270,19 @@ const MakeAppointment = () => {
                                                     <p className='PurpleColor' style={{fontSize:'15px',marginTop:'6%',fontWeight:'600'}}>name: <spam className='RedColor' style={{fontSize:'18px',fontWeight:'400'}}>{centre?.Name?.value}</spam></p>
                                                     <p className='PurpleColor' style={{fontSize:'15px',marginTop:'-6%',fontWeight:'600'}}>category: <spam style={{fontSize:'',fontWeight:'400'}}>{centre?.Category?.value}</spam></p>
                                                     <p className='PurpleColor' style={{fontSize:'15px',marginTop:'-6%',fontWeight:'600'}}>email: <spam style={{fontSize:'',fontWeight:'400'}}>{centre?.Email?.value}</spam></p>
-                                                    <p className='PurpleColor' style={{fontSize:'15px',marginTop:'-6%',fontWeight:'600'}}>contact no: <spam style={{fontSize:'',fontWeight:'400'}}>{centre?.ContactNo?.value}</spam></p>
                                                     <p className='PurpleColor' style={{fontSize:'15px',marginTop:'-6%',fontWeight:'600'}}>city: <spam style={{fontSize:'',fontWeight:'400'}}>{centre?.City?.value}</spam></p>
                                                     <p className='PurpleColor' style={{fontSize:'15px',marginTop:'-6%',fontWeight:'600'}}>location: <spam style={{fontSize:'',fontWeight:'400'}}>{centre?.Location?.value}</spam></p>
                                                     <p className='PurpleColor' style={{fontSize:'15px',marginTop:'-6%',fontWeight:'600'}}>timings: <spam style={{fontSize:'',fontWeight:'400',color:'green'}}>{centre?.Timings?.value}</spam></p>
                                                     <p className='PurpleColor' style={{fontSize:'15px',marginTop:'-6%',fontWeight:'600'}}>opening days: <spam style={{fontSize:'',fontWeight:'400',color:'green'}}>{centre?.Opening_Days?.value}</spam></p>
+                                                    <p className='' style={{fontSize:'18px',marginTop:'0%',fontWeight:'600',color:'#5ad7ed',fontFamily:'system-ui'}}>CALL <spam style={{fontSize:'',fontWeight:'400'}}>{centre?.ContactNo?.value}</spam></p>
                                                 </Row>
                                                 <Row style={{marginBottom:'2%',marginTop:'4%'}}>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'left' }}>
-                                                        <Google size={22} className="RedColor" style={{borderRadius: '50%',margin:'2%'}} />
-                                                        <Facebook size={22} className="RedColor" style={{borderRadius: '50%',margin:'2%'}} />
-                                                        <Instagram size={22} className="RedColor" style={{borderRadius: '50%',margin:'2%'}} />
-                                                        <Twitter size={22} className="RedColor" style={{borderRadius: '50%',margin:'2%'}} />
-                                                    </div>
+                                                    <SocialMediaButtons></SocialMediaButtons>
                                                 </Row>                                                
                                             </Col>
                                             <Col sm={8}>
                                                 <Row>
-                                                    <h4 className='PurpleColor' style={{fontFamily:"cursive",fontWeight:'600',fontSize:'19px',textAlign:'',marginBottom:'-2%'}}>
+                                                    <h3 className='PurpleColor' style={{fontFamily:"cursive",fontWeight:'600',fontSize:'21px',textAlign:'',marginBottom:'-2%'}}>
                                                         Donor Details
                                                         { user?.EligibilityStatus?.value === 'Eligible' ? (
                                                             <>
@@ -317,7 +313,7 @@ const MakeAppointment = () => {
                                                                 ><spam style={{color:'red'}}><XCircleFill className="m-1" size={18} /></spam></OverlayTrigger>
                                                             </>
                                                         )}
-                                                    </h4>
+                                                    </h3>
                                                     <p className="justify-content mb-4 mt-3" style={{fontSize:'12px',color:'gray'}}>
                                                         By booking an appointment, you are taking the first step towards a better, healthier you.
                                                         Your well-being deserves your attention. Don't delay, make an appointment and nurture your health.

@@ -26,6 +26,8 @@ import image_book_appointment from '../../Public/user/image/book-appointment-men
 import '../../Components_for_All_Panels/UserComponents/css/style.css';
 import AvailableDonorsBar from "../../Components_for_All_Panels/UserComponents/donors/AvailableDonorsBar";
 import AvailableRequestMakersBar from "../../Components_for_All_Panels/UserComponents/request_makers/AvailableRequestMakersBar";
+import SingleFAQ from "../../Components_for_All_Panels/UserComponents/packages/faqs/SingleFAQ";
+import packageService from "../../Services/Api/User/PackageService";
 
 
 
@@ -124,6 +126,21 @@ const HomeScreen_UserPanel = () => {
         // 👇️ scroll to top on page load
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
       }, []);
+
+      const [faqs, setFAQs] = React.useState([]);
+
+      const getData = () => {
+          packageService
+              .getFAQs()
+              .then((data) => {
+                  setFAQs(data);
+              })
+              .catch((err) => {
+                  console.log(err);
+          });
+      };
+    React.useEffect(getData, []);
+    console.log(faqs.results);
 
     return ( 
         <div>
@@ -318,7 +335,7 @@ const HomeScreen_UserPanel = () => {
             </div>
 
 
-            <div style={{marginTop:"6%",marginBottom:"10%"}}>
+            <div style={{marginTop:"6%",marginBottom:"0%"}}>
                 <Container>
                     <Row>
                     
@@ -340,54 +357,29 @@ const HomeScreen_UserPanel = () => {
             </div>
 
             <div style={{
-                paddingBottom:"6%", marginTop:"7%",
-                textAlign:"left", paddingTop:"2%",
-                fontFamily:"cursive", backgroundColor:'rgba(245, 241, 241, 0.445)'
+                paddingBottom:"2%", marginTop:"3%",
+                textAlign:"left", paddingTop:"0%",
+                fontFamily:"", backgroundColor:'rgba(245, 241, 241, 0.445)'
                 }}>
-                <Container className="mt-5">
-                    <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)"}}>Your most asked questions</h2>
-                    <div>
-                        <Row className="mt-5">
-                            <Col sm={5} style={{}}><a href="/user/register" className="TextColor">
-                                If I've been diagnosed with COVID-19, When can i donate blood?</a>
-                            </Col>
-                            <Col sm={2}></Col>
-                            <Col sm={5} style={{}}><a href="/user/register" className="TextColor">
-                                I have a tattoo, Can I donate blood?</a>
-                            </Col>
-                        </Row>
+                <div style={{textAlign:'center',marginTop:'5%',paddingTop:'4%' ,marginBottom:'5%',fontFamily:'cursive'}}>
+                    <h2 className="RedColor">Your most frequently asked questions</h2>
+                </div>
+                <div style={{width:'99.1%',marginBottom:'2%'}}>
+                    {faqs.length === 0 ? (
+                            <p>There are no FAQs</p>
+                        ) : (
+                            <Row className="d-flex justify-content-center m-1">
                         
-                        <Row className="mt-4">
-                            <Col sm={5} style={{}}><a href="/user/register" className="TextColor">
-                                I lived in the Pakistan for six months in 2014, When will I be able to donate?</a>
-                            </Col>
-                            <Col sm={2}></Col>
-                            <Col sm={5} style={{}}><a href="/user/register" className="TextColor">
-                                I have a low iron, Can I donate blood?</a>
-                            </Col>
-                        </Row>
-
-                        <Row className="mt-4">
-                            <Col sm={5} style={{}}><a href="/user/register" className="TextColor">
-                                What medications will prevent me from donating?</a>
-                            </Col>
-                            <Col sm={2}></Col>
-                            <Col sm={5} style={{}}><a href="/user/register" className="TextColor">
-                                All frequently asked questions?</a>
-                            </Col>
-                        </Row>
-                        
-                    </div>
-                </Container>
+                                {faqs?.results?.bindings?.map((faq, index) => (
+                                    <Col sm={12} key={index}>
+                                        <SingleFAQ key={index} faq={faq} />
+                                    </Col>
+                                ))}
+                            
+                            </Row>
+                        )}
+                </div>
                 
-            </div>
-
-            
-
-            <div>
-                <Container>
-                    <UserPanelBackToTopButton></UserPanelBackToTopButton>
-                </Container>
             </div>
             
             <Button
