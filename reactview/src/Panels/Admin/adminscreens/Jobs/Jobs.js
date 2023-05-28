@@ -186,7 +186,7 @@ export default function Jobs() {
         {jobs.length === 0 ? (
           <p className="turningreddish">There are no Jobs!!</p>
         ) : (
-          <Row className="d-flex justify-content-center m-5">
+          <Row className="cardsmapping m-5">
             {jobs?.results?.bindings?.map((jobs, index) => (
               <Col sm={12} key={index}>
                 <SingleJob key={index} jobs={jobs} />

@@ -22,8 +22,25 @@
 .marginss {
   margin-top: 30px;
 }
+.justifycenter{
+  display: flex;
+  justify-content: center;
+}
+.DonoCard{
+  width: 24rem;
+  transform: scale(0.93);
+}
+.DonoCard:hover{
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  transform: scale(0.96);  
+  transition-duration: 0.45s;
+}
 .red {
   color: rgb(200, 5, 5);
+}
+.red2 {
+  color: rgb(200, 5, 5);
+  font-size: 20px;
 }
 .maincontainer {
   /* display: flex; */
@@ -246,6 +263,23 @@ h5 {
   font-weight: 900;
   color: #bb2d3b;
 }
+.cardsmapping {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.AdminCard{
+  border: 1px solid rgb(160, 15, 15);
+  margin-right: 0%;
+  transform: scale(0.93);
+}
+.AdminCard:hover{
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  transform: scale(0.96);  
+  transition-duration: 0.45s;
+}
+
 
 .popup-overlay {
   position: absolute;

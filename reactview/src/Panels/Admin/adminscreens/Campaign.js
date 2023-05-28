@@ -181,7 +181,7 @@ export default function Campaign() {
         {campaigns.length === 0 ? (
              <p className="turningreddish">Whoops! No Campaign Live?</p>
         ) : (
-          <Row className="d-flex justify-content-center m-5">
+          <Row className=" cardsmapping m-5">
             {campaigns?.results?.bindings?.map((campaign, index) => (
               <Col sm={12} key={index}>
                 <SingleCampaign key={index} campaign={campaign} />

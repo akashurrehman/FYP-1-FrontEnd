@@ -186,7 +186,7 @@ export default function News() {
         {news.length === 0 ? (
              <p className="turningreddish">No News Yet!!</p>
         ) : (
-          <Row className="d-flex justify-content-center m-5">
+          <Row className=" cardsmapping m-5">
             {news?.results?.bindings?.map((news, index) => (
               <Col sm={12} key={index}>
                 <SingleNews key={index} news={news} />

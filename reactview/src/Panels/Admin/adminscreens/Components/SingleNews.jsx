@@ -187,11 +187,11 @@ const SingleNews = (props) => {
                       <div className="row">
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button onClick={deleteUser}>Delete</Button>
+                          <Button variant="danger" onClick={deleteUser}>Delete</Button>
                         </div>
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button onClick={handleShow}>Update</Button>
+                          <Button variant="warning" onClick={handleShow}>Update</Button>
                         </div>
                       </div>
                     </Card.Body>

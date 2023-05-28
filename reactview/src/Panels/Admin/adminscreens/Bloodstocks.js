@@ -71,28 +71,33 @@ export default function Bloodstocks() {
             Generate PDF
           </button>
         </div>
-        {users.map((faq, index) => (
-          <div className="headin" key={index}>
-            <h4> ID: {faq.id}</h4>
-            <div className="row">
-              <div className="col-lg-4">
-                <p>
-                  <strong>No Of Bags:</strong> {faq.noOfBags}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4">
-                <p>
-                  <strong>Gender:</strong> {faq.gender}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4">
-                <p>
-                  <strong>Blood Group:</strong> {faq.bloodGroup}{" "}
-                </p>
+        <div className="cardsmapping">
+          {users.map((faq, index) => (
+            <div className="headin" key={index}>
+              <div className="card DonoCard">
+                <div className="card-body">
+                  <h5 className="card-title aligncenter justifycenter">
+                    {" "}
+                    <h1>{faq.bloodGroup}</h1>
+                  </h5>
+
+                  <h5 className="card-title">
+                    {" "}
+                    <strong>No of Bags: </strong> {faq.noOfBags}{" "}
+                  </h5>
+                  <p className="card-text">
+                    <div className="row">
+                      <div className="col-lg-12 col-12">{faq.gender} </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-12 col-12 text-muted">{faq.id}</div>
+                    </div>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

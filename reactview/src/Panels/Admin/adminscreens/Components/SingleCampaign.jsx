@@ -1,19 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Button, FloatingLabel } from "react-bootstrap";
-import {
-  Form,
-  Row,
-  Col,
-  Card,
-  InputGroup,
-  Modal,
-} from "react-bootstrap";
+import { Form, Row, Col, Card, InputGroup, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import {
-  CalendarDateFill,
-  Laptop,
-} from "react-bootstrap-icons";
+import { CalendarDateFill, Laptop } from "react-bootstrap-icons";
 
 import "./style.css";
 import Campaign from "../Campaign";
@@ -61,22 +51,25 @@ const SingleCampaign = (props) => {
     }
   };
   const deleteRecord = () => {
-   packageService
-        .deleteCampaign(campaign.ID.value)
-        .then((data) => {
-            console.log(data);
-            window.location.reload();
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-};
+    packageService
+      .deleteCampaign(campaign.ID.value)
+      .then((data) => {
+        console.log(data);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title> <h5 className="rang">Edit Details</h5></Modal.Title>
+          <Modal.Title>
+            {" "}
+            <h5 className="rang">Edit Details</h5>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <InputGroup className="mb-3 input">
@@ -140,7 +133,7 @@ const SingleCampaign = (props) => {
               <Row className="" style={{ marginBottom: "10%" }}>
                 <Col sm={12}>
                   <Card
-                    className="UserCard"
+                    className="AdminCard"
                     border="secondary"
                     style={{ width: "22rem" }}
                   >
@@ -154,11 +147,15 @@ const SingleCampaign = (props) => {
                         }}
                       >
                         <Card.Title>
-                          <h5
-                            className="TextCursive"
-                            style={{ color: "rgb(116, 10, 10)" }}
-                          >
-                            {campaign?.Title?.value}
+                          <h5>
+                            <strong
+                              className="TextCursive"
+                              style={{ color: "rgb(116, 10, 10)" }}
+                            >
+                              {" "}
+                              Title:
+                            </strong>
+                            <span className="m-2">{campaign?.Title?.value}</span>
                           </h5>
                         </Card.Title>
                       </Col>
@@ -187,11 +184,11 @@ const SingleCampaign = (props) => {
                       <div className="row">
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button onClick={deleteRecord}>Delete</Button>
+                          <Button variant="danger" onClick={deleteRecord}>Delete</Button>
                         </div>
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button onClick={handleShow}>Update</Button>
+                          <Button variant="warning" onClick={handleShow}>Update</Button>
                         </div>
                       </div>
                     </Card.Body>

@@ -295,7 +295,7 @@ export default function FinancialDonations() {
         {fdon.length === 0 ? (
            <p className="turningreddish">No Donations Yet!!</p>
         ) : (
-          <Row className="d-flex justify-content-center m-5">
+          <Row className="cardsmapping m-5">
             {fdon?.results?.bindings?.map((fdon, index) => (
               <Col sm={12} key={index}>
                 <SingleFinancialDonation key={index} fdon={fdon} />

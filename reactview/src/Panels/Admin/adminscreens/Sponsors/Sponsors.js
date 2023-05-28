@@ -164,7 +164,7 @@ export default function Sponsors() {
         {sponsors.length === 0 ? (
              <p className="turningreddish">Hmmm....No Sponsors!!</p>
         ) : (
-          <Row className="d-flex justify-content-center m-5">
+          <Row className=" cardsmapping m-5">
             {sponsors?.results?.bindings?.map((sponsors, index) => (
               <Col sm={12} key={index}>
                 <SingleSponsor key={index} sponsors={sponsors} />

@@ -6,6 +6,17 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  Envelope,
+  Globe,
+  PersonLinesFill,
+  CalendarDateFill,
+  Lock,
+  PhoneVibrate,
+  Geo,
+  Map,
+  Fingerprint,
+} from "react-bootstrap-icons";
 
 export default function Donors() {
   const [users, setUsers] = React.useState([]);
@@ -79,67 +90,67 @@ export default function Donors() {
             Generate PDF
           </button>
         </div>
+        <div className="cardsmapping">
         {users.map((faq, index) => (
           <div className="headin" key={index}>
-            <h4> Name: {faq.name}</h4>
-            <div className="row">
-              <div className="col-lg-4 col-12">
-                {" "}
-                <p>
-                  {" "}
-                  <strong>ID:</strong> {faq.id}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  {" "}
-                  <strong>Email: </strong>
-                  {faq.email}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  <strong>Gender: </strong> {faq.gender}{" "}
-                </p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-4 col-12">
-                <p>
-                  {" "}
-                  <strong>Location: </strong>
-                  {faq.location}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  {" "}
-                  <strong>Message:</strong> {faq.message}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4 col-12">
-                <p>
-                  <strong>Blood Group:</strong> {faq.bloodGroup}{" "}
-                </p>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-lg-4">
-                {" "}
-                <p>
-                  {" "}
-                  <strong>Contact:</strong> {faq.contact}{" "}
-                </p>
-              </div>
-              <div className="col-lg-4">
-                <p>
-                  {" "}
-                  <strong>City: </strong> {faq.city}{" "}
+            <div className="card DonoCard">
+              <div className="card-body">
+                <h5 className="card-title"> {faq.name}</h5>
+                <h6 className="card-subtitle mb-2 text-muted"> {faq.id}</h6>
+
+                <h5 className="card-title"> Details:</h5>
+                <p className="card-text">
+                  <div className="row">
+                    <div className="col-lg-9 col-12">
+                      <p className="m-1">
+                        {" "}
+                        <strong>Email: </strong>
+                        {faq.email}
+                      </p>
+                    </div>
+                    <div className="col-lg-3 col-12">
+                      {" "}
+                      <strong> {faq.gender}</strong>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-lg-9 col-12">
+                      <p>
+                        {" "}
+                        <strong>Contact: </strong>
+                        {faq.contact}{" "}
+                      </p>
+                    </div>
+                    <div className="col-lg-3 col-12">
+                      {" "}
+                      <strong className="red"> {faq.bloodGroup}</strong>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12">
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        {faq.location}{" "}
+                      </h6>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12">
+                      <strong>City: </strong> {faq.city}{" "}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-12 ">
+                      <strong >Message:</strong> <br />
+                      <span className="text-muted">  {faq.message}{" "}</span>
+                    
+                    </div>
+                  </div>
                 </p>
               </div>
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );

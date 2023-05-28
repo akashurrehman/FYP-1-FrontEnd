@@ -176,7 +176,7 @@ export default function FAQs() {
         {faqs.length === 0 ? (
              <p className="turningreddish">There are no Questions!!</p>
         ) : (
-          <Row className="d-flex justify-content-center m-5">
+          <Row className=" cardsmapping m-5">
             {faqs?.results?.bindings?.map((faqs, index) => (
               <Col sm={12} key={index}>
                 <SingleFaqs key={index} faqs={faqs} />
