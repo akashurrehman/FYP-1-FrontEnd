@@ -1,40 +1,38 @@
 import React, { useEffect, useState, useRef } from "react";
-import NewsCardTemplate from "./news/NewsCardTemplate";
-import Newsdata from "./news/Newsdata";
-import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
+import { Col, FloatingLabel, Form, InputGroup, Row } from "react-bootstrap";
 import { CalendarDateFill, Filter, Laptop } from "react-bootstrap-icons";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import NewsPopUp from "./PopUps/NewsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-function ncard(val) {
-  return (
-    <NewsCardTemplate
-      imgsrc={val.imgsrcs}
-      title={val.title}
-      Category={val.Category}
-      Posted_on={val.Posted_on}
-      details={val.details}
-      id={val.id}
-    />
-  );
-}
-
+import packageService from "./Services/PackageService";
+import SingleNews from "./Components/SingleNews";
 export default function News() {
   const [users, setUsers] = React.useState([]);
-  const [searchTerm, setSearchTerm] = React.useState("");
   const [Title, setTitle] = useState("");
   const [Date, setDate] = useState("");
   const [description, setDescription] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
   const PDFnotify = () => {
     toast.success("PDF generated successfully");
   };
+
+  const [news, setNews] = React.useState([]);
+
+  const getData = () => {
+    packageService
+      .getNews()
+      .then((data) => {
+        setNews(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  React.useEffect(getData, []);
+  console.log(news.results);
 
   useEffect(() => {
     axios
@@ -55,22 +53,6 @@ export default function News() {
         console.error(error);
       });
   }, []);
-
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:8081/api/admin/deleteNews/${id}`)
-      .then((response) => {
-        console.log(response);
-        // alert("News deleted successfully!");
-        toast.success("Record Deleted Successfully");
-        // Remove the deleted FAQ from the users state
-        setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to delete News. Please try again!");
-      });
-  };
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -97,18 +79,7 @@ export default function News() {
       .then((response) => {
         console.log("My data response in news is", response);
         toast.success("Record Added successfully");
-
-        // Create a new news object with the same properties as the response data
-        const newNews = {
-          title: Title,
-          postDate: Date,
-          details: description,
-          id: response.data.id, // Assuming the API returns the new news item's ID
-        };
-
-        // Update the news state by adding the new news item to the existing array
-        setUsers((prevNews) => [...prevNews, newNews]);
-
+        getData();
         setTitle("");
         setDate("");
         setDescription("");
@@ -117,52 +88,6 @@ export default function News() {
         console.error(error);
         alert("Failed to add news. Please try again!");
       });
-  };
-
-  const filteredUsers = users.filter((faq) =>
-    faq.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleUpdate = (input1Value, input2Value, id) => {
-    // Handle the update logic here
-    console.log(`Input 1 value: ${input1Value}`);
-    console.log(`Input 2 value: ${input2Value}`);
-    console.log("test ID value is", id);
-    console.log("Title value", input1Value);
-    console.log("Details value", input2Value);
-
-    const updata = { title: input1Value, details: input2Value };
-    console.log("the data I am updating is", updata);
-    axios
-      .put(
-        `http://localhost:8081/api/admin/news/NewsDetails/update/${id}`,
-        updata,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log("Campaign updated successfully");
-
-        // Update the state with the new data
-        setUsers((prevData) => {
-          const updatedData = prevData.map((item) => {
-            if (item.id === id) {
-              return { ...item, title: input1Value, details: input2Value };
-            }
-            return item;
-          });
-          return updatedData;
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    // Hide the popup
-    setShowPopup(false);
   };
 
   const generatePDF = () => {
@@ -252,51 +177,23 @@ export default function News() {
       <h3 className="color marginss">
         <u>News Currently Live</u>
       </h3>
-
-      <FloatingLabel
-        controlId="floatingPassword"
-        label="Search By News Title Here"
-      >
-        <Form.Control
-          type="City"
-          placeholder="Enter Question Title Here"
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </FloatingLabel>
       <div className="generatePDFButton">
         <button className="btn btn-danger" onClick={generatePDF}>
           Generate PDF
         </button>
       </div>
-      <div className="pdf-campaigns-container" ref={pdfContainerRef}>
-        {filteredUsers.map((faq, index) => (
-          <div className="headin">
-            <h4>Title: {faq.title}</h4>
-            <p>
-              Description: {faq.details}
-              <button
-                className="btn btn-danger bton"
-                onClick={() => handleDelete(faq.id)}
-              >
-                Delete
-              </button>
-              <button
-                className="btn btn-warning bton"
-                onClick={() => setShowPopup(true)}
-              >
-                Edit
-              </button>
-              {showPopup && (
-                <NewsPopUp
-                  id={faq.id}
-                  title={faq.title}
-                  details={faq.details}
-                  onOkClick={handleUpdate}
-                />
-              )}
-            </p>
-          </div>
-        ))}
+      <div style={{ width: "99.1%", marginBottom: "13%" }}>
+        {news.length === 0 ? (
+             <p className="turningreddish">No News Yet!!</p>
+        ) : (
+          <Row className="d-flex justify-content-center m-5">
+            {news?.results?.bindings?.map((news, index) => (
+              <Col sm={12} key={index}>
+                <SingleNews key={index} news={news} />
+              </Col>
+            ))}
+          </Row>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,372 @@
+
+.Navbar{
+    background-color: rgb(255, 255, 255);
+    padding-top: 5.0px;
+    padding-bottom: 0px;
+    box-shadow: 0px 0px 2px 0px rgb(116, 10, 10);
+}
+
+.Appname{
+    color: rgb(214, 79, 79);
+    font-family:"cursive";
+    font-weight: 900;
+}
+
+.Appcolor{
+    color:  rgb(200, 5, 5);
+    padding-right: 8%;
+}
+
+.AppSocialMediaIcon{
+    color:  rgb(160, 15, 15);
+    padding-right: 2%;
+}
+
+
+.LoginContainerRow {
+    margin-top: 10%;
+}
+.LoginContainerCol {
+    padding: 20px;
+    
+}
+
+.RegistrationContainerRow {
+    margin-top: 6.9%;
+}
+.RegistrationContainerCol {
+    padding: 20px;
+}
+
+.UserChangerBoxLogo {
+    margin: 10%;
+}
+
+.UserChangerBox {
+    width: 27%;
+   
+}
+
+.RowMargin {
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    padding-left: 35%;
+}
+
+.PageFooterContainer{
+    background-color: rgb(116, 10, 10);
+    text-align: center;
+    color: bisque;
+    padding-bottom: 3%;
+    padding-top: 8%;
+}
+
+.FooterColor {
+    background-color: #F5F5DC;
+    box-shadow: 0px 0px 6px 0px rgb(255, 255, 255);
+    border-top: 1px solid black;
+}
+
+
+
+.ColHover:hover{
+    box-shadow: 0px 0px 16px 0px rgb(160, 15, 15);
+    transform: scale(0.9);
+    transition-duration: 0.6s;
+}
+
+.IconHover:hover{
+    color:  rgb(146, 17, 17);
+}
+
+
+
+.list > .Menu {
+    display: inline-block;
+    
+}
+.list > .Menu ul {
+    visibility: hidden;
+    position: absolute;
+    top: 107%;
+    transition: 0.1s;
+    background: rgb(255, 255, 255);
+    
+}
+.list > .Menu:hover ul {
+    visibility: visible;
+    transition-delay: 0s;
+    background: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: rgb(255, 255, 255);
+    
+    
+}
+.hello {
+    /* border: 1px solid #e93333; */
+    box-shadow: 0px 0px 2px 0px rgb(160, 15, 15);
+    /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+    width: 400px;
+}
+.Menu {
+    width: 80px;
+    background: rgb(255, 255, 255);
+    margin: -1px;
+    position: relative;
+    padding: 10px;
+    
+}
+.Link {
+    display: block;
+    color:rgba(68, 67, 67, 0.87);
+    margin-left: -12%;
+}
+
+.BorderBottom {
+    border-bottom: "dashed rgb(116, 10, 10)";
+}
+
+.dropbtn {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 0px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #d83838;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgb(160, 15, 15);
+    z-index: 1;
+    margin-top: 30%;
+  }
+  
+  .dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {background-color: rgb(119, 12, 12);}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: #ffffff;}
+
+
+
+  /* Container holding the image and the text */
+
+  .Color {
+    background-color: rgba(236, 213, 213, 0.445);
+    box-shadow: 0px 0px 6px 0px rgb(214, 79, 79);
+}
+
+
+
+
+
+.FilterListHoverColor {
+    color: rgb(2, 1, 1);
+    padding-left: 13%;
+    padding-bottom: 3%;
+    background-color: #ffffff;
+    border-bottom: 2px solid rgb(255, 255, 255);
+}
+.FilterListHoverColor:hover {
+    
+    border-right: 4px solid rgb(160, 15, 15);
+    color:rgb(160, 15, 15);
+    border-radius: 0px;
+}
+
+
+.AlignCenter {
+    margin-left: 22%;
+}
+
+
+
+.IconColor {
+    color: rgb(160, 15, 15);
+}
+
+.TextColor {
+    color: rgb(160, 15, 15);
+}
+
+
+
+
+
+.UserCard{
+    border: 1px solid rgb(160, 15, 15);
+    margin-right: 0%;
+    transform: scale(0.93);
+}
+.UserCard:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transform: scale(0.96);
+    
+    transition-duration: 0.45s;
+}
+
+.TextCursive {
+    font-family: cursive;
+    
+}
+
+
+.custom-toast {
+    width: 120%; /* Change the width to your desired value */
+    margin-left: -20%;
+    background-color: #f9f2f1;
+}
+
+
+  /* Style the options box */
+  .form-select option {
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  /* Style the selected option */
+  .form-select option:checked {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .form-select::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 4px);
+    border-top: 6px solid #777;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+
+  /* Hover effect on the dropdown arrow */
+  .form-select:hover::after {
+    border-top-color: #007bff;
+  }
+
+  /* Focus effect on the select box */
+  .form-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25);
+  }
+
+  /* Disabled state of the select box */
+  .form-select:disabled {
+    background-color: #f5f5f5;
+    color: #777;
+    border-color: #ccc;
+  }
+
+  /* Disabled state of the options */
+  .form-select:disabled option {
+    background-color: #f5f5f5;
+    color: #777;
+  }
+
+  /* Hover effect on the options */
+  .form-select option:hover {
+    background-color: #f5f5f5;
+  }
+
+
+
+
+
+
+
+/* New Styling start from here */
+
+.BrownColor {
+    color: #4E3524;
+}
+.PurpleColor {
+    color: #27213C;
+}
+.RedColor {
+    color: #D64045;
+}
+.WhiteColor {
+    color: #ffffff;
+}
+.GreyColor {
+    color: #635f5f;
+}
+
+
+.btn-flat {
+    background-color: #ffffff;
+    color: #D64045;
+    border: 1px solid #D64045;
+}
+
+.Button {
+    background-color: #ffffff;
+    color: #D64045;
+    border: 1px solid #D64045;
+}
+
+.btn-flat:hover {
+    background-color: #D64045;
+    color: #F5F5DC;
+}
+
+.btn-flatSolid {
+    background-color: #D64045;
+    color: #F5F5DC;
+    border: 1px solid #D64045;
+}
+
+.btn-flatSolid:hover {
+    background-color: #27213C;
+    color: #F5F5DC;
+    border: 1px solid #F5F5DC;
+}
+
+.btn-flat2Solid {
+    background-color: #27213C;
+    color: #F5F5DC;
+    border: 1px solid #27213C;
+}
+
+.btn-flat2Solid:hover {
+    background-color: #D64045;
+    color: #F5F5DC;
+    border: 1px solid #F5F5DC;
+}
+
+
+.BarBox{
+    background-color: #D64045;
+}
+.BarBox:hover{
+    background-color: #27213C;
+}

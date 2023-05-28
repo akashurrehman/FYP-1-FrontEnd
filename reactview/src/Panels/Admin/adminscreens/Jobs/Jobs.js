@@ -1,25 +1,40 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
+import { Col, FloatingLabel, Form, InputGroup, Row } from "react-bootstrap";
 import { TextField } from "@mui/material";
 import { CalendarDateFill, Laptop } from "react-bootstrap-icons";
-import JobsPopUp from "../PopUps/JobsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import packageService from "../Services/PackageService";
+import SingleJob from "../Components/SingleJob";
 
 export default function Jobs() {
   const [users, setUsers] = React.useState([]);
   const [Title, setTitle] = useState("");
   const [Date, setDate] = useState("");
   const [description, setDescription] = useState("");
-  const [searchTerm, setSearchTerm] = React.useState("");
   const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
   const PDFnotify = () => {
     toast.success("PDF generated successfully");
   };
+
+  const [jobs, setJobs] = React.useState([]);
+
+  const getData = () => {
+    packageService
+      .getJobPosts()
+      .then((data) => {
+        setJobs(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  React.useEffect(getData, []);
+  console.log(jobs.results);
 
   useEffect(() => {
     axios
@@ -41,23 +56,6 @@ export default function Jobs() {
         console.error(error);
       });
   }, []);
-
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:8081/api/admin/deleteJobPost/${id}`)
-      .then((response) => {
-        console.log(response);
-        toast.success("Record Deleted successfully");
-
-        // Remove the deleted FAQ from the users state
-        setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to delete Job post. Please try again!");
-      });
-  };
-
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -83,18 +81,7 @@ export default function Jobs() {
       .then((response) => {
         console.log("My data response in Jobs is", response);
         toast.success("Record Added successfully");
-
-        // Create a new job post object with the same properties as the response data
-        const newJobPost = {
-          title: Title,
-          postingDate: Date,
-          details: description,
-          id: response.data.id, // Assuming the API returns the new job post's ID
-        };
-
-        // Update the jobPosts state by adding the new job post to the existing array
-        setUsers((prevJobPosts) => [...prevJobPosts, newJobPost]);
-
+        getData();
         setTitle("");
         setDate("");
         setDescription("");
@@ -104,53 +91,6 @@ export default function Jobs() {
         alert("Failed to add Job post. Please try again!");
       });
   };
-
-  const handleUpdate = (input1Value, input2Value, id, dateVal) => {
-    // Handle the update logic here
-
-    const updata = {
-      title: input1Value,
-      details: input2Value,
-      date: dateVal,
-    };
-    console.log("the data for financial donation I am updating is", updata);
-    axios
-      .put(
-        `http://localhost:8081/api/admin/jobPost/JobPostDetails/update/${id}`,
-        updata,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        toast.success("Record Updated successfully");
-
-        // Update the state with the new data
-        setUsers((prevData) => {
-          const updatedData = prevData.map((item) => {
-            if (item.id === id) {
-              return {
-                ...item,
-                title: input1Value,
-                details: input2Value,
-                date: dateVal,
-              };
-            }
-            return item;
-          });
-          return updatedData;
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    // Hide the popup
-    setShowPopup(false);
-  };
-
   const generatePDF = () => {
     const doc = new jsPDF();
     const campaignsContainer = pdfContainerRef.current;
@@ -242,49 +182,18 @@ export default function Jobs() {
         </button>
       </div>
 
-      <div className="pdf-campaigns-container" ref={pdfContainerRef}>
-        {users.map((faq, index) => (
-          <div className="headin" key={index}>
-            <h4>Job Title: {faq.title}</h4>
-            <div className="row">
-              <div className="col-lg-6 col-12">
-                <p>
-                  <strong>Job Details:</strong> {faq.details}
-                </p>
-              </div>
-              <div className="col-lg-6 col-12">
-                <p>
-                  {" "}
-                  <strong>Posted Date:</strong> {faq.date}
-                </p>
-              </div>
-            </div>
-
-            <p>
-              <button
-                className="btn btn-danger bton"
-                onClick={() => handleDelete(faq.id)}
-              >
-                Delete
-              </button>
-              <button
-                className="btn btn-warning bton"
-                onClick={() => setShowPopup(true)}
-              >
-                Edit
-              </button>
-              {showPopup && (
-                <JobsPopUp
-                  id={faq.id}
-                  title={faq.title}
-                  details={faq.details}
-                  date={faq.date}
-                  onOkClick={handleUpdate}
-                />
-              )}
-            </p>
-          </div>
-        ))}
+      <div style={{ width: "99.1%", marginBottom: "13%" }}>
+        {jobs.length === 0 ? (
+          <p className="turningreddish">There are no Jobs!!</p>
+        ) : (
+          <Row className="d-flex justify-content-center m-5">
+            {jobs?.results?.bindings?.map((jobs, index) => (
+              <Col sm={12} key={index}>
+                <SingleJob key={index} jobs={jobs} />
+              </Col>
+            ))}
+          </Row>
+        )}
       </div>
     </div>
   );

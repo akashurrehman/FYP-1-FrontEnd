@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Button,Row,Col,Modal, Form, InputGroup, Image } from 'react-bootstrap';
-
 import userService from '../../../Services/Api/User/UserService';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import image from '../../../Public/user/image/profile.jpg';
-
 import AccountCircle from '@mui/icons-material/PersonSharp';
 import EmailIcon from '@mui/icons-material/EmailSharp';
 import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';

@@ -1,40 +1,33 @@
 import React, { useEffect, useState, useRef } from "react";
-import Cards from "./Cards";
-import CardData from "./CardData";
-import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
+import { Col, FloatingLabel, Form, InputGroup, Row } from "react-bootstrap";
 import { CalendarDateFill, Geo, Laptop } from "react-bootstrap-icons";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-import PopUp from "./PopUps/PopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
-function ncard(val) {
-  return (
-    <Cards
-      imgsrc={val.imgsrcs}
-      title={val.title}
-      date={val.date}
-      location={val.location}
-      details={val.details}
-      id={val.id}
-    />
-  );
-}
-
+import SingleCampaign from "./Components/SingleCampaign";
+import packageService from "./Services/PackageService";
+import { toast } from "react-toastify";
 export default function Campaign() {
   const [users, setUsers] = React.useState([]);
   const [Title, setTitle] = useState("");
   const [Date, setDate] = useState("");
   const [description, setDescription] = useState("");
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
-  const PDFnotify = () => {
-    toast.success("PDF generated successfully");
+  const [campaigns, setCampaigns] = React.useState([]);
+
+  const getData = () => {
+    packageService
+      .getCampaigns()
+      .then((data) => {
+        setCampaigns(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+  React.useEffect(getData, []);
+  console.log(campaigns.results);
 
   useEffect(() => {
     axios
@@ -54,22 +47,6 @@ export default function Campaign() {
         console.error(error);
       });
   }, []);
-
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:8081/api/admin/deleteCompaigns/${id}`)
-      .then((response) => {
-        console.log(response);
-        toast.success("Record Deleted successfully");
-
-        // Remove the deleted FAQ from the users state
-        setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to delete Campaign. Please try again!");
-      });
-  };
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -96,17 +73,7 @@ export default function Campaign() {
       .then((response) => {
         console.log("My data response in Campaigns is", response);
         toast.success("Record Added successfully");
-
-        // Create a new campaign object with the same properties as the response data
-        const newUsers = {
-          title: Title,
-          postDate: Date,
-          details: description,
-        };
-
-        // Update the campaigns state by adding the new campaign to the existing array
-        setUsers((prevCampaigns) => [...prevCampaigns, newUsers]);
-
+        getData();       
         setTitle("");
         setDate("");
         setDescription("");
@@ -115,52 +82,6 @@ export default function Campaign() {
         console.error(error);
         alert("Failed to add Campaign. Please try again!");
       });
-  };
-
-  const filteredUsers = users.filter((faq) =>
-    faq.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleUpdate = (input1Value, input2Value, id) => {
-    // Handle the update logic here
-    console.log(`Input 1 value: ${input1Value}`);
-    console.log(`Input 2 value: ${input2Value}`);
-    console.log("test ID value is", id);
-    console.log("Title value", input1Value);
-    console.log("Details value", input2Value);
-
-    const updata = { title: input1Value, details: input2Value };
-    console.log("the data I am updating is", updata);
-    axios
-      .put(
-        `http://localhost:8081/api/admin/campaign/CampaignDetails/update/${id}`,
-        updata,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        toast.success("Record Updated successfully");
-
-        // Update the state with the new data
-        setUsers((prevData) => {
-          const updatedData = prevData.map((item) => {
-            if (item.id === id) {
-              return { ...item, title: input1Value, details: input2Value };
-            }
-            return item;
-          });
-          return updatedData;
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    // Hide the popup
-    setShowPopup(false);
   };
 
   const generatePDF = () => {
@@ -185,7 +106,6 @@ export default function Campaign() {
 
         console.error("Error generating PDF:", error);
       });
-    PDFnotify();
   };
 
   return (
@@ -251,48 +171,24 @@ export default function Campaign() {
       <h3 className="color marginss">
         <u>Campaigns Currently Live</u>
       </h3>
-
-      <FloatingLabel controlId="floatingPassword" label="Search By  Title Here">
-        <Form.Control
-          type="City"
-          placeholder="Enter Question Title Here"
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </FloatingLabel>
       <div className="generatePDFButton">
         <button className="btn btn-danger" onClick={generatePDF}>
           Generate PDF
         </button>
       </div>
-      <div className="pdf-campaigns-container" ref={pdfContainerRef}>
-        {filteredUsers.map((faq, index) => (
-          <div className="headin" key={index}>
-            <h4>Title: {faq.title}</h4>
-            <p>
-              Details: {faq.details}
-              <button
-                className="btn btn-danger bton"
-                onClick={() => handleDelete(faq.id)}
-              >
-                Delete
-              </button>
-              <button
-                className="btn btn-warning bton"
-                onClick={() => setShowPopup(true)}
-              >
-                Edit
-              </button>
-              {showPopup && (
-                <PopUp
-                  id={faq.id}
-                  title={faq.title}
-                  details={faq.details}
-                  onOkClick={handleUpdate}
-                />
-              )}
-            </p>
-          </div>
-        ))}
+
+      <div style={{ width: "99.1%", marginBottom: "13%" }}>
+        {campaigns.length === 0 ? (
+             <p className="turningreddish">Whoops! No Campaign Live?</p>
+        ) : (
+          <Row className="d-flex justify-content-center m-5">
+            {campaigns?.results?.bindings?.map((campaign, index) => (
+              <Col sm={12} key={index}>
+                <SingleCampaign key={index} campaign={campaign} />
+              </Col>
+            ))}
+          </Row>
+        )}
       </div>
     </div>
   );

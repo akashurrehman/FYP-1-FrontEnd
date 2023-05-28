@@ -241,6 +241,11 @@ h5 {
   width: 50%;
   height: 100%;
 }
+.turningreddish{
+  font-size: 40px;
+  font-weight: 900;
+  color: #bb2d3b;
+}
 
 .popup-overlay {
   position: absolute;

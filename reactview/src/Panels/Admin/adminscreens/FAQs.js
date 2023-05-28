@@ -1,24 +1,38 @@
 import { TextField } from "@mui/material";
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
+import { Col, FloatingLabel, Form, InputGroup, Row } from "react-bootstrap";
 import { Book, CalendarDateFill, Geo } from "react-bootstrap-icons";
-import FAQsPopUp from "./PopUps/FAQsPopUp";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import packageService from "./Services/PackageService";
+import SingleFaqs from "./Components/SingleFaqs";
 
 export default function FAQs() {
   const [users, setUsers] = React.useState([]);
-  const [searchTerm, setSearchTerm] = React.useState("");
   const [Title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [showPopup, setShowPopup] = useState(false);
   const pdfContainerRef = useRef(null);
   const PDFnotify = () => {
     toast.success("PDF generated successfully");
   };
+
+  const [faqs, setFaqs] = React.useState([]);
+
+  const getData = () => {
+    packageService
+      .getFAQs()
+      .then((data) => {
+        setFaqs(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  React.useEffect(getData, []);
+  console.log(faqs.results);
 
   useEffect(() => {
     axios
@@ -38,22 +52,6 @@ export default function FAQs() {
         console.error(error);
       });
   }, []);
-
-  const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:8081/api/admin/deleteFAQ/${id}`)
-      .then((response) => {
-        console.log(response);
-        toast.success("Record Deleted successfully");
-
-        // Remove the deleted FAQ from the users state
-        setUsers((prevUsers) => prevUsers.filter((faq) => faq.id !== id));
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Failed to delete Question. Please try again!");
-      });
-  };
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -76,13 +74,7 @@ export default function FAQs() {
       .then((response) => {
         console.log("My data response in Faqs is", response);
         toast.success("Record Added successfully");
-        // Update the users state with the new FAQ
-        const newFAQ = {
-          title: Title,
-          details: description,
-          id: response.data.id, // Assuming the API returns the new FAQ's ID
-        };
-        setUsers((prevUsers) => [...prevUsers, newFAQ]);
+        getData();
         setTitle("");
         setDescription("");
       })
@@ -90,52 +82,6 @@ export default function FAQs() {
         console.error(error);
         alert("Failed to add Question. Please try again!");
       });
-  };
-
-  const filteredUsers = users.filter((faq) =>
-    faq.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  const handleUpdate = (input1Value, input2Value, id) => {
-    // Handle the update logic here
-    console.log(`Input 1 value: ${input1Value}`);
-    console.log(`Input 2 value: ${input2Value}`);
-    console.log("test ID value is", id);
-    console.log("Title value", input1Value);
-    console.log("Details value", input2Value);
-
-    const updata = { title: input1Value, details: input2Value };
-    console.log("the data I am updating is", updata);
-    axios
-      .put(
-        `http://localhost:8081/api/admin/faq/FAQDetails/update/{${id}`,
-        updata,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        toast.success("Record Updated successfully");
-
-        // Update the state with the new data
-        setUsers((prevData) => {
-          const updatedData = prevData.map((item) => {
-            if (item.id === id) {
-              return { ...item, title: input1Value, details: input2Value };
-            }
-            return item;
-          });
-          return updatedData;
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
-    // Hide the popup
-    setShowPopup(false);
   };
 
   const generatePDF = () => {
@@ -213,48 +159,31 @@ export default function FAQs() {
       <h3 className="color marginss">
         <u>Already Posted Questions</u>
       </h3>
-      <FloatingLabel controlId="floatingPassword" label="Search By  Title Here">
+      {/* <FloatingLabel controlId="floatingPassword" label="Search By  Title Here">
         <Form.Control
           type="City"
           placeholder="Enter Question Title Here"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </FloatingLabel>
+      </FloatingLabel> */}
       <div className="generatePDFButton">
         <button className="btn btn-danger" onClick={generatePDF}>
           Generate PDF
         </button>
       </div>
 
-      <div className="pdf-campaigns-container" ref={pdfContainerRef}>
-        {filteredUsers.map((faq, index) => (
-          <div className="headin" key={index}>
-            <h4>Question: {faq.title}</h4>
-            <p>
-              Answer: {faq.details}
-              <button
-                className="btn btn-danger bton"
-                onClick={() => handleDelete(faq.id)}
-              >
-                Delete
-              </button>
-              <button
-                className="btn btn-warning bton"
-                onClick={() => setShowPopup(true)}
-              >
-                Edit
-              </button>
-              {showPopup && (
-                <FAQsPopUp
-                  id={faq.id}
-                  title={faq.title}
-                  details={faq.details}
-                  onOkClick={handleUpdate}
-                />
-              )}
-            </p>
-          </div>
-        ))}
+      <div style={{ width: "99.1%", marginBottom: "13%" }}>
+        {faqs.length === 0 ? (
+             <p className="turningreddish">There are no Questions!!</p>
+        ) : (
+          <Row className="d-flex justify-content-center m-5">
+            {faqs?.results?.bindings?.map((faqs, index) => (
+              <Col sm={12} key={index}>
+                <SingleFaqs key={index} faqs={faqs} />
+              </Col>
+            ))}
+          </Row>
+        )}
       </div>
     </div>
   );
