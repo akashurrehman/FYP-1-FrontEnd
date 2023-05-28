@@ -18,7 +18,7 @@ import AB_negative from './../../Components_for_All_Panels/BloodCentre/Image/Ab-
 import O_positive from './../../Components_for_All_Panels/BloodCentre/Image/O-positive.jpg';
 import O_negative from './../../Components_for_All_Panels/BloodCentre/Image/O-negative.jpg';
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
-
+import {PrinterFill} from 'react-bootstrap-icons'
 import axios from 'axios'; 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -79,6 +79,7 @@ const BloodStock=()=> {
     fetchData();
     authCentre();
     setIsLoading(false);
+    toast.info("You can print blood stock report from this Page!",{position:toast.POSITION.TOP_CENTER})
   }, []);
   
   
@@ -203,12 +204,14 @@ const handleInputChange = (event) => {
           {blood.map((card) => (
             <Col key={card.ID} md={4}>
               <Card style={{ width: "18rem",marginTop:"10px" }}>
+              <Card.Header>
                 <Card.Img variant="top" style={{
                     width: "50%",
                     height: "50%",
                     margin: "0 auto",
                     display: "block"
                   }}  src={card.bloodGroup === 'A+' ? A_positive : card.bloodGroup === 'B+' ? B_positive : card.bloodGroup === 'AB+' ? AB_positive : card.bloodGroup ==='A-' ? A_negative : card.bloodGroup === 'B-' ? B_negative : card.bloodGroup ==='A-' ? A_negative : card.bloodGroup === 'AB-' ? AB_negative : card.bloodGroup === 'O+' ? O_positive : O_negative } />
+                </Card.Header>
                 <Card.Body>
                   <Card.Title>Blood Group:{card.bloodGroup}</Card.Title>
                   <Card.Text>No of bags available: {card.noOfBags}</Card.Text>
@@ -222,7 +225,19 @@ const handleInputChange = (event) => {
           ))}
         </CardGroup>
           </>
-        <Button onClick={handleBloodPrint}>Print Blood stock files</Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={6}>
+        
+        </Col>
+        <Col xs={12} md={4}>  
+          <div style={{justifyContent:"center",alignItems:"center",marginTop:"18px"}}>
+            <Button variant="danger" style={{backgroundColor:""}} onClick={handleBloodPrint}><PrinterFill className="" size={20} /> Print Blood stock</Button>
+          </div>
+        </Col>
+        <Col xs={2}>
+        
         </Col>
       </Row>
     </Container>

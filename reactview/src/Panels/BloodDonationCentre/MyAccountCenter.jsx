@@ -58,19 +58,22 @@ const MyAccountCenter=()=> {
     const [donors, setDonors] = useState([]);
     const [requests,setRequests]=useState([]);
     const [appointment, setAppointment] = useState([]);
+    const [centerData,setCenterData]=useState([]);
   
     useEffect(() => {
       const fetchDataForAll = async () => {
-        const [dataRes, donorsRes,requests, appointmentRes] = await Promise.all([
+        const [dataRes, donorsRes,requests, appointmentRes,centerRes] = await Promise.all([
           fetchData(`http://localhost:8081/api/users/bloodrequest/byUserID/${id}`),
           fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo"),
           fetchData(`http://localhost:8081/api/users/accepted/bloodRequests/${id}`),
           fetchData(`http://localhost:8081/api/users/appointment/byCentreID/${id}`),
+          fetchData(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${id}`),
         ]);
         setData(dataRes);
         setDonors(donorsRes);
         setRequests(requests);
         setAppointment(appointmentRes);
+        setCenterData(centerRes);
       };
       fetchDataForAll();
       authCentre();
@@ -123,6 +126,28 @@ const MyAccountCenter=()=> {
                     </Card.Body>
                 </Card>
             </Col>
+            <Col className="mt-md-5 px-2" md={4}>
+              <Card style={{marginTop:10,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#153250",color:"white"}} >
+                <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
+                  <Card.Header style={{justifyContent:"left",alignItems:"left",fontSize:"18px"}}>Personal Information</Card.Header>
+                <Card.Body>
+                <hr />
+                {centerData.map((item) => (
+                  <div key={item.ID.value}>
+                    <h6><span className="mr-5 pr-5">Name:</span>{item.Name.value}</h6>
+                    <h6><span>Email:</span>{item.Email.value}</h6>
+                    <h6><span>License:</span>{item.License.value}</h6>
+                    <h6><span>ContactNo:</span>{item.ContactNo.value}</h6>
+                    <h6><span>Timings:</span>{item.Timings.value}</h6>
+                    <h6><span>Opening_Days:</span>{item.Opening_Days.value}</h6>
+                    <h6><span>Address:</span>{item.Location.value}</h6>
+                    <h6><span>Category:</span>{item.Category.value}</h6>
+                    
+                  </div>
+                ))} 
+                </Card.Body>
+              </Card> 
+            </Col> 
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={8}>  
