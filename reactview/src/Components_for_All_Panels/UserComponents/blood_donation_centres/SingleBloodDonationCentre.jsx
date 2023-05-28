@@ -1,12 +1,8 @@
 import React from "react";
 
 import { Container, Button } from "react-bootstrap";
-import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
-import UserPanelHeader from "../UserPanelHeader";
-import UserPanelFooter from "../UserPanelFooter";
-import UserPanelBackToTopButton from "../UserPanelBackToTopButton";
-import Image1 from "../../../Public/user/image/CardImage3.jpg";
-import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill } from 'react-bootstrap-icons';
+import { Row, Col, Card } from "react-bootstrap";
+import { ChevronRight, GeoAltFill, TelephoneOutboundFill } from 'react-bootstrap-icons';
 
 import '../css/style.css';
 import { Link } from "react-router-dom";
@@ -35,7 +31,7 @@ const SingleBloodDonationCentre = (props) => {
     
 
     return ( <div>
-        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'1%'}}>
+        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'0%'}}>
                 <Row className=''>
                     <div className=''>
                         

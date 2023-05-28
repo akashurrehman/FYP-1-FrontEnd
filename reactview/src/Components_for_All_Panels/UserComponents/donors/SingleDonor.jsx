@@ -27,7 +27,7 @@ const SingleDonor = (props) => {
                                 <Card className="UserCard" border="secondary" style={{ width: '21rem' }}>
                                     <Row>
                                         <Col sm={8} style={{paddingLeft: '7%',paddingTop: '7%',textAlign:'left'}}>
-                                            <Card.Title><h4 className='TextCursive RedColor' style={{}}>{donor.Name.value}</h4></Card.Title>
+                                            <Card.Title><h4 className='TextCursive RedColor' style={{height:'55px'}}>{donor.Name.value}</h4></Card.Title>
                                         </Col>
                                         <Col className='' sm={3} style={{marginRight:'0%',marginTop: '3%'}}>
                                             <Card.Img className="" variant="top" src={CardImage1} width="0%" height="60rem" style={{}}/>

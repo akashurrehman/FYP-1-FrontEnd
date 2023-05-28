@@ -56,7 +56,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class Auth {
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Human FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     // String secret = "mySecretKey";
     // Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
@@ -146,19 +146,23 @@ public class Auth {
             String p = bindingsArr.getJSONObject(0).get("Password").toString();
             String r = bindingsArr.getJSONObject(0).get("Role").toString();
             String id = bindingsArr.getJSONObject(0).get("ID").toString();
+            String name = bindingsArr.getJSONObject(0).get("UserName").toString();
 
             String json1 = p;
             String json2 = r;
             String json3 = id;
+            String json4 = name;
 
             try {
                 JSONObject jsonObject1 = new JSONObject(json1);
                 JSONObject jsonObject2 = new JSONObject(json2);
                 JSONObject jsonObject3 = new JSONObject(json3);
+                JSONObject jsonObject4 = new JSONObject(json4);
 
                 String password_value = jsonObject1.getString("value");
                 String role_value = jsonObject2.getString("value");
                 String id_value = jsonObject3.getString("value");
+                String name_value = jsonObject4.getString("value");
 
                 // System.out.println(role_value);
                 // System.out.println(password_value);
@@ -175,6 +179,7 @@ public class Auth {
                             .setSubject(role_value)
                             .claim("role", role_value)
                             .claim("id", id_value)
+                            .claim("name", name_value)
                             .setExpiration(expiration)
                             .signWith(key)
                             .compact();

@@ -1,14 +1,10 @@
 import React from "react";
 import { Container, Button } from "react-bootstrap";
-import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
+import { Form, Row, Col, Nav,DropdownButton,InputGroup } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
-import UserPanelBackToTopButton from "../UserPanelBackToTopButton";
 import Image1 from "../../../Public/user/image/CardImage3.jpg";
-import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill } from 'react-bootstrap-icons';
-
-import CardImage1 from "../../../Public/user/image/Avatar.JPG";
-
+import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 
 import '../css/style.css';
 import centreService from "../../../Services/Api/User/BloodDonationCentreService";

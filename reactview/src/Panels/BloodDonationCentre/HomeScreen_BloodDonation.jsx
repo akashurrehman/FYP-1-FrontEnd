@@ -7,27 +7,23 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import CardGroup from 'react-bootstrap/CardGroup';
 import Header from '../../Components_for_All_Panels/BloodCentre/Header';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios';
-import { Bar } from 'react-chartjs-2';
-import { useHistory } from 'react-router-dom';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth  }  from './Auth/AuthContext';
-import jwt_decode from 'jwt-decode';
 import jwtDecode from "jwt-decode";
-
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
+import axios from 'axios';
 
 //import Link from 'react-router-dom/Link';
 
 
 const HomeScreen_BloodDonation=()=> {
+  const [isLoading, setIsLoading] = useState(true);
   const {token} = useAuth();
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwtDecode(token) : null;
   const role = decodedToken?.role;
-
+  const id= decodedToken?.id;
   const authCentre=()=>{
     if(role!='CENTRE'){
       window.location.href = "/user/login";
@@ -76,7 +72,7 @@ const HomeScreen_BloodDonation=()=> {
           fetchData("http://localhost:8081/api/admin/getJobPost"),
           fetchData("http://localhost:8081/api/admin/getNews"),
           fetchData("http://localhost:8081/api/admin/getFAQ"),
-          fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getAppointmentInfo"),
+          fetchData(`http://localhost:8081/api/users/appointment/byCentreID/${id}`),
           fetchData("http://localhost:8081/api/admin/getEvents"),
         ]);
         setData(dataRes);
@@ -86,9 +82,11 @@ const HomeScreen_BloodDonation=()=> {
         setFAQ(FAQRes);
         setAppointment(appointmentRes);
         setEvents(eventsRes);
+        setIsLoading(false);
       };
       fetchDataForAll();
       authCentre();
+      toast.info("You have successfully authenticated",{position:toast.POSITION.TOP_CENTER})
     }, []);
   
 
@@ -101,6 +99,10 @@ const HomeScreen_BloodDonation=()=> {
       display: "inline-block",
     };
   return (
+  <div>
+    {isLoading ? (
+        <LoadingSpinner />
+      ) : (
     <Container fluid style={{backgroundColor:"#E9EAE0"}}>
       <Header />
       <Row>
@@ -118,7 +120,8 @@ const HomeScreen_BloodDonation=()=> {
             <Col className="mt-md-5 px-2" md={4}>  
                 <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
-                        <Card.Title>Recent Blood Requests</Card.Title>
+                        <Card.Title style={{justifyContent:"center",textAlign:"center"}}>Recent Blood Requests</Card.Title>
+                        <hr style={{color:"red",width:"100%",justifyContent:"center",alignItems:"center",textAlign:"center"}} />
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
                         {data.map((item) => (
                           <div key={item.requests.value}>
@@ -133,16 +136,15 @@ const HomeScreen_BloodDonation=()=> {
                 </Card>
             </Col>
             <Col className="mt-md-5 px-2" md={8}>  
-              <Card style={{marginTop:10,paddingBottom:10}}>
+              <Card style={{marginTop:10}}>
                 <div style={{position: "relative"}}>
-                  <img src="/Images/blood-Center.jpg" alt="Image for display" style={{width: "50%", height: "50%", objectFit: "cover"}}/>
+                  <img src="/Images/Banner-bloodCentre-2.jpg" alt="Banner Image" style={{width: "100%", height: "50%", objectFit: "cover"}}/>
                     <div style={{position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(0,0,0,0.5)", padding: "10px"}}>
-                      <Card.Title style={{color: "white"}}>Be a hero in your - It's in your blood</Card.Title>
-                        <Button variant="primary" onClick={RegisterNewUser} style={{backgroundColor: "#153250"}}> <i class="fa fa-plus-square" aria-hidden="true"></i> Register New User</Button>
+                      <Card.Title style={{color: "white",justifyContent:"center",textAlign:"center"}}>Be a hero in your - It's in your blood</Card.Title>
+                        <div style={{justifyContent:"center", alignItems:"center", textAlign:"center"}}>
+                          <Button variant="primary" onClick={RegisterNewUser} style={{backgroundColor: "#153250"}}> <i class="fa fa-plus-square" aria-hidden="true"></i> Register New User</Button>
+                        </div>
                     </div>
-                </div>
-                <div style={{display: "flex", flexDirection: "column", alignItems: "center", marginTop: "10px"}}>
-                  <p>Register to be a blood donor, give blood and save blood!</p>
                 </div>
               </Card>
             </Col>
@@ -151,7 +153,8 @@ const HomeScreen_BloodDonation=()=> {
             <Col className="mt-md-5 px-2" md={4}>  
                 <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
-                        <Card.Title>Recent Blood Donors</Card.Title>
+                        <Card.Title style={{justifyContent:"center",textAlign:"center"}}>Recent Blood Donors</Card.Title>
+                        <hr style={{color:"red",width:"100%",justifyContent:"center",alignItems:"center",textAlign:"center"}} />
                         <div style={{ height: "25vh", overflow: "scroll" }}>
                         {donors.map((donor) => (
                           <div key={donor.donations.value}>
@@ -167,22 +170,27 @@ const HomeScreen_BloodDonation=()=> {
             </Col>
             <Col className="mt-md-5 px-2" md={8}>  
             <Card style={{marginTop:10,paddingBottom:10}}>
-              {/*
+              <Card.Header style={{textAlign:"center",justifyContent:"center",fontSize:"24px"}}>
+                Booked Appointments!
+              </Card.Header>
+              
               <div>
                 {appointment.map((item) => (
-                  <div key={item.appointments.value}>
-                    <h2>{item.Name.value}</h2>
-                    <p>{item.Email.value}</p>
-                    <hr />
-                  </div>
+                   <div key={item.appointments.value} style={{fontSize:"14px",marginLeft:"16px"}}>
+                   <h6>Name:{item.DonorName.value}</h6>
+                   <h6>Email:{item.DonorEmail.value}</h6>
+                   <h6>Timing:{item.Timings.value}</h6>
+                   <h6>Blood Group:{item.BloodGroup.value}</h6>
+                   <hr />
+                 </div>
                 ))}
                 </div>
-             */ }
+
                 <Card.Body className="d-flex justify-content-between">
-                  <Card.Title>By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
+                  <Card.Title >By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
                     <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointment details!</Button>
                 </Card.Body>
-                  <p>By handling users through appointments you can gain best experience ever!</p>
+                  <p style={{fontSize:"14px",marginLeft:"16px"}}>By handling users through appointments you can gain best experience ever!</p>
             </Card>
             </Col>
         </CardGroup>
@@ -206,9 +214,9 @@ const HomeScreen_BloodDonation=()=> {
                   <div key={event.ID.value}>
                     <h4>Event Title:{event.Name.value}</h4>
                     <p>Event Details:{event.Message.value}</p>
-                    <h5>Location:{event.Location.value}</h5>
+                    <h6>Location:{event.Location.value}</h6>
                     <h6> Event Date:{event.Date.value}</h6>
-                    <hr style={{color:"red",width:"50%",fontSize:"40px",fontWeight:"bold"}}/> {/* Add a line after each item */}
+                    <hr style={{color:"red",width:"100%",fontSize:"40px",fontWeight:"bold"}}/> {/* Add a line after each item */}
                   </div>
                   ))}
               </div>
@@ -222,7 +230,7 @@ const HomeScreen_BloodDonation=()=> {
                   <h4>Job Title:{jobPost.Title.value}</h4>
                   <p>Job Details:{jobPost.Details.value}</p>
                   <h6> Job Posted Date:{jobPost.Date.value}</h6>
-                  <hr style={{color:"red",width:"50%",fontSize:"40px",fontWeight:"bold"}}/> {/* Add a line after each item */}
+                  <hr style={{color:"red",width:"100%",fontSize:"40px",fontWeight:"bold"}}/> {/* Add a line after each item */}
                 </div>
               ))}
             </Card.Body>
@@ -235,7 +243,7 @@ const HomeScreen_BloodDonation=()=> {
                   <h4>Job Title:{jobPost.Title.value}</h4>
                   <p>Job Details:{jobPost.Details.value}</p>
                   <h6>Job Posted Date:{jobPost.Date.value}</h6>
-                  <hr style={{color:"red",width:"50%",fontSize:"40px",fontWeight:"bold"}}/> {/* Add a line after each item */}
+                  <hr style={{color:"red",width:"100%",fontSize:"40px",fontWeight:"bold"}}/> {/* Add a line after each item */}
                 </div>
               ))}
             </Card.Body>
@@ -251,6 +259,8 @@ const HomeScreen_BloodDonation=()=> {
         </Col>
       </Row>
     </Container>
+    )}
+  </div>
   );
 }
 

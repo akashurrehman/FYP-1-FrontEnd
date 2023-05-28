@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-import { Container,  Navbar, Nav, Button,NavDropdown,Row,Col,Modal, Form, InputGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -15,6 +14,7 @@ import MyBloodDonations from './MyBloodDonations';
 import MyAppointments from './MyAppointments';
 import AcceptedBloodRequests from './AcceptedBloodRequests';
 import userLoginService from '../../../Services/Api/User/UserLoginService';
+import UserPanelFooter from '../UserPanelFooter';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -76,26 +76,27 @@ function TabPanel(props) {
                                 width: 200,
                                 position: 'fixed',
                                     "& .Mui-selected": {
-                                        color: "#a00f0f",
+                                        color: "#D64045",
                                     },
                                     "& .Mui-selected .MuiTab-wrapper": {
                                         backgroundColor: "#a00f0f",
                                         color: "#ffffff",
                                     },
                                     "& .MuiTabs-indicator": {
-                                        backgroundColor: "#a00f0f",
+                                        backgroundColor: "#27213C",
                                     },
+                                    
                             }}
                         >
-                        <Tab label="My Profile" {...a11yProps(0)} />
-                        <Tab label="My Blood Requests" {...a11yProps(1)} />
-                        <Tab label="My Blood Donations" {...a11yProps(2)} />
-                        <Tab label="My Appointments" {...a11yProps(3)} />
-                        <Tab label="Accepted Requests" {...a11yProps(4)} />
-                        <Tab label="Log Out" {...a11yProps(5)} onClick={(e) => {
-                                userLoginService.logout();
-                                window.location.reload();
-                            }} />
+                            <Tab label="My Profile" {...a11yProps(0)} sx={{ marginLeft: 0, }}/>
+                            <Tab label="My Blood Requests" {...a11yProps(1)} />
+                            <Tab label="My Blood Donations" {...a11yProps(2)} />
+                            <Tab label="My Appointments" {...a11yProps(3)} />
+                            <Tab label="Accepted Requests" {...a11yProps(4)} />
+                            <Tab label="Log Out" {...a11yProps(5)} onClick={(e) => {
+                                    userLoginService.logout();
+                                    window.location.reload();
+                                }} />
                         </Tabs>
                     </Box>
                     <TabPanel value={value} index={0}>
@@ -125,6 +126,10 @@ function TabPanel(props) {
                     </TabPanel>
                 </Box>
             </div>
+            <div style={{marginTop:'8%'}}>
+                
+            </div>
+            <UserPanelFooter></UserPanelFooter>
         </div>
     );
 }

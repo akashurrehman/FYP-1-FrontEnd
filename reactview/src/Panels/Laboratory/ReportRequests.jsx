@@ -9,19 +9,16 @@ import Button from 'react-bootstrap/Button';
 import DataTable from 'react-data-table-component';
 import Header from "./LabComponents/Header";
 import { handleRequestReportsPrint } from "./LabComponents/PrintedFiles/RequestedReport";
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 const ReportRequests=()=> {  
-    const [selectedRowIds, setSelectedRowIds] = useState({});
-
+  const [selectedRowIds, setSelectedRowIds] = useState({});
+  const [loading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [approvedData, setApprovedData] = useState([]);
         const handleApprove = (id) => {
           console.log("ID:"+id);
-          
-        //     axios
-        //         .post(`http://localhost:8081/api/users/bloodrequest/approve/${id}`)
-        //         .then((response) => console.log(response.data))
-        //         .catch((error) => console.log(error));
+        
           // Find the approved data from the current data state and remove it
           const approvedItem = data.find((item) => item.ID.value === id);
           setData(data.filter((item) => item.ID.value !== id));
@@ -65,6 +62,7 @@ const ReportRequests=()=> {
         setData(rows);
       })
       .catch((error) => console.log(error));
+      setIsLoading(false);
   }, []);
   const handlePrint = () => {
     handleRequestReportsPrint(data);
@@ -122,7 +120,8 @@ const columns = [
   }  
 ];
   return (
-    <Container style={{backgroundColor:"#EEEEEE"}}>
+    loading ? <LoadingSpinner/> :
+    <Container style={{backgroundColor:"#EEEEEE"}} fluid>
       <Header />
       <Row>
         <Col className="mt-md-5" xs={12}>

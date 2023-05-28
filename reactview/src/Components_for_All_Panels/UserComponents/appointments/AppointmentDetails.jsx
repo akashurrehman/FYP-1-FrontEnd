@@ -73,7 +73,8 @@ const AppointmentDetails = () => {
                         <h4 style={{fontSize:'18px'}}>Centre Timings: <spam style={{fontSize:'16px',fontWeight:'400'}}>{appointment?.Timings?.value}</spam></h4>
                         <h4 style={{fontSize:'18px'}}>Centre Contact No: <spam style={{fontSize:'16px',fontWeight:'400'}}>{appointment?.CentreContactNo?.value}</spam></h4>
                         <h4 style={{fontSize:'18px'}}>Centre Location: <spam style={{fontSize:'16px',fontWeight:'400'}}>{appointment?.Location?.value}</spam></h4>
-                        
+                        <h4 style={{fontSize:'18px'}}>Booking Date: <spam style={{fontSize:'16px',fontWeight:'400'}}>{appointment?.BookingDate?.value}</spam></h4>
+                        <h4 style={{fontSize:'18px'}}>Booking Time: <spam style={{fontSize:'16px',fontWeight:'400'}}>{appointment?.BookingTime?.value}</spam></h4>
                     </Col>
                     <Col sm={4}>
                     <div>

@@ -17,9 +17,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
 import jwt_decode from 'jwt-decode';
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 
 const LabProfileSetting=()=> {
+  const [loading, setIsLoading] = useState(true);
   //Get the token from the AuthContext
   const {token} = useAuth();
     const authCentre=()=>{
@@ -90,10 +92,10 @@ const LabProfileSetting=()=> {
           address: centerData.Address.value,
           city:centerData.City.value
         });
-
   }
 });
-authCentre();
+//authCentre();
+setIsLoading(false);
 },[]);
 
   const handleChange = (event) => {
@@ -149,7 +151,7 @@ const handleSubmit = (event) => {
   }
 };
 
-const CENTER_ID = 'L001';
+const CENTER_ID = id;
 
 const handleDelete = () => {
   axios
@@ -171,7 +173,7 @@ const handleConfirm = () => {
   .put(`http://localhost:8081/api/lab/RegisteredLabs/edit/${CENTER_ID}`, center)
   .then((response) => {
     console.log(response.data);
-    toast("Profile Updated Successfully",{type:"success", position:toast.POSITION.TOP_RIGHT});
+    toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
   })
   .catch((error) => {
     console.error(error);
@@ -192,8 +194,9 @@ const handleCancel = () => {
 };
 
   return (
+  loading ? <LoadingSpinner /> :
   <div  style={{backgroundColor:"#EEEEEE"}}>
-    <Container style={{backgroundColor:"#D5D5D5"}}>
+    <Container style={{backgroundColor:"#D5D5D5"}} fluid className="px-3">
       <Header />
       <Row>
         <Col className="mt-md-5" xs={12}>
@@ -227,7 +230,6 @@ const handleCancel = () => {
         {center.contactNoError && <p style={{ color: "red" }}>{center.contactNoError}</p> }
         <Form.Group className="mb-3" controlId="email">
           <Form.Label>Email</Form.Label>
-
           <BsEnvelopeFill size={15} color="red"/>
           <Form.Control name="email" placeholder="example@gmail.com" value={center.email} onChange={handleChange}/>
       </Form.Group>
@@ -240,7 +242,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
         <Col>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
+            <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
         </Col>
     </Row>
       <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
@@ -253,7 +255,7 @@ const handleCancel = () => {
                 <Form.Check type="checkbox" style={{color:"black",borderColor:"red"}} className="py-3" label="Are the provided information is correct according to your center or knowledge?" />
               </Form.Group>
             </Form>
-            <Button style={{ display: "inline-block", width:"25%",textAlign:"center"}} className="mx-3 my-3" variant="danger" onClick={handleDelete}>Delete Center</Button>
+            <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} className="mx-3 my-3" variant="danger" onClick={handleDelete}>Delete Center</Button>
           </Col>
         </Row>
       </Card>

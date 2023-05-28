@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 
-import { Container, Button } from "react-bootstrap";
-import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
-import UserPanelHeader from "../UserPanelHeader";
-import UserPanelFooter from "../UserPanelFooter";
-import UserPanelBackToTopButton from "../UserPanelBackToTopButton";
-import Image1 from "../../../Public/user/image/RequestMaker.jpg";
-import CardImage1 from "../../../Public/user/image/Avatar.JPG";
-import { Search,ArrowRight,ChevronRight,Trash, GeoAltFill, TelephoneOutboundFill, TrashFill, Trash2Fill, Trash3Fill } from 'react-bootstrap-icons';
+import { Container } from "react-bootstrap";
+import { Row, Col, Card, ListGroup, Nav } from "react-bootstrap";
+import { ArrowRight } from 'react-bootstrap-icons';
 
 import '../css/style.css';
 import { Link } from "react-router-dom";
 import appointmentService from "../../../Services/Api/User/AppointmentService";
 import ConfirmationBox from "../ConfirmationBox";
-import { BsTrash, BsTrashFill } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 
 const SingleAppointment = (props) => {
 
@@ -38,7 +33,7 @@ const SingleAppointment = (props) => {
     };
 
     return ( <div>
-        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'7%'}}>
+        <Container className='d-flex justify-content-center' style={{paddingTop:'0%',paddingBottom:'0%'}}>
             <Row className=''>
                 <div className='d-flex'>
                     
@@ -65,8 +60,8 @@ const SingleAppointment = (props) => {
                                                 </Col>
                                                 <Col sm={6}>
                                                     <p className='PurpleColor' style={{marginTop:'-3%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Centre Name: </strong>{appointment?.CentreName?.value}</p>
-                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Timings: </strong>{appointment?.Timings?.value}</p>
-                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Location: </strong>{appointment?.Location?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Booking Date: </strong>{appointment?.BookingDate?.value}</p>
+                                                    <p className='PurpleColor' style={{marginTop:'-5.5%'}}><strong className='TextCursive' style={{color:'#635f5f'}}>Booking Time: </strong>{appointment?.BookingTime?.value}</p>
                                                 </Col>
                                             </Row>
                                         

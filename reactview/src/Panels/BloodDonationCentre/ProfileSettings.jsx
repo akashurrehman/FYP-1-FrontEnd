@@ -18,8 +18,10 @@ import { useAuth  }  from './Auth/AuthContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from "jwt-decode";
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 const ProfileSettings=()=> {
+  const [isLoading, setIsLoading] = useState(true);
   const [center, setCenterData] = useState({
     name: "",
     city: "",
@@ -65,10 +67,11 @@ const ProfileSettings=()=> {
           category: centerData.Category.value,
         });
 
-  }
-});
-authCentre();
-},[]);
+    }
+  });
+    authCentre();
+    setIsLoading(false);
+  },[]);
 const validateForm = () => {
   let isValid = true;
   const errors = {};
@@ -169,53 +172,54 @@ const validateForm = () => {
         newCenterData = { ...center, [name]: value, locationError: null };
       }
     }
-  
-    
     setCenterData(newCenterData);  
   };
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  const isValid = validateForm();
-  if (isValid) {
-  setShowModal(true);
-  }
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
+    setShowModal(true);
+    }
+  };
 
 
 
-const handleDelete = () => {
-  axios
-    .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/delete/${id}`)
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/delete/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
+        window.location.href('/users/login');
+        // Perform any additional actions after successful delete
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+      });
+  };
+
+
+  const handleConfirm = () => {
+    axios
+    .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/update/${id}`, center)
     .then((response) => {
       console.log(response.data);
-      toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
-      // Perform any additional actions after successful delete
+      // toast.success(response.data,{position:toast.POSITION.TOP_RIGHT});
+      toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
     })
     .catch((error) => {
       console.error(error);
-      toast.error(error,{position:toast.POSITION.TOP_CENTER});
+      //toast.error(error,{position:toast.POSITION.TOP_CENTER}
+      toast(error,{position:toast.POSITION.TOP_RIGHT});
     });
-};
+    setShowModal(false);
+  }
 
-
-const handleConfirm = () => {
-  axios
-  .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/update/${id}`, center)
-  .then((response) => {
-    console.log(response.data);
-    toast("Profile Updated Successfully");
-  })
-  .catch((error) => {
-    console.error(error);
-    toast.error(error,{position:toast.POSITION.TOP_CENTER}
-  )});
-setShowModal(false);
-}
-
-const handleCancel = () => {
-  setShowModal(false);
-}
+  const handleCancel = () => {
+    setShowModal(false);
+  }
 
   const mystyle = {
       height: "7%",
@@ -225,6 +229,10 @@ const handleCancel = () => {
 };
 
   return (
+  <div>
+  {isLoading ? (
+    <LoadingSpinner />
+    ) : (
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
@@ -304,7 +312,16 @@ const handleCancel = () => {
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>Available Timings</Form.Label>
             <BsStopwatch size={15} />
-            <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/>
+            {/* <Form.Control placeholder="Category" name="timings" value={center.timings} onChange={handleChange} required/> */}
+            <Form.Select required name="timings" value={center.timings} onChange={handleChange} >
+              <option value="">Select Timing/Shift of Center*</option>
+              <option value="6AM-2PM">6AM-2PM</option>
+              <option value="2PM-11PM">2PM-11PM</option>
+              <option value="11PM-6AM">11PM-6AM</option>
+              <option value="6AM-6PM">6AM-6PM</option>
+              <option value="6PM-6AM">6PM-6AM</option>
+              <option value="12AM-12PM/Full Day/Night">12AM-12PM/Full Day/Night</option>
+            </Form.Select>
           </Form.Group>
         </Col>
         <Col xs="12" sm="3">
@@ -318,10 +335,17 @@ const handleCancel = () => {
           <Form.Group as={Col} controlId="formGridZip">
             <Form.Label>Category</Form.Label>
             <i class="fa fa-registered" aria-hidden="true"></i>
-            <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
+            
+            {/* <Form.Control name="category" placeholder="Category" value={center.category} onChange={handleChange}/>
             {center.categoryError && (
               <p style={{ color: 'red' }}>{center.categoryError}</p>
-            )}
+            )} */}
+            
+            <Form.Select required name="category" value={center.category} onChange={handleChange} >
+              <option value="">Select Category of Center*</option>
+              <option value="Private">Private</option>
+              <option value="Public">Public</option>
+            </Form.Select>
           </Form.Group>
         </Col>
       </Row>
@@ -373,6 +397,8 @@ const handleCancel = () => {
         </Col>
       </Row>
     </Container>
+    )}
+  </div>
   );
 }
 
