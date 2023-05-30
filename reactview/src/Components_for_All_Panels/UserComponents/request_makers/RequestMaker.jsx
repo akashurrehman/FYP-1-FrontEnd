@@ -11,6 +11,8 @@ import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 import CardImage1 from "../../../Public/user/image/Avatar.JPG";
 import AvailableRequestMakersBar from "./AvailableRequestMakersBar";
 import requestMakerService from "../../../Services/Api/User/RequestMakerService";
+import jwtDecode from "jwt-decode";
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
 
 import '../css/style.css';
 import SingleRequestMaker from "./SingleRequestMaker";
@@ -27,6 +29,18 @@ const RequestMaker = () => {
 
     const [requestMakers, setRequestMakers] = React.useState([]);
 
+    const {token} = useAuth();
+    
+    const decodedToken = token ? jwtDecode(token) : null;
+    const role = decodedToken?.role;
+
+    const authCentre=()=>{
+      if(role!='USER'){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+
     const getData = () => {
         requestMakerService
             .getRequestMakers()
@@ -37,7 +51,7 @@ const RequestMaker = () => {
                 console.log(err);
             });
     };
-    React.useEffect(getData, []);
+    React.useEffect(getData,authCentre(), []);
     console.log(requestMakers.results);
 
     return ( <div>

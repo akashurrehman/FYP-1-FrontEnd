@@ -20,7 +20,8 @@ import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';
 import LocationOnSharpIcon from '@mui/icons-material/LocationOnSharp';
 import ContactsSharpIcon from '@mui/icons-material/ContactsSharp';
 import LocationCitySharpIcon from '@mui/icons-material/LocationCitySharp';
-
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 import image from '../../../Public/user/image/PostBloodRequest2.jpg';
 import '../css/style.css';
 
@@ -35,6 +36,21 @@ export default function MakeBloodRequest() {
         setCity(event.target.value);
         setBloodGroup(event.target.value);
     };
+    //Get id from token 
+    const {token} = useAuth();
+    const decodedToken = token ? jwtDecode(token) : null;
+
+    const role = decodedToken?.role;
+
+    const authCentre=()=>{
+      if(role!='USER'){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+    React.useEffect(()=>{
+        authCentre();
+    },[])
 
     return (<div>
 

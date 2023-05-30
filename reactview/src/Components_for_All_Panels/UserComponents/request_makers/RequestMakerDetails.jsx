@@ -6,6 +6,8 @@ import UserPanelFooter from "../UserPanelFooter";
 import { useParams } from 'react-router-dom';
 import image from '../../../Public/user/image/jobpost.png';
 import '../css/style.css';
+import jwtDecode from "jwt-decode";
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
 
 import requestMakerService from "../../../Services/Api/User/RequestMakerService";
 
@@ -13,6 +15,18 @@ const RequestMakerDetails = () => {
 
     const { id } = useParams();
     const [requestMaker, setRequestMaker] = useState();
+
+    const {token} = useAuth();
+    
+    const decodedToken = token ? jwtDecode(token) : null;
+    const role = decodedToken?.role;
+
+    const authCentre=()=>{
+      if(role!='USER'){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
 
     const getData = () => {
         requestMakerService
@@ -26,7 +40,7 @@ const RequestMakerDetails = () => {
     };
 
     
-    useEffect(()=> getData, []);
+    useEffect(()=> getData,authCentre(), []);
     console.log(requestMaker);
 
     return ( <div>

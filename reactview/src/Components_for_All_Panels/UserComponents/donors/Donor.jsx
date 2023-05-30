@@ -12,11 +12,26 @@ import '../css/style.css';
 import AvailableDonorsBar from "./AvailableDonorsBar";
 import donorService from "../../../Services/Api/User/DonorService";
 import SingleDonor from "./SingleDonor";
-
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 
 const Donor = () => {
 
     const [donors, setDonors] = React.useState([]);
+
+     //Get User ID from token
+     const {token} = useAuth();
+     const decodedToken = token ? jwtDecode(token) : null;
+ 
+     const role = decodedToken?.role;
+ 
+     const authCentre=()=>{
+       if(role!='USER'){
+         window.location.href = "/user/login";
+       }
+         console.log("authCentre");
+     }
+
 
     const getData = () => {
         donorService
@@ -28,7 +43,7 @@ const Donor = () => {
                 console.log(err);
         });
     };
-    React.useEffect(getData, []);
+    React.useEffect(getData,authCentre(), []);
     console.log(donors?.results?.bindings?.length);
 
     

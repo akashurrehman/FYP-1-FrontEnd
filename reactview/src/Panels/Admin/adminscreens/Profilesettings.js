@@ -1,7 +1,24 @@
 import React from 'react'
 import { Envelope,Globe, PersonLinesFill, CalendarDateFill,Lock, PhoneVibrate, Geo, Map, Fingerprint } from 'react-bootstrap-icons';
 import { Form, Row, Col, InputGroup, FloatingLabel } from "react-bootstrap";
+import { useAuth } from '../../BloodDonationCentre/Auth/AuthContext';
+import jwtDecode from 'jwt-decode';
 export default function Profilesettings() {
+  const {token} = useAuth();
+    
+  const decodedToken = token ? jwtDecode(token) : null;
+  const role = decodedToken?.role;
+
+  const authCentre=()=>{
+    if(role!='ADMIN'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
+
+  React.useEffect(() => {
+    authCentre();
+  }, []);
   return (
     <div className="turningred">
       <h1 className="color">

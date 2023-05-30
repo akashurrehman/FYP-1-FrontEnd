@@ -5,7 +5,8 @@ import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import Image1 from "../../../Public/user/image/CardImage3.jpg";
 import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
-
+import {useAuth} from "./../../../Panels/BloodDonationCentre/Auth/AuthContext"
+import jwt_decode from 'jwt-decode';
 import '../css/style.css';
 import centreService from "../../../Services/Api/User/BloodDonationCentreService";
 import SingleBloodDonationCentre from "./SingleBloodDonationCentre";
@@ -24,6 +25,22 @@ const BloodDonationCentre = () => {
 
     const [centres, setCentres] = React.useState([]);
 
+    //This will get the id  from the token if user is login
+    const {token} = useAuth();
+
+    const decodedToken = token ? jwt_decode(token) : null;
+
+    const role = decodedToken?.role;
+
+    //For User Authentications only
+    
+    const authCentre=()=>{
+    if(role!='USER'){
+        window.location.href = "/user/login";
+    }
+        console.log("authCentre");
+    }
+
     const getData = () => {
         centreService
           .getCentres()
@@ -34,7 +51,12 @@ const BloodDonationCentre = () => {
             console.log(err);
           });
     };
-    React.useEffect(getData, []);
+
+    React.useEffect(() =>{
+    getData,
+    authCentre();
+    },[]);
+
     console.log(centres.results);
 
     return ( <div>

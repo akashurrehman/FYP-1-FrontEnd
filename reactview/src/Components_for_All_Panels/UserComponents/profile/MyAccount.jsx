@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import UserPanelHeader from '../UserPanelHeader';
 
-
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 import MyPersonalDetails from './MyPersonalDetails';
 import MyBloodRequests from './MyBloodRequests';
 import MyBloodDonations from './MyBloodDonations';
@@ -56,7 +57,21 @@ function TabPanel(props) {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    //Get id from token 
+    const {token} = useAuth();
+    const decodedToken = token ? jwtDecode(token) : null;
 
+    const role = decodedToken?.role;
+
+    const authCentre=()=>{
+      if(role!='USER'){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+    React.useEffect(()=>{
+        authCentre();
+    },[])
     return (
         <div>
             <UserPanelHeader></UserPanelHeader>

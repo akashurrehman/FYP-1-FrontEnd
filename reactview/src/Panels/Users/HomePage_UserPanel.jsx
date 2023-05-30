@@ -19,7 +19,8 @@ import image_all_centre from '../../Public/user/image/all-centre-menu.png';
 import image_post_blood_request from '../../Public/user/image/post-blood-request-menu.png';
 import image_make_blood_donation from '../../Public/user/image/make-blood-donation-menu.png';
 import image_book_appointment from '../../Public/user/image/book-appointment-menu.png';
-
+import { useAuth } from "./../BloodDonationCentre/Auth/AuthContext";
+import jwt_decode from 'jwt-decode';
 // import { sparqlConnect, setQueryURL } from "sparql-connect";
  
 
@@ -55,34 +56,7 @@ const HomeScreen_UserPanel = () => {
     // };
 
 
-    const queryUrl=()=>{  
-        const query = `
-        SELECT ?persons ?id ?name ?email
-        WHERE {
-        ?persons rdf:type bd:Person .
-        ?persons bd:hasPersonID ?id .
-        ?persons bd:hasPersonFullName ?name .
-        ?persons bd:hasPersonEmail ?email .
-        }`;
-        var url_to_endpoint="http://localhost:3030/#/dataset/blood/query";
-        const encodedQuery = (query);
-        const url = `${url_to_endpoint}?query=${encodedQuery}`;
-      
-        const name=()=> {
-            console.log("url",url);
-        }
-        axios
-            .get(url)
-            .then((response) => {
-                console.log(response);
-                
-                // do something with the data
-            })
-            .catch(error => {
-                console.error(error);
-            }
-        );
-    }
+   
 
     // const url = setQueryURL('http://localhost:3030/#/dataset/blood/query');
  
@@ -105,6 +79,23 @@ const HomeScreen_UserPanel = () => {
 
     const value = 0.66;
 
+    const {token} = useAuth();
+
+    //This will get the id  from the token if user is login
+    const decodedToken = token ? jwt_decode(token) : null;
+
+    const role = decodedToken?.role;
+
+    //For User Authentications only
+    
+    const authCentre=()=>{
+    if(role!='USER'){
+        window.location.href = "/user/login";
+    }
+        console.log("authCentre");
+    }
+    
+      
     
     const [isHover, setIsHover] = React.useState(true);
 
@@ -125,6 +116,7 @@ const HomeScreen_UserPanel = () => {
     React.useEffect(() => {
         // 👇️ scroll to top on page load
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        authCentre();
       }, []);
 
       const [faqs, setFAQs] = React.useState([]);

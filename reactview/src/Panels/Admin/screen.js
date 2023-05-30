@@ -13,8 +13,25 @@ import DonorsTables from "./adminscreens/Donors";
 import Sponsors from "./adminscreens/Sponsors/Sponsors";
 import FinancialDonations from "./adminscreens/FinacialDonations/FinancialDonations";
 import Jobs from "./adminscreens/Jobs/Jobs";
+import { useAuth } from "../BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 
 const HomeScreen_BloodDonation = () => {
+  const {token} = useAuth();
+    
+    const decodedToken = token ? jwtDecode(token) : null;
+    const role = decodedToken?.role;
+
+    const authCentre=()=>{
+      if(role!='ADMIN'){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+  
+    React.useEffect(() => {
+      authCentre();
+    }, []);
   return (
     <div className="container-fluid maincontainer mt-0">
       

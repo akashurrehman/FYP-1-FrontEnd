@@ -40,15 +40,19 @@ const MakeAppointment = () => {
 
     //Get User ID from token
     const {token} = useAuth();
+    const decodedToken = token ? jwtDecode(token) : null;
+
+    const role = decodedToken?.role;
+
     const authCentre=()=>{
-      if(!token){
+      if(role!='USER'){
         window.location.href = "/user/login";
       }
         console.log("authCentre");
     }
   
     //This will get the id  from the token if user is login
-    const decodedToken = token ? jwtDecode(token) : null;
+   
     const userID = decodedToken?.id;
     // console.log(userID);
 
@@ -108,7 +112,7 @@ const MakeAppointment = () => {
 
 
 
-    useEffect(()=>{authCentre();getUserData();getCentreData();}, []);
+    useEffect(()=>{authCentre();getUserData();getCentreData();authCentre();}, []);
     console.log(centre);
     console.log(user);
     // console.log(donorName);

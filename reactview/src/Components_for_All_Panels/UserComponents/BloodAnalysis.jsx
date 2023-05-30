@@ -32,6 +32,15 @@ const BloodAnalysis = () => {
     const id = decodedToken?.id;
     console.log(id);
 
+    const role = decodedToken?.role;
+
+    const authCentre=()=>{
+      if(role!='USER'){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
+
     const [age, setAge] = React.useState();
     const [sex, setSex] = React.useState();
     const [wbc, setWBC] = React.useState();
@@ -99,6 +108,10 @@ const BloodAnalysis = () => {
             }
         }
     }
+
+    React.useEffect(() => {
+        authCentre();
+    },[])
 
 
     const updateUserEligibilityStatus = async (e) => {

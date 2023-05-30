@@ -3,8 +3,25 @@ import Carousel from "react-bootstrap/Carousel";
 import styles from "../../Admin/adminscreen.css";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/esm/Button";
+import { useAuth } from "../../BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 
 function Dashboard() {
+  const {token} = useAuth();
+    
+  const decodedToken = token ? jwtDecode(token) : null;
+  const role = decodedToken?.role;
+
+  const authCentre=()=>{
+    if(role!='ADMIN'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
+
+  React.useEffect(() => {
+    authCentre();
+  }, []);
   return (
     <div className="turningred">
       <h1 className="color">Dashboard</h1>

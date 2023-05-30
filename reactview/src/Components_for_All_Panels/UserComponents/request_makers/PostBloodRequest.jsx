@@ -29,13 +29,16 @@ const PostBloodRequest = () => {
     //Get id from token 
     //Get User ID from token
     const {token} = useAuth();
+    
+    const decodedToken = token ? jwtDecode(token) : null;
+    const role = decodedToken?.role;
+
     const authCentre=()=>{
-      if(!token){
+      if(role!='USER'){
         window.location.href = "/user/login";
       }
         console.log("authCentre");
     }
-    const decodedToken = token ? jwtDecode(token) : null;
     const id = decodedToken?.id;
 
     useEffect(()=>{authCentre();}, []);

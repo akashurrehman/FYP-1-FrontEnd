@@ -6,7 +6,8 @@ import UserPanelFooter from "../UserPanelFooter";
 import { useParams } from 'react-router-dom';
 import image from '../../../Public/user/image/jobpost.png';
 import '../css/style.css';
-
+import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 import donorService from "../../../Services/Api/User/DonorService";
 
 const DonorDetails = () => {
@@ -24,9 +25,21 @@ const DonorDetails = () => {
                 console.log(err);
         });
     };
+    //Get User ID from token
+    const {token} = useAuth();
+    const decodedToken = token ? jwtDecode(token) : null;
+
+    const role = decodedToken?.role;
+
+    const authCentre=()=>{
+      if(role!='USER'){
+        window.location.href = "/user/login";
+      }
+        console.log("authCentre");
+    }
 
     
-    useEffect(()=> getData, []);
+    useEffect(()=> getData,authCentre(), []);
     console.log(donor);
 
     return ( <div>

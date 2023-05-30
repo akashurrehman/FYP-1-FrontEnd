@@ -17,8 +17,26 @@ import {
   Map,
   Fingerprint,
 } from "react-bootstrap-icons";
+import { useAuth } from "../../BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 
 export default function Donors() {
+  const {token} = useAuth();
+    
+  const decodedToken = token ? jwtDecode(token) : null;
+  const role = decodedToken?.role;
+
+  const authCentre=()=>{
+    if(role!='ADMIN'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
+
+  React.useEffect(() => {
+    authCentre();
+  }, []);
+
   const [users, setUsers] = React.useState([]);
   const pdfContainerRef = useRef(null);
   const PDFnotify = () => {

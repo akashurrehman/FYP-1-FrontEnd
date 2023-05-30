@@ -9,8 +9,25 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import packageService from "../Services/PackageService";
 import SingleJob from "../Components/SingleJob";
-
+import { useAuth } from "../../../BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 export default function Jobs() {
+  const {token} = useAuth();
+    
+  const decodedToken = token ? jwtDecode(token) : null;
+  const role = decodedToken?.role;
+
+  const authCentre=()=>{
+    if(role!='ADMIN'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
+
+  React.useEffect(() => {
+    authCentre();
+  }, []);
+
   const [users, setUsers] = React.useState([]);
   const [Title, setTitle] = useState("");
   const [Date, setDate] = useState("");

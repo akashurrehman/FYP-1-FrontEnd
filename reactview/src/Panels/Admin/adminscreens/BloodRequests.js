@@ -6,8 +6,26 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../../BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 
 export default function BloodRequests() {
+  const {token} = useAuth();
+    
+  const decodedToken = token ? jwtDecode(token) : null;
+  const role = decodedToken?.role;
+
+  const authCentre=()=>{
+    if(role!='ADMIN'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
+
+  React.useEffect(() => {
+    authCentre();
+  }, []);
+
   const [users, setUsers] = React.useState([]);
   const pdfContainerRef = useRef(null);
   const PDFnotify = () => {

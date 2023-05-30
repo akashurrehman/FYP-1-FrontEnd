@@ -9,8 +9,25 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import packageService from "../Services/PackageService";
 import SingleSponsor from "../Components/SingleSponsor";
-
+import { useAuth } from "../../../BloodDonationCentre/Auth/AuthContext";
+import jwtDecode from "jwt-decode";
 export default function Sponsors() {
+  const {token} = useAuth();
+    
+  const decodedToken = token ? jwtDecode(token) : null;
+  const role = decodedToken?.role;
+
+  const authCentre=()=>{
+    if(role!='ADMIN'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
+
+  React.useEffect(() => {
+    authCentre();
+  }, []);
+
   const [users, setUsers] = React.useState([]);
   const [Title, setTitle] = useState("");
   const [description, setDescription] = useState("");
