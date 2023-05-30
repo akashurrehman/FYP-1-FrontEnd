@@ -57,7 +57,7 @@ export default function News() {
       .get("http://localhost:8081/api/admin/getNews")
       .then((response) => {
         console.log("News Data Response is:", response.data.results.bindings);
-        // console.log("News Data ssssssssssss is:", response.data.results.bindings[0].news);
+    
         const faqs = response.data.results.bindings.map((faq) => {
           return {
             title: faq.Title.value,
