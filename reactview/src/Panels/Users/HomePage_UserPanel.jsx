@@ -157,6 +157,7 @@ const HomeScreen_UserPanel = () => {
                     }}>
                         <Row>
                             <Col sm={9}>
+                                
                                 <h5 className='pb-4 RedColor' style={{}}>DONATE BLOOD, SAVE LIFE!</h5>
                                 <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
                                 <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} href='/user/make-blood-donation'>Donate Now</Button>
@@ -178,7 +179,7 @@ const HomeScreen_UserPanel = () => {
                         <Col className="ColHover" sm={2} style={{backgroundColor:'white',borderRadius:'10px',marginRight:'1%'}}>
                             <div style={{padding:'6%'}}>
                                 <Image src={image_blood_analysis} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
-                                <Nav.Link style={{fontSize:'16px',fontWeight:'500',marginLeft:'-2.5%',paddingTop:'8%'}} className="RedColor" href="/user/blood-analysis">Take eligibility quiz </Nav.Link>
+                                <Nav.Link style={{fontSize:'16px',fontWeight:'500',marginLeft:'-2.5%',paddingTop:'8%'}} className="RedColor" href="/user/blood-analysis">Check donor strength </Nav.Link>
                                 
                             </div>
                         </Col>

@@ -31,9 +31,14 @@ const AvailableRequestMakersBar = () => {
         <div style={{}}>
             <Container>
                 <div className='BarBox' style={{borderBottom:'',width:'136%',borderRadius:'10px'}}>
+                
                     <Row>
+                    <div style={{fontSize:'17px',marginTop:'3%',marginBottom:'-6%',color:'#fff1e1'}}>
+                    <Nav.Link href='/user/donor'><p>Request Makers</p></Nav.Link>
+                </div>
                         <Col sm={4}>
                         <div style={{marginTop:'20%',textAlign:'left',marginLeft:'25%',marginBottom:'-10%'}}>
+                            
                             <div style={{ width: 50, height: 50,marginLeft:'0%'}}>
                             <CircularProgressbar value={requestMakers?.results?.bindings?.length} text={requestMakers?.results?.bindings?.length + "%"}
                                 styles={buildStyles({

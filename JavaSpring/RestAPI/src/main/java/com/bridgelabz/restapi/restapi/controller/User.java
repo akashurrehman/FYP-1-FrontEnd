@@ -62,7 +62,7 @@ public class User {
 
     /*
      * Route to Get Data of all Registered Users
-     */
+    */
 
     @GetMapping("/api/users/registration")
     public ResponseEntity<String> Allusers() {
