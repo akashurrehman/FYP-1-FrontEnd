@@ -10,7 +10,6 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { BsStopwatch } from 'react-icons/bs';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import { BsExclamationSquare } from 'react-icons/bs';
 import { BsEnvelopeFill } from 'react-icons/bs';
 import { BsGeoAltFill } from 'react-icons/bs';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
@@ -226,7 +225,7 @@ const validateForm = () => {
       width: "7%",
       borderRadius: "50px",
       display: "inline-block",
-};
+  };
 
   return (
   <div>
@@ -240,7 +239,7 @@ const validateForm = () => {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-            <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+            <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded" >
               <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body style={{justifyContent:"center",textAlign:"center"}}>
                 <Card.Title>{center.name}</Card.Title>
@@ -248,7 +247,7 @@ const validateForm = () => {
               </Card.Body>
             </Card>
         <div>
-        <Form className="mt-5">
+        <Form className="mt-5 shadow p-3 mb-2 rounded" >
         <Row className="mb-3">
         <Col xs="12" sm="6">
           <Form.Group  controlId="formGridEmail">
@@ -349,34 +348,29 @@ const validateForm = () => {
           </Form.Group>
         </Col>
       </Row>
-      <Row className="mb-3">
+      <Row className="mb-3" >
         <Form.Group as={Col} id="formGridCheckbox">
           <Form.Check type="checkbox" label="Are the provided information is correct according to your center or knowledge?" />
         </Form.Group>
       </Row>
     </Form>
-    <Row className="mb-3">
         <Col>
-            <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}><i class="fa fa-check-circle" aria-hidden="true"></i>Update Information</Button>
+            <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="mx-3  w-md-100" onClick={handleSubmit}><i class="fa fa-check-circle" aria-hidden="true"></i>Update Information</Button>
         </Col>
-    </Row>
-    <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
+    <Card className="shadow p-3 mb-2 border rounded" style={{marginTop:30,paddingBottom:10}}>
         <Row>
           <Col style={{ textAlign: "justifyContent"}}>
-            <h5 className="py-2 mx-3">Are you sure you want to delete your account?</h5>
+            <h5 className="py-2 mx-3"><i class="fa fa-registered" aria-hidden="true"></i>Are you sure you want to delete your account?</h5>
             <h6 className="py-2 mx-3">Once you delete your account, there is no going back. Please be certain.</h6>
             <Form>
               <Form.Group as={Col} id="formGridCheckbox">
                 <Form.Check type="checkbox" style={{color:"black",borderColor:"red"}} className="py-3" label="Are the provided information is correct according to your center or knowledge?" />
               </Form.Group>
             </Form>
-            <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} className="mx-3 my-3 w-md-100" variant="danger" onClick={handleDelete}><i class="fa fa-trash" aria-hidden="true"></i>Delete Center</Button>
+            <Button style={{ display: "inline-block", textAlign:"center"}} className="mx-3 my-3 w-md-100" variant="danger" onClick={handleDelete}><i class="fa fa-trash" aria-hidden="true"></i>Delete Center</Button>
           </Col>
         </Row>
       </Card>
-        {/* <>
-        {token ? <p>You are logged in.{id}</p> : <p>You are not logged in.</p>}
-        </> */}
     </div>
     <Modal show={showModal} onHide={handleCancel}>
         <Modal.Header closeButton>

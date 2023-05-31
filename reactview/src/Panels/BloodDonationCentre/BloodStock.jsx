@@ -39,6 +39,9 @@ const BloodStock=()=> {
   const [show, setShow] = useState(false);
 
   const [blood, setbloodData] = useState([]);
+  const [toastify,setToastify ] = useState(false);
+
+
 
   const handleBloodPrint = () => {
     handleBloodStockPrint(blood);
@@ -56,7 +59,10 @@ const BloodStock=()=> {
     }
       console.log("authCentre");
   }
-
+  const toasity=()=>{
+    toast("All the activities are monitored by ADMIN!",{position:toast.POSITION.TOP_CENTER});
+    setToastify(true);
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -79,7 +85,7 @@ const BloodStock=()=> {
     fetchData();
     authCentre();
     setIsLoading(false);
-    toast.info("You can print blood stock report from this Page!",{position:toast.POSITION.TOP_CENTER})
+    toasity();
   }, []);
   
   
@@ -193,10 +199,17 @@ const handleInputChange = (event) => {
           <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-3 border rounded">
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Available Blood Stock</Card.Title>
+            </Card.Body>
+          </Card>
+          <Card style={{marginTop:10,paddingBottom:10,alignItems:"center",justifyContent:"center"}} className="shadow p-3 mb-2 border rounded">
+            <Card.Body>
+              <Card.Title style={
+                {color:"red",fontSize:20,fontWeight:"bold",textAlign:"center"}
+              }>You can generate the report of available blood stock for the Record Purposes!</Card.Title>
             </Card.Body>
           </Card>
           <>
@@ -231,7 +244,7 @@ const handleInputChange = (event) => {
         <Col xs={6}>
         
         </Col>
-        <Col xs={12} md={4}>  
+        <Col xs={12} md={4} style={{marginBottom:"1.5rem"}}>  
           <div style={{justifyContent:"center",alignItems:"center",marginTop:"18px"}}>
             <Button variant="danger" style={{backgroundColor:""}} onClick={handleBloodPrint}><PrinterFill className="" size={20} /> Print Blood stock</Button>
           </div>

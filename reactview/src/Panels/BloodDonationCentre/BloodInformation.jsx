@@ -148,6 +148,12 @@ const BloodInformation=()=> {
   const handleCancel = () => {
     setShowModal(false);
   }
+  const mystyle = {
+    height: "7%",
+    width: "7%",
+    borderRadius: "50px",
+    display: "inline-block",
+};
   return (
     <Container fluid style={{backgroundColor:"#EEEEEE",paddingBottom:"3.5rem"}}>
       <Header />
@@ -156,21 +162,20 @@ const BloodInformation=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}}>
-            <Card.Img variant="top" src="/100px180" />
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
+          <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title>Add Blood Information of User who donate blood</Card.Title>
             </Card.Body>
           </Card>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}} className="shadow p-3 mb-2 rounded">
             <Card.Body>
               <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>In this Page, you can add the details of the user who donate blood on you center!</Card.Title>
-              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>This donor information can be used for future transfutions!</Card.Title>
+              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>This donor information can be used for future transfusions and available to all Users!</Card.Title>
             </Card.Body>
-
           </Card>
         
-      <Form className="mt-3">
+      <Form className="shadow p-3 mb-3 rounded mt-3">
       <Row className="align-items-center">
         <Col xs="12" sm="4">
           <Form.Label htmlFor="inlineFormInputGroup">
@@ -291,8 +296,8 @@ const BloodInformation=()=> {
         </Col>
       </Row>
     </Form>
-    <Col xs="12" sm={6} className="align-items-center">
-          <Button variant="primary" type="submit" className="w-md-100 mb-5" onClick={handleSubmit} style={{backgroundColor: "#153250"}}>
+    <Col xs="12" sm={12} className="align-items-center" style={{justifyContent:"center", alignItems:"center",textAlign:"center"}}>
+          <Button variant="primary" type="submit" className="w-md-100 mb-5" onClick={handleSubmit} style={{backgroundColor: "#153250",justifyContent:"center", alignItems:"center"}}>
           <i class="fa fa-plus-square" aria-hidden="true"></i> Submit Donor's Information
           </Button>
         </Col>
