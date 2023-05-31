@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Button, Image, Nav } from "react-bootstrap";
 import { Form, Row, Col, InputGroup } from "react-bootstrap";
 import axios from "axios";
@@ -22,6 +22,8 @@ const UserLogin = (props) => {
     const [username, setUserName] = React.useState("");
 
     const [password, setPassword] = React.useState("");
+
+    const [availableStatus, setAvailableStatus] = useState("Available");
 
     //Form Validation
     const [validated, setValidated] = React.useState(false);
@@ -52,11 +54,14 @@ const UserLogin = (props) => {
             console.log("In  Login File:",token);
             // Determine the user's role from the token payload
             const { role } = jwt_decode(token);
+            const { id } = jwt_decode(token);
             console.log("After Decode Token:",jwt_decode(token))
             console.log("Role:",role);
+            updateDonorAvailabilityStatus(id);
             // Redirect the user to the appropriate route based on their role
 
             if(role=='USER') {
+                
                 window.location.href = "/userpanel/HomeScreen";
             }
             if(role=='CENTRE') {
@@ -73,6 +78,24 @@ const UserLogin = (props) => {
                     closeOnClick: true,
                     pauseOnHover: true,
                     position: toast.POSITION.BOTTOM_RIGHT,});
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
+
+    
+
+    const updateDonorAvailabilityStatus = async (id) => {
+        try {
+            const response = await axios.put('http://localhost:8081/api/users/update/donorAvailabilityStatus/' + id, {
+                availableStatus
+            });
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
             } 
             else {
                 console.log('An error occurred');

@@ -53,7 +53,7 @@ const BloodDonationCentre = () => {
     };
 
     React.useEffect(() =>{
-    getData,
+    getData();
     authCentre();
     },[]);
 

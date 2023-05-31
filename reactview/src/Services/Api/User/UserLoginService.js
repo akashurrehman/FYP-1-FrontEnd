@@ -1,6 +1,7 @@
 import jwtDecode from "jwt-decode";
 import GenericService from "./GenericService";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 class UserLoginService extends GenericService {
     constructor() {
@@ -41,9 +42,18 @@ class UserLoginService extends GenericService {
     });
     
     logout = () => {
+
+        //Get id from token 
+        const token = localStorage.getItem('token');
+        const decodedToken = token ? jwtDecode(token) : null;
+        const id = decodedToken?.id;
+        updateDonorAvailabilityStatus(id);
+
         localStorage.removeItem("token");
         localStorage.removeItem("donorEligible");
     }; 
+
+    
 
     isLoggedIn = () => {
         return localStorage.getItem("token") ? true : false;
@@ -62,6 +72,23 @@ class UserLoginService extends GenericService {
             return false;
         }
     };
+}
+
+const updateDonorAvailabilityStatus = async (id) => {
+    const availableStatus = 'Not Available';
+    try {
+        const response = await axios.put('http://localhost:8081/api/users/update/donorAvailabilityStatus/' + id, {
+            availableStatus
+        });
+    } 
+    catch (error) {
+        if (error.response) {
+            console.log(error.response.data.error);
+        } 
+        else {
+            console.log('An error occurred');
+        }
+    }
 }
 
 let userLoginService = new UserLoginService;

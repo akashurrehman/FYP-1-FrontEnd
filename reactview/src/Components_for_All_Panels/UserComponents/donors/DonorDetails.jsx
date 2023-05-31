@@ -39,7 +39,11 @@ const DonorDetails = () => {
     }
 
     
-    useEffect(()=> getData,authCentre(), []);
+    React.useEffect(() =>{
+        getData();
+        authCentre();
+    },[]);
+
     console.log(donor);
 
     return ( <div>
