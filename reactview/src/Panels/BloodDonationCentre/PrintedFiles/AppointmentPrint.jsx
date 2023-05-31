@@ -9,18 +9,18 @@ export const handleAppointmentPrint = (data) => {
     printContent += '@media print {';
     printContent += '  #header { position: fixed; top: 0; left: 0; right: 0; height: 80px; background-color: #f5f5f5; border-bottom: 1px solid black; }';
     printContent += '  #footer { position: fixed; bottom: 0; left: 0; right: 0; height: 30px; background-color: #f5f5f5; border-top: 1px solid black; }';
-    printContent += '  #content { margin-top: 80px; margin-bottom: 30px; }';
+    printContent += '  #content { margin-top: 80px; margin-bottom: 60px;text-align: center }';
     printContent += '  #watermark { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.5;font:28px }';
     printContent += '}';
     printContent += '</style></head><body>';
     printContent += '<div id="header"><h1>All Appointments here</h1></div>';
-    printContent += '<div id="content">Add the content or description here<table>';
+    printContent += '<div id="content">Here you can view all the appointments that donors books for the coming days or week<table>';
     printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>City</th><th>Address</th><th>Blood Group</th><th>Donor Contact Number</th><th>Appointment Timing</th><th>Status</th></tr>';
     data.forEach((row) => {
       printContent += `<tr><td>${row.ID.value}</td><td>${row.DonorName.value}</td><td>${row.DonorEmail.value}</td><td>${row.Gender.value}</td><td>${row.City.value}</td><td>${row.Address.value}</td><td>${row.BloodGroup.value}</td><td>${row.DonorContactNo.value}</td><td>${row.Timings.value}</td></tr>`;
     });
     printContent += '</table></div>';
-    printContent += '<div id="footer"><p style="text-align: center; margin-top: 8px;">Footer content will add up here </p></div>';
+    printContent += '<div id="footer"><p style="text-align: center; margin-top: 8px;">Thank you for supporting our cause! Your generous contribution will make a difference in saving lives. If you have any questions or require further assistance, contact us through email: help@gmail.com</p></div>';
     printContent += '<div id="watermark">Original</div>';
     printContent += '</body></html>';
   

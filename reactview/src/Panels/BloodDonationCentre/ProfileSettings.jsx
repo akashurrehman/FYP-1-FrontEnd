@@ -18,8 +18,10 @@ import { useAuth  }  from './Auth/AuthContext';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from "jwt-decode";
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 const ProfileSettings=()=> {
+  const [isLoading, setIsLoading] = useState(true);
   const [center, setCenterData] = useState({
     name: "",
     city: "",
@@ -65,10 +67,11 @@ const ProfileSettings=()=> {
           category: centerData.Category.value,
         });
 
-  }
-});
-authCentre();
-},[]);
+    }
+  });
+    authCentre();
+    setIsLoading(false);
+  },[]);
 const validateForm = () => {
   let isValid = true;
   const errors = {};
@@ -169,53 +172,54 @@ const validateForm = () => {
         newCenterData = { ...center, [name]: value, locationError: null };
       }
     }
-  
-    
     setCenterData(newCenterData);  
   };
 
-const handleSubmit = (event) => {
-  event.preventDefault();
-  const isValid = validateForm();
-  if (isValid) {
-  setShowModal(true);
-  }
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
+    setShowModal(true);
+    }
+  };
 
 
 
-const handleDelete = () => {
-  axios
-    .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/delete/${id}`)
+  const handleDelete = () => {
+    axios
+      .delete(`http://localhost:8081/api/bloodCenter/RegisteredCenters/delete/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
+        window.location.href('/users/login');
+        // Perform any additional actions after successful delete
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error(error,{position:toast.POSITION.TOP_RIGHT});
+      });
+  };
+
+
+  const handleConfirm = () => {
+    axios
+    .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/update/${id}`, center)
     .then((response) => {
       console.log(response.data);
-      toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
-      // Perform any additional actions after successful delete
+      // toast.success(response.data,{position:toast.POSITION.TOP_RIGHT});
+      toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
     })
     .catch((error) => {
       console.error(error);
-      toast.error(error,{position:toast.POSITION.TOP_CENTER});
+      //toast.error(error,{position:toast.POSITION.TOP_CENTER}
+      toast(error,{position:toast.POSITION.TOP_RIGHT});
     });
-};
+    setShowModal(false);
+  }
 
-
-const handleConfirm = () => {
-  axios
-  .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/update/${id}`, center)
-  .then((response) => {
-    console.log(response.data);
-    toast("Profile Updated Successfully");
-  })
-  .catch((error) => {
-    console.error(error);
-    toast.error(error,{position:toast.POSITION.TOP_CENTER}
-  )});
-setShowModal(false);
-}
-
-const handleCancel = () => {
-  setShowModal(false);
-}
+  const handleCancel = () => {
+    setShowModal(false);
+  }
 
   const mystyle = {
       height: "7%",
@@ -225,6 +229,10 @@ const handleCancel = () => {
 };
 
   return (
+  <div>
+  {isLoading ? (
+    <LoadingSpinner />
+    ) : (
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
@@ -389,6 +397,8 @@ const handleCancel = () => {
         </Col>
       </Row>
     </Container>
+    )}
+  </div>
   );
 }
 

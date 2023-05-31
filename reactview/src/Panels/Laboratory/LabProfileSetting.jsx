@@ -17,9 +17,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
 import jwt_decode from 'jwt-decode';
+import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 
 const LabProfileSetting=()=> {
+  const [loading, setIsLoading] = useState(true);
   //Get the token from the AuthContext
   const {token} = useAuth();
     const authCentre=()=>{
@@ -93,6 +95,7 @@ const LabProfileSetting=()=> {
   }
 });
 //authCentre();
+setIsLoading(false);
 },[]);
 
   const handleChange = (event) => {
@@ -148,7 +151,7 @@ const handleSubmit = (event) => {
   }
 };
 
-const CENTER_ID = 'L001';
+const CENTER_ID = id;
 
 const handleDelete = () => {
   axios
@@ -170,7 +173,7 @@ const handleConfirm = () => {
   .put(`http://localhost:8081/api/lab/RegisteredLabs/edit/${CENTER_ID}`, center)
   .then((response) => {
     console.log(response.data);
-    toast("Profile Updated Successfully",{type:"success", position:toast.POSITION.TOP_RIGHT});
+    toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
   })
   .catch((error) => {
     console.error(error);
@@ -191,6 +194,7 @@ const handleCancel = () => {
 };
 
   return (
+  loading ? <LoadingSpinner /> :
   <div  style={{backgroundColor:"#EEEEEE"}}>
     <Container style={{backgroundColor:"#D5D5D5"}} fluid className="px-3">
       <Header />

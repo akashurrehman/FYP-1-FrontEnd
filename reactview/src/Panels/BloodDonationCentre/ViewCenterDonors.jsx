@@ -13,8 +13,11 @@ import './Styling/print.css';
 import { handleDonorPrint } from "./PrintedFiles/DonorsPrint";
 import { useAuth } from "./Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
-
-const ViewCenterDonors=()=> {  
+import {  PrinterFill } from 'react-bootstrap-icons';
+import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
+import { toast } from "react-toastify";
+const ViewCenterDonors=()=> {
+  const [loading, setIsLoading] = useState(true);  
   const [data, setData] = useState([]);
   const {token} = useAuth();
   //This will get the id  from the token if user is login
@@ -53,6 +56,8 @@ const ViewCenterDonors=()=> {
       })
       .catch((error) => console.log(error));
       authCentre();
+      setIsLoading(false);  
+      toast.info('You are in center Donor Page!',{position:toast.POSITION.TOP_CENTER});
   }, []);
 
   const handlePrint = () => {
@@ -96,15 +101,10 @@ const columns = [
     name: 'City',
     selector: 'City.value',
   },
-  {
-    name: 'Action',
-    cell: (row) => (
-      <Button variant="primary" style={{ borderRadius: 0, height:"50%", widht:"100%" }} onClick={() => alert('Download Receipt Option selected!')}>Download Receipt</Button>
-    )
-  }
 ];
 
   return (
+    loading ? <LoadingSpinner /> :
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
@@ -128,7 +128,7 @@ const columns = [
           highlightOnHover
           
           actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> Download</button>
+            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <PrinterFill className="" size={20} />Download/Print</button>
           }
           subHeader
         />
