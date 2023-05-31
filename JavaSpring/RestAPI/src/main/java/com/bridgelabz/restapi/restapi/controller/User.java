@@ -58,7 +58,7 @@ public class User {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Route to Get Data of all Registered Users
@@ -589,6 +589,8 @@ public class User {
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
+                "?donations bd:hasDonorAvailable ?DonorAvailability ." +
+                "?donations bd:bloodDonationMakeby ?PersonID ." +
                 "}";
 
         // set the response headers
@@ -629,6 +631,8 @@ public class User {
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
+                "?donations bd:hasDonorAvailable ?DonorAvailability ." +
+                "?donations bd:bloodDonationMakeby ?PersonID ." +
                 "filter(?ID = \"" + ID + "\")" +
                 "}";
 
@@ -672,6 +676,8 @@ public class User {
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
+                "?donations bd:hasDonorAvailable ?DonorAvailability ." +
+                "?donations bd:bloodDonationMakeby ?PersonID ." +
                 "}";
 
         // set the response headers
@@ -690,6 +696,41 @@ public class User {
         }
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+    /*
+     * Edit the User Information by passing ID
+     * 
+     * @param id
+     * User can edit the information only eligibility status
+     */
+    @PutMapping("/api/users/update/donorAvailabilityStatus/{id}")
+    public ResponseEntity<String> editDonorAvailabilityStatus(@RequestBody String User, @PathVariable String id)
+            throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(User);
+
+        String availableStatus = jsonNode.has("availableStatus") ? jsonNode.get("availableStatus").asText() : null;
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                "DELETE {" +
+                "?donations bd:hasDonorAvailable ?AvailableStatus }" +
+                "INSERT { " +
+                " ?donations bd:hasDonorAvailable \"" + availableStatus + "\"^^xsd:string } " +
+                "WHERE { ?person rdf:type bd:Blood_Donation ." +
+                "?donations bd:hasDonorAvailable ?AvailableStatus ." +
+                "?donations bd:bloodDonationMakeby bd:" + id + " ." +
+                "}";
+        boolean isInserted = UpdateSparql(queryString);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data Updated successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
     }
 
     /*

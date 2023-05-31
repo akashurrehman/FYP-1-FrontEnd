@@ -219,6 +219,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/notification/byRequestMakerID/{id}").permitAll()
                 .antMatchers("/api/users/notification/byCentreID/{id}").permitAll()
 
+                .antMatchers("/api/users/update/donorAvailabilityStatus/{id}").permitAll()
+
                 /************ Blood Donation Centre Routes start here *************/
                 .antMatchers("/api/bloodCenter/RegisteredCenters").permitAll()
                 .antMatchers("/api/bloodCenter/RegisteredCenters/{ID}").permitAll()

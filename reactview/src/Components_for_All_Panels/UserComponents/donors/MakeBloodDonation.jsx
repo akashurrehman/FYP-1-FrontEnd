@@ -41,7 +41,10 @@ const MakeBloodDonation = () => {
   
     const id = decodedToken?.id;
 
-    useEffect(()=>{authCentre();getData();}, []);
+    React.useEffect(() =>{
+        getData();
+        authCentre();
+    },[]);
 
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");

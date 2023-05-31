@@ -5,6 +5,7 @@ import SingleDonor from '../donors/SingleDonor';
 import { Button, Col, Image, Nav, Row } from 'react-bootstrap';
 import image from '../../../Public/user/image/my-donation.jpg';
 import { ArrowRight } from 'react-bootstrap-icons';
+import SingleDonorForAccount from '../donors/SingleDonorForAccount';
 
 
 export default function MyBloodDonations() {
@@ -47,7 +48,7 @@ export default function MyBloodDonations() {
                         <Row className="d-flex justify-content-center">
                             {donors.results.bindings.map((donor, index) => (
                                 <Col sm={12} key={index}>
-                                    <SingleDonor key={index} donor={donor} />
+                                    <SingleDonorForAccount key={index} donor={donor} />
                                 </Col>
                                 
                             ))}

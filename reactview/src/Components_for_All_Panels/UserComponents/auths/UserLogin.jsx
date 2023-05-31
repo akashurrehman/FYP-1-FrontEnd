@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Button, Image, Nav } from "react-bootstrap";
 import { Form, Row, Col, InputGroup } from "react-bootstrap";
 import axios from "axios";
@@ -7,6 +7,7 @@ import UserPanelFooter from "../UserPanelFooter";
 import image from '../../../Public/user/image/Image1.png';
 import { toast } from "react-toastify";
 import AccountCircle from '@mui/icons-material/PersonSharp';
+import PeopleSharpIcon from '@mui/icons-material/PeopleSharp';
 import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
 import jwt_decode from 'jwt-decode';
 import { ArrowRight } from 'react-bootstrap-icons';
@@ -22,6 +23,8 @@ const UserLogin = (props) => {
     const [username, setUserName] = React.useState("");
 
     const [password, setPassword] = React.useState("");
+
+    const [availableStatus, setAvailableStatus] = useState("Available");
 
     //Form Validation
     const [validated, setValidated] = React.useState(false);
@@ -52,11 +55,14 @@ const UserLogin = (props) => {
             console.log("In  Login File:",token);
             // Determine the user's role from the token payload
             const { role } = jwt_decode(token);
+            const { id } = jwt_decode(token);
             console.log("After Decode Token:",jwt_decode(token))
             console.log("Role:",role);
+            updateDonorAvailabilityStatus(id);
             // Redirect the user to the appropriate route based on their role
 
             if(role=='USER') {
+                
                 window.location.href = "/userpanel/HomeScreen";
             }
             if(role=='CENTRE') {
@@ -73,6 +79,24 @@ const UserLogin = (props) => {
                     closeOnClick: true,
                     pauseOnHover: true,
                     position: toast.POSITION.BOTTOM_RIGHT,});
+            } 
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
+
+    
+
+    const updateDonorAvailabilityStatus = async (id) => {
+        try {
+            const response = await axios.put('http://localhost:8081/api/users/update/donorAvailabilityStatus/' + id, {
+                availableStatus
+            });
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
             } 
             else {
                 console.log('An error occurred');
@@ -127,7 +151,7 @@ const UserLogin = (props) => {
                                     <h3 className="RedColor" style={{fontFamily:'cursive',textAlign:'center',marginBottom:'3%'}}>
                                         Login to Account
                                     </h3>
-                                    <p className="mt-3" style={{fontSize:'13.5px',color:'gray',textAlign:'center',marginBottom:'8%'}}>
+                                    <p className="mt-3" style={{fontSize:'13.5px',color:'gray',textAlign:'center',marginBottom:'6%'}}>
                                         WELCOME! To our secure online booking process. You can manage all your appointment details in one convenient place.
                                     </p>
                                     
@@ -177,6 +201,30 @@ const UserLogin = (props) => {
                                                     <Form.Control.Feedback type="invalid">
                                                         Please provide a valid password.
                                                     </Form.Control.Feedback>
+                                                </InputGroup>
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col sm={12}>
+                                                <Form.Label className='PurpleColor'>Login As <spam className='RedColor'>*</spam></Form.Label>
+                                                <InputGroup size="sm" className="mb-3" hasValidation>
+                                                    <InputGroup.Text id="inputGroup-sizing-default">
+                                                        <PeopleSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                                    </InputGroup.Text>
+                                                    
+                                                    <Form.Select required 
+                                                        
+                                                    >
+                                                        <option value="">Login as *</option>
+                                                        <option value="Male">Blood Donation Centre</option>
+                                                        <option value="Female">Donor / Request Maker</option>
+                                                        <option value="Other">Admin</option>
+                                                    </Form.Select> 
+                                                    <Form.Control.Feedback type="invalid">
+                                                        Please provide a valid gender.
+                                                    </Form.Control.Feedback>
+                                                    
                                                 </InputGroup>
                                             </Col>
                                         </Row>
