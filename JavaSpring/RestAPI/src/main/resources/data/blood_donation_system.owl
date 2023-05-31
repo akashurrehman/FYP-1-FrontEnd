@@ -909,6 +909,22 @@
     >2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Blood_Stock>
+  <bd:Blood_Donation_Centre rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319609419">
+    <bd:hasCentreLocation>Main Kashmir Road</bd:hasCentreLocation>
+    <bd:hasUserName>alkabir111</bd:hasUserName>
+    <bd:hasCentreContactNo>+92 349 1112345</bd:hasCentreContactNo>
+    <bd:hasPassword>$2a$10$FSRU8OBIpjRG110btsM2WOblFteh.DWFxUMAg.EHNltZqWyYdvToW</bd:hasPassword>
+    <bd:hasCentreCategory>Private</bd:hasCentreCategory>
+    <bd:hasCentreOpeningDays>Monday,Tuesday,Wednesday</bd:hasCentreOpeningDays>
+    <bd:hasCentreLicenseNo>L7123458782183</bd:hasCentreLicenseNo>
+    <bd:hasCentreName>Al-Kabir Foundation</bd:hasCentreName>
+    <bd:hasCentreTimings>11Am-9Pm</bd:hasCentreTimings>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    <bd:hasCentreEmail>alkabir@email.com</bd:hasCentreEmail>
+    <bd:hasCentreCity>Lahore</bd:hasCentreCity>
+    <bd:hasCentreID>Centre_1684319609419</bd:hasCentreID>
+    <bd:hasRole>CENTRE</bd:hasRole>
+  </bd:Blood_Donation_Centre>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1684320789894">
     <bd:hasRequestMakerLocation>Moon Market, Lahore</bd:hasRequestMakerLocation>
     <bd:hasRequestMakerName>Ahmad</bd:hasRequestMakerName>
@@ -1044,33 +1060,6 @@
     <bd:hasUserName>fatima111</bd:hasUserName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
   </owl:NamedIndividual>
-  <bd:Notification rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification_1685565232746">
-    <bd:notificationForCentre>
-      <bd:Blood_Donation_Centre rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319609419">
-        <bd:hasCentreLocation>Main Kashmir Road</bd:hasCentreLocation>
-        <bd:hasUserName>alkabir111</bd:hasUserName>
-        <bd:hasCentreContactNo>+92 349 1112345</bd:hasCentreContactNo>
-        <bd:hasPassword>$2a$10$FSRU8OBIpjRG110btsM2WOblFteh.DWFxUMAg.EHNltZqWyYdvToW</bd:hasPassword>
-        <bd:hasCentreCategory>Private</bd:hasCentreCategory>
-        <bd:hasCentreOpeningDays>Monday,Tuesday,Wednesday</bd:hasCentreOpeningDays>
-        <bd:hasCentreLicenseNo>L7123458782183</bd:hasCentreLicenseNo>
-        <bd:hasCentreName>Al-Kabir Foundation</bd:hasCentreName>
-        <bd:hasCentreTimings>11Am-9Pm</bd:hasCentreTimings>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <bd:hasCentreEmail>alkabir@email.com</bd:hasCentreEmail>
-        <bd:hasCentreCity>Lahore</bd:hasCentreCity>
-        <bd:hasCentreID>Centre_1684319609419</bd:hasCentreID>
-        <bd:hasRole>CENTRE</bd:hasRole>
-      </bd:Blood_Donation_Centre>
-    </bd:notificationForCentre>
-    <bd:notificationMadeBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352"/>
-    <bd:hasNotificationDay>Thursday</bd:hasNotificationDay>
-    <bd:hasNotificationTime>01:33:52 am</bd:hasNotificationTime>
-    <bd:hasNotificationDate>1 June 2023</bd:hasNotificationDate>
-    <bd:hasNotificationMadeByName>hurairah111</bd:hasNotificationMadeByName>
-    <bd:hasNotificationMessage>Appointment booked by hurairah111</bd:hasNotificationMessage>
-    <bd:hasNotificationID>Notification_1685565232746</bd:hasNotificationID>
-  </bd:Notification>
   <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_8">
     <bd:hasBloodStockNoOfBags>1</bd:hasBloodStockNoOfBags>
     <bd:hasBloodStockID>BS008</bd:hasBloodStockID>
@@ -1178,26 +1167,6 @@
     <bd:eventManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Event>
-  <bd:Appointment rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment_1685565232555">
-    <bd:hasAppointmentID>Appointment_1685565232555</bd:hasAppointmentID>
-    <bd:hasAppointmentCentreName>Al-Kabir Foundation</bd:hasAppointmentCentreName>
-    <bd:hasAppointmentDonorGender>Male</bd:hasAppointmentDonorGender>
-    <bd:appointmentBookedIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319609419"/>
-    <bd:hasAppointmentCentreTimings>11Am-9Pm</bd:hasAppointmentCentreTimings>
-    <bd:hasAppointmentCentreLocation>Main Kashmir Road</bd:hasAppointmentCentreLocation>
-    <bd:appointmentMadeBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352"/>
-    <bd:hasAppointmentDonorContactNo>03001234567</bd:hasAppointmentDonorContactNo>
-    <bd:hasAppointmentDonorName>Muhammad Abu Hurairah</bd:hasAppointmentDonorName>
-    <bd:hasAppointmentCentreEmail>alkabir@email.com</bd:hasAppointmentCentreEmail>
-    <bd:hasAppointmentBookingTime>01:35</bd:hasAppointmentBookingTime>
-    <bd:hasAppointmentDonorBloodGroup>AB-</bd:hasAppointmentDonorBloodGroup>
-    <bd:hasAppointmentBookingDate>2023-06-02</bd:hasAppointmentBookingDate>
-    <bd:hasAppointmentDonorAddress>Qazi Town, Multan Road, Lahore</bd:hasAppointmentDonorAddress>
-    <bd:hasAppointmentDonorCity>Lahore</bd:hasAppointmentDonorCity>
-    <bd:hasAppointmentDonorEmail>abuhurairah@email.com</bd:hasAppointmentDonorEmail>
-    <bd:hasAppointmentDonorDOB>2000-12-23</bd:hasAppointmentDonorDOB>
-    <bd:hasAppointmentCentreContactNo>+92 349 1112345</bd:hasAppointmentCentreContactNo>
-  </bd:Appointment>
   <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_7">
     <bd:hasBloodStockNoOfBags>1</bd:hasBloodStockNoOfBags>
     <bd:hasBloodStockID>BS007</bd:hasBloodStockID>

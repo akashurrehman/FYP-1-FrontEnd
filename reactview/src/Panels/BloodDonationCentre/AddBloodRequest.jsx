@@ -184,7 +184,12 @@ const AddBloodRequest=()=> {
   const handleAllRequests = () => {
   window.location.href = "/bloodCenter/bloodRequests";
   }
-
+  const mystyle = {
+    height: "10%",
+    width: "10%",
+    borderRadius: "50px",
+    display: "inline-block",
+  };
   return (
     <Container fluid style={{backgroundColor:"#F3F3F3"}}>
       <Header />
@@ -193,13 +198,13 @@ const AddBloodRequest=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}}>
-            <Card.Img variant="top" src="/100px180" />
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 border rounded">
+            <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title>Add New Blood Request</Card.Title>
             </Card.Body>
           </Card>
-          <Card style={{marginTop:10,paddingBottom:10,alignItems:"center",justifyContent:"center"}}>
+          <Card style={{marginTop:10,paddingBottom:10,alignItems:"center",justifyContent:"center"}} className="shadow p-3 mb-3 border rounded">
             <Card.Body>
               <Card.Title style={
                 {color:"red",fontSize:20,fontWeight:"bold",textAlign:"center"}
@@ -207,7 +212,7 @@ const AddBloodRequest=()=> {
             </Card.Body>
           </Card>
         
-      <Form className="mt-3">
+      <Form className="mt-3 shadow p-3 mb-2 border rounded">
       <Row className="align-items-center">
         <Col xs="12" sm="4">
           <Form.Label htmlFor="inlineFormInputGroup" >
@@ -322,15 +327,15 @@ const AddBloodRequest=()=> {
         </Col>
       </Row>
     </Form>
-      <Row className="mb-3">
+      <Row className="mb-5">
           <Col>
               <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleSubmit}><i class="fa fa-plus" aria-hidden="true"></i>Post Blood Request</Button>
           </Col>
       </Row>
       
-        <Row className="mb-3">
+        <Row>
             <Col>
-              <Card>
+              <Card style={{justifyContent:"center",alignItems:"center"}} className="shadow p-3 mb-2 border rounded">
                 <Card.Body>
                   <Card.Title style={
                     {color:"red",fontSize:20,fontWeight:"bold",textAlign:"center"}
@@ -338,7 +343,7 @@ const AddBloodRequest=()=> {
                   </Card.Title>
                 </Card.Body>
                 <Card.Footer>
-                  <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250",justifyContent:"center",alignItems:"center"}} className="w-md-100" onClick={handleAllRequests}><i class="fa fa-hand-o-right" aria-hidden="true"></i>View All blood Requests </Button>
+                  <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="w-md-100" onClick={handleAllRequests}><i class="fa fa-hand-o-right" aria-hidden="true"></i>View All blood Requests </Button>
                 </Card.Footer>
               </Card> 
             </Col>

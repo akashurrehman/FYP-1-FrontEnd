@@ -110,7 +110,7 @@ const HomeScreen_BloodDonation=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow-lg p-3 mb-5 rounded">
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Website: Dashboard</Card.Title>
@@ -118,18 +118,21 @@ const HomeScreen_BloodDonation=()=> {
           </Card>
           <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={4}>  
-                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}} className="shadow p-3 mb-5 bg-body rounded">
                     <Card.Body>
-                        <Card.Title style={{justifyContent:"center",textAlign:"center"}}>Recent Blood Requests</Card.Title>
+                        <Card.Title style={{justifyContent:"center",textAlign:"center",border:"1px underlined"}}>Recent Blood Requests</Card.Title>
                         <hr style={{color:"red",width:"100%",justifyContent:"center",alignItems:"center",textAlign:"center"}} />
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
-                        {data.map((item) => (
+                        {data?.length === 0 && <p>No Blood Requests</p>
+                      }
+                        {data?.map((item) => (
                           <div key={item.requests.value}>
                             <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
                             <h6><span>Address:</span>{item.City.value}</h6>
                             <hr /> {/* Add a line after each item */}
                           </div>
-                        ))} 
+                        ))}
+
                         </div>
                         <Button variant="primary" onClick={ViewAllRequests} style={{backgroundColor: "#153250",marginTop:"12px"}}><><i class="fa fa-check-circle" aria-hidden="true"></i>View all requests</></Button>
                     </Card.Body>
@@ -151,11 +154,14 @@ const HomeScreen_BloodDonation=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={4}>  
-                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}} className="shadow p-3 mb-5 bg-body rounded">
                     <Card.Body>
                         <Card.Title style={{justifyContent:"center",textAlign:"center"}}>Recent Blood Donors</Card.Title>
                         <hr style={{color:"red",width:"100%",justifyContent:"center",alignItems:"center",textAlign:"center"}} />
                         <div style={{ height: "25vh", overflow: "scroll" }}>
+                        {
+                          donors?.length === 0 && <p>No Donors to Display</p>
+                        }
                         {donors.map((donor) => (
                           <div key={donor.donations.value}>
                              <p>Name: {donor.Name.value}</p>
@@ -173,14 +179,16 @@ const HomeScreen_BloodDonation=()=> {
               <Card.Header style={{textAlign:"center",justifyContent:"center",fontSize:"24px"}}>
                 Booked Appointments!
               </Card.Header>
-              
+                {
+                  appointment?.length === 0 && <p>No Appointments to Display</p>
+                }
               <div>
                 {appointment.map((item) => (
                    <div key={item.appointments.value} style={{fontSize:"14px",marginLeft:"16px"}}>
                    <h6>Name:{item.DonorName.value}</h6>
                    <h6>Email:{item.DonorEmail.value}</h6>
                    <h6>Timing:{item.Timings.value}</h6>
-                   <h6>Blood Group:{item.BloodGroup.value}</h6>
+                   <h5>Blood Group:{item.BloodGroup.value}</h5>
                    <hr />
                  </div>
                 ))}
@@ -194,9 +202,10 @@ const HomeScreen_BloodDonation=()=> {
             </Card>
             </Col>
         </CardGroup>
-          <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
+          <Card style={{marginTop:30,paddingBottom:10}} className="shadow-sm p-3 mb-5 bg-body rounded border border-primary">
             <Card.Body>
-              <Card.Title><i class="fa fa-question-circle" aria-hidden="true"></i>Important  FAQS</Card.Title>
+              <Card.Header style={{justifyContent:"center",textAlign:"center",fontSize:"22px",fontStyle:"bold"}}><i class="fa fa-question-circle" aria-hidden="true"></i>Important  FAQS</Card.Header>
+              {FAQ.length === 0 && <p>No FAQS to Display</p>}
               {FAQ.map((item) => (
                 <div key={item.ID.value}>
                   <h4>Question:{item.Title.value}</h4>
@@ -206,10 +215,11 @@ const HomeScreen_BloodDonation=()=> {
               ))}
             </Card.Body>
           </Card>
-          <Card border="light" style={{marginTop:30,paddingBottom:10}}>
+          <Card style={{marginTop:30,paddingBottom:10}} className="shadow-sm p-3 mb-5 bg-body rounded border border-primary">
             <Card.Body>
-              <Card.Title><i className="fa fa-calendar" aria-hidden="true"></i>Upcoming Events</Card.Title>
+          <Card.Header style={{textAlign:"center",justifyContent:"center",fontSize:"22px",fontStyle:"bold"}}><i className="fa fa-calendar" aria-hidden="true"></i>Upcoming Events</Card.Header>
               <div>
+                {events.length === 0 && <p>No Events to Display</p>}
                 {events.map((event) => (
                   <div key={event.ID.value}>
                     <h4>Event Title:{event.Name.value}</h4>
@@ -222,9 +232,12 @@ const HomeScreen_BloodDonation=()=> {
               </div>
             </Card.Body>
           </Card>
-          <Card border="light" style={{marginTop:30,paddingBottom:10}}>
+          <Card style={{marginTop:30,paddingBottom:10}} className="shadow-sm p-3 mb-5 bg-body rounded border border-primary">
             <Card.Body>
-              <Card.Title><i class="fa fa-briefcase" aria-hidden="true"></i>Job Posts</Card.Title>
+              <Card.Header style={{textAlign:"center",justifyContent:"center",fontSize:"22px",fontStyle:"bold"}}><i class="fa fa-briefcase" aria-hidden="true"></i>Job Posts</Card.Header>
+              {
+                jobPosts.length === 0 && <p>No Job Posts to Display</p>
+              }
               {jobPosts.map((jobPost) => (
                 <div key={jobPost.ID.value}>
                   <h4>Job Title:{jobPost.Title.value}</h4>
@@ -235,9 +248,12 @@ const HomeScreen_BloodDonation=()=> {
               ))}
             </Card.Body>
           </Card>
-          <Card border="light" style={{marginTop:30,paddingBottom:10}}>
+          <Card style={{marginTop:30}} className="shadow-sm p-3 mb-5 bg-body rounded border border-primary">
             <Card.Body>
-              <Card.Title><i class="fa fa-folder" aria-hidden="true"></i>Important News </Card.Title>
+              <Card.Header style={{textAlign:"center",justifyContent:"center",fontSize:"22px",fontStyle:"bold"}}><i class="fa fa-folder" aria-hidden="true"></i>Important News </Card.Header>
+              {
+                news.length === 0 && <p>No News to Display</p>
+              }
               {news.map((jobPost) => (
                 <div key={jobPost.ID.value}>
                   <h4>Job Title:{jobPost.Title.value}</h4>
@@ -248,14 +264,6 @@ const HomeScreen_BloodDonation=()=> {
               ))}
             </Card.Body>
           </Card>
-            <Card border="info" style={{marginTop:30,paddingBottom:10}}>
-              <Card.Body>
-                <Card.Title><i className="fa fa-folder" aria-hidden="true"></i>Blood Stock Overview/Available Blood Stock</Card.Title>
-                <p>
-                
-                </p>
-              </Card.Body>
-            </Card>            
         </Col>
       </Row>
     </Container>

@@ -171,6 +171,12 @@ const AddNewUser=()=> {
     setShowModal(false);
   }
 
+  const mystyle = {
+    height: "7%",
+    width: "7%",
+    borderRadius: "50px",
+    display: "inline-block",
+  };
 
   return (
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
@@ -180,20 +186,20 @@ const AddNewUser=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}}>
-            <Card.Img variant="top" src="/100px180" />
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 border rounded">
+          <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title>Add New User to the website</Card.Title>
             </Card.Body>
           </Card>
 
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}} className="shadow p-3 mb-3 border rounded">
             <Card.Body style={{color:"red",fontSize:"14px",fontWeight:"bold"}}>
               <Card.Title>In this page, you can register new user to the website!</Card.Title>
               <Card.Title>Their login will be created according to provided credentials!</Card.Title>
             </Card.Body>
           </Card>
-      <Form>
+      <Form className="shadow p-3 mb-2 border rounded">
       <Row className="mt-5">
         <Col xs={12}sm={3}>
           <Form.Label> Enter full Name of user</Form.Label>
@@ -301,13 +307,13 @@ const AddNewUser=()=> {
         </Col>
       </Row>        
     </Form>
-    <Row className="mb-3">
-          <Col xs={12} sm={6}>
-              <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} type="submit" onClick={handleSubmit}><i class="fa fa-plus" aria-hidden="true"></i>Add User</Button>
+        <Row className="mb-3">
+          <Col xs={12} sm={12} style={{alignItems:"center", textAlign:"center"}}>
+              <Button style={{ display: "inline-block", textAlign:"center",backgroundColor: "#153250"}} className="w-md-100 px-5" type="submit" onClick={handleSubmit}><i class="fa fa-plus" aria-hidden="true"></i>Add User</Button>
           </Col>
-      </Row>
-        </Col>
-      </Row>
+        </Row>
+    </Col>
+  </Row>
       <Modal show={showModal} onHide={handleCancel}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Submission</Modal.Title>

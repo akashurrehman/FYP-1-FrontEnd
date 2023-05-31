@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
-//import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
@@ -68,17 +67,22 @@ const BloodRequests=()=> {
           try {
             axios.put('http://localhost:8081/api/users/accept/bloodRequest/' + id, {
                 donatedBy, donorName
-            });
+            }).then((response)=>{
+              console.log("Response Data:"+response.data);
+              console.log(donorName);
+              console.log(donatedBy)
+              console.log("Donated By and Donor Name"+{donatedBy, donorName})
+              alert("Request Accepted");
+             }).catch((error)=>{
+              console.log("Put Error"+error);
+              alert("Request Not Accepted");
+              console.log("Donated By and Donor Name"+{donatedBy, donorName})
+              });
+          } catch (error) {
+              console.log("Catch Error here"+error);
+              console.log("Donated By and Donor Name"+{donatedBy, donorName})
         } 
-        catch (error) {
-            if (error.response) {
-                console.log(error.response.data.error);
-            } 
-            else {
-                console.log('An error occurred');
-            }
-        }
-        };
+      };
         /* const handleReject = () => {
             axios
                 .post(`http://localhost:8081/api/users/bloodrequest/reject/`+ id)
@@ -89,15 +93,6 @@ const BloodRequests=()=> {
         const handleChange = (state) => {
           // Get the selected rows from the state
         };
-        
-        /* const handleFilter = () => {
-          //Pass the cnter Name or id here
-          const center = prompt('Enter center ID or name');
-          if (center) {
-            setFilterByCenter(true);
-            setCenterId(center);
-          }
-        }; */
 
   useEffect(() => {
     // fetch data from the backend
@@ -151,11 +146,6 @@ const mystyle = {
 };  
 
 const columns = [
-  {
-    name: 'ID',
-    selector: 'ID.value',
-    sortable: true,
-  },
   {
     name: 'Name',
     selector: 'Name.value',

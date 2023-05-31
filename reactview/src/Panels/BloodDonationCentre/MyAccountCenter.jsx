@@ -97,7 +97,7 @@ const MyAccountCenter=()=> {
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded">
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Website: My Account</Card.Title>
@@ -105,11 +105,15 @@ const MyAccountCenter=()=> {
           </Card>
           <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={8}>  
-                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Requests</Card.Title>
                         <hr />
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
+                        
+                        {
+                          data?.length===0 && <h5>No Blood Requests</h5>
+                        }
                         {data.map((item) => (
                           <div key={item.ID.value}>
                             <h6><span>Name:</span>{item.Name.value}</h6>
@@ -127,13 +131,13 @@ const MyAccountCenter=()=> {
                 </Card>
             </Col>
             <Col className="mt-md-5 px-2" md={4}>
-              <Card style={{marginTop:10,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#153250",color:"white"}} >
+              <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,alignItems:"center",justifyContent:"center",backgroundColor:"#153250",color:"white"}} >
                 <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
                   <Card.Header style={{justifyContent:"left",alignItems:"left",fontSize:"18px"}}>Personal Information</Card.Header>
                 <Card.Body>
                 <hr />
                 {centerData.map((item) => (
-                  <div key={item.ID.value}>
+                  <div key={item.ID.value} style={{textAlign:"left", paddingBottom:"10px", fontSize:"2rem"}}>
                     <h6><span className="mr-5 pr-5">Name:</span>{item.Name.value}</h6>
                     <h6><span>Email:</span>{item.Email.value}</h6>
                     <h6><span>License:</span>{item.License.value}</h6>
@@ -151,11 +155,14 @@ const MyAccountCenter=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={8}>  
-                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>All Accepted Requests</Card.Title>
                         <hr />
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
+                        {
+                          requests?.length===0 && <h5>No Accepted Requests</h5>
+                        }
                         {requests.map((item) => (
                           <div key={item.ID.value}>
                             <h6><span>Name:</span>{item.Name.value}</h6>
@@ -177,11 +184,15 @@ const MyAccountCenter=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-5 px-2" md={8}>  
-                <Card style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Donors</Card.Title>
                         <hr />
                         <div style={{ height: "25vh", overflow: "scroll" }}>
+                        {
+                          donors?.length===0 && <h5>No Donors Data added</h5>
+                        }
+
                         {donors.map((donor) => (
                           <div key={donor.donations.value}>
                              <p>Name: {donor.Name.value}</p>
@@ -195,10 +206,13 @@ const MyAccountCenter=()=> {
                 </Card>
             </Col>
             <Col className="mt-md-5 px-2" md={8}>  
-              <Card style={{marginTop:10,paddingBottom:10}}>
+              <Card className="shadow p-3 mb-5 bg-body rounded" style={{marginTop:10,paddingBottom:10}}>
                 <div>
                   <h4 style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}> Appointments booked in your Center!</h4>
                   <hr />
+                  {
+                    appointment?.length===0 && <h5>No Appointments booked in your center</h5>
+                  }
                   {appointment.map((item) => (
                     <div key={item.appointments.value} style={{fontSize:"14px", marginLeft:"16px"}}>
                       <h6>Name:{item.DonorName.value}</h6>

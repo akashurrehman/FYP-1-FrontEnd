@@ -13,16 +13,27 @@ import { useAuth } from "./Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
 import {PrinterFill} from 'react-bootstrap-icons'
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
+import axios from 'axios';
 
 const Appointments=()=> {
   const [loading, setIsLoading] = useState(true);  
   const [data, setData] = useState([]);
+  const [center, setCenterData] = useState({
+    name: "",
+    city: "",
+    licenseNo: "",
+    contactNo: "",
+    email: "",
+    location:"",
+    });
+
   const {token} = useAuth();
 
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwt_decode(token) : null;
   const id = decodedToken?.id;
   const role = decodedToken?.role;
+  const name=decodedToken?.Name;
 
   const authCentre=()=>{
     if(role!='CENTRE'){
@@ -60,9 +71,29 @@ const Appointments=()=> {
       authCentre();
       setIsLoading(false);
   }, []);
+  
+  useEffect(()=>{
+    axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/${id}`).then((response)=>{
+      const { results } = response.data;
+      if (results && results.bindings && results.bindings.length > 0) {
+        const centerData = results.bindings[0];
+        setCenterData({
+          name: centerData.Name.value,
+          city: centerData.City.value,
+          contactNo: centerData.ContactNo.value,
+          email: centerData.Email.value,
+          licenseNo: centerData.License.value,
+          location: centerData.Location.value,
+          
+        });
+
+    }
+  });
+  
+  },[]);
 
   const handlePrint = () => {
-    handleAppointmentPrint(data);
+    handleAppointmentPrint(data,center);
     console.log("Handle Print button in Appointment!")
   };
   const mystyle = {
@@ -73,11 +104,6 @@ const Appointments=()=> {
   };  
 
 const columns = [
-  {
-    name: 'ID',
-    selector: 'ID.value',
-    sortable: true,
-  },
   {
     name: 'Name',
     selector: 'DonorName.value',
@@ -123,19 +149,26 @@ const columns = [
    {loading ? (
     <LoadingSpinner />
     ) : (
-    <Container fluid style={{backgroundColor:"#EEEEEE"}}>
+    <Container fluid style={{backgroundColor:"#EEEEEE",paddingBottom:"10rem"}}>
       <Header />
       <Row>
         <Col xs={3}>
             <Sidebar />        
         </Col>
         <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Booked Appointments</Card.Title>
             </Card.Body>
         </Card>
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}} className="shadow p-3 mb-2 rounded">
+            <Card.Body>
+              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>Here you can see all the booked appointments!</Card.Title>
+              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>You can accept or reject the appointments also</Card.Title>
+            </Card.Body>
+        </Card>
+
         <DataTable title = "All Appointment" columns={columns} data={data}
           pagination
           fixedHeader
