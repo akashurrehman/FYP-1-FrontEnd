@@ -7,6 +7,7 @@ import UserPanelFooter from "../UserPanelFooter";
 import image from '../../../Public/user/image/Image1.png';
 import { toast } from "react-toastify";
 import AccountCircle from '@mui/icons-material/PersonSharp';
+import PeopleSharpIcon from '@mui/icons-material/PeopleSharp';
 import LockPersonSharpIcon from '@mui/icons-material/LockPersonSharp';
 import jwt_decode from 'jwt-decode';
 import { ArrowRight } from 'react-bootstrap-icons';
@@ -150,7 +151,7 @@ const UserLogin = (props) => {
                                     <h3 className="RedColor" style={{fontFamily:'cursive',textAlign:'center',marginBottom:'3%'}}>
                                         Login to Account
                                     </h3>
-                                    <p className="mt-3" style={{fontSize:'13.5px',color:'gray',textAlign:'center',marginBottom:'8%'}}>
+                                    <p className="mt-3" style={{fontSize:'13.5px',color:'gray',textAlign:'center',marginBottom:'6%'}}>
                                         WELCOME! To our secure online booking process. You can manage all your appointment details in one convenient place.
                                     </p>
                                     
@@ -200,6 +201,30 @@ const UserLogin = (props) => {
                                                     <Form.Control.Feedback type="invalid">
                                                         Please provide a valid password.
                                                     </Form.Control.Feedback>
+                                                </InputGroup>
+                                            </Col>
+                                        </Row>
+
+                                        <Row>
+                                            <Col sm={12}>
+                                                <Form.Label className='PurpleColor'>Login As <spam className='RedColor'>*</spam></Form.Label>
+                                                <InputGroup size="sm" className="mb-3" hasValidation>
+                                                    <InputGroup.Text id="inputGroup-sizing-default">
+                                                        <PeopleSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
+                                                    </InputGroup.Text>
+                                                    
+                                                    <Form.Select required 
+                                                        
+                                                    >
+                                                        <option value="">Login as *</option>
+                                                        <option value="Male">Blood Donation Centre</option>
+                                                        <option value="Female">Donor / Request Maker</option>
+                                                        <option value="Other">Admin</option>
+                                                    </Form.Select> 
+                                                    <Form.Control.Feedback type="invalid">
+                                                        Please provide a valid gender.
+                                                    </Form.Control.Feedback>
+                                                    
                                                 </InputGroup>
                                             </Col>
                                         </Row>

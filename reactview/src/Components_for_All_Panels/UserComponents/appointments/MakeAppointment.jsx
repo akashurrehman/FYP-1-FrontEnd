@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  Button,Modal,Form,InputGroup,Card,Image,Container, OverlayTrigger, Popover } from "react-bootstrap";
+import {  Form,InputGroup,Card,Image,Container, OverlayTrigger, Popover } from "react-bootstrap";
 import { Row, Col, Nav } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
@@ -32,6 +32,15 @@ import WcSharpIcon from '@mui/icons-material/WcSharp';
 import AccessTimeSharpIcon from '@mui/icons-material/AccessTimeSharp';
 import EventAvailableSharpIcon from '@mui/icons-material/EventAvailableSharp';
 import SocialMediaButtons from "../SocialMediaButtons";
+import LocalPhoneSharpIcon from '@mui/icons-material/LocalPhoneSharp';
+
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+
 
 const MakeAppointment = () => {
 
@@ -224,6 +233,8 @@ const MakeAppointment = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+
     //Form Validation
     const [validated, setValidated] = React.useState(false);
     const handleSubmit = (event) => {
@@ -237,6 +248,19 @@ const MakeAppointment = () => {
             event.preventDefault();
         }
         setValidated(true);
+    };
+
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 750,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
     };
 
     return ( <div>
@@ -325,6 +349,7 @@ const MakeAppointment = () => {
                                                     <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                                         <Row>
                                                             <Col sm={6}>
+                                                                <div style={{textAlign:'left',marginTop:'-3%',marginBottom:'-3%'}}><Form.Label className='PurpleColor' >Full Name <spam className='RedColor'>*</spam></Form.Label></div>
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                                         <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -341,6 +366,7 @@ const MakeAppointment = () => {
                                                                 </InputGroup>
                                                             </Col>
                                                             <Col sm={6}>
+                                                                <div style={{textAlign:'left',marginTop:'-3%',marginBottom:'-3%'}}><Form.Label className='PurpleColor' >Date of Birth <spam className='RedColor'>*</spam></Form.Label></div>
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                                         <CalendarMonthSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -348,7 +374,7 @@ const MakeAppointment = () => {
                                                                     <Form.Control
                                                                         required
                                                                         aria-label="Default"
-                                                                        aria-describedby="inputGroup-sizing-default" type="date" placeholder="Date of Birth*" 
+                                                                        aria-describedby="inputGroup-sizing-default" type="text" placeholder="Date of Birth*" 
                                                                         value={user?.DOB?.value}
                                                                     />
                                                                     <Form.Control.Feedback type="invalid">
@@ -359,25 +385,18 @@ const MakeAppointment = () => {
                                                         </Row>
                                                         <Row>
                                                             <Col sm={6}>
-                                                            <InputGroup size="sm" className="mb-3" hasValidation>
+                                                                <div style={{textAlign:'left',marginTop:'-3%',marginBottom:'-3%'}}><Form.Label className='PurpleColor' >Blood Group <spam className='RedColor'>*</spam></Form.Label></div>
+                                                                <InputGroup size="sm" className="mb-3" hasValidation>
                                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                                         <BloodtypeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                                                     </InputGroup.Text>
                                                                     
-                                                                    <Form.Select required 
-                                                                        value={user?.BloodGroup?.value} 
-                                                                        
-                                                                    >
-                                                                        <option value="">Select Blood Group*</option>
-                                                                        <option value="A+">A+</option>
-                                                                        <option value="B+">B+</option>
-                                                                        <option value="O+">O+</option>
-                                                                        <option value="AB+">AB+</option>
-                                                                        <option value="A-">A-</option>
-                                                                        <option value="B-">B-</option>
-                                                                        <option value="O-">O-</option>
-                                                                        <option value="AB-">AB-</option>
-                                                                    </Form.Select>
+                                                                    <Form.Control
+                                                                        required
+                                                                        aria-label="Default"
+                                                                        aria-describedby="inputGroup-sizing-default" type="text" placeholder="Date of Birth*" 
+                                                                        value={user?.BloodGroup?.value}
+                                                                    />
                                                                     <Form.Control.Feedback type="invalid">
                                                                         Please provide a valid blood group.
                                                                     </Form.Control.Feedback>
@@ -385,19 +404,18 @@ const MakeAppointment = () => {
                                                                 </InputGroup>
                                                             </Col>
                                                             <Col sm={6}>
+                                                                <div style={{textAlign:'left',marginTop:'-3%',marginBottom:'-3%'}}><Form.Label className='PurpleColor' >Gender <spam className='RedColor'>*</spam></Form.Label></div>
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                                         <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                                                     </InputGroup.Text>
                                                                     
-                                                                    <Form.Select required 
-                                                                        value={user?.Gender?.value} 
-                                                                    >
-                                                                        <option value="">Gender*</option>
-                                                                        <option value="Male">Male</option>
-                                                                        <option value="Female">Female</option>
-                                                                        <option value="Other">Other</option>
-                                                                    </Form.Select> 
+                                                                    <Form.Control
+                                                                        required
+                                                                        aria-label="Default"
+                                                                        aria-describedby="inputGroup-sizing-default" type="text" placeholder="Date of Birth*" 
+                                                                        value={user?.Gender?.value}
+                                                                    />
                                                                     <Form.Control.Feedback type="invalid">
                                                                         Please provide a valid gender.
                                                                     </Form.Control.Feedback>
@@ -407,6 +425,7 @@ const MakeAppointment = () => {
                                                         </Row>
                                                         <Row>
                                                             <Col sm={6}>
+                                                            <div style={{textAlign:'left',marginTop:'-3%',marginBottom:'-3%'}}><Form.Label className='PurpleColor' >Email <spam className='RedColor'>*</spam></Form.Label></div>
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                                         <EmailIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -424,6 +443,7 @@ const MakeAppointment = () => {
                                                                 </InputGroup>
                                                             </Col>
                                                             <Col sm={6}>
+                                                            <div style={{textAlign:'left',marginTop:'-3%',marginBottom:'-3%'}}><Form.Label className='PurpleColor' >Contact No <spam className='RedColor'>*</spam></Form.Label></div>
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                                         <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -443,6 +463,8 @@ const MakeAppointment = () => {
                                                         </Row>
                                                         <Row>
                                                             <Col sm={12}>
+                                                            <div style={{textAlign:'left',marginTop:'-1%',marginBottom:'-1%'}}><Form.Label className='PurpleColor' >Address <spam className='RedColor'>*</spam></Form.Label></div>
+
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
                                                                     <InputGroup.Text id="inputGroup-sizing-default">
                                                                         <LocationOnSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -462,7 +484,7 @@ const MakeAppointment = () => {
                                                         </Row>
                                                         <Row>
                                                             <Col sm={6}>
-                                                                <div style={{textAlign:'left'}}>
+                                                                <div style={{textAlign:'left',marginTop:'0%',marginBottom:'-3%'}}>
                                                                     <Form.Label className='PurpleColor'>Booking Date <spam className='RedColor'>*</spam></Form.Label>
                                                                 </div>
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
@@ -479,12 +501,12 @@ const MakeAppointment = () => {
                                                                         }}
                                                                     />
                                                                     <Form.Control.Feedback type="invalid">
-                                                                        Please provide a valid contact number.
+                                                                        Please provide a valid date for booking.
                                                                     </Form.Control.Feedback>
                                                                 </InputGroup>
                                                             </Col>
                                                             <Col sm={6}>
-                                                                <div style={{textAlign:'left'}}>
+                                                                <div style={{textAlign:'left',marginTop:'0%',marginBottom:'-3%'}}>
                                                                     <Form.Label className='PurpleColor'>Booking Time <spam className='RedColor'>*</spam></Form.Label>
                                                                 </div>
                                                                 <InputGroup size="sm" className="mb-3" hasValidation>
@@ -501,7 +523,7 @@ const MakeAppointment = () => {
                                                                         }}
                                                                     />
                                                                     <Form.Control.Feedback type="invalid">
-                                                                        Please provide a valid contact number.
+                                                                        Please provide a valid time for booking.
                                                                     </Form.Control.Feedback>
                                                                 </InputGroup>
                                                             </Col>
@@ -534,7 +556,7 @@ const MakeAppointment = () => {
             </div>
             <div>
                 <Container>
-                    <Row className="" style={{marginBottom:"10%",marginTop:'-6%'}}>
+                    <Row className="" style={{marginBottom:"10%",marginTop:'-2%'}}>
                         <Col sm={4}>
                             <Card className="ColHover" border="danger" style={{ width: '22rem' }}>
                                 <Card.Img variant="top" src={CardImage1} height="250rem"/>
@@ -575,14 +597,19 @@ const MakeAppointment = () => {
                 </Container>
             </div>
 
-        <div>
-            <Modal show={show} onHide={handleClose} centered style={{}} >
+        <div >
+            {/* <Modal show={show} onHide={handleClose} centered >
                 <div style={{border:'1px solid grey',boxShadow: '0px 0px 8px 0px grey'}}>
                     <Modal.Header closeButton>
-                        <Modal.Title className='TextColor'>Appointment Slip</Modal.Title>
+                        <Modal.Title className='RedColor'>{centre?.Name?.value}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body >
-                        <p><strong style={{color:'grey'}}>Donor Name: </strong>{user?.Name?.value}</p>
+                        <Row>
+                            <Col sm={8}>
+                                <h5 className='PurpleColor'>Booked by: <strong>{user?.Name?.value}</strong></h5>
+                            </Col>
+                            <Col sm={4}></Col>
+                        </Row>
                         <p style={{marginTop:'-4%'}}><strong style={{color:'grey'}}>Donor Date of Birth: </strong>{user?.DOB?.value}</p>
                         <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Blood Group: </strong>{user?.BloodGroup?.value}</p>
                         <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Gender: </strong>{user?.Gender?.value}</p>
@@ -592,7 +619,6 @@ const MakeAppointment = () => {
                         <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Donor Address: </strong>{user?.Address?.value}</p>
                         <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Booking Date: </strong>{bookingDate}</p>
                         <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Booking Time: </strong>{bookingTime}</p>
-                        <p style={{marginTop:'-2%'}}><strong style={{color:'grey'}}>Centre Name: </strong>{centre?.Name?.value}</p>
                         <p style={{marginTop:'-4%'}}><strong style={{color:'grey'}}>Centre Timings: </strong>{centre?.Timings?.value}</p>
                         <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Centre Email: </strong>{centre?.Email?.value}</p>
                         <p style={{marginTop:'-5%'}}><strong style={{color:'grey'}}>Centre Contact No: </strong>{centre?.ContactNo?.value}</p>
@@ -615,7 +641,80 @@ const MakeAppointment = () => {
                         </Button>
                     </Modal.Footer>
                 </div>
+            </Modal> */}
+
+
+
+            <Modal
+                open={show}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Typography id="modal-modal-title" variant="h4" component="h2">
+                        <div className='RedColor' style={{textAlign:'center'}}>{centre?.Name?.value}</div>
+                        
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 0 }}>
+                        <div className='RedColor' style={{textAlign:'center'}}>({centre?.Location?.value})</div>
+                        
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        <Row>
+                            <Col sm={7}>
+                                <h5 style={{marginTop:'5%'}} className='PurpleColor'>Booked by: <strong>{user?.Name?.value}</strong></h5>
+                                <p style={{marginTop:'2%',fontSize:'16px'}} className='PurpleColor'><EmailIcon sx={{ color: 'action.active', fontSize:'large' }}/> {user?.Email?.value}</p>
+                                <p style={{marginTop:'-4%',fontSize:'16px'}} className='PurpleColor'><LocalPhoneSharpIcon sx={{ color: 'action.active', fontSize:'large' }}/> {user?.ContactNo?.value}</p>
+                                <p style={{marginTop:'-4%',fontSize:'16px'}} className='PurpleColor'><LocationOnSharpIcon sx={{ color: 'action.active', fontSize:'large' }}/> {user?.Address?.value}</p>
+                            </Col>
+                            <Col sm={5}>
+                                <p className='PurpleColor' style={{textAlign:'right',fontSize:'14px'}}>Appointment# 1234567890</p>
+                                <p style={{marginTop:'-8%',textAlign:'right',fontSize:'14px'}} className='PurpleColor'>Date: 02/12/2022</p>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col sm={1}></Col>
+                            <Col sm={11}>
+                                <p style={{fontSize:'20px',fontFamily:'cursive'}}><strong>Appointment Details</strong></p>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col sm={1}></Col>
+                            <Col sm={4}>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Donor Gender:</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Donated Blood Group:</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Booking Date:</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Booking Time:</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Centre Contact No:</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Centre Email:</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Centre Opening Days:</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>Centre Timings:</p>
+
+                            </Col>
+                            <Col sm={2}></Col>
+                            <Col sm={4}>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{user?.Gender?.value}</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{user?.BloodGroup?.value} (Blood)</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{bookingDate}</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{bookingTime}</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{centre?.ContactNo?.value}</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{centre?.Email?.value}</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{centre?.Opening_Days?.value}</p>
+                                <p style={{fontSize:'19px',marginTop:'-8%'}}>{centre?.Timings?.value}</p>
+
+                            </Col>
+                            <Col sm={1}></Col>
+                            
+                        </Row>
+                        
+                        
+                    </Typography>
+                </Box>
             </Modal>
+
         </div>
 
         <UserPanelFooter></UserPanelFooter>
