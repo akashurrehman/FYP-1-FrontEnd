@@ -16,6 +16,7 @@ import { ArrowRight } from 'react-bootstrap-icons';
 import '../css/style.css';
 import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
 import SocialMediaButtons from "../SocialMediaButtons";
+import jwtDecode from "jwt-decode";
 
 
 const UserLogin = (props) => {
@@ -23,6 +24,8 @@ const UserLogin = (props) => {
     const [username, setUserName] = React.useState("");
 
     const [password, setPassword] = React.useState("");
+
+    const [role, setRole] = React.useState("");
 
     const [availableStatus, setAvailableStatus] = useState("Available");
 
@@ -46,7 +49,8 @@ const UserLogin = (props) => {
         try {
             const response = await axios.post('http://localhost:8081/user/auth/login', {
                 username,
-                password
+                password,
+                role,
             });
             const token = response.headers.authorization;
             // Store the token in local storage
@@ -54,21 +58,23 @@ const UserLogin = (props) => {
             handleLogin(token);
             console.log("In  Login File:",token);
             // Determine the user's role from the token payload
-            const { role } = jwt_decode(token);
+            
+            const decodedToken = token ? jwtDecode(token) : null;
+            const userRole = decodedToken?.role;
             const { id } = jwt_decode(token);
-            console.log("After Decode Token:",jwt_decode(token))
-            console.log("Role:",role);
+            // console.log("After Decode Token:",jwt_decode(token))
+            // console.log("Role:",userRole);
             updateDonorAvailabilityStatus(id);
             // Redirect the user to the appropriate route based on their role
 
-            if(role=='USER') {
+            if(userRole=='USER') {
                 
                 window.location.href = "/userpanel/HomeScreen";
             }
-            if(role=='CENTRE') {
+            if(userRole=='CENTRE') {
                 window.location.href = "/bloodCenter/HomeScreen";
             }
-            if(role=='ADMIN') {
+            if(userRole=='ADMIN') {
                 window.location.href = "/adminpanel/HomeScreen";
             }
         } 
@@ -214,12 +220,13 @@ const UserLogin = (props) => {
                                                     </InputGroup.Text>
                                                     
                                                     <Form.Select required 
-                                                        
+                                                        value={role} 
+                                                        onChange={(e) => setRole(e.target.value)}
                                                     >
                                                         <option value="">Login as *</option>
-                                                        <option value="Male">Blood Donation Centre</option>
-                                                        <option value="Female">Donor / Request Maker</option>
-                                                        <option value="Other">Admin</option>
+                                                        <option value="CENTRE">Blood Donation Centre</option>
+                                                        <option value="USER">Donor / Request Maker</option>
+                                                        <option value="ADMIN">Admin</option>
                                                     </Form.Select> 
                                                     <Form.Control.Feedback type="invalid">
                                                         Please provide a valid gender.

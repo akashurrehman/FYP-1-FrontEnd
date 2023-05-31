@@ -38,7 +38,7 @@ const SingleDonor = (props) => {
                                                 </Card.Text>
                                             </Col>
                                             
-                                            <Col sm={2} className='d-flex' style={{paddingTop:'3%'}}>
+                                            <Col sm={3} className='d-flex' style={{paddingTop:'3%'}}>
                                                 <EnvelopeAtFill className="RedColor" size={22} />
                                                 <p className='PurpleColor' style={{paddingLeft:'6%'}}>{donor?.Email?.value}</p>
                                             </Col>
@@ -46,7 +46,7 @@ const SingleDonor = (props) => {
                                                 <TelephoneOutboundFill className="RedColor" size={20} />
                                                 <p className='PurpleColor' style={{paddingLeft:'6%'}}>{donor?.Contact?.value}</p>
                                             </Col>
-                                            <Col sm={2} className='d-flex' style={{paddingTop:'3%'}}>
+                                            <Col sm={1} className='d-flex' style={{paddingTop:'3%'}}>
                                                 {donor?.Gender?.value === 'Male' ? (
                                                     <>
                                                         <GenderMale className="RedColor" size={20} />

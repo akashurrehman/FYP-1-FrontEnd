@@ -21,7 +21,7 @@ import ConfirmationBox from '../ConfirmationBox';
 
 export default function MyPersonalDetails() {
 
-    const [fullName, setFullName] = React.useState("");
+        const [fullName, setFullName] = React.useState("");
         const [bloodGroup, setBloodGroup] = React.useState("");
         const [gender, setGender] = React.useState("");
         const [dob, setDob] = React.useState("");
