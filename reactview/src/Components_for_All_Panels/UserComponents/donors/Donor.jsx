@@ -17,6 +17,7 @@ import SingleDonor from "./SingleDonor";
 const Donor = () => {
 
     const [donors, setDonors] = React.useState([]);
+    const [array, setArray] = React.useState([]);
 
     const getData = () => {
         donorService
@@ -35,12 +36,23 @@ const Donor = () => {
 
     //For Filter
     const [filterBlood,setFilterBlood] = React.useState("Blood Group");
-    const bloodArray = ['A+ Blood','B+ Blood','AB+ Blood','O+ Blood','A- Blood','B- Blood','AB- Blood','O- Blood'];
+    const bloodArray = ['A+','B+','AB+','O+','A-','B-','AB-','O-'];
     const [filterCity,setFilterCity] = React.useState("City");
     const cityArray = ['Lahore','Karachi','Islamabad','Multan','Peshawar'];
     const [filterDate,setFilterDate] = React.useState("Donors");
     const dateArray = ['Recent','Day Ago','Week Ago','Month Ago','Year Ago'];
     
+    
+      const filterDonors = (bloodGroup) => {
+        const filteredDonors = donors.results.bindings.filter((donor) => {
+            console.log(donor.Blood_Group.value);
+            console.log(bloodGroup);
+          return donor.Blood_Group.value.toLowerCase() === bloodGroup.toLowerCase();
+        });
+        
+        setArray(filteredDonors);
+        console.log(filteredDonors);
+      };
     
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -62,6 +74,7 @@ const Donor = () => {
                                 placeholder="Search Blood Donations"
                                 aria-label="Search Blood Donations"
                                 aria-describedby="basic-addon2"
+                                onChange={(e) => filterDonors('A-')}
                             />
                             <InputGroup.Text id="basic-addon2"><Search className="m-1 PurpleColor" size={18} /></InputGroup.Text>
                         </InputGroup>
@@ -89,7 +102,7 @@ const Donor = () => {
                                         <Nav.Link 
                                             className='FilterListHoverColor'
                                             eventKey={blood} 
-                                            onClick={() => {setFilterBlood(blood)}}
+                                            onClick={() => {setFilterBlood(blood);filterDonors(blood)}}
                                         >
                                             <Form.Check 
                                                 type=''
@@ -167,12 +180,12 @@ const Donor = () => {
         </div>
 
         <div style={{width:'99.1%'}}>
-            {donors.length === 0 ? (
+            {array.length === 0 ? (
                     <p>There are no Centres</p>
                 ) : (
                     <Row className="d-flex justify-content-center m-5">
                 
-                        {donors.results.bindings.map((donor, index) => (
+                        {array.map((donor, index) => (
                             <Col sm={4} key={index}>
                                 <SingleDonor key={index} donor={donor} />
                             </Col>
