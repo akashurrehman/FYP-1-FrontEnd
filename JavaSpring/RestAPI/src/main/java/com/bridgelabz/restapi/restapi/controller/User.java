@@ -62,7 +62,7 @@ public class User {
 
     /*
      * Route to Get Data of all Registered Users
-     */
+    */
 
     @GetMapping("/api/users/registration")
     public ResponseEntity<String> Allusers() {
@@ -182,15 +182,8 @@ public class User {
                 "?persons bd:hasUserName ?UserName ." +
                 "?persons bd:hasPersonID ?ID ." +
                 "?persons bd:hasPersonEmail ?Email ." +
-                "filter(?UserName = \"" + userName + "\")" +
-                "}" +
-                "UNION" +
-                "{ " +
-                "?persons rdf:type bd:Person ." +
-                "?persons bd:hasUserName ?UserName ." +
-                "?persons bd:hasPersonID ?ID ." +
-                "?persons bd:hasPersonEmail ?Email ." +
-                "filter(?Email = \"" + email + "\")" +
+                "?person bd:hasRole ?Role ." +
+                "filter(?UserName = \"" + userName + "\" && ?Email = \"" + email + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "UNION" +
                 "{ " +
@@ -198,15 +191,8 @@ public class User {
                 "?centres bd:hasUserName ?UserName ." +
                 "?centres bd:hasCentreID ?ID ." +
                 "?centres bd:hasCentreEmail ?Email ." +
-                "filter(?UserName = \"" + userName + "\")" +
-                "}" +
-                "UNION" +
-                "{ " +
-                "?centres rdf:type bd:Blood_Donation_Centre ." +
-                "?centres bd:hasUserName ?UserName ." +
-                "?centres bd:hasCentreID ?ID ." +
-                "?centres bd:hasCentreEmail ?Email ." +
-                "filter(?Email = \"" + email + "\")" +
+                "?centres bd:hasRole ?Role ." +
+                "filter(?UserName = \"" + userName + "\" && ?Email = \"" + email + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "UNION" +
                 "{ " +
@@ -214,31 +200,16 @@ public class User {
                 "?admins bd:hasUserName ?UserName ." +
                 "?admins bd:hasAdminID ?ID ." +
                 "?admins bd:hasAdminEmail ?Email ." +
-                "filter(?UserName = \"" + userName + "\")" +
-                "}" +
-                "UNION" +
-                "{ " +
-                "?admins rdf:type bd:Admin ." +
-                "?admins bd:hasUserName ?UserName ." +
-                "?admins bd:hasAdminID ?ID ." +
-                "?admins bd:hasAdminEmail ?Email ." +
-                "filter(?Email = \"" + email + "\")" +
+                "?admins bd:hasRole ?Role ." +
+                "filter(?UserName = \"" + userName + "\" && ?Email = \"" + email + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "UNION" +
                 "{ " +
                 "?labs rdf:type bd:Lab ." +
                 "?labs bd:hasUserName ?UserName ." +
                 "?labs bd:hasLabID ?ID ." +
-                "?labs bd:hasLabEmail ?Email ." +
-                "filter(?UserName = \"" + userName + "\")" +
-                "}" +
-                "UNION" +
-                "{ " +
-                "?labs rdf:type bd:Lab ." +
-                "?labs bd:hasUserName ?UserName ." +
-                "?labs bd:hasLabID ?ID ." +
-                "?labs bd:hasLabEmail ?Email ." +
-                "filter(?Email = \"" + email + "\")" +
+                "?labs bd:hasRole ?Role ." +
+                "filter(?UserName = \"" + userName + "\" && ?Email = \"" + email + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "}";
 

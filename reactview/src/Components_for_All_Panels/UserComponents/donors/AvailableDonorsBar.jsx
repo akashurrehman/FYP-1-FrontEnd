@@ -35,7 +35,10 @@ const AvailableDonorsBar = () => {
                     <Row>
                         <Col sm={4}>
                         <div style={{marginTop:'20%',textAlign:'center',marginLeft:'25%',marginBottom:'-10%'}}>
-                            <div style={{ width: 50, height: 50,marginLeft:'0%'}}>
+                            <div style={{fontSize:'14px',marginTop:'4%',color:'#fff1e1',fontFamily:'cursive'}}>
+                                <Nav.Link href='/user/donor'><p>Donors</p></Nav.Link>
+                            </div>
+                            <div style={{ width: 45, height: 45,marginLeft:'0%'}}>
                             <CircularProgressbar value={donors?.results?.bindings?.length} text={donors?.results?.bindings?.length + "%"}
                                 styles={buildStyles({
                                 // Rotation of path and trail, in number of turns (0-1)
@@ -62,9 +65,7 @@ const AvailableDonorsBar = () => {
                             />
                             
                             </div>
-                            <div style={{fontSize:'14px',marginTop:'4%',color:'#fff1e1',fontFamily:'cursive'}}>
-                                <Nav.Link href='/user/donor'><p>Donations</p></Nav.Link>
-                            </div>
+                            
                         </div>
                         </Col>
                         <Col sm={2}></Col>

@@ -81,6 +81,7 @@ public class Auth {
 
         String username = jsonNode.has("username") ? jsonNode.get("username").asText() : null;
         String password = jsonNode.has("password") ? jsonNode.get("password").asText() : null;
+        String role = jsonNode.has("role") ? jsonNode.get("role").asText() : null;
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
@@ -91,7 +92,7 @@ public class Auth {
                 "?person bd:hasUserName ?UserName ." +
                 "?person bd:hasPassword ?Password ." +
                 "?person bd:hasRole ?Role ." +
-                "filter(?UserName = \"" + username + "\")" +
+                "filter(?UserName = \"" + username + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "UNION" +
                 "{ " +
@@ -100,7 +101,7 @@ public class Auth {
                 "?admin bd:hasUserName ?UserName ." +
                 "?admin bd:hasPassword ?Password ." +
                 "?admin bd:hasRole ?Role ." +
-                "filter(?UserName = \"" + username + "\")" +
+                "filter(?UserName = \"" + username + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "UNION" +
                 "{ " +
@@ -109,7 +110,7 @@ public class Auth {
                 "?centre bd:hasUserName ?UserName ." +
                 "?centre bd:hasPassword ?Password ." +
                 "?centre bd:hasRole ?Role ." +
-                "filter(?UserName = \"" + username + "\")" +
+                "filter(?UserName = \"" + username + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "UNION" +
                 "{ " +
@@ -118,7 +119,7 @@ public class Auth {
                 "?lab bd:hasUserName ?UserName ." +
                 "?lab bd:hasPassword ?Password ." +
                 "?lab bd:hasRole ?Role ." +
-                "filter(?UserName = \"" + username + "\")" +
+                "filter(?UserName = \"" + username + "\" && ?Role = \"" + role + "\")" +
                 "}" +
                 "}";
 
