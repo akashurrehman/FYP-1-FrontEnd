@@ -1,842 +1,1859 @@
-<rdf:RDF
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:bd="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#"
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-  <owl:Ontology rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system"/>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News">
-    <rdfs:label>News</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation">
-    <rdfs:label>Blood_Donation</rdfs:label>
-    <rdfs:comment xml:lang="en">This is the Blood Donation class</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment">
-    <rdfs:label>Appointment</rdfs:label>
-    <rdfs:comment xml:lang="en">This is the Appointment class.</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker">
-    <rdfs:label>Request_Maker</rdfs:label>
-    <rdfs:comment xml:lang="en">This is request maker class, it belongs to user and it is subclass of person class.</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request">
-    <rdfs:label>Blood_Request</rdfs:label>
-    <rdfs:comment xml:lang="en">This is the Blood Request class.</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation"/>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab">
-    <rdfs:label>Lab</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement">
-    <rdfs:label>Advertisement</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System">
-    <rdfs:label>Blood_Donation_System</rdfs:label>
-    <rdfs:comment xml:lang="en">This is the main class of our Blood Donation Management System</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event">
-    <rdfs:label>Event</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test">
-    <rdfs:label>Blood_Test</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre">
-    <rdfs:label>Blood_Donation_Centre</rdfs:label>
-    <rdfs:comment xml:lang="en">This is blood donation center class, it belongs to user and it is subclass of user class.</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification">
-    <rdfs:label>Notification</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person">
-    <rdfs:label>Person</rdfs:label>
-    <rdfs:comment xml:lang="en">This is person class, it belongs to user and it is subclass of user class. It includes donors and request makers.</rdfs:comment>
-    <rdfs:subClassOf>
-      <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-    </rdfs:subClassOf>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User">
-    <rdfs:label>User</rdfs:label>
-    <rdfs:comment xml:lang="en">This is User class.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post">
-    <rdfs:label>Job_Post</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin">
-    <rdfs:label>Admin</rdfs:label>
-    <rdfs:comment xml:lang="en">This is admin class, it belongs to user and it is subclass of user class.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question">
-    <rdfs:label>Frequently_Asked_Question</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock">
-    <rdfs:label>Blood_Stock</rdfs:label>
-    <rdfs:comment xml:lang="en">This is the Blood Stock class.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor">
-    <rdfs:label>Donor</rdfs:label>
-    <rdfs:comment xml:lang="en">This is donor class, it belongs to user and it is subclass of person class.</rdfs:comment>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    <owl:equivalentClass rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation">
-    <rdfs:label>Financial_Donation</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#BloodTest"/>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign">
-    <rdfs:label>Campaign</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor">
-    <rdfs:label>Sponsor</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor">
-    <rdfs:label>Blood_Donor</rdfs:label>
-    <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
-  </owl:Class>
-  <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#BloodDonor"/>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#faqManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#newsManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#campaignManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#userRegisteredIn">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationForCentre">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#stockManagedBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#appointmentBookedIn">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#advertisementManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#financialdonationManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#appointmentMadeBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationForRequestMaker">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#sponsorManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#eventManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#bloodDonationMakeby">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#jobpostManageBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationMadeBy">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#bloodRequestMakeby">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:ObjectProperty>
-  <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasUser">
-    <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
-  </owl:ObjectProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreLocation">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventDateTime">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasMadeDonation">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonDateOfBirth">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventLocation">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasUserName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerCity">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSex">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventMessage">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsPostDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsAIDs">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminBloodGroup">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestDonatedBy">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreLocation">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabCity">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorCity">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationTime">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignTitle">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerLocation">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminAddress">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHPV">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorGender">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsDetails">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementPostDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignDetails">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementTitle">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignsPostDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerGender">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorLocation">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationMessage">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsSyphilis">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockAddedDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorAddress">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminDateOfBirth">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonAddress">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationMadeByName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreCity">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentBookingTime">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonBloodGroup">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonFullName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreTimings">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreTimings">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorGender">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorCity">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreOpeningDays">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockNoOfBags">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostPostingDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorBloodGroup">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorBloodGroup">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAge">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorMessage">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationDay">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreLicenseNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDs">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPassword">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQDetails">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRole">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerHospital">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminFullName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestDonorName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonationID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQTitle">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorEmail">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonCity">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreCategory">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminGender">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorDOB">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorMessage">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorDonationAmount">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementDetails">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerMessage">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentBookingDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonEligibilityStatus">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostTitle">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorAvailable">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorMessage">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockBloodGroup">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerBloodGroup">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonGender">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostID">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerContactNo">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHepatitisB">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorDonationDate">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostDetails">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsTitle">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabAddress">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHIV">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-  </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminCity">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
-  </owl:DatatypeProperty>
-  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasHGB">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
-  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDxHPV">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
-  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRBC">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
-  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDxCancer">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
-  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasWBC">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
-  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPLT">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
-  <owl:FunctionalProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDiabetes">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
-  </owl:FunctionalProperty>
-  <bd:Financial_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donor_1684321865812">
-    <bd:hasFinancialDonorName>Ali</bd:hasFinancialDonorName>
-    <bd:hasFinancialDonorMessage>Donate ....... to needy persons.</bd:hasFinancialDonorMessage>
-    <bd:hasFinancialDonorDonationDate>2023-05-17</bd:hasFinancialDonorDonationDate>
-    <bd:hasFinancialDonorDonationAmount>1500</bd:hasFinancialDonorDonationAmount>
-    <bd:hasFinancialDonorContactNo>+92 333 1234567</bd:hasFinancialDonorContactNo>
-    <bd:hasFinancialDonationID>Financial_Donor_1684321865812</bd:hasFinancialDonationID>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </bd:Financial_Donation>
-  <bd:Blood_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1">
-    <bd:hasDonorBloodGroup>A-</bd:hasDonorBloodGroup>
-    <bd:hasDonorLocation>Iqbal Town, Lahore</bd:hasDonorLocation>
-    <bd:bloodDonationMakeby>
-      <bd:Donor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_001">
-        <bd:hasPersonEmail>ali@email.com</bd:hasPersonEmail>
-        <bd:hasPersonGender>Male</bd:hasPersonGender>
-        <bd:userRegisteredIn>
-          <bd:Blood_Donation_System rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website">
-            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-          </bd:Blood_Donation_System>
-        </bd:userRegisteredIn>
-        <bd:hasUserName>ali123</bd:hasUserName>
-        <bd:hasPersonDateOfBirth>January 01,2001</bd:hasPersonDateOfBirth>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <bd:hasPersonFullName>Ali</bd:hasPersonFullName>
-        <bd:hasPersonContactNo>+92 333 1234561</bd:hasPersonContactNo>
-        <bd:hasPersonBloodGroup>A+</bd:hasPersonBloodGroup>
-        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
-        <bd:hasPassword>123456789user</bd:hasPassword>
-        <bd:hasPersonID>PR001</bd:hasPersonID>
-        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-        <bd:hasPersonCity>Lahore</bd:hasPersonCity>
-        <bd:hasRole>USER</bd:hasRole>
-        <bd:hasPersonAddress>H01 A-Block DHA, Lahore</bd:hasPersonAddress>
-      </bd:Donor>
-    </bd:bloodDonationMakeby>
-    <bd:hasDonorMessage>Give life gift</bd:hasDonorMessage>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-    <bd:hasDonorEmail>sana@email.com</bd:hasDonorEmail>
-    <bd:hasDonorName>Sana Javed</bd:hasDonorName>
-    <bd:hasDonorID>DN001</bd:hasDonorID>
-    <bd:hasDonorContactNo>+92 333 1234561</bd:hasDonorContactNo>
-    <bd:hasDonorGender>Female</bd:hasDonorGender>
-    <bd:hasDonorCity>Lahore</bd:hasDonorCity>
-    <bd:hasDonorAvailable>Not Available</bd:hasDonorAvailable>
-  </bd:Blood_Donation>
-  <bd:Sponsor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor_1">
-    <bd:hasSponsorName>Jamal Sons</bd:hasSponsorName>
-    <bd:hasSponsorMessage>This website make sure that blood is available for pateient in any situation.</bd:hasSponsorMessage>
-    <bd:hasSponsorID>S001</bd:hasSponsorID>
-    <bd:sponsorManageBy>
-      <bd:Admin rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001">
-        <bd:hasAdminBloodGroup>A+</bd:hasAdminBloodGroup>
-        <bd:hasUserName>admin111</bd:hasUserName>
-        <bd:userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
-        <bd:hasAdminFullName>Hassan</bd:hasAdminFullName>
-        <bd:hasAdminDateOfBirth>January 01, 2000</bd:hasAdminDateOfBirth>
-        <bd:hasAdminGender>Male</bd:hasAdminGender>
-        <bd:hasRole>ADMIN</bd:hasRole>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <bd:hasAdminCity>Lahore</bd:hasAdminCity>
-        <bd:hasAdminAddress>H01 P-Block DHA, Lahore</bd:hasAdminAddress>
-        <bd:hasAdminContactNo>+92 333 1234567</bd:hasAdminContactNo>
-        <bd:hasAdminID>AD001</bd:hasAdminID>
-        <bd:hasPassword>$2a$10$ZN2QBOfnMugeZBOA86qSReMxvJuMyfgTDLzsxo4IsA7R9RA0x5n/.</bd:hasPassword>
-        <bd:hasAdminEmail>hassan@email.com</bd:hasAdminEmail>
-      </bd:Admin>
-    </bd:sponsorManageBy>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </bd:Sponsor>
-  <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_1">
-    <bd:hasBloodStockNoOfBags>1</bd:hasBloodStockNoOfBags>
-    <bd:hasBloodStockID>BS001</bd:hasBloodStockID>
-    <bd:hasBloodStockBloodGroup>O-</bd:hasBloodStockBloodGroup>
-    <bd:hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
-    <bd:stockManagedBy>
-      <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_001">
-        <bd:hasCentreContactNo>+92 042 1234567</bd:hasCentreContactNo>
-        <bd:hasCentreTimings>09AM-06PM</bd:hasCentreTimings>
-        <bd:hasCentreName>Sundus Foundation</bd:hasCentreName>
-        <bd:hasCentreID>Centre_001</bd:hasCentreID>
-        <bd:hasCentreEmail>sundusfoundation@email.com</bd:hasCentreEmail>
-        <bd:hasPassword>123456789centre</bd:hasPassword>
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#"
+     xml:base="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system"
+     xmlns:bd="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <owl:Ontology rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#advertisementManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#advertisementManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#appointmentBookedIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#appointmentBookedIn">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#appointmentMadeBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#appointmentMadeBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#bloodDonationMakeby -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#bloodDonationMakeby">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#bloodRequestMakeby -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#bloodRequestMakeby">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#campaignManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#campaignManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#eventManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#eventManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#faqManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#faqManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#financialdonationManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#financialdonationManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasUser -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasUser">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#jobpostManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#jobpostManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#newsManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#newsManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationForCentre -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationForCentre">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationForRequestMaker -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationForRequestMaker">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationMadeBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#notificationMadeBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#sponsorManageBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#sponsorManageBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#stockManagedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#stockManagedBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#userRegisteredIn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#userRegisteredIn">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminAddress">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminBloodGroup">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminCity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminDateOfBirth -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminDateOfBirth">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminFullName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminFullName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminGender">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdminID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementDetails -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementDetails">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementPostDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementPostDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementTitle">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAge -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAge">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentBookingDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentBookingDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentBookingTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentBookingTime">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreLocation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreLocation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreTimings -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentCentreTimings">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorAddress">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorBloodGroup">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorCity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorDOB -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorDOB">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorGender">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockAddedDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockAddedDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockBloodGroup">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockNoOfBags -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasBloodStockNoOfBags">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignDetails -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignDetails">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignTitle">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignsPostDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCampaignsPostDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreCategory -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreCategory">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreCity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreLicenseNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreLicenseNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreLocation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreLocation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreOpeningDays -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreOpeningDays">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreTimings -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasCentreTimings">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDiabetes -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDiabetes">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorAvailable -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorAvailable">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorBloodGroup">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorCity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorGender">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorLocation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorLocation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorMessage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorMessage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDonorName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDxCancer -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDxCancer">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDxHPV -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasDxHPV">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventDateTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventDateTime">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventLocation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventLocation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventMessage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventMessage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasEventName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQDetails -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQDetails">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFAQTitle">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonationID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonationID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorDonationAmount -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorDonationAmount">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorDonationDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorDonationDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorMessage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorMessage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasFinancialDonorName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasHGB -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasHGB">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostDetails -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostDetails">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostPostingDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostPostingDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasJobPostTitle">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabAddress">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabCity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasLabName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasMadeDonation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasMadeDonation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsDetails -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsDetails">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsPostDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsPostDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsTitle -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNewsTitle">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationDate -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationDate">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationDay -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationDay">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationMadeByName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationMadeByName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationMessage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationMessage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasNotificationTime">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPLT -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPLT">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPassword -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPassword">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonAddress -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonAddress">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonBloodGroup">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonCity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonDateOfBirth -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonDateOfBirth">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonEligibilityStatus -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonEligibilityStatus">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonFullName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonFullName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonGender">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasPersonID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRBC -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRBC">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestDonatedBy -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestDonatedBy">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestDonorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestDonorName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerBloodGroup -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerBloodGroup">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerCity -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerCity">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerContactNo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerContactNo">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerEmail -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerEmail">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerGender -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerGender">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerHospital -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerHospital">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerLocation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerLocation">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerMessage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerMessage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRole -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRole">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDs -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDs">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsAIDs -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsAIDs">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHIV -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHIV">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHPV -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHPV">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHepatitisB -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsHepatitisB">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsSyphilis -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSTDsSyphilis">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSex -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSex">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorID">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorMessage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorMessage">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasSponsorName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasUserName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasUserName">
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasWBC -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasWBC">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:comment xml:lang="en">This is admin class, it belongs to user and it is subclass of user class.</rdfs:comment>
+        <rdfs:label>Admin</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Advertisement</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:comment xml:lang="en">This is the Appointment class.</rdfs:comment>
+        <rdfs:label>Appointment</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#BloodDonor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#BloodDonor"/>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#BloodTest -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#BloodTest"/>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:comment xml:lang="en">This is the Blood Donation class</rdfs:comment>
+        <rdfs:label>Blood_Donation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:comment xml:lang="en">This is blood donation center class, it belongs to user and it is subclass of user class.</rdfs:comment>
+        <rdfs:label>Blood_Donation_Centre</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:comment xml:lang="en">This is the main class of our Blood Donation Management System</rdfs:comment>
+        <rdfs:label>Blood_Donation_System</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label>Blood_Donor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:comment xml:lang="en">This is the Blood Request class.</rdfs:comment>
+        <rdfs:label>Blood_Request</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:comment xml:lang="en">This is the Blood Stock class.</rdfs:comment>
+        <rdfs:label>Blood_Stock</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Test">
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+        <rdfs:label>Blood_Test</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Campaign</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation"/>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor">
+        <owl:equivalentClass rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:comment xml:lang="en">This is donor class, it belongs to user and it is subclass of person class.</rdfs:comment>
+        <rdfs:label>Donor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Event</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donation">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Financial_Donation</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Frequently_Asked_Question">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Frequently_Asked_Question</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Job_Post</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:label>Lab</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>News</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Notification">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Notification</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User"/>
+        <rdfs:comment xml:lang="en">This is person class, it belongs to user and it is subclass of user class. It includes donors and request makers.</rdfs:comment>
+        <rdfs:label>Person</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdfs:comment xml:lang="en">This is request maker class, it belongs to user and it is subclass of person class.</rdfs:comment>
+        <rdfs:label>Request_Maker</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Sponsor">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:label>Sponsor</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#User">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_System"/>
+        <rdfs:comment xml:lang="en">This is User class.</rdfs:comment>
+        <rdfs:label>User</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin"/>
+        <userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
+        <hasAdminAddress>H01 P-Block DHA, Lahore</hasAdminAddress>
+        <hasAdminBloodGroup>A+</hasAdminBloodGroup>
+        <hasAdminCity>Lahore</hasAdminCity>
+        <hasAdminContactNo>+92 333 1234567</hasAdminContactNo>
+        <hasAdminDateOfBirth>January 01, 2000</hasAdminDateOfBirth>
+        <hasAdminEmail>hassan@email.com</hasAdminEmail>
+        <hasAdminFullName>Hassan</hasAdminFullName>
+        <hasAdminGender>Male</hasAdminGender>
+        <hasAdminID>AD001</hasAdminID>
+        <hasPassword>$2a$10$ZN2QBOfnMugeZBOA86qSReMxvJuMyfgTDLzsxo4IsA7R9RA0x5n/.</hasPassword>
+        <hasRole>ADMIN</hasRole>
+        <hasUserName>admin111</hasUserName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment_001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment_001">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
+        <appointmentBookedIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_001"/>
+        <appointmentMadeBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_001"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Avertisement_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Avertisement_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
+        <advertisementManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
+        <hasAdvertisementDetails>A newly opend foundation as well as blood donation centre located at &quot;Ravi Block, Lahore&quot;. This is fully functional blood donation centre who will collect blood for patient in &quot;Jinnah Hospial, Lahore&quot;.</hasAdvertisementDetails>
+        <hasAdvertisementID>A001</hasAdvertisementID>
+        <hasAdvertisementPostDate>Jan 01,2000</hasAdvertisementPostDate>
+        <hasAdvertisementTitle>Al-Kabir Foundation</hasAdvertisementTitle>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <stockManagedBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_001"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>O-</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS001</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_2 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_2">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>O+</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS002</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_3 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_3">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>A-</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS003</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_4 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_4">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>A+</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS004</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_5 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_5">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>B-</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS005</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_6 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_6">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>B+</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS006</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_7 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_7">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>AB-</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS007</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_8 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_8">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock"/>
+        <hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2000-01-02T00:00:00</hasBloodStockAddedDate>
+        <hasBloodStockBloodGroup>AB+</hasBloodStockBloodGroup>
+        <hasBloodStockID>BS008</hasBloodStockID>
+        <hasBloodStockNoOfBags>1</hasBloodStockNoOfBags>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
+        <campaignManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
+        <hasCampaignDetails>Give food, cloths and money or what ever you have for the injured people of TURKEY who suffered from earth quake.</hasCampaignDetails>
+        <hasCampaignID>C001</hasCampaignID>
+        <hasCampaignTitle>Donate for TURKEY</hasCampaignTitle>
+        <hasCampaignsPostDate>Jan 02,2000</hasCampaignsPostDate>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1684321536807 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign_1684321536807">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Campaign"/>
+        <hasCampaignDetails>Give food, cloths and money or what ever you have for the injured people of KASHMIR who suffered from earth quake.</hasCampaignDetails>
+        <hasCampaignID>Campaign_1684321536807</hasCampaignID>
+        <hasCampaignTitle>Donate for KASHMIR</hasCampaignTitle>
+        <hasCampaignsPostDate>2023-05-21</hasCampaignsPostDate>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_001 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_001">
         <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
         <bd:hasCentreCategory>Private</bd:hasCentreCategory>
         <bd:userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
@@ -973,101 +1990,95 @@
         <bd:hasPersonAddress>LDA EveNeu 1, Lahore</bd:hasPersonAddress>
         <bd:hasPersonFullName>Muhammad Salman</bd:hasPersonFullName>
         <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
-        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-        <bd:hasPersonID>Person_1684319454548</bd:hasPersonID>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <bd:hasPersonBloodGroup>B-</bd:hasPersonBloodGroup>
-        <bd:hasUserName>salman111</bd:hasUserName>
-      </bd:Donor>
-    </bd:bloodRequestMakeby>
-    <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
-    <bd:hasRequestMakerID>Request_1684320789894</bd:hasRequestMakerID>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-    <bd:hasRequestMakerEmail>ahmad@email.com</bd:hasRequestMakerEmail>
-    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
-    <bd:hasRequestMakerContactNo>03001234567</bd:hasRequestMakerContactNo>
-    <bd:hasRequestDonatedBy>null</bd:hasRequestDonatedBy>
-    <bd:hasRequestMakerBloodGroup>A-</bd:hasRequestMakerBloodGroup>
-    <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
-    <bd:hasRequestMakerHospital>Service Hospital</bd:hasRequestMakerHospital>
-    <bd:hasRequestMakerMessage>I need A- blood group urgently in Services Hospital, Lahore.</bd:hasRequestMakerMessage>
-  </owl:NamedIndividual>
-  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1684320392697">
-    <bd:hasRequestMakerContactNo>03001234567</bd:hasRequestMakerContactNo>
-    <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
-    <bd:hasRequestMakerLocation>Moon Market, Lahore</bd:hasRequestMakerLocation>
-    <bd:hasRequestDonorName>Muhammad Salman</bd:hasRequestDonorName>
-    <bd:hasRequestDonatedBy>Person_1684319454548</bd:hasRequestDonatedBy>
-    <bd:hasRequestMakerName>Junaid</bd:hasRequestMakerName>
-    <bd:hasRequestMakerMessage>I need AB- (-ve) blood group urgently for thelicimia patient.</bd:hasRequestMakerMessage>
-    <bd:hasRequestMakerHospital>Service Hospital</bd:hasRequestMakerHospital>
-    <bd:hasRequestMakerEmail>junaid@email.com</bd:hasRequestMakerEmail>
-    <bd:hasRequestMakerID>Request_1684320392697</bd:hasRequestMakerID>
-    <bd:bloodRequestMakeby>
-      <bd:Request_Maker rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319298290">
-        <bd:hasPersonDateOfBirth>2000-02-10</bd:hasPersonDateOfBirth>
-        <bd:hasPersonContactNo>03001234567</bd:hasPersonContactNo>
-        <bd:hasPersonAddress>LDA EveNeu 1, Lahore.</bd:hasPersonAddress>
-        <bd:hasPassword>$2a$10$JtxIup3A3nyvHXGy6PhBsORE94m5h3JvMLlCplHxghDwXDubZwwSK</bd:hasPassword>
-        <bd:hasPersonCity>Lahore</bd:hasPersonCity>
-        <bd:hasRole>USER</bd:hasRole>
-        <bd:hasPersonID>Person_1684319298290</bd:hasPersonID>
-        <bd:hasUserName>akash111</bd:hasUserName>
-        <bd:hasPersonEligibilityStatus>Eligible</bd:hasPersonEligibilityStatus>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <bd:hasPersonGender>Male</bd:hasPersonGender>
-        <bd:hasPersonBloodGroup>A-</bd:hasPersonBloodGroup>
+        <userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
+        <hasPassword>123456789user</hasPassword>
+        <hasPersonAddress>H01 A-Block DHA, Lahore</hasPersonAddress>
+        <hasPersonBloodGroup>A+</hasPersonBloodGroup>
+        <hasPersonCity>Lahore</hasPersonCity>
+        <hasPersonContactNo>+92 333 1234561</hasPersonContactNo>
+        <hasPersonDateOfBirth>January 01,2001</hasPersonDateOfBirth>
+        <hasPersonEmail>ali@email.com</hasPersonEmail>
+        <hasPersonFullName>Ali</hasPersonFullName>
+        <hasPersonGender>Male</hasPersonGender>
+        <hasPersonID>PR001</hasPersonID>
+        <hasRole>USER</hasRole>
+        <hasUserName>ali123</hasUserName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_002 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_002">
         <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
         <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
-        <bd:hasPersonFullName>Akash Ur Rehman</bd:hasPersonFullName>
-        <bd:hasPersonEmail>akash@emil.com</bd:hasPersonEmail>
-      </bd:Request_Maker>
-    </bd:bloodRequestMakeby>
-    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
-    <bd:hasRequestMakerBloodGroup>AB-</bd:hasRequestMakerBloodGroup>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
-  </owl:NamedIndividual>
-  <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_2">
-    <bd:hasBloodStockNoOfBags>1</bd:hasBloodStockNoOfBags>
-    <bd:hasBloodStockID>BS002</bd:hasBloodStockID>
-    <bd:hasBloodStockBloodGroup>O+</bd:hasBloodStockBloodGroup>
-    <bd:hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </bd:Blood_Stock>
-  <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_3">
-    <bd:hasBloodStockNoOfBags>1</bd:hasBloodStockNoOfBags>
-    <bd:hasBloodStockID>BS003</bd:hasBloodStockID>
-    <bd:hasBloodStockBloodGroup>A-</bd:hasBloodStockBloodGroup>
-    <bd:hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"
-    >2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </bd:Blood_Stock>
-  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1684319792744">
-    <bd:hasDonorLocation>Qazi Town, Multan Road, Lahore</bd:hasDonorLocation>
-    <bd:hasDonorCity>Lahore</bd:hasDonorCity>
-    <bd:hasDonorMessage>Give life blood.</bd:hasDonorMessage>
-    <bd:hasDonorAvailable>Not Available</bd:hasDonorAvailable>
-    <bd:hasDonorGender>Male</bd:hasDonorGender>
-    <bd:hasDonorEmail>abuhurairah@email.com</bd:hasDonorEmail>
-    <bd:hasDonorID>Donation_1684319792744</bd:hasDonorID>
-    <bd:hasDonorBloodGroup>AB-</bd:hasDonorBloodGroup>
-    <bd:hasDonorName>Muhammad Abu Hurairah</bd:hasDonorName>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-    <bd:hasDonorContactNo>03001234567</bd:hasDonorContactNo>
-    <bd:bloodDonationMakeby>
-      <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352">
-        <bd:hasPersonFullName>Muhammad Abu Hurairah</bd:hasPersonFullName>
-        <bd:hasPersonContactNo>03001234567</bd:hasPersonContactNo>
-        <bd:hasUserName>hurairah111</bd:hasUserName>
-        <bd:hasPersonBloodGroup>AB-</bd:hasPersonBloodGroup>
-        <bd:hasPersonCity>Lahore</bd:hasPersonCity>
-        <bd:hasPersonEmail>abuhurairah@email.com</bd:hasPersonEmail>
-        <bd:hasPersonEligibilityStatus>Eligible</bd:hasPersonEligibilityStatus>
-        <bd:hasPassword>$2a$10$gbdG/nHD8LWC1MCD01LgI.uOwI25USlZB4e12i2vmCRgrBPTCDbVy</bd:hasPassword>
-        <bd:hasPersonGender>Male</bd:hasPersonGender>
         <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
-        <bd:hasPersonDateOfBirth>2000-12-23</bd:hasPersonDateOfBirth>
+        <userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
+        <hasPassword>234567891user</hasPassword>
+        <hasPersonAddress>H02 A-Block DHA, Lahore</hasPersonAddress>
+        <hasPersonBloodGroup>B+</hasPersonBloodGroup>
+        <hasPersonCity>Lahore</hasPersonCity>
+        <hasPersonContactNo>+92 333 1234562</hasPersonContactNo>
+        <hasPersonDateOfBirth>January 02,2001</hasPersonDateOfBirth>
+        <hasPersonEmail>raza@email.com</hasPersonEmail>
+        <hasPersonFullName>Raza</hasPersonFullName>
+        <hasPersonGender>Male</hasPersonGender>
+        <hasPersonID>PR002</hasPersonID>
+        <hasRole>USER</hasRole>
+        <hasUserName>raza123</hasUserName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_003 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_003">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
+        <userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
+        <hasPassword>345678912user</hasPassword>
+        <hasPersonAddress>H03 A-Block DHA, Lahore</hasPersonAddress>
+        <hasPersonBloodGroup>AB+</hasPersonBloodGroup>
+        <hasPersonCity>Lahore</hasPersonCity>
+        <hasPersonContactNo>+92 333 1234563</hasPersonContactNo>
+        <hasPersonDateOfBirth>January 03,2001</hasPersonDateOfBirth>
+        <hasPersonEmail>salman@email.com</hasPersonEmail>
+        <hasPersonFullName>Salman</hasPersonFullName>
+        <hasPersonGender>Male</hasPersonGender>
+        <hasPersonID>PR003</hasPersonID>
+        <hasRole>USER</hasRole>
+        <hasUserName>salman123</hasUserName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352">
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+        <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_Maker"/>
+        <hasPassword>$2a$10$gbdG/nHD8LWC1MCD01LgI.uOwI25USlZB4e12i2vmCRgrBPTCDbVy</hasPassword>
+        <hasPersonAddress>Qazi Town, Multan Road, Lahore</hasPersonAddress>
+        <hasPersonBloodGroup>AB-</hasPersonBloodGroup>
+        <hasPersonCity>Lahore</hasPersonCity>
+        <hasPersonContactNo>03001234567</hasPersonContactNo>
+        <hasPersonDateOfBirth>2000-12-23</hasPersonDateOfBirth>
+        <hasPersonEligibilityStatus>Eligible</hasPersonEligibilityStatus>
+        <hasPersonEmail>abuhurairah@email.com</hasPersonEmail>
+        <hasPersonFullName>Muhammad Abu Hurairah</hasPersonFullName>
+        <hasPersonGender>Male</hasPersonGender>
+        <hasPersonID>Person_1684319206352</hasPersonID>
+        <hasRole>USER</hasRole>
+        <hasUserName>hurairah111</hasUserName>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319298290 -->
+
+    <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319298290">
         <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
         <bd:hasRole>USER</bd:hasRole>
         <bd:hasPersonID>Person_1684319206352</bd:hasPersonID>
@@ -1323,3 +2334,8 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Advertisement>
 </rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+

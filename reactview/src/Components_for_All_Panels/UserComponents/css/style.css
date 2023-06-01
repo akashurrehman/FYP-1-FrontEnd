@@ -394,3 +394,8 @@
     background-color: red;
     color: white;
 }
+
+
+.BarCardScale{
+    transform: scale(0.8);
+}

@@ -711,8 +711,8 @@ const MakeAppointment = () => {
                         </Row>
                         
                         <Row>
-                            <Col style={{justifyContent:"center",alignItems:"center",textAlign:"center"}}>
-                                <BUTTON variant="primary" onClick={handlePrintReceipt}>Print Receipt</BUTTON>
+                            <Col style={{justifyContent:"center",alignItems:"center",textAlign:"right"}}>
+                                <BUTTON variant="flatSolid" size='sm' onClick={handlePrintReceipt}>Print Receipt</BUTTON>
                             </Col>
                         </Row>
                     </Typography>
