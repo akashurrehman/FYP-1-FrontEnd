@@ -149,7 +149,7 @@ const HomeScreen_UserPanel = () => {
 
                     <div 
                         style={{position: "absolute",
-                            bottom: "20%",left: "10%",
+                            bottom: "10%",left: "10%",
                             backgroundColor: "",color: "white",
                             padding: "30px",
                             marginLeft: "30px",textAlign: "center",
@@ -165,7 +165,7 @@ const HomeScreen_UserPanel = () => {
                             <Col sm={3}>
                                 
                                 <Row><AvailableDonorsBar></AvailableDonorsBar></Row>
-                                <Row style={{marginTop:'7%',marginLeft:'-8%'}}><AvailableRequestMakersBar></AvailableRequestMakersBar></Row>
+                                <Row style={{marginTop:'7%',marginLeft:'-5%'}}><AvailableRequestMakersBar></AvailableRequestMakersBar></Row>
                                 
                             </Col>
                         </Row>

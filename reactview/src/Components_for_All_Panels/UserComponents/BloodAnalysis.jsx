@@ -70,7 +70,6 @@ const BloodAnalysis = () => {
     };
 
     const submitForm = async (e) => {
-        console.log(age,sex,wbc,rbc,plt,HGB,diabetes,stds,syphilis,aids);
         try {
             const response = await axios.post('http://localhost:5000/predictions', {
                 age, sex, wbc, rbc, plt, HGB, diabetes, stds, syphilis, aids
@@ -80,6 +79,7 @@ const BloodAnalysis = () => {
             if (response.data.output == "Donor is eligible for blood donation") {
                 // console.log(response.data.output);
                 console.log(eligibilityStatus);
+                handleImageSubmit();
 
                 if(id != null){
                     updateUserEligibilityStatus();
@@ -151,7 +151,30 @@ const BloodAnalysis = () => {
 
     const [showCongratulationBox, setShowCongratulationBox] = useState(false);
 
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [message, setMessage] = useState("");
     
+
+    const handleImageChange = (event) => {
+        event.preventDefault();
+        setSelectedImage(event.target.files[0]);
+    };
+    
+    const handleImageSubmit = () => {
+        const formData = new FormData();
+        formData.append("image", selectedImage);
+        console.log(selectedImage);   
+        axios
+            .post("http://localhost:3003/users/upload", formData)
+            .then((res) => {
+            console.log(res.data)
+            setMessage(res.data.message);
+            })
+            .catch((error) => {
+            setMessage(error.message);
+            console.log("error",error)
+            });
+    };
     
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -167,13 +190,16 @@ const BloodAnalysis = () => {
                 <Row className='mt-0 mb-5 p-1'>
                     <Col sm={12} className='LoginContainerCol'>
                         <Image src={image} rounded style={{marginBottom: "3%",marginTop:'-5%',height: "7rem",opacity:'1.0'}}></Image>
-                        <h4 className="RedColor" style={{fontFamily:'cursive'}}>Check your eligibility</h4>
+                        <h4 className="RedColor" style={{fontFamily:'cursive'}}>Check Donor Strength</h4>
                         <p className="justify-content mb-3 mt-3" style={{fontSize:'13px',color:'grey'}}>
-                            "Dear Donor!", Your donation changes lives. But not everyone can donate blood (including plasma), for a few reasons. Check your eligibility to donate today.
+                            "Dear Donor!", Fill out this form according to your CBC Report (Complete Blood Count). Then check your strength to donate today.
                         </p>
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <Row>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Age <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="left"
@@ -192,20 +218,23 @@ const BloodAnalysis = () => {
                                         <Form.Control
                                             required
                                             aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Age*" 
+                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Enter age*" 
                                             value={age}
                                             onChange={(e) => {
                                                 setAge(e.target.value);
                                             }}
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Please provide a valid name.
+                                            Please provide a valid age.
                                         </Form.Control.Feedback>
                                     </InputGroup>
                                     </OverlayTrigger>
                                 </Col>
                             
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Sex <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="right"
@@ -226,7 +255,7 @@ const BloodAnalysis = () => {
                                             value={sex} 
                                             onChange={(e) => setSex(e.target.value)}
                                         >
-                                            <option value="">Sex*</option>
+                                            <option value="">Select gender*</option>
                                             <option value={0}>Male</option>
                                             <option value={1}>Female</option>
                                         </Form.Select> 
@@ -240,6 +269,9 @@ const BloodAnalysis = () => {
                             </Row>
                             <Row>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>White Blood Cell <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="left"
@@ -258,19 +290,22 @@ const BloodAnalysis = () => {
                                         <Form.Control
                                             required
                                             aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="White Blood Cell*" 
+                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Enter White Blood Cell Count*" 
                                             value={wbc}
                                             onChange={(e) => {
                                                 setWBC(e.target.value);
                                             }}
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Please provide a valid name.
+                                            Please provide a valid white blood cell count.
                                         </Form.Control.Feedback>
                                     </InputGroup>
                                     </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Red Blood Cell <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="right"
@@ -289,14 +324,14 @@ const BloodAnalysis = () => {
                                         <Form.Control
                                             required
                                             aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Red Blood Cell*" 
+                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Enter Red Blood Cell Count*" 
                                             value={rbc}
                                             onChange={(e) => {
                                                 setRBC(e.target.value);
                                             }}
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Please provide a valid name.
+                                            Please provide a valid red blood cell count.
                                         </Form.Control.Feedback>
                                     </InputGroup>
                                     </OverlayTrigger>
@@ -305,6 +340,9 @@ const BloodAnalysis = () => {
                             </Row>
                             <Row>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Platelets <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="left"
@@ -323,19 +361,22 @@ const BloodAnalysis = () => {
                                         <Form.Control
                                             required
                                             aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Platelet*" 
+                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Enter Platelets Count*" 
                                             value={plt}
                                             onChange={(e) => {
                                                 setPLT(e.target.value);
                                             }}
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Please provide a valid name.
+                                            Please provide a valid value of platelets.
                                         </Form.Control.Feedback>
                                     </InputGroup>
                                     </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Hemoglobin <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="right"
@@ -354,14 +395,14 @@ const BloodAnalysis = () => {
                                         <Form.Control
                                             required
                                             aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="HGB*" 
+                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Enter Hemoglobin(HGB) Level*" 
                                             value={HGB}
                                             onChange={(e) => {
                                                 setHGB(e.target.value);
                                             }}
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Please provide a valid name.
+                                            Please provide a valid hemoglobin level.
                                         </Form.Control.Feedback>
                                     </InputGroup>
                                     </OverlayTrigger>
@@ -370,6 +411,9 @@ const BloodAnalysis = () => {
                             
                             <Row>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Diabetes <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="left"
@@ -391,18 +435,21 @@ const BloodAnalysis = () => {
                                                 value={diabetes}
                                                 onChange={(e) => setDiabetes(e.target.value)}
                                             >
-                                                <option value="">Diabetes*</option>
+                                                <option value="">Select Diabetes Status*</option>
                                                 <option value={1}>Yes</option>
                                                 <option value={0}>No</option>
                                             </Form.Select>
                                             
                                             <Form.Control.Feedback type="invalid">
-                                                Please provide a valid gender.
+                                                Please provide a valid diabetes status.
                                             </Form.Control.Feedback>
                                         </InputGroup>
                                     </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Sexually Transmitted Diseases <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="right"
@@ -424,13 +471,13 @@ const BloodAnalysis = () => {
                                                 value={stds}
                                                 onChange={(e) => setSTDs(e.target.value)}
                                             >
-                                                <option value="">STDs*</option>
+                                                <option value="">Select STDs Status*</option>
                                                 <option value={1}>Yes</option>
                                                 <option value={0}>No</option>
                                             </Form.Select>
                                             
                                             <Form.Control.Feedback type="invalid">
-                                                Please provide a valid gender.
+                                                Please provide a valid STDS status.
                                             </Form.Control.Feedback>
                                         </InputGroup>
                                     </OverlayTrigger>
@@ -440,6 +487,9 @@ const BloodAnalysis = () => {
                             
                             <Row>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Syphilis <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="left"
@@ -461,18 +511,21 @@ const BloodAnalysis = () => {
                                                 value={syphilis}
                                                 onChange={(e) => setSyphilis(e.target.value)}
                                             >
-                                                <option value="">Syphilis*</option>
+                                                <option value="">Select Syphilis Status*</option>
                                                 <option value={1}>Yes</option>
                                                 <option value={0}>No</option>
                                             </Form.Select>
                                             
                                             <Form.Control.Feedback type="invalid">
-                                                Please provide a valid gender.
+                                                Please provide a valid Syphilis status.
                                             </Form.Control.Feedback>
                                         </InputGroup>
                                     </OverlayTrigger>
                                 </Col>
                                 <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Acquired Immunodeficiency Syndrome <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                     <OverlayTrigger
                                         trigger={['hover', 'focus']}
                                         placement="right"
@@ -500,23 +553,32 @@ const BloodAnalysis = () => {
                                                     
                                                 }}
                                             >
-                                                <option value="">AIDS*</option>
+                                                <option value="">Select AIDS Status*</option>
                                                 <option value={1}>Yes</option>
                                                 <option value={0}>No</option>
                                             </Form.Select>
                                             
                                             <Form.Control.Feedback type="invalid">
-                                                Please provide a valid gender.
+                                                Please provide a valid AIDS status.
                                             </Form.Control.Feedback>
                                         </InputGroup>
                                     </OverlayTrigger>
                                 </Col>
                             </Row>
 
-                            <Row className="mt-2" style={{textAlign:'right'}}>
-                                <Col sm={12}>
+                            <Row className="mt-2" >
+                                <Col sm={6}>
+                                    <form>
+                                        <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                            <Form.Label className='PurpleColor'>Upload your CBC report <spam className='RedColor'>*</spam></Form.Label>
+                                        </div>
+                                        <input type="file" accept="image/*"  onChange={handleImageChange} />
+                                        {message && <p>{message}</p>}
+                                    </form>
+                                </Col>
+                                <Col className="mt-3" sm={6} style={{textAlign:'right'}}>
                                 <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
-                                >Check Eligibility</Button>
+                                >Check Strength</Button>
                                 </Col>
                             </Row>
 

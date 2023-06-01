@@ -34,8 +34,8 @@ const AvailableRequestMakersBar = () => {
                 
                     <Row>
                     <div style={{fontSize:'17px',marginTop:'3%',marginBottom:'-6%',color:'#fff1e1'}}>
-                    <Nav.Link href='/user/donor'><p>Request Makers</p></Nav.Link>
-                </div>
+                        <Nav.Link href='/user/donor'><p>Request Makers</p></Nav.Link>
+                    </div>
                         <Col sm={4}>
                         <div style={{marginTop:'20%',textAlign:'left',marginLeft:'25%',marginBottom:'-10%'}}>
                             
