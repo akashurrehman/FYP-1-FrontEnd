@@ -34,13 +34,12 @@ import EventAvailableSharpIcon from '@mui/icons-material/EventAvailableSharp';
 import SocialMediaButtons from "../SocialMediaButtons";
 import LocalPhoneSharpIcon from '@mui/icons-material/LocalPhoneSharp';
 
-
+import BUTTON from 'react-bootstrap/Button';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-
-
+import {AppointmentReceipt} from './AppointmentPrintReceipt';
 
 const MakeAppointment = () => {
 
@@ -118,8 +117,10 @@ const MakeAppointment = () => {
                 console.log(err);
         });
     };
-
-
+    const handlePrintReceipt = () => {
+        AppointmentReceipt(centre,user,bookingDate,bookingTime);
+        console.log("Appointmwnt Print Receipt");
+    }
 
     useEffect(()=>{authCentre();getUserData();getCentreData();authCentre();}, []);
     console.log(centre);
@@ -707,10 +708,13 @@ const MakeAppointment = () => {
 
                             </Col>
                             <Col sm={1}></Col>
-                            
                         </Row>
                         
-                        
+                        <Row>
+                            <Col style={{justifyContent:"center",alignItems:"center",textAlign:"center"}}>
+                                <BUTTON variant="primary" onClick={handlePrintReceipt}>Print Receipt</BUTTON>
+                            </Col>
+                        </Row>
                     </Typography>
                 </Box>
             </Modal>
