@@ -1011,6 +1011,21 @@
     >2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Blood_Stock>
+  <bd:Blood_Donation_Centre rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1685594505970">
+    <bd:hasCentreTimings>11PM-6AM</bd:hasCentreTimings>
+    <bd:hasCentreCity>Lahore</bd:hasCentreCity>
+    <bd:hasCentreID>Centre_1685594505970</bd:hasCentreID>
+    <bd:hasCentreLicenseNo>LRCCOO01</bd:hasCentreLicenseNo>
+    <bd:hasCentreContactNo>+92 349 4622821</bd:hasCentreContactNo>
+    <bd:hasCentreLocation>Defence Road, Near Main Market</bd:hasCentreLocation>
+    <bd:hasCentreCategory>Private</bd:hasCentreCategory>
+    <bd:hasCentreName>Test</bd:hasCentreName>
+    <bd:hasCentreEmail>test@gmail.com</bd:hasCentreEmail>
+    <bd:hasCentreOpeningDays>Monday to Friday</bd:hasCentreOpeningDays>
+    <bd:hasUserName>test123</bd:hasUserName>
+    <bd:hasPassword>$2a$10$K7FtrcKXKNDOaezVKTUzveWpGz6PFjXcnfKmQaEEecjRA1o6vJyR2</bd:hasPassword>
+    <bd:hasRole>CENTRE</bd:hasRole>
+  </bd:Blood_Donation_Centre>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1684319792744">
     <bd:hasDonorLocation>Qazi Town, Multan Road, Lahore</bd:hasDonorLocation>
     <bd:hasDonorCity>Lahore</bd:hasDonorCity>
