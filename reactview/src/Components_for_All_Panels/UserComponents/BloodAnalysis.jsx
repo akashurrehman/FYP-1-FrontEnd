@@ -190,9 +190,9 @@ const BloodAnalysis = () => {
                 <Row className='mt-0 mb-5 p-1'>
                     <Col sm={12} className='LoginContainerCol'>
                         <Image src={image} rounded style={{marginBottom: "3%",marginTop:'-5%',height: "7rem",opacity:'1.0'}}></Image>
-                        <h4 className="RedColor" style={{fontFamily:'cursive'}}>Check Donor Strength</h4>
-                        <p className="justify-content mb-3 mt-3" style={{fontSize:'13px',color:'grey'}}>
-                            "Dear Donor!", Fill out this form according to your CBC Report (Complete Blood Count). Then check your strength to donate today.
+                        <h3 className="RedColor" style={{}}>Check Donor Strength</h3>
+                        <p className="justify-content mb-3 mt-3" style={{fontSize:'15px',color:'grey',fontFamily:'cursive'}}>
+                            "Dear Donor!", Fill out this form according to your CBC Report (Complete Blood Count). Then check your strength for blood donation or booking appointment.
                         </p>
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <Row>
