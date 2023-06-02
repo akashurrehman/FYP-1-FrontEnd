@@ -117,9 +117,9 @@ const PostBloodRequest = () => {
                 <Container>
                     <Row className='mt-0 mb-5 p-1'>
                         <Col sm={12} className='LoginContainerCol'>
-                        <Image src={image_post_blood_request} rounded style={{marginTop: "-8%",marginBottom:'2%',height: "4rem",opacity:'1.0'}}></Image>
-                            <h4 className="RedColor" style={{fontFamily:'cursive'}}>Post Blood Request</h4>
-                            <p className="justify-content mb-3 mt-3" style={{fontSize:'13.5px',color:'gray'}}>
+                        <Image src={image_post_blood_request} rounded style={{marginTop: "-13%",marginBottom:'0%',height: "4rem",opacity:'1.0'}}></Image>
+                            <h4 className="RedColor" style={{marginTop:'-2%'}}>Post Blood Request</h4>
+                            <p className="justify-content mb-3 mt-0" style={{fontSize:'13.5px',color:'gray',fontFamily:'cursive'}}>
                                 "Dear Request Maker!", your information is valuable to us.
                                 When you fill out this form, the system will create your blood request. 
                                 With your name and other details; you can view your posted blood requests!
@@ -127,6 +127,9 @@ const PostBloodRequest = () => {
                             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                 <Row>
                                     <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Full Name <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <AccountCircle sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -134,7 +137,7 @@ const PostBloodRequest = () => {
                                             <Form.Control
                                                 required
                                                 aria-label="Default"
-                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Full Name*" 
+                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Please provide full name" 
                                                 value={name}
                                                 onChange={(e) => {
                                                     setName(e.target.value);
@@ -147,6 +150,9 @@ const PostBloodRequest = () => {
                                     </Col>
                                 
                                     <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Email <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <EmailIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -154,7 +160,7 @@ const PostBloodRequest = () => {
                                             <Form.Control
                                                 required
                                                 aria-label="Default"
-                                                aria-describedby="inputGroup-sizing-default" type="email" placeholder="Email*" 
+                                                aria-describedby="inputGroup-sizing-default" type="email" placeholder="Please provide email" 
                                                 value={email}
                                                 onChange={(e) => {
                                                     setEmail(e.target.value);
@@ -168,6 +174,9 @@ const PostBloodRequest = () => {
                                 </Row>
                                 <Row>
                                     <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Hospital Where Blood Needed <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <LocalHospitalIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -175,7 +184,7 @@ const PostBloodRequest = () => {
                                             <Form.Control
                                                 not-required
                                                 aria-label="Default"
-                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Hospital / Blood Donation Centre*" 
+                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Hospital / Blood Donation Centre name" 
                                                 value={hospital}
                                                 onChange={(e) => {
                                                     setHospital(e.target.value);
@@ -188,6 +197,9 @@ const PostBloodRequest = () => {
                                     </Col>
                                     
                                     <Col sm={6}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Contact No <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <ContactsSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -195,7 +207,7 @@ const PostBloodRequest = () => {
                                             <Form.Control
                                                 required
                                                 aria-label="Default"
-                                                aria-describedby="inputGroup-sizing-default" type="number" placeholder="Contact Number*" 
+                                                aria-describedby="inputGroup-sizing-default" type="number" placeholder="Please provide contact no" 
                                                 value={contactNo}
                                                 onChange={(e) => {
                                                     setContactNo(e.target.value);
@@ -210,6 +222,9 @@ const PostBloodRequest = () => {
                                 
                                 <Row>
                                     <Col sm={12}>
+                                    <div style={{textAlign:'left',marginBottom:'-1%'}}>
+                                        <Form.Label className='PurpleColor'>Location <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <LocationOnSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -217,7 +232,7 @@ const PostBloodRequest = () => {
                                             <Form.Control
                                                 required
                                                 aria-label="Default" 
-                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Location*" 
+                                                aria-describedby="inputGroup-sizing-default" type="text" placeholder="Please provide location" 
                                                 value={location}
                                                 onChange={(e) => {
                                                     setLocation(e.target.value);
@@ -231,6 +246,9 @@ const PostBloodRequest = () => {
                                 </Row>
                                 <Row>
                                     <Col sm={5}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Required Blood Group <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <BloodtypeSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -240,7 +258,7 @@ const PostBloodRequest = () => {
                                                 value={bloodGroup} 
                                                 onChange={(e) => setBloodGroup(e.target.value)}
                                             >
-                                                <option value="">Select Blood Group*</option>
+                                                <option value="">Select Blood Group</option>
                                                 <option value="A+">A+</option>
                                                 <option value="B+">B+</option>
                                                 <option value="O+">O+</option>
@@ -257,7 +275,10 @@ const PostBloodRequest = () => {
                                         </InputGroup>
                                     </Col>
                                     <Col sm={3}>
-                                    <InputGroup size="sm" className="mb-3" hasValidation>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>Patient Gender <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
+                                        <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <WcSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                             </InputGroup.Text>
@@ -266,7 +287,7 @@ const PostBloodRequest = () => {
                                                 value={gender} 
                                                 onChange={(e) => setGender(e.target.value)}
                                             >
-                                                <option value="">Gender*</option>
+                                                <option value="">Gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                                 <option value="Other">Other</option>
@@ -278,6 +299,9 @@ const PostBloodRequest = () => {
                                         </InputGroup>
                                     </Col>
                                     <Col sm={4}>
+                                    <div style={{textAlign:'left',marginBottom:'-2%'}}>
+                                        <Form.Label className='PurpleColor'>City <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <LocationCitySharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
@@ -286,7 +310,7 @@ const PostBloodRequest = () => {
                                                 value={city} 
                                                 onChange={(e) => setCity(e.target.value)}
                                             >
-                                                <option value="">Select City*</option>
+                                                <option value="">Select City</option>
                                                 <option value="Lahore">Lahore</option>
                                                 <option value="Islamabad">Islamabad</option>
                                                 <option value="Karachi">Karachi</option>
@@ -300,6 +324,9 @@ const PostBloodRequest = () => {
                                 </Row>
                                 <Row>
                                     <Col sm={12}>
+                                    <div style={{textAlign:'left',marginBottom:'-1%'}}>
+                                        <Form.Label className='PurpleColor'>Important message about blood request <spam className='RedColor'>*</spam></Form.Label>
+                                    </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
                                                 <ChatSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
