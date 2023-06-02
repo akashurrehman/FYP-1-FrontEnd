@@ -17,24 +17,32 @@ import { useAuth } from "../BloodDonationCentre/Auth/AuthContext";
 import jwtDecode from "jwt-decode";
 
 const HomeScreen_BloodDonation = () => {
-  const {token} = useAuth();
-    
-    const decodedToken = token ? jwtDecode(token) : null;
-    const role = decodedToken?.role;
+  const { token } = useAuth();
 
-    const authCentre=()=>{
-      if(role!='ADMIN'){
-        window.location.href = "/user/login";
-      }
-        console.log("authCentre");
+  const decodedToken = token ? jwtDecode(token) : null;
+  console.log("My Decoded Token Is", decodedToken)
+  const role = decodedToken?.role;
+  const name = decodedToken?.name;
+
+  const authCentre = () => {
+    if (role != 'ADMIN') {
+      window.location.href = "/user/login";
     }
-  
-    React.useEffect(() => {
-      authCentre();
-    }, []);
+    console.log("authCentre");
+  }
+  const {handleLogout} = useAuth();
+  const handleLogoutClick=()=>{
+    handleLogout();
+    console.log('In Logout')
+    window.location.href="/user/login";
+  }
+
+  React.useEffect(() => {
+    authCentre();
+  }, []);
   return (
     <div className="container-fluid maincontainer mt-0">
-      
+
       <div className="row">
         <div className="col-sm-3 sidemenu  p-0 ml-50">
           {/* Profile Image and navigation div */}
@@ -49,11 +57,14 @@ const HomeScreen_BloodDonation = () => {
                   />
                 </div>
                 <div className="mt-2">
-                  <strong>Salman Ahmed</strong>
+                  <strong>{name}</strong>
                 </div>
                 <div className="mt-1">
                   <p className="text-secondary mb-1">Admin</p>
-                  <p className="fw-bold text-primary">Sign Out</p>
+                  <div onClick={handleLogoutClick} className="signout">
+                    <p className="fw-bold text-primary">Sign Out</p>
+                  </div>
+
                 </div>
               </div>
               <div>

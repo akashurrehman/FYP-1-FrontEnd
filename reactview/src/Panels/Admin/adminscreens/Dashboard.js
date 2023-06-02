@@ -1,10 +1,85 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import styles from "../../Admin/adminscreen.css";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/esm/Button";
+
 import { useAuth } from "../../BloodDonationCentre/Auth/AuthContext";
 import jwtDecode from "jwt-decode";
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend,
+} from 'chart.js';
+import { Bar, Line } from 'react-chartjs-2';
+import faker from 'faker';
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Filler,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'No. of visitors on the Website',
+    },
+  },
+};
+export const options1 = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'No. of Request Makers on the Website',
+    },
+  },
+};
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+export const data = {
+  labels,
+  datasets: [
+    {
+      fill: true,
+      label: 'Visitors',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      borderColor: 'rgb(100, 3, 1)',
+      backgroundColor: 'rgb(200, 3, 1)',
+    },
+  ],
+};
+export const data1 = {
+  labels,
+  datasets: [
+    {
+      fill: true,
+      label: 'Request Makers',
+      data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+      borderColor: 'rgb(100, 3, 1)',
+      backgroundColor: 'rgb(200, 3, 1)',
+    },
+  ],
+};
+
 
 function Dashboard() {
   const {token} = useAuth();
@@ -60,34 +135,12 @@ function Dashboard() {
       </Carousel>
 
       <div class="container text-center carddivs m-0 row">
-        <div className="row carddives">
-          <div className="col-lg-4 col-md-6 col-12">
-            <Card>
-              <Card.Img variant="top" src={require("../AdminPhotos/44.png")} />
-              <Card.Body>
-                {/* <Card.Title>Card</Card.Title> */}
-
-                <Button variant="warning">View Blood Request</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-lg-4 col-md-6 col-12">
-            <Card>
-              <Card.Img variant="top" src={require("../AdminPhotos/66.png")} />
-              <Card.Body>
-                <Button variant="warning">View Queries</Button>
-              </Card.Body>
-            </Card>
-          </div>
-          <div className="col-lg-4 col-md-6 col-12">
-            <Card>
-              <Card.Img variant="top" src={require("../AdminPhotos/55.png")} />
-              <Card.Body>
-                <Button variant="warning">View Blood Stocks</Button>
-              </Card.Body>
-            </Card>
-          </div>
-        </div>
+   <div className="row">
+    {/* <div className="col-lg-6">Boc 1</div> */}
+    <div className="col-lg-6"><Line options={options} data={data} /></div>
+    {/* <div className="col-lg-6"><Bar options={options} data={data} /></div> */}
+    <div className="col-lg-6"><Line options={options1} data={data1} /></div>
+   </div>
       </div>
     </div>
   );
