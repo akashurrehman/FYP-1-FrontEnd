@@ -434,9 +434,9 @@ const UserPanelHeader = () => {
                                                 </Col>
                                                 <Col sm={7}>
                                                     <div style={{textAlign:'right'}}>
-                                                        <Button size='sm' variant="flatSolid" onClick={handleClose}>
+                                                        {/* <Button size='sm' variant="flatSolid" onClick={handleClose}>
                                                             View all notifications
-                                                        </Button>
+                                                        </Button> */}
                                                     </div>
                                                 </Col>
                                             </Row>

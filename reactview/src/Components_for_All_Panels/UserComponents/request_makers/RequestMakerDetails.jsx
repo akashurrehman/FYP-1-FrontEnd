@@ -50,7 +50,7 @@ const RequestMakerDetails = () => {
                 <Row style={{marginBottom:'4%'}}>
                     <Col sm={12} style={{textAlign:'center',width:'60%'}}>
                         <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Request Maker Details</h2>  
-                        <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
+                        {/* <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p> */}
                     </Col>
                 </Row>
                 <Row style={{marginBottom:'10%'}}>
