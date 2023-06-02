@@ -103,7 +103,7 @@ const Appointments=()=> {
     display: "inline-block",
   };  
 
-const columns = [
+/* const columns = [
   {
     name: 'Name',
     selector: 'DonorName.value',
@@ -142,7 +142,7 @@ const columns = [
       <Button variant="primary" style={{ borderRadius: 0, height:"50%", widht:"100%" }} onClick={() => alert('Download Receipt Option selected!')}> IP/CT </Button>
     )
   }
-];
+]; */
 
   return (
   <div>
@@ -156,32 +156,105 @@ const columns = [
             <Sidebar />        
         </Col>
         <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
-          <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
-            <Card.Body>
-              <Card.Title >Booked Appointments</Card.Title>
-            </Card.Body>
-        </Card>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}} className="shadow p-3 mb-2 rounded">
-            <Card.Body>
-              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>Here you can see all the booked appointments!</Card.Title>
-              <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>You can accept or reject the appointments also</Card.Title>
-            </Card.Body>
-        </Card>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
+            <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
+              <Card.Body>
+                <Card.Title >Booked Appointments</Card.Title>
+              </Card.Body>
+          </Card>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}} className="shadow p-3 mb-2 rounded">
+              <Card.Body>
+                <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>Here you can see all the booked appointments!</Card.Title>
+                <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>You can accept or reject the appointments also</Card.Title>
+              </Card.Body>
+          </Card>
 
-        <DataTable title = "All Appointment" columns={columns} data={data}
-          pagination
-          fixedHeader
-          fixedHeaderScrollHeight='450px'
-          selectableRows
-          selectableRowsHighlight
-          highlightOnHover
-          
-          actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250", color:"white"}}> <PrinterFill className="" size={20} /> Download/Print</button>
+          {/* <DataTable title = "All Appointment" columns={columns} data={data}
+            pagination
+            fixedHeader
+            fixedHeaderScrollHeight='450px'
+            selectableRows
+            selectableRowsHighlight
+            highlightOnHover
+            
+            actions ={
+              <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250", color:"white"}}> <PrinterFill className="" size={20} /> Download/Print</button>
+            }
+            subHeader
+          /> */}  
+          {data.length > 0 ? (
+          <div>
+          {
+            data.map((item) => (
+              <Col md={12} xs={12}>
+                <Card className="shadow p-3 mb-2 rounded">
+                  <Card.Body>
+                    <Card.Text>
+                      <Row>
+                        <Col xs={5}>
+                          <h6>
+                            Email:  
+                          </h6>
+                          <h6>
+                            Blood Group:
+                          </h6>
+                          <h6>
+                            Gender:
+                          </h6> 
+                          <h6>
+                            Contact No:
+                          </h6>
+                        </Col>
+                        <Col xs={7}>
+                          <h6>
+                            {item.DonorEmail.value}
+                          </h6>
+                          <h6>
+                            {item.BloodGroup.value}
+                          </h6>
+                          <h6>
+                            {item.Gender.value}
+                          </h6>
+                          <h6>
+                            {item.DonorContactNo.value}
+                          </h6>
+                        </Col>
+                      </Row>
+                    </Card.Text>                   
+                  </Card.Body> 
+                </Card>
+              </Col>
+            ))
           }
-          subHeader
-        />
+          </div>
+          )
+           : (
+            <div>
+              <h6 style={{textAlign:"center",marginTop:"20px"}}>No Appointments Found!</h6>
+            </div>
+          )}
+          {
+            data.length>0?(
+              <div>
+              {
+                <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>
+                <div>
+                  <h6>
+                    For Printing the Appointments, click this button. This is for record Purposes only.
+                  </h6>
+                  <Button className='btn btn-info mb-3' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
+                </div>
+              </Col>
+              }
+              </div>
+          )
+           : (
+            <div>
+              
+            </div>
+          )}
+          
+
         </Col>
       </Row>
     </Container>

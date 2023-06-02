@@ -71,7 +71,7 @@ const mystyle = {
   display: "inline-block",
 };  
 
-const columns = [
+/* const columns = [
   {
     name: 'ID',
     selector: 'ID.value',
@@ -101,7 +101,7 @@ const columns = [
     name: 'City',
     selector: 'City.value',
   },
-];
+]; */
 
   return (
     loading ? <LoadingSpinner /> :
@@ -112,26 +112,27 @@ const columns = [
             <Sidebar />        
         </Col>
         <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
-          <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
-            <Card.Body style={{alignItems:"center",justifyContent:"center",textAlign:"center"}}>
-              <Card.Title>All Donors till Now</Card.Title>
-              <Card.Title>Contains the information of all the donors who donate at your blood donation center!</Card.Title>
-            </Card.Body>
-        </Card>
-        <DataTable title = "All donors" columns={columns} data={data}
-          pagination
-          fixedHeader
-          fixedHeaderScrollHeight='450px'
-          selectableRows
-          selectableRowsHighlight
-          highlightOnHover
-          
-          actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <PrinterFill className="" size={20} />Download/Print</button>
-          }
-          subHeader
-        />
+          <Card className="shadow p-3 mb-2 rounded" style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+            <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
+              <Card.Body style={{alignItems:"center",justifyContent:"center",textAlign:"center"}}>
+                <Card.Title>All Donors till Now</Card.Title>
+                <Card.Title>Contains the information of all the donors who donate at your blood donation center!</Card.Title>
+              </Card.Body>
+          </Card>
+
+            {/* <DataTable title = "All donors" columns={columns} data={data}
+            pagination
+            fixedHeader
+            fixedHeaderScrollHeight='450px'
+            selectableRows
+            selectableRowsHighlight
+            highlightOnHover
+            
+            actions ={
+              <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <PrinterFill className="" size={20} />Download/Print</button>
+            }
+            subHeader
+            /> */}
         </Col>
       </Row>
     </Container>

@@ -10,7 +10,7 @@ import DataTable from 'react-data-table-component';
 import Header from "./LabComponents/Header";
 import { handleRequestReportsPrint } from "./LabComponents/PrintedFiles/RequestedReport";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
-
+import {  PrinterFill } from 'react-bootstrap-icons';
 const ReportRequests=()=> {  
   const [selectedRowIds, setSelectedRowIds] = useState({});
   const [loading, setIsLoading] = useState(true);
@@ -74,7 +74,7 @@ const mystyle = {
   borderRadius: "50px",
   display: "inline-block",
 };  
-
+/* 
 const columns = [
   {
     name: 'ID',
@@ -118,31 +118,101 @@ const columns = [
       </div>
     )
   }  
-];
+]; */
   return (
     loading ? <LoadingSpinner/> :
     <Container style={{backgroundColor:"#EEEEEE"}} fluid>
       <Header />
       <Row>
-        <Col className="mt-md-5" xs={12}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#85586F",color:"white"}} >
+        <Col className="mt-sm-5" xs={12}>
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#85586F",color:"white"}} className="shadow p-3 mb-2 rounded">
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >All Report Requests</Card.Title>
             </Card.Body>
         </Card>
-        <DataTable title = "All Reports Requests" columns={columns} data={data}
-          pagination
-          fixedHeader
-          fixedHeaderScrollHeight='500px'
-          selectableRows
-          selectableRowsHighlight
-          highlightOnHover
-          actions ={
-            <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"white"}}> Download All Report Requests</button>
-          }
-          subHeader
-        />
+        {/*  <DataTable title = "All Reports Requests" columns={columns} data={data}
+            pagination
+            fixedHeader
+            fixedHeaderScrollHeight='500px'
+            selectableRows
+            selectableRowsHighlight
+            highlightOnHover
+            actions ={
+              <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"white"}}> Download All Report Requests</button>
+            }
+            subHeader
+          /> */}
+          {data.length > 0 ? (
+          <div>
+          {
+            data.map((item) => (
+              <Col md={12} xs={12}>
+                <Card className="shadow p-3 mb-2 mt-2 rounded">
+                  <Card.Body>
+                    <Card.Text>
+                      <Row>
+                        <Col xs={5}>
+                          <h6>
+                            Email:  
+                          </h6>
+                          <h6>
+                            Blood Group:
+                          </h6>
+                          <h6>
+                            Gender:
+                          </h6> 
+                          <h6>
+                            Contact No:
+                          </h6>
+                        </Col>
+                        <Col xs={7}>
+                          <h6>
+                            {item.Email.value}
+                          </h6>
+                          <h6>
+                            {item.Blood_Group.value}
+                          </h6>
+                          <h6>
+                            {item.Gender.value}
+                          </h6>
+                          <h6>
+                            {item.Contact.value}
+                          </h6>
+                        </Col>
+                      </Row>
+                    </Card.Text>                   
+                  </Card.Body> 
+                </Card>
+              </Col>
+            ))
+         }
+         </div>
+          ) : (
+            <div>
+              <h6 style={{textAlign:"center",marginTop:"20px"}}>No Report Requests Found!</h6>
+            </div>
+          )}
+          {
+            data.length>0?(
+              <div>
+              {
+                <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>
+                  <div>
+                    <h6>
+                      For Printing the Report list, click this button. This is for record Purposes only.
+                    </h6>
+                      <Button className='btn btn-info mb-3' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
+                  </div>
+                </Col>
+              }
+              </div>
+          )
+           : (
+            <div>
+              
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

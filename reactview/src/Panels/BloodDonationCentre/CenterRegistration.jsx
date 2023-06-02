@@ -9,7 +9,6 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import { BsStopwatch } from 'react-icons/bs';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import { BsExclamationSquare } from 'react-icons/bs';
 import { BsEnvelopeFill } from 'react-icons/bs';
 import { BsGeoAltFill } from 'react-icons/bs';
 import { toast } from 'react-toastify';
@@ -196,7 +195,7 @@ const handleCancel = () => {
     <Container style={{backgroundColor:"#D5D5D5"}} fluid>
       <Row>
         <Col className="mt-md-2" xs={12}>
-            <Card style={{paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+            <Card style={{paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
               <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body>
                 <Card.Title style={{justifyContent:"center",textAlign:"center"}}>
@@ -333,7 +332,7 @@ const handleCancel = () => {
               </Col>
           </Row>
           <Row className="mb-3">
-            <Card className="mb-5 mt-5 pt-2 pb-2" border="success">
+            <Card className="mb-5 mt-5 pt-2 pb-2 shadow p-3 mb-2 rounded" border="success" >
               <p>If you are already registered then you can login through this button!</p>
               <Col xs={6}>
                   <Button style={{ display: "inline-block", width:"75%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleLogin}>Already Registered? Go to Login.</Button>
