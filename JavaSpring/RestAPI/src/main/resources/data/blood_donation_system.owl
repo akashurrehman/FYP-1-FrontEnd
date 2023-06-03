@@ -626,13 +626,13 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab"/>
   </owl:DatatypeProperty>
-  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorName">
-    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
-  </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAdvertisementDetails">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
     <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Advertisement"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasAppointmentDonorName">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Appointment"/>
   </owl:DatatypeProperty>
   <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#hasRequestMakerMessage">
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
@@ -926,12 +926,12 @@
     <bd:hasRole>CENTRE</bd:hasRole>
   </bd:Blood_Donation_Centre>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1684320789894">
-    <bd:hasRequestMakerName>Ahmad</bd:hasRequestMakerName>
     <bd:hasRequestMakerLocation>Moon Market, Lahore</bd:hasRequestMakerLocation>
+    <bd:hasRequestMakerName>Ahmad</bd:hasRequestMakerName>
     <bd:bloodRequestMakeby>
       <bd:Donor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319454548">
-        <bd:hasPersonEmail>msalman@email.com</bd:hasPersonEmail>
         <bd:hasPassword>$2a$10$4GWh6wBQWwC1n9WhwUZWpeYotscNGfiDAax8hfTi1tDLXO5rtQ.ni</bd:hasPassword>
+        <bd:hasPersonEmail>msalman@email.com</bd:hasPersonEmail>
         <bd:hasPersonGender>Male</bd:hasPersonGender>
         <bd:hasPersonCity>Lahore</bd:hasPersonCity>
         <bd:hasPersonDateOfBirth>2000-10-01</bd:hasPersonDateOfBirth>
@@ -1015,13 +1015,13 @@
     <bd:hasDonorLocation>Qazi Town, Multan Road, Lahore</bd:hasDonorLocation>
     <bd:hasDonorCity>Lahore</bd:hasDonorCity>
     <bd:hasDonorMessage>Give life blood.</bd:hasDonorMessage>
-    <bd:hasDonorAvailable>Not Available</bd:hasDonorAvailable>
     <bd:hasDonorGender>Male</bd:hasDonorGender>
     <bd:hasDonorEmail>abuhurairah@email.com</bd:hasDonorEmail>
     <bd:hasDonorID>Donation_1684319792744</bd:hasDonorID>
     <bd:hasDonorBloodGroup>AB-</bd:hasDonorBloodGroup>
     <bd:hasDonorName>Muhammad Abu Hurairah</bd:hasDonorName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+    <bd:hasDonorAvailable>Available</bd:hasDonorAvailable>
     <bd:hasDonorContactNo>03001234567</bd:hasDonorContactNo>
     <bd:bloodDonationMakeby>
       <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352">
@@ -1045,8 +1045,8 @@
     </bd:bloodDonationMakeby>
   </owl:NamedIndividual>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319570720">
-    <bd:hasCentreTimings>9Am-4Am</bd:hasCentreTimings>
     <bd:hasCentreID>Centre_1684319570720</bd:hasCentreID>
+    <bd:hasCentreTimings>9Am-4Am</bd:hasCentreTimings>
     <bd:hasRole>CENTRE</bd:hasRole>
     <bd:hasCentreContactNo>+92 349 1128246</bd:hasCentreContactNo>
     <bd:hasPassword>$2a$10$ZN2QBOfnMugeZBOA86qSReMxvJuMyfgTDLzsxo4IsA7R9RA0x5n/.</bd:hasPassword>
@@ -1056,8 +1056,8 @@
     <bd:hasCentreOpeningDays>Monday</bd:hasCentreOpeningDays>
     <bd:hasCentreName>Fatima Foundation</bd:hasCentreName>
     <bd:hasCentreLocation>Main Ferozpur Road</bd:hasCentreLocation>
-    <bd:hasUserName>fatima111</bd:hasUserName>
     <bd:hasCentreCategory>Private</bd:hasCentreCategory>
+    <bd:hasUserName>fatima111</bd:hasUserName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
   </owl:NamedIndividual>
   <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_8">
@@ -1110,8 +1110,8 @@
     <bd:hasRequestMakerHospital>Sheikh Zyd Hospital</bd:hasRequestMakerHospital>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerMessage>I need A+ blood group urgently in Sheikh Zyd Hospital, Lahore.</bd:hasRequestMakerMessage>
-    <bd:hasRequestMakerLocation>Cream Block, Allam Iqbal Town, Lahore.</bd:hasRequestMakerLocation>
     <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
+    <bd:hasRequestMakerLocation>Cream Block, Allam Iqbal Town, Lahore.</bd:hasRequestMakerLocation>
     <bd:hasRequestMakerID>Request_1684323792728</bd:hasRequestMakerID>
     <bd:hasRequestMakerBloodGroup>A+</bd:hasRequestMakerBloodGroup>
     <bd:hasRequestMakerName>Qamar</bd:hasRequestMakerName>
@@ -1130,8 +1130,8 @@
     <bd:hasRequestMakerEmail>areeba@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerName>Areeba</bd:hasRequestMakerName>
     <bd:hasRequestMakerHospital>Indus Hospital</bd:hasRequestMakerHospital>
-    <bd:hasRequestMakerID>Request_1684320969889</bd:hasRequestMakerID>
     <bd:bloodRequestMakeby rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352"/>
+    <bd:hasRequestMakerID>Request_1684320969889</bd:hasRequestMakerID>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerMessage>I need blood group of B+ urgently in hospital for patient.</bd:hasRequestMakerMessage>
     <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
@@ -1181,9 +1181,9 @@
     <bd:hasRole>USER</bd:hasRole>
     <bd:hasPassword>345678912user</bd:hasPassword>
     <bd:hasPersonContactNo>+92 333 1234563</bd:hasPersonContactNo>
-    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasPersonGender>Male</bd:hasPersonGender>
     <bd:hasPersonAddress>H03 A-Block DHA, Lahore</bd:hasPersonAddress>
+    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasUserName>salman123</bd:hasUserName>
     <bd:userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
     <bd:hasPersonDateOfBirth>January 03,2001</bd:hasPersonDateOfBirth>

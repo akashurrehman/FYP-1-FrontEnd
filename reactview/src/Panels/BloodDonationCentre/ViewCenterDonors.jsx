@@ -9,6 +9,7 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
+import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 import './Styling/print.css';
 import { handleDonorPrint } from "./PrintedFiles/DonorsPrint";
 import { useAuth } from "./Auth/AuthContext";
@@ -16,9 +17,14 @@ import jwt_decode from 'jwt-decode';
 import {  PrinterFill } from 'react-bootstrap-icons';
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import { toast } from "react-toastify";
+import { InputGroup,FormControl } from "react-bootstrap";
+
 const ViewCenterDonors=()=> {
   const [loading, setIsLoading] = useState(true);  
   const [data, setData] = useState([]);
+  const [filteredDataArray, setFilteredDataArray] = React.useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
   const {token} = useAuth();
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwt_decode(token) : null;
@@ -34,12 +40,12 @@ const ViewCenterDonors=()=> {
   
 
   useEffect(() => {
-    // fetch data from the backend
+    // Fetch data from the backend
     fetch('http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo')
       .then((response) => response.json())
-      .then((data) => {
-        // map the bindings array to an array of objects
-        const rows = data.results.bindings.map((binding) => {
+      .then((res) => {
+        // Map the bindings array to an array of objects
+        const rows = res.results.bindings.map((binding) => {
           return {
             ID: binding.ID,
             Name: binding.Name,
@@ -53,12 +59,15 @@ const ViewCenterDonors=()=> {
           };
         });
         setData(rows);
+        setFilteredDataArray(rows);
+        console.log("Data:", rows);
       })
       .catch((error) => console.log(error));
-      authCentre();
-      setIsLoading(false);  
-      toast.info('You are in center Donor Page!',{position:toast.POSITION.TOP_CENTER});
+    authCentre();
+    setIsLoading(false);
+    toast.info('You are in center Donor Page!', { position: toast.POSITION.TOP_CENTER });
   }, []);
+  
 
   const handlePrint = () => {
     handleDonorPrint(data);
@@ -70,6 +79,36 @@ const mystyle = {
   borderRadius: "50px",
   display: "inline-block",
 };  
+const filterDonorsByName = (name) => {
+  console.log("name", name);
+  const filteredDonors = data.filter((donor) => {
+    return donor.Name.value.toLowerCase() === name.toLowerCase();
+  });
+  setFilteredDataArray(filteredDonors);
+  console.log("filterDonorsByName", filteredDonors);
+};
+
+const setArray = () => {
+  setFilteredDataArray(data);
+  console.log("setArray", data);
+};
+
+
+const handleChange = (event) => {
+  setSearchTerm(event.target.value);
+};
+
+const handleClick = (event) => {
+  event.preventDefault();
+  console.log(searchTerm);
+  if(searchTerm !== '') {
+      filterDonorsByName(searchTerm);
+  }
+  else{
+      setArray();
+  }
+  
+};
 
 /* const columns = [
   {
@@ -133,11 +172,31 @@ const mystyle = {
             }
             subHeader
             /> */}
+          <Container className='d-flex justify-content-center'>
+            <Row style={{ width: '40%' }}>
+              <form onSubmit={handleClick}>
+                  <InputGroup size="sm" className="mb-1">
+                    <FormControl
+                        placeholder="Search blood donor by name ..."
+                        aria-label="Search Blood Donations"
+                        aria-describedby="basic-addon2"
+                        value={searchTerm}
+                        onChange={handleChange}
+                      />
+                      {/* No submit button */}
+                      <input type="submit" style={{ display: 'none' }} />
+                      <InputGroup.Text id="basic-addon2">
+                      <Search className="m-1 PurpleColor" size={18} />
+                      </InputGroup.Text>
+                  </InputGroup>
+              </form>
+            </Row>
+          </Container>
           
-          {data.length > 0 ? (
+          {filteredDataArray.length > 0 ? (
           <div>
           {
-            data.map((item) => (
+            filteredDataArray.map((item) => (
               <Col md={12} xs={12}>
                 <Card className="shadow p-3 mb-2 mt-2 rounded">
                   <Card.Body>
@@ -191,7 +250,7 @@ const mystyle = {
             </div>
           )}
           {
-            data.length>0?(
+            filteredDataArray.length>0?(
               <div>
               {
                 <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>
