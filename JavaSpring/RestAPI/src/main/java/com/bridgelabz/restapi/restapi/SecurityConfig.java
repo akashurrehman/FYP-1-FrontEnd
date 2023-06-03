@@ -321,6 +321,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/admin/event/eventDetails/update/{ID}").permitAll()
                 .antMatchers("/api/admin/deleteEvents/{id}").permitAll()
 
+                //For Lab
+                .antMatchers("/api/labs/AllDonorsCBCReport").permitAll()
+                .antMatchers("/api/labs/getCBCdetails/byUserName/{userName}").permitAll()
+
+
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()

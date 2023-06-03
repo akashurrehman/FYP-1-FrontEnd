@@ -397,6 +397,111 @@ public class lab {
         }
     }
 
+
+
+    /*
+     * Get ALL LABS
+     */
+    @GetMapping("/api/labs/AllDonorsCBCReport")
+    public ResponseEntity<String> AllDonorsCBCReport() {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?cbc rdf:type bd:Lab_Donor_CBC ." +
+                "?cbc bd:hasLabDonorCBCID ?ID ." +
+                "?cbc bd:hasLABDonorCBCUserName ?UserName ." +
+                "?cbc bd:hasLabDonorCBCName ?Name ." +
+                "?cbc bd:hasLabDonorCBCAddress ?Address ." +
+                "?cbc bd:hasLabDonorCBCEmail ?Email ." +
+                "?cbc bd:hasLabDonorCBCContactNo ?ContactNo ." +
+                "?cbc bd:hasLabDonorCBCCity ?City ." +
+                "?cbc bd:hasLABDonorCBCStatus ?Status ." +
+                "?cbc bd:hasAge ?Age ." +
+                "?cbc bd:hasSex ?Sex ." +
+                "?cbc bd:hasWBC ?WBC ." +
+                "?cbc bd:hasRBC ?RBC ." +
+                "?cbc bd:hasPLT ?PLT ." +
+                "?cbc bd:hasHGB ?HGB ." +
+                "?cbc bd:hasSTDs ?STDs ." +
+                "?cbc bd:hasSTDsAIDs ?AIDs ." +
+                "?cbc bd:hasDiabetes ?Diabetes ." +
+                "?cbc bd:hasSTDsSyphilis ?Syphilis ." +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Data is Found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"No Data Found!\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
+    /*
+     * Get single lab by passing ID
+     */
+    @GetMapping("/api/labs/getCBCdetails/byUserName/{userName}")
+    public ResponseEntity<String> GetCBCReportDetailsByUserName(@PathVariable String userName) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?cbc rdf:type bd:Lab_Donor_CBC ." +
+                "?cbc bd:hasLabDonorCBCID ?ID ." +
+                "?cbc bd:hasLABDonorCBCUserName ?UserName ." +
+                "?cbc bd:hasLabDonorCBCName ?Name ." +
+                "?cbc bd:hasLabDonorCBCAddress ?Address ." +
+                "?cbc bd:hasLabDonorCBCEmail ?Email ." +
+                "?cbc bd:hasLabDonorCBCContactNo ?ContactNo ." +
+                "?cbc bd:hasLabDonorCBCCity ?City ." +
+                "?cbc bd:hasLABDonorCBCStatus ?Status ." +
+                "?cbc bd:hasAge ?Age ." +
+                "?cbc bd:hasSex ?Sex ." +
+                "?cbc bd:hasWBC ?WBC ." +
+                "?cbc bd:hasRBC ?RBC ." +
+                "?cbc bd:hasPLT ?PLT ." +
+                "?cbc bd:hasHGB ?HGB ." +
+                "?cbc bd:hasSTDs ?STDs ." +
+                "?cbc bd:hasSTDsAIDs ?AIDs ." +
+                "?cbc bd:hasDiabetes ?Diabetes ." +
+                "?cbc bd:hasSTDsSyphilis ?Syphilis ." +
+                "filter(?UserName = \"" + userName + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Data is Found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"No Data Found!\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
+
+
+
+
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
         File file = new File(ONTOLOGY_FILE_LOCAL_PATH);
