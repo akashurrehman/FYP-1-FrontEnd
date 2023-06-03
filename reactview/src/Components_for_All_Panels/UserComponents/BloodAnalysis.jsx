@@ -175,6 +175,50 @@ const BloodAnalysis = () => {
             console.log("error",error)
             });
     };
+
+
+    const getUserCBCReportData = async (e) => {
+        //Get id from token 
+        const token = localStorage.getItem('token');
+        const decodedToken = token ? jwtDecode(token) : null;
+        const userName = decodedToken?.name;
+        console.log(userName);
+        try {
+            if(userName !== null){
+                const response = await axios.get('http://localhost:8081/api/labs/getCBCdetails/byUserName/' + userName, {});
+                console.log(response?.data?.results?.bindings?.[0]);
+                setAge(response?.data?.results?.bindings?.[0].Age?.value);
+                setSex(response?.data?.results?.bindings?.[0].Sex?.value);
+                setWBC(response?.data?.results?.bindings?.[0].WBC?.value);
+                setRBC(response?.data?.results?.bindings?.[0].RBC?.value);
+                setPLT(response?.data?.results?.bindings?.[0].PLT?.value);
+                setHGB(response?.data?.results?.bindings?.[0].HGB?.value);
+                setDiabetes(response?.data?.results?.bindings?.[0].Diabetes?.value);
+                setSTDs(response?.data?.results?.bindings?.[0].STDs?.value);
+                setSyphilis(response?.data?.results?.bindings?.[0].Syphilis?.value);
+                setAIDs(response?.data?.results?.bindings?.[0].AIDs?.value);
+            }
+            else {
+                toast.error('Please login for requesting your CBC reports details from LAB', {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    position: toast.POSITION.BOTTOM_RIGHT,});
+            }
+        } 
+        catch (error) {
+            if (error.response) {
+                console.log(error.response.data.error);
+                toast.info('Kindly give your blood sample to lab, then you will be able to get your CBC report details here', {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    theme: "colored",
+                    position: toast.POSITION.BOTTOM_RIGHT,});
+            }
+            else {
+                console.log('An error occurred');
+            }
+        }
+    }
     
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -190,7 +234,10 @@ const BloodAnalysis = () => {
                 <Row className='mt-0 mb-5 p-1'>
                     <Col sm={12} className='LoginContainerCol'>
                         <Image src={image} rounded style={{marginBottom: "3%",marginTop:'-5%',height: "7rem",opacity:'1.0'}}></Image>
-                        <h3 className="RedColor" style={{}}>Check Donor Strength</h3>
+                        <h3 className="RedColor" style={{}}>Check Donor Strength 
+                            <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={getUserCBCReportData}
+                            >Request for a CBC</Button>
+                        </h3>
                         <p className="justify-content mb-3 mt-3" style={{fontSize:'15px',color:'grey',fontFamily:'cursive'}}>
                             "Dear Donor!", Fill out this form according to your CBC Report (Complete Blood Count). Then check your strength for blood donation or booking appointment.
                         </p>
