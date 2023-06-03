@@ -85,7 +85,7 @@ export default function BloodRequests() {
   };
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <div className="pdf-campaigns-container" ref={pdfContainerRef}>
         <div className="buttonInDonor">
           <h1 className="color">Blood Request</h1>

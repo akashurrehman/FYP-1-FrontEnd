@@ -120,7 +120,7 @@ export default function Sponsors() {
     PDFnotify();
   };
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <h1 className="color">Sponsors List</h1>
 
       <h3 className="color marginss">

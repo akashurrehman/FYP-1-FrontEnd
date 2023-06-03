@@ -213,7 +213,7 @@ export default function FinancialDonations() {
   };
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <h3 className="color marginss">
         <u>Add A New Financial Donation</u>
       </h3>

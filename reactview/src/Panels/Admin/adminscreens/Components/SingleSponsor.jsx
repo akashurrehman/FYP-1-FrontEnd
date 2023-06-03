@@ -132,7 +132,7 @@ const SingleSponsor = (props) => {
                       >
                         <Card.Title>
                           <h5
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "rgb(116, 10, 10)" }}
                           >
                             {sponsors?.Name?.value}
@@ -142,9 +142,9 @@ const SingleSponsor = (props) => {
                     </Row>
                     <Card.Body>
                       <Card.Text>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%" }}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Details:

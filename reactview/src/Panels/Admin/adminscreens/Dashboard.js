@@ -98,7 +98,7 @@ function Dashboard() {
     authCentre();
   }, []);
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <h1 className="color">Dashboard</h1>
       {/* Carousel Slider */}
       <Carousel>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "react-circular-progressbar/dist/styles.css";
 import axios from "axios";
 import "../adminscreen.css";
@@ -16,21 +16,23 @@ import {
   Geo,
   Map,
   Fingerprint,
+  Trash,
 } from "react-bootstrap-icons";
 import { useAuth } from "../../BloodDonationCentre/Auth/AuthContext";
 import jwtDecode from "jwt-decode";
+import { Button, Container, Dropdown, DropdownButton, Form, Nav, Row } from "react-bootstrap";
 
 export default function Donors() {
-  const {token} = useAuth();
-    
+  const { token } = useAuth();
+
   const decodedToken = token ? jwtDecode(token) : null;
   const role = decodedToken?.role;
 
-  const authCentre=()=>{
-    if(role!='ADMIN'){
+  const authCentre = () => {
+    if (role != 'ADMIN') {
       window.location.href = "/user/login";
     }
-      console.log("authCentre");
+    console.log("authCentre");
   }
 
   React.useEffect(() => {
@@ -71,6 +73,8 @@ export default function Donors() {
       });
   }, []);
 
+
+
   const generatePDF = () => {
     const doc = new jsPDF();
     const campaignsContainer = pdfContainerRef.current;
@@ -95,79 +99,166 @@ export default function Donors() {
       });
     PDFnotify();
   };
+  //For Filter
+  const bloodArray = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
+  const cityArray = ['Lahore', 'Karachi', 'Islamabad', 'Multan', 'Peshawar'];
+  const [filterDate, setFilterDate] = React.useState("Donors");
+  const dateArray = ['Recent', 'Day Ago', 'Week Ago', 'Month Ago', 'Year Ago'];
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedBloodGroup, setSelectedBloodGroup] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [filteredDonors, setFilteredDonors] = useState([]);
+  const [filtersApplied, setFiltersApplied] = useState(false);
+
+
+
+  useEffect(() => {
+    setFilteredDonors(users);
+  }, [users]);
+
+
+
+  const clearFilters = () => {
+    setSelectedBloodGroup(null);
+    setSelectedCity(null);
+    setFiltersApplied(false);
+  };
+  useEffect(() => {
+    let filteredDonors = users;
+
+    if (selectedBloodGroup) {
+      filteredDonors = filteredDonors.filter(
+        (donor) => donor.bloodGroup === selectedBloodGroup
+      );
+    }
+
+    if (selectedCity) {
+      filteredDonors = filteredDonors.filter(
+        (donor) => donor.city === selectedCity
+      );
+    }
+
+    setFilteredDonors(filteredDonors);
+    setFiltersApplied(selectedBloodGroup || selectedCity);
+  }, [selectedBloodGroup, selectedCity, users]);
+
+
+
+
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <div className="pdf-campaigns-container" ref={pdfContainerRef}>
         <div className="buttonInDonor">
-          <h1 className="color">Donors List</h1>
+          <h1 className="color">Donors List</h1><br />
+
+
+
+
           <button
-            className="btn btn-danger BtnGeneratePDF"
+            className="btn btn-danger BtnGeneratePDF "
             onClick={generatePDF}
           >
             Generate PDF
           </button>
         </div>
-        <div className="cardsmapping">
-        {users.map((faq, index) => (
-          <div className="headin" key={index}>
-            <div className="card DonoCard">
-              <div className="card-body">
-                <h5 className="card-title"> {faq.name}</h5>
-                <h6 className="card-subtitle mb-2 text-muted"> {faq.id}</h6>
 
-                <h5 className="card-title"> Details:</h5>
-                <p className="card-text">
-                  <div className="row">
-                    <div className="col-lg-9 col-12">
-                      <p className="m-1">
+        <div className="row mt-4">
+          <div className="col-lg-2 col-12"> <h3>Filters:</h3></div>
+          <div className="col-lg-6 gap col-12">
+
+            <DropdownButton
+              id="dropdown-item-button"
+              // className="custom-dropdown-button"
+              title={selectedBloodGroup || "Select Blood Group"}
+              onSelect={(bloodGroup) => setSelectedBloodGroup(bloodGroup)}
+            >
+              {bloodArray.map((bloodGroup, index) => (
+                <Dropdown.Item key={index} eventKey={bloodGroup}>
+                  {bloodGroup}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+            <DropdownButton
+              id="dropdown-item-button"
+              title={selectedCity || "Select City"}
+              onSelect={(city) => setSelectedCity(city)}
+            >
+              {cityArray.map((city, index) => (
+                <Dropdown.Item key={index} eventKey={city}>
+                  {city}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+            {filtersApplied && (
+              
+              <button className="btn btn-secondary icnss" onClick={clearFilters}>
+              <Trash className="trashbox" size={18} />
+              </button>
+            )}
+
+          </div>
+        </div>
+        <div className="cardsmapping mt-2">
+          {filteredDonors.map((faq, index) => (
+            <div className="headin" key={index}>
+              <div className="card DonoCard">
+                <div className="card-body">
+                  <h5 className="card-title"> {faq.name}</h5>
+                  <h6 className="card-subtitle mb-2 text-muted"> {faq.id}</h6>
+
+                  <h5 className="card-title"> Details:</h5>
+                  <p className="card-text">
+                    <div className="row">
+                      <div className="col-lg-9 col-12">
+                        <p className="m-1">
+                          {" "}
+                          <strong>Email: </strong>
+                          {faq.email}
+                        </p>
+                      </div>
+                      <div className="col-lg-3 col-12">
                         {" "}
-                        <strong>Email: </strong>
-                        {faq.email}
-                      </p>
+                        <strong> {faq.gender}</strong>
+                      </div>
                     </div>
-                    <div className="col-lg-3 col-12">
-                      {" "}
-                      <strong> {faq.gender}</strong>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-lg-9 col-12">
-                      <p>
+                    <div className="row">
+                      <div className="col-lg-9 col-12">
+                        <p>
+                          {" "}
+                          <strong>Contact: </strong>
+                          {faq.contact}{" "}
+                        </p>
+                      </div>
+                      <div className="col-lg-3 col-12">
                         {" "}
-                        <strong>Contact: </strong>
-                        {faq.contact}{" "}
-                      </p>
+                        <strong className="red"> {faq.bloodGroup}</strong>
+                      </div>
                     </div>
-                    <div className="col-lg-3 col-12">
-                      {" "}
-                      <strong className="red"> {faq.bloodGroup}</strong>
+                    <div className="row">
+                      <div className="col-12">
+                        <h6 className="card-subtitle mb-2 text-muted">
+                          {faq.location}{" "}
+                        </h6>
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12">
-                      <h6 className="card-subtitle mb-2 text-muted">
-                        {faq.location}{" "}
-                      </h6>
+                    <div className="row">
+                      <div className="col-12">
+                        <strong>City: </strong> {faq.city}{" "}
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12">
-                      <strong>City: </strong> {faq.city}{" "}
+                    <div className="row">
+                      <div className="col-12 ">
+                        <strong >Message:</strong> <br />
+                        <span className="text-muted">  {faq.message}{" "}</span>
+
+                      </div>
                     </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-12 ">
-                      <strong >Message:</strong> <br />
-                      <span className="text-muted">  {faq.message}{" "}</span>
-                    
-                    </div>
-                  </div>
-                </p>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
         </div>
       </div>
     </div>

@@ -134,7 +134,7 @@ export default function Jobs() {
   };
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <h3 className="color marginss">
         <u>Create a New Job Post </u>
       </h3>

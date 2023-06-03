@@ -127,7 +127,7 @@ export default function Campaign() {
   };
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <h1 className="color">Campaigns</h1>
 
       <h3 className="color marginss">

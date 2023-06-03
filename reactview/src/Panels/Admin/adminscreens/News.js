@@ -134,7 +134,7 @@ export default function News() {
   };
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <h1 className="color">News</h1>
       <h3 className="color marginss">
         <u>Create a new News Feed </u>

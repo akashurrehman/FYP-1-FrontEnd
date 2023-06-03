@@ -117,7 +117,7 @@ const SingleFaqs = (props) => {
         className="d-flex justify-content-center"
         style={{ paddingTop: "0%", paddingBottom: "7%" }}
       >
-        <Row className="">
+        <Row className="fontfamily">
           <div className="d-flex">
             <Col sm={4}>
               <Row className="" style={{ marginBottom: "10%" }}>
@@ -138,7 +138,7 @@ const SingleFaqs = (props) => {
                       >
                         <Card.Title>
                           <h5
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "rgb(116, 10, 10)" }}
                           >
                             {faqs?.Title?.value}
@@ -148,9 +148,9 @@ const SingleFaqs = (props) => {
                     </Row>
                     <Card.Body>
                       <Card.Text>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%",  }}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Details:

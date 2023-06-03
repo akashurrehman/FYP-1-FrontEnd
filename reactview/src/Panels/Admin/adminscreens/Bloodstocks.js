@@ -80,7 +80,7 @@ export default function Bloodstocks() {
   };
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <div className="pdf-campaigns-container" ref={pdfContainerRef}>
         <div className="buttonInDonor">
           <h1 className="color">Blood Stock</h1>

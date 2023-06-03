@@ -127,7 +127,7 @@ const SingleCampaign = (props) => {
         className="d-flex justify-content-center"
         style={{ paddingTop: "0%", paddingBottom: "7%" }}
       >
-        <Row className="">
+        <Row className="fontfamily">
           <div className="d-flex">
             <Col sm={4}>
               <Row className="" style={{ marginBottom: "10%" }}>
@@ -149,7 +149,7 @@ const SingleCampaign = (props) => {
                         <Card.Title>
                           <h5>
                             <strong
-                              className="TextCursive"
+                             
                               style={{ color: "rgb(116, 10, 10)" }}
                             >
                               {" "}
@@ -162,18 +162,18 @@ const SingleCampaign = (props) => {
                     </Row>
                     <Card.Body>
                       <Card.Text>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%"}}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Details:
                           </strong>
                           {campaign?.Details?.value}
                         </p>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%"}}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Date Posted:
