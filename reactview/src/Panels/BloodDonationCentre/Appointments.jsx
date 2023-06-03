@@ -252,7 +252,7 @@ const Appointments=()=> {
             <div>
               
             </div>
-          )}
+            )}
           
 
         </Col>
