@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Button, FloatingLabel } from "react-bootstrap";
 import { Form, Row, Col, Card, InputGroup, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { CalendarDateFill, Laptop } from "react-bootstrap-icons";
-
 import "./style.css";
-import GenericService from "../Services/GenericService";
 import packageService from "../Services/PackageService";
 
 const SingleFinancialDonation = (props) => {
-  const [show, setShow] = useState(false);
 
+    // Deletion Confirmation Modal
+    const [delShow, setDelShow] = useState(false);
+    const handleDelClose = () => setDelShow(false);
+    const handleDelShow = () => setDelShow(true);
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [name, setName] = useState("");
@@ -19,7 +20,7 @@ const SingleFinancialDonation = (props) => {
   const [donationAmount, setdonationAmount] = useState("");
   const [contactNo, setContactNo] = useState("");
   const [message, setmessage] = useState("");
-  const { fdon, history } = props;
+  const { fdon} = props;
   console.log(props);
   useEffect(() => {
     setName(fdon?.Name?.value);
@@ -150,6 +151,20 @@ const SingleFinancialDonation = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={delShow} onHide={handleDelClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to Delete the Donation Record?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={deleteUser}>
+            Yes
+          </Button>
+          <Button variant="primary" onClick={handleDelClose}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Container
         className="d-flex justify-content-center"
         style={{ paddingTop: "0%", paddingBottom: "7%" }}
@@ -225,7 +240,7 @@ const SingleFinancialDonation = (props) => {
                       <div className="row">
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button variant="danger" onClick={deleteUser}>Delete</Button>
+                          <Button variant="danger" onClick={handleDelShow}>Delete</Button>
                         </div>
                         <div className="col-lg-3 col-12">
                           {" "}

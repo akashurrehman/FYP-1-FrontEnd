@@ -9,9 +9,8 @@ import {
   InputGroup,
   Modal,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import {
-  CalendarDateFill,
+
   Laptop,
 } from "react-bootstrap-icons";
 
@@ -19,13 +18,18 @@ import "./style.css";
 import packageService from "../Services/PackageService";
 
 const SingleSponsor = (props) => {
+
+    // Deletion Confirmation Modal
+    const [delShow, setDelShow] = useState(false);
+    const handleDelClose = () => setDelShow(false);
+    const handleDelShow = () => setDelShow(true);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const { sponsors, history } = props;
+  const { sponsors } = props;
   console.log(props);
   useEffect(() => {
     setName(sponsors?.Name?.value);
@@ -107,6 +111,20 @@ const SingleSponsor = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={delShow} onHide={handleDelClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to Delete the Sponsor Record?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={deleteUser}>
+            Yes
+          </Button>
+          <Button variant="primary" onClick={handleDelClose}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Container
         className="d-flex justify-content-center"
         style={{ paddingTop: "0%", paddingBottom: "7%" }}
@@ -155,7 +173,7 @@ const SingleSponsor = (props) => {
                       <div className="row">
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button variant="danger" onClick={deleteUser}>Delete</Button>
+                          <Button variant="danger" onClick={handleDelShow}>Delete</Button>
                         </div>
                         <div className="col-lg-3 col-12">
                           {" "}
