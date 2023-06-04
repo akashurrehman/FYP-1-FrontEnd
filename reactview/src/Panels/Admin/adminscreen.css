@@ -51,6 +51,9 @@
 .fontfamily{
   font-family: "Montserrat";
 }
+.cursorpointer{
+  cursor: pointer;
+}
 .maincontainer {
   /* display: flex; */
   margin-top: 55px;

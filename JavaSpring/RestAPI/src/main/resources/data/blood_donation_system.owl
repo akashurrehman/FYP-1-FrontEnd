@@ -753,15 +753,13 @@
     <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donor"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </owl:FunctionalProperty>
-  <bd:Financial_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donor_1684321865812">
-    <bd:hasFinancialDonorName>Ali</bd:hasFinancialDonorName>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donor_1684321865812">
     <bd:hasFinancialDonorMessage>Donate ....... to needy persons.</bd:hasFinancialDonorMessage>
     <bd:hasFinancialDonorDonationDate>2023-05-17</bd:hasFinancialDonorDonationDate>
     <bd:hasFinancialDonorDonationAmount>1500</bd:hasFinancialDonorDonationAmount>
     <bd:hasFinancialDonorContactNo>+92 333 1234567</bd:hasFinancialDonorContactNo>
-    <bd:hasFinancialDonationID>Financial_Donor_1684321865812</bd:hasFinancialDonationID>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </bd:Financial_Donation>
+    <bd:hasFinancialDonorName>Ali</bd:hasFinancialDonorName>
+  </owl:NamedIndividual>
   <bd:Blood_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1">
     <bd:hasDonorBloodGroup>A-</bd:hasDonorBloodGroup>
     <bd:hasDonorLocation>Iqbal Town, Lahore</bd:hasDonorLocation>
@@ -885,13 +883,11 @@
     <bd:hasLabName>Fazal Mehmod</bd:hasLabName>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Lab>
-  <bd:Job_Post rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post_1684321928743">
-    <bd:hasJobPostTitle>Manager Required</bd:hasJobPostTitle>
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post_1684321928743">
     <bd:hasJobPostPostingDate>2023-05-15</bd:hasJobPostPostingDate>
-    <bd:hasJobPostID>Job_Post_1684321928743</bd:hasJobPostID>
+    <bd:hasJobPostTitle>Manager Required</bd:hasJobPostTitle>
     <bd:hasJobPostDetails>One Admin required in our blood donation centre for managing blood stock</bd:hasJobPostDetails>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </bd:Job_Post>
+  </owl:NamedIndividual>
   <rdf:Description rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donor_1685851281060">
     <bd:hasFinancialDonorContactNo>03022319373</bd:hasFinancialDonorContactNo>
     <bd:hasFinancialDonorDonationAmount>323232323</bd:hasFinancialDonorDonationAmount>
@@ -1060,11 +1056,10 @@
       </bd:Person>
     </bd:bloodDonationMakeby>
   </owl:NamedIndividual>
-  <bd:Frequently_Asked_Question rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#FAQ_1685851045490">
-    <bd:hasFAQTitle>ddsd</bd:hasFAQTitle>
+  <rdf:Description rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#FAQ_1685851045490">
     <bd:hasFAQDetails>sdsdsdsd</bd:hasFAQDetails>
-    <bd:hasFAQID>FAQ_1685851045490</bd:hasFAQID>
-  </bd:Frequently_Asked_Question>
+    <bd:hasFAQTitle>ddsd</bd:hasFAQTitle>
+  </rdf:Description>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319570720">
     <bd:hasCentreID>Centre_1684319570720</bd:hasCentreID>
     <bd:hasCentreTimings>9Am-4Am</bd:hasCentreTimings>
@@ -1093,14 +1088,12 @@
     <bd:hasSponsorMessage>This website make sure that blood is available for pateient in any situation.</bd:hasSponsorMessage>
     <bd:hasSponsorName>Babar Sons</bd:hasSponsorName>
   </owl:NamedIndividual>
-  <bd:Job_Post rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post_1">
+  <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Job_Post_1">
     <bd:hasJobPostTitle>Staff Required</bd:hasJobPostTitle>
     <bd:hasJobPostPostingDate>Jan 01,2000</bd:hasJobPostPostingDate>
-    <bd:hasJobPostID>JP001</bd:hasJobPostID>
-    <bd:hasJobPostDetails>Five female nurses required in Sundus Foundation, Blood Donation, Lahore.</bd:hasJobPostDetails>
     <bd:jobpostManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </bd:Job_Post>
+    <bd:hasJobPostDetails>Five female nurses required in Sundus Foundation, Blood Donation, Lahore.</bd:hasJobPostDetails>
+  </owl:NamedIndividual>
   <bd:Blood_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1684320444065">
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
     <bd:hasDonorGender>Male</bd:hasDonorGender>
