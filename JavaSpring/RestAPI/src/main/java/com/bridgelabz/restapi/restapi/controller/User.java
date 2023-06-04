@@ -62,7 +62,7 @@ public class User {
 
     /*
      * Route to Get Data of all Registered Users
-    */
+     */
 
     @GetMapping("/api/users/registration")
     public ResponseEntity<String> Allusers() {
@@ -1041,7 +1041,7 @@ public class User {
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(User);
-
+        System.out.print(User);
         String donatedBy = jsonNode.has("donatedBy") ? jsonNode.get("donatedBy").asText() : null;
         String donorName = jsonNode.has("donorName") ? jsonNode.get("donorName").asText() : null;
 
@@ -1127,7 +1127,8 @@ public class User {
                         "                       bd:appointmentBookedIn bd:%s ;\n" +
                         "}",
                 donorName, donorDOB, donorEmail, donorContactNo, donorGender, donorAddress, donorCity, donorBloodGroup,
-                centreName, centreTimings, centreContactNo, centreEmail, centreLocation, bookingDate, bookingTime, individualId, userID,
+                centreName, centreTimings, centreContactNo, centreEmail, centreLocation, bookingDate, bookingTime,
+                individualId, userID,
                 centreID);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
