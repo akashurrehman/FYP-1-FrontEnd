@@ -13,16 +13,18 @@ import { useAuth } from "./Auth/AuthContext";
 import jwtDecode from "jwt-decode";
 import {PrinterFill} from 'react-bootstrap-icons'
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
+import { InputGroup,FormControl } from "react-bootstrap";
+import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 
 const BloodRequests=()=> {  
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedData, setSelectedData] = useState([]);
   const [loading, setIsLoading] = useState(true);
-  
-    const [center, setCenterData] = useState({
-      name: "",
-      
-    });
+  const [filteredDataArray, setFilteredDataArray] = React.useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [center, setCenterData] = useState({
+    name: "",
+  });
 
   const {token} = useAuth();
   
@@ -60,19 +62,16 @@ const BloodRequests=()=> {
 
   const [data, setData] = useState([]);
 
-        const handleApprove = () => {
-          console.log(id);
+        const handleApprove = (ID) => {
+          console.log("Blood Request ID:"+ID);
           console.log(center.name);
           const donorName = center.name;
           try {
-            axios.put('http://localhost:8081/api/users/accept/bloodRequest/' + id, {
+            axios.put('http://localhost:8081/api/users/accept/bloodRequest/' + ID, {
                 donatedBy, donorName
             }).then((response)=>{
-              console.log("Response Data:"+response.data);
-              console.log(donorName);
-              console.log(donatedBy)
-              console.log("Donated By and Donor Name"+{donatedBy, donorName})
-              alert("Request Accepted");
+              alert(`Request Accepted  and Notification send to respective recipient`);
+              console.log("Response"+response);
              }).catch((error)=>{
               console.log("Put Error"+error);
               alert("Request Not Accepted");
@@ -83,16 +82,6 @@ const BloodRequests=()=> {
               console.log("Donated By and Donor Name"+{donatedBy, donorName})
         } 
       };
-        /* const handleReject = () => {
-            axios
-                .post(`http://localhost:8081/api/users/bloodrequest/reject/`+ id)
-                .then((response) => console.log(response.data))
-                .catch((error) => console.log(error)); 
-        };
-        */
-        const handleChange = (state) => {
-          // Get the selected rows from the state
-        };
 
   useEffect(() => {
     // fetch data from the backend
@@ -125,6 +114,7 @@ const BloodRequests=()=> {
           };
         });
         setData(rows);
+        setFilteredDataArray(rows);
       })
       .catch((error) => console.log(error));
       console.log("selectedRows after updating state", selectedRows);
@@ -135,6 +125,35 @@ const BloodRequests=()=> {
 
   const handlePrint = () => {
     handleRequestsPrint(data);
+  };
+  const filterDonorsByGender = (name) => {
+    console.log("name", name);
+    const filteredDonors = data.filter((donor) => {
+      return donor.Gender.value.toLowerCase() === name.toLowerCase();
+    });
+    setFilteredDataArray(filteredDonors);
+    console.log("filterDonorsByName", filteredDonors);
+  };
+  
+  const setArray = () => {
+    setFilteredDataArray(data);
+    console.log("setArray", data);
+  };
+  
+  
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(searchTerm);
+    if(searchTerm !== '') {
+      filterDonorsByGender(searchTerm);
+    }
+    else{
+        setArray();
+    }
   };
   
    
@@ -211,7 +230,6 @@ const mystyle = {
           fixedHeaderScrollHeight='500px'
           selectableRows
           subHeader
-          onSelectedRowsChange={handleChange}
           selectableRowsHighlight
           highlightOnHover
           actions ={
@@ -221,10 +239,30 @@ const mystyle = {
             </>
           }
         /> */}
-         {data.length > 0 ? (
+        <Container className='d-flex justify-content-center'>
+          <Row style={{ width: '40%' }}>
+            <form onSubmit={handleClick}>
+                <InputGroup size="sm" className="mb-1">
+                  <FormControl
+                    placeholder="Search blood requests by Gender ..."
+                    aria-label="Search Blood Donations"
+                    aria-describedby="basic-addon2"
+                    value={searchTerm}
+                    onChange={handleChange}
+                  />
+                    {/* No submit button */}
+                    <input type="submit" style={{ display: 'none' }} />
+                    <InputGroup.Text id="basic-addon2">
+                    <Search className="m-1 PurpleColor" size={18} />
+                    </InputGroup.Text>
+                </InputGroup>
+            </form>
+          </Row>
+        </Container>
+         {filteredDataArray.length > 0 ? (
           <div>
         {
-          data.map((item) => (
+          filteredDataArray.map((item) => (
             <Col md={12} xs={12}>
               <Card className="shadow p-3 mb-2 rounded">
                 <Card.Body>
@@ -259,6 +297,15 @@ const mystyle = {
                         </h6>
                       </Col>
                     </Row>
+                    <Row>
+                      <Col xs={12} className="pt-3">
+                        <div style={{justifyContent:"center",textAlign:"center",alignItems:"center"}}>
+                          <Button variant="danger" onClick={()=>{handleApprove(item.ID.value)}}>
+                            Approve Blood Request
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
                   </Card.Text>                   
                 </Card.Body> 
               </Card>
@@ -273,7 +320,7 @@ const mystyle = {
           )}  
         
           {
-            data.length>0?(
+            filteredDataArray.length>0?(
               <div>
               {
                 <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>

@@ -1041,7 +1041,7 @@ public class User {
             throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(User);
-
+        System.out.print(User);
         String donatedBy = jsonNode.has("donatedBy") ? jsonNode.get("donatedBy").asText() : null;
         String donorName = jsonNode.has("donorName") ? jsonNode.get("donorName").asText() : null;
 

@@ -171,7 +171,7 @@ const MyAccountCenter=()=> {
                             <h6><span>Blood Group:</span>{item.Blood_Group.value}</h6>
                             <h6><span>Contact:</span>{item.Contact.value}</h6>
                             <h6><span>City:</span>{item.Location.value}</h6>
-                            <h6><span>Blood Donated By:</span>{item.RequestDonatedBy.value}</h6>
+                            <h6><span>Blood Donated By:</span>{item.RequestDonorName.value}</h6>
                             
                             <hr /> {/* Add a line after each item */}
                           </div>

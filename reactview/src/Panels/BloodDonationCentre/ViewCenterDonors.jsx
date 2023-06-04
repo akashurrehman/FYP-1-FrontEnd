@@ -73,42 +73,41 @@ const ViewCenterDonors=()=> {
     handleDonorPrint(data);
     console.log("Handle Print button in Donors!")
   };
-const mystyle = {
-  height: "7%",
-  width: "7%",
-  borderRadius: "50px",
-  display: "inline-block",
-};  
-const filterDonorsByName = (name) => {
-  console.log("name", name);
-  const filteredDonors = data.filter((donor) => {
-    return donor.Name.value.toLowerCase() === name.toLowerCase();
-  });
-  setFilteredDataArray(filteredDonors);
-  console.log("filterDonorsByName", filteredDonors);
-};
+  const mystyle = {
+    height: "7%",
+    width: "7%",
+    borderRadius: "50px",
+    display: "inline-block",
+  };  
+  const filterDonorsByName = (name) => {
+    console.log("name", name);
+    const filteredDonors = data.filter((donor) => {
+      return donor.Name.value.toLowerCase() === name.toLowerCase();
+    });
+    setFilteredDataArray(filteredDonors);
+    console.log("filterDonorsByName", filteredDonors);
+  };
 
-const setArray = () => {
-  setFilteredDataArray(data);
-  console.log("setArray", data);
-};
+  const setArray = () => {
+    setFilteredDataArray(data);
+    console.log("setArray", data);
+  };
 
 
-const handleChange = (event) => {
-  setSearchTerm(event.target.value);
-};
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
-const handleClick = (event) => {
-  event.preventDefault();
-  console.log(searchTerm);
-  if(searchTerm !== '') {
-      filterDonorsByName(searchTerm);
-  }
-  else{
-      setArray();
-  }
-  
-};
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(searchTerm);
+    if(searchTerm !== '') {
+        filterDonorsByName(searchTerm);
+    }
+    else{
+        setArray();
+    }
+  };
 
 /* const columns = [
   {
@@ -207,6 +206,9 @@ const handleClick = (event) => {
                             Email:  
                           </h6>
                           <h6>
+                            Name:  
+                          </h6>
+                          <h6>
                             Blood Group:
                           </h6>
                           <h6>
@@ -222,6 +224,9 @@ const handleClick = (event) => {
                         <Col xs={7}>
                           <h6>
                             {item.Email.value}
+                          </h6>
+                          <h6>
+                            {item.Name.value}
                           </h6>
                           <h6>
                             {item.Blood_Group.value}
