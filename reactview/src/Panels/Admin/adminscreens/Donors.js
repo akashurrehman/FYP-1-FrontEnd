@@ -7,15 +7,6 @@ import html2canvas from "html2canvas";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
-  Envelope,
-  Globe,
-  PersonLinesFill,
-  CalendarDateFill,
-  Lock,
-  PhoneVibrate,
-  Geo,
-  Map,
-  Fingerprint,
   Trash,
 } from "react-bootstrap-icons";
 import { useAuth } from "../../BloodDonationCentre/Auth/AuthContext";
@@ -102,9 +93,6 @@ export default function Donors() {
   //For Filter
   const bloodArray = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
   const cityArray = ['Lahore', 'Karachi', 'Islamabad', 'Multan', 'Peshawar'];
-  const [filterDate, setFilterDate] = React.useState("Donors");
-  const dateArray = ['Recent', 'Day Ago', 'Week Ago', 'Month Ago', 'Year Ago'];
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedBloodGroup, setSelectedBloodGroup] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
   const [filteredDonors, setFilteredDonors] = useState([]);
@@ -191,9 +179,9 @@ export default function Donors() {
               ))}
             </DropdownButton>
             {filtersApplied && (
-              
+
               <button className="btn btn-secondary icnss" onClick={clearFilters}>
-              <Trash className="trashbox" size={18} />
+                <Trash className="trashbox" size={18} />
               </button>
             )}
 
