@@ -397,8 +397,6 @@ public class lab {
         }
     }
 
-
-
     /*
      * Get ALL LABS
      */
@@ -447,7 +445,6 @@ public class lab {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * Get single lab by passing ID
@@ -517,8 +514,10 @@ public class lab {
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
-        String donorEligibilityStatus = jsonNode.has("donorEligibilityStatus") ? jsonNode.get("donorEligibilityStatus").asText() : null;
-        
+        String donorEligibilityStatus = jsonNode.has("donorEligibilityStatus")
+                ? jsonNode.get("donorEligibilityStatus").asText()
+                : null;
+
         String age = jsonNode.has("age") ? jsonNode.get("age").asText() : null;
         String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
         String sex = jsonNode.has("sex") ? jsonNode.get("sex").asText() : null;
@@ -560,7 +559,8 @@ public class lab {
                         "                       bd:hasDiabetes \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasSTDsSyphilis bd:%s .\n" +
                         "}",
-                individualId,username,name,address,email,contactNo,city,bloodGroup,donorEligibilityStatus,age,sex,wbc,rbc,plt,hgb,stds,aids,diabetes,syphilis);
+                individualId, username, name, address, email, contactNo, city, bloodGroup, donorEligibilityStatus, age,
+                sex, wbc, rbc, plt, hgb, stds, aids, diabetes, syphilis);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -571,10 +571,6 @@ public class lab {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
         }
     }
-
-
-
-
 
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file

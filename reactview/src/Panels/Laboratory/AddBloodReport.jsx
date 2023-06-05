@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
+
 import Header from "./LabComponents/Header";
 import { toast } from 'react-toastify';
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
@@ -21,24 +21,24 @@ const AddBloodReport=()=> {
   const [searchTerm, setSearchTerm] = useState('');
   const [userData, setUserData] = useState(
     {
-      ID: "",
-      UserName:"",
-      Name: "",
-      Address: "",
-      Email: "",
-      ContactNo: "",
-      City: "",
-      Age: "",
-      Sex: "",
-      Status: "",
-      WBC: "",
-      RBC: "",
-      HGB: "",
-      PLT: "",
-      STDs: "",
-      AIDs: "",
-      Diabetes: "",
-      Syphilis: "",
+      username:"",
+      name: "",
+      address: "",
+      bloodGroup: "",
+      email: "",
+      contactNo: "",
+      city: "",
+      age: "",
+      sex: "",
+      donorEligibilityStatus: "",
+      wbc: "",
+      rbc: "",
+      hgb: "",
+      plt: "",
+      stds: "",
+      aids: "",
+      diabetes: "",
+      syphilis: "",
     }
   );
   
@@ -60,6 +60,31 @@ const AddBloodReport=()=> {
     console.log("setArray", userData);
   };
   
+  const PostUserReport = (event) => {
+    event.preventDefault();
+    console.log("PostUserReport", userData);
+    axios.post(`http://localhost:8081/api/lab/addUserDetails/addUserCBCReportDetails/add`, userData).then((response) => {
+        console.log(response);
+        toast.success('Report Added Successfully', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            });
+        })
+        .catch((error) => {
+        console.log(error);
+        toast.error('Report Not Added Successfully', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            });
+        });
+    };
+
   const getUsername = (searchTerm) => {
     console.log("getUsername", searchTerm);
     axios.get(`http://localhost:8081/api/labs/getCBCdetails/byUserName/${searchTerm}`).then((response)=>{
@@ -67,23 +92,24 @@ const AddBloodReport=()=> {
       if (results && results.bindings && results.bindings.length > 0) {
         const UserData = results.bindings[0];
         setUserData({
-          ID: UserData.ID.value,
-          UserName:UserData.UserName.value,
-          Age: UserData.Age.value,
-          Name: UserData.Name.value,
-          Address: UserData.Address.value,
-          Email: UserData.Email.value,
-          ContactNo: UserData.ContactNo.value,
-          City: UserData.City.value,
-          Status: UserData.Status.value,
-          WBC: UserData.WBC.value,
-          RBC: UserData.RBC.value,
-          HGB: UserData.HGB.value,
-          PLT: UserData.PLT.value,
-          STDs: UserData.STDs.value,
-          AIDs: UserData.AIDs.value,
-          Diabetes: UserData.Diabetes.value,
-          Syphilis: UserData.Syphilis.value,
+          username:UserData.UserName.value,
+          age: UserData.Age.value,
+          name: UserData.Name.value,
+          address: UserData.Address.value,
+          email: UserData.Email.value,
+          sex: UserData.Sex.value,
+          contactNo: UserData.ContactNo.value,
+          city: UserData.City.value,
+          donorEligibilityStatus: UserData.Status.value,
+          bloodGroup: UserData.BloodGroup.value,
+          wbc: UserData.WBC.value,
+          rbc: UserData.RBC.value,
+          hgb: UserData.HGB.value,
+          plt: UserData.PLT.value,
+          stds: UserData.STDs.value,
+          aids: UserData.AIDs.value,
+          diabetes: UserData.Diabetes.value,
+          syphilis: UserData.Syphilis.value,
         });
         console.log("Data",UserData);
       }})
@@ -174,8 +200,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Age"
                   autoFocus
-                  name="Age"
-                  value={userData.Age}
+                  name="age"
+                  value={userData.age}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -188,8 +214,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Sex"
                   autoFocus
-                  name="Sex"
-                  value={userData.Sex == 0 ? 'Male' : 'Female'}
+                  name="sex"
+                  value={userData.sex === 0 ? 'Male' : 'Female'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -202,8 +228,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Name"
                   autoFocus
-                  name="Name"
-                  value={userData.Name}
+                  name="name"
+                  value={userData.name}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -216,8 +242,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Contact No"
                   autoFocus
-                  name="ContactNo"
-                  value={userData.ContactNo}
+                  name="contactNo"
+                  value={userData.contactNo}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -230,8 +256,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="City"
                   autoFocus
-                  name="City"
-                  value={userData.City}
+                  name="city"
+                  value={userData.city}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -244,8 +270,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Contact No"
                   autoFocus
-                  name="Address"
-                  value={userData.Address}
+                  name="address"
+                  value={userData.address}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -263,8 +289,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="PLT"
                   autoFocus
-                  name="PLT"
-                  value={userData.PLT}
+                  name="plt"
+                  
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -277,8 +303,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="WBC"
                   autoFocus
-                  name="WBC"
-                  value={userData.WBC}
+                  name="wbc"
+                  
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -291,8 +317,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="RBC"
                   autoFocus
-                  name="RBC"
-                  value={userData.RBC}
+                  name="rbc"
+                 
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -305,8 +331,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="HGB"
                   autoFocus
-                  name="HGB"
-                  value={userData.HGB}
+                  name="hgb"
+                 
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -319,8 +345,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="STDs"
                   autoFocus
-                  name="STDs"
-                  value={userData.STDs == 1 ? 'Yes' : 'No'}
+                  name="stds"
+                  
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -333,8 +359,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="AIDs"
                   autoFocus
-                  name="AIDs"
-                  value={userData.AIDs == 1 ? 'Yes' : 'No'}
+                  name="aids"
+                 
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -347,8 +373,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Diabetes"
                   autoFocus
-                  name="Diabetes"
-                  value={userData.Diabetes == 1 ? 'Yes' : 'No'}
+                  name="diabetes"
+                 
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -361,8 +387,34 @@ const mystyle = {
                 <Form.Control
                   placeholder="Syphilis"
                   autoFocus
-                  name="Syphilis"
-                  value={userData.Syphilis == 1 ? 'Yes' : 'No'}
+                  name="syphilis"
+                  
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>Blood Group</Form.Label>
+                <Form.Control
+                  placeholder="bloodGroup"
+                  autoFocus
+                  name="bloodGroup"
+                  onChange={handleInputChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={6}>
+              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Label>
+                Status
+                </Form.Label>
+                <Form.Control
+                  placeholder="Status"
+                  autoFocus
+                  name="donorEligibilityStatus"
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -382,7 +434,7 @@ const mystyle = {
               {
                 <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>
                   <div>
-                      <Button className='btn btn-info mb-3'  style={{backgroundColor: "#153250",color:"#fff"}}>Upload Report Data of User</Button>
+                      <Button className='btn btn-info mb-3'  style={{backgroundColor: "#153250",color:"#fff"}} onClick={PostUserReport}>Upload Report Data of User</Button>
                   </div>
                 </Col>
               }

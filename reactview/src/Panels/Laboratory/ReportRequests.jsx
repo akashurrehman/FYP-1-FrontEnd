@@ -25,28 +25,7 @@ const ReportRequests=()=> {
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [blood, setbloodData] = useState([]);
-  const [userData, setUserData] = useState(
-    {
-      ID: "",
-      UserName:"",
-      Name: "",
-      Address: "",
-      Email: "",
-      ContactNo: "",
-      City: "",
-      Age: "",
-      Sex: "",
-      Status: "",
-      WBC: "",
-      RBC: "",
-      HGB: "",
-      PLT: "",
-      STDs: "",
-      AIDs: "",
-      Diabetes: "",
-      Syphilis: "",
-    }
-  );
+
   const [CBCData, setSingleData] = useState(
     {
       ID: "",
@@ -116,6 +95,7 @@ const ReportRequests=()=> {
             ContactNo: binding.ContactNo,
             City: binding.City,
             Status: binding.Status,
+            BloodGroup: binding.BloodGroup,
           };
         });
         setData(rows);
@@ -398,6 +378,9 @@ const columns = [
                           <h6>
                             Status:
                           </h6>
+                          <h6>
+                            Blood Group:
+                          </h6>
                         </Col>
                         <Col xs={7}>
                           <h6>
@@ -420,6 +403,9 @@ const columns = [
                           </h6>
                           <h6>
                             {item.Status.value}
+                          </h6>
+                          <h6>
+                            {item.BloodGroup.value}
                           </h6>
                         </Col>
                       </Row>
