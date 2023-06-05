@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Button, FormControl } from "react-bootstrap";
 import { Form, Row, Col, Nav,DropdownButton,InputGroup } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
@@ -15,15 +15,16 @@ import SingleBloodDonationCentre from "./SingleBloodDonationCentre";
 const BloodDonationCentre = () => {
 
     //For Filter
-    const [filterBlood,setFilterBlood] = React.useState("Blood Group");
-    const bloodArray = ['A+ Blood','B+ Blood','AB+ Blood','O+ Blood','A- Blood','B- Blood','AB- Blood','O- Blood'];
+    const [filterCategory,setFilterCategory] = React.useState("Category");
+    const categoryArray = ['Government','Private','Both'];
     const [filterCity,setFilterCity] = React.useState("City");
     const cityArray = ['Lahore','Karachi','Islamabad','Multan','Peshawar'];
     const [filterDistance,setFilterDistance] = React.useState("Any Distance");
     const distanceArray = ['Within 1km','Within 5km','Within 10km','Within 15km'];
-    
+    const [searchTerm, setSearchTerm] = useState('');
 
     const [centres, setCentres] = React.useState([]);
+    const [filteredCentreArray, setFilteredCentresArray] = React.useState([]);
 
     //This will get the id  from the token if user is login
     const {token} = useAuth();
@@ -46,6 +47,7 @@ const BloodDonationCentre = () => {
           .getCentres()
           .then((data) => {
             setCentres(data);
+            setFilteredCentresArray(data?.results?.bindings);
           })
           .catch((err) => {
             console.log(err);
@@ -59,12 +61,58 @@ const BloodDonationCentre = () => {
 
     console.log(centres.results);
 
+
+    const filterCentresByCategory = (category) => {
+        const filteredCentres = centres.results.bindings.filter((centre) => {
+            return centre.Category.value.toLowerCase() === category.toLowerCase();
+        });
+        
+        setFilteredCentresArray(filteredCentres);
+    };
+
+    const filterCentresByName = (name) => {
+        const filteredCentres = centres.results.bindings.filter((centre) => {
+            return centre.Name.value.toLowerCase() === name.toLowerCase();
+        });
+        setFilteredCentresArray(filteredCentres);
+    };
+
+    const filterCentresByCity = (city) => {
+        const filteredCentres = centres.results.bindings.filter((centre) => {
+            return centre.City.value.toLowerCase() === city.toLowerCase();
+        });
+        setFilteredCentresArray(filteredCentres);
+    };
+
+    const setArray = () => {
+        setFilteredCentresArray(centres.results.bindings);
+    };
+
+
+    
+    //For search bar
+    const handleChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(searchTerm);
+        if(searchTerm !== '') {
+            filterCentresByName(searchTerm);
+        }
+        else{
+            setArray();
+        }
+        
+    };
+
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
         <div style={{marginTop:'10%',marginBottom:'4%'}}>
             <Container className='d-flex justify-content-center'>
                 <Row>
-                    <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Find a blood donation centre near you</h2>
+                    <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Find a blood donation centres near you</h2>
                 </Row>
             </Container>
         </div>
@@ -74,14 +122,22 @@ const BloodDonationCentre = () => {
             <div style={{marginTop:'-1%',marginBottom:'0%',paddingTop:'0%',marginBottom:'0%',position:'absolute',width:'100%'}}>
                 <Container className='d-flex justify-content-center'>
                     <Row style={{width:'40%'}}>
-                        <InputGroup className="mb-1" size='sm'>
-                            <Form.Control
-                                placeholder="Search Blood Donations"
+                    <form onSubmit={handleSubmit}>
+                        <InputGroup size="sm" className="mb-1">
+                            <FormControl
+                                placeholder="Search blood donation centres by name ..."
                                 aria-label="Search Blood Donations"
                                 aria-describedby="basic-addon2"
+                                value={searchTerm}
+                                onChange={handleChange}
                             />
-                            <InputGroup.Text id="basic-addon2"><Search className="m-1 PurpleColor" size={18} /></InputGroup.Text>
+                            {/* No submit button */}
+                            <input type="submit" style={{ display: 'none' }} />
+                            <InputGroup.Text id="basic-addon2">
+                            <Search className="m-1 PurpleColor" size={18} />
+                            </InputGroup.Text>
                         </InputGroup>
+                    </form>
                     </Row>
                 </Container>
             </div>
@@ -97,26 +153,24 @@ const BloodDonationCentre = () => {
                                 id="dropdown-autoclose-false dropdown-menu-align-end"
                                 variant="flat" align="end"
                                 size = 'sm'
-                                title={filterBlood}
+                                title={filterCategory}
                                 style={{paddingLeft:'5px'}}
                             >
                                 <div style={{}}>
-                                    {bloodArray.map((blood)=>(
+                                    {categoryArray.map((category)=>(
                                         
                                         <Nav.Link 
                                             className='FilterListHoverColor' 
-                                            eventKey={blood} 
-                                            onClick={() => {setFilterBlood(blood)}}
+                                            eventKey={category} 
+                                            onClick={() => {setFilterCategory(category);filterCentresByCategory(category)}}
                                         >
-                                            <Form.Check 
-                                                type='checkbox'
-                                                id='default-check'
-                                                label={`${blood}`}
-                                            />
+                                            <Form.Text>
+                                                {`${category}`}
+                                            </Form.Text>
                                         </Nav.Link>
                                     ),)}
                                     
-                                    <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button>
+                                    {/* <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button> */}
                                 </div>
                             </DropdownButton>
 
@@ -132,21 +186,19 @@ const BloodDonationCentre = () => {
                                         <Nav.Link 
                                             className='FilterListHoverColor' 
                                             eventKey={city} 
-                                            onClick={() => {setFilterCity(city)}}
+                                            onClick={() => {setFilterCity(city);filterCentresByCity(city)}}
                                         >
-                                            <Form.Check 
-                                                type='checkbox'
-                                                id='default-check'
-                                                label={`${city}`}
-                                            />
+                                            <Form.Text>
+                                                {`${city}`}
+                                            </Form.Text>
                                         </Nav.Link>
                                     ),)}
                                     
-                                    <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button>
+                                    {/* <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button> */}
                                 </div>
                             </DropdownButton>
 
-                            <DropdownButton
+                            {/* <DropdownButton
                                 id="dropdown-autoclose-false"
                                 variant="flat" align="end"
                                 size = 'sm'
@@ -170,10 +222,10 @@ const BloodDonationCentre = () => {
                                     
                                     <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button>
                                 </div>
-                            </DropdownButton>
+                            </DropdownButton> */}
 
                             <div style={{paddingLeft:'5px'}}>
-                                <Button size = 'sm' variant="flat" onClick={()=>{setFilterCity('City',setFilterBlood('Blood Group'),setFilterDistance('Any Distance'))}}><Trash className="IcomColor" size={18} /></Button>
+                                <Button size = 'sm' variant="flat" onClick={()=>{setFilterCity('City');setFilterCategory('Category');setFilterDistance('Any Distance');setArray();}}><Trash className="IcomColor" size={18} /></Button>
                             </div>
                             
                         </p>
@@ -184,11 +236,13 @@ const BloodDonationCentre = () => {
         </div>
 
         <div style={{}}>
-            {centres.length === 0 ? (
-                <p>There are no Centres</p>
+            {filteredCentreArray.length === 0 ? (
+                <Row className="d-flex justify-content-center m-5">
+                    <h4 style={{textAlign:'center'}}>Centres are not available</h4>
+                </Row>
             ) : (
                 <div>
-                    {centres.results.bindings.map((centre, index) => (
+                    {filteredCentreArray.map((centre, index) => (
                         <SingleBloodDonationCentre key={index} centre={centre} />
                     ))}
                 </div>
@@ -210,8 +264,8 @@ const BloodDonationCentre = () => {
                         <div style={{paddingTop:"23%",paddingLeft:"20%",textAlign:"left"}}>
                             <h5 className="PurpleColor">Thinking about becoming a blood donor?</h5>
                             <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Make Blood Donation. Give Life gift.</h3>
-                            <p className="text-left">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
-                            <Button href='/user/make-blood-donation' size='sm' variant="flatSolid">Make Blood Donation<ArrowRight className="" size={20} /></Button>
+                            <p className="text-left">Remember, by becoming a blood donor, you have the opportunity to positively impact countless lives. "Become a Hero: Donate Blood and Save Lives."</p>
+                            <Button href='/user/make-blood-donation' size='sm' variant="flatSolid">Make Blood Donation <ArrowRight className="" size={18} /></Button>
                         </div>
                         
                     </Col>

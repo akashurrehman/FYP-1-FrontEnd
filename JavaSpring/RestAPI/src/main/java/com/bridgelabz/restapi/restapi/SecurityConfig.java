@@ -187,6 +187,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /************ User Routes start here *************/
                 .antMatchers("/api/users/registration").permitAll()
                 .antMatchers("/api/users/registration/{ID}").permitAll()
+                .antMatchers("/api/users/registration/getUserByUsername/{username}").permitAll()
                 .antMatchers("/api/user/registration/add").permitAll()
                 .antMatchers("/api/users/edit/{ID}").permitAll()
                 .antMatchers("/api/users/delete/{id}").permitAll()
@@ -324,6 +325,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //For Lab
                 .antMatchers("/api/labs/AllDonorsCBCReport").permitAll()
                 .antMatchers("/api/labs/getCBCdetails/byUserName/{userName}").permitAll()
+                .antMatchers("/api/lab/addUserDetails/addUserCBCReportDetails/add").permitAll()
 
 
                 .anyRequest().authenticated()

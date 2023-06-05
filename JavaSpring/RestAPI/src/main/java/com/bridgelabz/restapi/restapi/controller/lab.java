@@ -416,6 +416,7 @@ public class lab {
                 "?cbc bd:hasLabDonorCBCEmail ?Email ." +
                 "?cbc bd:hasLabDonorCBCContactNo ?ContactNo ." +
                 "?cbc bd:hasLabDonorCBCCity ?City ." +
+                "?cbc bd:hasLabDonorCBCBloodGroup ?BloodGroup ." +
                 "?cbc bd:hasLABDonorCBCStatus ?Status ." +
                 "?cbc bd:hasAge ?Age ." +
                 "?cbc bd:hasSex ?Sex ." +
@@ -465,6 +466,7 @@ public class lab {
                 "?cbc bd:hasLabDonorCBCEmail ?Email ." +
                 "?cbc bd:hasLabDonorCBCContactNo ?ContactNo ." +
                 "?cbc bd:hasLabDonorCBCCity ?City ." +
+                "?cbc bd:hasLabDonorCBCBloodGroup ?BloodGroup ." +
                 "?cbc bd:hasLABDonorCBCStatus ?Status ." +
                 "?cbc bd:hasAge ?Age ." +
                 "?cbc bd:hasSex ?Sex ." +
@@ -497,6 +499,78 @@ public class lab {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
+    /*
+     * Add Blood Request
+     * Can by add by Users or centers
+     */
+    @PostMapping("/api/lab/addUserDetails/addUserCBCReportDetails/add")
+    public ResponseEntity<String> AddUserAndCBCDetails(@RequestBody String cbc) throws IOException {
+
+        System.out.print(cbc);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(cbc);
+
+        String username = jsonNode.has("username") ? jsonNode.get("username").asText() : null;
+        String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
+        String address = jsonNode.has("address") ? jsonNode.get("address").asText() : null;
+        String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
+        String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
+        String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
+        String donorEligibilityStatus = jsonNode.has("donorEligibilityStatus") ? jsonNode.get("donorEligibilityStatus").asText() : null;
+        
+        String age = jsonNode.has("age") ? jsonNode.get("age").asText() : null;
+        String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
+        String sex = jsonNode.has("sex") ? jsonNode.get("sex").asText() : null;
+        String wbc = jsonNode.has("wbc") ? jsonNode.get("wbc").asText() : null;
+        String rbc = jsonNode.has("rbc") ? jsonNode.get("rbc").asText() : null;
+        String plt = jsonNode.has("plt") ? jsonNode.get("plt").asText() : null;
+        String hgb = jsonNode.has("hgb") ? jsonNode.get("hgb").asText() : null;
+        String stds = jsonNode.has("stds") ? jsonNode.get("stds").asText() : null;
+        String aids = jsonNode.has("aids") ? jsonNode.get("aids").asText() : null;
+        String diabetes = jsonNode.has("diabetes") ? jsonNode.get("diabetes").asText() : null;
+        String syphilis = jsonNode.has("syphilis") ? jsonNode.get("syphilis").asText() : null;
+
+        String individualId = "Lab_Donor_CBC_" + System.currentTimeMillis();
+
+        System.out.print(individualId);
+        String query = String.format(
+                "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                        "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                        "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                        "INSERT DATA {\n" +
+                        "bd:" + individualId + " rdf:type bd:Lab_Donor_CBC ;\n" +
+                        "                       bd:hasLabDonorCBCID \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLABDonorCBCUserName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLabDonorCBCName \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLabDonorCBCAddress \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLabDonorCBCEmail \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLabDonorCBCContactNo \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLabDonorCBCCity \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLabDonorCBCBloodGroup \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasLABDonorCBCStatus \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasAge \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasSex \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasWBC \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasRBC \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasPLT \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasHGB \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasSTDs \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasSTDsAIDs \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDiabetes \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasSTDsSyphilis bd:%s .\n" +
+                        "}",
+                individualId,username,name,address,email,contactNo,city,bloodGroup,donorEligibilityStatus,age,sex,wbc,rbc,plt,hgb,stds,aids,diabetes,syphilis);
+        // Call the InsertSparql function with the query
+        boolean isInserted = InsertSparql(query);
+
+        if (isInserted) {
+            String successMessage = "{\"success\": \"Data inserted successfully\"}";
+            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+        }
+    }
 
 
 

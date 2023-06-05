@@ -269,7 +269,7 @@ const UserLogin = (props) => {
                                             <Col sm={6} style={{textAlign:'right'}}>
                                                 <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} 
                                                 onMouseLeave={handleMouseLeave}
-                                                >Log In</Button>
+                                                >LOG IN</Button>
                                             </Col>
                                         </Row>
                                         <Row style={{marginBottom:'2%',marginTop:'4%'}}>
@@ -292,7 +292,7 @@ const UserLogin = (props) => {
                 </Col>
                 <Col sm={5}>
                     <div>
-                        <Image src={image} rounded style={{marginTop:'29%', paddingRight:'7%', width:'100%', height: "100%",opacity:'0.7'}}></Image>
+                        <Image src={image} rounded style={{marginTop:'29%', marginLeft:'-12%', width:'100%', height: "100%",opacity:'1.0'}}></Image>
                     </div>
                 </Col>
             </Row>

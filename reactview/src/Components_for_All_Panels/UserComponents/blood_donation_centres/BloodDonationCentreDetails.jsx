@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import { Link, useParams } from 'react-router-dom';
-import image from '../../../Public/user/image/jobpost.png';
+import image from '../../../Public/user/image/all-centre-menu.png';
 import '../css/style.css';
 
 import centreService from "../../../Services/Api/User/BloodDonationCentreService";
@@ -52,7 +52,7 @@ const BloodDonationCentreDetails = () => {
             <Container>
                 <Row style={{marginBottom:'3%'}}>
                     <Col sm={12} style={{textAlign:'center',width:'50%'}}>
-                        <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Blood Donation Centre Details</h2>  
+                        <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>{centre?.Name?.value}</h2>  
                         <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
                     </Col>
                 </Row>
@@ -72,13 +72,13 @@ const BloodDonationCentreDetails = () => {
                         <Link to={{ pathname: `/user/make-appointment/${centre?.ID?.value}`, state: { centre } }} className='TextColor' style={{paddingLeft:'0%',marginTop:'0%',textDecoration:'none'}}>
                             <Button variant="default" style={ButtonStyle1} 
                                 onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                >Make Appointment</Button>
+                                >MAKE APPOINTMENT</Button>
                         </Link>
                         </div>
                     </Col>
                     <Col sm={6}>
                     <div>
-                        <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "40%",opacity:'0.75'}}></Image>
+                        <Image src={image} rounded style={{marginLeft: "30%",marginTop:'-5%',height: "27rem",opacity:'1.0'}}></Image>
                     </div>
                     </Col>
                 </Row>

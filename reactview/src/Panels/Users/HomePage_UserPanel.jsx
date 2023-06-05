@@ -161,6 +161,7 @@ const HomeScreen_UserPanel = () => {
                                 <h5 className='pb-4 RedColor' style={{}}>DONATE BLOOD, SAVE LIFE!</h5>
                                 <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
                                 <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} href='/user/make-blood-donation'>Donate Now</Button>
+                                {/* <h4 className="d-flex"><div style={{fontFamily:'cursive',color:"#D64045"}}>Donate</div><div style={{fontFamily:'cursive',color:'#27213C',fontSize:'15px'}}> life</div></h4> */}
                             </Col>
                             <Col sm={3}>
                                 
@@ -274,7 +275,7 @@ const HomeScreen_UserPanel = () => {
                                     <Card.Text>
                                         There are donor all across the country/city. Find donor one that's closest to you.
                                     </Card.Text>
-                                    <Button href='/user/donors' size='sm' variant="flat">Check donors </Button>
+                                    <Button href='/user/donor' size='sm' variant="flat">Check Donors </Button>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -317,8 +318,8 @@ const HomeScreen_UserPanel = () => {
                         <Col sm={4}>
                             <div style={{paddingTop:"30%",paddingLeft:"20%",textAlign:"left"}}>
                                 <h5 className='PurpleColor'>Thinking about becoming a donor?</h5>
-                                <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Join us. Be the Life of a dead person.</h3>
-                                <p className="text-left PurpleColor">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
+                                <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Join us. Give the gift of life through blood donation.</h3>
+                                <p className="text-left PurpleColor">Remember, by becoming a blood donor, you have the opportunity to positively impact countless lives. "Become a Hero: Donate Blood and Save Lives."</p>
                                 <Button size='sm' variant="flatSolid">Register <ArrowRight className="" size={20} /></Button>
                             </div>
                             
@@ -335,8 +336,8 @@ const HomeScreen_UserPanel = () => {
                         <Col sm={4}>
                             <div style={{paddingTop:"30%",paddingLeft:"20%",textAlign:"left"}}>
                                 <h5 className='PurpleColor'>Thinking about a blood donation?</h5>
-                                <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Join us. Be the Life Donor.</h3>
-                                <p className="text-left PurpleColor">Our blood donors might not look or sound alike, but they all share one thing. Together, they’re the Lifeblood of Pakistan. Join us.</p>
+                                <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Join us. Become a blood donor and make a lasting impact.</h3>
+                                <p className="text-left PurpleColor">Join the lifesaving community and become a blood donor. Donating blood is a simple and safe way to change lives.</p>
                                 <Button size='sm' variant="flatSolid">Sign in <ArrowRight className="" size={20} /></Button>
                             </div>
                             
