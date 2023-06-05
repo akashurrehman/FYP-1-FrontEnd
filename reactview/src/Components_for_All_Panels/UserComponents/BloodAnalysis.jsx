@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Button, Image } from "react-bootstrap";
+import { Container, Button, Image, Nav } from "react-bootstrap";
 import { Form, Row, Col, InputGroup, FloatingLabel, OverlayTrigger, Popover } from "react-bootstrap";
 import UserPanelHeader from "./UserPanelHeader";
 import UserPanelFooter from "./UserPanelFooter";
@@ -187,6 +187,10 @@ const BloodAnalysis = () => {
             if(userName !== null){
                 const response = await axios.get('http://localhost:8081/api/labs/getCBCdetails/byUserName/' + userName, {});
                 console.log(response?.data?.results?.bindings?.[0]);
+                toast.success('Congratulation! The system automatically fills the given fields according to your CBC report. This report is generated based on the blood sample that you gave to LAB.', {
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    position: toast.POSITION.BOTTOM_RIGHT,});
                 setAge(response?.data?.results?.bindings?.[0].Age?.value);
                 setSex(response?.data?.results?.bindings?.[0].Sex?.value);
                 setWBC(response?.data?.results?.bindings?.[0].WBC?.value);
@@ -220,6 +224,15 @@ const BloodAnalysis = () => {
         }
     }
     
+
+    const address = 'Lahore, Pakistan';
+  
+    const handleGeocode = async () => {
+        
+      };
+  
+
+
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
 
@@ -235,11 +248,12 @@ const BloodAnalysis = () => {
                     <Col sm={12} className='LoginContainerCol'>
                         <Image src={image} rounded style={{marginBottom: "3%",marginTop:'-5%',height: "7rem",opacity:'1.0'}}></Image>
                         <h3 className="RedColor" style={{}}>Check Donor Strength 
-                            <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={getUserCBCReportData}
-                            >Request for a CBC</Button>
+                            
+                            {/* <Button onClick={handleGeocode}>Get Coordinates</Button> */}
                         </h3>
                         <p className="justify-content mb-3 mt-3" style={{fontSize:'15px',color:'grey',fontFamily:'cursive'}}>
                             "Dear Donor!", Fill out this form according to your CBC Report (Complete Blood Count). Then check your strength for blood donation or booking appointment.
+                            <Nav.Link className='RedColor' style={{fontWeight:'600',marginTop:'1%'}} onClick={getUserCBCReportData}>Request for a CBC Report Details from LAB</Nav.Link>
                         </p>
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
                             <Row>

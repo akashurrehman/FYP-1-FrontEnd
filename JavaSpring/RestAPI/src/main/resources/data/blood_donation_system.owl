@@ -983,13 +983,13 @@
         <bd:hasUserName>salman111</bd:hasUserName>
       </bd:Donor>
     </bd:bloodRequestMakeby>
+    <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
     <bd:hasRequestMakerID>Request_1684320789894</bd:hasRequestMakerID>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
     <bd:hasRequestMakerEmail>ahmad@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
-    <bd:hasRequestDonorName>Fatima Foundation</bd:hasRequestDonorName>
-    <bd:hasRequestDonatedBy>Centre_1684319570720</bd:hasRequestDonatedBy>
     <bd:hasRequestMakerContactNo>03001234567</bd:hasRequestMakerContactNo>
+    <bd:hasRequestDonatedBy>null</bd:hasRequestDonatedBy>
     <bd:hasRequestMakerBloodGroup>A-</bd:hasRequestMakerBloodGroup>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerHospital>Service Hospital</bd:hasRequestMakerHospital>
@@ -1188,14 +1188,14 @@
     <bd:hasRequestMakerHospital>Indus Hospital</bd:hasRequestMakerHospital>
     <bd:bloodRequestMakeby rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352"/>
     <bd:hasRequestMakerID>Request_1684320969889</bd:hasRequestMakerID>
-    <bd:hasRequestDonatedBy>Centre_1684319570720</bd:hasRequestDonatedBy>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerMessage>I need blood group of B+ urgently in hospital for patient.</bd:hasRequestMakerMessage>
+    <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
     <bd:hasRequestMakerLocation>H-Block Sabzazar, Lahore</bd:hasRequestMakerLocation>
     <bd:hasRequestMakerContactNo>03001234567</bd:hasRequestMakerContactNo>
     <bd:hasRequestMakerBloodGroup>B+</bd:hasRequestMakerBloodGroup>
     <bd:hasRequestMakerGender>Female</bd:hasRequestMakerGender>
-    <bd:hasRequestDonorName>Fatima Foundation</bd:hasRequestDonorName>
+    <bd:hasRequestDonatedBy>null</bd:hasRequestDonatedBy>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Blood_Request>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#FAQ_1">
@@ -1250,26 +1250,26 @@
     <bd:hasPersonCity>Lahore</bd:hasPersonCity>
   </bd:Request_Maker>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1684319762680">
-    <bd:hasRequestMakerLocation>LDA EveNeu 1, Lahore.</bd:hasRequestMakerLocation>
+    <bd:hasRequestDonorName>Akash Ur Rehman</bd:hasRequestDonorName>
+    <bd:hasRequestDonatedBy>Person_1684319298290</bd:hasRequestDonatedBy>
     <bd:hasRequestMakerName>Jamshaid</bd:hasRequestMakerName>
     <bd:hasRequestMakerEmail>jamshaid@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerBloodGroup>A+</bd:hasRequestMakerBloodGroup>
     <bd:hasRequestMakerContactNo>03001234567</bd:hasRequestMakerContactNo>
     <bd:hasRequestMakerMessage>I need A+ blood group urgently in Jinnah Hospital Lahore.</bd:hasRequestMakerMessage>
     <bd:hasRequestMakerID>Request_1684319762680</bd:hasRequestMakerID>
-    <bd:hasRequestDonorName>Fatima Foundation</bd:hasRequestDonorName>
     <bd:bloodRequestMakeby rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352"/>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Request"/>
     <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
     <bd:hasRequestMakerHospital>Jinnah Hospital</bd:hasRequestMakerHospital>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
-    <bd:hasRequestDonatedBy>Centre_1684319570720</bd:hasRequestDonatedBy>
+    <bd:hasRequestMakerLocation>LDA EveNeu 1, Lahore.</bd:hasRequestMakerLocation>
   </owl:NamedIndividual>
   <bd:Blood_Request rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1">
     <bd:hasRequestMakerEmail>ali@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
-    <bd:hasRequestDonatedBy>Centre_1684319570720</bd:hasRequestDonatedBy>
     <bd:hasRequestMakerContactNo>+92 333 1234561</bd:hasRequestMakerContactNo>
+    <bd:hasRequestDonorName>Muhammad Abu Hurairah</bd:hasRequestDonorName>
     <bd:hasRequestMakerID>RM001</bd:hasRequestMakerID>
     <bd:hasRequestMakerBloodGroup>A+</bd:hasRequestMakerBloodGroup>
     <bd:hasRequestMakerMessage>I need A positive blood group urgently for thelicimia pateient.</bd:hasRequestMakerMessage>
@@ -1278,7 +1278,7 @@
     <bd:hasRequestMakerName>Ali</bd:hasRequestMakerName>
     <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
     <bd:hasRequestMakerHospital>Jinnah Hospital</bd:hasRequestMakerHospital>
-    <bd:hasRequestDonorName>Fatima Foundation</bd:hasRequestDonorName>
+    <bd:hasRequestDonatedBy>Person_1684319206352</bd:hasRequestDonatedBy>
     <bd:bloodRequestMakeby>
       <bd:Donor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_002">
         <bd:hasPersonEmail>raza@email.com</bd:hasPersonEmail>
