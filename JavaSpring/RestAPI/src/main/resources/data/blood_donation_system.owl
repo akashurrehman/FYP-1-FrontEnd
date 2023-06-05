@@ -1075,8 +1075,8 @@
     <bd:hasDonorEmail>abuhurairah@email.com</bd:hasDonorEmail>
     <bd:hasDonorID>Donation_1684319792744</bd:hasDonorID>
     <bd:hasDonorBloodGroup>AB-</bd:hasDonorBloodGroup>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
     <bd:hasDonorName>Muhammad Abu Hurairah</bd:hasDonorName>
+    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
     <bd:hasDonorAvailable>Available</bd:hasDonorAvailable>
     <bd:hasDonorContactNo>03001234567</bd:hasDonorContactNo>
     <bd:bloodDonationMakeby>
@@ -1102,7 +1102,6 @@
   </owl:NamedIndividual>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319570720">
     <bd:hasCentreID>Centre_1684319570720</bd:hasCentreID>
-    <bd:hasCentreTimings>9Am-4Am</bd:hasCentreTimings>
     <bd:hasRole>CENTRE</bd:hasRole>
     <bd:hasCentreContactNo>+92 349 1128246</bd:hasCentreContactNo>
     <bd:hasPassword>$2a$10$ZN2QBOfnMugeZBOA86qSReMxvJuMyfgTDLzsxo4IsA7R9RA0x5n/.</bd:hasPassword>
@@ -1112,9 +1111,10 @@
     <bd:hasCentreOpeningDays>Monday</bd:hasCentreOpeningDays>
     <bd:hasCentreName>Fatima Foundation</bd:hasCentreName>
     <bd:hasCentreLocation>Main Ferozpur Road</bd:hasCentreLocation>
-    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
-    <bd:hasUserName>fatima111</bd:hasUserName>
     <bd:hasCentreCategory>Private</bd:hasCentreCategory>
+    <bd:hasCentreTimings>6AM-2PM</bd:hasCentreTimings>
+    <bd:hasUserName>fatima111</bd:hasUserName>
+    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
   </owl:NamedIndividual>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_8">
     <bd:hasBloodStockAddedDate rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime"

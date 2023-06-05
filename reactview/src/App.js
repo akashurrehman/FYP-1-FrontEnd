@@ -74,6 +74,7 @@ import Campaign from './Components_for_All_Panels/UserComponents/packages/campai
 import CampaignDetails from './Components_for_All_Panels/UserComponents/packages/campaigns/CampaignDetails';
 import MakeAppointment from './Components_for_All_Panels/UserComponents/appointments/MakeAppointment';
 import AppointmentDetails from './Components_for_All_Panels/UserComponents/appointments/AppointmentDetails';
+import AddBloodReport from './Panels/Laboratory/AddBloodReport';
 
 
 function App() {
@@ -155,6 +156,7 @@ function App() {
           <Route exact path='/lab/home' element={<LabHome/>}/>
           <Route exact path='/lab/profileSettings' element={<LabProfileSetting/>}/>
           <Route exact path='/lab/ReportRequest' element={<ReportRequests/>}/>
+          <Route exact path='/lab/bloodReports' element={<AddBloodReport/>}/>
         </Routes>
       </Router>
     </div>

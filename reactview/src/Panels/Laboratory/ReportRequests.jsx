@@ -14,13 +14,39 @@ import { toast } from 'react-toastify';
 import { handleRequestReportsPrint } from "./LabComponents/PrintedFiles/RequestedReport";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import {  PrinterFill } from 'react-bootstrap-icons';
+import { InputGroup,FormControl } from "react-bootstrap";
+import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
+
 const ReportRequests=()=> {  
 
 
   const [loading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
   const [blood, setbloodData] = useState([]);
+  const [userData, setUserData] = useState(
+    {
+      ID: "",
+      UserName:"",
+      Name: "",
+      Address: "",
+      Email: "",
+      ContactNo: "",
+      City: "",
+      Age: "",
+      Sex: "",
+      Status: "",
+      WBC: "",
+      RBC: "",
+      HGB: "",
+      PLT: "",
+      STDs: "",
+      AIDs: "",
+      Diabetes: "",
+      Syphilis: "",
+    }
+  );
   const [CBCData, setSingleData] = useState(
     {
       ID: "",
@@ -72,22 +98,7 @@ const ReportRequests=()=> {
     const { name, value } = event.target;
     setSingleData((prevCenterData) => ({ ...prevCenterData, [name]: value }));
   };
-  // const handleSaveChanges = () => {
-  //   console.log("Handle Save Changes clicked");
-  //   console.log("ID",bloodData.ID);
-  //   axios
-  //     .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${bloodData.ID}`, bloodData)
-  //     .then((response) => {
-  //       console.log("Response Data",response.data);
-  //       toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
-  //       handleClose();
-  //       window.location.reload();
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error,{position: toast.POSITION.TOP_RIGHT});
-  //       console.log("Error updating data: ", error);
-  //     });
-  // };
+ 
   
   useEffect(() => {
     // fetch data from the backend
@@ -115,7 +126,10 @@ const ReportRequests=()=> {
   const handlePrint = () => {
     handleRequestReportsPrint(data);
   };
-   
+  
+  
+ 
+  
 const mystyle = {
   height: "7%",
   width: "7%",
@@ -352,6 +366,7 @@ const columns = [
             }
             subHeader
           /> */}
+        
           {data.length > 0 ? (
           <div>
           {
