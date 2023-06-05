@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Button, FormControl } from "react-bootstrap";
 import { Form, Row, Col, Card, ListGroup, Nav,Dropdown,DropdownButton,InputGroup,Modal } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
@@ -21,38 +21,87 @@ const RequestMaker = () => {
 
     //For Filter
     const [filterBlood,setFilterBlood] = React.useState("Blood Group");
-    const bloodArray = ['A+ Blood','B+ Blood','AB+ Blood','O+ Blood','A- Blood','B- Blood','AB- Blood','O- Blood'];
+    const bloodArray = ['A+','B+','AB+','O+','A-','B-','AB-','O-'];
     const [filterCity,setFilterCity] = React.useState("City");
     const cityArray = ['Lahore','Karachi','Islamabad','Multan','Peshawar'];
     const [filterDate,setFilterDate] = React.useState("Request Makers");
     const dateArray = ['Recent','Day Ago','Week Ago','Month Ago','Year Ago'];
+    const [searchTerm, setSearchTerm] = useState('');
 
     const [requestMakers, setRequestMakers] = React.useState([]);
+    const [filteredRequestMakerArray, setFilteredRequestMakersArray] = React.useState([]);
 
     const {token} = useAuth();
     
     const decodedToken = token ? jwtDecode(token) : null;
     const role = decodedToken?.role;
 
-    const authCentre=()=>{
-      if(role!='USER'){
-        window.location.href = "/user/login";
-      }
-        console.log("authCentre");
-    }
+    // const authCentre=()=>{
+    //   if(role!='USER'){
+    //     window.location.href = "/user/login";
+    //   }
+    //     console.log("authCentre");
+    // }
 
     const getData = () => {
         requestMakerService
             .getRequestMakers()
             .then((data) => {
                 setRequestMakers(data);
+                setFilteredRequestMakersArray(data?.results?.bindings);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
-    React.useEffect(getData,authCentre(), []);
+    React.useEffect(getData, []);
     console.log(requestMakers.results);
+
+
+
+    const filterRequestMakersByBloodGroup = (bloodGroup) => {
+        const filteredRequestMakers = requestMakers.results.bindings.filter((requestMaker) => {
+            return requestMaker.Blood_Group.value.toLowerCase() === bloodGroup.toLowerCase();
+        });
+        
+        setFilteredRequestMakersArray(filteredRequestMakers);
+    };
+    const filterRequestMakersByName = (name) => {
+        const filteredRequestMakers = requestMakers.results.bindings.filter((requestMaker) => {
+            return requestMaker.Name.value.toLowerCase() === name.toLowerCase();
+        });
+        setFilteredRequestMakersArray(filteredRequestMakers);
+    };
+    const filterRequestMakersByCity = (city) => {
+        const filteredRequestMakers = requestMakers.results.bindings.filter((requestMaker) => {
+            return requestMaker.City.value.toLowerCase() === city.toLowerCase();
+        });
+        setFilteredRequestMakersArray(filteredRequestMakers);
+    };
+
+    const setArray = () => {
+        setFilteredRequestMakersArray(requestMakers.results.bindings);
+    };
+
+
+    
+    //For search bar
+    const handleChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(searchTerm);
+        if(searchTerm !== '') {
+            filterRequestMakersByName(searchTerm);
+        }
+        else{
+            setArray();
+        }
+        
+    };
+    
 
     return ( <div>
         <UserPanelHeader></UserPanelHeader>
@@ -69,14 +118,22 @@ const RequestMaker = () => {
             <div style={{marginTop:'-1%',marginBottom:'0%',paddingTop:'0%',marginBottom:'0%',position:'absolute',width:'100%'}}>
                 <Container className='d-flex justify-content-center'>
                     <Row style={{width:'40%'}}>
-                        <InputGroup size="sm" className="">
-                            <Form.Control
-                                placeholder="Search Blood Requests"
-                                aria-label="Search Blood Requests"
+                    <form onSubmit={handleSubmit}>
+                        <InputGroup size="sm" className="mb-1">
+                            <FormControl
+                                placeholder="Search request makers by name ..."
+                                aria-label="Search Blood Donations"
                                 aria-describedby="basic-addon2"
+                                value={searchTerm}
+                                onChange={handleChange}
                             />
-                            <InputGroup.Text id="basic-addon2"><Search className="m-1 PurpleColor" size={18} /></InputGroup.Text>
+                            {/* No submit button */}
+                            <input type="submit" style={{ display: 'none' }} />
+                            <InputGroup.Text id="basic-addon2">
+                            <Search className="m-1 PurpleColor" size={18} />
+                            </InputGroup.Text>
                         </InputGroup>
+                    </form>
                     </Row>
                 </Container>
             </div>
@@ -101,17 +158,15 @@ const RequestMaker = () => {
                                         <Nav.Link 
                                             className='FilterListHoverColor' 
                                             eventKey={blood} 
-                                            onClick={() => {setFilterBlood(blood)}}
+                                            onClick={() => {setFilterBlood(blood);filterRequestMakersByBloodGroup(blood)}}
                                         >
-                                            <Form.Check 
-                                                type='checkbox'
-                                                id='default-check'
-                                                label={`${blood}`}
-                                            />
+                                            <Form.Text>
+                                                {`${blood}`}
+                                            </Form.Text>
                                         </Nav.Link>
                                     ),)}
                                     
-                                    <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button>
+                                    {/* <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button> */}
                                 </div>
                             </DropdownButton>
 
@@ -127,21 +182,19 @@ const RequestMaker = () => {
                                         <Nav.Link 
                                             className='FilterListHoverColor' 
                                             eventKey={city} 
-                                            onClick={() => {setFilterCity(city)}}
+                                            onClick={() => {setFilterCity(city);filterRequestMakersByCity(city)}}
                                         >
-                                            <Form.Check 
-                                                type='checkbox'
-                                                id='default-check'
-                                                label={`${city}`}
-                                            />
+                                            <Form.Text>
+                                                {`${city}`}
+                                            </Form.Text>
                                         </Nav.Link>
                                     ),)}
                                     
-                                    <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button>
+                                    {/* <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button> */}
                                 </div>
                             </DropdownButton>
 
-                            <DropdownButton
+                            {/* <DropdownButton
                                 id="dropdown-autoclose-false"
                                 variant="flat"
                                 size='sm'
@@ -165,10 +218,10 @@ const RequestMaker = () => {
                                     
                                     <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button>
                                 </div>
-                            </DropdownButton>
+                            </DropdownButton> */}
 
                             <div style={{paddingLeft:'5px'}}>
-                                <Button size='sm' variant="flat" onClick={()=>{setFilterCity('City',setFilterBlood('Blood Group'),setFilterDate('Request Makers'))}}><Trash className="IcomColor" size={18} /></Button>
+                                <Button size='sm' variant="flat" onClick={()=>{setFilterCity('City');setFilterBlood('Blood Group');setFilterDate('Request Makers');setArray();}}><Trash className="IcomColor" size={18} /></Button>
                             </div>
                             
                         </p>
@@ -179,11 +232,13 @@ const RequestMaker = () => {
         </div>
 
         <div style={{width:'99.1%'}}>
-            {requestMakers.length === 0 ? (
-                    <p>There are no Centres</p>
+            {filteredRequestMakerArray.length === 0 ? (
+                    <Row className="d-flex justify-content-center m-5">
+                        <h4 style={{textAlign:'center'}}>Request Makers are not available</h4>
+                    </Row>
                 ) : (
                     <Row className="d-flex justify-content-center">
-                        {requestMakers.results.bindings.map((requestMaker, index) => (
+                        {filteredRequestMakerArray.map((requestMaker, index) => (
                             <Col sm={4} key={index}>
                                 <SingleRequestMaker key={index} requestMaker={requestMaker} />
                             </Col>

@@ -110,9 +110,19 @@ const PostBloodRequest = () => {
 
 <div>
     <Row style={{width:"100%"}}>
+        <Col sm={4}>
+            <div>
+                <Image src={image} rounded style={{marginLeft: "3%",marginTop:'30%',height: "23rem",opacity:'1.0'}}></Image>
+            </div>
+            <div style={{marginLeft:'35%',marginTop:'3%',textAlign:"center",width:'55%',transform:'scale(0.85)'}}>
+                
+                <AvailableRequestMakersBar></AvailableRequestMakersBar>
+                
+            </div>
+        </Col>
         <Col sm={8}>
             <div 
-                style={{width:'85%', marginLeft:'5%',marginTop:'15%',textAlign:'center'
+                style={{width:'85%', marginLeft:'13%',marginTop:'15%',textAlign:'center'
             }}>
                 <Container>
                     <Row className='mt-0 mb-5 p-1'>
@@ -325,7 +335,7 @@ const PostBloodRequest = () => {
                                 <Row>
                                     <Col sm={12}>
                                     <div style={{textAlign:'left',marginBottom:'-1%'}}>
-                                        <Form.Label className='PurpleColor'>Important message about blood request <spam className='RedColor'>*</spam></Form.Label>
+                                        <Form.Label className='PurpleColor'>Important message for available blood donors <spam className='RedColor'>*</spam></Form.Label>
                                     </div>
                                         <InputGroup size="sm" className="mb-3" hasValidation>
                                             <InputGroup.Text id="inputGroup-sizing-default">
@@ -345,10 +355,10 @@ const PostBloodRequest = () => {
                                         </InputGroup>
                                     </Col>
                                 </Row>
-                                <Row className="mt-2" style={{textAlign:'left'}}>
+                                <Row className="mt-2" style={{textAlign:'right'}}>
                                     <Col sm={12}>
                                     <Button variant="default" type='submit' style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} 
-                                    >Post Request</Button>
+                                    >POST BLOOD REQUEST</Button>
                                     </Col>
                                 </Row>
                             </Form>
@@ -372,16 +382,7 @@ const PostBloodRequest = () => {
                 )}
             </div>
         </Col>
-        <Col sm={4}>
-            <div>
-                <Image src={image} rounded style={{marginLeft: "-25%",marginTop:'30%',height: "23rem",opacity:'1.0'}}></Image>
-            </div>
-            <div style={{marginLeft:'5%',marginTop:'3%',textAlign:"center",width:'55%',transform:'scale(0.85)'}}>
-                
-                <AvailableRequestMakersBar></AvailableRequestMakersBar>
-                
-            </div>
-        </Col>
+        
     </Row>
     
     

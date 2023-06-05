@@ -145,6 +145,49 @@ public class User {
     }
 
     /*
+     * Route to Get Data of Single User by passing Email
+     * ID is passed in the URL
+     * Through ID we can find the User Information
+     */
+    @GetMapping("/api/users/registration/getUserByUsername/{username}")
+    public ResponseEntity<String> SingleUserByUserName(@PathVariable String username) {
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?persons rdf:type bd:Person ." +
+                "?persons bd:hasPersonFullName ?Name ." +
+                "?persons bd:hasUserName ?UserName ." +
+                "?persons bd:hasPersonID ?ID ." +
+                "?persons bd:hasPersonEmail ?Email ." +
+                "?persons bd:hasPersonContactNo ?ContactNo ." +
+                "?persons bd:hasPersonAddress ?Address ." +
+                "?persons bd:hasPersonBloodGroup ?BloodGroup ." +
+                "?persons bd:hasPersonDateOfBirth ?DOB ." +
+                "?persons bd:hasPersonGender ?Gender ." +
+                "?persons bd:hasPersonCity ?City ." +
+                "filter(?UserName = \"" + username + "\")" +
+                "}";
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if ID is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using User Name: " + username + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
+    /*
      * Route to Register the Users
      * Users have to enter information such as Email, Username and password
      */
@@ -428,6 +471,8 @@ public class User {
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
 
+        String donorAvailable = "Available"; 
+
         String individualId = "Donation_" + System.currentTimeMillis();
         String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
@@ -444,9 +489,10 @@ public class User {
                         "                       bd:hasDonorBloodGroup \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorEmail \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorMessage \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorAvailable \"%s\"^^xsd:string ;\n" +
                         "                       bd:bloodDonationMakeby bd:%s .\n" +
                         "}",
-                name, individualId, city, gender, location, contactNo, bloodGroup, email, message, id);
+                name, individualId, city, gender, location, contactNo, bloodGroup, email, message, donorAvailable, id);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -477,7 +523,8 @@ public class User {
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
-        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null; 
+
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +

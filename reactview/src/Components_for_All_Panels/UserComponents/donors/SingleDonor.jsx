@@ -77,12 +77,12 @@ const SingleDonor = (props) => {
                                                     {donor.DonorAvailability.value === 'Available' ? (
                                                         <>
                                                             <Button size='sm' variant="success" type='submit'
-                                                                >Available</Button>
+                                                                >AVAILABLE</Button>
                                                         </>
                                                     ):(
                                                         <>
-                                                            <Button size='sm' variant="warning" type='submit'
-                                                                >Not Available</Button>
+                                                            <Button size='sm' variant="secondary" type='submit'
+                                                                >NOT AVAILABLE</Button>
                                                         </>
                                                     )}
                                                 
