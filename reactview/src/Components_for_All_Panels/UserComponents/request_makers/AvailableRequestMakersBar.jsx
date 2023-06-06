@@ -39,7 +39,7 @@ const AvailableRequestMakersBar = () => {
                         <Col sm={4}>
                         <div style={{marginTop:'20%',textAlign:'left',marginLeft:'25%',marginBottom:'-10%'}}>
                             
-                            <div style={{ width: 50, height: 50,marginLeft:'0%'}}>
+                            <div style={{ width: 55, height: 55,marginLeft:'0%'}}>
                             <CircularProgressbar value={requestMakers?.results?.bindings?.length} text={requestMakers?.results?.bindings?.length + "%"}
                                 styles={buildStyles({
                                 // Rotation of path and trail, in number of turns (0-1)
@@ -49,7 +49,7 @@ const AvailableRequestMakersBar = () => {
                                 strokeLinecap: 'round',
                             
                                 // Text size
-                                textSize: '22px',
+                                textSize: '25px',
                             
                                 // How long animation takes to go from one percentage to another, in seconds
                                 pathTransitionDuration: 3,
@@ -77,7 +77,7 @@ const AvailableRequestMakersBar = () => {
                             <div style={{fontSize:'14px',color:'white'}}>
                                 <Nav.Link href='/user/donor'><PostcardFill className="" size={20} /></Nav.Link>
                             </div>
-                            <div style={{fontSize:'15px',color:'white'}}>
+                            <div style={{fontSize:'16px',color:'white'}}>
                                 <p>{requestMakers?.results?.bindings?.length}</p>
                             </div>
                             <div style={{fontSize:'11px',color:'white'}}>

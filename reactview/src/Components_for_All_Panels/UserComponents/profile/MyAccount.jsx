@@ -16,6 +16,7 @@ import MyAppointments from './MyAppointments';
 import AcceptedBloodRequests from './AcceptedBloodRequests';
 import userLoginService from '../../../Services/Api/User/UserLoginService';
 import UserPanelFooter from '../UserPanelFooter';
+import MyCBCReport from './MyCBCReport';
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -108,7 +109,8 @@ function TabPanel(props) {
                             <Tab label="My Blood Donations" {...a11yProps(2)} />
                             <Tab label="My Appointments" {...a11yProps(3)} />
                             <Tab label="Accepted Requests" {...a11yProps(4)} />
-                            <Tab label="Log Out" {...a11yProps(5)} onClick={(e) => {
+                            <Tab label="My CBC Report" {...a11yProps(5)} />
+                            <Tab label="Log Out" {...a11yProps(6)} onClick={(e) => {
                                     userLoginService.logout();
                                     window.location.reload();
                                 }} />
@@ -137,6 +139,11 @@ function TabPanel(props) {
                     <TabPanel value={value} index={4}>
                         <div style={{marginLeft:'20%',width:'100%'}}>
                             <AcceptedBloodRequests></AcceptedBloodRequests>
+                        </div>
+                    </TabPanel>
+                    <TabPanel value={value} index={5}>
+                        <div style={{marginLeft:'20%',width:'100%'}}>
+                            <MyCBCReport></MyCBCReport>
                         </div>
                     </TabPanel>
                 </Box>

@@ -161,8 +161,11 @@ const BloodAnalysis = () => {
     };
     
     const handleImageSubmit = () => {
+        const userName = decodedToken?.name;
+        console.log(userName);
         const formData = new FormData();
         formData.append("image", selectedImage);
+        formData.append("userName", userName);
         console.log(selectedImage);   
         axios
             .post("http://localhost:3003/users/upload", formData)

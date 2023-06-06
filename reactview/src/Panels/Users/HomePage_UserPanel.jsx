@@ -158,7 +158,7 @@ const HomeScreen_UserPanel = () => {
                         <Row>
                             <Col sm={9}>
                                 
-                                <h5 className='pb-4 RedColor' style={{}}>DONATE BLOOD, SAVE LIFE!</h5>
+                                <h5 className='pb-4' style={{color:'#f74046',fontWeight:'600'}}>DONATE BLOOD, SAVE LIFE!</h5>
                                 <h1 className='pb-4' style={{fontFamily:"cursive",}}>Give the gift of "LIFE" and inspire others to donate</h1>
                                 <Button variant="default" style={ButtonStyle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} href='/user/make-blood-donation'>Donate Now</Button>
                                 {/* <h4 className="d-flex"><div style={{fontFamily:'cursive',color:"#D64045"}}>Donate</div><div style={{fontFamily:'cursive',color:'#27213C',fontSize:'15px'}}> life</div></h4> */}
