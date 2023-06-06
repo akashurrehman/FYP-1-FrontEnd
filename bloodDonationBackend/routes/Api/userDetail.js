@@ -33,6 +33,7 @@ router.post("/upload", upload, async (req, res) => {
     const picture = new Image({
       image: req.file.filename,
       imagePath: req.file.path,
+      userName: req.body.userName,
     });
     try {
       await picture.save();
@@ -42,15 +43,15 @@ router.post("/upload", upload, async (req, res) => {
       console.log(err);
     }
   });
-  router.get('/images/:id', async (req, res) => {
+  router.get('/images/:userName', async (req, res) => {
     try {
-      const imageId = req.params.id;
-      const image = await Image.findById(imageId);
-      
+      //const imageId = req.params.id;
+      const UserName = req.params.userName;
+      //const image = await Image.findById(imageId);
+      const image=await Image.findOne({userName:UserName});
       if (!image) {
         return res.status(404).send({ error: 'Image not found' });
       }
-  
       res.send(image);
     } catch (err) {
       console.log(err);

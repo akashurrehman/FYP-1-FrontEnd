@@ -30,6 +30,10 @@ function Header(props) {
             <Nav.Link href="/lab/ReportRequest" style={{color:"#FFFFFF" }}>
               <i class="fa fa-check-circle" aria-hidden="true"></i> Applicants Report Verify/ Reject
             </Nav.Link>
+            <Nav.Link href="/lab/bloodReports" style={{color:"#FFFFFF" }}>
+              <i class="fa fa-check-circle" aria-hidden="true"></i> Add Lab report
+            </Nav.Link>
+            
           </Nav>
             <Nav>
               <Nav.Link onClick={localStorage.removeItem('token')} style={{color:"#FFFFFF" }}>
