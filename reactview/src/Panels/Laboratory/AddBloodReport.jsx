@@ -398,12 +398,17 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Blood Group</Form.Label>
-                <Form.Control
-                  placeholder="bloodGroup"
-                  autoFocus
-                  name="bloodGroup"
-                  onChange={handleInputChange}
-                />
+                <Form.Select required name="bloodGroup" onChange={handleChange} >
+                  <option value="">Select Blood Group*</option>
+                  <option value="AB+">AB+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="O+">O+</option>
+                  <option value="O-">O-</option>
+                  <option value="A+">A+</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B-">B-</option>
+                </Form.Select>
               </Form.Group>
             </Col>
             <Col xs={6}>
