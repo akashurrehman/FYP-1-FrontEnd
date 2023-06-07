@@ -279,15 +279,15 @@ const BloodAnalysis = () => {
                                         <InputGroup.Text id="inputGroup-sizing-default">
                                             <EscalatorWarningSharpIcon sx={{ color: 'action.active', mr:0 , my: 0 }}/>
                                         </InputGroup.Text>
-                                        <Form.Control
-                                            required
-                                            aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Enter age*" 
-                                            value={age}
-                                            onChange={(e) => {
-                                                setAge(e.target.value);
-                                            }}
-                                        />
+                                        <Form.Select required 
+                                            value={age} 
+                                            onChange={(e) => setAge(e.target.value)}
+                                        >
+                                            <option value="">Select your age*</option>
+                                            {Array.from({ length: 60 }, (_, index) => (
+                                                <option key={index + 1} value={index + 1}>{index + 1}</option>
+                                            ))}
+                                        </Form.Select> 
                                         <Form.Control.Feedback type="invalid">
                                             Please provide a valid age.
                                         </Form.Control.Feedback>

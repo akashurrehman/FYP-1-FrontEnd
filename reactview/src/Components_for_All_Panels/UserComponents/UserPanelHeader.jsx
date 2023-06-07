@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navbar,Nav,Button,Row,Col,Modal,Image } from 'react-bootstrap';
 import { ArrowRight } from 'react-bootstrap-icons';
 import CircleNotificationsSharpIcon from '@mui/icons-material/NotificationsActiveSharp';
+import LogoutSharpIcon from '@mui/icons-material/LogoutSharp';
 
 import DoneAllSharpIcon from '@mui/icons-material/DoneAllSharp';
 import SettingsSharpIcon from '@mui/icons-material/SettingsSharp';
@@ -384,7 +385,7 @@ const UserPanelHeader = () => {
 
                 </Nav>
 
-                <div className='d-flex justify-content-center' style={{marginRight:'-20%'}}>
+                <div className='d-flex justify-content-center' style={{marginRight:'-12%'}}>
                 <Nav>
                     <Nav.Link href="/user/contact-us">Help</Nav.Link>
                     <Nav.Link href="/user/contact-us">Contact Us</Nav.Link>
@@ -403,6 +404,11 @@ const UserPanelHeader = () => {
                     <>
                         <Nav>
                             <Nav.Link onClick={handleShow}><CircleNotificationsSharpIcon sx={{ color: '#27213C', mr:0 , my: 0 }}/></Nav.Link>
+                            <Nav.Link onClick={(e) => {
+                                    userLoginService.logout();
+                                    window.location.reload();}}>
+                                        <LogoutSharpIcon sx={{ color: '#27213C', mr:0 , my: 0 }}/>
+                            </Nav.Link>
                             
                             <div>
                                 <Modal show={show} onHide={handleClose}>
