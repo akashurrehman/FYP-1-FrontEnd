@@ -48,6 +48,7 @@ router.post("/upload", upload, async (req, res) => {
       //const imageId = req.params.id;
       const UserName = req.params.userName;
       //const image = await Image.findById(imageId);
+      console.log(UserName);
       const image=await Image.findOne({userName:UserName});
       if (!image) {
         return res.status(404).send({ error: 'Image not found' });
