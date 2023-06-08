@@ -69,7 +69,9 @@ const Appointments=()=> {
       })
       .catch((error) => console.log(error));
       authCentre();
+      setTimeout(() => {
       setIsLoading(false);
+    }, 3000);
   }, []);
   
   useEffect(()=>{

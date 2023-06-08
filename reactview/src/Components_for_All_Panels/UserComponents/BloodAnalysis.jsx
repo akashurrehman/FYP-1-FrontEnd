@@ -4,9 +4,6 @@ import { Form, Row, Col, InputGroup, FloatingLabel, OverlayTrigger, Popover } fr
 import UserPanelHeader from "./UserPanelHeader";
 import UserPanelFooter from "./UserPanelFooter";
 import image from '../../Public/user/image/blood-donation-eligibility-quiz-icon.png';
-
-
-
 import EscalatorWarningSharpIcon from '@mui/icons-material/EscalatorWarningSharp';
 import BloodtypeSharpIcon from '@mui/icons-material/BloodtypeSharp';
 import BloodtypeOutlinedIcon from '@mui/icons-material/BloodtypeOutlined';
@@ -56,6 +53,7 @@ const BloodAnalysis = () => {
 
     //Form Validation
     const [validated, setValidated] = React.useState(false);
+    
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
