@@ -82,7 +82,9 @@ const HomeScreen_BloodDonation=()=> {
         setFAQ(FAQRes);
         setAppointment(appointmentRes);
         setEvents(eventsRes);
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       };
       fetchDataForAll();
       authCentre();
