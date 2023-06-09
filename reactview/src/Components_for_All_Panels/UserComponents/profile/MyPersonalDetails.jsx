@@ -16,6 +16,7 @@ import WifiCallingSharpIcon from '@mui/icons-material/WifiCallingSharp';
 import { CheckCircleFill, Trash, XCircleFill } from 'react-bootstrap-icons';
 import userLoginService from '../../../Services/Api/User/UserLoginService';
 import ConfirmationBox from '../ConfirmationBox';
+import ProfilePictureUpload from '../ProfilePictureUpload';
 
 
 
@@ -157,8 +158,8 @@ export default function MyPersonalDetails() {
     return (
         <div>
             <Row>
-                <Col sm={10}>
-                    <div style={{marginLeft:'5%', width:'140%',marginTop:'-12%'}}>
+                <Col sm={8}>
+                    <div style={{marginLeft:'-5%', width:'140%',marginTop:'-10%'}}>
                         <Row>
                             <h3 className='PurpleColor'>Welcome <spam className='RedColor' style={{fontFamily:'cursive',textAlign:'left',fontSize:'21px'}}>"{user?.Name?.value}"  </spam>
                             { user?.EligibilityStatus?.value === 'Eligible' ? (
@@ -271,12 +272,14 @@ export default function MyPersonalDetails() {
                         </div>
                     </div>
                 </Col>
-                <Col sm={2}>
-                    <div>
-                        <Image src={image} rounded style={{marginLeft: "170%",marginTop:'0%',height: "12rem",opacity:'0.75'}}></Image>
+                <Col sm={4}>
+                    <div style={{marginLeft:'30%',marginTop:'-25%'}}>
+                        <ProfilePictureUpload></ProfilePictureUpload>
                     </div>
                 </Col>
             </Row>
+
+            
             
             <div>
                 <Modal show={show} onHide={handleClose}>

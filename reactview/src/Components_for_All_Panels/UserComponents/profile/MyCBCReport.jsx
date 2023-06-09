@@ -46,7 +46,7 @@ export default function MyCBCReport() {
                     {image ? (
                         <img src={`http://localhost:3003/${image.imagePath.replace(/\\/g, '/').replace('public/', '')}`} alt="Image" />
                     ) : (
-                        <p>Loading image...</p>
+                        <Nav.Link className='RedColor'>Kindly upload your CBC report first then you will be able to view your CBC report here</Nav.Link>
                     )}
                     </div>
                 </div>
