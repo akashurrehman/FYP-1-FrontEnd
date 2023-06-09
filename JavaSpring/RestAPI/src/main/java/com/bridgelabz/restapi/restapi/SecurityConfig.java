@@ -240,6 +240,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add").permitAll()
                 .antMatchers("/api/bloodCenter/RegisteredCenters/bloodStockDetails/{ID}").permitAll()
                 .antMatchers("/api/bloodCenter/RegisteredCenters/bloodStockDetails/delete/{id}").permitAll()
+                .antMatchers("/api/bloodCenter/RegisteredCenters/bloodStockDetailsWithGroups/add").permitAll()
+                .antMatchers("/api/users/bloodstock/withAllBloodGroups/byCentreID/{id}").permitAll()
 
                 .antMatchers("/api/bloodCenter/RegisteredCenters/makeRequest").permitAll()
                 .antMatchers("/api/bloodCenter/RegisteredCenters/editRequest/{ID}").permitAll()

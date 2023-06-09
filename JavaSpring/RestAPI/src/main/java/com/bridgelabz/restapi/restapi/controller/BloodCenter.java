@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -35,6 +38,11 @@ import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpHeaders;
+
+
+import java.time.LocalDate;
+
+
 
 //import for password encryption
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -639,12 +647,8 @@ public class BloodCenter {
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
     public ResponseEntity<String> AddBloodStockDetails(@RequestBody String BloodDetails) throws IOException {
-        /*
-         * String bloodGroup = "AB+";
-         * String addedDate = "9TH FEB, 2023";
-         * String noOfBags = "5";
-         */
-
+        
+        
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(BloodDetails);
 
@@ -674,6 +678,7 @@ public class BloodCenter {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
         }
+    
     }
 
     /*
@@ -969,6 +974,117 @@ public class BloodCenter {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
+
+    @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetailsWithGroups/add")
+    public ResponseEntity<String> AddBloodStockDetailsWithGroups(@RequestBody String bloodStock) throws IOException {
+        try {
+
+            System.out.print(bloodStock);
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(bloodStock);
+
+            String centre_ID = jsonNode.has("centre_ID") ? jsonNode.get("centre_ID").asText() : null;
+
+            List<String> successMessages = new ArrayList<>();
+            // Hardcoded blood group, date, and stock values
+            List<String> bloodGroups = Arrays.asList("A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-");
+            
+            List<String> addedDates = new ArrayList<>();
+            LocalDate currentDate = LocalDate.now();
+            for (int i = 0; i < 8; i++) {
+                String formattedDate = currentDate.toString();
+                addedDates.add(formattedDate);
+            }
+
+            List<String> noOfBags = Arrays.asList("0", "0", "0", "0", "0", "0", "0", "0");
+
+            if (bloodGroups.size() != addedDates.size() || bloodGroups.size() != noOfBags.size()) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error: Mismatch in the number of blood groups, dates, and stock values");
+            }
+
+            for (int i = 0; i < bloodGroups.size(); i++) {
+                String bloodGroup = bloodGroups.get(i);
+                String addedDate = addedDates.get(i);
+                String stockValue = noOfBags.get(i);
+
+                String individualId = "Blood_Stock_" + System.currentTimeMillis();
+                String query = String.format(
+                        "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
+                                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                                "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
+                                "INSERT DATA {\n" +
+                                "   bd:%s rdf:type bd:Blood_Stock ;\n" +
+                                "       bd:hasBloodStockID \"%s\"^^xsd:string ;\n" +
+                                "       bd:hasBloodStockBloodGroup \"%s\"^^xsd:string ;\n" +
+                                "       bd:hasBloodStockAddedDate \"%s\"^^xsd:string ;\n" +
+                                "       bd:hasBloodStockNoOfBags \"%s\"^^xsd:string ;\n" +
+                                "       bd:stockManagedBy bd:%s .\n" +
+                                "}",
+                        individualId, individualId, bloodGroup, addedDate, stockValue, centre_ID);
+
+                boolean isInserted = InsertSparql(query);
+
+                if (isInserted) {
+                    successMessages.add("Data for blood group " + bloodGroup + " inserted successfully");
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body("Error occurred while inserting data for blood group " + bloodGroup);
+                }
+            }
+
+            // Build a JSON response containing success messages for each blood group
+            String successMessage = new ObjectMapper().writeValueAsString(successMessages);
+            return ResponseEntity.ok(successMessage);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while processing the request");
+        }
+    }
+
+    /*
+     * Get blood stock information
+     * Made by LogeedIn user by passing userID
+     */
+    @GetMapping("/api/users/bloodstock/withAllBloodGroups/byCentreID/{id}")
+    public ResponseEntity<String> GetBloodStockCentreID(@PathVariable String id) {
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+
+                "SELECT * WHERE {" +
+                "?stocks rdf:type bd:Blood_Stock ." +
+                "?stocks bd:stockManagedBy bd:" + id + " ." +
+                "?stocks bd:hasBloodStockID ?ID ." +
+                "?stocks bd:hasBloodStockBloodGroup ?BloodGroup ." +
+                "?stocks bd:hasBloodStockAddedDate ?AddedDate ." +
+                "?stocks bd:hasBloodStockNoOfBags ?NoOfBags ." +
+                "}";
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if Email is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+        if (bindingsArr.isEmpty()) {
+            String errorMessage = "{\"error\": \"Unable to Fetch Data by Using ID: " + id + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
+        }
+
+        // create the response object with the JSON result and headers
+        return new ResponseEntity<String>(result, HttpStatus.OK);
+    }
+
+
+
+
+
+
+
+
+
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
@@ -1003,6 +1119,7 @@ public class BloodCenter {
             // Returns the results in json format
         }
     }
+
 
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
