@@ -53,6 +53,9 @@ const Sidebar = () => {
             <NavLink exact to="/bloodCenter/bloodRequests" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="tint">All Blood Requests</CDBSidebarMenuItem>
             </NavLink>
+            <NavLink exact to="/bloodCenter/MyAccount" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="tint">My Account</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink onClick={handleLogoutClick} activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="share">Logout</CDBSidebarMenuItem>
             </NavLink>

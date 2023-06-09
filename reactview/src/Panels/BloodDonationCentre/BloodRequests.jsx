@@ -15,6 +15,7 @@ import {PrinterFill} from 'react-bootstrap-icons'
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import { InputGroup,FormControl } from "react-bootstrap";
 import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
+import './Styling/popupcard.css'; 
 
 const BloodRequests=()=> {  
   const [selectedRows, setSelectedRows] = useState([]);
@@ -264,7 +265,7 @@ const mystyle = {
         {
           filteredDataArray.map((item) => (
             <Col md={12} xs={12}>
-              <Card className="shadow p-3 mb-2 rounded">
+              <Card className="shadow p-3 mb-2 rounded" id="card">
                 <Card.Body>
                   <Card.Text>
                     <Row>

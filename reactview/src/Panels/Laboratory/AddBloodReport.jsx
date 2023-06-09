@@ -45,6 +45,13 @@ const AddBloodReport=()=> {
  
     useEffect(() => {
     setIsLoading(false);
+    toast.info('You have to add blood report (CBC) details!', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      });
     }, []);
 
   const handleInputChange = (event) => {

@@ -14,6 +14,7 @@ import jwt_decode from 'jwt-decode';
 import {PrinterFill} from 'react-bootstrap-icons'
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import axios from 'axios';
+import './Styling/popupcard.css'; 
 
 const Appointments=()=> {
   const [loading, setIsLoading] = useState(true);  
@@ -189,7 +190,7 @@ const Appointments=()=> {
           {
             data.map((item) => (
               <Col md={12} xs={12}>
-                <Card className="shadow p-3 mb-2 rounded">
+                <Card className="shadow p-3 mb-2 rounded" id="card">
                   <Card.Body>
                     <Card.Text>
                       <Row>

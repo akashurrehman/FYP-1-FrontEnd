@@ -168,7 +168,7 @@ const columns = [
         <Modal.Header closeButton>
           <Modal.Title style={{textAlign:"center",justifyContent:"center",fontSize:"22px"}}>CBC Report Details</Modal.Title>
         </Modal.Header>
-        <Modal.Title style={{textAlign:"center",fontSize:"18px",justifyContent:"center"}}>{CBCData.UserName}</Modal.Title>
+        <Modal.Title style={{textAlign:"center",fontSize:"18px",justifyContent:"center"}}>UserName:{CBCData.UserName}</Modal.Title>
 
         <Modal.Body>
           <Form>
@@ -178,10 +178,9 @@ const columns = [
                 <Form.Label>Age</Form.Label>
                 <Form.Control
                   placeholder="Age"
-                  autoFocus
+                  disabled
                   name="Age"
                   value={CBCData.Age}
-                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -192,10 +191,9 @@ const columns = [
                 </Form.Label>
                 <Form.Control
                   placeholder="Sex"
-                  autoFocus
                   name="Sex"
+                  disabled
                   value={CBCData.Sex == 0 ? 'Male' : 'Female'}
-                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -206,11 +204,10 @@ const columns = [
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>PLT</Form.Label>
                 <Form.Control
+                  disabled
                   placeholder="PLT"
-                  autoFocus
                   name="PLT"
                   value={CBCData.PLT}
-                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -221,10 +218,9 @@ const columns = [
                 </Form.Label>
                 <Form.Control
                   placeholder="WBC"
-                  autoFocus
+                  disabled
                   name="WBC"
                   value={CBCData.WBC}
-                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -235,10 +231,9 @@ const columns = [
                 <Form.Label>RBC</Form.Label>
                 <Form.Control
                   placeholder="RBC"
-                  autoFocus
+                  disabled
                   name="RBC"
                   value={CBCData.RBC}
-                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -249,10 +244,9 @@ const columns = [
                 </Form.Label>
                 <Form.Control
                   placeholder="HGB"
-                  autoFocus
+                  disabled
                   name="HGB"
                   value={CBCData.HGB}
-                  onChange={handleInputChange}
                 />
               </Form.Group>
             </Col>
@@ -263,7 +257,7 @@ const columns = [
                 <Form.Label>STDs</Form.Label>
                 <Form.Control
                   placeholder="STDs"
-                  autoFocus
+                  disabled
                   name="STDs"
                   value={CBCData.STDs == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
@@ -277,7 +271,7 @@ const columns = [
                 </Form.Label>
                 <Form.Control
                   placeholder="AIDs"
-                  autoFocus
+                  disabled
                   name="AIDs"
                   value={CBCData.AIDs == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
@@ -291,7 +285,7 @@ const columns = [
                 <Form.Label>Diabetes</Form.Label>
                 <Form.Control
                   placeholder="Diabetes"
-                  autoFocus
+                  disabled
                   name="Diabetes"
                   value={CBCData.Diabetes == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
@@ -305,7 +299,7 @@ const columns = [
                 </Form.Label>
                 <Form.Control
                   placeholder="Syphilis"
-                  autoFocus
+                  disabled
                   name="Syphilis"
                   value={CBCData.Syphilis == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
@@ -318,9 +312,6 @@ const columns = [
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose} style={{backgroundColor: "#153250"}}>
             Close
-          </Button>
-          <Button variant="primary" style={{backgroundColor: "#153250"}}> 
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
@@ -412,7 +403,7 @@ const columns = [
                       <Row>
                         <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>
                           <div>
-                            <Button className='btn btn-info mb-3' onClick={()=>handleShow(item.UserName.value)} style={{backgroundColor: "#153250",color:"#fff"}}>Add Report Details</Button>
+                            <Button className='btn btn-info mb-3' onClick={()=>handleShow(item.UserName.value)} style={{backgroundColor: "#153250",color:"#fff"}}>View Report Details</Button>
                           </div>
                         </Col>
                       </Row>

@@ -1,0 +1,11 @@
+
+#card:hover{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transform: scale(0.96);  
+    transition-duration: 0.45s;
+  }
+  @media screen and (max-width: 600px) {
+  #verifyicon{
+    visibility:hidden;
+  }
+}

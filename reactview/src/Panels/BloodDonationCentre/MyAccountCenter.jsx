@@ -14,7 +14,7 @@ import { useAuth  }  from './Auth/AuthContext';
 import jwt_decode from 'jwt-decode';
 import jwtDecode from "jwt-decode";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
-
+import './Styling/popupcard.css'; 
 
 const MyAccountCenter=()=> {
   const [Loading, setIsLoading]=useState(true);
@@ -29,9 +29,6 @@ const MyAccountCenter=()=> {
     }
       console.log("authCentre");
   }
-
-
-  
 
   const ViewAllRequests = () => {
     toast.success("You are redirected to View All Requests Page", {position: toast.POSITION.TOP_CENTER});
@@ -104,7 +101,7 @@ const MyAccountCenter=()=> {
             </Card.Body>
           </Card>
           <CardGroup style={{}}>
-            <Col className="mt-md-5 px-2" md={8}>  
+            <Col className="mt-md-2 px-2" md={8}>  
                 <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Requests</Card.Title>
@@ -112,7 +109,7 @@ const MyAccountCenter=()=> {
                         <div style={{ height: "25vh", overflow: "scroll", scrollbarWidth: 'thin', scrollbarColor: '#888 #f5f5f5' , padding: "10px"}}>
                         
                         {
-                          data?.length===0 && <h5>No Blood Requests</h5>
+                          data?.length===0 && <h5 style={{justifyContent:"center",textAlign:"center",fontSize:"28px"}}>No Blood Requests</h5>
                         }
                         {data.map((item) => (
                           <div key={item.ID.value}>
@@ -130,7 +127,7 @@ const MyAccountCenter=()=> {
                     </Card.Body>
                 </Card>
             </Col>
-            <Col className="mt-md-5 px-2" md={4}>
+            <Col className="mt-md-2 px-2" md={4}>
               <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,alignItems:"center",justifyContent:"center",backgroundColor:"#153250",color:"white"}} >
                 <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
                   <Card.Header style={{justifyContent:"left",alignItems:"left",fontSize:"18px"}}>Personal Information</Card.Header>
@@ -154,7 +151,7 @@ const MyAccountCenter=()=> {
             </Col> 
         </CardGroup>
         <CardGroup style={{}}>
-            <Col className="mt-md-5 px-2" md={8}>  
+            <Col className="mt-md-2 px-2" md={8}>  
                 <Card className="shadow p-3 mb-5 rounded" style={{paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>All Accepted Requests</Card.Title>
@@ -183,7 +180,7 @@ const MyAccountCenter=()=> {
             </Col>
         </CardGroup>
         <CardGroup style={{}}>
-            <Col className="mt-md-5 px-2" md={8}>  
+            <Col className="mt-md-2 px-2" md={8}>  
                 <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Donors</Card.Title>
@@ -195,8 +192,9 @@ const MyAccountCenter=()=> {
 
                         {donors.map((donor) => (
                           <div key={donor.donations.value}>
-                             <p>Name: {donor.Name.value}</p>
-                             <p>Email: {donor.Email.value}</p>
+                             <h6>Name: {donor.Name.value}</h6>
+                             <h6>Email: {donor.Email.value}</h6>
+                             <h6>Gender: {donor.Gender.value}</h6>
                              <hr />
                           </div>                       
                         ))} 
@@ -205,13 +203,13 @@ const MyAccountCenter=()=> {
                     </Card.Body>
                 </Card>
             </Col>
-            <Col className="mt-md-5 px-2" md={8}>  
-              <Card className="shadow p-3 mb-5 bg-body rounded" style={{marginTop:10,paddingBottom:10}}>
+            <Col className="mt-md-2 px-2" md={8}>  
+              <Card className="shadow p-3 mb-5 bg-body rounded" style={{marginTop:10,paddingBottom:10}} id="card">
                 <div>
                   <h4 style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}> Appointments booked in your Center!</h4>
                   <hr />
                   {
-                    appointment?.length===0 && <h5>No Appointments booked in your center</h5>
+                    appointment?.length===0 && <h5 style={{textAlign:"center",justifyContent:"center",color:"red",fontSize:"18px"}}>No Appointments booked in your center</h5>
                   }
                   {appointment.map((item) => (
                     <div key={item.appointments.value} style={{fontSize:"14px", marginLeft:"16px"}}>

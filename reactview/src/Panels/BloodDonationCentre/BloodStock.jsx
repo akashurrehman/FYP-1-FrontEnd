@@ -25,9 +25,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import {handleBloodStockPrint} from "./PrintedFiles/BloodStockPrint";
 import { useAuth } from "./Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
+//Import bloodstock.css file
+import './Styling/popupcard.css'; 
 
 const BloodStock=()=> {
   const [loading, setIsLoading] = useState(true);
+  const [isDataFetched, setIsDataFetched] = useState(false);
 
   const mystyle = {
     height: "7%",
@@ -63,30 +66,54 @@ const BloodStock=()=> {
     toast("All the activities are monitored by ADMIN!",{position:toast.POSITION.TOP_CENTER});
     setToastify(true);
   }
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails');
-        const { results } = response.data;
-        if (results && results.bindings && results.bindings.length > 0) {
-          const centerData = results.bindings.map((binding) => ({
-            ID: binding.ID.value,
-            bloodGroup: binding.Blood_Group.value,
-            noOfBags: binding.No_Of_Bags.value,
-            addedDate: binding.Gender.value,
-          }));
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8081/api/users/bloodstock/withAllBloodGroups/byCentreID/${ID}`);
+      const { results } = response.data;
+      if (results && results.bindings && results.bindings.length > 0) {
+        const centerData = results.bindings.map((binding) => ({
+          ID: binding.ID.value,
+          bloodGroup: binding.BloodGroup.value,
+          noOfBags: binding.NoOfBags.value,
+          addedDate: binding.AddedDate.value,
+        }));
+        // Check if data is already fetched
+        if (!isDataFetched) {
           setbloodData(centerData);
-          console.log("Data",centerData);
+          setIsDataFetched(true);
+          console.log("Blood stock on fetching", centerData);
         }
-      } catch (error) {
-        console.error(error);
       }
-    };
-    fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const PostStockData=async()=>{
+    try {
+      const response = await axios.post('http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetailsWithGroups/add',{
+        centre_ID: ID,
+      })
+      .then((response)=>
+      {
+        console.log("Response Data in Posting blood stock",response.data);
+        fetchData();
+      })
+      .catch((error)=>{console.log(error)});
+    } catch (error) {
+      console.error(error);
+    }
+      
+  };
+  useEffect(() => {
     authCentre();
+    fetchData();
     setIsLoading(false);
     toasity();
   }, []);
+  
+ 
+
   
   
 const handleInputChange = (event) => {
@@ -212,11 +239,26 @@ const handleInputChange = (event) => {
               }>You can generate the report of available blood stock for the Record Purposes!</Card.Title>
             </Card.Body>
           </Card>
+          {
+            blood?.length > 0 ? (
+              <>
+              </>
+            ) : 
+            (
+            <Card style={{marginTop:10,paddingBottom:10,alignItems:"center",justifyContent:"center"}} className="shadow p-3 mb-2 border rounded">
+              <Card.Body>
+                <Button variant="primary" onClick={PostStockData}>
+                  Create Blood Registry
+                </Button>
+              </Card.Body>
+            </Card>
+          )}
+          
           <>
           <CardGroup>
           {blood.map((card) => (
             <Col key={card.ID} md={4}>
-              <Card style={{ width: "18rem",marginTop:"10px" }}>
+              <Card style={{ width: "18rem",marginTop:"10px" }} id="card">
               <Card.Header>
                 <Card.Img variant="top" style={{
                     width: "50%",
@@ -240,19 +282,24 @@ const handleInputChange = (event) => {
           </>
         </Col>
       </Row>
-      <Row>
-        <Col xs={6}>
-        
-        </Col>
-        <Col xs={12} md={4} style={{marginBottom:"1.5rem"}}>  
-          <div style={{justifyContent:"center",alignItems:"center",marginTop:"18px"}}>
+      {
+      blood?.length > 0 ? (
+        <Row>
+          <Col xs={6}>
+          
+          </Col>
+          <Col xs={12} md={4} style={{marginBottom:"1.5rem",textAlign:"center",justifyContent:"center",alignItems:"center",marginTop:"18px"}}>  
             <Button variant="danger" style={{backgroundColor:""}} onClick={handleBloodPrint}><PrinterFill className="" size={20} /> Print Blood stock</Button>
-          </div>
-        </Col>
-        <Col xs={2}>
-        
-        </Col>
-      </Row>
+          </Col>
+          <Col xs={2}>
+          
+          </Col>
+        </Row>
+      ) : 
+      (
+        <>
+        </>
+      )}
     </Container>
     </>
     )}

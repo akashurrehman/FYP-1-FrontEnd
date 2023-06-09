@@ -13,8 +13,7 @@ import { useAuth  }  from './Auth/AuthContext';
 import jwtDecode from "jwt-decode";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import axios from 'axios';
-
-//import Link from 'react-router-dom/Link';
+import './Styling/popupcard.css'; 
 
 
 const HomeScreen_BloodDonation=()=> {
@@ -86,6 +85,12 @@ const HomeScreen_BloodDonation=()=> {
           setIsLoading(false);
         }, 3000);
       };
+      console.log("Blood Request Data:",data)
+      console.log("Donors Data:",donors)
+      console.log("Job Posts Data:",jobPosts)
+      console.log("News Data:",news)
+      console.log("FAQ Data:",FAQ)
+      console.log("Appointment Data:",appointment)
       fetchDataForAll();
       authCentre();
       toast.info("You have successfully authenticated",{position:toast.POSITION.TOP_CENTER})
@@ -95,10 +100,14 @@ const HomeScreen_BloodDonation=()=> {
   
 
   const mystyle = {
-      height: "7%",
-      width: "7%",
+      height: "15%",
+      width: "15%",
+      justifyContent: "center",
+      alignItems: "center",
+      textAlign: "center",
       borderRadius: "50%",
       display: "inline-block",
+
     };
   return (
   <div>
@@ -113,9 +122,17 @@ const HomeScreen_BloodDonation=()=> {
         </Col>
         <Col className="mt-md-5" xs={9}>
           <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow-lg p-3 mb-5 rounded">
-            <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
+          
+            <Card.Img
+              variant="top"
+              id="Circularimg"
+              src="/Images/blood-Center.jpg"
+              alt="Image"
+              style={mystyle}
+              className="d-inline-block align-top mx-2"
+            />
             <Card.Body>
-              <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Website: Dashboard</Card.Title>
+              <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Center: Dashboard</Card.Title>
             </Card.Body>
           </Card>
           <CardGroup style={{}}>
@@ -128,9 +145,11 @@ const HomeScreen_BloodDonation=()=> {
                         {data?.length === 0 && <p>No Blood Requests</p>
                       }
                         {data?.map((item) => (
-                          <div key={item.requests.value}>
-                            <h5><span>Blood Group:</span>{item.Blood_Group.value}</h5>
+                          <div key={item.requests.value} >
+                            <h5><strong>Blood Group:</strong>{item.Blood_Group.value}</h5>
                             <h6><span>Address:</span>{item.City.value}</h6>
+                            <h6><span>Gender:</span>{item.Gender.value}</h6>
+                            <h6><span>Location:</span>{item.Location.value}</h6>
                             <hr /> {/* Add a line after each item */}
                           </div>
                         ))}
@@ -141,9 +160,9 @@ const HomeScreen_BloodDonation=()=> {
                 </Card>
             </Col>
             <Col className="mt-md-5 px-2" md={8}>  
-              <Card style={{marginTop:10}}>
+              <Card style={{marginTop:10,borderRadius:"24px"}}>
                 <div style={{position: "relative"}}>
-                  <img src="/Images/Banner-bloodCentre-2.jpg" alt="Banner Image" style={{width: "100%", height: "50%", objectFit: "cover"}}/>
+                  <img src="/Images/Banner-bloodCentre-2.jpg" alt="Banner Image" style={{width: "100%", height: "50%", objectFit: "cover",borderRadius:"24px"}}/>
                     <div style={{position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(0,0,0,0.5)", padding: "10px"}}>
                       <Card.Title style={{color: "white",justifyContent:"center",textAlign:"center"}}>Be a hero in your - It's in your blood</Card.Title>
                         <div style={{justifyContent:"center", alignItems:"center", textAlign:"center"}}>
@@ -162,12 +181,15 @@ const HomeScreen_BloodDonation=()=> {
                         <hr style={{color:"red",width:"100%",justifyContent:"center",alignItems:"center",textAlign:"center"}} />
                         <div style={{ height: "25vh", overflow: "scroll" }}>
                         {
-                          donors?.length === 0 && <p>No Donors to Display</p>
+                          donors?.length === 0 && <p style={{textAlign:"center",justifyContent:"center"}}>No Donors to Display</p>
                         }
                         {donors.map((donor) => (
                           <div key={donor.donations.value}>
-                             <p>Name: {donor.Name.value}</p>
-                             <p>Email: {donor.Email.value}</p>
+                            <h6><strong>Blood Group: {donor.Blood_Group.value}</strong></h6>
+                            <h6>Name: {donor.Name.value}</h6>
+                            <h6>Email: {donor.Email.value}</h6>
+                            <h6>Contact: {donor.Contact.value}</h6>
+                            <h6>Gender: {donor.Gender.value}</h6>
                              <hr />
                           </div>                       
                         ))} 
@@ -182,7 +204,8 @@ const HomeScreen_BloodDonation=()=> {
                 Booked Appointments!
               </Card.Header>
                 {
-                  appointment?.length === 0 && <p>No Appointments to Display</p>
+                  appointment?.length === 0 && <p style={{justifyContent:"center",textAlign:"center",color:"red", paddingBottom:"14px", fontSize:"20px"
+                }}>No Appointments to Display</p>
                 }
               <div>
                 {appointment.map((item) => (
@@ -195,16 +218,15 @@ const HomeScreen_BloodDonation=()=> {
                  </div>
                 ))}
                 </div>
-
                 <Card.Body className="d-flex justify-content-between">
                   <Card.Title >By appointment online, it is beneficial for staff and users! Donate Blood.</Card.Title>
-                    <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointment details!</Button>
+                    <Button variant="danger" onClick={viewAllAppointments} style={{width:"50%"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointments!</Button>
                 </Card.Body>
                   <p style={{fontSize:"14px",marginLeft:"16px"}}>By handling users through appointments you can gain best experience ever!</p>
             </Card>
             </Col>
         </CardGroup>
-          <Card style={{marginTop:30,paddingBottom:10}} className="shadow-sm p-3 mb-5 bg-body rounded border border-primary">
+          <Card id="card" style={{marginTop:30,paddingBottom:10}} className="shadow-sm p-3 mb-5 bg-body rounded border border-primary">
             <Card.Body>
               <Card.Header style={{justifyContent:"center",textAlign:"center",fontSize:"22px",fontStyle:"bold"}}><i class="fa fa-question-circle" aria-hidden="true"></i>Important  FAQS</Card.Header>
               {FAQ.length === 0 && <p>No FAQS to Display</p>}

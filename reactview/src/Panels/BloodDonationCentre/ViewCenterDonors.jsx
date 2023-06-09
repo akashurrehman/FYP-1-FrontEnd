@@ -18,7 +18,8 @@ import {  PrinterFill } from 'react-bootstrap-icons';
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import { toast } from "react-toastify";
 import { InputGroup,FormControl } from "react-bootstrap";
-
+import './Styling/popupcard.css'; 
+import {BsFillAwardFill} from "react-icons/bs";
 const ViewCenterDonors=()=> {
   const [loading, setIsLoading] = useState(true);  
   const [data, setData] = useState([]);
@@ -197,11 +198,11 @@ const ViewCenterDonors=()=> {
           {
             filteredDataArray.map((item) => (
               <Col md={12} xs={12}>
-                <Card className="shadow p-3 mb-2 mt-2 rounded">
+                <Card className="shadow p-3 mb-2 mt-2 rounded" id="card">
                   <Card.Body>
                     <Card.Text>
                       <Row>
-                        <Col xs={5}>
+                        <Col xs={5} md={5}>
                           <h6>
                             Email:  
                           </h6>
@@ -221,7 +222,7 @@ const ViewCenterDonors=()=> {
                             City:
                           </h6>
                         </Col>
-                        <Col xs={7}>
+                        <Col xs={7} md={4}>
                           <h6>
                             {item.Email.value}
                           </h6>
@@ -240,6 +241,10 @@ const ViewCenterDonors=()=> {
                           <h6>
                             {item.City.value}
                           </h6>
+                        </Col>
+                        <Col md={3} id="verifyicon">
+                        <BsFillAwardFill className="mt-5" size={55} color="#003268"/>
+                        <h5>VERIFIED</h5>
                         </Col>
                       </Row>
                     </Card.Text>                   
