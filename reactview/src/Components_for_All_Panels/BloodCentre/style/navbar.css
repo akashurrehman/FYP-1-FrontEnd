@@ -1,7 +1,4 @@
 @media screen and (max-width: 600px) {
-  #visi {
-    visibility:hidden;
-  }
   #sticky-sidebar{
     margin-top: 0%;
   }
