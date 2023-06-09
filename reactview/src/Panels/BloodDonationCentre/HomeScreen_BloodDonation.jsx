@@ -95,10 +95,14 @@ const HomeScreen_BloodDonation=()=> {
   
 
   const mystyle = {
-      height: "7%",
-      width: "7%",
+      height: "15%",
+      width: "15%",
+      justifyContent: "center",
+      alignItems: "center",
+      textAlign: "center",
       borderRadius: "50%",
       display: "inline-block",
+
     };
   return (
   <div>
@@ -113,9 +117,17 @@ const HomeScreen_BloodDonation=()=> {
         </Col>
         <Col className="mt-md-5" xs={9}>
           <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow-lg p-3 mb-5 rounded">
-            <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
+          
+            <Card.Img
+              variant="top"
+              id="Circularimg"
+              src="/Images/blood-Center.jpg"
+              alt="Image"
+              style={mystyle}
+              className="d-inline-block align-top mx-2"
+            />
             <Card.Body>
-              <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Website: Dashboard</Card.Title>
+              <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Center: Dashboard</Card.Title>
             </Card.Body>
           </Card>
           <CardGroup style={{}}>
@@ -141,9 +153,9 @@ const HomeScreen_BloodDonation=()=> {
                 </Card>
             </Col>
             <Col className="mt-md-5 px-2" md={8}>  
-              <Card style={{marginTop:10}}>
+              <Card style={{marginTop:10,borderRadius:"24px"}}>
                 <div style={{position: "relative"}}>
-                  <img src="/Images/Banner-bloodCentre-2.jpg" alt="Banner Image" style={{width: "100%", height: "50%", objectFit: "cover"}}/>
+                  <img src="/Images/Banner-bloodCentre-2.jpg" alt="Banner Image" style={{width: "100%", height: "50%", objectFit: "cover",borderRadius:"24px"}}/>
                     <div style={{position: "absolute", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(0,0,0,0.5)", padding: "10px"}}>
                       <Card.Title style={{color: "white",justifyContent:"center",textAlign:"center"}}>Be a hero in your - It's in your blood</Card.Title>
                         <div style={{justifyContent:"center", alignItems:"center", textAlign:"center"}}>
