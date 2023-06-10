@@ -103,7 +103,7 @@ const LabHome=()=> {
         <Col xs={12}>  
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
-              <Card.Title><i className="fa fa-flag" aria-hidden="true"></i>Important  Notification</Card.Title>
+              <Card.Title style={{justifyContent:"center",textAlign:"center",fontSize:"22px",fontStyle:"bold"}}><span style={{backgroundColor:"#85586F",padding:"8px",borderRadius:"18px",color:"#f2f2f2"}} ><i className="fa fa-flag" aria-hidden="true"></i>Important  Notification</span></Card.Title>
               {news.map((item) => (
                 <div key={item.ID.value}>
                   <h4>Title:{item.Title.value}</h4>
@@ -115,7 +115,7 @@ const LabHome=()=> {
           </Card>
           <Card border="success" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
-              <Card.Title><i className="fa fa-calendar" aria-hidden="true"></i>Upcoming Events</Card.Title>
+              <Card.Title style={{justifyContent:"center",textAlign:"center",fontSize:"22px",fontStyle:"bold"}}><span style={{backgroundColor:"#85586F",padding:"8px",borderRadius:"18px",color:"#f2f2f2"}} ><i className="fa fa-calendar" aria-hidden="true"></i>Upcoming Events</span></Card.Title>
               {events.map((item) => (
                 <div key={item.ID.value}>
                   <h4>Event:{item.Name.value}</h4>
@@ -128,10 +128,10 @@ const LabHome=()=> {
           </Card>
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
-              <Card.Title><i className="fa fa-flag" aria-hidden="true"></i>Important  FAQS</Card.Title>
+              <Card.Title style={{justifyContent:"center",textAlign:"center",fontSize:"22px",fontStyle:"bold"}}><span style={{backgroundColor:"#85586F",padding:"8px",borderRadius:"18px",color:"#f2f2f2"}} ><i className="fa fa-flag" aria-hidden="true"></i>Important  FAQS</span></Card.Title>
               {FAQ.map((item) => (
                 <div key={item.ID.value}>
-                  <h4>Question:{item.Title.value}</h4>
+                  <h4><strong>Question:{item.Title.value}</strong></h4>
                   <p>Answer:{item.Details.value}</p>
                   <hr style={{color:"red",width:"100%"}}/>
                 </div>
@@ -140,11 +140,11 @@ const LabHome=()=> {
           </Card>
           <Card border="info" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
-              <Card.Title><i className="fa fa-flag" aria-hidden="true"></i>Job Posts</Card.Title>
+              <Card.Title style={{justifyContent:"center",textAlign:"center",fontSize:"22px",fontStyle:"bold"}}><span style={{backgroundColor:"#85586F",padding:"8px",borderRadius:"18px",color:"#f2f2f2"}} ><i className="fa fa-flag" aria-hidden="true"></i>Job Posts</span></Card.Title>
               {jobPosts.map((item) => (
                 <div key={item.ID.value}>
-                  <h4>Question:{item.Title.value}</h4>
-                  <p>Answer:{item.Details.value}</p>
+                  <h4><strong>Job Title:{item.Title.value}</strong></h4>
+                  <p>Details:{item.Details.value}</p>
                   <hr style={{color:"red",width:"100%"}}/>
                 </div>
               ))}

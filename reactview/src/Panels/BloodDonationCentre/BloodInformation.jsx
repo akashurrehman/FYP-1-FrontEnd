@@ -158,11 +158,11 @@ const BloodInformation=()=> {
     <Container fluid style={{backgroundColor:"#EEEEEE",paddingBottom:"3.5rem"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
             <Sidebar/>        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
+        <Col className="mt-md-5" xs={10}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",marginLeft:"25px",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title>Add Blood Information of User who donate blood</Card.Title>
@@ -175,7 +175,7 @@ const BloodInformation=()=> {
             </Card.Body>
           </Card>
         
-      <Form className="shadow p-3 mb-3 rounded mt-3">
+      <Form className="shadow p-3 mb-3 rounded mt-3" style={{marginLeft:"25px"}}>
       <Row className="align-items-center">
         <Col xs="12" sm="4">
           <Form.Label htmlFor="inlineFormInputGroup">

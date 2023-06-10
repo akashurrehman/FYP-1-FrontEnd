@@ -52,7 +52,7 @@ function Header(props) {
       <Container fluid>
         <Navbar.Brand>
         <img
-                src="/Images/blood-center.jpg"
+                src="/Images/WebLogo.jpeg"
                 style={{
                   width: '35px',
                   height: '35px',

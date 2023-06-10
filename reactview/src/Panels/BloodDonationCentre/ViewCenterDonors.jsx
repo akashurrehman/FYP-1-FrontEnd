@@ -147,11 +147,11 @@ const ViewCenterDonors=()=> {
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
             <Sidebar />        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-          <Card className="shadow p-3 mb-2 rounded" style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
+        <Col className="mt-md-5" xs={10}>
+          <Card className="shadow p-3 mb-2 rounded" style={{marginTop:30,paddingBottom:10,alignItems:"center",marginLeft:"25px",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} >
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body style={{alignItems:"center",justifyContent:"center",textAlign:"center"}}>
                 <Card.Title>All Donors till Now</Card.Title>
@@ -194,7 +194,7 @@ const ViewCenterDonors=()=> {
           </Container>
           
           {filteredDataArray.length > 0 ? (
-          <div>
+          <div style={{marginLeft:"25px"}}>
           {
             filteredDataArray.map((item) => (
               <Col md={12} xs={12}>

@@ -19,12 +19,19 @@ const Sidebar = () => {
     window.location.href="/user/login";
   }
   return (
-    <div className="sticky-top position-fixed" style={{ display: 'flex', height: '95vh',marginTop:30,marginLeft:-25}} id="sticky-sidebar">
-      <CDBSidebar textColor="#FFFFFF" backgroundColor="#153250"   breakpoint={720} >
+    <div className="sticky-top position-fixed" style={{ display: 'flex', height: '95vh',marginTop:38,marginLeft:-25}} id="sticky-sidebar">
+      <CDBSidebar textColor="#FFFFFF" backgroundColor="#153250"   breakpoint={720} style={{width:"125%"}}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Blood logo
-          </a>
+        <img
+                src="/Images/WebLogo.jpeg"
+                style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '50%'
+              }}
+                alt="user Profile"
+                className="d-inline-block align-top mx-2"
+              />
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content" >

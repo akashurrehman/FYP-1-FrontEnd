@@ -90,11 +90,11 @@ const MyAccountCenter=()=> {
     <Container fluid style={{backgroundColor:"#E9EAE0"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
             <Sidebar/>        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded">
+        <Col className="mt-md-5" xs={10}>
+          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",marginLeft:"25px",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded">
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Website: My Account</Card.Title>
@@ -102,7 +102,7 @@ const MyAccountCenter=()=> {
           </Card>
           <CardGroup style={{}}>
             <Col className="mt-md-2 px-2" md={8}>  
-                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,borderColor:"#272C33",marginLeft:"25px",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Requests</Card.Title>
                         <hr />
@@ -152,7 +152,7 @@ const MyAccountCenter=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-2 px-2" md={8}>  
-                <Card className="shadow p-3 mb-5 rounded" style={{paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{paddingBottom:10,marginLeft:"25px",borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>All Accepted Requests</Card.Title>
                         <hr />
@@ -181,7 +181,7 @@ const MyAccountCenter=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-2 px-2" md={8}>  
-                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,marginLeft:"25px",paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Donors</Card.Title>
                         <hr />
@@ -204,7 +204,7 @@ const MyAccountCenter=()=> {
                 </Card>
             </Col>
             <Col className="mt-md-2 px-2" md={8}>  
-              <Card className="shadow p-3 mb-5 bg-body rounded" style={{marginTop:10,paddingBottom:10}} id="card">
+              <Card className="shadow p-3 mb-2 bg-body rounded" style={{marginTop:10,paddingBottom:10,marginLeft:"25px"}} id="card">
                 <div>
                   <h4 style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}> Appointments booked in your Center!</h4>
                   <hr />

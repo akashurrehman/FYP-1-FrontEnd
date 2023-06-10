@@ -18,7 +18,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import jwt_decode from "jwt-decode";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
-
+import {BsFillExclamationTriangleFill} from "react-icons/bs"
 const ProfileSettings=()=> {
   const [isLoading, setIsLoading] = useState(true);
   const [center, setCenterData] = useState({
@@ -235,18 +235,18 @@ const validateForm = () => {
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
             <Sidebar/>        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-            <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded" >
+        <Col className="mt-md-5" xs={10}>
+            <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",marginLeft:"24px",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded" >
               <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body style={{justifyContent:"center",textAlign:"center"}}>
                 <Card.Title>{center.name}</Card.Title>
                 <Card.Title>Profile Settings Panel</Card.Title>
               </Card.Body>
             </Card>
-        <div>
+        <div style={{marginLeft:"24px"}}>
         <Form className="mt-5 shadow p-3 mb-2 rounded" >
         <Row className="mb-3">
         <Col xs="12" sm="6">
@@ -360,7 +360,7 @@ const validateForm = () => {
     <Card className="shadow p-3 mb-2 border rounded" style={{marginTop:30,paddingBottom:10}}>
         <Row>
           <Col style={{ textAlign: "justifyContent"}}>
-            <h5 className="py-2 mx-3"><i class="fa fa-registered" aria-hidden="true"></i>Are you sure you want to delete your account?</h5>
+            <h5 className="py-2 mx-3"><BsFillExclamationTriangleFill size={20}/>Are you sure you want to delete your account?</h5>
             <h6 className="py-2 mx-3">Once you delete your account, there is no going back. Please be certain.</h6>
             <Form>
               <Form.Group as={Col} id="formGridCheckbox">

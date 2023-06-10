@@ -13,7 +13,7 @@ import { useAuth } from "./Auth/AuthContext";
 import jwtDecode from "jwt-decode";
 import {PrinterFill} from 'react-bootstrap-icons'
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
-import { InputGroup,FormControl } from "react-bootstrap";
+import { InputGroup,FormControl, FormLabel } from "react-bootstrap";
 import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 import './Styling/popupcard.css'; 
 
@@ -211,11 +211,11 @@ const mystyle = {
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
             <Sidebar />        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
+        <Col className="mt-md-5 mt-sm-5" xs={10}>
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",marginLeft:"25px",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >All Blood Requests</Card.Title>
@@ -243,6 +243,12 @@ const mystyle = {
         <Container className='d-flex justify-content-center'>
           <Row style={{ width: '40%' }}>
             <form onSubmit={handleClick}>
+                <FormLabel
+                  className="text-center pl-5"
+                  style={{ fontWeight: 'bold' }}
+                >
+                  Filter by Gender
+                </FormLabel>
                 <InputGroup size="sm" className="mb-1">
                   <FormControl
                     placeholder="Search blood requests by Gender ..."
@@ -261,7 +267,7 @@ const mystyle = {
           </Row>
         </Container>
          {filteredDataArray.length > 0 ? (
-          <div>
+          <div style={{marginLeft:"25px"}}>
         {
           filteredDataArray.map((item) => (
             <Col md={12} xs={12}>
