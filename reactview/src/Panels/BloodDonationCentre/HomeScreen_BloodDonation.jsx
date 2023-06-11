@@ -2,6 +2,7 @@ import React,{useEffect,useState,useContext} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {Nav} from 'react-bootstrap';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -14,7 +15,9 @@ import jwtDecode from "jwt-decode";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import axios from 'axios';
 import './Styling/popupcard.css'; 
-
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { PostcardFill } from "react-bootstrap-icons";
 
 const HomeScreen_BloodDonation=()=> {
   const [isLoading, setIsLoading] = useState(true);
@@ -225,6 +228,149 @@ const HomeScreen_BloodDonation=()=> {
                     <Button variant="danger" className="justify-content-center text-center mb-0" onClick={viewAllAppointments} style={{width:"50%",justifyContent:"center",textAlign:"center",alignItems:"center"}}><i class="fa fa-check-circle" aria-hidden="true"></i> View All Appointments!</Button>
                 </Card.Body>
             </Card>
+            </Col>
+        </CardGroup>
+        <CardGroup style={{marginLeft:"25px"}}>
+            <Col className="mt-md-2 px-2" md={4}>
+            <div className='BarBox' style={{borderBottom:'',width:'100%',borderRadius:'10px'}}>
+                
+                <Row style={{justifyContent:"center",textAlign:"center"}}>
+                <div style={{fontSize:'17px',marginTop:'3%',marginBottom:'-6%',color:'#fff1e1'}}>
+                    <Nav.Link href='/bloodCenter/bloodRequests'><p>Total Blood Requests</p></Nav.Link>
+                </div>
+                    <Col sm={8}>
+                    <div style={{marginTop:'5%',textAlign:'left',marginLeft:'25%'}}>
+                        
+                        <div style={{ width: 55, height: 55,marginLeft:'0%'}}>
+                        <CircularProgressbar value={data?.length} text={data?.length + "%"}
+                            styles={buildStyles({
+                            // Rotation of path and trail, in number of turns (0-1)
+                            // rotation: 0.25,
+                        
+                            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                            strokeLinecap: 'round',
+                        
+                            // Text size
+                            textSize: '35px',
+                        
+                            // How long animation takes to go from one percentage to another, in seconds
+                            pathTransitionDuration: 3,
+                        
+                            // Can specify path transition in more detail, or remove it entirely
+                            pathTransition: '',
+                        
+                            // Colors
+                            pathColor: 'white',
+                            textColor: 'white',
+                            trailColor: '#D64045',
+                            backgroundColor: '#D64045',
+                            })}
+                        />
+                        
+                        </div>
+                        <div style={{fontSize:'14px',marginTop:'1%',color:'#fff1e1',fontFamily:'cursive'}}>
+                            <Nav.Link href='/bloodCenter/bloodRequests'><p>Blood Requests</p></Nav.Link>
+                        </div>
+                    </div>
+                    </Col>
+
+                </Row>
+                
+            </div>
+            </Col>
+            <Col className="mt-md-2 px-2" md={4} style={{justifyContent:"center",alignItems:"center"}}>
+              <div className='BarBox' style={{borderBottom:'',width:'100%',borderRadius:'10px'}}>
+                
+                <Row style={{justifyContent:"center",textAlign:"center"}}>
+                <div style={{fontSize:'17px',marginTop:'3%',marginBottom:'-6%',color:'#fff1e1',justifyContent:"center"}}>
+                    <Nav.Link href='/bloodCenter/AppointmentDetails'><p>Appointments</p></Nav.Link>
+                </div>
+                    <Col sm={4}>
+                    <div style={{marginTop:'5%',textAlign:'left',marginLeft:'25%'}}>
+                        
+                        <div style={{ width: 55, height: 55,marginLeft:'0%'}}>
+                        <CircularProgressbar value={appointment?.length} text={appointment?.length + "%"}
+                            styles={buildStyles({
+                            // Rotation of path and trail, in number of turns (0-1)
+                            // rotation: 0.25,
+                        
+                            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                            strokeLinecap: 'round',
+                        
+                            // Text size
+                            textSize: '35px',
+                        
+                            // How long animation takes to go from one percentage to another, in seconds
+                            pathTransitionDuration: 3,
+                        
+                            // Can specify path transition in more detail, or remove it entirely
+                            pathTransition: '',
+                        
+                            // Colors
+                            pathColor: 'white',
+                            textColor: 'white',
+                            trailColor: '#D64045',
+                            backgroundColor: '#D64045',
+                            })}
+                        />
+                        
+                        </div>
+                        <div style={{fontSize:'18px',marginTop:'1%',color:'#fff1e1',fontFamily:'cursive'}}>
+                            <Nav.Link href='/bloodCenter/AppointmentDetails'><p>Appointments</p></Nav.Link>
+                        </div>
+                    </div>
+                    </Col>
+
+                </Row>
+                
+            </div>
+            </Col>
+            <Col className="mt-md-2 px-2" md={4}>
+            <div className='BarBox' style={{borderBottom:'',width:'100%',borderRadius:'10px'}}>
+                
+                <Row style={{justifyContent:"center",textAlign:"center"}}>
+                <div style={{fontSize:'17px',marginTop:'3%',marginBottom:'-6%',color:'#fff1e1'}}>
+                    <Nav.Link href='/bloodCenter/ViewAllDonors'><p>Total Donors</p></Nav.Link>
+                </div>
+                    <Col sm={4}>
+                    <div style={{marginTop:'5%',textAlign:'left',marginLeft:'25%'}}>
+                        
+                        <div style={{ width: 55, height: 55,marginLeft:'0%'}}>
+                        <CircularProgressbar value={donors?.length} text={donors?.length + "%"}
+                            styles={buildStyles({
+                            // Rotation of path and trail, in number of turns (0-1)
+                            // rotation: 0.25,
+                        
+                            // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
+                            strokeLinecap: 'round',
+                        
+                            // Text size
+                            textSize: '35px',
+                        
+                            // How long animation takes to go from one percentage to another, in seconds
+                            pathTransitionDuration: 3,
+                        
+                            // Can specify path transition in more detail, or remove it entirely
+                            pathTransition: '',
+                        
+                            // Colors
+                            pathColor: 'white',
+                            textColor: 'white',
+                            trailColor: '#D64045',
+                            backgroundColor: '#D64045',
+                            })}
+                        />
+                        
+                        </div>
+                        <div style={{fontSize:'18px',marginTop:'1%',color:'#fff1e1',fontFamily:'cursive'}}>
+                            <Nav.Link href='/bloodCenter/ViewAllDonors'><p>Donors</p></Nav.Link>
+                        </div>
+                    </div>
+                    </Col>
+
+                </Row>
+                
+            </div>
             </Col>
         </CardGroup>
           <Card id="card" style={{marginTop:30,paddingBottom:10,marginLeft:"24px"}} className="shadow-sm p-3 mb-5 bg-body rounded border border-primary">
