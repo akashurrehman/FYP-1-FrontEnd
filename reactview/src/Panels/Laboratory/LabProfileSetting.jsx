@@ -242,7 +242,7 @@ const handleCancel = () => {
     </Form>
     <Row className="mb-3">
         <Col>
-            <Button style={{ display: "inline-block", width:"50%",textAlign:"center",backgroundColor: "#153250"}} onClick={handleSubmit}>Update Information</Button>
+            <Button style={{ display: "inline-block",textAlign:"center",backgroundColor: "#153250"}} className="mx-3 my-3 w-sm-100" onClick={handleSubmit}>Update Information</Button>
         </Col>
     </Row>
       <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
@@ -255,7 +255,7 @@ const handleCancel = () => {
                 <Form.Check type="checkbox" style={{color:"black",borderColor:"red"}} className="py-3" label="Are the provided information is correct according to your center or knowledge?" />
               </Form.Group>
             </Form>
-            <Button style={{ display: "inline-block", width:"50%",textAlign:"center"}} className="mx-3 my-3" variant="danger" onClick={handleDelete}>Delete Center</Button>
+            <Button style={{ display: "inline-block",textAlign:"center"}} className="mx-3 my-3 w-sm-100" variant="danger" onClick={handleDelete}>Delete Center</Button>
           </Col>
         </Row>
       </Card>

@@ -152,7 +152,12 @@ const handleInputChange = (event) => {
     return setShow(true);
   };
   
-  
+  var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
 
   const handleSaveChanges = () => {
     console.log("Handle Save Changes clicked");
@@ -161,16 +166,17 @@ const handleInputChange = (event) => {
       .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${bloodData.ID}`, bloodData)
       .then((response) => {
         console.log("Response Data",response.data);
-        toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
+        toast.info(response.data.success,{position:toast.POSITION.TOP_RIGHT});
         handleClose();
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
       })
       .catch((error) => {
-        toast.error(error,{position: toast.POSITION.TOP_RIGHT});
+        toast.error(error.response.data,{position: toast.POSITION.TOP_RIGHT});
         console.log("Error updating data: ", error);
       });
   };
-
 
     return (
     <div>
@@ -204,8 +210,9 @@ const handleInputChange = (event) => {
                 placeholder="10 am"
                 autoFocus
                 name="addedDate"
+                //Add current date to form
                 value={bloodData.addedDate}
-                onChange={handleInputChange}
+                onChange={new Date().toLocaleString()}
               />
             </Form.Group>
           </Form>
@@ -222,17 +229,17 @@ const handleInputChange = (event) => {
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
           <Sidebar/>        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-3 border rounded">
+        <Col className="mt-md-5" xs={10}>
+        <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",marginLeft:"25px",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-3 border rounded">
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title >Available Blood Stock</Card.Title>
             </Card.Body>
           </Card>
-          <Card style={{marginTop:10,paddingBottom:10,alignItems:"center",justifyContent:"center"}} className="shadow p-3 mb-2 border rounded">
+          <Card style={{marginTop:10,paddingBottom:10,alignItems:"center",marginLeft:"25px",justifyContent:"center"}} className="shadow p-3 mb-2 border rounded">
             <Card.Body>
               <Card.Title style={
                 {color:"red",fontSize:20,fontWeight:"bold",textAlign:"center"}
@@ -255,7 +262,7 @@ const handleInputChange = (event) => {
           )}
           
           <>
-          <CardGroup>
+          <CardGroup style={{marginLeft:"25px"}}>
           {blood.map((card) => (
             <Col key={card.ID} md={4}>
               <Card style={{ width: "18rem",marginTop:"10px" }} id="card">

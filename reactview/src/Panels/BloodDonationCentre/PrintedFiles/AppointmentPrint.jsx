@@ -1,5 +1,5 @@
 
-export const handleAppointmentPrint = (data,center) => {
+export const handleAppointmentPrint = (filteredDataArray,center) => {
     let printContent = '<html><head><style>';
     printContent += 'table { border-collapse: collapse; width: 100%; }';
     printContent += 'th, td { border: 1px solid black; padding: 8px; text-align: left; }';
@@ -23,7 +23,7 @@ export const handleAppointmentPrint = (data,center) => {
     printContent += `<div id= "body"><h5>City=${center.city}</h5></div>`;
     printContent += `<div id= "body"><h5>Phone Number=${center.contactNo}</h5></div>`;
     printContent += '<tr><th>Name</th><th>Email</th><th>Gender</th><th>City</th><th>Address</th><th>Blood Group</th><th>Donor Contact Number</th><th>Appointment Timing</th></tr>';
-    data.forEach((row) => {
+    filteredDataArray.forEach((row) => {
       printContent += `<tr><td>${row.DonorName.value}</td><td>${row.DonorEmail.value}</td><td>${row.Gender.value}</td><td>${row.City.value}</td><td>${row.Address.value}</td><td>${row.BloodGroup.value}</td><td>${row.DonorContactNo.value}</td><td>${row.Timings.value}</td></tr>`;
     });
     printContent += '</table></div>';

@@ -15,6 +15,8 @@ import jwt_decode from 'jwt-decode';
 import jwtDecode from "jwt-decode";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import './Styling/popupcard.css'; 
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import {Nav} from 'react-bootstrap';
 
 const MyAccountCenter=()=> {
   const [Loading, setIsLoading]=useState(true);
@@ -56,10 +58,10 @@ const MyAccountCenter=()=> {
     const [requests,setRequests]=useState([]);
     const [appointment, setAppointment] = useState([]);
     const [centerData,setCenterData]=useState([]);
-  
+
     useEffect(() => {
       const fetchDataForAll = async () => {
-        const [dataRes, donorsRes,requests, appointmentRes,centerRes] = await Promise.all([
+        const [dataRes, donorsRes,requests, appointmentRes,centerRes,bloodStockRes] = await Promise.all([
           fetchData(`http://localhost:8081/api/users/bloodrequest/byUserID/${id}`),
           fetchData("http://localhost:8081/api/bloodCenter/RegisteredCenters/getDonorInfo"),
           fetchData(`http://localhost:8081/api/users/accepted/bloodRequests/${id}`),
@@ -78,7 +80,49 @@ const MyAccountCenter=()=> {
       console.log("Decode Token",jwt_decode(token));
       
     }, []);
+    
+    const [bloodData, setBloodData] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8081/api/users/bloodstock/withAllBloodGroups/byCentreID/${id}`);
+          const { results } = response.data;
+          if (results && results.bindings && results.bindings.length > 0) {
+            const centerData = results.bindings.map((binding) => ({
+              ID: binding.ID.value,
+              bloodGroup: binding.BloodGroup.value,
+              noOfBags: binding.NoOfBags.value,
+              addedDate: binding.AddedDate.value,
+            }));
+            setBloodData(centerData);
+            console.log("Blood stock on fetching", centerData);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      };
   
+      fetchData();
+    }, [id]);
+  
+    const maxBagsPerGroup = 10; // Change this value according to your requirements
+  
+    const calculateProgressPercentage = (noOfBags) => {
+      return (noOfBags / maxBagsPerGroup) * 100;
+    };
+    
+    const getVariant = (noOfBags) => {
+      if (noOfBags >= 8) {
+        return 'danger';
+      } else if (noOfBags >= 6) {
+        return 'warning';
+      } else if (noOfBags >= 4) {
+        return 'info';
+      } else {
+        return 'success';
+      }
+    };
   const mystyle = {
       height: "7%",
       width: "7%",
@@ -90,11 +134,11 @@ const MyAccountCenter=()=> {
     <Container fluid style={{backgroundColor:"#E9EAE0"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
             <Sidebar/>        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded">
+        <Col className="mt-md-5" xs={10}>
+          <Card style={{marginTop:30,paddingBottom:5,alignItems:"center",marginLeft:"25px",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-5 rounded">
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title style={{justifyContent:"left",alignItems:"left"}}>Blood Donation Website: My Account</Card.Title>
@@ -102,7 +146,7 @@ const MyAccountCenter=()=> {
           </Card>
           <CardGroup style={{}}>
             <Col className="mt-md-2 px-2" md={8}>  
-                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,borderColor:"#272C33",marginLeft:"25px",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Requests</Card.Title>
                         <hr />
@@ -152,7 +196,7 @@ const MyAccountCenter=()=> {
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-2 px-2" md={8}>  
-                <Card className="shadow p-3 mb-5 rounded" style={{paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{paddingBottom:10,marginLeft:"25px",borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>All Accepted Requests</Card.Title>
                         <hr />
@@ -178,10 +222,39 @@ const MyAccountCenter=()=> {
                     </Card.Body>
                 </Card>
             </Col>
+            <Col className="mt-md-2 px-2" md={4}>
+              <Card className="shadow p-3 mb-5 rounded" style={{backgroundColor:"#153250",color:"white"}} >
+                <Card.Header style={{fontSize:"18px",justifyContent:"center",alignItems:"center", textAlign:"center"}}>Blood Stock Details</Card.Header>
+                <Card.Body>
+            <div>
+                {bloodData.map((data) => {
+                  const { ID, bloodGroup, noOfBags } = data;
+                  const progressPercentage = calculateProgressPercentage(parseInt(noOfBags));
+                  const variant = getVariant(parseInt(noOfBags));
+
+                  return (
+                    <ProgressBar
+                      key={ID}
+                      now={progressPercentage}
+                      label={`${bloodGroup}                  ${noOfBags} bags`}
+                      variant={variant}
+                      striped
+                      style={{ height: '30px', margin: '10px', fontSize: '1rem' }}
+                    />
+                  );
+                })}
+              </div>
+                </Card.Body>
+                <Card.Footer>
+                <Nav.Link href='/bloodCenter/BloodStock' style={{textAlign:"center",justifyContent:"center",fontSize:"1.2 rem"}}><p>View Details</p></Nav.Link>
+                </Card.Footer>
+              </Card>
+            </Col>
+
         </CardGroup>
         <CardGroup style={{}}>
             <Col className="mt-md-2 px-2" md={8}>  
-                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
+                <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,marginLeft:"25px",paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Donors</Card.Title>
                         <hr />
@@ -204,7 +277,7 @@ const MyAccountCenter=()=> {
                 </Card>
             </Col>
             <Col className="mt-md-2 px-2" md={8}>  
-              <Card className="shadow p-3 mb-5 bg-body rounded" style={{marginTop:10,paddingBottom:10}} id="card">
+              <Card className="shadow p-3 mb-2 bg-body rounded" style={{marginTop:10,paddingBottom:10,marginLeft:"25px"}} id="card">
                 <div>
                   <h4 style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}> Appointments booked in your Center!</h4>
                   <hr />

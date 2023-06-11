@@ -158,7 +158,7 @@ const AddNewUser=()=> {
     .post(`http://localhost:8081/api/user/registration/add`, userData)
     .then((response) => {
       console.log(response.data);
-      toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
+      toast.success(response.data.success,{position:toast.POSITION.TOP_RIGHT});
     })
     .catch((error) => {
       console.error(error);
@@ -182,24 +182,24 @@ const AddNewUser=()=> {
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>
       <Header />
       <Row>
-        <Col xs={3}>
+        <Col xs={2}>
             <Sidebar/>        
         </Col>
-        <Col className="mt-md-5" xs={9}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 border rounded">
+        <Col className="mt-md-5" xs={10}>
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",marginLeft:"25px",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 border rounded">
           <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title>Add New User to the website</Card.Title>
             </Card.Body>
           </Card>
 
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}} className="shadow p-3 mb-3 border rounded">
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center",marginLeft:"25px"}} className="shadow p-3 mb-3 border rounded">
             <Card.Body style={{color:"red",fontSize:"14px",fontWeight:"bold"}}>
               <Card.Title>In this page, you can register new user to the website!</Card.Title>
               <Card.Title>Their login will be created according to provided credentials!</Card.Title>
             </Card.Body>
           </Card>
-      <Form className="shadow p-3 mb-2 border rounded">
+      <Form className="shadow p-3 mb-2 border rounded" style={{marginLeft:"25px",}}>
       <Row className="mt-5">
         <Col xs={12}sm={3}>
           <Form.Label> Enter full Name of user</Form.Label>
