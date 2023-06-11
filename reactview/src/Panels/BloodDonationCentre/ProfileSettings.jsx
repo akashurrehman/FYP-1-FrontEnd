@@ -190,7 +190,7 @@ const validateForm = () => {
       .then((response) => {
         console.log(response.data);
         toast.success(response.data.message,{position:toast.POSITION.TOP_RIGHT});
-        window.location.href('/users/login');
+        window.location.href = "/user/login";
         // Perform any additional actions after successful delete
       })
       .catch((error) => {
@@ -206,18 +206,19 @@ const validateForm = () => {
     .then((response) => {
       console.log(response.data);
       // toast.success(response.data,{position:toast.POSITION.TOP_RIGHT});
-      toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
+      toast.info(response.data.success,{position:toast.POSITION.TOP_RIGHT});
     })
     .catch((error) => {
       console.error(error);
       //toast.error(error,{position:toast.POSITION.TOP_CENTER}
-      toast(error,{position:toast.POSITION.TOP_RIGHT});
+      toast("Data Not Updated!",{position:toast.POSITION.TOP_RIGHT});
     });
     setShowModal(false);
   }
 
   const handleCancel = () => {
     setShowModal(false);
+    toast("Update Cancelled",{position:toast.POSITION.TOP_RIGHT});
   }
 
   const mystyle = {

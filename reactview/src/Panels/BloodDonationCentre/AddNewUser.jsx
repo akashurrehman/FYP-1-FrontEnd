@@ -158,7 +158,7 @@ const AddNewUser=()=> {
     .post(`http://localhost:8081/api/user/registration/add`, userData)
     .then((response) => {
       console.log(response.data);
-      toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
+      toast.success(response.data.success,{position:toast.POSITION.TOP_RIGHT});
     })
     .catch((error) => {
       console.error(error);

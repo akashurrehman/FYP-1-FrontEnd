@@ -152,7 +152,12 @@ const handleInputChange = (event) => {
     return setShow(true);
   };
   
-  
+  var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = mm + '/' + dd + '/' + yyyy;
 
   const handleSaveChanges = () => {
     console.log("Handle Save Changes clicked");
@@ -161,16 +166,17 @@ const handleInputChange = (event) => {
       .put(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${bloodData.ID}`, bloodData)
       .then((response) => {
         console.log("Response Data",response.data);
-        toast(response.data.success,{position:toast.POSITION.TOP_RIGHT});
+        toast.info(response.data.success,{position:toast.POSITION.TOP_RIGHT});
         handleClose();
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 4000);
       })
       .catch((error) => {
-        toast.error(error,{position: toast.POSITION.TOP_RIGHT});
+        toast.error(error.response.data,{position: toast.POSITION.TOP_RIGHT});
         console.log("Error updating data: ", error);
       });
   };
-
 
     return (
     <div>
@@ -204,8 +210,9 @@ const handleInputChange = (event) => {
                 placeholder="10 am"
                 autoFocus
                 name="addedDate"
+                //Add current date to form
                 value={bloodData.addedDate}
-                onChange={handleInputChange}
+                onChange={new Date().toLocaleString()}
               />
             </Form.Group>
           </Form>

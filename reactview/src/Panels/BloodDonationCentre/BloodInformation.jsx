@@ -135,7 +135,7 @@ const BloodInformation=()=> {
     .post(`http://localhost:8081/api/user/bloodDonation/BloodDonationDetails/addUserInfo`, donorData)
     .then((response) => {
       console.log(response.data);
-      toast.success(response.data,{position:toast.POSITION.TOP_CENTER});
+      toast.success(response.data.success,{position:toast.POSITION.TOP_CENTER});
       //toast("Donor Information Added Successfully",{position:toast.POSITION.TOP_CENTER});
       })
     .catch((error) => {
