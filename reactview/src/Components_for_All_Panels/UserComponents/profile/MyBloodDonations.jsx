@@ -61,13 +61,13 @@ export default function MyBloodDonations() {
                 <div style={{backgroundColor:'#F5F5DC',width:'130%',marginLeft:'7%',borderRadius:'10px'}}>
                     <div style={{textAlign:'left',padding:'8%'}}>
                         <Image src={image} rounded style={{marginLeft: "0%",marginTop:'0%',height: "5rem",opacity:'1.0'}}></Image>
-                        <Nav.Link style={{fontSize:'18px',fontWeight:'500',marginTop:'3%'}} className="RedColor" href="/user/make-blood-donation">Make more donation <ArrowRight className="" size={17} /></Nav.Link>
+                        <Nav.Link style={{fontSize:'18px',fontWeight:'500',marginTop:'3%'}} className="RedColor" href="/user/make-blood-donation">Become a Blood Donor <ArrowRight className="" size={17} /></Nav.Link>
                         <p className="" style={{fontSize:'14px',color:'gray'}}>
                             Donate blood, save a life - a small act of kindness can make a big difference in someone's life. Every drop counts - by donating blood, you have the power to bring hope and healing to someone in need.  
                         </p>
                     </div>
                     <div style={{textAlign:'right'}}>
-                    <Button variant='flat2Solid' size='sm' href='/user/donor' style={{marginBottom:'6%',marginRight:'6%'}}>View All Donations</Button>
+                    <Button variant='flat2Solid' size='sm' href='/user/donor' style={{marginBottom:'6%',marginRight:'6%'}}>View All Donors</Button>
                 </div>
                 </div>
             </Col>

@@ -62,7 +62,7 @@ export default function MyBloodRequests() {
                         <Image src={image} rounded style={{marginLeft: "0%",marginTop:'0%',height: "5rem",opacity:'1.0'}}></Image>
                         <Nav.Link style={{fontSize:'18px',fontWeight:'500',marginTop:'3%'}} className="RedColor" href="/user/post-blood-request">Post more requests <ArrowRight className="" size={17} /></Nav.Link>
                         <p className="" style={{fontSize:'14px',color:'gray'}}>
-                            Donate blood, save a life - a small act of kindness can make a big difference in someone's life. Every drop counts - by donating blood, you have the power to bring hope and healing to someone in need.  
+                        Blood Request is a dedicated blood donation website module that aims to fill the gap between blood donors and individuals in need of blood transfusions. Our platform serves as a vital resource, connecting potential donors with patients, hospitals, and healthcare facilities in urgent need of blood.
                         </p>
                     </div>
                     <div style={{textAlign:'right'}}>

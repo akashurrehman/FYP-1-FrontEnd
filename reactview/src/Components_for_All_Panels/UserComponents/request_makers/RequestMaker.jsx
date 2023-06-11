@@ -24,6 +24,8 @@ const RequestMaker = () => {
     const bloodArray = ['A+','B+','AB+','O+','A-','B-','AB-','O-'];
     const [filterCity,setFilterCity] = React.useState("City");
     const cityArray = ['Lahore','Karachi','Islamabad','Multan','Peshawar'];
+    const [filterStatus,setFilterStatus] = React.useState("Blood Requests");
+    const statusArray = ['Accepted','Not Accepted'];
     const [filterDate,setFilterDate] = React.useState("Request Makers");
     const dateArray = ['Recent','Day Ago','Week Ago','Month Ago','Year Ago'];
     const [searchTerm, setSearchTerm] = useState('');
@@ -77,6 +79,21 @@ const RequestMaker = () => {
             return requestMaker.City.value.toLowerCase() === city.toLowerCase();
         });
         setFilteredRequestMakersArray(filteredRequestMakers);
+    };
+    const filterRequestMakersByStatus = (status) => {
+        if(status === 'Not Accepted'){
+            const filteredRequestMakers = requestMakers.results.bindings.filter((requestMaker) => {
+                return requestMaker.RequestDonatedBy.value.toLowerCase() === 'null';
+            });
+            setFilteredRequestMakersArray(filteredRequestMakers);
+        }
+        else{
+            const filteredRequestMakers = requestMakers.results.bindings.filter((requestMaker) => {
+                return requestMaker.RequestDonatedBy.value.toLowerCase() !== 'null';
+            });
+            setFilteredRequestMakersArray(filteredRequestMakers);
+        }
+        
     };
 
     const setArray = () => {
@@ -186,6 +203,31 @@ const RequestMaker = () => {
                                         >
                                             <Form.Text>
                                                 {`${city}`}
+                                            </Form.Text>
+                                        </Nav.Link>
+                                    ),)}
+                                    
+                                    {/* <Button size='sm mt-2' className='AlignCenter' variant="flat">Filter Result</Button> */}
+                                </div>
+                            </DropdownButton>
+
+                            <DropdownButton
+                                id="dropdown-autoclose-false dropdown-menu-align-end"
+                                variant="flat" align="end"
+                                size='sm'
+                                title={filterStatus}
+                                style={{paddingLeft:'5px'}}
+                            >
+                                <div style={{}}>
+                                    {statusArray.map((status)=>(
+                                        
+                                        <Nav.Link 
+                                            className='FilterListHoverColor' 
+                                            eventKey={status} 
+                                            onClick={() => {setFilterStatus(status);filterRequestMakersByStatus(status)}}
+                                        >
+                                            <Form.Text>
+                                                {`${status}`}
                                             </Form.Text>
                                         </Nav.Link>
                                     ),)}

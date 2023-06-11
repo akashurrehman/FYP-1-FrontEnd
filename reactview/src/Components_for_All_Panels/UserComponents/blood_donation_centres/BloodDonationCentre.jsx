@@ -263,9 +263,9 @@ const BloodDonationCentre = () => {
                     <Col sm={5}>
                         <div style={{paddingTop:"23%",paddingLeft:"20%",textAlign:"left"}}>
                             <h5 className="PurpleColor">Thinking about becoming a blood donor?</h5>
-                            <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Make Blood Donation. Give Life gift.</h3>
+                            <h3 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Become a Blood Donor. Give Life gift.</h3>
                             <p className="text-left">Remember, by becoming a blood donor, you have the opportunity to positively impact countless lives. "Become a Hero: Donate Blood and Save Lives."</p>
-                            <Button href='/user/make-blood-donation' size='sm' variant="flatSolid">Make Blood Donation <ArrowRight className="" size={18} /></Button>
+                            <Button href='/user/make-blood-donation' size='sm' variant="flatSolid">Become a Blood Donor <ArrowRight className="" size={18} /></Button>
                         </div>
                         
                     </Col>

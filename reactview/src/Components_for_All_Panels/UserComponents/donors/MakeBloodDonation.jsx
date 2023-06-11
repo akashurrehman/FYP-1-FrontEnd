@@ -151,7 +151,7 @@ const MakeBloodDonation = () => {
                             <p className="justify-content mb-3 mt-0" style={{fontSize:'13.5px',color:'gray',fontFamily:'cursive'}}>
                             "Dear Donor!", your information is valuable to us.
                                 When you fill out this form, the system will create your blood donation. 
-                                With your name and other details; you can view your posted blood requests!
+                                With your name and other details; you can view your blood donors!
                             </p>
                             <Form noValidate validated={validated} onSubmit={handleSubmit}>
                                 <Row>
