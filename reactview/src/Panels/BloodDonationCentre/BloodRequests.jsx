@@ -2,6 +2,7 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
+import {Nav,Dropdown,DropdownButton,Form} from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
@@ -26,6 +27,33 @@ const BloodRequests=()=> {
   const [center, setCenterData] = useState({
     name: "",
   });
+
+  //For Filter
+  const [filterBlood,setFilterBlood] = React.useState("Blood Group");
+  const bloodArray = ['A+','B+','AB+','O+','A-','B-','AB-','O-'];
+  const [filterCity,setFilterCity] = React.useState("City");
+  const cityArray = ['Lahore','Karachi','Islamabad','Multan','Peshawar'];
+  const [filterDate,setFilterDate] = React.useState("Donors");
+  const dateArray = ['Recent','Day Ago','Week Ago','Month Ago','Year Ago'];
+
+  const filterDonorsByBloodGroup = (bloodGroup) => {
+    const filteredDonors = data.filter((donor) => {
+        // console.log(donor.Blood_Group.value);
+        // console.log(bloodGroup);
+        return donor.Blood_Group.value.toLowerCase() === bloodGroup.toLowerCase();
+    });
+    
+    setFilteredDataArray(filteredDonors);
+    // console.log(filteredDonors);
+  };
+
+  const filterDonorsByCity = (city) => {
+    const filteredDonors = data.filter((donor) => {
+        return donor.City.value.toLowerCase() === city.toLowerCase();
+    });
+    setFilteredDataArray(filteredDonors);
+  };
+
 
   const {token} = useAuth();
   
@@ -125,7 +153,7 @@ const BloodRequests=()=> {
   }, [selectedRows, filterByCenter, centerId]);
 
   const handlePrint = () => {
-    handleRequestsPrint(data);
+    handleRequestsPrint(filteredDataArray);
   };
   const filterDonorsByGender = (name) => {
     console.log("name", name);
@@ -165,44 +193,6 @@ const mystyle = {
   display: "inline-block",
 };  
 
-/* const columns = [
-  {
-    name: 'Name',
-    selector: 'Name.value',
-  },
-  {
-    name: 'Email',
-    selector: 'Email.value',
-  },
-  {
-    name: 'Gender',
-    selector: 'Gender.value',
-  },
-  {
-    name: 'Blood Group',
-    selector: 'Blood_Group.value',
-  },
-  {
-    name: 'Contact',
-    selector: 'Contact.value',
-  },
-  {
-    name: 'City',
-    selector: 'City.value',
-  },
-  {
-    name: 'Hospital',
-    selector: 'Hospital.value',
-  },
-  {
-    name: 'Action',
-    cell: (row) => (
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button variant="success" style={{ borderRadius: 0,height:"30px", width:"100%", marginRight:"5px" }} onClick={handleApprove}><i class="fa fa-check" aria-hidden="true"></i>Approve</Button>
-      </div>
-    )
-  }  
-]; */
   return (
   <div>
    {loading ? (
@@ -221,31 +211,12 @@ const mystyle = {
               <Card.Title >All Blood Requests</Card.Title>
             </Card.Body>
         </Card>
-        {/*
-          <DataTable 
-          title="All Blood Requests"
-          columns={columns}
-          data={data}
-          pagination
-          fixedHeader
-          fixedHeaderScrollHeight='500px'
-          selectableRows
-          subHeader
-          selectableRowsHighlight
-          highlightOnHover
-          actions ={
-            <>
-            <Button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
-            
-            </>
-          }
-        /> */}
         <Container className='d-flex justify-content-center'>
           <Row style={{ width: '40%' }}>
             <form onSubmit={handleClick}>
                 <FormLabel
-                  className="text-center pl-5"
-                  style={{ fontWeight: 'bold' }}
+                  className=" mr-5"
+                  style={{ fontWeight: 'bold' ,paddingLeft:'25%'}}
                 >
                   Filter by Gender
                 </FormLabel>
@@ -266,6 +237,82 @@ const mystyle = {
             </form>
           </Row>
         </Container>
+        <Card style={{marginLeft:"25px", marginBottom:"10px",backgroundColor:"#465e7f",color:"#FFFFFF"}}>
+        <div style={{marginTop:'1%',marginBottom:'1%',paddingBottom:'3%',paddingTop:'3%'}}>
+                <Container className='d-flex justify-content-center'>
+                    <Row>
+                        <Col>
+                            <FormLabel
+                              className=" mr-5"
+                              style={{ fontWeight: 'bold' ,paddingLeft:'12%'}}
+                            >
+                              By Blood Group
+                            </FormLabel>
+                            <FormLabel
+                              className=" mr-5"
+                              style={{ fontWeight: 'bold' ,paddingLeft:'5%'}}
+                            >
+                              By City
+                            </FormLabel>
+                        </Col>
+                        <p className='d-flex'>
+                            <div className='TextCursive PurpleColor' style={{margin:'5px',paddingRight:'2px',color:"#FFFFFF"}}>Filter by:</div>
+                            <DropdownButton
+                                id="dropdown-autoclose-false dropdown-menu-align-end"
+                                variant="flat" align="end"
+                                size='sm'
+                                title={filterBlood}
+                                style={{paddingLeft:'5px'}}
+                            >
+                                <div style={{}}>
+                                    {bloodArray.map((blood)=>(
+                                        
+                                        <Nav.Link 
+                                            className='FilterListHoverColor'
+                                            eventKey={blood} 
+                                            onClick={() => {setFilterBlood(blood);filterDonorsByBloodGroup(blood)}}
+                                        >
+                                            <Form.Text>
+                                                {`${blood}`} Blood
+                                            </Form.Text>
+                                        </Nav.Link>
+                                    ),)}
+                                    
+                                </div>
+                            </DropdownButton>
+
+                            <DropdownButton
+                                id="dropdown-autoclose-false"
+                                variant="flat"
+                                size='sm'
+                                title={filterCity}
+                                style={{paddingLeft:'5px'}}
+                            >
+                                <div style={{}}>
+                                    {cityArray.map((city)=>(
+                                        <Nav.Link 
+                                            className='FilterListHoverColor' 
+                                            eventKey={city} 
+                                            onClick={() => {setFilterCity(city);filterDonorsByCity(city)}}
+                                        >
+                                            <Form.Text>
+                                                {`${city}`}
+                                            </Form.Text>
+                                        </Nav.Link>
+                                    ),)}
+                                    
+                                </div>
+                            </DropdownButton>
+                            <div style={{paddingLeft:'5px'}}>
+                                <Button size='sm' variant="flatSolid" onClick={()=>{setFilterCity('City');setFilterBlood('Blood Group');setFilterDate('Request Makers');setArray();  }}><Trash className="IcomColor" size={18} /></Button>
+                            </div>
+                            
+                        </p>
+                        
+                    </Row>
+                </Container>
+            </div>
+        </Card>
          {filteredDataArray.length > 0 ? (
           <div style={{marginLeft:"25px"}}>
         {

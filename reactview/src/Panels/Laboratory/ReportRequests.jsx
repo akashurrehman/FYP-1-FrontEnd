@@ -104,7 +104,8 @@ const ReportRequests=()=> {
       setIsLoading(false);
   }, []);
   const handlePrint = () => {
-    handleRequestReportsPrint(data);
+    console.log("Handle Print method calls!")
+    handleRequestReportsPrint(data,CBCData);
   };
   
   
@@ -428,7 +429,7 @@ const columns = [
                     <h6>
                       For Printing the Report list, click this button. This is for record Purposes only.
                     </h6>
-                      <Button className='btn btn-info mb-3' onClick={() => handleShow()} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
+                      <Button className='btn btn-info mb-3' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
                   </div>
                 </Col>
               }

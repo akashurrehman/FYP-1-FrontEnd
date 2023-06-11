@@ -71,7 +71,7 @@ const ViewCenterDonors=()=> {
   
 
   const handlePrint = () => {
-    handleDonorPrint(data);
+    handleDonorPrint(filteredDataArray);
     console.log("Handle Print button in Donors!")
   };
   const mystyle = {
@@ -158,20 +158,6 @@ const ViewCenterDonors=()=> {
                 <Card.Title>Contains the information of all the donors who donate at your blood donation center!</Card.Title>
               </Card.Body>
           </Card>
-
-            {/* <DataTable title = "All donors" columns={columns} data={data}
-            pagination
-            fixedHeader
-            fixedHeaderScrollHeight='450px'
-            selectableRows
-            selectableRowsHighlight
-            highlightOnHover
-            
-            actions ={
-              <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}> <PrinterFill className="" size={20} />Download/Print</button>
-            }
-            subHeader
-            /> */}
           <Container className='d-flex justify-content-center'>
             <Row style={{ width: '40%' }}>
               <form onSubmit={handleClick}>
@@ -192,6 +178,7 @@ const ViewCenterDonors=()=> {
               </form>
             </Row>
           </Container>
+          
           
           {filteredDataArray.length > 0 ? (
           <div style={{marginLeft:"25px"}}>

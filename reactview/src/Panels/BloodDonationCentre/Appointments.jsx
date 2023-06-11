@@ -8,12 +8,15 @@ import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
 import DataTable from 'react-data-table-component';
 import './Styling/print.css';
+import {Nav,Dropdown,DropdownButton,Form} from 'react-bootstrap';
 import { handleAppointmentPrint } from "./PrintedFiles/AppointmentPrint";
 import { useAuth } from "./Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
 import {PrinterFill} from 'react-bootstrap-icons'
 import LoadingSpinner  from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
+import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
 import axios from 'axios';
+import { InputGroup,FormControl, FormLabel } from "react-bootstrap";
 import './Styling/popupcard.css'; 
 
 const Appointments=()=> {
@@ -43,6 +46,33 @@ const Appointments=()=> {
       console.log("authCentre");
   }
 
+    //For Filter
+    const [filterBlood,setFilterBlood] = React.useState("Blood Group");
+    const bloodArray = ['A+','B+','AB+','O+','A-','B-','AB-','O-'];
+    const [filterCity,setFilterCity] = React.useState("City");
+    const cityArray = ['Lahore','Karachi','Islamabad','Multan','Peshawar'];
+    const [filterDate,setFilterDate] = React.useState("Donors");
+    const dateArray = ['Recent','Day Ago','Week Ago','Month Ago','Year Ago'];
+
+    const [filteredDataArray, setFilteredDataArray] = React.useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  
+    const filterDonorsByBloodGroup = (bloodGroup) => {
+      const filteredDonors = data.filter((donor) => {
+          return donor.BloodGroup.value.toLowerCase() === bloodGroup.toLowerCase();
+      });
+      
+      setFilteredDataArray(filteredDonors);
+      // console.log(filteredDonors);
+    };
+  
+    const filterDonorsByCity = (city) => {
+      const filteredDonors = data.filter((donor) => {
+          return donor.City.value.toLowerCase() === city.toLowerCase();
+      });
+      setFilteredDataArray(filteredDonors);
+    };
+  
   
 
   useEffect(() => {
@@ -67,6 +97,7 @@ const Appointments=()=> {
           };
         });
         setData(rows);
+        setFilteredDataArray(rows);
       })
       .catch((error) => console.log(error));
       authCentre();
@@ -96,7 +127,7 @@ const Appointments=()=> {
   },[]);
 
   const handlePrint = () => {
-    handleAppointmentPrint(data,center);
+    handleAppointmentPrint(filteredDataArray,center);
     console.log("Handle Print button in Appointment!")
   };
   const mystyle = {
@@ -106,46 +137,35 @@ const Appointments=()=> {
     display: "inline-block",
   };  
 
-/* const columns = [
-  {
-    name: 'Name',
-    selector: 'DonorName.value',
-  },
-  {
-    name: 'Email',
-    selector: 'DonorEmail.value',
-  },
-  {
-    name: 'Gender',
-    selector: 'Gender.value',
-  },
-  {
-    name: 'Blood Group',
-    selector: 'BloodGroup.value',
-  },
-  {
-    name: 'Contact',
-    selector: 'DonorContactNo.value',
-  },
-  {
-    name: 'City',
-    selector: 'City.value',
-  },
-  {
-    name: 'Address',
-    selector: 'Address.value',
-  },
-  {
-    name: 'Timings',
-    selector: 'Timings.value',
-  },
-  {
-    name: 'Appointment Status',
-    cell: (row) => (
-      <Button variant="primary" style={{ borderRadius: 0, height:"50%", widht:"100%" }} onClick={() => alert('Download Receipt Option selected!')}> IP/CT </Button>
-    )
-  }
-]; */
+  const filterDonorsByGender = (name) => {
+    console.log("name", name);
+    const filteredDonors = data.filter((donor) => {
+      return donor.Gender.value.toLowerCase() === name.toLowerCase();
+    });
+    setFilteredDataArray(filteredDonors);
+    console.log("filterDonorsByName", filteredDonors);
+  };
+  
+  const setArray = () => {
+    setFilteredDataArray(data);
+    console.log("setArray", data);
+  };
+  
+  
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  
+  const handleClick = (event) => {
+    event.preventDefault();
+    console.log(searchTerm);
+    if(searchTerm !== '') {
+      filterDonorsByGender(searchTerm);
+    }
+    else{
+        setArray();
+    }
+  };
 
   return (
   <div>
@@ -159,7 +179,7 @@ const Appointments=()=> {
             <Sidebar />        
         </Col>
         <Col className="mt-md-5" xs={10}>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",marginLeft:"25px",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 rounded">
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
               <Card.Body>
                 <Card.Title >Booked Appointments</Card.Title>
@@ -171,10 +191,114 @@ const Appointments=()=> {
                 <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>You can accept or reject the appointments also</Card.Title>
               </Card.Body>
           </Card>
-          {data.length > 0 ? (
+
+          <Container className='d-flex justify-content-center'>
+          <Row style={{ width: '40%' }}>
+            <form onSubmit={handleClick}>
+                <FormLabel
+                  className=" mr-5"
+                  style={{ fontWeight: 'bold' ,paddingLeft:'25%'}}
+                >
+                  Filter by Gender
+                </FormLabel>
+                <InputGroup size="sm" className="mb-1">
+                  <FormControl
+                    placeholder="Search blood requests by Gender ..."
+                    aria-label="Search Blood Donations"
+                    aria-describedby="basic-addon2"
+                    value={searchTerm}
+                    onChange={handleChange}
+                  />
+                    {/* No submit button */}
+                    <input type="submit" style={{ display: 'none' }} />
+                    <InputGroup.Text id="basic-addon2">
+                    <Search className="m-1 PurpleColor" size={18} />
+                    </InputGroup.Text>
+                </InputGroup>
+            </form>
+          </Row>
+        </Container>
+        <Card style={{marginLeft:"25px", marginBottom:"10px",backgroundColor:"#465e7f",color:"#FFFFFF"}}>
+        <div style={{marginTop:'1%',marginBottom:'1%',paddingBottom:'3%',paddingTop:'3%'}}>
+                <Container className='d-flex justify-content-center'>
+                    <Row>
+                        <Col>
+                            <FormLabel
+                              className=" mr-5"
+                              style={{ fontWeight: 'bold' ,paddingLeft:'12%'}}
+                            >
+                              By Blood Group
+                            </FormLabel>
+                            <FormLabel
+                              className=" mr-5"
+                              style={{ fontWeight: 'bold' ,paddingLeft:'5%'}}
+                            >
+                              By City
+                            </FormLabel>
+                        </Col>
+                        <p className='d-flex'>
+                            <div className='TextCursive PurpleColor' style={{margin:'5px',paddingRight:'2px',color:"#FFFFFF"}}>Filter by:</div>
+                            <DropdownButton
+                                id="dropdown-autoclose-false dropdown-menu-align-end"
+                                variant="flat" align="end"
+                                size='sm'
+                                title={filterBlood}
+                                style={{paddingLeft:'5px'}}
+                            >
+                                <div style={{}}>
+                                    {bloodArray.map((blood)=>(
+                                        
+                                        <Nav.Link 
+                                            className='FilterListHoverColor'
+                                            eventKey={blood} 
+                                            onClick={() => {setFilterBlood(blood);filterDonorsByBloodGroup(blood)}}
+                                        >
+                                            <Form.Text>
+                                                {`${blood}`} Blood
+                                            </Form.Text>
+                                        </Nav.Link>
+                                    ),)}
+                                    
+                                </div>
+                            </DropdownButton>
+
+                            <DropdownButton
+                                id="dropdown-autoclose-false"
+                                variant="flat"
+                                size='sm'
+                                title={filterCity}
+                                style={{paddingLeft:'5px'}}
+                            >
+                                <div style={{}}>
+                                    {cityArray.map((city)=>(
+                                        <Nav.Link 
+                                            className='FilterListHoverColor' 
+                                            eventKey={city} 
+                                            onClick={() => {setFilterCity(city);filterDonorsByCity(city)}}
+                                        >
+                                            <Form.Text>
+                                                {`${city}`}
+                                            </Form.Text>
+                                        </Nav.Link>
+                                    ),)}
+                                    
+                                </div>
+                            </DropdownButton>
+                            <div style={{paddingLeft:'5px'}}>
+                                <Button size='sm' variant="flatSolid" onClick={()=>{setFilterCity('City');setFilterBlood('Blood Group');setFilterDate('Request Makers');setArray();  }}><Trash className="IcomColor" size={18} /></Button>
+                            </div>
+                            
+                        </p>
+                        
+                    </Row>
+                </Container>
+            </div>
+        </Card>
+
+          {filteredDataArray.length > 0 ? (
           <div style={{marginLeft:"25px"}}>
           {
-            data.map((item) => (
+            filteredDataArray.map((item) => (
               <Col md={12} xs={12}>
                 <Card className="shadow p-3 mb-2 rounded" id="card">
                   <Card.Body>
@@ -223,15 +347,15 @@ const Appointments=()=> {
             </div>
           )}
           {
-            data.length>0?(
+            filteredDataArray.length>0?(
               <div style={{marginLeft:"25px"}}>
               {
-                <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>
+                <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"4px",marginTop:"16px"}}>
                 <div>
                   <h6>
                     For Printing the Appointments, click this button. This is for record Purposes only.
                   </h6>
-                  <Button className='btn btn-info mb-3' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
+                  <Button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"#fff"}}><PrinterFill className="" size={20} />Download/Print</Button>
                 </div>
               </Col>
               }

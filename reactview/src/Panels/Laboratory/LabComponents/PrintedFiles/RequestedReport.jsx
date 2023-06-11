@@ -1,4 +1,4 @@
-export const handleRequestReportsPrint = (data) => {
+export const handleRequestReportsPrint = (props) => {
     let printContent = '<html><head><style>';
     printContent += 'table { border-collapse: collapse; width: 100%; }';
     printContent += 'th, td { border: 1px solid black; padding: 8px; text-align: left; }';
@@ -13,13 +13,13 @@ export const handleRequestReportsPrint = (data) => {
     printContent += '}';
     printContent += '</style></head><body>';
     printContent += '<div id="header"><h1>All Report Requests</h1></div>';
-    printContent += '<div id="content">All the blood Requests are shown here<table>';
-    printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
-    data.forEach((row) => {
-      printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
+    printContent += '<div id="content">All the Report Details are shown here<table>';
+    printContent += '<tr><th>UserName</th><th>Name</th><th>Email</th><th>Address</th><th>Blood Group</th><th>Contact Number</th><th>City</th><th>Status</th></tr>';
+    props.forEach((row) => {
+      printContent += `<tr><td>${row.UserName.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Address.value}</td><td>${row.BloodGroup.value}</td><td>${row.ContactNo.value}</td><td>${row.City.value}</td><td>${row.Status.value}</td></tr>`;
     });
     printContent += '</table></div>';
-    printContent += '<div id="footer"><p style="text-align: center; margin-top: 8px;"><p>Printed on: {new Date().toLocaleDateString()}</p><p>For any inquiries, please contact us at:</p><p>Email: example@example.com</p><p>Phone: 123-456-7890</p> </p></div>';
+    printContent += '<div id="footer"><p style="text-align: center; margin-top: 8px;"><p>For any inquiries, please contact us at:</p><p>Email: example@example.com</p><p>Phone: 123-456-7890</p> </p></div>';
     printContent += '<div id="watermark">Original File</div>';
     printContent += '</body></html>';
   
