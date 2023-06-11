@@ -35,10 +35,10 @@ const SingleNews = (props) => {
     setDetails(news.Details.value);
     setPostDate(news.Date.value);
   }, []);
-
-  console.log("New Title is", title);
-  console.log("New Title is", details);
-  console.log("New Title is", postDate);
+  // Deletion Confirmation Modal
+  const [delShow, setDelShow] = useState(false);
+  const handleDelClose = () => setDelShow(false);
+  const handleDelShow = () => setDelShow(true);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -130,6 +130,20 @@ const SingleNews = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Modal show={delShow} onHide={handleDelClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to Delete the News?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={deleteUser}>
+            Yes
+          </Button>
+          <Button variant="primary" onClick={handleDelClose}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Container
         className="d-flex justify-content-center"
         style={{ paddingTop: "0%", paddingBottom: "7%" }}
@@ -155,7 +169,7 @@ const SingleNews = (props) => {
                       >
                         <Card.Title>
                           <h5
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "rgb(116, 10, 10)" }}
                           >
                             {news?.Title?.value}
@@ -165,18 +179,18 @@ const SingleNews = (props) => {
                     </Row>
                     <Card.Body>
                       <Card.Text>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%" }}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Details:
                           </strong>
                           {news?.Details?.value}
                         </p>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%" }}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Date Posted:
@@ -187,7 +201,7 @@ const SingleNews = (props) => {
                       <div className="row">
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button variant="danger" onClick={deleteUser}>Delete</Button>
+                          <Button variant="danger" onClick={handleDelShow}>Delete</Button>
                         </div>
                         <div className="col-lg-3 col-12">
                           {" "}

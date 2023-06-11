@@ -126,7 +126,7 @@ export default function FAQs() {
     PDFnotify();
   };
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <h1 className="color">Frequently Asked Questions</h1>
       <h3 className="color marginss">
         <u>Add a New Question</u>

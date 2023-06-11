@@ -2,23 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Button, FloatingLabel } from "react-bootstrap";
 import { Form, Row, Col, Card, InputGroup, Modal } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { CalendarDateFill, Laptop } from "react-bootstrap-icons";
 
 import "./style.css";
-import Campaign from "../Campaign";
-import GenericService from "../Services/GenericService";
+// import Campaign from "../Campaign";
+// import GenericService from "../Services/GenericService";
 import packageService from "../Services/PackageService";
 
 const SingleCampaign = (props) => {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [title, setTitle] = useState("");
   const [postDate, setPostDate] = useState("");
   const [details, setDetails] = useState("");
-  const { campaign, history } = props;
+  // Deletion Confirmation Modal
+  const [delShow, setDelShow] = useState(false);
+  const handleDelClose = () => setDelShow(false);
+  const handleDelShow = () => setDelShow(true);
+
+  const { campaign } = props;
   console.log(props);
   useEffect(() => {
     setTitle(campaign?.Title?.value);
@@ -26,16 +30,13 @@ const SingleCampaign = (props) => {
     setPostDate(campaign.Date.value);
   }, []);
 
-  console.log("New Title is", title);
-  console.log("New Title is", details);
-  console.log("New Title is", postDate);
 
   const submitForm = async (e) => {
     e.preventDefault();
     try {
       await axios.put(
         "http://localhost:8081/api/admin/campaign/CampaignDetails/update/" +
-          campaign.ID.value,
+        campaign.ID.value,
         { title, details, postDate }
       );
       console.log(title);
@@ -123,11 +124,26 @@ const SingleCampaign = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* Delete Confirmation Modal */}
+      <Modal show={delShow} onHide={handleDelClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to Delete the Campaign?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={deleteRecord}>
+            Yes
+          </Button>
+          <Button variant="primary" onClick={handleDelClose}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Container
         className="d-flex justify-content-center"
         style={{ paddingTop: "0%", paddingBottom: "7%" }}
       >
-        <Row className="">
+        <Row className="fontfamily">
           <div className="d-flex">
             <Col sm={4}>
               <Row className="" style={{ marginBottom: "10%" }}>
@@ -149,7 +165,7 @@ const SingleCampaign = (props) => {
                         <Card.Title>
                           <h5>
                             <strong
-                              className="TextCursive"
+
                               style={{ color: "rgb(116, 10, 10)" }}
                             >
                               {" "}
@@ -162,18 +178,18 @@ const SingleCampaign = (props) => {
                     </Row>
                     <Card.Body>
                       <Card.Text>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%" }}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Details:
                           </strong>
                           {campaign?.Details?.value}
                         </p>
-                        <p style={{ marginTop: "-5.5%", height: "40px" }}>
+                        <p style={{ marginTop: "-5.5%" }}>
                           <strong
-                            className="TextCursive"
+                            className="fontfamily"
                             style={{ color: "#635f5f" }}
                           >
                             Date Posted:
@@ -184,7 +200,7 @@ const SingleCampaign = (props) => {
                       <div className="row">
                         <div className="col-lg-3 col-12">
                           {" "}
-                          <Button variant="danger" onClick={deleteRecord}>Delete</Button>
+                          <Button variant="danger" onClick={handleDelShow}>Delete</Button>
                         </div>
                         <div className="col-lg-3 col-12">
                           {" "}

@@ -15,6 +15,12 @@
 .reflex {
   display: flex;
 }
+.signout{
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
 .flexes {
   display: flex;
   margin-top: 30px;
@@ -42,6 +48,12 @@
   color: rgb(200, 5, 5);
   font-size: 20px;
 }
+.fontfamily{
+  font-family: "Montserrat";
+}
+.cursorpointer{
+  cursor: pointer;
+}
 .maincontainer {
   /* display: flex; */
   margin-top: 55px;
@@ -50,6 +62,26 @@
 .cup {
   margin-top: 12px;
 }
+.custom-dropdown-button {
+  background-color: rgb(160, 15, 15); /* Set the desired background color */
+  color: white; /* Set the desired text color */
+  border-color:  rgb(160, 15, 15); /* Set the desired border color */
+}
+
+.custom-dropdown-button:hover,
+.custom-dropdown-button:focus {
+  background-color:  rgb(160, 15, 15); /* Set the desired hover/focus background color */
+  color: white; /* Set the desired hover/focus text color */
+  border-color:  rgb(160, 15, 15); /* Set the desired hover/focus border color */
+}
+.gap{
+  gap: 10px;
+  display: flex;
+}
+.icnss{
+  height: 38px;
+}
+
 .Appcolor {
   color: rgb(200, 5, 5);
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "react-circular-progressbar/dist/styles.css";
 import axios from "axios";
 import "../adminscreen.css";
@@ -8,6 +8,8 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../BloodDonationCentre/Auth/AuthContext";
 import jwtDecode from "jwt-decode";
+import { Trash } from "react-bootstrap-icons";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 export default function Bloodstocks() {
   const {token} = useAuth();
     
@@ -78,9 +80,43 @@ export default function Bloodstocks() {
       });
     PDFnotify();
   };
+   //For Filter
+   const bloodArray = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
+   const [selectedBloodGroup, setSelectedBloodGroup] = useState(null); 
+   const [filteredDonors, setFilteredDonors] = useState([]);
+   const [filtersApplied, setFiltersApplied] = useState(false);
+ 
+ 
+ 
+   useEffect(() => {
+     setFilteredDonors(users);
+   }, [users]);
+ 
+ 
+ 
+   const clearFilters = () => {
+     setSelectedBloodGroup(null);
+    
+     setFiltersApplied(false);
+   };
+   useEffect(() => {
+     let filteredDonors = users;
+ 
+     if (selectedBloodGroup) {
+       filteredDonors = filteredDonors.filter(
+         (donor) => donor.bloodGroup === selectedBloodGroup
+       );
+     }
+ 
+    
+     setFilteredDonors(filteredDonors);
+     setFiltersApplied(selectedBloodGroup);
+   }, [selectedBloodGroup, users]);
+ 
+ 
 
   return (
-    <div className="turningred">
+    <div className="turningred fontfamily">
       <div className="pdf-campaigns-container" ref={pdfContainerRef}>
         <div className="buttonInDonor">
           <h1 className="color">Blood Stock</h1>
@@ -88,8 +124,33 @@ export default function Bloodstocks() {
             Generate PDF
           </button>
         </div>
-        <div className="cardsmapping">
-          {users.map((faq, index) => (
+        <div className="row mt-4">
+          <div className="col-lg-2 col-12"> <h3>Filters:</h3></div>
+          <div className="col-lg-6 gap col-12">
+
+            <DropdownButton
+              id="dropdown-item-button"
+              // className="custom-dropdown-button"
+              title={selectedBloodGroup || "Select Blood Group"}
+              onSelect={(bloodGroup) => setSelectedBloodGroup(bloodGroup)}
+            >
+              {bloodArray.map((bloodGroup, index) => (
+                <Dropdown.Item key={index} eventKey={bloodGroup}>
+                  {bloodGroup}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+            {filtersApplied && (
+
+              <button className="btn btn-secondary icnss" onClick={clearFilters}>
+                <Trash className="trashbox" size={18} />
+              </button>
+            )}
+
+          </div>
+        </div>
+        <div className="cardsmapping mt-2">
+          {filteredDonors.map((faq, index) => (
             <div className="headin" key={index}>
               <div className="card DonoCard">
                 <div className="card-body">
