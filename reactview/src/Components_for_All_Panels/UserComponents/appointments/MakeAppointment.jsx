@@ -212,7 +212,7 @@ const MakeAppointment = () => {
     
     const ErrorToastMakeBloodAnalysis = ({ closeToast }) => (
         <div>
-            <p><strong className='TextColor'>Sorry !</strong> Kindly check your eligibility status for blood donation. </p>
+            <p><strong className='TextColor'>Sorry !</strong> Kindly check your eligibility status for booking an appointment. </p>
             <div style={{textAlign:'right'}}>
                 <Nav.Link className='RedColor' href='/user/blood-analysis'>Make blood analysis  <ArrowRight className="" size={16} /></Nav.Link>
             </div>
@@ -321,7 +321,7 @@ const MakeAppointment = () => {
                                                                     overlay={
                                                                     <Popover id="aids-popover">
                                                                         <Popover.Body>
-                                                                            Congratulations! You are eligible for making blood donation and booking appointment in {centre?.Name?.value}
+                                                                            Congratulations! You are eligible for making blood donation and booking an appointment in {centre?.Name?.value}
                                                                         </Popover.Body>
                                                                     </Popover>
                                                                     }
@@ -335,7 +335,7 @@ const MakeAppointment = () => {
                                                                     overlay={
                                                                     <Popover id="aids-popover">
                                                                         <Popover.Body>
-                                                                            Sorry! You are not eligible for making blood donation and booking appointment in {centre?.Name?.value}
+                                                                            Sorry! You are not eligible for making blood donation and booking an appointment in {centre?.Name?.value}
                                                                         </Popover.Body>
                                                                     </Popover>
                                                                     }
@@ -452,7 +452,7 @@ const MakeAppointment = () => {
                                                                     <Form.Control
                                                                         required
                                                                         aria-label="Default"
-                                                                        aria-describedby="inputGroup-sizing-default" type="number" placeholder="Contact Number*" 
+                                                                        aria-describedby="inputGroup-sizing-default" type="text" placeholder="Contact Number*" 
                                                                         value={user?.ContactNo?.value}
                                                                         
                                                                     />

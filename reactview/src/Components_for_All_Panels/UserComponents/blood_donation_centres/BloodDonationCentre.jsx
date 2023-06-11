@@ -16,7 +16,7 @@ const BloodDonationCentre = () => {
 
     //For Filter
     const [filterCategory,setFilterCategory] = React.useState("Category");
-    const categoryArray = ['Government','Private','Both'];
+    const categoryArray = ['Public','Private','Both'];
     const [filterCity,setFilterCity] = React.useState("City");
     const cityArray = ['Lahore','Karachi','Islamabad','Multan','Peshawar'];
     const [filterDistance,setFilterDistance] = React.useState("Any Distance");
@@ -238,7 +238,7 @@ const BloodDonationCentre = () => {
         <div style={{}}>
             {filteredCentreArray.length === 0 ? (
                 <Row className="d-flex justify-content-center m-5">
-                    <h4 style={{textAlign:'center'}}>Centres are not available</h4>
+                    <h4 style={{textAlign:'center'}}>Blood Donation Centres not found!</h4>
                 </Row>
             ) : (
                 <div>

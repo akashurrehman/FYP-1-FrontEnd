@@ -253,7 +253,7 @@ const BloodAnalysis = () => {
                             {/* <Button onClick={handleGeocode}>Get Coordinates</Button> */}
                         </h3>
                         <p className="justify-content mb-3 mt-3" style={{fontSize:'15px',color:'grey',fontFamily:'cursive'}}>
-                            "Dear Donor!", Fill out this form according to your CBC Report (Complete Blood Count). Then check your strength for blood donation or booking appointment.
+                            "Dear Donor!", Fill out this form according to your CBC Report (Complete Blood Count). Then check your strength for blood donation or booking an appointment.
                             <Nav.Link className='RedColor' style={{fontWeight:'600',marginTop:'1%'}} onClick={getUserCBCReportData}>Request for a CBC Report Details from LAB</Nav.Link>
                         </p>
                         <Form noValidate validated={validated} onSubmit={handleSubmit}>
