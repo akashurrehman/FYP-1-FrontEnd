@@ -1,14 +1,7 @@
-const io = require('socket.io')(server);
+const express = require('express');
+const router = express.Router();
+const { createMessage } = require('../../Controllers/chatController');
 
-io.on('connection', (socket) => {
-  console.log('User connected');
+router.post('/message', createMessage);
 
-  socket.on('message', (data) => {
-    console.log('Received message:', data);
-    io.emit('message', data);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('User disconnected');
-  });
-});
+module.exports = router;
