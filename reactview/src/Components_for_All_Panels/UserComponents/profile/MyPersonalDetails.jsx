@@ -427,7 +427,7 @@ export default function MyPersonalDetails() {
                                         <Form.Control
                                             required
                                             aria-label="Default"
-                                            aria-describedby="inputGroup-sizing-default" type="number" placeholder="Contact Number*" 
+                                            aria-describedby="inputGroup-sizing-default" type="text" placeholder="Contact Number*" 
                                             value={contactNo}
                                             onChange={(e) => {
                                                 setContactNo(e.target.value);

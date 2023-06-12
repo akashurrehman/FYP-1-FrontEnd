@@ -110,7 +110,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_all_blood_donation} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/donor">View All Blood Donations <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                             
@@ -120,7 +120,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_make_blood_donation} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/make-blood-donation">Make Blood Donation <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
                                                 </p>
                                             </div>
                                         </Col>
@@ -168,7 +168,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_all_centre} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/blood-donation-centre">Blood Donations Centres <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
                                                 </p>
                                             </div>
                                             
@@ -178,7 +178,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_book_appointment} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/blood-donation-centre">Book Appointment <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                         </Col>
@@ -192,7 +192,7 @@ const UserPanelHeader = () => {
                                                     <Image src={image_my_appointment} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                     <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/my-account">My Appointments <ArrowRight className="" size={17} /></Nav.Link>
                                                     <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                        We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                     </p>
                                                 </div>
                                                 
@@ -226,7 +226,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_all_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/request-maker">View All Blood Requests <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
                                                 </p>
                                             </div>
                                             
@@ -236,7 +236,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_post_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/post-blood-request">Post Blood Request <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                         </Col>
@@ -250,7 +250,7 @@ const UserPanelHeader = () => {
                                                     <Image src={image_my_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                     <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/my-account">My Blood Requests <ArrowRight className="" size={17} /></Nav.Link>
                                                     <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                        We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                     </p>
                                                 </div>
                                                 
@@ -260,7 +260,7 @@ const UserPanelHeader = () => {
                                                     <Image src={image_accepted_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                     <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/my-account">Accepted Blood Requests <ArrowRight className="" size={17} /></Nav.Link>
                                                     <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                        We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
                                                     </p>
                                                 </div>
                                             </Col>
@@ -302,7 +302,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_news} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/news">News <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
                                                 </p>
                                             </div>
                                             
@@ -312,7 +312,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_campaign} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/campaign">Campaigns <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                         </Col>
@@ -321,7 +321,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_event} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/event">Events <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                         </Col>
@@ -330,7 +330,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_advertisement} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3.0rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/job-post">Advertisements <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                             
@@ -343,7 +343,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_job_post} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/job-post">Job Posts <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                             
@@ -353,7 +353,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_financial_donor} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/financial-donation">Financial Donors <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
                                                 </p>
                                             </div>
                                         </Col>
@@ -362,7 +362,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_sponsor} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/sponsor">Sponsors <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
                                                 </p>
                                             </div>
                                         </Col>
@@ -371,7 +371,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_faq} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/faq">FAQ's <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
                                                 </p>
                                             </div>
                                         </Col>
@@ -406,7 +406,7 @@ const UserPanelHeader = () => {
                             <Nav.Link onClick={handleShow}><CircleNotificationsSharpIcon sx={{ color: '#27213C', mr:0 , my: 0 }}/></Nav.Link>
                             <Nav.Link onClick={(e) => {
                                     userLoginService.logout();
-                                    window.location.reload();}}>
+                                    window.location.href = "/user/login";}}>
                                         <LogoutSharpIcon sx={{ color: '#27213C', mr:0 , my: 0 }}/>
                             </Nav.Link>
                             

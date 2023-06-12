@@ -184,7 +184,7 @@ const SingleRequestMaker = (props) => {
                                                                     });
                                                                 }
                                                                 
-                                                            }}>Donate & Save Life
+                                                            }}>Accept Blood Request
                                                         </Button>
                                                     </>
                                                 )}

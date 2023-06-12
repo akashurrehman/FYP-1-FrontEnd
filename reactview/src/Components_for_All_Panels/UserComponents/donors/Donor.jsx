@@ -38,7 +38,7 @@ const Donor = () => {
         getData();
     }, []);
 
-    // console.log(donors?.results?.bindings?.length);
+    console.log(donors?.results?.bindings);
 
 
 
@@ -47,6 +47,8 @@ const Donor = () => {
     const bloodArray = ['A+', 'B+', 'AB+', 'O+', 'A-', 'B-', 'AB-', 'O-'];
     const [filterCity, setFilterCity] = React.useState("City");
     const cityArray = ['Lahore', 'Karachi', 'Islamabad', 'Multan', 'Peshawar'];
+    const [filterStatus,setFilterStatus] = React.useState("Blood Donor");
+    const statusArray = ['Available','Not Available'];
     const [filterDate, setFilterDate] = React.useState("Donors");
     const dateArray = ['Recent', 'Day Ago', 'Week Ago', 'Month Ago', 'Year Ago'];
     const [searchTerm, setSearchTerm] = useState('');
@@ -76,10 +78,16 @@ const Donor = () => {
         setFilteredDonorsArray(filteredDonors);
     };
 
+    const filterDonorsByStatus = (status) => {
+        const filteredDonors = donors.results.bindings.filter((donor) => {
+            return donor.DonorAvailability.value.toLowerCase() === status.toLowerCase();
+        });
+        setFilteredDonorsArray(filteredDonors);
+    };
+
     const setArray = () => {
         setFilteredDonorsArray(donors.results.bindings);
     };
-
 
 
     //For search bar
@@ -188,6 +196,29 @@ const Donor = () => {
                                 </div>
                             </DropdownButton>
 
+                            <DropdownButton
+                                id="dropdown-autoclose-false"
+                                variant="flat"
+                                size='sm'
+                                title={filterStatus}
+                                style={{ paddingLeft: '5px' }}
+                            >
+                                <div style={{}}>
+                                    {statusArray.map((status) => (
+                                        <Nav.Link
+                                            className='FilterListHoverColor'
+                                            eventKey={status}
+                                            onClick={() => { setFilterStatus(status); filterDonorsByStatus(status) }}
+                                        >
+                                            <Form.Text>
+                                                {`${status}`}
+                                            </Form.Text>
+                                        </Nav.Link>
+                                    ),)}
+
+                                </div>
+                            </DropdownButton>
+
                             {/* <DropdownButton
                                 id="dropdown-autoclose-false"
                                 variant="flat"
@@ -228,7 +259,7 @@ const Donor = () => {
         <div style={{ width: '99.1%' }}>
             {filteredDonorArray.length === 0 ? (
                 <Row className="d-flex justify-content-center m-5">
-                    <h4 style={{ textAlign: 'center' }}>Donors are not available</h4>
+                    <h4 style={{ textAlign: 'center' }}>Blood Donors not found!</h4>
                 </Row>
 
             ) : (
