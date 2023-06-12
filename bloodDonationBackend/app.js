@@ -4,11 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose=require('mongoose');
-const socketIO = require('socket.io');
-const io = socketIO(server);
+
+// const socketIO = require('socket.io');
+// const io = socketIO(server);
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var usersRouter = require('./routes/users');
 var user=require('./routes/Api/userDetail');
 const chatRoutes = require('./routes/Api/Messages');
 
@@ -29,10 +30,10 @@ app.use(
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.set('io', io);
+//app.set('io', io);
 
 // Socket.io event handling
-io.on('connection', (socket) => {
+/* io.on('connection', (socket) => {
   console.log('A user connected');
 
   // Join a room when a user connects
@@ -53,7 +54,7 @@ io.on('connection', (socket) => {
     console.log('A user disconnected');
   });
 });
-
+ */
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

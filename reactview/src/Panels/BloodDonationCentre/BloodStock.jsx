@@ -145,20 +145,20 @@ const handleInputChange = (event) => {
           ID: centerData.ID.value,
           bloodGroup: centerData.Blood_Group.value,
           noOfBags: centerData.No_Of_Bags.value,
-          addedDate: centerData.Gender.value
+          addedDate: centerData?.AddedDate?.value
         });
         console.log("Data",centerData);
       }});
     return setShow(true);
   };
-  
-  var today = new Date();
-var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-var yyyy = today.getFullYear();
+    /* 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
 
-today = mm + '/' + dd + '/' + yyyy;
-
+    today = mm + '/' + dd + '/' + yyyy;
+    */
   const handleSaveChanges = () => {
     console.log("Handle Save Changes clicked");
     console.log("ID",bloodData.ID);
@@ -212,7 +212,7 @@ today = mm + '/' + dd + '/' + yyyy;
                 name="addedDate"
                 //Add current date to form
                 value={bloodData.addedDate}
-                onChange={new Date().toLocaleString()}
+                onChange={handleInputChange}
               />
             </Form.Group>
           </Form>
