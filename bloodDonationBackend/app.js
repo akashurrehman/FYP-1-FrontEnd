@@ -3,20 +3,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongoose=require('mongoose');
+var mongoose = require('mongoose');
+//var http = require('http');
 
-// const socketIO = require('socket.io');
-// const io = socketIO(server);
+const app = express();
+//const server = http.createServer(app);
+//const socketIO = require('socket.io');
+//const io = socketIO(server);
+
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 var user=require('./routes/Api/userDetail');
-const chatRoutes = require('./routes/Api/Messages');
+//const chatRoutes = require('./routes/Api/Messages');
 
 
 const cors = require("cors");
 var config = require('config');
-var app = express();
 app.use(cors());
 
 /*
@@ -32,7 +35,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 //app.set('io', io);
 
-// Socket.io event handling
 /* io.on('connection', (socket) => {
   console.log('A user connected');
 
@@ -85,5 +87,4 @@ app.use(function(err, req, res, next) {
 mongoose.connect(config.get("db"), { useNewUrlParser: true })
     .then(() => console.log("Connected to MongoDB Cluster1-FYP_Blood Donation...."))
     .catch((error) => console.log(error.message));
-
 module.exports = app;

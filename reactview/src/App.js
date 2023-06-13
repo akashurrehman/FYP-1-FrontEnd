@@ -75,7 +75,7 @@ import CampaignDetails from './Components_for_All_Panels/UserComponents/packages
 import MakeAppointment from './Components_for_All_Panels/UserComponents/appointments/MakeAppointment';
 import AppointmentDetails from './Components_for_All_Panels/UserComponents/appointments/AppointmentDetails';
 import AddBloodReport from './Panels/Laboratory/AddBloodReport';
-
+import Chat from './Panels/BloodDonationCentre/chat';
 
 function App() {
   return (
@@ -95,6 +95,7 @@ function App() {
           <Route exact path='/bloodCenter/ViewAllDonors' element={<ViewCenterDonors/>}/>
           <Route exact path='/bloodCenter/MyAccount' element={<MyAccountCenter/>}/>
           <Route exact path='/bloodCenter/Registration' element={<CenterRegistration/>}/>
+          <Route exact path='/bloodCenter/chat' element={<Chat />}/>
           
           {/* Admin panel Routes */}
           <Route exact path='/adminpanel/HomeScreen' element={<AdminPanelHomeScreen/>}/>
