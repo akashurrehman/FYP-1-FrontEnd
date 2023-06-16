@@ -1,61 +1,86 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import { useAuth  }  from './Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
+import './Styling/chat.css'; 
 
-const socket = io('http://localhost:3033');
+const socket = io('http://localhost:3003');
 
 function Chat() {
-  const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState('');
-  const [currentUserId, setCurrentUserId] = useState('12122');
+
+  const { token } = useAuth();
+
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const Id = decodedToken?.id;
+
+  const [SenderId, setSenderId] = useState('');
+  const [message, setMessage] = useState('');
+  const [receiverId, setReceiverId] = useState('12Random'); // Hardcoded receiver ID, replace with actual ID
+  const [receivedMessage, setReceivedMessage] = useState('');
+  const [sentMessages, setSentMessages] = useState([]);
 
   useEffect(() => {
-    // Join a room with the user's ID when they connect
-    socket.emit('join', currentUserId);
+    // set the User ID
+    setSenderId(Id);
+    setReceiverId('12Random');
+    console.log("Login ID:",Id);
 
-    // Clean up socket connection on component unmount
-    return () => {
-      socket.disconnect();
-    };
-  }, [currentUserId]);
-
-  // Listen for new messages from the server
-  useEffect(() => {
-    socket.on('message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
+    // Join the room with the user ID when connected
+    socket.on('connect', () => {
+      console.log('Connected to the server');
+      socket.emit('join', SenderId);
     });
-  }, []);
 
-  const handleSendMessage = () => {
-    const newMessage = {
-      content: inputMessage,
-      timestamp: new Date().toISOString(),
-    };
+    // Listen for incoming messages
+    socket.on('message', (msg) => {
+      setReceivedMessage(msg);
+    });
+  }, [SenderId]);
 
-    // Emit the new message to the server with the recipient's user ID
-    socket.emit('message', { userId: '11255445', message: newMessage });
-
-    setMessages((prevMessages) => [...prevMessages, newMessage]); // Add the message to the sender's message list
-
-    setInputMessage('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (SenderId && receiverId && message) {
+      const newMessage = { SenderId, receiverId, message };
+      socket.emit('message', newMessage);
+      setSentMessages((prevMessages) => [...prevMessages, newMessage]);
+      console.log("sent Messages are:", sentMessages);
+      setMessage('');
+    }
   };
+  
 
   return (
-    <div>
-      <h1>Chat System</h1>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>
-            <span>{message.content}</span>
-            <span>{message.timestamp}</span>
+    <div className="chat-container">
+        <h1 className="chat-heading">Chat</h1>
+        <div className="chat-window">
+        <div className="message-list">
+        {sentMessages.map((msg, index) => (
+          <div key={index} className="message">
+            <span className="sender">You:</span>
+            <span className="message-content">{msg.message}</span>
           </div>
         ))}
+        </div>
+      <div className="input-area">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="message">Message:</label>
+          <input
+            type="text"
+            id="message"
+            className="message-input"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+
+          <button type="submit" className="send-button">Send</button>
+        </form>
       </div>
-      <input
-        type="text"
-        value={inputMessage}
-        onChange={(e) => setInputMessage(e.target.value)}
-      />
-      <button onClick={handleSendMessage}>Send</button>
+      </div>
+      <div className="received-message">
+        <h2 className="received-message-heading">Received Message:</h2>
+        <p className="received-message-content">{receivedMessage}</p>
+      </div>
     </div>
   );
 }

@@ -1,0 +1,22 @@
+ /*  // Socket.io connection event
+  io.on('connection', (socket) => {
+    console.log('A user connected');
+
+    // Handle chat message event
+    socket.on('chat message', (msg) => {
+      console.log('Message:', msg);
+      
+      // Broadcast the message to all connected clients
+      io.emit('chat message', msg);
+      
+      // Auto-reply with a response message
+      const responseMsg = 'Auto reply: I received your message.';
+      socket.emit('chat message', responseMsg);
+      console.log('Chat response:', responseMsg);
+    });
+
+    // Handle disconnect event
+    socket.on('disconnect', () => {
+      console.log('A user disconnected');
+    });
+  }); */
