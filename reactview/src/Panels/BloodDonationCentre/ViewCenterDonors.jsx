@@ -109,39 +109,6 @@ const ViewCenterDonors=()=> {
         setArray();
     }
   };
-
-/* const columns = [
-  {
-    name: 'ID',
-    selector: 'ID.value',
-    sortable: true,
-  },
-  {
-    name: 'Name',
-    selector: 'Name.value',
-  },
-  {
-    name: 'Email',
-    selector: 'Email.value',
-  },
-  {
-    name: 'Gender',
-    selector: 'Gender.value',
-  },
-  {
-    name: 'Blood Group',
-    selector: 'Blood_Group.value',
-  },
-  {
-    name: 'Contact',
-    selector: 'Contact.value',
-  },
-  {
-    name: 'City',
-    selector: 'City.value',
-  },
-]; */
-
   return (
     loading ? <LoadingSpinner /> :
     <Container fluid style={{backgroundColor:"#EEEEEE"}}>

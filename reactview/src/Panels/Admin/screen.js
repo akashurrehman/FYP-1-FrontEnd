@@ -23,6 +23,7 @@ const HomeScreen_BloodDonation = () => {
   console.log("My Decoded Token Is", decodedToken)
   const role = decodedToken?.role;
   const name = decodedToken?.name;
+  const id = decodedToken?.id;
 
   const authCentre = () => {
     if (role != 'ADMIN') {
@@ -36,7 +37,10 @@ const HomeScreen_BloodDonation = () => {
     console.log('In Logout')
     window.location.href="/user/login";
   }
-
+  const Chat = () => {
+    console.log("In chat Module!");
+    window.location.href = `/bloodCenter/Chat?id=${id}`;
+  };
   React.useEffect(() => {
     authCentre();
   }, []);
@@ -172,6 +176,19 @@ const HomeScreen_BloodDonation = () => {
                   </button>
                   <button
                     className="nav-link menu-list"
+                    id="v-pills-settings-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#v-pills-settings"
+                    type="button"
+                    role="tab"
+                    aria-controls="v-pills-settings"
+                    aria-selected="false"
+                    onClick={Chat}
+                  >
+                    Chat
+                  </button>
+                  <button
+                    className="nav-link menu-list"
                     id="v-pills-sponsors-tab"
                     data-bs-toggle="pill"
                     data-bs-target="#v-pills-sponsors"
@@ -304,6 +321,7 @@ const HomeScreen_BloodDonation = () => {
               >
                 <FinancialDonations />
               </div>
+
               <div
                 className="tab-pane fade"
                 id="v-pills-jobs"
