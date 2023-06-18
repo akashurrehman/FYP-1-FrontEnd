@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Form, Button,Modal } from 'react-bootstrap';
 
 const OpenApi = () => {
   const [input, setInput] = useState('');
@@ -20,22 +21,27 @@ const OpenApi = () => {
   };
 
   return (
+    <Modal>
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="input">Input:</label>
-        <input
-          type="text"
-          id="input"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="input">
+          <Form.Label>Input:</Form.Label>
+          <Form.Control
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
       <div>
         <h3>Response:</h3>
         <p>{response}</p>
       </div>
     </div>
+    </Modal>
   );
 };
 

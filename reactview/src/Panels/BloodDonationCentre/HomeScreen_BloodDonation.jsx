@@ -1,4 +1,4 @@
-import React,{useEffect,useState,useContext} from "react";
+import React,{useEffect,useState,useContext,useRef } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -96,10 +96,25 @@ const HomeScreen_BloodDonation=()=> {
       console.log("Appointment Data:",appointment)
       fetchDataForAll();
       authCentre();
-      toast.info("You have successfully authenticated",{position:toast.POSITION.TOP_CENTER})
+      
     }, []);
-  
 
+    const isInitialRender = useRef(true);
+
+    //For showing toast single time
+    useEffect(() => {
+      const showToast = () => {
+        toast.info('You have successfully authenticated', {
+          position: toast.POSITION.TOP_CENTER
+        });
+      };
+  
+      if (isInitialRender.current) {
+        isInitialRender.current = false;
+      } else {
+        showToast();
+      }
+    }, []);
   
 
   const mystyle = {

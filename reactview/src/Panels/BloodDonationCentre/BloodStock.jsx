@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -42,9 +42,6 @@ const BloodStock=()=> {
   const [show, setShow] = useState(false);
 
   const [blood, setbloodData] = useState([]);
-  const [toastify,setToastify ] = useState(false);
-
-
 
   const handleBloodPrint = () => {
     handleBloodStockPrint(blood);
@@ -62,10 +59,20 @@ const BloodStock=()=> {
     }
       console.log("authCentre");
   }
-  const toasity=()=>{
-    toast("All the activities are monitored by ADMIN!",{position:toast.POSITION.TOP_CENTER});
-    setToastify(true);
-  }
+  const isInitialRender = useRef(true);
+
+  //For showing toast single time
+  useEffect(() => {
+    const showToast = () => {
+      toast("All the activities are monitored by ADMIN!",{position:toast.POSITION.TOP_CENTER});
+    };
+
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+    } else {
+      showToast();
+    }
+  }, []);
   const fetchData = async () => {
     try {
       const response = await axios.get(`http://localhost:8081/api/users/bloodstock/withAllBloodGroups/byCentreID/${ID}`);
@@ -109,7 +116,6 @@ const BloodStock=()=> {
     authCentre();
     fetchData();
     setIsLoading(false);
-    toasity();
   }, []);
   
  

@@ -117,51 +117,7 @@ const mystyle = {
   borderRadius: "50px",
   display: "inline-block",
 };  
-/* 
-const columns = [
-  {
-    name: 'ID',
-    selector: 'ID.value',
-    sortable: true,
-  },
-  {
-    name: 'Name',
-    selector: 'Name.value',
-  },
-  {
-    name: 'Email',
-    selector: 'Email.value',
-  },
-  {
-    name: 'Gender',
-    selector: 'Gender.value',
-  },
-  {
-    name: 'Blood Group',
-    selector: 'Blood_Group.value',
-  },
-  {
-    name: 'Contact',
-    selector: 'Contact.value',
-  },
-  {
-    name: 'City',
-    selector: 'City.value',
-  },
-  {
-    name: 'Hospital',
-    selector: 'Hospital.value',
-  },
-  {
-    name: 'Action',
-    cell: (row) => (
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button variant="primary" style={{ borderRadius: 0, width:"100%", height:"auto",marginRight:"5px" }} onClick={() => handleApprove(row.ID.value)}>Approve</Button>
-        <Button variant="success" style={{ borderRadius: 0, width:"100%",height:"auto" }} onClick={() => handleReject(row.ID.value)}>Deny</Button>
-      </div>
-    )
-  }  
-]; */
+
   return (
     loading ? <LoadingSpinner/> :
     <>

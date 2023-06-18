@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -43,17 +43,28 @@ const AddBloodReport=()=> {
   );
   
  
-    useEffect(() => {
-    setIsLoading(false);
-    toast.info('You have to add blood report (CBC) details!', {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      });
-    }, []);
+    const isInitialRender = useRef(true);
 
+    //For showing toast single time
+    useEffect(() => {
+      const showToast = () => {
+        toast.info('You have to add blood report (CBC) details!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          });
+      };
+  
+      if (isInitialRender.current) {
+        isInitialRender.current = false;
+      } else {
+        showToast();
+      }
+      setIsLoading(false)
+    }, []);
+   
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserData((prevCenterData) => ({ ...prevCenterData, [name]: value }));

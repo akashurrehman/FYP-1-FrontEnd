@@ -10,12 +10,19 @@ const configuration = new Configuration({
 
 router.post('/chatgpt', async (req, res) => {
   const prompt = req.body.prompt;
+  console.log("Propmt",prompt);
   
   try {
     const completion = await openai.createCompletion({
-      model: "ada",
-      prompt: prompt,
+        model: "ada",
+        prompt: prompt,
+        maxTokens: 150,
+        temperature: 0.9,
+        topP: 1,
+        presencePenalty: 0.6,
+        frequencyPenalty: 0.6,
     });
+    console.log("Response",completion.data.choices[0].text);
     console.log(completion.data.choices[0].text);
     res.json({ text: completion.data.choices[0].text });
     } catch (error) {
