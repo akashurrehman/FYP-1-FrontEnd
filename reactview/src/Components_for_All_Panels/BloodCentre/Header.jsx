@@ -14,6 +14,7 @@ import SettingsSharpIcon from '@mui/icons-material/SettingsSharp';
 import SingleNotifications from './Notifications/singleNotifications';
 import jwtDecode from "jwt-decode";
 import Badge from 'react-bootstrap/Badge';
+import ChatComponent from './../../Panels/BloodDonationCentre/chat'
 
 function Header(props) {
 
@@ -47,6 +48,11 @@ function Header(props) {
     console.log('In Logout')
     window.location.href="/user/login";
   }
+  const Chat = () => {
+    console.log("In chat Module!");
+    window.location.href = `/bloodCenter/Chat?id=${id}`;
+  };
+  
   return (
     <Navbar style={{backgroundColor:"#153250",color:"#FFFFFF",paddingLeft:"60px"}} expand="lg" fixed="top" id="visi" textColor="#FFFFFF">
       <Container fluid>
@@ -71,7 +77,7 @@ function Header(props) {
             <Nav.Link href="/bloodCenter/HomeScreen" style={{color:"#FFFFFF" }}><i class="fa fa-home" aria-hidden="true"></i>Dashboard/Home</Nav.Link>
             <Nav.Link href="/bloodCenter/addbloodRequest" style={{color:"#FFFFFF" }}><i class="fa fa-tint" aria-hidden="true"></i>Add Blood Request</Nav.Link>
             <Nav.Link href="/bloodCenter/addNewUser" style={{color:"#FFFFFF" }}><i class="fa fa-address-card" aria-hidden="true"></i>Add New User</Nav.Link>
-           
+            <Nav.Link onClick={Chat} style={{color:"#FFFFFF" }}><i class="fa fa-address-card" aria-hidden="true"></i>Message to Admin</Nav.Link>
             <Nav.Link href="#" style={{color:"#FFFFFF" }}>
             <i class="fa fa-filter" aria-hidden="true"></i>Other Options
             </Nav.Link>

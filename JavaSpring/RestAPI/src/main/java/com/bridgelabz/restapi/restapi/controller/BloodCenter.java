@@ -39,10 +39,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpHeaders;
 
-
 import java.time.LocalDate;
-
-
 
 //import for password encryption
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -619,7 +616,7 @@ public class BloodCenter {
                 "?stocks bd:hasBloodStockBloodGroup ?Blood_Group ." +
                 "?stocks bd:hasBloodStockID ?ID ." +
                 "?stocks bd:hasBloodStockNoOfBags ?No_Of_Bags ." +
-                "?stocks bd:hasBloodStockAddedDate ?Gender ." +
+                "?stocks bd:hasBloodStockAddedDate ?AddedDate ." +
                 "filter(?Blood_Group = \"" + BloodGroup + "\")" +
                 "}";
         // set the response headers
@@ -647,8 +644,7 @@ public class BloodCenter {
      */
     @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetails/add")
     public ResponseEntity<String> AddBloodStockDetails(@RequestBody String BloodDetails) throws IOException {
-        
-        
+
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(BloodDetails);
 
@@ -665,7 +661,7 @@ public class BloodCenter {
                         "bd:" + individualId + " rdf:type bd:Blood_Stock ;\n" +
                         "                       bd:hasBloodStockID \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasBloodStockBloodGroup \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:dateTime ;\n" +
+                        "                       bd:hasBloodStockAddedDate \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasBloodStockNoOfBags \"%s\"^^xsd:string ;\n" +
                         "}",
                 individualId, bloodGroup, addedDate, noOfBags);
@@ -678,7 +674,7 @@ public class BloodCenter {
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
         }
-    
+
     }
 
     /*
@@ -702,7 +698,7 @@ public class BloodCenter {
                 "?stock bd:hasBloodStockAddedDate ?AddedDate ." +
                 "?stock bd:hasBloodStockNoOfBags ?NoOfBags } " +
                 "INSERT { ?stock bd:hasBloodStockBloodGroup \"" + bloodGroup + "\"^^xsd:string ." +
-                " ?stock bd:hasBloodStockAddedDate \"" + addedDate + "\"^^xsd:dateTime ." +
+                " ?stock bd:hasBloodStockAddedDate \"" + addedDate + "\"^^xsd:string ." +
                 " ?stock bd:hasBloodStockNoOfBags \"" + noOfBags + "\"^^xsd:string } " +
                 "WHERE { ?stock rdf:type bd:Blood_Stock ." +
                 "?stock bd:hasBloodStockBloodGroup ?BloodGroup ." +
@@ -974,7 +970,6 @@ public class BloodCenter {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
     @PostMapping("/api/bloodCenter/RegisteredCenters/bloodStockDetailsWithGroups/add")
     public ResponseEntity<String> AddBloodStockDetailsWithGroups(@RequestBody String bloodStock) throws IOException {
         try {
@@ -988,7 +983,7 @@ public class BloodCenter {
             List<String> successMessages = new ArrayList<>();
             // Hardcoded blood group, date, and stock values
             List<String> bloodGroups = Arrays.asList("A+", "B+", "AB+", "O+", "A-", "B-", "AB-", "O-");
-            
+
             List<String> addedDates = new ArrayList<>();
             LocalDate currentDate = LocalDate.now();
             for (int i = 0; i < 8; i++) {
@@ -1011,7 +1006,8 @@ public class BloodCenter {
                 String individualId = "Blood_Stock_" + System.currentTimeMillis();
                 String query = String.format(
                         "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
-                                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
+                                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n"
+                                +
                                 "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
                                 "INSERT DATA {\n" +
                                 "   bd:%s rdf:type bd:Blood_Stock ;\n" +
@@ -1037,7 +1033,8 @@ public class BloodCenter {
             String successMessage = new ObjectMapper().writeValueAsString(successMessages);
             return ResponseEntity.ok(successMessage);
         } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while processing the request");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error occurred while processing the request");
         }
     }
 
@@ -1077,14 +1074,6 @@ public class BloodCenter {
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
-
-
-
-
-
-
-
-
     static String ReadSparqlMethod(String queryString) {
 
         // create a file object for the RDF file
@@ -1119,7 +1108,6 @@ public class BloodCenter {
             // Returns the results in json format
         }
     }
-
 
     static boolean InsertSparql(String query) throws IOException {
         // create a file object for the RDF file
