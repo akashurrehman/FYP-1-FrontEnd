@@ -470,6 +470,8 @@ public class User {
         String location = jsonNode.has("location") ? jsonNode.get("location").asText() : null;
         String name = jsonNode.has("name") ? jsonNode.get("name").asText() : null;
         String gender = jsonNode.has("gender") ? jsonNode.get("gender").asText() : null;
+        String latitude = jsonNode.has("latitude") ? jsonNode.get("latitude").asText() : null;
+        String longitude = jsonNode.has("longitude") ? jsonNode.get("longitude").asText() : null;
 
         String donorAvailable = "Available"; 
 
@@ -485,6 +487,8 @@ public class User {
                         "                       bd:hasDonorCity \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorGender \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorLocation \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorLocationLatitude \"%s\"^^xsd:string ;\n" +
+                        "                       bd:hasDonorLocationLongitude \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorContactNo \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorBloodGroup \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDonorEmail \"%s\"^^xsd:string ;\n" +
@@ -492,7 +496,7 @@ public class User {
                         "                       bd:hasDonorAvailable \"%s\"^^xsd:string ;\n" +
                         "                       bd:bloodDonationMakeby bd:%s .\n" +
                         "}",
-                name, individualId, city, gender, location, contactNo, bloodGroup, email, message, donorAvailable, id);
+                name, individualId, city, gender, location, latitude, longitude, contactNo, bloodGroup, email, message, donorAvailable, id);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -607,6 +611,8 @@ public class User {
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
+                "?donations bd:hasDonorLocationLatitude ?Latitude ." +
+                "?donations bd:hasDonorLocationLongitude ?Longitude ." +
                 "?donations bd:hasDonorAvailable ?DonorAvailability ." +
                 "?donations bd:bloodDonationMakeby ?PersonID ." +
                 "}";
@@ -649,6 +655,8 @@ public class User {
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
                 "?donations bd:hasDonorCity ?City ." +
+                "?donations bd:hasDonorLocationLatitude ?Latitude ." +
+                "?donations bd:hasDonorLocationLongitude ?Longitude ." +
                 "?donations bd:hasDonorAvailable ?DonorAvailability ." +
                 "?donations bd:bloodDonationMakeby ?PersonID ." +
                 "filter(?ID = \"" + ID + "\")" +
@@ -693,6 +701,8 @@ public class User {
                 "?donations bd:hasDonorMessage ?Message ." +
                 "?donations bd:hasDonorBloodGroup ?Blood_Group ." +
                 "?donations bd:hasDonorContactNo ?Contact ." +
+                "?donations bd:hasDonorLocationLatitude ?Latitude ." +
+                "?donations bd:hasDonorLocationLongitude ?Longitude ." +
                 "?donations bd:hasDonorCity ?City ." +
                 "?donations bd:hasDonorAvailable ?DonorAvailability ." +
                 "?donations bd:bloodDonationMakeby ?PersonID ." +
