@@ -25,7 +25,7 @@ const MyAccountCenter=()=> {
   const id = decodedToken?.id;
   const role = decodedToken?.role;
   const authCentre=()=>{
-    if(role!='CENTRE'){
+    if(role!=='CENTRE'){
       
       window.location.href = "/user/login";
     }

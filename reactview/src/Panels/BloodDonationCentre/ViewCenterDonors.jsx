@@ -1,15 +1,13 @@
 import React,{useState,useEffect} from "react";
-import axios from "axios";
+//import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Sidebar from "../../Components_for_All_Panels/BloodCentre/SideNavbar";
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
 import Header from "../../Components_for_All_Panels/BloodCentre/Header";
-import DataTable from 'react-data-table-component';
-import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
+import { Search} from 'react-bootstrap-icons';
 import './Styling/print.css';
 import { handleDonorPrint } from "./PrintedFiles/DonorsPrint";
 import { useAuth } from "./Auth/AuthContext";
@@ -20,6 +18,7 @@ import { toast } from "react-toastify";
 import { InputGroup,FormControl } from "react-bootstrap";
 import './Styling/popupcard.css'; 
 import {BsFillAwardFill} from "react-icons/bs";
+
 const ViewCenterDonors=()=> {
   const [loading, setIsLoading] = useState(true);  
   const [data, setData] = useState([]);
@@ -29,10 +28,10 @@ const ViewCenterDonors=()=> {
   const {token} = useAuth();
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwt_decode(token) : null;
-  const id = decodedToken?.id;
+  //const id = decodedToken?.id;
   const role = decodedToken?.role;
   const authCentre=()=>{
-    if(role!='CENTRE'){
+    if(role!=='CENTRE'){
       window.location.href = "/user/login";
     }
       console.log("authCentre");

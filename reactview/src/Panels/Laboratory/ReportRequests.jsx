@@ -4,28 +4,35 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
 import Button from 'react-bootstrap/Button';
-import DataTable from 'react-data-table-component';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Header from "./LabComponents/Header";
-import { toast } from 'react-toastify';
+//import { toast } from 'react-toastify';
 import { handleRequestReportsPrint } from "./LabComponents/PrintedFiles/RequestedReport";
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 import {  PrinterFill } from 'react-bootstrap-icons';
-import { InputGroup,FormControl } from "react-bootstrap";
-import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
+import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
 
 const ReportRequests=()=> {  
 
 
   const [loading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
-  const [blood, setbloodData] = useState([]);
+  const {token} = useAuth();
 
+    //This will get the id  from the token if user is login
+  const decodedToken = jwt_decode(token);
+  const role = decodedToken?.role;
+  
+  const authCentre=()=>{
+    if(role!=='LAB'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
   const [CBCData, setSingleData] = useState(
     {
       ID: "",
@@ -102,6 +109,7 @@ const ReportRequests=()=> {
       })
       .catch((error) => console.log(error));
       setIsLoading(false);
+      //authCentre();
   }, []);
   const handlePrint = () => {
     console.log("Handle Print method calls!")
@@ -150,7 +158,7 @@ const mystyle = {
                   placeholder="Sex"
                   name="Sex"
                   disabled
-                  value={CBCData.Sex == 0 ? 'Male' : 'Female'}
+                  value={CBCData.Sex === 0 ? 'Male' : 'Female'}
                 />
               </Form.Group>
             </Col>
@@ -216,7 +224,7 @@ const mystyle = {
                   placeholder="STDs"
                   disabled
                   name="STDs"
-                  value={CBCData.STDs == 1 ? 'Yes' : 'No'}
+                  value={CBCData.STDs === 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -230,7 +238,7 @@ const mystyle = {
                   placeholder="AIDs"
                   disabled
                   name="AIDs"
-                  value={CBCData.AIDs == 1 ? 'Yes' : 'No'}
+                  value={CBCData.AIDs === 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -244,7 +252,7 @@ const mystyle = {
                   placeholder="Diabetes"
                   disabled
                   name="Diabetes"
-                  value={CBCData.Diabetes == 1 ? 'Yes' : 'No'}
+                  value={CBCData.Diabetes === 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -258,7 +266,7 @@ const mystyle = {
                   placeholder="Syphilis"
                   disabled
                   name="Syphilis"
-                  value={CBCData.Syphilis == 1 ? 'Yes' : 'No'}
+                  value={CBCData.Syphilis === 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -282,18 +290,6 @@ const mystyle = {
               <Card.Title >All Report Requests</Card.Title>
             </Card.Body>
         </Card>
-        {/*  <DataTable title = "All Reports Requests" columns={columns} data={data}
-            pagination
-            fixedHeader
-            fixedHeaderScrollHeight='500px'
-            selectableRows
-            selectableRowsHighlight
-            highlightOnHover
-            actions ={
-              <button className='btn btn-info' onClick={handlePrint} style={{backgroundColor: "#153250",color:"white"}}> Download All Report Requests</button>
-            }
-            subHeader
-          /> */}
         
           {data.length > 0 ? (
           <div>

@@ -54,7 +54,7 @@ const BloodStock=()=> {
   const role = decodedToken?.role;
   const ID= decodedToken?.id;
   const authCentre=()=>{
-    if(role!='CENTRE'){
+    if(role!=='CENTRE'){
       window.location.href = "/user/login";
     }
       console.log("authCentre");
@@ -143,7 +143,7 @@ const handleInputChange = (event) => {
   const handleShow = (id) => {
     console.log("Handle Show clicked");
     console.log("ID",id)
-    axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetails/${id}`).then((response)=>{
+    axios.get(`http://localhost:8081/api/bloodCenter/RegisteredCenters/bloodStockDetailsByID/${id}`).then((response)=>{
       const { results } = response.data;
       if (results && results.bindings && results.bindings.length > 0) {
         const centerData = results.bindings[0];
@@ -158,12 +158,12 @@ const handleInputChange = (event) => {
     return setShow(true);
   };
     /* 
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
 
-    today = mm + '/' + dd + '/' + yyyy;
+      today = mm + '/' + dd + '/' + yyyy;
     */
   const handleSaveChanges = () => {
     console.log("Handle Save Changes clicked");
@@ -284,7 +284,7 @@ const handleInputChange = (event) => {
                   <Card.Title>Blood Group:{card.bloodGroup}</Card.Title>
                   <Card.Text>No of bags available: {card.noOfBags}</Card.Text>
                   <Card.Text>Freeze time: {card.addedDate}</Card.Text>
-                  <Button variant="primary" onClick={() => handleShow(card.bloodGroup)} style={{backgroundColor: "#153250"}}>
+                  <Button variant="primary" onClick={() => handleShow(card.ID)} style={{backgroundColor: "#153250"}}>
                     Update Stock
                   </Button>
                 </Card.Body>

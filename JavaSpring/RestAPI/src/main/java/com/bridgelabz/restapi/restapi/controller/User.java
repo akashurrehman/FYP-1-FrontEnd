@@ -58,7 +58,7 @@ public class User {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Route to Get Data of all Registered Users
@@ -185,7 +185,6 @@ public class User {
         // create the response object with the JSON result and headers
         return new ResponseEntity<String>(result, HttpStatus.OK);
     }
-
 
     /*
      * Route to Register the Users
@@ -473,7 +472,7 @@ public class User {
         String latitude = jsonNode.has("latitude") ? jsonNode.get("latitude").asText() : null;
         String longitude = jsonNode.has("longitude") ? jsonNode.get("longitude").asText() : null;
 
-        String donorAvailable = "Available"; 
+        String donorAvailable = "Available";
 
         String individualId = "Donation_" + System.currentTimeMillis();
         String query = String.format(
@@ -496,7 +495,8 @@ public class User {
                         "                       bd:hasDonorAvailable \"%s\"^^xsd:string ;\n" +
                         "                       bd:bloodDonationMakeby bd:%s .\n" +
                         "}",
-                name, individualId, city, gender, location, latitude, longitude, contactNo, bloodGroup, email, message, donorAvailable, id);
+                name, individualId, city, gender, location, latitude, longitude, contactNo, bloodGroup, email, message,
+                donorAvailable, id);
         // Call the InsertSparql function with the query
         boolean isInserted = InsertSparql(query);
 
@@ -527,7 +527,7 @@ public class User {
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
-        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null; 
+        String message = jsonNode.has("message") ? jsonNode.get("message").asText() : null;
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
                 "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +

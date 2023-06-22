@@ -35,7 +35,7 @@ const BloodInformation=()=> {
 
     const authCentre=()=>{
       
-      if(role!='CENTRE'){
+      if(role!=='CENTRE'){
         window.location.href = "/user/login";
       }
         console.log("authCentre");

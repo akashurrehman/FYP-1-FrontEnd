@@ -7,33 +7,37 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row'
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
-import { BsStopwatch } from 'react-icons/bs';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import { BsExclamationSquare } from 'react-icons/bs';
 import { BsEnvelopeFill } from 'react-icons/bs';
 import { BsGeoAltFill } from 'react-icons/bs';
 import Header from "./LabComponents/Header";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
+import {useAuth} from './../BloodDonationCentre/Auth/AuthContext'
 import jwt_decode from 'jwt-decode';
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
 
 
 const LabProfileSetting=()=> {
   const [loading, setIsLoading] = useState(true);
-  //Get the token from the AuthContext
-  const {token} = useAuth();
-    const authCentre=()=>{
-      if(!token){
-        window.location.href = "/user/login";
-      }
-        console.log("authCentre");
-    }
+ //Get the token from the AuthContext
+ const {token} = useAuth();
+
 
   //This will get the id  from the token if user is login
   const decodedToken = token ? jwt_decode(token) : null;
   const id = decodedToken?.id;
+  const role = decodedToken?.role;
+  
+  const authCentre=()=>{  
+  if(role!=='LAB'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
+
+
+ 
 
   const [center, setCenterData] = useState({
     name: "",
@@ -93,10 +97,12 @@ const LabProfileSetting=()=> {
           city:centerData.City.value
         });
   }
-});
-//authCentre();
-setIsLoading(false);
-},[]);
+  });
+    authCentre();
+    setIsLoading(false);
+    console.log("Token is useEffect: "+token);
+    console.log("Decoded Token is useEffect: "+decodedToken);
+  },[authCentre]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

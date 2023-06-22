@@ -6,13 +6,13 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
 import Header from "./LabComponents/Header";
 import { toast } from 'react-toastify';
 import LoadingSpinner from "../../Components_for_All_Panels/BloodCentre/LoadingSpinner";
-import {  PrinterFill } from 'react-bootstrap-icons';
 import { InputGroup,FormControl } from "react-bootstrap";
-import { Search,ArrowRight,Trash } from 'react-bootstrap-icons';
+import { Search} from 'react-bootstrap-icons';
+import { useAuth  }  from './../BloodDonationCentre/Auth/AuthContext';
+import jwt_decode from 'jwt-decode';
 
 const AddBloodReport=()=> {  
 
@@ -42,7 +42,18 @@ const AddBloodReport=()=> {
     }
   );
   
- 
+  const {token} = useAuth();
+
+  //This will get the id  from the token if user is login
+  const decodedToken =jwt_decode(token);
+  const role = decodedToken?.role;
+
+  const authCentre=()=>{
+    if(role!=='LAB'){
+      window.location.href = "/user/login";
+    }
+      console.log("authCentre");
+  }
     const isInitialRender = useRef(true);
 
     //For showing toast single time
@@ -63,6 +74,7 @@ const AddBloodReport=()=> {
         showToast();
       }
       setIsLoading(false)
+      //authCentre();
     }, []);
    
   const handleInputChange = (event) => {
