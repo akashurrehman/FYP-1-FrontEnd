@@ -113,7 +113,7 @@ const UserRegistration = (props) => {
                 submitUserForm();
                 event.preventDefault();
             }
-            else{
+            if(formChanger === 'true'){
                 submitCentreForm();
                 event.preventDefault();
             }

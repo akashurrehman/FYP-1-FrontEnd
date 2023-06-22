@@ -55,6 +55,7 @@ const MakeBloodDonation = () => {
     const [city, setCity] = React.useState("");
     const [message, setMessage] = React.useState("");
 
+
     const getData = () => {
         userService
             .getSingleUser(id)
@@ -91,9 +92,16 @@ const MakeBloodDonation = () => {
     //Store Data In Database(API)
     const storeData = () => {
         console.log("Send API call");
-        console.log(id, name, message, email, location, contactNo, bloodGroup, gender, city);
+        let latitude;
+        let longitude;
+        if(city === 'Lahore'){
+            latitude = '31.582045';
+            longitude = '74.329376';
+        }
+
+        console.log(id, name, message, email, location, contactNo, bloodGroup, gender, city, latitude, longitude);
         donorService
-            .addDonor({ id, name, message, email, location, contactNo, bloodGroup, gender, city })
+            .addDonor({ id, name, message, email, location, contactNo, bloodGroup, gender, city, latitude, longitude })
             .then((data) => {
                 console.log(data);
                 
@@ -103,6 +111,7 @@ const MakeBloodDonation = () => {
         });
     };
 
+    
     const [showCongratulationBox, setShowCongratulationBox] = React.useState(false);
 
     //Button Stylings

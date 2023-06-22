@@ -77,6 +77,9 @@ const UserLogin = (props) => {
             if(userRole=='ADMIN') {
                 window.location.href = "/adminpanel/HomeScreen";
             }
+            if(userRole=='LAB') {
+                window.location.href = "/lab/home";
+            }
         } 
         catch (error) {
             if (error.response) {
@@ -227,6 +230,7 @@ const UserLogin = (props) => {
                                                         <option value="CENTRE">Blood Donation Centre</option>
                                                         <option value="USER">Donor / Request Maker</option>
                                                         <option value="ADMIN">Admin</option>
+                                                        <option value="LAB">Lab</option>
                                                     </Form.Select> 
                                                     <Form.Control.Feedback type="invalid">
                                                         Please provide a valid gender.
