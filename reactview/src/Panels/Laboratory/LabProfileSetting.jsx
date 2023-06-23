@@ -102,7 +102,7 @@ const LabProfileSetting=()=> {
     setIsLoading(false);
     console.log("Token is useEffect: "+token);
     console.log("Decoded Token is useEffect: "+decodedToken);
-  },[authCentre]);
+  },[]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

@@ -194,11 +194,11 @@ const AddBloodRequest=()=> {
     <Container fluid style={{backgroundColor:"#F3F3F3"}}>
       <Header />
       <Row>
-        <Col xs={3} md={2}>
+        <Col xs={2}>
             <Sidebar/>        
         </Col>
         <Col className="mt-md-5" xs={9} md={10}>
-          <Card style={{marginTop:30,marginLeft:"25px",paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 border rounded">
+          <Card style={{marginTop:30,marginLeft:"24px",paddingBottom:10,alignItems:"center",justifyContent:"center",backgroundColor:"#970C10",color:"white"}} className="shadow p-3 mb-2 border rounded">
             <Card.Img variant="top" src="/Images/blood-Center.jpg" alt="Image" style={mystyle} className="d-inline-block align-top mx-2"/>
             <Card.Body>
               <Card.Title>Add New Blood Request</Card.Title>

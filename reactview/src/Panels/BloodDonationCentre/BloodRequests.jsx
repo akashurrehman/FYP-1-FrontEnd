@@ -212,7 +212,8 @@ const mystyle = {
             </Card.Body>
         </Card>
         <Container className='d-flex justify-content-center'>
-          <Row style={{ width: '40%' }}>
+          <Row className='w-md-50 w-sm-100'>
+            <Col xs={12}>
             <form onSubmit={handleClick}>
                 <FormLabel
                   className=" mr-5"
@@ -235,9 +236,10 @@ const mystyle = {
                     </InputGroup.Text>
                 </InputGroup>
             </form>
+            </Col>
           </Row>
         </Container>
-        <Card style={{marginLeft:"25px", marginBottom:"10px",backgroundColor:"#465e7f",color:"#FFFFFF"}}>
+        <Card style={{marginLeft:"24px", marginBottom:"10px",backgroundColor:"#465e7f",color:"#FFFFFF"}}>
         <div style={{marginTop:'1%',marginBottom:'1%',paddingBottom:'3%',paddingTop:'3%'}}>
                 <Container className='d-flex justify-content-center'>
                     <Row>
@@ -314,7 +316,7 @@ const mystyle = {
             </div>
         </Card>
          {filteredDataArray.length > 0 ? (
-          <div style={{marginLeft:"25px"}}>
+          <div style={{marginLeft:"24px"}}>
         {
           filteredDataArray.map((item) => (
             <Col md={12} xs={12}>

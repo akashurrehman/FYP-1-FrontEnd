@@ -44,8 +44,8 @@ const AddBloodReport=()=> {
   
   const {token} = useAuth();
 
-  //This will get the id  from the token if user is login
-  const decodedToken =jwt_decode(token);
+   //This will get the id  from the token if user is login
+   const decodedToken = token ? jwt_decode(token) : null;
   const role = decodedToken?.role;
 
   const authCentre=()=>{
@@ -74,7 +74,7 @@ const AddBloodReport=()=> {
         showToast();
       }
       setIsLoading(false)
-      //authCentre();
+      authCentre();
     }, []);
    
   const handleInputChange = (event) => {
@@ -142,6 +142,21 @@ const AddBloodReport=()=> {
           syphilis: UserData.Syphilis.value,
         });
         console.log("Data",UserData);
+        toast.success('User Found', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          });
+        toast.info('Add the valid (CBC) details!', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          });
+
       }})
       .catch((error) =>{ 
       console.log(error)
@@ -245,7 +260,7 @@ const mystyle = {
                   placeholder="Sex"
                   autoFocus
                   name="sex"
-                  value={userData.sex === 0 ? 'Male' : 'Female'}
+                  value={userData.sex == 0 ? 'Male' : 'Female'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -320,8 +335,9 @@ const mystyle = {
                   placeholder="PLT"
                   autoFocus
                   name="plt"
-                  
+                  value={userData.plt}
                   onChange={handleInputChange}
+                  required
                 />
               </Form.Group>
             </Col>
@@ -334,7 +350,8 @@ const mystyle = {
                   placeholder="WBC"
                   autoFocus
                   name="wbc"
-                  
+                  value={userData.wbc}
+                  required
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -348,7 +365,8 @@ const mystyle = {
                   placeholder="RBC"
                   autoFocus
                   name="rbc"
-                 
+                  required
+                  value={userData.rbc}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -362,7 +380,8 @@ const mystyle = {
                   placeholder="HGB"
                   autoFocus
                   name="hgb"
-                 
+                  value={userData.hgb}
+                  required
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -376,7 +395,8 @@ const mystyle = {
                   placeholder="STDs"
                   autoFocus
                   name="stds"
-                  
+                  value={userData.stds}
+                  required
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -389,8 +409,9 @@ const mystyle = {
                 <Form.Control
                   placeholder="AIDs"
                   autoFocus
+                  value={userData.aids}
                   name="aids"
-                 
+                  required
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -404,7 +425,8 @@ const mystyle = {
                   placeholder="Diabetes"
                   autoFocus
                   name="diabetes"
-                 
+                  value={userData.diabetes}
+                  required
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -418,7 +440,8 @@ const mystyle = {
                   placeholder="Syphilis"
                   autoFocus
                   name="syphilis"
-                  
+                  value={userData.syphilis}
+                  required
                   onChange={handleInputChange}
                 />
               </Form.Group>

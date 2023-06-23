@@ -17,15 +17,16 @@ import jwt_decode from 'jwt-decode';
 
 const ReportRequests=()=> {  
 
+  const {token} = useAuth();
+
+
+  //This will get the id  from the token if user is login
+  const decodedToken = token ? jwt_decode(token) : null;
+  const role = decodedToken?.role;
 
   const [loading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
-  const {token} = useAuth();
-
-    //This will get the id  from the token if user is login
-  const decodedToken = jwt_decode(token);
-  const role = decodedToken?.role;
   
   const authCentre=()=>{
     if(role!=='LAB'){
@@ -109,7 +110,7 @@ const ReportRequests=()=> {
       })
       .catch((error) => console.log(error));
       setIsLoading(false);
-      //authCentre();
+      authCentre();
   }, []);
   const handlePrint = () => {
     console.log("Handle Print method calls!")
@@ -158,7 +159,7 @@ const mystyle = {
                   placeholder="Sex"
                   name="Sex"
                   disabled
-                  value={CBCData.Sex === 0 ? 'Male' : 'Female'}
+                  value={CBCData.Sex == 0 ? 'Male' : 'Female'}
                 />
               </Form.Group>
             </Col>
@@ -224,7 +225,7 @@ const mystyle = {
                   placeholder="STDs"
                   disabled
                   name="STDs"
-                  value={CBCData.STDs === 1 ? 'Yes' : 'No'}
+                  value={CBCData.STDs == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -238,7 +239,7 @@ const mystyle = {
                   placeholder="AIDs"
                   disabled
                   name="AIDs"
-                  value={CBCData.AIDs === 1 ? 'Yes' : 'No'}
+                  value={CBCData.AIDs == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -252,7 +253,7 @@ const mystyle = {
                   placeholder="Diabetes"
                   disabled
                   name="Diabetes"
-                  value={CBCData.Diabetes === 1 ? 'Yes' : 'No'}
+                  value={CBCData.Diabetes == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -266,7 +267,7 @@ const mystyle = {
                   placeholder="Syphilis"
                   disabled
                   name="Syphilis"
-                  value={CBCData.Syphilis === 1 ? 'Yes' : 'No'}
+                  value={CBCData.Syphilis == 1 ? 'Yes' : 'No'}
                   onChange={handleInputChange}
                 />
               </Form.Group>

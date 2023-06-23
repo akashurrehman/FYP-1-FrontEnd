@@ -107,10 +107,9 @@ const BloodStock=()=> {
         fetchData();
       })
       .catch((error)=>{console.log(error)});
-    } catch (error) {
-      console.error(error);
-    }
-      
+      } catch (error) {
+        console.error(error);
+      }   
   };
   useEffect(() => {
     authCentre();
@@ -268,10 +267,10 @@ const handleInputChange = (event) => {
           )}
           
           <>
-          <CardGroup style={{marginLeft:"25px"}}>
+          <CardGroup style={{marginLeft:"20px"}}>
           {blood.map((card) => (
-            <Col key={card.ID} md={4}>
-              <Card style={{ width: "18rem",marginTop:"10px" }} id="card">
+            <Col key={card.ID} md={4} sm={4}>
+              <Card style={{ width: "18rem",marginTop:"10px"}} id="card">
               <Card.Header>
                 <Card.Img variant="top" style={{
                     width: "50%",
