@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 //import axios from "axios";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -37,7 +37,21 @@ const ViewCenterDonors=()=> {
       console.log("authCentre");
   }
 
-  
+  const isInitialRender = useRef(true);
+
+  //For showing toast single time
+  useEffect(() => {
+    const showToast = () => {
+      toast.info('You are in center Donor Page!', { position: toast.POSITION.TOP_CENTER });
+    };
+
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+    } else {
+      showToast();
+    }
+  }, []);
+
 
   useEffect(() => {
     // Fetch data from the backend
@@ -65,7 +79,6 @@ const ViewCenterDonors=()=> {
       .catch((error) => console.log(error));
     authCentre();
     setIsLoading(false);
-    toast.info('You are in center Donor Page!', { position: toast.POSITION.TOP_CENTER });
   }, []);
   
 

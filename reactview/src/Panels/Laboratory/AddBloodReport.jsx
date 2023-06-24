@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Header from "./LabComponents/Header";
@@ -18,6 +19,7 @@ const AddBloodReport=()=> {
 
 
   const [loading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [userData, setUserData] = useState(
     {
@@ -38,7 +40,7 @@ const AddBloodReport=()=> {
       stds: "",
       aids: "",
       diabetes: "",
-      syphilis: "",
+      Syphilis: "",
     }
   );
   
@@ -54,6 +56,35 @@ const AddBloodReport=()=> {
     }
       console.log("authCentre");
   }
+
+  const handleCancel = () => {
+    setShowModal(false);
+    toast("Report data not added",{position:toast.POSITION.TOP_RIGHT});
+  }
+  const validateForm = () => {
+    console.log("In Validate Form method!")
+    let isValid = true;
+    const errors = {};
+  
+    if (!userData.donorEligibilityStatus) {
+      console.log("Error in status")
+      isValid = false;
+      errors.donorEligibilityStatusError = "Please select Eigible or Not Eligible";
+    }
+    // if(!userData.bloodGroup){
+    //   isValid = false;
+    //   errors.bloodGroupError = "Please select valid blood Group";
+    // }
+    return isValid;
+  }
+  const handleSubmit = (event) => {
+    console.log("In Handle Submit button!")
+    event.preventDefault();
+    const isValid = validateForm();
+    if (isValid) {
+    setShowModal(true);
+    }
+  };
     const isInitialRender = useRef(true);
 
     //For showing toast single time
@@ -79,7 +110,29 @@ const AddBloodReport=()=> {
    
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUserData((prevCenterData) => ({ ...prevCenterData, [name]: value }));
+
+    //setUserData((prevCenterData) => ({ ...prevCenterData, [name]: value }));
+    let newUserData = { ...userData, [name]: value };
+
+     // For donorEligibilityStatus
+     if (name === "donorEligibilityStatus") {
+      const categoryRegex = /^(Eligible|Not Eligible)$/i; // regex for allowed values
+      if (!categoryRegex.test(value)) {
+        newUserData = { ...userData, [name]: value, donorEligibilityStatusError: "Please enter 'Eligible' or 'Not Eligible'" };
+      } else {
+        newUserData = { ...userData, [name]: value, donorEligibilityStatusError: null };
+      }
+    }
+    // if(name==="bloodGroup"){
+    //   const categoryRegex = /^(AB+|AB-|A+|A-|B+|B-|O+|O-)$/i; // regex for allowed values
+    //   if (!categoryRegex.test(value)) {
+    //     newUserData = { ...userData, [name]: value, bloodGroupError: "Please select valid blood Group" };
+    //   } else {
+    //     newUserData = { ...userData, [name]: value, bloodGroupError: null };
+    //   }
+    // }
+     // For STDs
+    setUserData(newUserData);  
   };
  
   
@@ -90,11 +143,12 @@ const AddBloodReport=()=> {
     console.log("setArray", userData);
   };
   
-  const PostUserReport = (event) => {
+  const handleConfirm = (event) => {
     event.preventDefault();
     console.log("PostUserReport", userData);
     axios.post(`http://localhost:8081/api/lab/addUserDetails/addUserCBCReportDetails/add`, userData).then((response) => {
         console.log(response);
+        console.log("User daata",userData);
         toast.success('Report Added Successfully', {
             position: "top-center",
             autoClose: 5000,
@@ -113,6 +167,7 @@ const AddBloodReport=()=> {
             pauseOnHover: true,
             });
         });
+        setShowModal(false);
     };
 
   const getUsername = (searchTerm) => {
@@ -139,7 +194,7 @@ const AddBloodReport=()=> {
           stds: UserData.STDs.value,
           aids: UserData.AIDs.value,
           diabetes: UserData.Diabetes.value,
-          syphilis: UserData.Syphilis.value,
+          Syphilis: UserData.Syphilis.value,
         });
         console.log("Data",UserData);
         toast.success('User Found', {
@@ -391,14 +446,11 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>STDs</Form.Label>
-                <Form.Control
-                  placeholder="STDs"
-                  autoFocus
-                  name="stds"
-                  value={userData.stds}
-                  required
-                  onChange={handleInputChange}
-                />
+                <Form.Select required  autoFocus name="stds"  onChange={handleInputChange} >
+                  <option value="">STDs Found?*</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </Form.Select>
               </Form.Group>
             </Col>
             <Col xs={6}>
@@ -406,14 +458,11 @@ const mystyle = {
                 <Form.Label>
                 AIDs
                 </Form.Label>
-                <Form.Control
-                  placeholder="AIDs"
-                  autoFocus
-                  value={userData.aids}
-                  name="aids"
-                  required
-                  onChange={handleInputChange}
-                />
+                <Form.Select required  autoFocus name="aids" onChange={handleInputChange} >
+                  <option value="">Aids Found?*</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </Form.Select>
               </Form.Group>
             </Col>
           </Row>
@@ -421,14 +470,11 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Diabetes</Form.Label>
-                <Form.Control
-                  placeholder="Diabetes"
-                  autoFocus
-                  name="diabetes"
-                  value={userData.diabetes}
-                  required
-                  onChange={handleInputChange}
-                />
+                <Form.Select required  autoFocus name="diabetes" onChange={handleInputChange} >
+                  <option value="">Diabetes Found?*</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </Form.Select>
               </Form.Group>
             </Col>
             <Col xs={6}>
@@ -436,14 +482,11 @@ const mystyle = {
                 <Form.Label>
                 Syphilis
                 </Form.Label>
-                <Form.Control
-                  placeholder="Syphilis"
-                  autoFocus
-                  name="syphilis"
-                  value={userData.syphilis}
-                  required
-                  onChange={handleInputChange}
-                />
+                <Form.Select required  autoFocus name="Syphilis" onChange={handleInputChange} >
+                  <option value="">Syphilis Found?*</option>
+                  <option value="0">No</option>
+                  <option value="1">Yes</option>
+                </Form.Select>
               </Form.Group>
             </Col>
           </Row>
@@ -451,7 +494,7 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Blood Group</Form.Label>
-                <Form.Select required name="bloodGroup" onChange={handleChange} >
+                <Form.Select required name="bloodGroup" value={userData.bloodGroup} onChange={handleInputChange} >
                   <option value="">Select Blood Group*</option>
                   <option value="AB+">AB+</option>
                   <option value="AB-">AB-</option>
@@ -469,12 +512,14 @@ const mystyle = {
                 <Form.Label>
                 Status
                 </Form.Label>
-                <Form.Control
-                  placeholder="Status"
-                  autoFocus
-                  name="donorEligibilityStatus"
-                  onChange={handleInputChange}
-                />
+                 <Form.Select required name="donorEligibilityStatus" value={userData.donorEligibilityStatus} onChange={handleInputChange} >
+                    <option value="">Select Status*</option>
+                    <option value="Eligible">Eligible</option>
+                    <option value="Not Eligible">Not Eligible</option>
+                  </Form.Select>
+                  {userData.donorEligibilityStatusError && (
+                    <p style={{ color: 'red' }}>{userData.donorEligibilityStatusError}</p>
+                  )}
               </Form.Group>
             </Col>
           </Row>
@@ -492,7 +537,7 @@ const mystyle = {
               {
                 <Col xs={12} style={{justifyContent:"center",textAlign:"center",marignBottom:"20px",marginTop:"16px"}}>
                   <div>
-                      <Button className='btn btn-info mb-3'  style={{backgroundColor: "#153250",color:"#fff"}} onClick={PostUserReport}>Upload Report Data of User</Button>
+                      <Button className='btn btn-info mb-3'  style={{backgroundColor: "#153250",color:"#fff"}} onClick={handleSubmit}>Upload Report Data of User</Button>
                   </div>
                 </Col>
               }
@@ -503,6 +548,22 @@ const mystyle = {
               
             </div>
           )}
+          <Modal show={showModal} onHide={handleCancel}>
+            <Modal.Header closeButton>
+              <Modal.Title>Confirm Submission</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Are you sure you want to submit the form?
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCancel} style={{backgroundColor: "#153250"}}>
+                Cancel
+              </Button>
+              <Button variant="primary" onClick={handleConfirm} style={{backgroundColor: "#153250"}}>
+                Submit
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Col>
       </Row>
     </Container>

@@ -483,7 +483,7 @@ public class lab {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         String result = ReadSparqlMethod(queryString);
-
+        System.out.println(result);
         // Check if Data is Found
         JSONObject jsonObj = new JSONObject(result);
         JSONObject resultsObj = jsonObj.getJSONObject("results");
