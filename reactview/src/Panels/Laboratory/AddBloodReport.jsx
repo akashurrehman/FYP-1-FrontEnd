@@ -40,7 +40,7 @@ const AddBloodReport=()=> {
       stds: "",
       aids: "",
       diabetes: "",
-      Syphilis: "",
+      syphilis: "",
     }
   );
   
@@ -194,7 +194,7 @@ const AddBloodReport=()=> {
           stds: UserData.STDs.value,
           aids: UserData.AIDs.value,
           diabetes: UserData.Diabetes.value,
-          Syphilis: UserData.Syphilis.value,
+          syphilis: UserData.Syphilis.value,
         });
         console.log("Data",UserData);
         toast.success('User Found', {
@@ -482,10 +482,10 @@ const mystyle = {
                 <Form.Label>
                 Syphilis
                 </Form.Label>
-                <Form.Select required  autoFocus name="Syphilis" onChange={handleInputChange} >
+                <Form.Select required  autoFocus name="syphilis" onChange={handleInputChange} >
                   <option value="">Syphilis Found?*</option>
-                  <option value="0">No</option>
-                  <option value="1">Yes</option>
+                  <option value={0}>No</option>
+                  <option value={1}>Yes</option>
                 </Form.Select>
               </Form.Group>
             </Col>
