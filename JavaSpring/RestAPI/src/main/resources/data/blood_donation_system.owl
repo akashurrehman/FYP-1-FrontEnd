@@ -954,27 +954,6 @@
     <bd:hasBloodStockAddedDate>2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Blood_Stock>
-  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687626672581">
-    <bd:hasSTDsSyphilis rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#null"/>
-    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
-    <bd:hasRBC>5.5</bd:hasRBC>
-    <bd:hasPLT>220</bd:hasPLT>
-    <bd:hasDiabetes>1</bd:hasDiabetes>
-    <bd:hasLABDonorCBCUserName>hurairah111</bd:hasLABDonorCBCUserName>
-    <bd:hasSTDsAIDs>1</bd:hasSTDsAIDs>
-    <bd:hasLabDonorCBCName>Muhammad Abu Hurairah</bd:hasLabDonorCBCName>
-    <bd:hasLabDonorCBCContactNo>03001234567</bd:hasLabDonorCBCContactNo>
-    <bd:hasLabDonorCBCAddress>Qazi Town, Multan Road, Lahore</bd:hasLabDonorCBCAddress>
-    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687626672581</bd:hasLabDonorCBCID>
-    <bd:hasSTDs>1</bd:hasSTDs>
-    <bd:hasHGB>13.55</bd:hasHGB>
-    <bd:hasSex>0</bd:hasSex>
-    <bd:hasWBC>7.5</bd:hasWBC>
-    <bd:hasLabDonorCBCBloodGroup>AB-</bd:hasLabDonorCBCBloodGroup>
-    <bd:hasAge>23</bd:hasAge>
-    <bd:hasLabDonorCBCEmail>abuhurairah@email.com</bd:hasLabDonorCBCEmail>
-    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
-  </bd:Lab_Donor_CBC>
   <bd:Blood_Donation_Centre rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319609419">
     <bd:hasCentreLocation>Main Kashmir Road</bd:hasCentreLocation>
     <bd:hasUserName>alkabir111</bd:hasUserName>
@@ -992,12 +971,12 @@
     <bd:hasRole>CENTRE</bd:hasRole>
   </bd:Blood_Donation_Centre>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1684320789894">
-    <bd:hasRequestMakerLocation>Moon Market, Lahore</bd:hasRequestMakerLocation>
     <bd:hasRequestMakerName>Ahmad</bd:hasRequestMakerName>
+    <bd:hasRequestMakerLocation>Moon Market, Lahore</bd:hasRequestMakerLocation>
     <bd:bloodRequestMakeby>
       <bd:Donor rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319454548">
-        <bd:hasPassword>$2a$10$4GWh6wBQWwC1n9WhwUZWpeYotscNGfiDAax8hfTi1tDLXO5rtQ.ni</bd:hasPassword>
         <bd:hasPersonEmail>msalman@email.com</bd:hasPersonEmail>
+        <bd:hasPassword>$2a$10$4GWh6wBQWwC1n9WhwUZWpeYotscNGfiDAax8hfTi1tDLXO5rtQ.ni</bd:hasPassword>
         <bd:hasPersonGender>Male</bd:hasPersonGender>
         <bd:hasPersonCity>Lahore</bd:hasPersonCity>
         <bd:hasPersonDateOfBirth>2000-10-01</bd:hasPersonDateOfBirth>
@@ -1026,27 +1005,6 @@
     <bd:hasRequestMakerHospital>Service Hospital</bd:hasRequestMakerHospital>
     <bd:hasRequestMakerMessage>I need A- blood group urgently in Services Hospital, Lahore.</bd:hasRequestMakerMessage>
   </owl:NamedIndividual>
-  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687625982360">
-    <bd:hasPLT>200</bd:hasPLT>
-    <bd:hasDiabetes>1</bd:hasDiabetes>
-    <bd:hasSTDsAIDs>1</bd:hasSTDsAIDs>
-    <bd:hasLabDonorCBCAddress>Qazi Town, Multan Road, Lahore</bd:hasLabDonorCBCAddress>
-    <bd:hasLabDonorCBCBloodGroup>AB-</bd:hasLabDonorCBCBloodGroup>
-    <bd:hasSTDs>1</bd:hasSTDs>
-    <bd:hasSTDsSyphilis rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#null"/>
-    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687625982360</bd:hasLabDonorCBCID>
-    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
-    <bd:hasLabDonorCBCName>Muhammad Abu Hurairah</bd:hasLabDonorCBCName>
-    <bd:hasLABDonorCBCUserName>hurairah111</bd:hasLABDonorCBCUserName>
-    <bd:hasSex>0</bd:hasSex>
-    <bd:hasRBC>5.5</bd:hasRBC>
-    <bd:hasLabDonorCBCEmail>abuhurairah@email.com</bd:hasLabDonorCBCEmail>
-    <bd:hasAge>23</bd:hasAge>
-    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
-    <bd:hasHGB>13.55</bd:hasHGB>
-    <bd:hasLabDonorCBCContactNo>03001234567</bd:hasLabDonorCBCContactNo>
-    <bd:hasWBC>7.5</bd:hasWBC>
-  </bd:Lab_Donor_CBC>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1684320392697">
     <bd:hasRequestMakerContactNo>03001234567</bd:hasRequestMakerContactNo>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
@@ -1119,18 +1077,18 @@
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Blood_Stock>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1684319792744">
-    <bd:hasDonorLocation>Qazi Town, Multan Road, Lahore</bd:hasDonorLocation>
     <bd:hasDonorLocationLongitude>74.329376</bd:hasDonorLocationLongitude>
+    <bd:hasDonorLocation>Qazi Town, Multan Road, Lahore</bd:hasDonorLocation>
     <bd:hasDonorCity>Lahore</bd:hasDonorCity>
     <bd:hasDonorLocationLatitude>31.582045</bd:hasDonorLocationLatitude>
     <bd:hasDonorMessage>Give life blood.</bd:hasDonorMessage>
-    <bd:hasDonorAvailable>Not Available</bd:hasDonorAvailable>
     <bd:hasDonorGender>Male</bd:hasDonorGender>
     <bd:hasDonorEmail>abuhurairah@email.com</bd:hasDonorEmail>
     <bd:hasDonorID>Donation_1684319792744</bd:hasDonorID>
     <bd:hasDonorBloodGroup>AB-</bd:hasDonorBloodGroup>
     <bd:hasDonorName>Muhammad Abu Hurairah</bd:hasDonorName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
+    <bd:hasDonorAvailable>Available</bd:hasDonorAvailable>
     <bd:hasDonorContactNo>03001234567</bd:hasDonorContactNo>
     <bd:bloodDonationMakeby>
       <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352">
@@ -1154,8 +1112,8 @@
     </bd:bloodDonationMakeby>
   </owl:NamedIndividual>
   <owl:NamedIndividual rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Centre_1684319570720">
-    <bd:hasCentreID>Centre_1684319570720</bd:hasCentreID>
     <bd:hasCentreTimings>9Am-4Am</bd:hasCentreTimings>
+    <bd:hasCentreID>Centre_1684319570720</bd:hasCentreID>
     <bd:hasRole>CENTRE</bd:hasRole>
     <bd:hasCentreContactNo>+92 349 1128246</bd:hasCentreContactNo>
     <bd:hasPassword>$2a$10$ZN2QBOfnMugeZBOA86qSReMxvJuMyfgTDLzsxo4IsA7R9RA0x5n/.</bd:hasPassword>
@@ -1165,8 +1123,8 @@
     <bd:hasCentreOpeningDays>Monday</bd:hasCentreOpeningDays>
     <bd:hasCentreName>Fatima Foundation</bd:hasCentreName>
     <bd:hasCentreLocation>Main Ferozpur Road</bd:hasCentreLocation>
-    <bd:hasCentreCategory>Private</bd:hasCentreCategory>
     <bd:hasUserName>fatima111</bd:hasUserName>
+    <bd:hasCentreCategory>Private</bd:hasCentreCategory>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation_Centre"/>
   </owl:NamedIndividual>
   <bd:Blood_Stock rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Stock_8">
@@ -1206,27 +1164,6 @@
     <bd:hasDonorContactNo>03001234567</bd:hasDonorContactNo>
     <bd:bloodDonationMakeby rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319298290"/>
   </bd:Blood_Donation>
-  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687626824975">
-    <bd:hasLabDonorCBCBloodGroup>AB-</bd:hasLabDonorCBCBloodGroup>
-    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687626824975</bd:hasLabDonorCBCID>
-    <bd:hasHGB>13.55</bd:hasHGB>
-    <bd:hasSTDsSyphilis rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#null"/>
-    <bd:hasDiabetes>1</bd:hasDiabetes>
-    <bd:hasPLT>200</bd:hasPLT>
-    <bd:hasSTDsAIDs>1</bd:hasSTDsAIDs>
-    <bd:hasLabDonorCBCContactNo>03001234567</bd:hasLabDonorCBCContactNo>
-    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
-    <bd:hasWBC>7.5</bd:hasWBC>
-    <bd:hasLABDonorCBCUserName>hurairah111</bd:hasLABDonorCBCUserName>
-    <bd:hasSex>0</bd:hasSex>
-    <bd:hasRBC>5.5</bd:hasRBC>
-    <bd:hasLabDonorCBCName>Muhammad Abu Hurairah</bd:hasLabDonorCBCName>
-    <bd:hasSTDs>1</bd:hasSTDs>
-    <bd:hasAge>23</bd:hasAge>
-    <bd:hasLabDonorCBCEmail>abuhurairah@email.com</bd:hasLabDonorCBCEmail>
-    <bd:hasLabDonorCBCAddress>Qazi Town, Multan Road, Lahore</bd:hasLabDonorCBCAddress>
-    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
-  </bd:Lab_Donor_CBC>
   <bd:News rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News_1684321443659">
     <bd:hasNewsTitle>Required B Negative (-ve) blood</bd:hasNewsTitle>
     <bd:hasNewsPostDate>2023-05-11</bd:hasNewsPostDate>
@@ -1241,8 +1178,8 @@
     <bd:hasRequestMakerHospital>Sheikh Zyd Hospital</bd:hasRequestMakerHospital>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerMessage>I need A+ blood group urgently in Sheikh Zyd Hospital, Lahore.</bd:hasRequestMakerMessage>
-    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
     <bd:hasRequestMakerLocation>Cream Block, Allam Iqbal Town, Lahore.</bd:hasRequestMakerLocation>
+    <bd:hasRequestMakerGender>Male</bd:hasRequestMakerGender>
     <bd:hasRequestMakerID>Request_1684323792728</bd:hasRequestMakerID>
     <bd:hasRequestMakerBloodGroup>A+</bd:hasRequestMakerBloodGroup>
     <bd:hasRequestMakerName>Qamar</bd:hasRequestMakerName>
@@ -1261,8 +1198,8 @@
     <bd:hasRequestMakerEmail>areeba@email.com</bd:hasRequestMakerEmail>
     <bd:hasRequestMakerName>Areeba</bd:hasRequestMakerName>
     <bd:hasRequestMakerHospital>Indus Hospital</bd:hasRequestMakerHospital>
-    <bd:bloodRequestMakeby rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352"/>
     <bd:hasRequestMakerID>Request_1684320969889</bd:hasRequestMakerID>
+    <bd:bloodRequestMakeby rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352"/>
     <bd:hasRequestMakerCity>Lahore</bd:hasRequestMakerCity>
     <bd:hasRequestMakerMessage>I need blood group of B+ urgently in hospital for patient.</bd:hasRequestMakerMessage>
     <bd:hasRequestDonorName>null</bd:hasRequestDonorName>
@@ -1287,27 +1224,6 @@
     <bd:hasBloodStockAddedDate>2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Blood_Stock>
-  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687626455361">
-    <bd:hasAge>23</bd:hasAge>
-    <bd:hasLabDonorCBCAddress>Qazi Town, Multan Road, Lahore</bd:hasLabDonorCBCAddress>
-    <bd:hasLabDonorCBCEmail>abuhurairah@email.com</bd:hasLabDonorCBCEmail>
-    <bd:hasSTDsSyphilis rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#null"/>
-    <bd:hasLABDonorCBCUserName>hurairah111</bd:hasLABDonorCBCUserName>
-    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
-    <bd:hasSTDsAIDs>1</bd:hasSTDsAIDs>
-    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687626455361</bd:hasLabDonorCBCID>
-    <bd:hasSTDs>1</bd:hasSTDs>
-    <bd:hasPLT>200</bd:hasPLT>
-    <bd:hasDiabetes>0</bd:hasDiabetes>
-    <bd:hasSex>0</bd:hasSex>
-    <bd:hasLabDonorCBCContactNo>03001234567</bd:hasLabDonorCBCContactNo>
-    <bd:hasLabDonorCBCName>Muhammad Abu Hurairah</bd:hasLabDonorCBCName>
-    <bd:hasWBC>7.5</bd:hasWBC>
-    <bd:hasRBC>5.5</bd:hasRBC>
-    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
-    <bd:hasLabDonorCBCBloodGroup>AB-</bd:hasLabDonorCBCBloodGroup>
-    <bd:hasHGB>13.55</bd:hasHGB>
-  </bd:Lab_Donor_CBC>
   <bd:Event rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Event_1">
     <bd:hasEventName>Make Donation</bd:hasEventName>
     <bd:hasEventMessage>Must attend event on blood donation</bd:hasEventMessage>
@@ -1331,9 +1247,9 @@
     <bd:hasRole>USER</bd:hasRole>
     <bd:hasPassword>345678912user</bd:hasPassword>
     <bd:hasPersonContactNo>+92 333 1234563</bd:hasPersonContactNo>
+    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasPersonGender>Male</bd:hasPersonGender>
     <bd:hasPersonAddress>H03 A-Block DHA, Lahore</bd:hasPersonAddress>
-    <bd:hasPersonID>PR003</bd:hasPersonID>
     <bd:hasUserName>salman123</bd:hasUserName>
     <bd:userRegisteredIn rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_Website"/>
     <bd:hasPersonDateOfBirth>January 03,2001</bd:hasPersonDateOfBirth>
@@ -1431,27 +1347,6 @@
     <bd:campaignManageBy rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Admin_001"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Campaign>
-  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687626998136">
-    <bd:hasLabDonorCBCEmail>abuhurairah@email.com</bd:hasLabDonorCBCEmail>
-    <bd:hasLabDonorCBCContactNo>03001234567</bd:hasLabDonorCBCContactNo>
-    <bd:hasLabDonorCBCName>Muhammad Abu Hurairah</bd:hasLabDonorCBCName>
-    <bd:hasSex>0</bd:hasSex>
-    <bd:hasLabDonorCBCAddress>Qazi Town, Multan Road, Lahore</bd:hasLabDonorCBCAddress>
-    <bd:hasLABDonorCBCUserName>hurairah111</bd:hasLABDonorCBCUserName>
-    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
-    <bd:hasSTDsSyphilis rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#null"/>
-    <bd:hasSTDsAIDs>1</bd:hasSTDsAIDs>
-    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
-    <bd:hasHGB>13.55</bd:hasHGB>
-    <bd:hasRBC>5.5</bd:hasRBC>
-    <bd:hasDiabetes>1</bd:hasDiabetes>
-    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687626998136</bd:hasLabDonorCBCID>
-    <bd:hasWBC>7.5</bd:hasWBC>
-    <bd:hasSTDs>1</bd:hasSTDs>
-    <bd:hasPLT>200</bd:hasPLT>
-    <bd:hasAge>23</bd:hasAge>
-    <bd:hasLabDonorCBCBloodGroup>AB-</bd:hasLabDonorCBCBloodGroup>
-  </bd:Lab_Donor_CBC>
   <bd:Advertisement rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Avertisement_1">
     <bd:hasAdvertisementTitle>Al-Kabir Foundation</bd:hasAdvertisementTitle>
     <bd:hasAdvertisementPostDate>Jan 01,2000</bd:hasAdvertisementPostDate>
