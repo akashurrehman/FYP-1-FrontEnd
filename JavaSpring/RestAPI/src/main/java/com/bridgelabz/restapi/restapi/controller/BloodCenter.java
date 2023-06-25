@@ -724,7 +724,7 @@ public class BloodCenter {
                 addedDates.add(formattedDate);
             }
 
-            List<String> noOfBags = Arrays.asList("0", "0", "0", "0", "0", "0", "0", "0");
+            List<String> noOfBags = Arrays.asList("2", "2", "2", "2", "2", "2", "2", "2");
 
             if (bloodGroups.size() != addedDates.size() || bloodGroups.size() != noOfBags.size()) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

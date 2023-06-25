@@ -14,9 +14,9 @@ export const handleRequestsPrint = (data) => {
     printContent += '</style></head><body>';
     printContent += '<div id="header"><h1>All Blood Requests</h1></div>';
     printContent += '<div id="content">Here you can view all the Blood Requests that users has made for the different blood Groups in your city<table>';
-    printContent += '<tr><th>ID</th><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
+    printContent += '<tr><th>Name</th><th>Email</th><th>Gender</th><th>Location</th><th>Message</th><th>Blood Group</th><th>Contact</th><th>City</th><th>Hospital</th></tr>';
     data.forEach((row) => {
-      printContent += `<tr><td>${row.ID.value}</td><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
+      printContent += `<tr><td>${row.Name.value}</td><td>${row.Email.value}</td><td>${row.Gender.value}</td><td>${row.Location.value}</td><td>${row.Message.value}</td><td>${row.Blood_Group.value}</td><td>${row.Contact.value}</td><td>${row.City.value}</td><td>${row.Hospital.value}</td></tr>`;
     });
     printContent += '</table></div>';
     printContent += '<div id="footer"><p style="text-align: center; margin-top: 2px;">Thank you for supporting our cause! Your generous contribution will make a difference in saving lives. If you have any questions, contact us through email: help@gmail.com </p></div>';

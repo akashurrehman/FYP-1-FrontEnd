@@ -446,11 +446,19 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>STDs</Form.Label>
-                <Form.Select required  autoFocus name="stds"  onChange={handleInputChange} >
+                {/* <Form.Select required  autoFocus name="stds"  onChange={handleInputChange} >
                   <option value="">STDs Found?*</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
-                </Form.Select>
+                </Form.Select> */}
+                <Form.Control
+                  placeholder="STDs"
+                  autoFocus
+                  name="stds"
+                  required
+                  value={userData.stds}
+                  onChange={handleInputChange}
+                />
               </Form.Group>
             </Col>
             <Col xs={6}>
@@ -458,11 +466,19 @@ const mystyle = {
                 <Form.Label>
                 AIDs
                 </Form.Label>
-                <Form.Select required  autoFocus name="aids" onChange={handleInputChange} >
+                {/* <Form.Select required  autoFocus name="aids" onChange={handleInputChange} >
                   <option value="">Aids Found?*</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
-                </Form.Select>
+                </Form.Select> */}
+                <Form.Control
+                  placeholder="AIDs"
+                  autoFocus
+                  name="aids"
+                  required
+                  value={userData.aids}
+                  onChange={handleInputChange}
+                />
               </Form.Group>
             </Col>
           </Row>
@@ -470,11 +486,19 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Diabetes</Form.Label>
-                <Form.Select required  autoFocus name="diabetes" onChange={handleInputChange} >
+                {/* <Form.Select required  autoFocus name="diabetes" onChange={handleInputChange} >
                   <option value="">Diabetes Found?*</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
-                </Form.Select>
+                </Form.Select> */}
+                <Form.Control
+                  placeholder="Diabetes"
+                  autoFocus
+                  name="diabetes"
+                  required
+                  value={userData.diabetes}
+                  onChange={handleInputChange}
+                />
               </Form.Group>
             </Col>
             <Col xs={6}>
@@ -482,11 +506,19 @@ const mystyle = {
                 <Form.Label>
                 Syphilis
                 </Form.Label>
-                <Form.Select required  autoFocus name="syphilis" onChange={handleInputChange} >
+                {/* <Form.Select required  autoFocus name="syphilis" onChange={handleInputChange} >
                   <option value="">Syphilis Found?*</option>
                   <option value={0}>No</option>
                   <option value={1}>Yes</option>
-                </Form.Select>
+                </Form.Select> */}
+                <Form.Control
+                  placeholder="Syphilis"
+                  autoFocus
+                  name="syphilis"
+                  required
+                  value={userData.syphilis}
+                  onChange={handleInputChange}
+                />
               </Form.Group>
             </Col>
           </Row>
