@@ -800,6 +800,27 @@
     <rdfs:domain rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC"/>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
   </owl:FunctionalProperty>
+  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687713183477">
+    <bd:hasSex>null</bd:hasSex>
+    <bd:hasAge>null</bd:hasAge>
+    <bd:hasSTDsAIDs>null</bd:hasSTDsAIDs>
+    <bd:hasLabDonorCBCEmail>null</bd:hasLabDonorCBCEmail>
+    <bd:hasLabDonorCBCCity>null</bd:hasLabDonorCBCCity>
+    <bd:hasLABDonorCBCUserName>null</bd:hasLABDonorCBCUserName>
+    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687713183477</bd:hasLabDonorCBCID>
+    <bd:hasHGB>null</bd:hasHGB>
+    <bd:hasWBC>null</bd:hasWBC>
+    <bd:hasLabDonorCBCAddress>null</bd:hasLabDonorCBCAddress>
+    <bd:hasSTDs>null</bd:hasSTDs>
+    <bd:hasLabDonorCBCName>null</bd:hasLabDonorCBCName>
+    <bd:hasLabDonorCBCContactNo>null</bd:hasLabDonorCBCContactNo>
+    <bd:hasRBC>null</bd:hasRBC>
+    <bd:hasPLT>null</bd:hasPLT>
+    <bd:hasLabDonorCBCBloodGroup>null</bd:hasLabDonorCBCBloodGroup>
+    <bd:hasSTDsSyphilis>null</bd:hasSTDsSyphilis>
+    <bd:hasLABDonorCBCStatus>null</bd:hasLABDonorCBCStatus>
+    <bd:hasDiabetes>null</bd:hasDiabetes>
+  </bd:Lab_Donor_CBC>
   <bd:Financial_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Financial_Donor_1684321865812">
     <bd:hasFinancialDonorName>Ali</bd:hasFinancialDonorName>
     <bd:hasFinancialDonorMessage>Donate ....... to needy persons.</bd:hasFinancialDonorMessage>
@@ -809,6 +830,27 @@
     <bd:hasFinancialDonationID>Financial_Donor_1684321865812</bd:hasFinancialDonationID>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Financial_Donation>
+  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687714853819">
+    <bd:hasLabDonorCBCBloodGroup>O-</bd:hasLabDonorCBCBloodGroup>
+    <bd:hasSTDsSyphilis>1</bd:hasSTDsSyphilis>
+    <bd:hasLabDonorCBCName>akash</bd:hasLabDonorCBCName>
+    <bd:hasSTDs>0</bd:hasSTDs>
+    <bd:hasLabDonorCBCEmail>akash1@gmail.com</bd:hasLabDonorCBCEmail>
+    <bd:hasSex>null</bd:hasSex>
+    <bd:hasLABDonorCBCUserName>akash1</bd:hasLABDonorCBCUserName>
+    <bd:hasDiabetes>0</bd:hasDiabetes>
+    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687714853819</bd:hasLabDonorCBCID>
+    <bd:hasAge>null</bd:hasAge>
+    <bd:hasPLT>260</bd:hasPLT>
+    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
+    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
+    <bd:hasHGB>9</bd:hasHGB>
+    <bd:hasRBC>8</bd:hasRBC>
+    <bd:hasLabDonorCBCAddress>lahore</bd:hasLabDonorCBCAddress>
+    <bd:hasSTDsAIDs>null</bd:hasSTDsAIDs>
+    <bd:hasLabDonorCBCContactNo>+92 346 4855855</bd:hasLabDonorCBCContactNo>
+    <bd:hasWBC>10</bd:hasWBC>
+  </bd:Lab_Donor_CBC>
   <bd:Blood_Donation rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donation_1">
     <bd:hasDonorBloodGroup>A-</bd:hasDonorBloodGroup>
     <bd:hasDonorLocation>Iqbal Town, Lahore</bd:hasDonorLocation>
@@ -1082,13 +1124,13 @@
     <bd:hasDonorCity>Lahore</bd:hasDonorCity>
     <bd:hasDonorLocationLatitude>31.582045</bd:hasDonorLocationLatitude>
     <bd:hasDonorMessage>Give life blood.</bd:hasDonorMessage>
+    <bd:hasDonorAvailable>Not Available</bd:hasDonorAvailable>
     <bd:hasDonorGender>Male</bd:hasDonorGender>
     <bd:hasDonorEmail>abuhurairah@email.com</bd:hasDonorEmail>
     <bd:hasDonorID>Donation_1684319792744</bd:hasDonorID>
     <bd:hasDonorBloodGroup>AB-</bd:hasDonorBloodGroup>
     <bd:hasDonorName>Muhammad Abu Hurairah</bd:hasDonorName>
     <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Blood_Donation"/>
-    <bd:hasDonorAvailable>Available</bd:hasDonorAvailable>
     <bd:hasDonorContactNo>03001234567</bd:hasDonorContactNo>
     <bd:bloodDonationMakeby>
       <bd:Person rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319206352">
@@ -1164,27 +1206,6 @@
     <bd:hasDonorContactNo>03001234567</bd:hasDonorContactNo>
     <bd:bloodDonationMakeby rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1684319298290"/>
   </bd:Blood_Donation>
-  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687704658064">
-    <bd:hasLABDonorCBCUserName>akash111</bd:hasLABDonorCBCUserName>
-    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
-    <bd:hasLabDonorCBCEmail>akash@email.com</bd:hasLabDonorCBCEmail>
-    <bd:hasSex>0</bd:hasSex>
-    <bd:hasRBC>5.5</bd:hasRBC>
-    <bd:hasHGB>13.55</bd:hasHGB>
-    <bd:hasLabDonorCBCAddress>Mandi Bahoudin</bd:hasLabDonorCBCAddress>
-    <bd:hasLabDonorCBCContactNo>+92 333 1234567</bd:hasLabDonorCBCContactNo>
-    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687704658064</bd:hasLabDonorCBCID>
-    <bd:hasLabDonorCBCBloodGroup>A+</bd:hasLabDonorCBCBloodGroup>
-    <bd:hasPLT>200</bd:hasPLT>
-    <bd:hasSTDsSyphilis>0</bd:hasSTDsSyphilis>
-    <bd:hasAge>23</bd:hasAge>
-    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
-    <bd:hasWBC>4.5</bd:hasWBC>
-    <bd:hasSTDsAIDs>0</bd:hasSTDsAIDs>
-    <bd:hasSTDs>0</bd:hasSTDs>
-    <bd:hasDiabetes>0</bd:hasDiabetes>
-    <bd:hasLabDonorCBCName>Akash Ur Rehman</bd:hasLabDonorCBCName>
-  </bd:Lab_Donor_CBC>
   <bd:News rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#News_1684321443659">
     <bd:hasNewsTitle>Required B Negative (-ve) blood</bd:hasNewsTitle>
     <bd:hasNewsPostDate>2023-05-11</bd:hasNewsPostDate>
@@ -1262,6 +1283,23 @@
     <bd:hasBloodStockAddedDate>2000-01-02T00:00:00</bd:hasBloodStockAddedDate>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Blood_Stock>
+  <bd:Request_Maker rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_1687707778127">
+    <bd:hasPersonID>Person_1687707778127</bd:hasPersonID>
+    <bd:hasPassword>$2a$10$IhYG51amwubQxjhMRjMQcODNobYE3f3dScXKqShSrJMwA/Nf/cnum</bd:hasPassword>
+    <bd:hasPersonEmail>akash1@gmail.com</bd:hasPersonEmail>
+    <bd:hasPersonGender>Male</bd:hasPersonGender>
+    <bd:hasPersonEligibilityStatus>Not Eligible</bd:hasPersonEligibilityStatus>
+    <bd:hasUserName>akash1</bd:hasUserName>
+    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person"/>
+    <bd:hasPersonFullName>akash</bd:hasPersonFullName>
+    <bd:hasPersonContactNo>+92 346 4855855</bd:hasPersonContactNo>
+    <bd:hasPersonAddress>lahore</bd:hasPersonAddress>
+    <bd:hasPersonBloodGroup>O+</bd:hasPersonBloodGroup>
+    <bd:hasPersonCity>Lahore</bd:hasPersonCity>
+    <rdf:type rdf:resource="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Donor"/>
+    <bd:hasRole>USER</bd:hasRole>
+    <bd:hasPersonDateOfBirth>2023-06-06</bd:hasPersonDateOfBirth>
+  </bd:Request_Maker>
   <bd:Request_Maker rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Person_003">
     <bd:hasPersonFullName>Salman</bd:hasPersonFullName>
     <bd:hasPersonBloodGroup>AB+</bd:hasPersonBloodGroup>
@@ -1344,27 +1382,6 @@
     <bd:hasCampaignDetails>Give food, cloths and money or what ever you have for the injured people of KASHMIR who suffered from earth quake.</bd:hasCampaignDetails>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   </bd:Campaign>
-  <bd:Lab_Donor_CBC rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Lab_Donor_CBC_1687705498811">
-    <bd:hasSTDsSyphilis>0</bd:hasSTDsSyphilis>
-    <bd:hasHGB>13.55</bd:hasHGB>
-    <bd:hasLabDonorCBCAddress>Mandi Bahoudin</bd:hasLabDonorCBCAddress>
-    <bd:hasLabDonorCBCName>Akash Ur Rehman</bd:hasLabDonorCBCName>
-    <bd:hasLabDonorCBCCity>Lahore</bd:hasLabDonorCBCCity>
-    <bd:hasSTDsAIDs>0</bd:hasSTDsAIDs>
-    <bd:hasPLT>200</bd:hasPLT>
-    <bd:hasAge>23</bd:hasAge>
-    <bd:hasLabDonorCBCContactNo>+92 333 1234567</bd:hasLabDonorCBCContactNo>
-    <bd:hasDiabetes>0</bd:hasDiabetes>
-    <bd:hasSex>0</bd:hasSex>
-    <bd:hasLabDonorCBCEmail>akash@email.com</bd:hasLabDonorCBCEmail>
-    <bd:hasLabDonorCBCBloodGroup>A+</bd:hasLabDonorCBCBloodGroup>
-    <bd:hasLABDonorCBCUserName>salman111</bd:hasLABDonorCBCUserName>
-    <bd:hasWBC>4.5</bd:hasWBC>
-    <bd:hasLabDonorCBCID>Lab_Donor_CBC_1687705498811</bd:hasLabDonorCBCID>
-    <bd:hasLABDonorCBCStatus>Eligible</bd:hasLABDonorCBCStatus>
-    <bd:hasSTDs>0</bd:hasSTDs>
-    <bd:hasRBC>5.5</bd:hasRBC>
-  </bd:Lab_Donor_CBC>
   <bd:Blood_Request rdf:about="http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#Request_1684324144900">
     <bd:hasRequestMakerLocation>Molana Shoukat Ali Road, Lahore.</bd:hasRequestMakerLocation>
     <bd:hasRequestDonatedBy>null</bd:hasRequestDonatedBy>
