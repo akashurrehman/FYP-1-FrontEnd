@@ -51,7 +51,7 @@ public class lab {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Add the New report in the Database
@@ -514,9 +514,7 @@ public class lab {
         String email = jsonNode.has("email") ? jsonNode.get("email").asText() : null;
         String contactNo = jsonNode.has("contactNo") ? jsonNode.get("contactNo").asText() : null;
         String city = jsonNode.has("city") ? jsonNode.get("city").asText() : null;
-        String donorEligibilityStatus = jsonNode.has("donorEligibilityStatus")
-                ? jsonNode.get("donorEligibilityStatus").asText()
-                : null;
+        String donorEligibilityStatus = jsonNode.has("donorEligibilityStatus") ? jsonNode.get("donorEligibilityStatus").asText() : null;
 
         String age = jsonNode.has("age") ? jsonNode.get("age").asText() : null;
         String bloodGroup = jsonNode.has("bloodGroup") ? jsonNode.get("bloodGroup").asText() : null;
@@ -533,7 +531,32 @@ public class lab {
         String individualId = "Lab_Donor_CBC_" + System.currentTimeMillis();
 
         System.out.print(individualId);
-        String query = String.format(
+
+        String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +
+                "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>" +
+                "SELECT * WHERE {" +
+                "?cbc rdf:type bd:Lab_Donor_CBC ." +
+                "?cbc bd:hasLabDonorCBCID ?ID ." +
+                "?cbc bd:hasLABDonorCBCUserName ?UserName ." +
+                "?cbc bd:hasLabDonorCBCName ?Name ." +
+                "?cbc bd:hasLabDonorCBCEmail ?Email ." +
+                "filter(?UserName = \"" + username + "\")" +
+                "}";
+
+
+        // set the response headers
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        String result = ReadSparqlMethod(queryString);
+
+        // Check if UserName is found
+        JSONObject jsonObj = new JSONObject(result);
+        JSONObject resultsObj = jsonObj.getJSONObject("results");
+        JSONArray bindingsArr = resultsObj.getJSONArray("bindings");
+
+        if (bindingsArr.isEmpty()) {
+            String query = String.format(
                 "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n" +
                         "PREFIX bd: <http://www.semanticweb.org/mabuh/ontologies/2023/blood_donation_system#>\n" +
                         "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n" +
@@ -557,19 +580,25 @@ public class lab {
                         "                       bd:hasSTDs \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasSTDsAIDs \"%s\"^^xsd:string ;\n" +
                         "                       bd:hasDiabetes \"%s\"^^xsd:string ;\n" +
-                        "                       bd:hasSTDsSyphilis bd:%s .\n" +
+                        "                       bd:hasSTDsSyphilis \"%s\"^^xsd:string .\n" +
                         "}",
                 individualId, username, name, address, email, contactNo, city, bloodGroup, donorEligibilityStatus, age,
                 sex, wbc, rbc, plt, hgb, stds, aids, diabetes, syphilis);
-        // Call the InsertSparql function with the query
-        boolean isInserted = InsertSparql(query);
+            // Call the InsertSparql function with the query
+            boolean isInserted = InsertSparql(query);
 
-        if (isInserted) {
-            String successMessage = "{\"success\": \"Data inserted successfully\"}";
-            return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+            if (isInserted) {
+                String successMessage = "{\"success\": \"Data inserted successfully\"}";
+                return new ResponseEntity<String>(successMessage, HttpStatus.OK);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body("Error occurred while inserting data");
+            }
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while inserting data");
+            String errorMessage = "{\"error\": \"User with this username already exit you can not add same user data multiple time: " + username + "\"}";
+            return new ResponseEntity<String>(errorMessage, headers, HttpStatus.NOT_FOUND);
         }
+
     }
 
     static boolean InsertSparql(String query) throws IOException {
