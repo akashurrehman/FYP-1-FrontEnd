@@ -34,6 +34,7 @@ const ProfileSettings=()=> {
   });
 
   const [showModal, setShowModal] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const {token} = useAuth();
   
   //This will get the id  from the token if user is login
@@ -43,7 +44,7 @@ const ProfileSettings=()=> {
 
 
   const authCentre=()=>{
-      if(role!='CENTRE'){
+      if(role!=='CENTRE'){
         window.location.href = "/user/login";
       }
         console.log("authCentre");
@@ -171,6 +172,10 @@ const validateForm = () => {
         newCenterData = { ...center, [name]: value, locationError: null };
       }
     }
+     // Checkbox validation
+  if (name === "checkbox") {
+    setIsChecked(!isChecked); // Toggle the checkbox status
+  }
     setCenterData(newCenterData);  
   };
 
@@ -351,7 +356,11 @@ const validateForm = () => {
       </Row>
       <Row className="mb-3" >
         <Form.Group as={Col} id="formGridCheckbox">
-          <Form.Check type="checkbox" label="Are the provided information is correct according to your center or knowledge?" />
+          <Form.Check type="checkbox" 
+           checked={isChecked}
+           onChange={handleChange}
+           name="checkbox" 
+          label="Are the provided information is correct according to your center or knowledge?" />
         </Form.Group>
       </Row>
     </Form>

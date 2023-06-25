@@ -40,7 +40,7 @@ const Appointments=()=> {
   const name=decodedToken?.Name;
 
   const authCentre=()=>{
-    if(role!='CENTRE'){
+    if(role!=='CENTRE'){
       window.location.href = "/user/login";
     }
       console.log("authCentre");

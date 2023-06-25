@@ -4,8 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import Header from "./LabComponents/Header";
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -24,34 +22,44 @@ const LabHome=()=> {
 
   //Get the token from the AuthContext
   const {token} = useAuth();
-    const authCentre=()=>{
-      if(!token){
+
+
+   //This will get the id  from the token if user is login
+   const decodedToken = token ? jwt_decode(token) : null;
+   const id = decodedToken?.id;
+    const role = decodedToken?.role;
+    
+  const authCentre=()=>{  
+    if(role!=='LAB'){
         window.location.href = "/user/login";
       }
         console.log("authCentre");
     }
 
-  //This will get the id  from the token if user is login
-  const decodedToken = token ? jwt_decode(token) : null;
-  const id = decodedToken?.id;
+
 
   useEffect(() => {
     const fetchData = async () => {
       const response1 = await axios.get(`http://localhost:8081/api/labs/RegisteredLabs/${id}`)
-      .then((response) => setLab(response.data.results.bindings)).catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
+      .then((response) => setLab(response.data.results.bindings))
+      .catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
       const response3 = await axios.get("http://localhost:8081/api/admin/getJobPost")
-      .then((response) => setJobPosts(response.data.results.bindings)).catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
+      .then((response) => setJobPosts(response.data.results.bindings))
+      .catch((error) => toast.error(error, {position: toast.POSITION.TOP_CENTER}));
       const response4 = await axios.get("http://localhost:8081/api/admin/getNews")
-      .then((response) => setNews(response.data.results.bindings)).catch((error) => console.log(error));
+      .then((response) => setNews(response.data.results.bindings))
+      .catch((error) => console.log(error));
       const response5 = await axios.get("http://localhost:8081/api/admin/getFAQ")
-      .then((response) => setFAQ(response.data.results.bindings)).catch((error) => toast.error(error));
+      .then((response) => setFAQ(response.data.results.bindings))
+      .catch((error) => toast.error(error));
       const response7 = await axios.get("http://localhost:8081/api/admin/getEvents")
-      .then((response) => setEvents(response.data.results.bindings)).catch((error) => console.log(error));
+      .then((response) => setEvents(response.data.results.bindings))
+      .catch((error) => console.log(error));
 
     };
     fetchData();
     setIsLoading(false);
-    //authCentre();
+    authCentre();
   }, []);
   const mystyle = {
       height: "7%",

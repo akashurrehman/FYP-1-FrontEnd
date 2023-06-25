@@ -97,8 +97,10 @@ function Header(props) {
               </Modal.Header>
               <Modal.Body>
               <div>
-                {notifications.length === 0 ? (
-                  <></>
+                {notifications.length == 0 ? (
+                  <h6 style={{justifyContent:"center",textAlign:"center"}}>
+                    No Notifications
+                  </h6>
                     ) : (
                       <Row className="d-flex justify-content-center">
                         {notifications.results.bindings.map((notification, index) => (

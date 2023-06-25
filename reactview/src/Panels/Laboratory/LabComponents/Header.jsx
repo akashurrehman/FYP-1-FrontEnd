@@ -4,20 +4,28 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 function Header(props) {
+
+  const LogoutFunction = (e)=>{
+    console.log("In Lab Logout Function!")
+    e.preventDefault();
+    localStorage.removeItem("token");
+    window.location.href='/user/login'
+  }
   return (
     <Navbar style={{backgroundColor:"#3A4F7A",color:"#FFFFFF"}} expand="lg" fixed="top" textColor="#FFFFFF">
       <Container fluid>
         <Navbar.Brand>
-        <img
-                src="/Images/blood-center.jpg"
-                style={{
-                  width: '35px',
-                  height: '35px',
-                  borderRadius: '50%'
-              }}
-                alt="Notification-icon"
-                className="d-inline-block align-top mx-lg-1"
-              /></Navbar.Brand>
+          <img
+            src="/Images/blood-center.jpg"
+            style={{
+              width: '35px',
+              height: '35px',
+              borderRadius: '50%'
+            }}
+            alt="Notification-icon"
+            className="d-inline-block align-top mx-lg-1"
+          />
+        </Navbar.Brand>
         <Navbar.Toggle  />
         <Navbar.Collapse style={{color:"#FFFFFF"}}>
           <Nav
@@ -36,7 +44,7 @@ function Header(props) {
             
           </Nav>
             <Nav>
-              <Nav.Link onClick={localStorage.removeItem('token')} style={{color:"#FFFFFF" }}>
+              <Nav.Link onClick={LogoutFunction} style={{color:"#FFFFFF" }}>
               <i class="fa fa-share" aria-hidden="true"></i> Logout
               </Nav.Link>
             </Nav>

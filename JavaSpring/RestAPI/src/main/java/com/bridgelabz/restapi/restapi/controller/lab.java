@@ -51,7 +51,7 @@ public class lab {
      */
 
     // Path for Ontology file
-    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/FYP/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
+    public static final String ONTOLOGY_FILE_LOCAL_PATH = "D:/Akash/Semester 7/Final Year Project/Front_End_Implementation/FYP-1-FrontEnd/JavaSpring/RestAPI/src/main/resources/data/blood_donation_system.owl";
 
     /*
      * Add the New report in the Database
@@ -483,7 +483,7 @@ public class lab {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         String result = ReadSparqlMethod(queryString);
-
+        System.out.println(result);
         // Check if Data is Found
         JSONObject jsonObj = new JSONObject(result);
         JSONObject resultsObj = jsonObj.getJSONObject("results");

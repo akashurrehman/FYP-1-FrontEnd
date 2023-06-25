@@ -35,7 +35,7 @@ const BloodInformation=()=> {
 
     const authCentre=()=>{
       
-      if(role!='CENTRE'){
+      if(role!=='CENTRE'){
         window.location.href = "/user/login";
       }
         console.log("authCentre");
@@ -168,7 +168,7 @@ const BloodInformation=()=> {
               <Card.Title>Add Blood Information of User who donate blood</Card.Title>
             </Card.Body>
           </Card>
-          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center"}} className="shadow p-3 mb-2 rounded">
+          <Card style={{marginTop:30,paddingBottom:10,alignItems:"center",justifyContent:"center",textAlign:"center",marginLeft:"25px"}} className="shadow p-3 mb-2 rounded">
             <Card.Body>
               <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>In this Page, you can add the details of the user who donate blood on you center!</Card.Title>
               <Card.Title style={{color:"red",fontSize:"15px",fontWeight:"bold"}}>This donor information can be used for future transfusions and available to all Users!</Card.Title>

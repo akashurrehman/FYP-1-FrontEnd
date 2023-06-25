@@ -25,7 +25,7 @@ const MyAccountCenter=()=> {
   const id = decodedToken?.id;
   const role = decodedToken?.role;
   const authCentre=()=>{
-    if(role!='CENTRE'){
+    if(role!=='CENTRE'){
       
       window.location.href = "/user/login";
     }
@@ -145,7 +145,7 @@ const MyAccountCenter=()=> {
             </Card.Body>
           </Card>
           <CardGroup style={{}}>
-            <Col className="mt-md-2 px-2" md={8}>  
+            <Col className="mt-2 px-md-2 px-0" md={8}>  
                 <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,borderColor:"#272C33",marginLeft:"25px",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Requests</Card.Title>
@@ -195,7 +195,7 @@ const MyAccountCenter=()=> {
             </Col> 
         </CardGroup>
         <CardGroup style={{}}>
-            <Col className="mt-md-2 px-2" md={8}>  
+            <Col className="mt-2 px-md-2 px-0" md={8}>  
                 <Card className="shadow p-3 mb-5 rounded" style={{paddingBottom:10,marginLeft:"25px",borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>All Accepted Requests</Card.Title>
@@ -253,7 +253,7 @@ const MyAccountCenter=()=> {
 
         </CardGroup>
         <CardGroup style={{}}>
-            <Col className="mt-md-2 px-2" md={8}>  
+            <Col className="mt-2 px-md-2 px-0" md={8}>  
                 <Card className="shadow p-3 mb-5 rounded" style={{marginTop:10,marginLeft:"25px",paddingBottom:10,borderColor:"#272C33",backgroundColor: "#f2f2f2",borderRadius:"4px solid"}}>
                     <Card.Body>
                         <Card.Title style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}>My Blood Donors</Card.Title>
@@ -276,7 +276,7 @@ const MyAccountCenter=()=> {
                     </Card.Body>
                 </Card>
             </Col>
-            <Col className="mt-md-2 px-2" md={8}>  
+            <Col className="mt-2 px-md-2 px-0" md={8}>  
               <Card className="shadow p-3 mb-2 bg-body rounded" style={{marginTop:10,paddingBottom:10,marginLeft:"25px"}} id="card">
                 <div>
                   <h4 style={{textAlign:"center", alignItems:"center",paddingBottom:"4px"}}> Appointments booked in your Center!</h4>

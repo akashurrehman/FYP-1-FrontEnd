@@ -27,7 +27,7 @@ const HomeScreen_BloodDonation=()=> {
   const role = decodedToken?.role;
   const id= decodedToken?.id;
   const authCentre=()=>{
-    if(role!='CENTRE'){
+    if(role!=='CENTRE'){
       window.location.href = "/user/login";
     }
       console.log("authCentre");
@@ -246,7 +246,7 @@ const HomeScreen_BloodDonation=()=> {
             </Col>
         </CardGroup>
         <CardGroup style={{marginLeft:"25px"}}>
-            <Col className="mt-md-2 px-2" md={4}>
+            <Col className="mt-2 px-md-2 px-0" md={4}>
             <div className='BarBox' style={{borderBottom:'',width:'100%',borderRadius:'10px'}}>
                 
                 <Row style={{justifyContent:"center",textAlign:"center"}}>
@@ -293,7 +293,7 @@ const HomeScreen_BloodDonation=()=> {
                 
             </div>
             </Col>
-            <Col className="mt-md-2 px-2" md={4} style={{justifyContent:"center",alignItems:"center"}}>
+            <Col className="mt-2 px-md-2 px-0" md={4} style={{justifyContent:"center",alignItems:"center"}}>
               <div className='BarBox' style={{borderBottom:'',width:'100%',borderRadius:'10px'}}>
                 
                 <Row style={{justifyContent:"center",textAlign:"center"}}>
@@ -340,7 +340,7 @@ const HomeScreen_BloodDonation=()=> {
                 
             </div>
             </Col>
-            <Col className="mt-md-2 px-2" md={4}>
+            <Col className="mt-2 px-md-2 px-0" md={4}>
             <div className='BarBox' style={{borderBottom:'',width:'100%',borderRadius:'10px'}}>
                 
                 <Row style={{justifyContent:"center",textAlign:"center"}}>
