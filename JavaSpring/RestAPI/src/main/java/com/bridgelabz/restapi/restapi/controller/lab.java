@@ -503,7 +503,8 @@ public class lab {
     @PostMapping("/api/lab/addUserDetails/addUserCBCReportDetails/add")
     public ResponseEntity<String> AddUserAndCBCDetails(@RequestBody String cbc) throws IOException {
 
-        System.out.print(cbc);
+        System.out.println("CBC Details is:");
+        System.out.println(cbc);
 
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(cbc);
@@ -530,6 +531,7 @@ public class lab {
 
         String individualId = "Lab_Donor_CBC_" + System.currentTimeMillis();
 
+        System.out.print("Individual ID is: ");
         System.out.print(individualId);
 
         String queryString = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>" +

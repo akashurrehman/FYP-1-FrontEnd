@@ -23,26 +23,38 @@ const AddBloodReport=()=> {
   const [searchTerm, setSearchTerm] = useState('');
   const [userData, setUserData] = useState(
     {
-      username:"",
-      name: "",
-      address: "",
-      bloodGroup: "",
-      email: "",
-      contactNo: "",
-      city: "",
-      age: "",
-      sex: "",
-      donorEligibilityStatus: "",
-      wbc: "",
-      rbc: "",
-      hgb: "",
-      plt: "",
-      stds: "",
-      aids: "",
-      diabetes: "",
-      syphilis: "",
+      Name:"",
+      UserName:"",
+      Email:"",
+      ContactNo:"",
+      Address:"",
+      BloodGroup:"",
+      DOB:"",
+      Gender:"",
+      City:"",
     }
   );
+
+  const [reportData, setReportData] = useState(
+    {
+      username:"",
+      name:"",
+      address:"",
+      email:"",
+      contactNo:"",
+      city:"",
+      donorEligibilityStatus:"",
+      age:"",
+      bloodGroup:"",
+      sex:"",
+      wbc:"",
+      rbc:"",
+      hgb:"",
+      stds:"",
+      aids:"",
+      diabetes:"",
+      syphilis:"",
+    });
   
   const {token} = useAuth();
 
@@ -66,15 +78,17 @@ const AddBloodReport=()=> {
     let isValid = true;
     const errors = {};
   
-    if (!userData.donorEligibilityStatus) {
+    if (!reportData.donorEligibilityStatus) {
       console.log("Error in status")
       isValid = false;
       errors.donorEligibilityStatusError = "Please select Eigible or Not Eligible";
     }
+    
     // if(!userData.bloodGroup){
     //   isValid = false;
     //   errors.bloodGroupError = "Please select valid blood Group";
     // }
+
     return isValid;
   }
   const handleSubmit = (event) => {
@@ -112,15 +126,15 @@ const AddBloodReport=()=> {
     const { name, value } = event.target;
 
     //setUserData((prevCenterData) => ({ ...prevCenterData, [name]: value }));
-    let newUserData = { ...userData, [name]: value };
+    let newReportData = { ...reportData, [name]: value };
 
      // For donorEligibilityStatus
      if (name === "donorEligibilityStatus") {
       const categoryRegex = /^(Eligible|Not Eligible)$/i; // regex for allowed values
       if (!categoryRegex.test(value)) {
-        newUserData = { ...userData, [name]: value, donorEligibilityStatusError: "Please enter 'Eligible' or 'Not Eligible'" };
+        newReportData = { ...reportData, [name]: value, donorEligibilityStatusError: "Please enter 'Eligible' or 'Not Eligible'" };
       } else {
-        newUserData = { ...userData, [name]: value, donorEligibilityStatusError: null };
+        newReportData = { ...reportData, [name]: value, donorEligibilityStatusError: null };
       }
     }
     // if(name==="bloodGroup"){
@@ -132,7 +146,7 @@ const AddBloodReport=()=> {
     //   }
     // }
      // For STDs
-    setUserData(newUserData);  
+    setReportData(newReportData);  
   };
  
   
@@ -145,10 +159,10 @@ const AddBloodReport=()=> {
   
   const handleConfirm = (event) => {
     event.preventDefault();
-    console.log("PostUserReport", userData);
-    axios.post(`http://localhost:8081/api/lab/addUserDetails/addUserCBCReportDetails/add`, userData).then((response) => {
+    console.log("PostUserReport", reportData);
+    axios.post(`http://localhost:8081/api/lab/addUserDetails/addUserCBCReportDetails/add`, reportData).then((response) => {
         console.log(response);
-        console.log("User daata",userData);
+        console.log("Report data",reportData);
         toast.success('Report Added Successfully', {
             position: "top-center",
             autoClose: 5000,
@@ -172,30 +186,31 @@ const AddBloodReport=()=> {
 
   const getUsername = (searchTerm) => {
     console.log("getUsername", searchTerm);
-    axios.get(`http://localhost:8081/api/labs/getCBCdetails/byUserName/${searchTerm}`).then((response)=>{
+    axios.get(`http://localhost:8081/api/users/registration/getUserByUsername/${searchTerm}`).then((response)=>{
       const { results } = response.data;
       if (results && results.bindings && results.bindings.length > 0) {
         const UserData = results.bindings[0];
         setUserData({
-          username:UserData.UserName.value,
-          age: UserData.Age.value,
-          name: UserData.Name.value,
-          address: UserData.Address.value,
-          email: UserData.Email.value,
-          sex: UserData.Sex.value,
-          contactNo: UserData.ContactNo.value,
-          city: UserData.City.value,
-          donorEligibilityStatus: UserData.Status.value,
-          bloodGroup: UserData.BloodGroup.value,
-          wbc: UserData.WBC.value,
-          rbc: UserData.RBC.value,
-          hgb: UserData.HGB.value,
-          plt: UserData.PLT.value,
-          stds: UserData.STDs.value,
-          aids: UserData.AIDs.value,
-          diabetes: UserData.Diabetes.value,
-          syphilis: UserData.Syphilis.value,
+          Name:UserData.Name.value,
+          UserName:UserData.UserName.value,
+          Email:UserData.Email.value,
+          ContactNo:UserData.ContactNo.value,
+          Address:UserData.Address.value,
+          BloodGroup:UserData.BloodGroup.value,
+          DOB:UserData.DOB.value,
+          Gender:UserData.Gender.value,
+          City:UserData.City.value,
         });
+        setReportData({
+          username:UserData.UserName.value,
+          name:UserData.Name.value,
+          address:UserData.Address.value,
+          email:UserData.Email.value,
+          contactNo:UserData.ContactNo.value,
+          city:UserData.City.value,
+
+        });
+          
         console.log("Data",UserData);
         toast.success('User Found', {
           position: "top-center",
@@ -296,12 +311,12 @@ const mystyle = {
           <Row>
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Age</Form.Label>
+                <Form.Label>DOB</Form.Label>
                 <Form.Control
-                  placeholder="Age"
+                  placeholder="DOB"
                   autoFocus
-                  name="age"
-                  value={userData.age}
+                  name="DOB"
+                  value={userData.DOB}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -309,13 +324,13 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>
-                  Sex
+                Gender
                 </Form.Label>
                 <Form.Control
-                  placeholder="Sex"
+                  placeholder="Gender"
                   autoFocus
-                  name="sex"
-                  value={userData.sex == 0 ? 'Male' : 'Female'}
+                  name="Gender"
+                  value={userData.Gender}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -328,8 +343,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Name"
                   autoFocus
-                  name="name"
-                  value={userData.name}
+                  name="Name"
+                  value={userData.Name}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -342,8 +357,8 @@ const mystyle = {
                 <Form.Control
                   placeholder="Contact No"
                   autoFocus
-                  name="contactNo"
-                  value={userData.contactNo}
+                  name="ContactNo"
+                  value={userData.ContactNo}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -352,12 +367,12 @@ const mystyle = {
           <Row>
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>City</Form.Label>
+                <Form.Label>Address</Form.Label>
                 <Form.Control
-                  placeholder="City"
+                  placeholder="Address"
                   autoFocus
-                  name="city"
-                  value={userData.city}
+                  name="Address"
+                  value={userData.Address}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -365,13 +380,13 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>
-                  Address
+                City
                 </Form.Label>
                 <Form.Control
-                  placeholder="Contact No"
+                  placeholder="City"
                   autoFocus
-                  name="address"
-                  value={userData.address}
+                  name="City"
+                  value={userData.City}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -390,7 +405,7 @@ const mystyle = {
                   placeholder="PLT"
                   autoFocus
                   name="plt"
-                  value={userData.plt}
+                  value={reportData.plt}
                   onChange={handleInputChange}
                   required
                 />
@@ -405,7 +420,7 @@ const mystyle = {
                   placeholder="WBC"
                   autoFocus
                   name="wbc"
-                  value={userData.wbc}
+                  value={reportData.wbc}
                   required
                   onChange={handleInputChange}
                 />
@@ -421,7 +436,7 @@ const mystyle = {
                   autoFocus
                   name="rbc"
                   required
-                  value={userData.rbc}
+                  value={reportData.rbc}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -435,7 +450,7 @@ const mystyle = {
                   placeholder="HGB"
                   autoFocus
                   name="hgb"
-                  value={userData.hgb}
+                  value={reportData.hgb}
                   required
                   onChange={handleInputChange}
                 />
@@ -446,11 +461,19 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>STDs</Form.Label>
-                <Form.Select required  autoFocus name="stds"  onChange={handleInputChange} >
+                <Form.Select required  autoFocus name="stds" value={reportData.stds} onChange={handleInputChange} >
                   <option value="">STDs Found?*</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
                 </Form.Select>
+                {/* <Form.Control
+                  placeholder="STDs"
+                  autoFocus
+                  name="stds"
+                  required
+                  value={reportData.stds}
+                  onChange={handleInputChange}
+                /> */}
               </Form.Group>
             </Col>
             <Col xs={6}>
@@ -458,11 +481,19 @@ const mystyle = {
                 <Form.Label>
                 AIDs
                 </Form.Label>
-                <Form.Select required  autoFocus name="aids" onChange={handleInputChange} >
+                <Form.Select required value={reportData.aids}  autoFocus name="aids" onChange={handleInputChange} >
                   <option value="">Aids Found?*</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
-                </Form.Select>
+                </Form.Select> 
+                {/* <Form.Control
+                  placeholder="AIDs"
+                  autoFocus
+                  name="aids"
+                  required
+                  value={reportData.aids}
+                  onChange={handleInputChange}
+                /> */}
               </Form.Group>
             </Col>
           </Row>
@@ -470,11 +501,19 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Diabetes</Form.Label>
-                <Form.Select required  autoFocus name="diabetes" onChange={handleInputChange} >
+                <Form.Select required  autoFocus name="diabetes" value={reportData.diabetes} onChange={handleInputChange} >
                   <option value="">Diabetes Found?*</option>
                   <option value="0">No</option>
                   <option value="1">Yes</option>
                 </Form.Select>
+                {/* <Form.Control
+                  placeholder="Diabetes"
+                  autoFocus
+                  name="diabetes"
+                  required
+                  value={reportData.diabetes}
+                  onChange={handleInputChange}
+                /> */}
               </Form.Group>
             </Col>
             <Col xs={6}>
@@ -482,11 +521,19 @@ const mystyle = {
                 <Form.Label>
                 Syphilis
                 </Form.Label>
-                <Form.Select required  autoFocus name="syphilis" onChange={handleInputChange} >
+                <Form.Select required  autoFocus name="syphilis" onChange={handleInputChange} value={reportData.syphilis} >
                   <option value="">Syphilis Found?*</option>
                   <option value={0}>No</option>
                   <option value={1}>Yes</option>
-                </Form.Select>
+                </Form.Select> 
+{/*                 <Form.Control
+                  placeholder="Syphilis"
+                  autoFocus
+                  name="syphilis"
+                  required
+                  value={reportData.syphilis}
+                  onChange={handleInputChange}
+                /> */}
               </Form.Group>
             </Col>
           </Row>
@@ -494,7 +541,7 @@ const mystyle = {
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Blood Group</Form.Label>
-                <Form.Select required name="bloodGroup" value={userData.bloodGroup} onChange={handleInputChange} >
+                <Form.Select required name="bloodGroup" value={reportData.bloodGroup} onChange={handleInputChange} >
                   <option value="">Select Blood Group*</option>
                   <option value="AB+">AB+</option>
                   <option value="AB-">AB-</option>
@@ -512,7 +559,7 @@ const mystyle = {
                 <Form.Label>
                 Status
                 </Form.Label>
-                 <Form.Select required name="donorEligibilityStatus" value={userData.donorEligibilityStatus} onChange={handleInputChange} >
+                 <Form.Select required name="donorEligibilityStatus" value={reportData.donorEligibilityStatus} onChange={handleInputChange} >
                     <option value="">Select Status*</option>
                     <option value="Eligible">Eligible</option>
                     <option value="Not Eligible">Not Eligible</option>

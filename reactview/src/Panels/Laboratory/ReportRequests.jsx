@@ -159,7 +159,7 @@ const mystyle = {
                   placeholder="Sex"
                   name="Sex"
                   disabled
-                  value={CBCData.Sex == 0 ? 'Male' : 'Female'}
+                  value={CBCData.Sex == 0 ? 'MALE' :'Female'}
                 />
               </Form.Group>
             </Col>
