@@ -27,7 +27,7 @@ export default function CongratulationBox({ message, firstButton, secondButton, 
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Congratulation :)</Modal.Title>
+        <Modal.Title>Congratulations</Modal.Title>
       </Modal.Header>
       <Modal.Body>{message}</Modal.Body>
       <Modal.Footer>

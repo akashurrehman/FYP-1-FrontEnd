@@ -412,7 +412,7 @@ const PostBloodRequest = () => {
                     <div>
                         {showCongratulationBox && (
                             <CongratulationBox
-                            message="Congratulation! Your blood request posted successfully."
+                            message="Congratulations! Your blood request posted successfully."
                             thirdButtonText="View All Requests"
                             secondButtonText="My Requests"
                             firstButtonText="Home Page"

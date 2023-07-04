@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import UserPanelHeader from "../UserPanelHeader";
 import UserPanelFooter from "../UserPanelFooter";
 import { useParams } from 'react-router-dom';
-import image from '../../../Public/user/image/jobpost.png';
+import image from '../../../Public/user/image/all-blood-request-menu.jpg';
 import '../css/style.css';
 import jwtDecode from "jwt-decode";
 import { useAuth } from "../../../Panels/BloodDonationCentre/Auth/AuthContext";
@@ -49,8 +49,8 @@ const RequestMakerDetails = () => {
             <Container>
                 <Row style={{marginBottom:'4%'}}>
                     <Col sm={12} style={{textAlign:'center',width:'60%'}}>
-                        <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Request Maker Details</h2>  
-                        {/* <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p> */}
+                        <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>Request Maker Details</h2>  
+                        <p style={{fontWeight:"300"}}>There are request makers all across the country. Find one that's closest to you and accept other users requests.</p>
                     </Col>
                 </Row>
                 <Row style={{marginBottom:'10%'}}>
@@ -85,7 +85,7 @@ const RequestMakerDetails = () => {
                     </Col>
                     <Col sm={5}>
                     <div>
-                        <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "40%",opacity:'0.75'}}></Image>
+                        <Image src={image} rounded style={{marginLeft: "48.5%",marginTop:'3.9%',height: "20rem",opacity:'0.75'}}></Image>
                     </div>
                     
                     </Col>

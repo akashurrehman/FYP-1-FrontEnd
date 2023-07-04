@@ -35,8 +35,8 @@ const FAQDetails = () => {
             <Container style={{width:'60%'}}>
                 <Row style={{textAlign:'center',marginBottom:'5%'}}>
                     <Col sm={12}>
-                        <h2 style={{fontWeight:"bold",color:"rgb(160, 15, 15)",fontFamily:"cursive",}}>Frequently Asked Question Details</h2>  
-                        <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
+                        <h2 className="RedColor" style={{fontWeight:"bold",fontFamily:"cursive",}}>Frequently Asked Question Details</h2>  
+                        <p style={{fontWeight:"300"}}>It’s normal to have some questions about donating. We may already have an answer ready for you below. Keeping donors and the patients who receive blood safe is vital for us. That’s why there are some criteria to donate blood.</p>
                     </Col>
                 </Row>
             </Container>

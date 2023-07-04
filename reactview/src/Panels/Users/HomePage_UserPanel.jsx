@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Container,Row,Col,ListGroup,Card,Button,Table, Image, Nav } from "react-bootstrap";
 import axios from "axios";
 import UserPanelFooter from "../../Components_for_All_Panels/UserComponents/UserPanelFooter";
@@ -19,6 +19,15 @@ import image_all_centre from '../../Public/user/image/all-centre-menu.png';
 import image_post_blood_request from '../../Public/user/image/post-blood-request-menu.png';
 import image_make_blood_donation from '../../Public/user/image/make-blood-donation-menu.png';
 import image_book_appointment from '../../Public/user/image/book-appointment-menu.png';
+import image_news from '../../Public/user/image/news.png';
+import image_campaign from '../../Public/user/image/campaign.png';
+import image_event from '../../Public/user/image/event.png';
+import image_sponsor from '../../Public/user/image/sponsor.png';
+import image_financial_donor from '../../Public/user/image/financial_donor.png';
+import image_job_post from '../../Public/user/image/job.png';
+import image_faq from '../../Public/user/image/faq.png';
+import image_advertisement from '../../Public/user/image/advertisement.png';
+
 import { useAuth } from "./../BloodDonationCentre/Auth/AuthContext";
 import jwt_decode from 'jwt-decode';
 // import { sparqlConnect, setQueryURL } from "sparql-connect";
@@ -29,6 +38,7 @@ import AvailableDonorsBar from "../../Components_for_All_Panels/UserComponents/d
 import AvailableRequestMakersBar from "../../Components_for_All_Panels/UserComponents/request_makers/AvailableRequestMakersBar";
 import SingleFAQ from "../../Components_for_All_Panels/UserComponents/packages/faqs/SingleFAQ";
 import packageService from "../../Services/Api/User/PackageService";
+import { toast } from "react-toastify";
 
 
 
@@ -134,6 +144,24 @@ const HomeScreen_UserPanel = () => {
     React.useEffect(getData, []);
     console.log(faqs.results);
 
+
+
+    const isInitialRender = useRef(true);
+    //For showing toast single time
+    useEffect(() => {
+        const showToast = () => {
+            toast.success('You have successfully authenticated', {
+            position: toast.POSITION.TOP_CENTER
+            });
+        };
+    
+        if (isInitialRender.current) {
+            isInitialRender.current = false;
+        } else {
+            showToast();
+        }
+    }, []);
+
     return ( 
         <div>
             <UserPanelHeader/>
@@ -236,7 +264,7 @@ const HomeScreen_UserPanel = () => {
                                     <Card.Text>
                                         See if you are eligible to donate blood today, or find frequently asked questions.
                                     </Card.Text>
-                                    <Button href='/user/blood-analysis' size='sm' variant="flat">Check eligibility</Button>
+                                    <Button href='/user/blood-analysis' size='sm' variant="flat">Check your strength</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -244,11 +272,11 @@ const HomeScreen_UserPanel = () => {
                             <Card className="ColHover" border="danger" style={{ width: '22rem' }}>
                                 <Card.Img variant="top" src={CardImage2}  height="250rem"/>
                                 <Card.Body>
-                                    <Card.Title>Making Your Donation?</Card.Title>
+                                    <Card.Title>Become a Blood Donor?</Card.Title>
                                     <Card.Text>
                                         Discover how you can give blood, plasma or platelets, and book your next donation.
                                     </Card.Text>
-                                    <Button href='/user/make-blood-donation' size='sm' variant="flat">Know how to donate</Button>
+                                    <Button href='/user/make-blood-donation' size='sm' variant="flat">Become a Donor</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -299,7 +327,7 @@ const HomeScreen_UserPanel = () => {
                                     <Card.Text>
                                         There are request makers all across the country. Find one that's closest to you.
                                     </Card.Text>
-                                    <Button href='/user/request-maker' size='sm' variant="flat">Find a Request Maker</Button>
+                                    <Button href='/user/request-maker' size='sm' variant="flat">Find a Blood Requests</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -374,6 +402,78 @@ const HomeScreen_UserPanel = () => {
                         )}
                 </div>
                 
+            </div>
+
+            <div style={{marginTop:'0%', marginBottom:'0%'}}>
+                <Container>
+                    <div style={{textAlign:'center',marginTop:'0%',paddingTop:'4%' ,marginBottom:'5%',fontFamily:'cursive'}}>
+                        <h2 className="RedColor">You may also like to view</h2>
+                    </div>
+                    <div>
+                        <Row>
+                            <Col sm={4}>
+                                <div style={{textAlign:'left'}}>
+                                    <Image src={image_news} rounded style={{marginLeft: "0%",marginBottom:'2%',height: "7rem",opacity:'1.0'}}></Image>
+                                    <Nav.Link style={{fontSize:'22px',fontWeight:'500',marginLeft:'0%'}} className="RedColor" href="/user/news">News <ArrowRight className="" size={17} /></Nav.Link>
+                                    <p className="" style={{fontSize:'14px',color:'gray'}}>
+                                    View latest news on our blood donation website thats helps you to be updated with latest news. 
+                                    </p>
+                                </div>
+                                
+                            </Col>
+                            <Col sm={4}>
+                                <div style={{textAlign:'left'}}>
+                                    <Image src={image_campaign} rounded style={{marginLeft: "0%",marginBottom:'2%',height: "7rem",opacity:'1.0'}}></Image>
+                                    <Nav.Link style={{fontSize:'22px',fontWeight:'500',marginLeft:'0%'}} className="RedColor" href="/user/campaign">Campaigns <ArrowRight className="" size={17} /></Nav.Link>
+                                    <p className="" style={{fontSize:'14px',color:'gray'}}>
+                                    View different campaigns on our blood donation website thats helps you to involved in the latest campaigns.
+                                    </p>
+                                </div>
+                            </Col>
+                            <Col sm={4}>
+                                <div style={{textAlign:'left'}}>
+                                    <Image src={image_event} rounded style={{marginLeft: "0%",marginBottom:'2%',height: "7rem",opacity:'1.0'}}></Image>
+                                    <Nav.Link style={{fontSize:'22px',fontWeight:'500',marginLeft:'0%'}} className="RedColor" href="/user/event">Events <ArrowRight className="" size={17} /></Nav.Link>
+                                    <p className="" style={{fontSize:'14px',color:'gray'}}>
+                                    View latest events on our blood donation website thats helps you to attend different donating events.
+                                    </p>
+                                </div>
+                            </Col>
+                            
+                        </Row>
+                        
+                        <Row style={{marginTop:'5%',marginBottom:'8%'}}>
+                            <Col sm={4}>
+                                <div style={{textAlign:'left'}}>
+                                    <Image src={image_job_post} rounded style={{marginLeft: "0%",marginBottom:'2%',height: "7rem",opacity:'1.0'}}></Image>
+                                    <Nav.Link style={{fontSize:'22px',fontWeight:'500',marginLeft:'0%'}} className="RedColor" href="/user/job-post">Job Posts <ArrowRight className="" size={17} /></Nav.Link>
+                                    <p className="" style={{fontSize:'14px',color:'gray'}}>
+                                    View job posts on our blood donation website thats helps you to find different jobs and gives job opportunity to you.
+                                    </p>
+                                </div>
+                                
+                            </Col>
+                            <Col sm={4}>
+                                <div style={{textAlign:'left'}}>
+                                    <Image src={image_financial_donor} rounded style={{marginBottom: "2%",marginTop:'0%',height: "7rem",opacity:'1.0'}}></Image>
+                                    <Nav.Link style={{fontSize:'22px',fontWeight:'500',marginLeft:'0%'}} className="RedColor" href="/user/financial-donation">Financial Donors <ArrowRight className="" size={17} /></Nav.Link>
+                                    <p className="" style={{fontSize:'14px',color:'gray'}}>
+                                    View financial donors on our blood donation website thats encourage you to become a financial donor.
+                                    </p>
+                                </div>
+                            </Col>
+                            <Col sm={4}>
+                                <div style={{textAlign:'left'}}>
+                                    <Image src={image_sponsor} rounded style={{marginLeft: "0%",marginBottom:'2%',height: "7rem",opacity:'1.0'}}></Image>
+                                    <Nav.Link style={{fontSize:'22px',fontWeight:'500',marginLeft:'0%'}} className="RedColor" href="/user/sponsor">Sponsors <ArrowRight className="" size={17} /></Nav.Link>
+                                    <p className="" style={{fontSize:'14px',color:'gray'}}>
+                                    View sponsors of our blood donation websites that provides information about your interest. 
+                                    </p>
+                                </div>
+                            </Col>
+                        </Row>
+                    </div>
+                </Container>
             </div>
             
             <Button

@@ -417,12 +417,12 @@ const MakeBloodDonation = () => {
                     <div>
                         {showCongratulationBox && (
                             <CongratulationBox
-                            message="Congratulation! Your blood donation made successfully."
-                            thirdButtonText="My Donations"
-                            secondButtonText="Make Appointment"
+                            message="Congratulations! Your blood donation made successfully."
+                            thirdButtonText="My Donors"
+                            secondButtonText="View all donors"
                             firstButtonText="Home Page"
                             firstButton={() => {window.location.href = "/userpanel/HomeScreen";}}
-                            secondButton={() => {window.location.href = "/user/blood-donation-centre";}}
+                            secondButton={() => {window.location.href = "/user/donor";}}
                             thirdButton={() => {window.location.href = "/user/my-account";}}
                             onCancel={()=>{setShowCongratulationBox(false);}}
                             margin="25%"

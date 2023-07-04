@@ -53,7 +53,7 @@ const BloodDonationCentreDetails = () => {
                 <Row style={{marginBottom:'3%'}}>
                     <Col sm={12} style={{textAlign:'center',width:'50%'}}>
                         <h2 className='RedColor' style={{fontWeight:"bold",fontFamily:"cursive",}}>{centre?.Name?.value}</h2>  
-                        <p style={{fontWeight:"300"}}>The average person puts only 25% of his energy into his work. The world takes off its hat to those who put in more than 50% of their capacity, and stands on its head for those few and far between souls who devote 100%.</p>
+                        <p style={{fontWeight:"300"}}>There are donation centres all across the country. Find one that's closest to you. Make your appointment for the blood donation in the closest or nearest center.</p>
                     </Col>
                 </Row>
                 <Row style={{marginBottom:'10%'}}>
