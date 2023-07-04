@@ -77,7 +77,7 @@ function Header(props) {
             <Nav.Link href="/bloodCenter/HomeScreen" style={{color:"#FFFFFF" }}><i class="fa fa-home" aria-hidden="true"></i>Dashboard/Home</Nav.Link>
             <Nav.Link href="/bloodCenter/addbloodRequest" style={{color:"#FFFFFF" }}><i class="fa fa-tint" aria-hidden="true"></i>Add Blood Request</Nav.Link>
             <Nav.Link href="/bloodCenter/addNewUser" style={{color:"#FFFFFF" }}><i class="fa fa-address-card" aria-hidden="true"></i>Add New User</Nav.Link>
-            <Nav.Link onClick={Chat} style={{color:"#FFFFFF" }}><i class="fa fa-address-card" aria-hidden="true"></i>Message to Admin</Nav.Link>
+            {/* <Nav.Link onClick={Chat} style={{color:"#FFFFFF" }}><i class="fa fa-address-card" aria-hidden="true"></i>Message to Admin</Nav.Link> */}
             <Nav.Link href="#" style={{color:"#FFFFFF" }}>
             <i class="fa fa-filter" aria-hidden="true"></i>Other Options
             </Nav.Link>

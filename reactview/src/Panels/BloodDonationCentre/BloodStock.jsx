@@ -282,7 +282,7 @@ const handleInputChange = (event) => {
                 <Card.Body>
                   <Card.Title>Blood Group:{card.bloodGroup}</Card.Title>
                   <Card.Text>No of bags available: {card.noOfBags}</Card.Text>
-                  <Card.Text>Freeze time: {card.addedDate}</Card.Text>
+                  <Card.Text>Freeze Date/time: {card.addedDate}</Card.Text>
                   <Button variant="primary" onClick={() => handleShow(card.ID)} style={{backgroundColor: "#153250"}}>
                     Update Stock
                   </Button>

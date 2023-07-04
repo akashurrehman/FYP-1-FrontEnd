@@ -84,7 +84,7 @@ const LabHome=()=> {
           </Card>
         </Col>
 
-        <Col xs={12} md={6}>
+      {/*   <Col xs={12} md={6}>
           <Card border="primary" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>
               <Card.Title><i class="fa fa-check-square" aria-hidden="true"></i>Total Verfied Reports</Card.Title>
@@ -107,7 +107,7 @@ const LabHome=()=> {
               <Button variant="primary">Edit</Button>
             </Card.Body>
           </Card>
-        </Col>
+        </Col> */}
         <Col xs={12}>  
           <Card border="danger" style={{marginTop:30,paddingBottom:10}}>
             <Card.Body>

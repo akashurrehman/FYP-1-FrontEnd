@@ -141,33 +141,6 @@ const mystyle = {
           <Row>
             <Col xs={6}>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Age</Form.Label>
-                <Form.Control
-                  placeholder="Age"
-                  disabled
-                  name="Age"
-                  value={CBCData.Age}
-                />
-              </Form.Group>
-            </Col>
-            <Col xs={6}>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>
-                  Sex
-                </Form.Label>
-                <Form.Control
-                  placeholder="Sex"
-                  name="Sex"
-                  disabled
-                  value={CBCData.Sex == 0 ? 'MALE' :'Female'}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col xs={6}>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>PLT</Form.Label>
                 <Form.Control
                   disabled
