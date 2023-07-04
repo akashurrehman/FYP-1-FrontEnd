@@ -108,9 +108,9 @@ const UserPanelHeader = () => {
                                         <Col sm={6}>
                                             <div style={{textAlign:'left'}}>
                                                 <Image src={image_all_blood_donation} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
-                                                <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/donor">View All Blood Donations <ArrowRight className="" size={17} /></Nav.Link>
+                                                <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/donor">View All Blood Donors <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                There are donor all across the country/city. Find donor one that's closest to you.
                                                 </p>
                                             </div>
                                             
@@ -118,9 +118,9 @@ const UserPanelHeader = () => {
                                         <Col sm={6}>
                                             <div style={{textAlign:'left'}}>
                                                 <Image src={image_make_blood_donation} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
-                                                <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/make-blood-donation">Make Blood Donation <ArrowRight className="" size={17} /></Nav.Link>
+                                                <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/make-blood-donation">Become a Blood Donor <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
+                                                If you want to a become a blood donor, you will create multiple donors profile on a single account. 
                                                 </p>
                                             </div>
                                         </Col>
@@ -134,7 +134,7 @@ const UserPanelHeader = () => {
                                                     <Image src={image_my_blood_donation} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                     <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/my-account">My Blood Donations <ArrowRight className="" size={17} /></Nav.Link>
                                                     <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                        We're driven by curiosity to research the journey of blood, milk and beyond. 
+                                                    View your blood donors that is created by you to your account. 
                                                     </p>
                                                 </div>
                                                 
@@ -168,7 +168,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_all_centre} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/blood-donation-centre">Blood Donations Centres <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
+                                                There are donation centres all across the country. Find one that's closest to you.
                                                 </p>
                                             </div>
                                             
@@ -178,7 +178,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_book_appointment} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/blood-donation-centre">Book Appointment <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                Make your appointment for the blood donation in the closest or nearest center. 
                                                 </p>
                                             </div>
                                         </Col>
@@ -192,7 +192,7 @@ const UserPanelHeader = () => {
                                                     <Image src={image_my_appointment} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                     <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/my-account">My Appointments <ArrowRight className="" size={17} /></Nav.Link>
                                                     <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                    View your appointments for the blood donation anytime and gets reminder about your appointments.
                                                     </p>
                                                 </div>
                                                 
@@ -226,7 +226,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_all_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/request-maker">View All Blood Requests <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
+                                                There are request makers all across the country. Find one that's closest to you and accept other users requests.
                                                 </p>
                                             </div>
                                             
@@ -236,7 +236,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_post_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/post-blood-request">Post Blood Request <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                If any one required blood any time they can post blood request of required blood.
                                                 </p>
                                             </div>
                                         </Col>
@@ -250,7 +250,7 @@ const UserPanelHeader = () => {
                                                     <Image src={image_my_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                     <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/my-account">My Blood Requests <ArrowRight className="" size={17} /></Nav.Link>
                                                     <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                    View your blood requests that is posted by you to your account.
                                                     </p>
                                                 </div>
                                                 
@@ -260,7 +260,7 @@ const UserPanelHeader = () => {
                                                     <Image src={image_accepted_blood_request} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                     <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/my-account">Accepted Blood Requests <ArrowRight className="" size={17} /></Nav.Link>
                                                     <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
+                                                    View blood requests that is accepted by you from your account. When you accept other user requests, they will receive a notification.
                                                     </p>
                                                 </div>
                                             </Col>
@@ -302,7 +302,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_news} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/news">News <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
+                                                View latest news on our blood donation website thats helps you to be updated with latest news.
                                                 </p>
                                             </div>
                                             
@@ -312,7 +312,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_campaign} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/campaign">Campaigns <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                View different campaigns on our blood donation website thats helps you to involved in the latest campaigns.
                                                 </p>
                                             </div>
                                         </Col>
@@ -321,7 +321,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_event} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/event">Events <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                View latest events on our blood donation website thats helps you to attend different donating events.
                                                 </p>
                                             </div>
                                         </Col>
@@ -330,7 +330,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_advertisement} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3.0rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/job-post">Advertisements <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                View latest advertisement (adds) on our blood donation website about blood donations.
                                                 </p>
                                             </div>
                                             
@@ -343,7 +343,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_job_post} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/job-post">Job Posts <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                View job posts on our blood donation website thats helps you to find different jobs and gives job opportunity to you.
                                                 </p>
                                             </div>
                                             
@@ -353,7 +353,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_financial_donor} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/financial-donation">Financial Donors <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
+                                                View financial donors on our blood donation website thats encourage you to become a financial donor.
                                                 </p>
                                             </div>
                                         </Col>
@@ -362,7 +362,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_sponsor} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/sponsor">Sponsors <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                Give the gift of "LIFE" and inspire others to donate. Donate blood, save life. 
+                                                View sponsors of our blood donation websites that provides information about your interest.
                                                 </p>
                                             </div>
                                         </Col>
@@ -371,7 +371,7 @@ const UserPanelHeader = () => {
                                                 <Image src={image_faq} rounded style={{marginLeft: "0%",marginTop:'0%',height: "3rem",opacity:'1.0'}}></Image>
                                                 <Nav.Link style={{fontSize:'20px',fontWeight:'500',marginLeft:'-2.5%'}} className="RedColor" href="/user/faq">FAQ's <ArrowRight className="" size={17} /></Nav.Link>
                                                 <p className="" style={{fontSize:'14px',color:'gray'}}>
-                                                    Give the gift of "LIFE" and inspire others to donate. Donate blood, save life.
+                                                It’s normal to have some questions about donating. We may already have an answer ready for you.
                                                 </p>
                                             </div>
                                         </Col>

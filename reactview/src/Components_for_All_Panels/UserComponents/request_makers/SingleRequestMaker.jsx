@@ -163,7 +163,13 @@ const SingleRequestMaker = (props) => {
                                                                         try {
                                                                             await updateRequest();
                                                                             await makeNotification();
+                                                                            toast.success("You accepted blood request successfully and request maker gets notification about your acceptance", {
+                                                                                closeOnClick: true,
+                                                                                pauseOnHover: true,
+                                                                                position: toast.POSITION.BOTTOM_RIGHT,
+                                                                            });
                                                                             window.location.reload();
+                                                                            
                                                                         } catch (error) {
                                                                             console.log('An error occurred during donation handling:', error);
                                                                         }
